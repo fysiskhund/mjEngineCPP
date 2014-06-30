@@ -16,7 +16,13 @@
  */
 #include <string.h>
 #include <jni.h>
-#include"mjVector3.h"
+#include <stdio.h>
+
+#include "mjVector3.h"
+#include "graphics/mjModel.h"
+
+
+#define BUFSIZ 1024
 
 /* This is a trivial JNI example where we use a native method
  * to return a new VM String. See the corresponding Java source
@@ -52,8 +58,24 @@ Java_co_phong_mjengine_HelloJni_stringFromJNI( JNIEnv* env,
 	
 	mjVector3* r = new mjVector3(1,2,3);
 	mjVector3* q = new mjVector3(4,5,6);
+
+    mjModel* model = new mjModel();
+    model->LoadFromFile("/sdcard/mjEngineCPP/sprite.mesh.xml");
+
+
+    if (model->status[0] == NULL)
+    {
 	
-    return env->NewStringUTF("Hello from JNI !  Compiled with ABI " ABI ". vValue");
+	model->status[0] = 'o';
+	model->status[1] = 'k';
+	model->status[2] = '.';
+	model->status[3] = NULL;
+    }
+
+
+
+
+    return env->NewStringUTF( model->status);
 	delete r;
 	delete q;
 }

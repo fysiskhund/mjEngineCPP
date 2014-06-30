@@ -14,11 +14,14 @@
 #
 LOCAL_PATH := $(call my-dir)
 
+
 include $(CLEAR_VARS)
 
 LOCAL_CFLAGS    := -DANDROID_NDK
 
 LOCAL_MODULE    := hello-jni
 LOCAL_SRC_FILES := hello-jni.cpp mjVector3.cpp graphics/mjModel.cpp graphics/mjModelMesh.cpp extLibs/tinyxml2.cpp
+
+LOCAL_LDLIBS := -llog 
 
 include $(BUILD_SHARED_LIBRARY)

@@ -5,16 +5,26 @@ mjModel::mjModel()
 	numVertices = -1;
 	currentVertex = -1;
 	currentFace = -1;
+	faceCount = -1;
+	status[0] = '\0';
+}
+void mjModel::LoadFromFile(char* fileName)
+{
+	XMLDocument doc;
+	
+	doc.LoadFile(fileName);
+	Load(&doc);
 }
 
-void mjModel::Load(char* modelDefinition)
+void mjModel::Load(XMLDocument* doc)
 {
-	//hie
-	XMLDocument doc;
 
-	doc.Parse( modelDefinition );
 
-	XMLElement* mesh = doc.FirstChildElement("mesh");
+	// Doc needs to already have been parsed or loaded by this line
+	
+	XMLElement* mesh = doc->FirstChildElement();
+	if (mesh != NULL)
+	{
 	XMLElement* sharedGeometry = mesh->FirstChildElement("sharedgeometry");
 	sharedGeometry->QueryIntAttribute("vertexcount", &numVertices);
 
@@ -25,16 +35,19 @@ void mjModel::Load(char* modelDefinition)
 	normalComponentBuffer = new float[3*numVertices];
 	texCoordBuffer = new float[2*numVertices];
 
-	XMLElement* vertex = sharedGeometry->FirstChildElement("vertexbuffer")->FirstChildElement("vertex");
+	XMLElement* vertexbuffer = sharedGeometry->FirstChildElement("vertexbuffer");
 
+
+	XMLElement* vertex = vertexbuffer->FirstChildElement("vertex");
+	snprintf(status,1024, "%s", "About to go into vertex data");
 	while(vertex)
 	{
 
 		XMLElement* vertexData;
 		vertexData = vertex->FirstChildElement("position");
-		vertexData->QueryFloatAttribute("x", &texCoordBuffer[posIn3Array]);
-		vertexData->QueryFloatAttribute("y", &texCoordBuffer[posIn3Array+1]);
-		vertexData->QueryFloatAttribute("z", &texCoordBuffer[posIn3Array+2]);
+		vertexData->QueryFloatAttribute("x", &vertexBuffer[posIn3Array]);
+		vertexData->QueryFloatAttribute("y", &vertexBuffer[posIn3Array+1]);
+		vertexData->QueryFloatAttribute("z", &vertexBuffer[posIn3Array+2]);
 
 		vertexData = vertex->FirstChildElement("normal");
 		vertexData->QueryFloatAttribute("x", &normalComponentBuffer[posIn3Array]);
@@ -51,4 +64,80 @@ void mjModel::Load(char* modelDefinition)
 		vertex = vertex->NextSiblingElement("vertex");
 	}
 
+	char tmp[1024];
+
+	for (int i = 0; i < numVertices; i++)
+	{
+		snprintf(tmp, 1024, "%s\n%3.3f %3.3f %3.3f", status, vertexBuffer[3*i], vertexBuffer[(3*i)+1], vertexBuffer[(3*i)+2]);
+		snprintf(status, 1024, "%s", tmp);
+	}
+
+	XMLElement* submeshes = mesh->FirstChildElement("submeshes");
+
+	XMLElement* submesh = submeshes->FirstChildElement("submesh");
+
+	while(submesh)
+	{
+		mjModelMesh* modelMesh = new mjModelMesh();
+
+		const char* tempStrAttr = submesh->Attribute("material");
+		modelMesh->material = new char[strnlen(tempStrAttr, 96)+1];
+		strncpy(modelMesh->material, tempStrAttr, 96);
+
+		XMLElement* faces = submesh->FirstChildElement("faces");
+
+
+		faces->QueryIntAttribute("count", &faceCount);
+
+		modelMesh->drawOrder = new int[faceCount*3];
+
+		int posInFaceArray = 0;
+		XMLElement* face = faces->FirstChildElement("face");
+		int numFacesParsed = 0;
+
+		while(face && (numFacesParsed <= faceCount))
+		{
+			
+			face->QueryIntAttribute("v1", &modelMesh->drawOrder[posInFaceArray]);
+			face->QueryIntAttribute("v2", &modelMesh->drawOrder[posInFaceArray+1]);
+			face->QueryIntAttribute("v3", &modelMesh->drawOrder[posInFaceArray+2]);
+
+			posInFaceArray += 3;
+			numFacesParsed++;
+			face = face->NextSiblingElement("face");
+		}
+		meshes.push_back(modelMesh);
+		submesh= submesh->NextSiblingElement("submesh");
+	}
+
+	snprintf(tmp, 1024, "%s\nParsed %d faces & %d meshes", status, faceCount, meshes.size());
+		snprintf(status, 1024, "%s", tmp);
+
+	XMLElement* submeshnames = mesh->FirstChildElement("submeshnames");
+
+	submesh = submeshnames->FirstChildElement("submesh");
+	int numSubMeshNames = 0;
+	while(submesh)
+	{
+		int desiredIndex;
+		submesh->QueryIntAttribute("index", &desiredIndex);
+
+		const char* tempStrAttr = submesh->Attribute("name");
+		meshes[desiredIndex]->name = new char[strnlen(tempStrAttr, 96)+1];
+		strncpy(meshes[desiredIndex]->name, tempStrAttr, 96);
+		numSubMeshNames++;
+		submesh = submesh->NextSiblingElement("submesh");
+	}
+
+	snprintf(tmp, 1024, "%s\nParsed %d submeshnames", status, numSubMeshNames);
+		snprintf(status, 1024, "%s", tmp);
+
+
+
+	
+	}
+	else
+	{
+		snprintf(status, 1024, "%s", "Error: mesh == null >_<*");
+	}
 }

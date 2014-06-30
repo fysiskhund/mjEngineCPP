@@ -1,8 +1,16 @@
 #ifndef MJMODEL_H
 #define MJMODEL_H
 
+
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+
+//#include <android/log.h>
+
 #include "mjModelMesh.h"
 #include "../extLibs/tinyxml2.h"
+
 
 using namespace tinyxml2;
 
@@ -13,21 +21,27 @@ public:
 	float* texCoordBuffer;
 	float* normalComponentBuffer;
 
+
 	float* bounds;
+
+	char status[1024];
 
 	int glTexture;
 
 
-	mjModelMesh* meshes;
+	std::vector<mjModelMesh*> meshes;
 
 	mjModel();
 
-	void Load(char* modelDefinition);
+	void LoadFromFile(char* fileName);
+
+	void Load(XMLDocument* doc);
 
 private:
 	int numVertices;
 	int currentVertex;
 	int currentFace;
+	int faceCount;
 
 };
 
