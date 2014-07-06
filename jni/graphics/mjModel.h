@@ -10,7 +10,7 @@
 
 #include "mjModelMesh.h"
 #include "../extLibs/tinyxml2.h"
-
+namespace mjEngine{
 
 using namespace tinyxml2;
 
@@ -37,6 +37,8 @@ public:
 
 	void Load(XMLDocument* doc);
 
+	void Draw();
+
 private:
 	int numVertices;
 	int currentVertex;
@@ -44,5 +46,6 @@ private:
 	int faceCount;
 
 };
+} // nameSpace mj
 
 #endif

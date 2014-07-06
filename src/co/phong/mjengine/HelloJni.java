@@ -15,6 +15,8 @@
  */
 package co.phong.mjengine;
 
+
+import co.phong.mjengine.hellojni.R;
 import android.app.Activity;
 import android.widget.TextView;
 import android.os.Bundle;
@@ -22,6 +24,8 @@ import android.os.Bundle;
 
 public class HelloJni extends Activity
 {
+	mjGLNativeSurfaceView glView;
+	TextView  tv;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -32,9 +36,22 @@ public class HelloJni extends Activity
          * the text is retrieved by calling a native
          * function.
          */
-        TextView  tv = new TextView(this);
+        
+        
+        setContentView(R.layout.mjtest);
+        tv = (TextView)findViewById(R.id.tv);
+        
+        glView = (mjGLNativeSurfaceView)findViewById(R.id.surfaceView);
+ 
+        
+        try {
+			Thread.sleep(3000); // let gdb attach
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         tv.setText( stringFromJNI() );
-        setContentView(tv);
+        
     }
 
     /* A native method that is implemented by the

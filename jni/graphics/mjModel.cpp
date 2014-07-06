@@ -1,5 +1,7 @@
 #include "mjModel.h"
 
+namespace mjEngine{
+
 mjModel::mjModel()
 {
 	numVertices = -1;
@@ -141,3 +143,4 @@ void mjModel::Load(XMLDocument* doc)
 		snprintf(status, 1024, "%s", "Error: mesh == null >_<*");
 	}
 }
+}// namespace mj
