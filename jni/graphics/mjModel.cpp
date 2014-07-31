@@ -90,8 +90,10 @@ void mjModel::Load(XMLDocument* doc)
 
 
 		faces->QueryIntAttribute("count", &faceCount);
+		
+		modelMesh->drawOrderCount = faceCount*3;
 
-		modelMesh->drawOrder = new int[faceCount*3];
+		modelMesh-> drawOrderBuffer = new unsigned short[faceCount*3];
 
 		int posInFaceArray = 0;
 		XMLElement* face = faces->FirstChildElement("face");
@@ -99,10 +101,13 @@ void mjModel::Load(XMLDocument* doc)
 
 		while(face && (numFacesParsed <= faceCount))
 		{
-			
-			face->QueryIntAttribute("v1", &modelMesh->drawOrder[posInFaceArray]);
-			face->QueryIntAttribute("v2", &modelMesh->drawOrder[posInFaceArray+1]);
-			face->QueryIntAttribute("v3", &modelMesh->drawOrder[posInFaceArray+2]);
+			int attr;
+			face->QueryIntAttribute("v1", &attr);
+			modelMesh->drawOrderBuffer[posInFaceArray] = (unsigned short) attr;
+			face->QueryIntAttribute("v2", &attr);
+			modelMesh->drawOrderBuffer[posInFaceArray+1] = (unsigned short) attr;
+			face->QueryIntAttribute("v3", &attr);
+			modelMesh->drawOrderBuffer[posInFaceArray+2] = (unsigned short) attr;
 
 			posInFaceArray += 3;
 			numFacesParsed++;
@@ -135,12 +140,17 @@ void mjModel::Load(XMLDocument* doc)
 		snprintf(status, 1024, "%s", tmp);
 
 
-
 	
+
 	}
 	else
 	{
 		snprintf(status, 1024, "%s", "Error: mesh == null >_<*");
 	}
+}
+
+void mjModel::Draw()
+{
+
 }
 }// namespace mj
