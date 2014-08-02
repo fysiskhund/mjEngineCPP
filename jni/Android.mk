@@ -19,7 +19,8 @@ LOCAL_SRC_FILES := gl_code.cpp \
 				   graphics/mjModel.cpp \
 				   graphics/mjModelMesh.cpp \
 				   mjVector3.cpp \
-				   graphics/mjImageLoader.cpp
+				   graphics/mjImageLoader.cpp \
+				   graphics/mjDefaultShaders.cpp
 				   
 LOCAL_LDLIBS    := -llog -lGLESv2 -lz
 LOCAL_STATIC_LIBRARIES := png

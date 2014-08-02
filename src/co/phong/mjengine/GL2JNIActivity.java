@@ -31,16 +31,18 @@ public class GL2JNIActivity extends Activity {
     @Override protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mView = new GL2JNIView(getApplication());
-	setContentView(mView);
+        setContentView(mView);
     }
 
     @Override protected void onPause() {
         super.onPause();
+        Log.i("mjEngine_J", "App is paused");
         mView.onPause();
     }
 
     @Override protected void onResume() {
         super.onResume();
+        Log.i("mjEngine_J", "App is resumed");
         mView.onResume();
     }
 }
