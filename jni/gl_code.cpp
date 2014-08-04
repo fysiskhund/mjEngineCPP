@@ -26,12 +26,21 @@
 #include "graphics/mjDefaultShaders.h"
 #include "mjVector3.h"
 #include "etc/testImage.h"
+#include "extLibs/math/Matrix.h"
 
 using namespace mjEngine;
 
 
 mjModel* model;
 mjDefaultShaders* defaultShaders = new mjDefaultShaders();
+
+float modelMatrix[16];
+float viewMatrix[16];
+float projectionMatrix[16];
+
+float modelViewProjectionMatrix[16];
+float modelViewMatrix[16];
+float ratio;
 
 static void printGLString(const char *name, GLenum s) {
     const char *v = (const char *) glGetString(s);
@@ -132,6 +141,8 @@ GLuint maPositionHandle;
 GLuint maNormalHandle;
 GLuint maTextureCoordHandle;
 GLuint maTextureHandle;
+GLuint maMVPMatrixHandle;
+GLuint maMVMatrixHandle;
 
 
 bool setupGraphics(int w, int h) {
@@ -159,8 +170,10 @@ bool setupGraphics(int w, int h) {
 
 
 
+
+
     mjVector3* r = new mjVector3(1,2,3);
-    	mjVector3* q = new mjVector3(4,5,6);
+    	mjVector3* q = new mjVector3(4,7,6);
 
     model = new mjModel();
     model->LoadFromFile("/sdcard/mjEngineCPP/sprite.mesh.xml");
@@ -169,12 +182,13 @@ bool setupGraphics(int w, int h) {
     delete q;
 
 
-    LOGI("About to load texture");
+
     // Test loading png texture
 
 
 
     mjImageLoader* imgLoader = new mjImageLoader();//("/sdcard/mjEngineCPP/test.png");
+    LOGI("About to load texture");
     if (imgLoader->Load("/sdcard/mjEngineCPP/test.png"))
     {
     	LOGI("Image being loaded is %dx%d", imgLoader->width, imgLoader->height);
@@ -199,14 +213,18 @@ bool setupGraphics(int w, int h) {
     //delete [] imgLoader->imageData;
 
 
+    Matrix4::SetIdentityM(modelMatrix,0 );
+    Matrix4::SetIdentityM(viewMatrix, 0);
+
+
+    ratio = h/w;
+    Matrix4::FrustumM(projectionMatrix, 0,
+    				   -ratio, ratio, -1, 1, 1, 100);
+
+
     return true;
 }
 
-const GLfloat gTriangleVertices[] = { 0.0f,  0.5f, 0.0f, 
-									 -0.5f, -0.5f, 0.0f,
-									  0.5f, -0.5f, 0.0f };
-									  
-const GLushort  drawOrderBuffer[] = { 0, 1, 2};
 
 void renderFrame() {
     static float grey;
@@ -271,16 +289,16 @@ void renderFrame() {
     // Matrix multiplication should come here
 
     // Apply the lookAt (viewMatrix) transformation to obtain modelView transformation
-    //Matrix.multiplyMM(modelViewMatrix, 0, viewMatrix, 0, mjStaticMatrixStack.current, 0);
+    Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
 
     // Calculate the modelViewProjection matrix
-    //Matrix.multiplyMM(modelViewProjectionMatrix, 0, projectionMatrix, 0, modelViewMatrix, 0);
+    Matrix4::MultiplyMM(modelViewProjectionMatrix, 0, projectionMatrix, 0, modelViewMatrix, 0);
     /////////
 
 
     // Insert the handles for the transformation matrix
-    //glUniformMatrix4fv(handles.maMVPMatrixHandle, 1, false, modelViewProjectionMatrix, 0);
-    //glUniformMatrix4fv(handles.maMVMatrixHandle, 1, false, modelViewMatrix, 0);
+    glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
+    glUniformMatrix4fv(maMVMatrixHandle, 1, false, modelViewMatrix);
 
 
 	mjModelMesh* mesh = model->meshes[0];
