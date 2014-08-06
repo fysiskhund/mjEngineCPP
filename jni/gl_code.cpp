@@ -41,6 +41,7 @@ float projectionMatrix[16];
 float modelViewProjectionMatrix[16];
 float modelViewMatrix[16];
 float ratio;
+bool hue = false;
 
 static void printGLString(const char *name, GLenum s) {
     const char *v = (const char *) glGetString(s);
@@ -57,10 +58,11 @@ static void checkGlError(const char* op) {
 static const char gVertexShader[] = 
     "attribute vec4 vPosition;\n"
 	"attribute vec2 aTexCoordinates;\n"
+	"uniform mat4 modelViewProjectionMatrix;\n"
 
 	"varying vec2 vTexCoordinates;\n"
     "void main() {\n"
-    "  gl_Position = vPosition;\n"
+    "  gl_Position = modelViewProjectionMatrix*vPosition;\n"
 	"  vTexCoordinates = aTexCoordinates;\n"
     "}\n";
 
@@ -158,6 +160,7 @@ bool setupGraphics(int w, int h) {
     checkGlError("glGetAttribLocation");
     //maNormalHandle = glGetAttribLocation(gProgram, "aNormal");
     maTextureCoordHandle = glGetAttribLocation(gProgram, "aTexCoordinates");
+    maMVPMatrixHandle = glGetUniformLocation(gProgram, "modelViewProjectionMatrix");
     checkGlError("glGetAttribLocation_atex");
 
     LOGI("glGetAttribLocation(\"vPosition\") = %d\n",
@@ -217,7 +220,7 @@ bool setupGraphics(int w, int h) {
     Matrix4::SetIdentityM(viewMatrix, 0);
 
 
-    ratio = h/w;
+    ratio = ((float)h)/((float)w);
     Matrix4::FrustumM(projectionMatrix, 0,
     				   -ratio, ratio, -1, 1, 1, 100);
 
@@ -291,14 +294,33 @@ void renderFrame() {
     // Apply the lookAt (viewMatrix) transformation to obtain modelView transformation
     Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
 
+    if (hue == false)
+    {
+    	for (int i = 0; i < 16; i++)
+    	{
+    		LOGI("%3.3f, ", projectionMatrix[i]);
+    	}
+
+    	LOGI("----");
+    }
+
     // Calculate the modelViewProjection matrix
     Matrix4::MultiplyMM(modelViewProjectionMatrix, 0, projectionMatrix, 0, modelViewMatrix, 0);
+
+    if (hue == false)
+    {
+    	for (int i = 0; i < 16; i++)
+    	{
+    		LOGI("%3.3f, ", projectionMatrix[i]);
+    	}
+    	hue = true;
+    }
     /////////
 
 
     // Insert the handles for the transformation matrix
     glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
-    glUniformMatrix4fv(maMVMatrixHandle, 1, false, modelViewMatrix);
+    //glUniformMatrix4fv(maMVMatrixHandle, 1, false, modelViewMatrix);
 
 
 	mjModelMesh* mesh = model->meshes[0];

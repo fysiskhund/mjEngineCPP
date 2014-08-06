@@ -9,13 +9,14 @@ void Matrix4::SetIdentityM(float* m, int ignoredMOffset)
 }
 
 
-void Matrix4::FrustumM(float* m, int ignoredMOffset, float left, float right, float bottom, float top, float near, float far)
+void Matrix4::FrustumM(float* m, int ignoredMOffset,
+		float left, float right, float bottom, float top, float near, float far)
 {
 
 	float A = (right + left)/(right - left);
 	float B = (top + bottom)/(top - bottom);
-	float C = (far + near)/(far - near);
-	float D = 2*far*near/(far - near);
+	float C = -(far + near)/(far - near);
+	float D = -2*far*near/(far - near);
 
 
 	m[0] = 2*near/(right - left);
