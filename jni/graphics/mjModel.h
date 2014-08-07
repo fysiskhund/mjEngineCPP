@@ -9,7 +9,11 @@
 //#include <android/log.h>
 
 #include "mjModelMesh.h"
+#include "mjShader.h"
+
 #include "../extLibs/tinyxml/tinyxml2.h"
+
+
 namespace mjEngine{
 
 using namespace tinyxml2;

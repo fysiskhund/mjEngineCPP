@@ -151,6 +151,10 @@ void mjModel::Load(XMLDocument* doc)
 
 void mjModel::Draw()
 {
-
+	for(int i = 0; i < meshes.size(); i++)
+	{
+		meshes[i]->Draw();
+	}
 }
+
 }// namespace mj

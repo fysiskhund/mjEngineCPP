@@ -41,7 +41,7 @@ float projectionMatrix[16];
 float modelViewProjectionMatrix[16];
 float modelViewMatrix[16];
 float ratio;
-bool hue = false;
+bool debugMatrix = true;
 
 static void printGLString(const char *name, GLenum s) {
     const char *v = (const char *) glGetString(s);
@@ -58,11 +58,11 @@ static void checkGlError(const char* op) {
 static const char gVertexShader[] = 
     "attribute vec4 vPosition;\n"
 	"attribute vec2 aTexCoordinates;\n"
-	"uniform mat4 modelViewProjectionMatrix;\n"
+	"uniform mat4 maMVPMatrix;\n"
 
 	"varying vec2 vTexCoordinates;\n"
     "void main() {\n"
-    "  gl_Position = modelViewProjectionMatrix*vPosition;\n"
+    "  gl_Position = maMVPMatrix*vPosition;\n"
 	"  vTexCoordinates = aTexCoordinates;\n"
     "}\n";
 
@@ -160,11 +160,17 @@ bool setupGraphics(int w, int h) {
     checkGlError("glGetAttribLocation");
     //maNormalHandle = glGetAttribLocation(gProgram, "aNormal");
     maTextureCoordHandle = glGetAttribLocation(gProgram, "aTexCoordinates");
-    maMVPMatrixHandle = glGetUniformLocation(gProgram, "modelViewProjectionMatrix");
     checkGlError("glGetAttribLocation_atex");
 
-    LOGI("glGetAttribLocation(\"vPosition\") = %d\n",
-    		maPositionHandle);
+    // Get the texture handle location
+    maTextureHandle = glGetUniformLocation(gProgram, "uTexture");
+    checkGlError("get uniform for texture");
+
+    maMVPMatrixHandle = glGetUniformLocation(gProgram, "maMVPMatrix");
+    checkGlError("glGetUniformLocation_mvpMatrix");
+
+    LOGI("glGetUniformLocation(\"maTextureHandle\") = %d\n",
+    		maTextureHandle);
 
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
@@ -199,6 +205,7 @@ bool setupGraphics(int w, int h) {
     {
     	LOGI("Image loader returned false -_-*");
     }
+    checkGlError("loading image");
 
     GLuint textures[1];
     glGenTextures(1, &textures[0]);
@@ -218,11 +225,11 @@ bool setupGraphics(int w, int h) {
 
     Matrix4::SetIdentityM(modelMatrix,0 );
     Matrix4::SetIdentityM(viewMatrix, 0);
+    Matrix4::SetIdentityM(modelViewMatrix,0);
 
-
-    ratio = ((float)h)/((float)w);
+    ratio = ((float)w)/((float)h);
     Matrix4::FrustumM(projectionMatrix, 0,
-    				   -ratio, ratio, -1, 1, 1, 100);
+    				   -ratio, ratio, -1, 1, 0.5, 100);
 
 
     return true;
@@ -261,6 +268,7 @@ void renderFrame() {
     glBindTexture(GL_TEXTURE_2D, model->glTexture);
     // Set the sampler texture unit to 0
     glUniform1i(maTextureHandle, 0);
+    checkGlError("set sampler texture unit to 0");
 
     // Connect ambient light
     //glUniform4fv(handles.maAmbientLightColorHandle, 1, ambientLightColour, 0);
@@ -292,34 +300,27 @@ void renderFrame() {
     // Matrix multiplication should come here
 
     // Apply the lookAt (viewMatrix) transformation to obtain modelView transformation
-    Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
-
-    if (hue == false)
-    {
-    	for (int i = 0; i < 16; i++)
-    	{
-    		LOGI("%3.3f, ", projectionMatrix[i]);
-    	}
-
-    	LOGI("----");
-    }
+    //Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
 
     // Calculate the modelViewProjection matrix
     Matrix4::MultiplyMM(modelViewProjectionMatrix, 0, projectionMatrix, 0, modelViewMatrix, 0);
-
-    if (hue == false)
-    {
-    	for (int i = 0; i < 16; i++)
-    	{
-    		LOGI("%3.3f, ", projectionMatrix[i]);
-    	}
-    	hue = true;
-    }
     /////////
+    //Matrix4::SetIdentityM(modelViewProjectionMatrix, 0);
 
+
+    if (debugMatrix)
+    {
+    	for(int i = 0; i < 16; i++)
+    	{
+    		debugMatrix = false;
+    		LOGI("%3.3f, ",modelViewProjectionMatrix[i] );
+    	}
+    }
 
     // Insert the handles for the transformation matrix
+    //LOGI("handle for transform matrix");
     glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
+    checkGlError("glUniformMatrix4fv");
     //glUniformMatrix4fv(maMVMatrixHandle, 1, false, modelViewMatrix);
 
 
