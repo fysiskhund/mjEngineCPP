@@ -31,7 +31,7 @@ public:
 
 	mjImageLoader();
 
-	bool Load(char *name);
+	bool Load(const char *name);
 
 };
 

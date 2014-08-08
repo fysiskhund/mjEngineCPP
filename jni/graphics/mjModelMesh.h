@@ -1,7 +1,6 @@
 #ifndef MJMODELMESH_H
 #define MJMODELMESH_H
 
-#include "mjShader.h"
 
 namespace mjEngine{
 class mjModelMesh
@@ -12,11 +11,10 @@ public:
 	unsigned short* drawOrderBuffer;
 	unsigned int drawOrderCount;
 
-	mjShader* shader;
+	int glTexture;
 
 	mjModelMesh();
 
-	void Draw();
 
 };
 }// namespace mjEngine

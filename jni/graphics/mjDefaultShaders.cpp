@@ -5,9 +5,30 @@ namespace mjEngine{
 
 mjDefaultShaders::mjDefaultShaders()
 {
-	//
+	//Setup
+	CreateProgram(simpleVertexShaderCode, simpleFragmentShaderCode);
+}
+void mjDefaultShaders::Run(mjModelMesh* mesh)
+{
+	 glUseProgram(glProgramHandle);
+}
 
-	vanillaVertexShaderCode = 
+const char* mjDefaultShaders::vanillaFragmentShaderCode =
+		"precision mediump float;\n"
+
+		 "varying vec2 vTexCoordinates;\n"
+		 "uniform sampler2D uTexture;\n"
+
+		 "varying vec4 vLight;\n"
+
+		 "void main(){ \n"
+		 " gl_FragColor = texture2D(uTexture, vTexCoordinates)* vLight;\n"
+		 "} \n";
+
+
+
+
+const char* mjDefaultShaders::vanillaVertexShaderCode =
 			"attribute vec4 vPosition; \n"
 	        "attribute vec2 aTexCoordinates;\n"
 	        "attribute vec3 aNormal;\n"
@@ -57,18 +78,23 @@ mjDefaultShaders::mjDefaultShaders()
 	        "} \n";
 
 
-	vanillaFragmentShaderCode =
-				 "precision mediump float;\n"
+const char* mjDefaultShaders::simpleVertexShaderCode =
+		"attribute vec4 vPosition;\n"
+		"attribute vec2 aTexCoordinates;\n"
+		"uniform mat4 maMVPMatrix;\n"
 
-				 "varying vec2 vTexCoordinates;\n"
-				 "uniform sampler2D uTexture;\n"
+		"varying vec2 vTexCoordinates;\n"
+	    "void main() {\n"
+	    "  gl_Position = maMVPMatrix*vPosition;\n"
+		"  vTexCoordinates = aTexCoordinates;\n"
+	    "}\n";
 
-				 "varying vec4 vLight;\n"
-
-				 "void main(){ \n"
-				 " gl_FragColor = texture2D(uTexture, vTexCoordinates)* vLight;\n"
-				 "} \n";
-
-}
+const char* mjDefaultShaders::simpleFragmentShaderCode =
+		"precision mediump float;\n"
+		"varying vec2 vTexCoordinates;\n"
+		"uniform sampler2D uTexture;\n"
+	    "void main() {\n"
+	    "  gl_FragColor = texture2D(uTexture, vTexCoordinates);\n"
+	    "}\n";
 
 }

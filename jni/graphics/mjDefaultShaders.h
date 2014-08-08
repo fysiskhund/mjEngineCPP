@@ -9,8 +9,11 @@ class mjDefaultShaders:  public mjShader
 {
 	public:
 	mjDefaultShaders();
-	const char* vanillaVertexShaderCode;
-	const char* vanillaFragmentShaderCode;
+	void Run(mjModelMesh* mesh) override;
+	static const char* simpleVertexShaderCode;
+	static const char* simpleFragmentShaderCode;
+	static const char* vanillaVertexShaderCode;
+	static const char* vanillaFragmentShaderCode;
 
 };
 }

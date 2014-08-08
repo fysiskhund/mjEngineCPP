@@ -16,7 +16,7 @@ mjImageLoader::mjImageLoader()
 }
 
 
-bool mjImageLoader::Load(char *name)
+bool mjImageLoader::Load(const char *name)
 {
 	// This procedure is based in Morten Nobel's
 	// http://blog.nobel-joergensen.com/2010/11/07/loading-a-png-as-texture-in-opengl-using-libpng/

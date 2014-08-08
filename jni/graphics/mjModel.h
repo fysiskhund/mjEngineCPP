@@ -30,14 +30,13 @@ public:
 
 	char status[1024];
 
-	int glTexture;
-
 
 	std::vector<mjModelMesh*> meshes;
+	std::vector<mjShader*> shaderForMesh;
 
 	mjModel();
 
-	void LoadFromFile(char* fileName);
+	void LoadFromFile(const char* fileName);
 
 	void Load(XMLDocument* doc);
 

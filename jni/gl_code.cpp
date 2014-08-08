@@ -218,7 +218,7 @@ bool setupGraphics(int w, int h) {
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgLoader->width, imgLoader->height, 0, imgLoader->hasAlpha? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, imgLoader->imageData);//testImage.pixel_data);
     //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, testImage.pixel_data);
-    model->glTexture = textures[0];
+    model->meshes[0]->glTexture = textures[0];
 
     //delete [] imgLoader->imageData;
 
@@ -265,7 +265,7 @@ void renderFrame() {
     // Connect the texture
     glActiveTexture(GL_TEXTURE0);
     // Bind the texture handle
-    glBindTexture(GL_TEXTURE_2D, model->glTexture);
+    glBindTexture(GL_TEXTURE_2D, model->meshes[0]->glTexture);
     // Set the sampler texture unit to 0
     glUniform1i(maTextureHandle, 0);
     checkGlError("set sampler texture unit to 0");

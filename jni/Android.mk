@@ -21,6 +21,7 @@ LOCAL_SRC_FILES := gl_code.cpp \
 				   mjVector3.cpp \
 				   graphics/mjImageLoader.cpp \
 				   graphics/mjDefaultShaders.cpp \
+				   graphics/mjShader.cpp\
 				   extlibs/math/Matrix.cpp
 				   
 LOCAL_LDLIBS    := -llog -lGLESv2 -lz

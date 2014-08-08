@@ -10,7 +10,7 @@ mjModel::mjModel()
 	faceCount = -1;
 	status[0] = '\0';
 }
-void mjModel::LoadFromFile(char* fileName)
+void mjModel::LoadFromFile(const char* fileName)
 {
 	XMLDocument doc;
 	
@@ -153,7 +153,9 @@ void mjModel::Draw()
 {
 	for(int i = 0; i < meshes.size(); i++)
 	{
-		meshes[i]->Draw();
+
+		shaderForMesh[i]->Run(meshes[i]);
+		glDrawElements(GL_TRIANGLES, meshes[i]->drawOrderCount, GL_UNSIGNED_SHORT, meshes[i]->drawOrderBuffer);
 	}
 }
 
