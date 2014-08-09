@@ -31,13 +31,19 @@ GLuint mjShader::LoadShader(GLenum shaderType, const char* pSource)
 
 void mjShader::CreateProgram(const char* vertexShaderCode, const char* fragmentShaderCode)
 {
-	glVertexShaderHandle = LoadShader(GL_VERTEX_SHADER, vertexShaderCode);
-	glFragmentShaderHandle = LoadShader(GL_FRAGMENT_SHADER, vertexShaderCode);
+	glProgramHandle = glCreateProgram();
 
-	GLuint glProgramHandle = glCreateProgram();
+
+	glVertexShaderHandle = LoadShader(GL_VERTEX_SHADER, vertexShaderCode);
+	glFragmentShaderHandle = LoadShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
+
+	//LOGI("vxshaderHandle %d, fragShaderHAndle: %d", glVertexShaderHandle, glFragmentShaderHandle);
+
 	if (glProgramHandle) {
+		//LOGI("VertexShader");
 		glAttachShader(glProgramHandle, glVertexShaderHandle);
 		//checkGlError("glAttachShader");
+		//LOGI("fragmentShader");
 		glAttachShader(glProgramHandle, glFragmentShaderHandle);
 		//checkGlError("glAttachShader");
 		glLinkProgram(glProgramHandle);
@@ -54,6 +60,7 @@ void mjShader::CreateProgram(const char* vertexShaderCode, const char* fragmentS
 					free(buf);
 				}*/
 			}
+			//LOGI("At glDeleteProgram :(");
 			glDeleteProgram(glProgramHandle);
 			glProgramHandle = 0;
 		}

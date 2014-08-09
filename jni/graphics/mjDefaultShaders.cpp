@@ -1,16 +1,60 @@
 
 #include "mjDefaultShaders.h"
 
+
+
 namespace mjEngine{
 
 mjDefaultShaders::mjDefaultShaders()
 {
 	//Setup
 	CreateProgram(simpleVertexShaderCode, simpleFragmentShaderCode);
+	name = new char[8];
+	strncpy(name, "default", 8);
+
+	LOGI("Programhandle is %d", glProgramHandle);
+	maPositionHandle = glGetAttribLocation(glProgramHandle, "vPosition");
+	LOGI("Position : %d", maPositionHandle);
+	//maNormalHandle = glGetAttribLocation(glProgram, "aNormal");
+
+	maTextureCoordHandle = glGetAttribLocation(glProgramHandle, "aTexCoordinates");
+	LOGI("texcoords: %d", maTextureCoordHandle);
+
+	// Get the texture handle location
+	maTextureHandle = glGetUniformLocation(glProgramHandle, "uTexture");
+
+	maMVPMatrixHandle = glGetUniformLocation(glProgramHandle, "maMVPMatrix");
+	LOGI("textureHAndle %d, mvpMAtrixHAndle %d", maTextureHandle, maMVPMatrixHandle);
 }
-void mjDefaultShaders::Run(mjModelMesh* mesh)
+void mjDefaultShaders::Run(mjModelMesh* mesh,
+		float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
+		float* modelViewProjectionMatrix)
 {
 	 glUseProgram(glProgramHandle);
+	 glEnableVertexAttribArray(maPositionHandle);
+	 glVertexAttribPointer(maPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, vertexBuffer);
+
+	 // Connect the texture
+	 glActiveTexture(GL_TEXTURE0);
+	 // Bind the texture handle
+	 glBindTexture(GL_TEXTURE_2D, mesh->glTexture);
+	 // Set the sampler texture unit to 0
+	 glUniform1i(maTextureHandle, 0);
+
+
+	 //Prepare ("connect") the triangle coordinate data
+	 // Offset in the buffer, for accessing the texcoord data directly
+
+	 glVertexAttribPointer(maTextureCoordHandle, 2,
+			 GL_FLOAT, GL_FALSE,
+			 0, texCoordBuffer);
+
+	 // Enable a handle to the texture coordinates
+	 glEnableVertexAttribArray(maTextureCoordHandle);
+
+	 // Send the modelViewProjection Matrix
+	 glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
+
 }
 
 const char* mjDefaultShaders::vanillaFragmentShaderCode =

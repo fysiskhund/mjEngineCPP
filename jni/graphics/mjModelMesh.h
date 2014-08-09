@@ -8,6 +8,8 @@ class mjModelMesh
 public:
 	char* name;
 	char* material;
+	char* shaderName;
+	int mjShaderListIndex;
 	unsigned short* drawOrderBuffer;
 	unsigned int drawOrderCount;
 

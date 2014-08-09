@@ -32,7 +32,6 @@ public:
 
 
 	std::vector<mjModelMesh*> meshes;
-	std::vector<mjShader*> shaderForMesh;
 
 	mjModel();
 
@@ -40,7 +39,9 @@ public:
 
 	void Load(XMLDocument* doc);
 
-	void Draw();
+	void TieShaders(std::vector<mjShader*>& shaderList);
+
+	void Draw(std::vector<mjShader*>& shaderList, float* projectionMatrix, float* modelViewMatrix, float* modelViewProjectionMatrix);
 
 private:
 	int numVertices;

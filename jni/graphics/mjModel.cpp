@@ -82,6 +82,18 @@ void mjModel::Load(XMLDocument* doc)
 	{
 		mjModelMesh* modelMesh = new mjModelMesh();
 
+		const char* shader = submesh->Attribute("shader");
+		if (shader != NULL)
+		{
+			modelMesh->shaderName = new char[strnlen(shader, 96)+1];
+			strncpy(modelMesh->shaderName, shader, 96);
+
+		} else
+		{
+			modelMesh->shaderName = NULL;
+
+		}
+
 		const char* tempStrAttr = submesh->Attribute("material");
 		modelMesh->material = new char[strnlen(tempStrAttr, 96)+1];
 		strncpy(modelMesh->material, tempStrAttr, 96);
@@ -149,12 +161,38 @@ void mjModel::Load(XMLDocument* doc)
 	}
 }
 
-void mjModel::Draw()
+void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
+{
+
+	for(int i = 0; i < meshes.size(); i++)
+	{
+		if (meshes[i]->shaderName == NULL)
+		{
+			//LOGI("mesh %d -> shader 0 [Default assignment]", i);
+			meshes[i]->mjShaderListIndex = 0;
+		} else
+		{
+			for (int j = 0; j < shaderList.size(); j++)
+			{
+				if (strncmp(meshes[i]->shaderName,shaderList[j]->name, 96) == 0)
+				{
+					//LOGI("mesh %d -> shader %d [null]", i, j);
+					meshes[i]->mjShaderListIndex = j;
+				}
+			}
+		}
+	}
+	//LOGI("TieShaders done.");
+}
+
+void mjModel::Draw(std::vector<mjShader*>& shaderList, float* projectionMatrix, float* modelViewMatrix, float* modelViewProjectionMatrix)
 {
 	for(int i = 0; i < meshes.size(); i++)
 	{
 
-		shaderForMesh[i]->Run(meshes[i]);
+		shaderList[meshes[i]->mjShaderListIndex]->Run(meshes[i],
+				vertexBuffer, texCoordBuffer, normalComponentBuffer,
+				modelViewProjectionMatrix);
 		glDrawElements(GL_TRIANGLES, meshes[i]->drawOrderCount, GL_UNSIGNED_SHORT, meshes[i]->drawOrderBuffer);
 	}
 }
