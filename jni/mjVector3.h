@@ -30,6 +30,7 @@ public:
 	float Dot(mjVector3& v);
 	void CrossOut(mjVector3& v, mjVector3* r);
 	
+	void CopyToArray(float* array);
 	
 	float x;
 	float y;

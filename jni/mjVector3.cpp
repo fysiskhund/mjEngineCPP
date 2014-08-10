@@ -114,6 +114,13 @@ namespace mjEngine{
 	out->z = (x*v.y) - (y*v.x);	
  }
  
+ void mjVector3::CopyToArray(float* array)
+ {
+	 array[0] = x;
+	 array[1] = y;
+	 array[2] = z;
+ }
+
 
 }
 

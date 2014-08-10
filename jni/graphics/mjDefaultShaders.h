@@ -2,6 +2,7 @@
 #define MJDEFAULTSHADERS
 
 #include "mjShader.h"
+#include "mjVector3.h"
 #include <string.h>
 
 #include <jni.h>
@@ -24,13 +25,23 @@ class mjDefaultShaders:  public mjShader
 	static const char* vanillaVertexShaderCode;
 	static const char* vanillaFragmentShaderCode;
 
+
+	mjVector3 diffuseLightDirection;
+	float diffuseLightColor[4];
+	float ambientLightColor[4];
+
 	// Handles
 	GLuint maPositionHandle;
 	GLuint maNormalHandle;
 	GLuint maTextureCoordHandle;
 	GLuint maTextureHandle;
 	GLuint maMVPMatrixHandle;
-	GLuint maMVMatrixHandle;
+	GLuint uDiffuseLightDirectionHandle;
+	GLuint uDiffuseLightColorHandle;
+	GLuint uAmbientLightColorHandle;
+	//GLuint maMVMatrixHandle;
+	private:
+		float diffuseLightDirectionArray[3];
 };
 }
 #endif

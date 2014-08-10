@@ -14,16 +14,16 @@ include $(PREBUILT_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := mjengine
-LOCAL_SRC_FILES := gl_code.cpp \
-				   extLibs/tinyxml/tinyxml2.cpp \
+LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
+				   mjVector3.cpp \
+				   extLibs/math/Matrix.cpp \
+				   graphics/mjImageLoader.cpp \
 				   graphics/mjModel.cpp \
 				   graphics/mjModelMesh.cpp \
-				   mjVector3.cpp \
-				   graphics/mjImageLoader.cpp \
 				   graphics/mjDefaultShaders.cpp \
-				   graphics/mjShader.cpp\
-				   core/mjObject.cpp\
-				   extlibs/math/Matrix.cpp
+				   graphics/mjShader.cpp \
+				   core/mjObject.cpp \
+				   gl_code.cpp
 				   
 LOCAL_LDLIBS    := -llog -lGLESv2 -lz
 LOCAL_STATIC_LIBRARIES := png
