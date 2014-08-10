@@ -8,7 +8,7 @@ namespace mjEngine{
 mjDefaultShaders::mjDefaultShaders()
 {
 	//Setup
-	CreateProgram(simpleVertexShaderCode, simpleFragmentShaderCode);
+	CreateProgram(vanillaVertexShaderCode, vanillaFragmentShaderCode);
 	name = new char[8];
 	strncpy(name, "default", 8);
 

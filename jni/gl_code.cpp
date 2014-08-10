@@ -22,6 +22,7 @@
 
 
 #include "graphics/mjModel.h"
+#include "core/mjObject.h"
 #include "graphics/mjImageLoader.h"
 #include "graphics/mjDefaultShaders.h"
 #include "mjVector3.h"
@@ -32,10 +33,10 @@ using namespace mjEngine;
 
 
 mjModel* model;
+mjObject testObject;
+
 mjDefaultShaders* defaultShaders = new mjDefaultShaders();
 
-float modelMatrix[16];
-float viewMatrix[16];
 float projectionMatrix[16];
 
 float modelViewProjectionMatrix[16];
@@ -71,19 +72,24 @@ bool setupGraphics(int w, int h) {
 
     LOGI("setupGraphics(%d, %d)", w, h);
 
+    glEnable(GL_DEPTH_TEST);
+
 
 
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
 
 
-    model = new mjModel();
-    model->LoadFromFile("/sdcard/mjEngineCPP/sprite.mesh.xml");
+    testObject.model = new mjModel();
+    testObject.model->LoadFromFile("/sdcard/mjEngineCPP/bird.mesh.xml");
+    testObject.pos.Set(0,-1.5,-1);
+    testObject.dir.Set(-1, 0, 1);
+    testObject.dir.Normalize();
 
     // Test loading png texture
     mjImageLoader* imgLoader = new mjImageLoader();//("/sdcard/mjEngineCPP/test.png");
     LOGI("About to load texture");
-    if (imgLoader->Load("/sdcard/mjEngineCPP/test.png"))
+    if (imgLoader->Load("/sdcard/mjEngineCPP/birdtexture.png"))
     {
     	LOGI("Image being loaded is %dx%d", imgLoader->width, imgLoader->height);
     } else
@@ -103,22 +109,22 @@ bool setupGraphics(int w, int h) {
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgLoader->width, imgLoader->height, 0, imgLoader->hasAlpha? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, imgLoader->imageData);//testImage.pixel_data);
     //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, testImage.pixel_data);
-    model->meshes[0]->glTexture = textures[0];
+
 
     //delete [] imgLoader->imageData;
 
 
-    Matrix4::SetIdentityM(modelMatrix,0 );
-    Matrix4::SetIdentityM(viewMatrix, 0);
-    Matrix4::SetIdentityM(modelViewMatrix,0);
 
     ratio = ((float)w)/((float)h);
     Matrix4::FrustumM(projectionMatrix, 0,
     				   -ratio, ratio, -1, 1, 0.5, 100);
 
     InitShaders();
-    model->TieShaders(shaderList);
-
+    testObject.model->TieShaders(shaderList);
+    for (int i = 0; i<testObject.model->meshes.size(); i++)
+    {
+    	testObject.model->meshes[i]->glTexture = textures[0];
+    }
     return true;
 }
 
@@ -150,10 +156,8 @@ void renderFrame() {
     // Apply the lookAt (viewMatrix) transformation to obtain modelView transformation
     //Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
 
-    // Calculate the modelViewProjection matrix
-    Matrix4::MultiplyMM(modelViewProjectionMatrix, 0, projectionMatrix, 0, modelViewMatrix, 0);
 
-    model->Draw(shaderList, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix);
+    testObject.Draw(shaderList, projectionMatrix);
 
 }
 
