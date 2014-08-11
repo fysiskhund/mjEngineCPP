@@ -144,6 +144,7 @@ const char* mjDefaultShaders::vanillaFragmentShaderCode =
 		 "varying vec4 vLight;\n"
 
 		 "void main(){ \n"
+		//"gl_FragColor = vec4(0,1,0,1)*vLight; \n"
 		 " gl_FragColor = texture2D(uTexture, vTexCoordinates)* vLight;\n"
 		 "} \n";
 

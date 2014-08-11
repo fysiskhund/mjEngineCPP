@@ -32,6 +32,7 @@ public:
 	mjImageLoader();
 
 	bool Load(const char *name);
+	GLuint SendToGL();
 
 };
 

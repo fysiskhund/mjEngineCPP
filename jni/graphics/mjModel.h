@@ -18,6 +18,8 @@ namespace mjEngine{
 
 using namespace tinyxml2;
 
+#define MJMODEL_MAXATTRSIZE 96
+
 class mjModel
 {
 public:

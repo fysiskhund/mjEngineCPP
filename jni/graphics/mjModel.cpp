@@ -9,6 +9,7 @@ mjModel::mjModel()
 	currentFace = -1;
 	faceCount = -1;
 	status[0] = '\0';
+
 }
 void mjModel::LoadFromFile(const char* fileName)
 {
@@ -77,7 +78,7 @@ void mjModel::Load(XMLDocument* doc)
 	XMLElement* submeshes = mesh->FirstChildElement("submeshes");
 
 	XMLElement* submesh = submeshes->FirstChildElement("submesh");
-
+	int currentMeshDEBUG = 0;
 	while(submesh)
 	{
 		mjModelMesh* modelMesh = new mjModelMesh();
@@ -85,8 +86,9 @@ void mjModel::Load(XMLDocument* doc)
 		const char* shader = submesh->Attribute("shader");
 		if (shader != NULL)
 		{
-			modelMesh->shaderName = new char[strnlen(shader, 96)+1];
-			strncpy(modelMesh->shaderName, shader, 96);
+			int length = strnlen(shader, MJMODEL_MAXATTRSIZE)+1;
+			modelMesh->shaderName = new char[length];
+			strncpy(modelMesh->shaderName, shader, length);
 
 		} else
 		{
@@ -95,8 +97,11 @@ void mjModel::Load(XMLDocument* doc)
 		}
 
 		const char* tempStrAttr = submesh->Attribute("material");
-		modelMesh->material = new char[strnlen(tempStrAttr, 96)+1];
-		strncpy(modelMesh->material, tempStrAttr, 96);
+		{
+			int length = strnlen(tempStrAttr, MJMODEL_MAXATTRSIZE)+1;
+			modelMesh->material = new char[length];
+			strncpy(modelMesh->material, tempStrAttr, length);
+		}
 
 		XMLElement* faces = submesh->FirstChildElement("faces");
 
@@ -125,12 +130,15 @@ void mjModel::Load(XMLDocument* doc)
 			numFacesParsed++;
 			face = face->NextSiblingElement("face");
 		}
+
 		meshes.push_back(modelMesh);
+		currentMeshDEBUG++;
 		submesh= submesh->NextSiblingElement("submesh");
 	}
 
 	snprintf(tmp, 1024, "%s\nParsed %d faces & %d meshes", status, faceCount, meshes.size());
-		snprintf(status, 1024, "%s", tmp);
+	snprintf(status, 1024, "%s", tmp);
+
 
 	XMLElement* submeshnames = mesh->FirstChildElement("submeshnames");
 
@@ -141,9 +149,17 @@ void mjModel::Load(XMLDocument* doc)
 		int desiredIndex;
 		submesh->QueryIntAttribute("index", &desiredIndex);
 
-		const char* tempStrAttr = submesh->Attribute("name");
-		meshes[desiredIndex]->name = new char[strnlen(tempStrAttr, 96)+1];
-		strncpy(meshes[desiredIndex]->name, tempStrAttr, 96);
+		{
+
+			const char* tempStrAttr = submesh->Attribute("name");
+			int length = strnlen(tempStrAttr, 96)+1;
+			char* newStr = new char[length];
+
+			strncpy(newStr, tempStrAttr, length);
+
+			meshes[desiredIndex]->name = newStr;
+
+		}
 		numSubMeshNames++;
 		submesh = submesh->NextSiblingElement("submesh");
 	}
@@ -168,7 +184,6 @@ void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
 	{
 		if (meshes[i]->shaderName == NULL)
 		{
-			//LOGI("mesh %d -> shader 0 [Default assignment]", i);
 			meshes[i]->mjShaderListIndex = 0;
 		} else
 		{
@@ -176,13 +191,11 @@ void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
 			{
 				if (strncmp(meshes[i]->shaderName,shaderList[j]->name, 96) == 0)
 				{
-					//LOGI("mesh %d -> shader %d [null]", i, j);
 					meshes[i]->mjShaderListIndex = j;
 				}
 			}
 		}
 	}
-	//LOGI("TieShaders done.");
 }
 
 void mjModel::Draw(std::vector<mjShader*>& shaderList, float* projectionMatrix, float* modelViewMatrix, float* modelViewProjectionMatrix)

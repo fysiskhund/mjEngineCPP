@@ -31,17 +31,7 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/NDK refresh-build.launch</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
-			<triggers>auto,full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/linux ndk builder.launch</value>
+					<value>&lt;project&gt;/.externalToolBuilders/OSX NDK builder.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>

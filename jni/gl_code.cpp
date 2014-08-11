@@ -32,8 +32,9 @@
 using namespace mjEngine;
 
 
-mjModel* model;
+
 mjObject testObject;
+mjObject testObject2;
 
 mjDefaultShaders* defaultShaders = new mjDefaultShaders();
 
@@ -65,7 +66,6 @@ void InitShaders()
 	mjDefaultShaders* defaultShaders = new mjDefaultShaders();
 	shaderList.push_back(defaultShaders);
 }
-
 bool setupGraphics(int w, int h) {
 
 
@@ -79,65 +79,62 @@ bool setupGraphics(int w, int h) {
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
 
-
+    LOGI("Before first model");
     testObject.model = new mjModel();
     testObject.model->LoadFromFile("/sdcard/mjEngineCPP/bird.mesh.xml");
-    testObject.pos.Set(0,-1.5,-1);
+    testObject.pos.Set(0,-1.5,-3);
     testObject.dir.Set(-1, 0, 1);
     testObject.dir.Normalize();
 
     // Test loading png texture
-    mjImageLoader* imgLoader = new mjImageLoader();//("/sdcard/mjEngineCPP/test.png");
-    LOGI("About to load texture");
-    if (imgLoader->Load("/sdcard/mjEngineCPP/birdtexture.png"))
+    mjImageLoader* imgLoader = new mjImageLoader();//
+    imgLoader->Load("/sdcard/mjEngineCPP/birdtexture.png");
+    GLuint glTexture = imgLoader->SendToGL();
+    for (int i = 0; i<testObject.model->meshes.size(); i++)
     {
-    	LOGI("Image being loaded is %dx%d", imgLoader->width, imgLoader->height);
-    } else
-    {
-    	LOGI("Image loader returned false -_-*");
+    	testObject.model->meshes[i]->glTexture = glTexture;
     }
-    checkGlError("loading image");
+    delete [] imgLoader->imageData;
 
-    GLuint textures[1];
-    glGenTextures(1, &textures[0]);
-    glBindTexture(GL_TEXTURE_2D, textures[0]);
+    LOGI("Before second model");
+    testObject2.model = new mjModel();
+    testObject2.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
+    testObject2.pos.Set(1.5,-1.5,-3);
+    testObject2.dir.Set(0.4, 0, 1);
+    testObject2.dir.Normalize();
 
-    // Set parameters
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgLoader->width, imgLoader->height, 0, imgLoader->hasAlpha? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, imgLoader->imageData);//testImage.pixel_data);
-    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, testImage.pixel_data);
+    LOGI("texture loading. for obj2");
+    imgLoader = new mjImageLoader();
+    imgLoader->Load("/sdcard/mjEngineCPP/suit_test.png");
+    glTexture = imgLoader->SendToGL();
+    for (int i = 0; i<testObject2.model->meshes.size(); i++)
+    {
+       	testObject2.model->meshes[i]->glTexture = glTexture;
+    }
 
-
-    //delete [] imgLoader->imageData;
-
-
+    delete [] imgLoader->imageData;
 
     ratio = ((float)w)/((float)h);
     Matrix4::FrustumM(projectionMatrix, 0,
-    				   -ratio, ratio, -1, 1, 0.5, 100);
+    				   -ratio, ratio, -1.0, 1.0, 1, 100);
 
     InitShaders();
     testObject.model->TieShaders(shaderList);
-    for (int i = 0; i<testObject.model->meshes.size(); i++)
-    {
-    	testObject.model->meshes[i]->glTexture = textures[0];
-    }
+    testObject2.model->TieShaders(shaderList);
     return true;
 }
 
 
 
 
+
 void renderFrame() {
-    static float grey;
-    grey += 0.01f;
-    if (grey > 1.0f) {
-        grey = 0.0f;
+    static float grey = 0.3;
+    grey += 0.0001f;
+    if (grey > 0.7f) {
+        grey = 0.3f;
     }
-    glClearColor(grey, grey, grey, 1.0f);
+    glClearColor(grey*0.5, grey*0.5, grey, 1.0f);
     checkGlError("glClearColor");
     glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     checkGlError("glClear");
@@ -158,6 +155,7 @@ void renderFrame() {
 
 
     testObject.Draw(shaderList, projectionMatrix);
+    testObject2.Draw(shaderList, projectionMatrix);
 
 }
 
