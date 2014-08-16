@@ -46,6 +46,8 @@ float modelViewProjectionMatrix[16];
 float modelViewMatrix[16];
 float ratio;
 bool debugMatrix = true;
+float theta = 0;
+
 
 static void printGLString(const char *name, GLenum s) {
     const char *v = (const char *) glGetString(s);
@@ -84,7 +86,7 @@ bool setupGraphics(int w, int h) {
     LOGI("Before first model");
     testObject.model = new mjModel();
     testObject.model->LoadFromFile("/sdcard/mjEngineCPP/bird.mesh.xml");
-    testObject.pos.Set(0,-1.5,-10);
+    testObject.pos.Set(-2,0,3);
     testObject.dir.Set(-1, 0, 1);
     testObject.dir.Normalize();
 
@@ -101,8 +103,8 @@ bool setupGraphics(int w, int h) {
     LOGI("Before second model");
     testObject2.model = new mjModel();
     testObject2.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
-    testObject2.pos.Set(0,-1.5,-5);
-    testObject2.dir.Set(0.4, 0, 1);
+    testObject2.pos.Set(-3,0,4);
+    testObject2.dir.Set(1, 0, 1);
     testObject2.dir.Normalize();
 
     LOGI("texture loading. for obj2");
@@ -143,15 +145,12 @@ void renderFrame() {
     checkGlError("glClear");
 
 
-    camera.dir.Set(0,0,-1);
+    camera.dir.Set(1,0,1);
     camera.dir.Normalize();
-    camera.pos.Set(0,0,0);
+    camera.pos.Set(0,0,-10);
     camera.GetLookAtMatrix(lookAtMatrix);
+    //Matrix4::DebugM("lookat", lookAtMatrix);
 
-    /*for(int i = 0; i< 16; i++)
-    {
-    	LOGI("lookAt[%d]:%3.3f", i, lookAtMatrix[i]);
-    }*/
 
     // Apply the transformation as defined by the pose to the modelMatrix
     //mjMatrixHelper.GetPositionScaleAndRotationMatrix(pose.positions.get(0), pose.angles.get(0), localMeshMatrix);
@@ -165,7 +164,19 @@ void renderFrame() {
     // Apply the lookAt (viewMatrix) transformation to obtain modelView transformation
     //Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
 
-
+    theta+= 0.1;
+    if (theta >= 2.0*(3.141592))
+    {
+    	theta -= 2.0*(3.141592);
+    }
+    {
+    	float x, z;
+    	x = sin(theta);
+    	z = cos(theta);
+    	testObject.dir.Set(x, 0, z);
+    	testObject2.dir.Set(x, 0, z);
+    	testObject.pos.Set(3.0*x,0,3.0*z);
+    }
     testObject.Draw(shaderList, lookAtMatrix, projectionMatrix);
     testObject2.Draw(shaderList, lookAtMatrix, projectionMatrix);
 

@@ -201,6 +201,7 @@ void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
 void mjModel::Draw(std::vector<mjShader*>& shaderList,
 		float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix)
 {
+	//Matrix4::DebugM("mvp", modelViewProjectionMatrix);
 	for(int i = 0; i < meshes.size(); i++)
 	{
 

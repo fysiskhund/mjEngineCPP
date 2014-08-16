@@ -122,10 +122,18 @@ void Matrix4::SetLookAtM(float* m, int offsetIgnored,
 	m[10] = -dir.z;
 	m[11] = 0;
 
-	m[12] = -pos.x;
-	m[13] = -pos.y;
-	m[14] = -pos.z;
+	m[12] = s.Dot(pos);
+	m[13] = u.Dot(pos);
+	m[14] = dir.Dot(pos);
 	m[15] = 1;
+}
+
+void Matrix4::DebugM(const char* name, float* m)
+{
+	for(int i = 0; i< 16; i++)
+	{
+		LOGI("%s[%d]:%3.3f", name, i, m[i]);
+	}
 }
 
 

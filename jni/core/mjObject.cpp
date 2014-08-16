@@ -18,20 +18,15 @@ void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 
 	Matrix4::GetPositionScaleAndRotationMatrix(pos, dir, up, scale, modelMatrix);
 
-	/*Matrix4::MultiplyMM(modelViewMatrix, 0,
-						lookAtMatrix, 0,
-						modelMatrix, 0);
+	Matrix4::MultiplyMM(modelViewMatrix, 0,
+			modelMatrix, 0,
+			lookAtMatrix, 0);
 
 	Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
-						projectionMatrix, 0,
-						modelViewMatrix, 0);
+						modelViewMatrix, 0,
+						projectionMatrix, 0);
+	//Matrix4::DebugM("mvpp", modelViewProjectionMatrix);
 
-	model->Draw(shaderList, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix);*/
-
-	Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
-			projectionMatrix, 0,
-			modelMatrix, 0);
-
-	model->Draw(shaderList, modelMatrix, projectionMatrix, modelViewProjectionMatrix);
+	model->Draw(shaderList, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix);
 }
 }

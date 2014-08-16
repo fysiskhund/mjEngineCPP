@@ -6,11 +6,13 @@
 #include <string.h>
 #include <vector>
 
+
 //#include <android/log.h>
 
 #include "mjModelMesh.h"
 #include "mjShader.h"
 
+#include "extlibs/math/Matrix.h"
 #include "../extLibs/tinyxml/tinyxml2.h"
 
 
