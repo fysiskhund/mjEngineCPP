@@ -22,7 +22,7 @@ public:
 	mjModel* model;
 
 	mjObject();
-	void Draw(std::vector<mjShader*>& shaderList, float* projectionMatrix);
+	void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
 };
 }
 #endif

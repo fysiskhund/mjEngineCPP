@@ -43,7 +43,8 @@ public:
 
 	void TieShaders(std::vector<mjShader*>& shaderList);
 
-	void Draw(std::vector<mjShader*>& shaderList, float* projectionMatrix, float* modelViewMatrix, float* modelViewProjectionMatrix);
+	void Draw(std::vector<mjShader*>& shaderList,
+			float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix);
 
 private:
 	int numVertices;

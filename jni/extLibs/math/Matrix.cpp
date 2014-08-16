@@ -94,5 +94,39 @@ void Matrix4::GetPositionScaleAndRotationMatrix(mjVector3& pos, mjVector3& dir, 
 	matrixR[14] = pos.z;
 	matrixR[15] = 1;
 }
+void Matrix4::SetLookAtM(float* m, int offsetIgnored,
+		mjVector3& pos,
+		mjVector3& dir,
+		mjVector3& up)
+{
+	mjVector3 s;
+	mjVector3 u;
+
+	dir.Normalize();
+	dir.CrossOut(up, &s); // s = dir x up
+	s.Normalize();
+	s.CrossOut(dir, &u); // u = s x dir
+
+	m[0] = s.x;
+	m[1] = u.x;
+	m[2] = -dir.x;
+	m[3] = 0;
+
+	m[4] = s.y;
+	m[5] = u.y;
+	m[6] = -dir.y;
+	m[7] = 0;
+
+	m[8] = s.z;
+	m[9] = u.z;
+	m[10] = -dir.z;
+	m[11] = 0;
+
+	m[12] = -pos.x;
+	m[13] = -pos.y;
+	m[14] = -pos.z;
+	m[15] = 1;
+}
+
 
 }

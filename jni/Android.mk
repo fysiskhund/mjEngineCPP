@@ -16,6 +16,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := mjengine
 LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   mjVector3.cpp \
+				   graphics/mjCamera.cpp \
 				   extLibs/math/Matrix.cpp \
 				   graphics/mjImageLoader.cpp \
 				   graphics/mjModel.cpp \

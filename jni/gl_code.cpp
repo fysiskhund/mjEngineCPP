@@ -28,6 +28,7 @@
 #include "mjVector3.h"
 #include "etc/testImage.h"
 #include "extLibs/math/Matrix.h"
+#include "graphics/mjCamera.h"
 
 using namespace mjEngine;
 
@@ -35,6 +36,7 @@ using namespace mjEngine;
 
 mjObject testObject;
 mjObject testObject2;
+mjCamera camera;
 
 mjDefaultShaders* defaultShaders = new mjDefaultShaders();
 
@@ -82,7 +84,7 @@ bool setupGraphics(int w, int h) {
     LOGI("Before first model");
     testObject.model = new mjModel();
     testObject.model->LoadFromFile("/sdcard/mjEngineCPP/bird.mesh.xml");
-    testObject.pos.Set(0,-1.5,-3);
+    testObject.pos.Set(0,-1.5,-10);
     testObject.dir.Set(-1, 0, 1);
     testObject.dir.Normalize();
 
@@ -99,7 +101,7 @@ bool setupGraphics(int w, int h) {
     LOGI("Before second model");
     testObject2.model = new mjModel();
     testObject2.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
-    testObject2.pos.Set(1.5,-1.5,-3);
+    testObject2.pos.Set(0,-1.5,-5);
     testObject2.dir.Set(0.4, 0, 1);
     testObject2.dir.Normalize();
 
@@ -116,7 +118,7 @@ bool setupGraphics(int w, int h) {
 
     ratio = ((float)w)/((float)h);
     Matrix4::FrustumM(projectionMatrix, 0,
-    				   -ratio, ratio, -1.0, 1.0, 1, 100);
+            				   -ratio, ratio, -1.0, 1.0, 1, 20);
 
     InitShaders();
     testObject.model->TieShaders(shaderList);
@@ -129,8 +131,9 @@ bool setupGraphics(int w, int h) {
 
 
 void renderFrame() {
+	float lookAtMatrix[16];
     static float grey = 0.3;
-    grey += 0.0001f;
+    grey += 0.001f;
     if (grey > 0.7f) {
         grey = 0.3f;
     }
@@ -140,6 +143,15 @@ void renderFrame() {
     checkGlError("glClear");
 
 
+    camera.dir.Set(0,0,-1);
+    camera.dir.Normalize();
+    camera.pos.Set(0,0,0);
+    camera.GetLookAtMatrix(lookAtMatrix);
+
+    /*for(int i = 0; i< 16; i++)
+    {
+    	LOGI("lookAt[%d]:%3.3f", i, lookAtMatrix[i]);
+    }*/
 
     // Apply the transformation as defined by the pose to the modelMatrix
     //mjMatrixHelper.GetPositionScaleAndRotationMatrix(pose.positions.get(0), pose.angles.get(0), localMeshMatrix);
@@ -154,8 +166,8 @@ void renderFrame() {
     //Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
 
 
-    testObject.Draw(shaderList, projectionMatrix);
-    testObject2.Draw(shaderList, projectionMatrix);
+    testObject.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    testObject2.Draw(shaderList, lookAtMatrix, projectionMatrix);
 
 }
 

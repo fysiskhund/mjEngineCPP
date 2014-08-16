@@ -10,17 +10,28 @@ mjObject::mjObject()
 	scale.Set(1,1,1);
 }
 
-void mjObject::Draw(std::vector<mjShader*>& shaderList, float* projectionMatrix)
+void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
+	float modelMatrix[16];
 	float modelViewMatrix[16];
 	float modelViewProjectionMatrix[16];
 
-	Matrix4::GetPositionScaleAndRotationMatrix(pos, dir, up, scale, modelViewMatrix);
+	Matrix4::GetPositionScaleAndRotationMatrix(pos, dir, up, scale, modelMatrix);
+
+	/*Matrix4::MultiplyMM(modelViewMatrix, 0,
+						lookAtMatrix, 0,
+						modelMatrix, 0);
 
 	Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
-						modelViewMatrix, 0,
-						projectionMatrix, 0);
+						projectionMatrix, 0,
+						modelViewMatrix, 0);
 
-	model->Draw(shaderList, projectionMatrix, modelViewMatrix, modelViewProjectionMatrix);
+	model->Draw(shaderList, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix);*/
+
+	Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
+			projectionMatrix, 0,
+			modelMatrix, 0);
+
+	model->Draw(shaderList, modelMatrix, projectionMatrix, modelViewProjectionMatrix);
 }
 }

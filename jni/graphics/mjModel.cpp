@@ -198,7 +198,8 @@ void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
 	}
 }
 
-void mjModel::Draw(std::vector<mjShader*>& shaderList, float* projectionMatrix, float* modelViewMatrix, float* modelViewProjectionMatrix)
+void mjModel::Draw(std::vector<mjShader*>& shaderList,
+		float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix)
 {
 	for(int i = 0; i < meshes.size(); i++)
 	{
