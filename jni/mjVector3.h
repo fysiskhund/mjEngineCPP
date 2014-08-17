@@ -32,6 +32,10 @@ public:
 	
 	void CopyToArray(float* array);
 	
+	float DistanceSquaredTo(mjVector3& v1);
+
+	float DistanceTo(mjVector3& v1);
+
 	float x;
 	float y;
 	float z;

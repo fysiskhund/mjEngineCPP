@@ -121,6 +121,19 @@ namespace mjEngine{
 	 array[2] = z;
  }
 
+ float mjVector3::DistanceSquaredTo(mjVector3& v1)
+ {
+	 mjVector3 v0v1(v1);
+
+	 v0v1.Subtract(*this);
+	 return v0v1.GetNorm();
+ }
+ float mjVector3::DistanceTo(mjVector3& v1)
+ {
+	 float dist = DistanceSquaredTo(v1);
+	 return sqrt(dist);
+ }
+
 
 }
 
