@@ -54,6 +54,10 @@ public:
 			mjVector3& backDir,
 			mjVector3& up);
 
+	static void SetScaleM(float* m, int offsetIgnored, float sX, float sY, float sZ);
+
+	static void SetTranslationM(float* m, int offsetIgnored, float tX, float tY, float tZ);
+
 	static void DebugM(const char* name, float* m);
 };
 

@@ -128,6 +128,25 @@ void Matrix4::SetLookAtM(float* m, int offsetIgnored,
 	m[15] = 1;
 }
 
+void Matrix4::SetScaleM(float* m, int offsetIgnored, float sX, float sY, float sZ){
+	m[0] = sX;
+	m[5] = sY;
+	m[10] = sZ;
+	m[1] = m[2] = m[3] = m[4] = m[6] = m[7] = m[8] = m[9] = m[11] = m[12] = m[13] = m[14] = 0;
+	m[15] = 1;
+}
+
+void Matrix4::SetTranslationM(float* m, int offsetIgnored, float tX, float tY, float tZ){
+	m[0] = m[5] = m[10] = m[15] = 1;
+
+	m[12] = tX;
+	m[13] = tY;
+	m[14] = tZ;
+
+	m[1] = m[2] = m[3] = m[4] = m[6] = m[7] = m[8] = m[9] = m[11] =  0;
+
+}
+
 void Matrix4::DebugM(const char* name, float* m)
 {
 	for(int i = 0; i< 16; i++)
