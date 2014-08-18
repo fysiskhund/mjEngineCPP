@@ -23,6 +23,8 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   graphics/mjModelMesh.cpp \
 				   graphics/mjDefaultShaders.cpp \
 				   graphics/mjShader.cpp \
+				   physics/mjSphere.cpp \
+				   physics/mjCollisionTests.cpp \
 				   core/mjObject.cpp \
 				   gl_code.cpp
 				   
