@@ -12,7 +12,7 @@ enum structuretype
 	MJ_TRIANGLE_MESH
 };
 
-class mjCollisionStructure
+class mjBoundingStructure
 {
 public:
 	structuretype type;

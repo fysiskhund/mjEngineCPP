@@ -1,12 +1,12 @@
 #ifndef MJSPHERE
 #define MJSPHERE
 
-#include "mjCollisionStructure.h"
+#include "mjBoundingStructure.h"
 #include "../mjVector3.h"
 
 namespace mjEngine{
 
-class mjSphere: public mjCollisionStructure
+class mjSphere: public mjBoundingStructure
 {
 public:
 	mjVector3 c;
