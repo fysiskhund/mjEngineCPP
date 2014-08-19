@@ -8,14 +8,30 @@ mjPhysics::mjPhysics()
 {
 
 }
-void mjPhysics::Update(float delta_t)
+void mjPhysics::Update(float t_elapsed)
 {
 
+	CollisionDetection();
 
-
-	// Final step: update everyone's speed and position
+	ProcessPhysicsEffects(t_elapsed);
 
 }
 
 
+void mjPhysics::CollisionDetection()
+{
+
+}
+void mjPhysics::ProcessPhysicsEffects(float t_elapsed)
+{
+	for(int i = 0; i < allObjects.size(); i++)
+	{
+		if (allObjects[i].hasKinematics)
+		{
+			//allObjects[i].effectStack.add(gravityEffect);
+		}
+		allObjects[i].ProcessPhysicsEffects();
+		allObjects[i].Update(t_elapsed);
+	}
+}
 }

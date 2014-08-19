@@ -16,13 +16,20 @@ public:
 
 	mjVector3 scale;
 
+
+	mjVector3 accel;
 	mjVector3 vel;
+
 	float mass = 1;
 
 	mjModel* model;
 
+	bool hasKinematics;
+	bool canCollide;
 	mjObject();
 	void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
+	void ProcessPhysicsEffects();
+	void Update(float t_elapsed);
 };
 }
 #endif

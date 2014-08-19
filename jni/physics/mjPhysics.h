@@ -1,8 +1,10 @@
 #ifndef MJPHYSICS
 #define MJPHYSICS
 
-#include "../mjVector3.h"
 #include <vector>
+#include "../mjVector3.h"
+#include "../core/mjObject.h"
+
 
 namespace mjEngine
 {
@@ -15,9 +17,15 @@ public:
 
 
 	void Update(float delta_t);
+	mjVector3 gravity;
+
 
 private:
-std::vector<mjObject> objects;
+	std::vector<mjObject> allObjects;
+	std::vector<mjObject> objectsWithKinematics;
+	std::vector<std::vector<mjObject> > collisionLayers;
+	void CollisionDetection();
+	void ProcessPhysicsEffects(float t_elapsed);
 
 };
 

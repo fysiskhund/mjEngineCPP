@@ -13,6 +13,7 @@ public:
 	mjVector3(float x, float y, float z);
 	
 	void Set(float x, float y, float z);
+	void Set0();
 	
 	void Copy(mjVector3& v);
 	
