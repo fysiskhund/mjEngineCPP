@@ -26,6 +26,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   physics/mjPhysics.cpp \
 				   physics/mjSphere.cpp \
 				   physics/mjCollisionTests.cpp \
+				   physics/mjPhysicsEffect.cpp \
 				   core/mjObject.cpp \
 				   gl_code.cpp
 				   
