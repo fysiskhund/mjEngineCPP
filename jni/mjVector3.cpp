@@ -37,6 +37,14 @@ namespace mjEngine{
 	this->z = z;
  }
  
+
+ void mjVector3::Set0()
+ {
+	this->x = 0;
+	this->y = 0;
+	this->z = 0;
+ }
+
  void mjVector3::Copy(mjVector3& v)
  {
 	x = v.x;

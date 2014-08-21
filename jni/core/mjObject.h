@@ -1,9 +1,13 @@
-#ifndef MJOBJECT
-#define MJOBJECT
+#ifndef MJOBJECT_H
+#define MJOBJECT_H
+
+#include <vector>
 
 #include "../mjVector3.h"
 #include "../graphics/mjModel.h"
 #include "../extLibs/math/Matrix.h"
+#include "../physics/mjPhysicsEffect.h"
+
 namespace mjEngine{
 
 
@@ -23,6 +27,9 @@ public:
 	float mass = 1;
 
 	mjModel* model;
+
+	std::vector<mjPhysicsEffect*> effectStack;
+	std::vector<mjPhysicsEffect*> collisionStack;
 
 	bool hasKinematics;
 	bool canCollide;

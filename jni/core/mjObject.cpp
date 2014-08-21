@@ -35,7 +35,12 @@ void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 }
 void mjObject::ProcessPhysicsEffects()
 {
+	accel.Set0();
 
+	for (int i = 0; i < effectStack.size(); i++)
+	{
+		//if (effectStack[i]->)
+	}
 }
 void mjObject::Update(float t_elapsed)
 {

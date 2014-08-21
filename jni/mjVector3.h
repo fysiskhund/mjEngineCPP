@@ -22,6 +22,8 @@ public:
 	void Subtract(mjVector3& v);
 	void ScaleSubtract(float a, mjVector3& v);
 	
+
+
 	void MulScalar(float a);
 	
 	float GetNorm();
