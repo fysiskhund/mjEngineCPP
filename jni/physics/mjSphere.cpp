@@ -1,3 +1,6 @@
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
 #include "mjSphere.h"
 
 namespace mjEngine{
