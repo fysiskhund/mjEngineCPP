@@ -1,4 +1,8 @@
-#ifndef MJCAMERA_H
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
+ #ifndef MJCAMERA_H
 #define MJCAMERA_H
 
 #include "../core/mjObject.h"

@@ -1,5 +1,9 @@
-#ifndef MJDEFAULTSHADERS
-#define MJDEFAULTSHADERS
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
+ #ifndef MJDEFAULTSHADERS_H
+#define MJDEFAULTSHADERS_H
 
 #include "mjShader.h"
 #include "mjVector3.h"

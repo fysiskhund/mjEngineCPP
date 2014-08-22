@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
 #ifndef MJPHYSICSEFFECT_H
 #define MJPHYSICSEFFECT_H
 

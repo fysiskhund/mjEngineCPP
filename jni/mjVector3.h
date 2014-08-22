@@ -1,5 +1,9 @@
-#ifndef MJVECTOR3
-#define MJVECTOR3
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
+#ifndef MJVECTOR3_H
+#define MJVECTOR3_H
 
 #include <math.h>
 

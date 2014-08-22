@@ -1,4 +1,8 @@
-#ifndef MJOBJECT_H
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
+ #ifndef MJOBJECT_H
 #define MJOBJECT_H
 
 #include <vector>

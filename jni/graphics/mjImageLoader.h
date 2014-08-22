@@ -1,4 +1,8 @@
-#ifndef MJIMAGELOADER_H
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
+ #ifndef MJIMAGELOADER_H
 #define MJIMAGELOADER_H
 
 #include <stdlib.h>

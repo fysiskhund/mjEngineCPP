@@ -1,5 +1,9 @@
-#ifndef MJSHADER
-#define MJSHADER
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
+ #ifndef MJSHADER_H
+#define MJSHADER_H
 
 #include <jni.h>
 #include <android/log.h>

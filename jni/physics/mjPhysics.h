@@ -1,5 +1,10 @@
-#ifndef MJPHYSICS
-#define MJPHYSICS
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
+ 
+#ifndef MJPHYSICS_H
+#define MJPHYSICS_H
 
 #include <vector>
 #include "../mjVector3.h"

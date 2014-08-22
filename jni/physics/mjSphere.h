@@ -1,5 +1,9 @@
-#ifndef MJSPHERE
-#define MJSPHERE
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
+#ifndef MJSPHERE_H
+#define MJSPHERE_H
 
 #include "mjBoundingStructure.h"
 #include "../mjVector3.h"

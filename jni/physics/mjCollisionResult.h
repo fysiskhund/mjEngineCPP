@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
 #ifndef MJCOLLISIONRESULT_H
 #define MJCOLLISIONRESULT_H
 

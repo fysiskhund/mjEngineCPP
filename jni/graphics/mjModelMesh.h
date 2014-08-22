@@ -1,4 +1,8 @@
-#ifndef MJMODELMESH_H
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
+ #ifndef MJMODELMESH_H
 #define MJMODELMESH_H
 
 

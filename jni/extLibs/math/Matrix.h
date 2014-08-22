@@ -1,4 +1,8 @@
-#ifndef MATRIX_H
+/*
+ * Copyright (C) 2014 Alejandro Valenzuela Roca
+ */
+
+ #ifndef MATRIX_H
 #define MATRIX_H
 
 #include "../../mjVector3.h"
