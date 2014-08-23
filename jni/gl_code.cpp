@@ -31,6 +31,7 @@
 #include "etc/testImage.h"
 #include "extLibs/math/Matrix.h"
 #include "graphics/mjCamera.h"
+#include "physics/mjPhysics.h"
 
 using namespace mjEngine;
 
@@ -49,6 +50,8 @@ float modelViewMatrix[16];
 float ratio;
 bool debugMatrix = true;
 float theta = 0;
+
+mjPhysics physics;
 
 
 static void printGLString(const char *name, GLenum s) {
@@ -127,6 +130,8 @@ bool setupGraphics(int w, int h) {
     InitShaders();
     testObject.model->TieShaders(shaderList);
     testObject2.model->TieShaders(shaderList);
+
+
     return true;
 }
 
@@ -135,6 +140,12 @@ bool setupGraphics(int w, int h) {
 
 
 void renderFrame() {
+
+	// Update phase
+	//physics.Update(0.016);
+	testObject2.Update(0.016);
+
+
 	float lookAtMatrix[16];
     static float grey = 0.3;
     grey += 0.001f;
@@ -176,7 +187,7 @@ void renderFrame() {
     	x = sin(theta);
     	z = cos(theta);
     	testObject.dir.Set(x, 0, z);
-    	testObject2.dir.Set(x, 0, z);
+    	//testObject2.dir.Set(x, 0, z);
     	testObject.pos.Set(3.0*x,0,3.0*z);
     }
     testObject.Draw(shaderList, lookAtMatrix, projectionMatrix);
@@ -195,8 +206,8 @@ void PrintGLCapabilities()
 extern "C" {
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height);
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj);
-    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_handleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID, jfloat x, jfloat y);
-    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_handleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown);
+    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID, jfloat x, jfloat y);
+    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown);
 };
 
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height)
@@ -212,11 +223,24 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobje
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID,
 		jfloat x, jfloat y)
 {
-	LOGI("Controller[%d].joystick[%d]: %3.3f, %3.3f", controllerID, joystickID, x, y);
+	mjVector3 dir;
+	dir.Set(x,0,y);
+
+	float norm = dir.GetNorm();
+	if (norm > 0.2)
+	{
+		testObject2.dir.Copy(dir);
+		testObject2.dir.Normalize();
+		testObject2.vel.Copy(dir);
+	} else {
+		testObject2.vel.Set0();
+	}
+
+	//LOGI("Controller[%d].joystick[%d]: %3.3f, %3.3f", controllerID, joystickID, x, y);
 }
 
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown)
 {
-	LOGI("Controller[%d].button[%d]: %d", controllerID, buttonID, pressedDown);
+	//LOGI("Controller[%d].button[%d]: %d", controllerID, buttonID, pressedDown);
 }
 

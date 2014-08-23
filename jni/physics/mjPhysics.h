@@ -26,9 +26,10 @@ public:
 
 
 private:
-	std::vector<mjObject> allObjects;
-	std::vector<mjObject> objectsWithKinematics;
-	std::vector<std::vector<mjObject> > collisionLayers;
+	std::vector<mjObject*> allObjects;
+	std::vector<mjObject*> objectsWithKinematics;
+	std::vector<std::vector<mjObject*>* > collisionLayers;
+	void AddObject(mjObject* object, int collisionLayer);
 	void CollisionDetection();
 	void ProcessPhysicsEffects(float t_elapsed);
 
