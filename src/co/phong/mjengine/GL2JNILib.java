@@ -19,4 +19,7 @@ public class GL2JNILib {
      */
      public static native void init(int width, int height);
      public static native void step();
+     
+     public static native boolean HandleJoystickInput(int controllerID, int joystickID, float x, float y);
+     public static native boolean HandleButtonInput(int controllerID, int buttonID, boolean pressedDown);
 }

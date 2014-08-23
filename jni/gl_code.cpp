@@ -7,6 +7,8 @@
 #include <jni.h>
 #include <android/log.h>
 
+
+
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
 
@@ -193,6 +195,8 @@ void PrintGLCapabilities()
 extern "C" {
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height);
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj);
+    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_handleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID, jfloat x, jfloat y);
+    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_handleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown);
 };
 
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height)
@@ -204,3 +208,15 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobje
 {
     renderFrame();
 }
+
+JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID,
+		jfloat x, jfloat y)
+{
+	LOGI("Controller[%d].joystick[%d]: %3.3f, %3.3f", controllerID, joystickID, x, y);
+}
+
+JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown)
+{
+	LOGI("Controller[%d].button[%d]: %d", controllerID, buttonID, pressedDown);
+}
+
