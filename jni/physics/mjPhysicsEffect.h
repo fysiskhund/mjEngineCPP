@@ -13,7 +13,7 @@ namespace mjEngine{
 
 enum EffectType{
 	MJ_ACCELERATION,
-	MJ_GRAVIY,
+	MJ_GRAVITY,
 	MJ_COLLISION
 };
 enum EffectAction{

@@ -39,16 +39,71 @@ void mjObject::ProcessPhysicsEffects()
 
 	for (int i = 0; i < effectStack.size(); i++)
 	{
+		switch(effectStack[i]->type)
+		{
+			case MJ_ACCELERATION:
+			case MJ_GRAVITY:
+				accel.Add(effectStack[i]->value);
+
+			break;
+			default:
+				break;
+		}
+
 		//if (effectStack[i]->)
 	}
+	effectStack.clear();
+
 }
 void mjObject::Update(float t_elapsed)
 {
+	if (!boundingStructure.isImmovable)
+			{
+				vel.Sum(t_elapsed, acc);
+				pos.Sum(t_elapsed, vel);
 
-	vel.ScaleAdd(t_elapsed, accel); // vel = vel + delta_t *a
+				for (mjPhysicsEffect collisionEffect:collisionStack)
+				{
+					if (collisionEffect.action != null)
+					{s
+						switch(collisionEffect.action)
+						{
+						case changePosition:
+							if (collisionEffect.mask[0])
+							{
+								pos.x = collisionEffect.value.x;
+							}
+							if (collisionEffect.mask[1])
+							{
+								pos.y = collisionEffect.value.y;
 
-	pos.ScaleAdd(t_elapsed, vel); // pos = pos + delta_t * v
+							}
+							if (collisionEffect.mask[2])
+							{
+								pos.z = collisionEffect.value.z;
+							}
+							break;
 
+						case addVelocity:
+							if (collisionEffect.mask[0])
+							{
+								vel.x += collisionEffect.value.x;
+							}
+							if (collisionEffect.mask[1])
+							{
+								vel.y += collisionEffect.value.y;
+							}
+							if (collisionEffect.mask[2])
+							{
+								vel.z += collisionEffect.value.z;
+							}
+							break;
+						}
+
+					}
+				}
+			}
+			collisionStack.clear();
 
 }
 }
