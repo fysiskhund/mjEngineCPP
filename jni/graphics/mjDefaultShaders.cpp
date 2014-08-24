@@ -41,6 +41,7 @@ mjDefaultShaders::mjDefaultShaders()
 	maTextureHandle = glGetUniformLocation(glProgramHandle, "uTexture");
 
 	maMVPMatrixHandle = glGetUniformLocation(glProgramHandle, "maMVPMatrix");
+	maMMatrixHandle = glGetUniformLocation(glProgramHandle, "maMMatrix");
 
 	uDiffuseLightDirectionHandle = glGetUniformLocation(glProgramHandle, "uDiffuseLightDirection");
 	uDiffuseLightColorHandle = glGetUniformLocation(glProgramHandle, "uDiffuseLightColor");
@@ -51,7 +52,7 @@ mjDefaultShaders::mjDefaultShaders()
 }
 void mjDefaultShaders::Run(mjModelMesh* mesh,
 		float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-		float* modelViewProjectionMatrix)
+		float* modelMatrix, float* modelViewProjectionMatrix)
 {
 	 glUseProgram(glProgramHandle);
 	 glEnableVertexAttribArray(maPositionHandle);
@@ -74,6 +75,8 @@ void mjDefaultShaders::Run(mjModelMesh* mesh,
 
 	 // Send the modelViewProjection Matrix
 	 glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
+	 // Send the modelViewProjection Matrix
+	 glUniformMatrix4fv(maMMatrixHandle, 1, false, modelMatrix);
 
 	 // Send the light parameters
 	 glUniform3fv(uDiffuseLightDirectionHandle, 1, diffuseLightDirectionArray);
@@ -92,7 +95,7 @@ const char* mjDefaultShaders::vanillaVertexShaderCode =
 	        "attribute vec3 aNormal;\n"
 	        "uniform mat4 maMVPMatrix;\n"
 
-	        "uniform mat4 maMVMatrix;\n"
+	        "uniform mat4 maMMatrix;\n"
 			"uniform vec4 uDiffuseLightColor;\n"
 
 	        "uniform vec3 uDiffuseLightDirection;\n"
@@ -111,7 +114,7 @@ const char* mjDefaultShaders::vanillaVertexShaderCode =
 
 				// Calculate and normalize eye space normal
 				// maMVMatrix = modelView matrix
-				" vec3 ecNormal = vec3(maMVPMatrix * vec4(aNormal, 0.0));\n"
+				" vec3 ecNormal = vec3(maMMatrix * vec4(aNormal, 0.0));\n"
 			    " ecNormal = ecNormal / length(ecNormal);\n"
 
 			    " float ecNormalDotLightDirection = max(0.0, dot(ecNormal, uDiffuseLightDirection));\n"

@@ -47,7 +47,7 @@ void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 						modelViewMatrix, 0);
 	//Matrix4::DebugM("mvpp", modelViewProjectionMatrix);
 
-	model->Draw(shaderList, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix);
+	model->Draw(shaderList, modelMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix);
 }
 void mjObject::ProcessPhysicsEffects()
 {

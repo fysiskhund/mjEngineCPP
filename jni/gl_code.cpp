@@ -108,8 +108,8 @@ bool setupGraphics(int w, int h) {
 
     character.model = new mjModel();
     character.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
-    character.pos.Set(0,0,-3);
-    character.dir.Set(0, 0, -1);
+    character.pos.Set(0,0,0);
+    character.dir.Set(0, 0, 1);
     character.dir.Normalize();
 
     LOGI("texture loading. for obj2");
@@ -123,10 +123,10 @@ bool setupGraphics(int w, int h) {
 
     delete [] imgLoader->imageData;
 
-    float closeUpFactor = 1;
+    float closeUpFactor = 0.1;
     ratio = closeUpFactor*((float)w)/((float)h);
     Matrix4::FrustumM(projectionMatrix, 0,
-            				   -ratio, ratio, -closeUpFactor, closeUpFactor, 1, 50);
+            				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 50);
 
     InitShaders();
     bird.model->TieShaders(shaderList);
@@ -161,7 +161,7 @@ void renderFrame() {
 
     camera.dir.Set(0,0,-1);
     camera.dir.Normalize();
-    camera.pos.Set(0,0,3);
+    camera.pos.Set(0,1.6,8);
     camera.GetLookAtMatrix(lookAtMatrix);
     //Matrix4::DebugM("lookat", lookAtMatrix);
 
@@ -178,7 +178,7 @@ void renderFrame() {
     // Apply the lookAt (viewMatrix) transformation to obtain modelView transformation
     //Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
 
-    theta+= 0.1;
+    theta+= 0.05;
     if (theta >= 2.0*(3.141592))
     {
     	theta -= 2.0*(3.141592);
@@ -187,7 +187,7 @@ void renderFrame() {
     	float x, z;
     	x = sin(theta);
     	z = cos(theta);
-    	bird.dir.Set(x, 0, z);
+    	bird.dir.Set(z, 0, -x);
     	//character.dir.Set(x, 0, z);
     	bird.pos.Set(3.0*x,0,3.0*z);
     }

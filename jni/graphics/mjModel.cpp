@@ -199,7 +199,7 @@ void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
 }
 
 void mjModel::Draw(std::vector<mjShader*>& shaderList,
-		float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix)
+		float* modelMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix)
 {
 	//Matrix4::DebugM("mvp", modelViewProjectionMatrix);
 	for(int i = 0; i < meshes.size(); i++)
@@ -207,7 +207,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
 		shaderList[meshes[i]->mjShaderListIndex]->Run(meshes[i],
 				vertexBuffer, texCoordBuffer, normalComponentBuffer,
-				modelViewProjectionMatrix);
+				modelMatrix, modelViewProjectionMatrix);
 		glDrawElements(GL_TRIANGLES, meshes[i]->drawOrderCount, GL_UNSIGNED_SHORT, meshes[i]->drawOrderBuffer);
 	}
 }

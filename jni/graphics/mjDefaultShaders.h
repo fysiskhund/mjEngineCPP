@@ -23,7 +23,7 @@ class mjDefaultShaders:  public mjShader
 	mjDefaultShaders();
 	void Run(mjModelMesh* mesh,
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-			float* modelViewProjectionMatrix) override;
+			float* modelMatrix, float* modelViewProjectionMatrix ) override;
 	static const char* simpleVertexShaderCode;
 	static const char* simpleFragmentShaderCode;
 	static const char* vanillaVertexShaderCode;
@@ -40,6 +40,7 @@ class mjDefaultShaders:  public mjShader
 	GLuint maTextureCoordHandle;
 	GLuint maTextureHandle;
 	GLuint maMVPMatrixHandle;
+	GLuint maMMatrixHandle;
 	GLuint uDiffuseLightDirectionHandle;
 	GLuint uDiffuseLightColorHandle;
 	GLuint uAmbientLightColorHandle;

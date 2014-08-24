@@ -27,7 +27,7 @@ public:
 	char* name;
 	virtual void Run(mjModelMesh* modelMesh,
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-			float* modelViewProjectionMatrix){}; // Gets called before drawing something
+			float* modelMatrix, float* modelViewProjectionMatrix){}; // Gets called before drawing something
 	GLuint LoadShader(GLenum shaderType, const char* pSource);
 	void CreateProgram(const char* vertexShadercode, const char* fragmentShaderCode);
 };
