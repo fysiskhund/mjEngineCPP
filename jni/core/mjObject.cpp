@@ -2,6 +2,19 @@
 
 namespace mjEngine{
 
+mjObject::mjObject(mjBoundingStructure* structure)
+{
+	// Vectors are initialised with 0, so no need to set them here
+
+	up.Set(0,1,0);
+	dir.Set(0,0,1);
+	scale.Set(1,1,1);
+
+	hasKinematics = true;
+	canCollide = true;
+	this->boundingStructure = structure;
+
+}
 mjObject::mjObject()
 {
 	// Vectors are initialised with 0, so no need to set them here
@@ -12,7 +25,10 @@ mjObject::mjObject()
 
 	hasKinematics = true;
 	canCollide = true;
+
+	boundingStructure = new mjSphere();
 }
+
 
 void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
@@ -23,12 +39,12 @@ void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 	Matrix4::GetPositionScaleAndRotationMatrix(pos, dir, up, scale, modelMatrix);
 
 	Matrix4::MultiplyMM(modelViewMatrix, 0,
-			modelMatrix, 0,
-			lookAtMatrix, 0);
+			lookAtMatrix, 0,
+			modelMatrix, 0);
 
 	Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
-						modelViewMatrix, 0,
-						projectionMatrix, 0);
+						projectionMatrix, 0,
+						modelViewMatrix, 0);
 	//Matrix4::DebugM("mvpp", modelViewProjectionMatrix);
 
 	model->Draw(shaderList, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix);
@@ -57,50 +73,62 @@ void mjObject::ProcessPhysicsEffects()
 }
 void mjObject::Update(float t_elapsed)
 {
-	if (!boundingStructure.isImmovable)
+	if (!boundingStructure->isImmovable)
 			{
-				vel.Sum(t_elapsed, acc);
-				pos.Sum(t_elapsed, vel);
+				vel.ScaleAdd(t_elapsed, accel);
+				pos.ScaleAdd(t_elapsed, vel);
 
-				for (mjPhysicsEffect collisionEffect:collisionStack)
+				for (int i=0; i < collisionStack.size(); i++)//(mjPhysicsEffect collisionEffect:collisionStack)
 				{
-					if (collisionEffect.action != null)
-					{s
-						switch(collisionEffect.action)
+					mjPhysicsEffect* collisionEffect = collisionStack[i];
+					switch(collisionEffect->action)
+					{
+					case MJ_CHANGE_POSITION:
+						if (collisionEffect->mask[0])
 						{
-						case changePosition:
-							if (collisionEffect.mask[0])
-							{
-								pos.x = collisionEffect.value.x;
-							}
-							if (collisionEffect.mask[1])
-							{
-								pos.y = collisionEffect.value.y;
-
-							}
-							if (collisionEffect.mask[2])
-							{
-								pos.z = collisionEffect.value.z;
-							}
-							break;
-
-						case addVelocity:
-							if (collisionEffect.mask[0])
-							{
-								vel.x += collisionEffect.value.x;
-							}
-							if (collisionEffect.mask[1])
-							{
-								vel.y += collisionEffect.value.y;
-							}
-							if (collisionEffect.mask[2])
-							{
-								vel.z += collisionEffect.value.z;
-							}
-							break;
+							pos.x = collisionEffect->value.x;
 						}
+						if (collisionEffect->mask[1])
+						{
+							pos.y = collisionEffect->value.y;
 
+						}
+						if (collisionEffect->mask[2])
+						{
+							pos.z = collisionEffect->value.z;
+						}
+						break;
+
+					case MJ_ADD_VELOCITY:
+						if (collisionEffect->mask[0])
+						{
+							vel.x += collisionEffect->value.x;
+						}
+						if (collisionEffect->mask[1])
+						{
+							vel.y += collisionEffect->value.y;
+						}
+						if (collisionEffect->mask[2])
+						{
+							vel.z += collisionEffect->value.z;
+						}
+						break;
+					case MJ_ADD_ACCEL:
+						if (collisionEffect->mask[0])
+						{
+							accel.x += collisionEffect->value.x;
+						}
+						if (collisionEffect->mask[1])
+						{
+							accel.y += collisionEffect->value.y;
+						}
+						if (collisionEffect->mask[2])
+						{
+							accel.z += collisionEffect->value.z;
+						}
+						break;
 					}
+
 				}
 			}
 			collisionStack.clear();

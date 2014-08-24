@@ -37,8 +37,8 @@ using namespace mjEngine;
 
 
 
-mjObject testObject;
-mjObject testObject2;
+mjObject bird;
+mjObject character;
 mjCamera camera;
 
 mjDefaultShaders* defaultShaders = new mjDefaultShaders();
@@ -89,47 +89,48 @@ bool setupGraphics(int w, int h) {
     checkGlError("glViewport");
 
     LOGI("Before first model");
-    testObject.model = new mjModel();
-    testObject.model->LoadFromFile("/sdcard/mjEngineCPP/bird.mesh.xml");
-    testObject.pos.Set(-2,0,3);
-    testObject.dir.Set(-1, 0, 1);
-    testObject.dir.Normalize();
+    bird.model = new mjModel();
+    bird.model->LoadFromFile("/sdcard/mjEngineCPP/bird.mesh.xml");
+    bird.pos.Set(-2,0,3);
+    bird.dir.Set(-1, 0, 1);
+    bird.dir.Normalize();
 
     // Test loading png texture
     mjImageLoader* imgLoader = new mjImageLoader();//
     imgLoader->Load("/sdcard/mjEngineCPP/birdtexture.png");
     GLuint glTexture = imgLoader->SendToGL();
-    for (int i = 0; i<testObject.model->meshes.size(); i++)
+    for (int i = 0; i<bird.model->meshes.size(); i++)
     {
-    	testObject.model->meshes[i]->glTexture = glTexture;
+    	bird.model->meshes[i]->glTexture = glTexture;
     }
     delete [] imgLoader->imageData;
 
-    LOGI("Before second model");
-    testObject2.model = new mjModel();
-    testObject2.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
-    testObject2.pos.Set(-3,0,4);
-    testObject2.dir.Set(1, 0, 1);
-    testObject2.dir.Normalize();
+
+    character.model = new mjModel();
+    character.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
+    character.pos.Set(0,0,-3);
+    character.dir.Set(0, 0, -1);
+    character.dir.Normalize();
 
     LOGI("texture loading. for obj2");
     imgLoader = new mjImageLoader();
     imgLoader->Load("/sdcard/mjEngineCPP/suit_test.png");
     glTexture = imgLoader->SendToGL();
-    for (int i = 0; i<testObject2.model->meshes.size(); i++)
+    for (int i = 0; i<character.model->meshes.size(); i++)
     {
-       	testObject2.model->meshes[i]->glTexture = glTexture;
+       	character.model->meshes[i]->glTexture = glTexture;
     }
 
     delete [] imgLoader->imageData;
 
-    ratio = ((float)w)/((float)h);
+    float closeUpFactor = 1;
+    ratio = closeUpFactor*((float)w)/((float)h);
     Matrix4::FrustumM(projectionMatrix, 0,
-            				   -ratio, ratio, -1.0, 1.0, 1, 20);
+            				   -ratio, ratio, -closeUpFactor, closeUpFactor, 1, 50);
 
     InitShaders();
-    testObject.model->TieShaders(shaderList);
-    testObject2.model->TieShaders(shaderList);
+    bird.model->TieShaders(shaderList);
+    character.model->TieShaders(shaderList);
 
 
     return true;
@@ -143,7 +144,7 @@ void renderFrame() {
 
 	// Update phase
 	//physics.Update(0.016);
-	testObject2.Update(0.016);
+	character.Update(0.016);
 
 
 	float lookAtMatrix[16];
@@ -158,9 +159,9 @@ void renderFrame() {
     checkGlError("glClear");
 
 
-    camera.dir.Set(1,0,1);
+    camera.dir.Set(0,0,-1);
     camera.dir.Normalize();
-    camera.pos.Set(0,0,-10);
+    camera.pos.Set(0,0,3);
     camera.GetLookAtMatrix(lookAtMatrix);
     //Matrix4::DebugM("lookat", lookAtMatrix);
 
@@ -186,12 +187,13 @@ void renderFrame() {
     	float x, z;
     	x = sin(theta);
     	z = cos(theta);
-    	testObject.dir.Set(x, 0, z);
-    	//testObject2.dir.Set(x, 0, z);
-    	testObject.pos.Set(3.0*x,0,3.0*z);
+    	bird.dir.Set(x, 0, z);
+    	//character.dir.Set(x, 0, z);
+    	bird.pos.Set(3.0*x,0,3.0*z);
     }
-    testObject.Draw(shaderList, lookAtMatrix, projectionMatrix);
-    testObject2.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    character.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    bird.Draw(shaderList, lookAtMatrix, projectionMatrix);
+
 
 }
 
@@ -229,11 +231,11 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 	float norm = dir.GetNorm();
 	if (norm > 0.2)
 	{
-		testObject2.dir.Copy(dir);
-		testObject2.dir.Normalize();
-		testObject2.vel.Copy(dir);
+		character.dir.CopyFrom(dir);
+		character.dir.Normalize();
+		character.vel.CopyFrom(dir);
 	} else {
-		testObject2.vel.Set0();
+		character.vel.Set0();
 	}
 
 	//LOGI("Controller[%d].joystick[%d]: %3.3f, %3.3f", controllerID, joystickID, x, y);

@@ -10,7 +10,9 @@
 #include "../mjVector3.h"
 #include "../graphics/mjModel.h"
 #include "../extLibs/math/Matrix.h"
+#include "../physics/mjBoundingStructure.h"
 #include "../physics/mjPhysicsEffect.h"
+#include "../physics/mjSphere.h"
 
 namespace mjEngine{
 
@@ -31,6 +33,7 @@ public:
 	float mass = 1;
 
 	mjModel* model;
+	mjBoundingStructure* boundingStructure;
 
 	std::vector<mjPhysicsEffect*> effectStack;
 	std::vector<mjPhysicsEffect*> collisionStack;
@@ -38,9 +41,11 @@ public:
 	bool hasKinematics;
 	bool canCollide;
 	mjObject();
+	mjObject(mjBoundingStructure* structure);
 	void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
 	void ProcessPhysicsEffects();
 	void Update(float t_elapsed);
+
 };
 }
 #endif

@@ -122,10 +122,73 @@ void Matrix4::SetLookAtM(float* m, int offsetIgnored,
 	m[10] = -dir.z;
 	m[11] = 0;
 
-	m[12] = s.Dot(pos);
-	m[13] = u.Dot(pos);
+	m[12] = -s.Dot(pos);
+	m[13] = -u.Dot(pos);
 	m[14] = dir.Dot(pos);
 	m[15] = 1;
+}
+
+void Matrix4::glhLookAtf2( float *matrix, float *eyePosition3D,
+                  float *center3D, float *upVector3D )
+{
+   float forward[3], side[3], up[3];
+   float matrix2[16], resultMatrix[16];
+   mjVector3 forwardV;
+   mjVector3 sideV;
+   mjVector3 upV;
+   mjVector3 upVector3DV;
+
+
+   //------------------
+   forward[0] = center3D[0] - eyePosition3D[0];
+   forward[1] = center3D[1] - eyePosition3D[1];
+   forward[2] = center3D[2] - eyePosition3D[2];
+   //NormalizeVector(forward);
+   forwardV.CopyFromArray(forward);
+   forwardV.Normalize();
+   forwardV.CopyToArray(forward);
+
+   //------------------
+   //Side = forward x up
+   //ComputeNormalOfPlane(side, forward, upVector3D);
+   forwardV.CrossOut(upVector3DV, &sideV);
+   sideV.Normalize();
+   sideV.CopyToArray(side);
+   //NormalizeVector(side);
+
+
+   //------------------
+   //Recompute up as: up = side x forward
+   //ComputeNormalOfPlane(up, side, forward);
+   sideV.CrossOut(forwardV, &upV);
+   upV.CopyToArray(up);
+
+   //------------------
+   matrix2[0] = side[0];
+   matrix2[4] = side[1];
+   matrix2[8] = side[2];
+   matrix2[12] = 0.0;
+   //------------------
+   matrix2[1] = up[0];
+   matrix2[5] = up[1];
+   matrix2[9] = up[2];
+   matrix2[13] = 0.0;
+   //------------------
+   matrix2[2] = -forward[0];
+   matrix2[6] = -forward[1];
+   matrix2[10] = -forward[2];
+   matrix2[14] = 0.0;
+   //------------------
+   matrix2[3] = matrix2[7] = matrix2[11] = 0.0;
+   matrix2[15] = 1.0;
+   //------------------
+   Matrix4::MultiplyMM(resultMatrix, 0,
+		   	   	   	   matrix, 0,
+		   	   	   	   matrix2, 0);
+   SetTranslationM(resultMatrix, 0,
+                  -eyePosition3D[0], -eyePosition3D[1], -eyePosition3D[2]);
+   //------------------
+   memcpy(matrix, resultMatrix, 16*sizeof(float));
 }
 
 void Matrix4::SetScaleM(float* m, int offsetIgnored, float sX, float sY, float sZ){

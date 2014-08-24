@@ -5,7 +5,6 @@ namespace mjEngine{
 
 enum structuretype
 {
-	MJ_UNDEFINED=0,
 	MJ_SPHERE,
 	MJ_AABB,
 	MJ_TRIANGLE,
@@ -16,6 +15,7 @@ class mjBoundingStructure
 {
 public:
 	structuretype type;
+	bool isImmovable = false;
 };
 
 }

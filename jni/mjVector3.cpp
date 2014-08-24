@@ -45,11 +45,17 @@ namespace mjEngine{
 	this->z = 0;
  }
 
- void mjVector3::Copy(mjVector3& v)
+ void mjVector3::CopyFrom(mjVector3& v)
  {
 	x = v.x;
 	y = v.y;
 	z = v.z;
+ }
+ void mjVector3::CopyFromArray(float* v)
+ {
+	 x = v[0];
+	 y = v[1];
+	 z = v[2];
  }
  
  

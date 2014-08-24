@@ -19,7 +19,8 @@ public:
 	void Set(float x, float y, float z);
 	void Set0();
 	
-	void Copy(mjVector3& v);
+	void CopyFrom(mjVector3& v);
+	void CopyFromArray(float* v);
 	
 	void Add(mjVector3& v);
 	void ScaleAdd(float a, mjVector3& v);

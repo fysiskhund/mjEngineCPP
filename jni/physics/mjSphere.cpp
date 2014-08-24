@@ -15,14 +15,14 @@ mjSphere::mjSphere(mjVector3& c, float r)
 {
 	type = MJ_SPHERE;
 	this->r = r;
-	this->c.Copy(c);
+	this->c.CopyFrom(c);
 
 }
 mjSphere::mjSphere(mjSphere& copy)
 {
 	type = MJ_SPHERE;
 	this->r = copy.r;
-	this->c.Copy(copy.c);
+	this->c.CopyFrom(copy.c);
 
 }
 }
