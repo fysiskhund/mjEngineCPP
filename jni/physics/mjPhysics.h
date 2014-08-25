@@ -9,6 +9,8 @@
 #include <vector>
 #include "../mjVector3.h"
 #include "../core/mjObject.h"
+#include "mjCollisionResult.h"
+#include "mjCollisionTests.h"
 
 
 namespace mjEngine

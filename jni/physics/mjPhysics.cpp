@@ -40,7 +40,49 @@ void mjPhysics::Update(float t_elapsed)
 
 void mjPhysics::CollisionDetection()
 {
+	// Objects in layer 0 are tested against other objects in layer 0
+	if (collisionLayers.size() > 0)
+	{
+		for (int i = 0; i < collisionLayers[0]->size(); i++)
+		{
+			mjObject* objectI = (*collisionLayers[0])[i];
+			for (int j = i+1; j < collisionLayers[0]->size(); j++)
+			{
+				mjObject* objectJ = (*collisionLayers[0])[j];
+				mjObject* object0;
+				mjObject* object1;
+				if (objectI->boundingStructure->type < objectJ->boundingStructure->type)
+				{
+					object0 = objectI;
+					object1 = objectJ;
+				} else
+				{
+					object0 = objectJ;
+					object1 = objectI;
+				}
 
+				switch(object0->boundingStructure->type)
+				{
+				case MJ_SPHERE:
+				{
+					switch(object1->boundingStructure->type){
+					case MJ_SPHERE:
+					{
+						mjCollisionResult* colResult = new mjCollisionResult();
+						mjCollisionTests::SphereVsSphere(*(mjSphere*) object0, *(mjSphere*) object1, colResult);
+					}
+						break;
+					default:
+						break;
+					}
+				}
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	}
 }
 void mjPhysics::ProcessPhysicsEffects(float t_elapsed)
 {
