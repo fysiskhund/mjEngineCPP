@@ -5,6 +5,8 @@
 #ifndef MJCOLLISIONRESULT_H
 #define MJCOLLISIONRESULT_H
 
+#include "mjPhysicsEffect.h"
+
 namespace mjEngine{
 
 enum mjcolresult{
@@ -16,6 +18,8 @@ enum mjcolresult{
 
 class mjCollisionResult{
 public:
+	mjPhysicsEffect* effectObj0;
+	mjPhysicsEffect* effectObj1;
 };
 
 }

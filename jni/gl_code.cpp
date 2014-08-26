@@ -133,6 +133,7 @@ bool setupGraphics(int w, int h) {
     character.model->TieShaders(shaderList);
 
 
+    physics.gravity.Set0();
     return true;
 }
 
@@ -143,8 +144,8 @@ bool setupGraphics(int w, int h) {
 void renderFrame() {
 
 	// Update phase
-	//physics.Update(0.016);
-	character.Update(0.016);
+	physics.Update(0.016);
+	//character.Update(0.016);
 
 
 	float lookAtMatrix[16];
