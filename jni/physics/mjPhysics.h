@@ -30,6 +30,7 @@ public:
 	void Update(float delta_t);
 	mjVector3 gravity;
 	void AddObject(mjObject* object, int collisionLayer);
+	bool debugVar = 0;
 
 private:
 	std::vector<mjObject*> allObjects;

@@ -31,7 +31,10 @@ void mjPhysics::AddObject(mjObject* object, int collisionLayer)
 void mjPhysics::Update(float t_elapsed)
 {
 
-	CollisionDetection();
+	if (debugVar)
+	{
+		CollisionDetection();
+	}
 
 	ProcessPhysicsEffects(t_elapsed);
 

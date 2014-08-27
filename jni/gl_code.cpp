@@ -251,5 +251,6 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown)
 {
 	//LOGI("Controller[%d].button[%d]: %d", controllerID, buttonID, pressedDown);
+	physics.debugVar = true;
 }
 

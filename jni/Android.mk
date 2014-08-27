@@ -6,7 +6,7 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := png
-LOCAL_SRC_FILES := extLibs/png/libpng.a
+LOCAL_SRC_FILES := extLibs/png/$(TARGET_ARCH_ABI)/libpng.a
 #LOCAL_EXPORT_C_INCLUDES := extLibs/png/include
 
 include $(PREBUILT_STATIC_LIBRARY)
