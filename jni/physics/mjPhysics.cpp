@@ -41,8 +41,10 @@ void mjPhysics::Update(float t_elapsed)
 void mjPhysics::CollisionDetection()
 {
 	// Objects in layer 0 are tested against other objects in layer 0
+
 	if (collisionLayers.size() > 0)
 	{
+
 		for (int i = 0; i < collisionLayers[0]->size(); i++)
 		{
 			mjObject* objectI = (*collisionLayers[0])[i];
@@ -69,7 +71,13 @@ void mjPhysics::CollisionDetection()
 					case MJ_SPHERE:
 					{
 						mjCollisionResult* colResult = new mjCollisionResult();
-						mjCollisionTests::SphereVsSphere(*(mjSphere*) object0, *(mjSphere*) object1, colResult);
+						if (mjCollisionTests::SphereVsSphere(*(mjSphere*) object0, *(mjSphere*) object1, colResult) == MJ_OVERLAP)
+						{
+							LOGI("Collision!\n");
+						} else
+						{
+							LOGI("No collision!\n");
+						}
 					}
 						break;
 					default:

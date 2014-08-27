@@ -2,9 +2,11 @@
 
 namespace mjEngine{
 mjcolresult mjCollisionTests::SphereVsSphere(mjSphere& s0, mjSphere& s1, mjCollisionResult *out){
-	mjVector3 s0ToS1(s1.c);
+	mjVector3 s0ToS1;
 
-	s0ToS1.Subtract(s0.c);
+	s0ToS1.CopyFrom(*s1.c);
+
+	s0ToS1.Subtract(*s0.c);
 
 	float dist = s0ToS1.Normalize();
 	float rSum = s0.r+s1.r;
@@ -32,6 +34,7 @@ mjcolresult mjCollisionTests::SphereVsSphere(mjSphere& s0, mjSphere& s1, mjColli
 			s0ToS1.MulScalar(-1);
 
 			out->effectObj1->value.CopyFrom(s0ToS1);
+
 
 		}
 		return MJ_OVERLAP;

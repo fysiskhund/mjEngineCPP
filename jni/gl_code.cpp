@@ -6,7 +6,9 @@
 
 #include <jni.h>
 #include <android/log.h>
-
+#define  LOG_TAG    "mj"
+#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 
 #include <GLES2/gl2.h>
@@ -16,9 +18,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define  LOG_TAG    "mj"
-#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
-#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
+
 
 
 
@@ -94,6 +94,7 @@ bool setupGraphics(int w, int h) {
     bird.pos.Set(-2,0,3);
     bird.dir.Set(-1, 0, 1);
     bird.dir.Normalize();
+    ((mjSphere*) bird.boundingStructure)->r = 0.3;
 
     // Test loading png texture
     mjImageLoader* imgLoader = new mjImageLoader();//
@@ -108,9 +109,10 @@ bool setupGraphics(int w, int h) {
 
     character.model = new mjModel();
     character.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
-    character.pos.Set(0,0,0);
+    character.pos.Set(0,0,3);
     character.dir.Set(0, 0, 1);
     character.dir.Normalize();
+    ((mjSphere*) character.boundingStructure)->r = 0.3;
 
     LOGI("texture loading. for obj2");
     imgLoader = new mjImageLoader();
@@ -133,6 +135,9 @@ bool setupGraphics(int w, int h) {
     character.model->TieShaders(shaderList);
 
 
+
+    physics.AddObject(&bird, 0);
+    physics.AddObject(&character, 0);
     physics.gravity.Set0();
     return true;
 }
@@ -235,6 +240,7 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 		character.dir.CopyFrom(dir);
 		character.dir.Normalize();
 		character.vel.CopyFrom(dir);
+
 	} else {
 		character.vel.Set0();
 	}

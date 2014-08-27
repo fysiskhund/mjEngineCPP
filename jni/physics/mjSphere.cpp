@@ -9,20 +9,22 @@ mjSphere::mjSphere()
 {
 	type = MJ_SPHERE;
 	r = 0;
-
+	c = new mjVector3();
 }
-mjSphere::mjSphere(mjVector3& c, float r)
+mjSphere::mjSphere(mjVector3* c, float r)
 {
 	type = MJ_SPHERE;
+
 	this->r = r;
-	this->c.CopyFrom(c);
+	this->c = c;
+
 
 }
 mjSphere::mjSphere(mjSphere& copy)
 {
 	type = MJ_SPHERE;
 	this->r = copy.r;
-	this->c.CopyFrom(copy.c);
+	this->c->CopyFrom(*copy.c);
 
 }
 }

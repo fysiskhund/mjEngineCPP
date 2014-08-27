@@ -13,9 +13,9 @@ namespace mjEngine{
 class mjSphere: public mjBoundingStructure
 {
 public:
-	mjVector3 c;
+	mjVector3* c;
 	float r;
-	mjSphere(mjVector3& c, float r);
+	mjSphere(mjVector3* c, float r);
 	mjSphere(mjSphere& copy);
 	mjSphere();
 };
