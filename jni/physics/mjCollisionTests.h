@@ -12,6 +12,11 @@
 #include "mjAABB.h"
 
 
+#include <android/log.h>
+#define  LOG_TAG    "mj"
+#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
+
 namespace mjEngine
 {
 
@@ -20,7 +25,7 @@ namespace mjEngine
 class mjCollisionTests{
 public:
 
-	static mjcolresult SphereVsSphere(mjSphere& s0, mjSphere& s1, mjCollisionResult* out);
+	static mjcolresult SphereVsSphere(mjSphere* s0, mjSphere* s1, mjCollisionResult *out);
 	
 	static mjcolresult AABBVsAABB(mjAABB& a, mjAABB& b, mjCollisionResult* out);
 private:

@@ -15,8 +15,10 @@ mjSphere::mjSphere(mjVector3* c, float r)
 {
 	type = MJ_SPHERE;
 
-	this->r = r;
 	this->c = c;
+	this->r = r;
+
+	LOGI("sph: c = %x", c);
 
 
 }

@@ -26,7 +26,7 @@ mjObject::mjObject()
 	hasKinematics = true;
 	canCollide = true;
 
-	boundingStructure = new mjSphere();
+	boundingStructure = new mjSphere(&pos, 1);
 }
 
 
