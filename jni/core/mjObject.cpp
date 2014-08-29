@@ -84,18 +84,19 @@ void mjObject::Update(float t_elapsed)
 					switch(collisionEffect->action)
 					{
 					case MJ_CHANGE_POSITION:
+						//LOGI("change position");
 						if (collisionEffect->mask[0])
 						{
-							pos.x = collisionEffect->value.x;
+							pos.x += collisionEffect->value.x;
 						}
 						if (collisionEffect->mask[1])
 						{
-							pos.y = collisionEffect->value.y;
+							pos.y += collisionEffect->value.y;
 
 						}
 						if (collisionEffect->mask[2])
 						{
-							pos.z = collisionEffect->value.z;
+							pos.z += collisionEffect->value.z;
 						}
 						break;
 

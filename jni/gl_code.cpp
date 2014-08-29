@@ -112,9 +112,9 @@ bool setupGraphics(int w, int h) {
     character.pos.Set(0,0,3);
     character.dir.Set(0, 0, 1);
     character.dir.Normalize();
-    ((mjSphere*) character.boundingStructure)->r = 0.3;
+    ((mjSphere*) character.boundingStructure)->r = 0.5;
 
-    LOGI("texture loading. for obj2");
+    //LOGI("texture loading. for obj2");
     imgLoader = new mjImageLoader();
     imgLoader->Load("/sdcard/mjEngineCPP/suit_test.png");
     glTexture = imgLoader->SendToGL();

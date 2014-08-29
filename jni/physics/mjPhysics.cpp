@@ -53,7 +53,7 @@ void mjPhysics::CollisionDetection()
 			mjObject* objectI = (*collisionLayers[0])[i];
 			for (int j = i+1; j < collisionLayers[0]->size(); j++)
 			{
-				LOGI("phys: i:%d, j:%d\n", i, j);
+				//LOGI("phys: i:%d, j:%d\n", i, j);
 				mjObject* objectJ = (*collisionLayers[0])[j];
 				mjObject* object0;
 				mjObject* object1;
@@ -74,15 +74,21 @@ void mjPhysics::CollisionDetection()
 					switch(object1->boundingStructure->type){
 					case MJ_SPHERE:
 					{
-						LOGI("sphVsph");
+						//LOGI("sphVsph");
 						mjCollisionResult* colResult = new mjCollisionResult();
-						LOGI("After new Colresult");
+						//LOGI("After new Colresult");
 						if (mjCollisionTests::SphereVsSphere((mjSphere*)object0->boundingStructure, (mjSphere*)object1->boundingStructure, colResult) == MJ_OVERLAP)
 						{
-							LOGI("Collision!\n");
+							colResult->effectObj0->otherObject = object1;
+							object0->collisionStack.push_back(colResult->effectObj0);
+
+							colResult->effectObj1->otherObject = object0;
+							object1->collisionStack.push_back(colResult->effectObj1);
+
 						} else
 						{
-							LOGI("No collision!\n");
+							delete colResult;
+							//LOGI("No collision!\n");
 						}
 					}
 						break;
