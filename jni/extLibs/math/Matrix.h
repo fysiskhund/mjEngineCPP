@@ -7,13 +7,10 @@
 
 #include "../../mjVector3.h"
 
-#include <jni.h>
-#include <android/log.h>
-#include <string.h>
-#define  LOG_TAG    "mj"
-#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
-#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
+#include <string.h>
+
+#include "../logger/mjLog.h"
 
 namespace mjEngine{
 

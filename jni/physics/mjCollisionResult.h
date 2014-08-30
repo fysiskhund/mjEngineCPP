@@ -18,8 +18,10 @@ enum mjcolresult{
 
 class mjCollisionResult{
 public:
-	mjPhysicsEffect* effectObj0;
-	mjPhysicsEffect* effectObj1;
+	mjcolresult result;
+	mjPhysicsEffect* relocationEffectObj0;
+	mjPhysicsEffect*
+	mjPhysicsEffect* relocationEffectObj1;
 };
 
 }

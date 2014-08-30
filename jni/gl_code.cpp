@@ -4,15 +4,17 @@
 
 // OpenGL ES 2.0 code
 
+#ifdef ANDROID
 #include <jni.h>
-#include <android/log.h>
-#define  LOG_TAG    "mj"
-#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
-#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
-
 
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
+#endif
+
+#include "extLibs/logger/mjLog.h"
+
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
