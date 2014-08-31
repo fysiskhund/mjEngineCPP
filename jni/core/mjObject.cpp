@@ -74,65 +74,74 @@ void mjObject::ProcessPhysicsEffects()
 void mjObject::Update(float t_elapsed)
 {
 	if (!boundingStructure->isImmovable)
+	{
+		vel.ScaleAdd(t_elapsed, accel);
+		pos.ScaleAdd(t_elapsed, vel);
+
+
+		for (int i=0; i < collisionStack.size(); i++)//(mjPhysicsEffect collisionEffect:collisionStack)
+		{
+			mjPhysicsEffect* collisionEffect = collisionStack[i];
+			switch(collisionEffect->action)
 			{
-				vel.ScaleAdd(t_elapsed, accel);
-				pos.ScaleAdd(t_elapsed, vel);
-
-				for (int i=0; i < collisionStack.size(); i++)//(mjPhysicsEffect collisionEffect:collisionStack)
+			case MJ_CHANGE_POSITION:
+				//LOGI("change position");
+				if (collisionEffect->mask[0])
 				{
-					mjPhysicsEffect* collisionEffect = collisionStack[i];
-					switch(collisionEffect->action)
-					{
-					case MJ_CHANGE_POSITION:
-						//LOGI("change position");
-						if (collisionEffect->mask[0])
-						{
-							pos.x += collisionEffect->value.x;
-						}
-						if (collisionEffect->mask[1])
-						{
-							pos.y += collisionEffect->value.y;
-
-						}
-						if (collisionEffect->mask[2])
-						{
-							pos.z += collisionEffect->value.z;
-						}
-						break;
-
-					case MJ_ADD_VELOCITY:
-						if (collisionEffect->mask[0])
-						{
-							vel.x += collisionEffect->value.x;
-						}
-						if (collisionEffect->mask[1])
-						{
-							vel.y += collisionEffect->value.y;
-						}
-						if (collisionEffect->mask[2])
-						{
-							vel.z += collisionEffect->value.z;
-						}
-						break;
-					case MJ_ADD_ACCEL:
-						if (collisionEffect->mask[0])
-						{
-							accel.x += collisionEffect->value.x;
-						}
-						if (collisionEffect->mask[1])
-						{
-							accel.y += collisionEffect->value.y;
-						}
-						if (collisionEffect->mask[2])
-						{
-							accel.z += collisionEffect->value.z;
-						}
-						break;
-					}
+					pos.x += collisionEffect->value.x;
+				}
+				if (collisionEffect->mask[1])
+				{
+					pos.y += collisionEffect->value.y;
 
 				}
-			}
-			collisionStack.clear();
+				if (collisionEffect->mask[2])
+				{
+					pos.z += collisionEffect->value.z;
+				}
+				break;
 
+			case MJ_ADD_VELOCITY:
+				if (collisionEffect->mask[0])
+				{
+					vel.x += collisionEffect->value.x;
+				}
+				if (collisionEffect->mask[1])
+				{
+					vel.y += collisionEffect->value.y;
+				}
+				if (collisionEffect->mask[2])
+				{
+					vel.z += collisionEffect->value.z;
+				}
+				break;
+			case MJ_ADD_ACCEL:
+				if (collisionEffect->mask[0])
+				{
+					accel.x += collisionEffect->value.x;
+				}
+				if (collisionEffect->mask[1])
+				{
+					accel.y += collisionEffect->value.y;
+				}
+				if (collisionEffect->mask[2])
+				{
+					accel.z += collisionEffect->value.z;
+				}
+				break;
+			}
+
+		}
+	}
+	collisionStack.clear();
+
+	// Update underlying mjBoundingStructure data if necessary
+	switch(boundingStructure->type)
+	{
+	case MJ_AABB:
+		break;
+	default:
+		break;
+	}
 }
 }

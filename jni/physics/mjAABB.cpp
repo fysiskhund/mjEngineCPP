@@ -2,26 +2,26 @@
 
 namespace mjEngine{
 
-mjAABB::mjAABB(mjVector3& minCorner, mjVector3& maxCorner, bool isImmovable)
+mjAABB::mjAABB(mjVector3* center, mjVector3& minCorner, mjVector3& maxCorner, bool isImmovable)
 {
-		this->minCorner = minCorner;
-		this->maxCorner = maxCorner;
+		this->minCorner.CopyFrom(minCorner);
+		this->maxCorner.CopyFrom(maxCorner);
 		
-		halfWidths = new mjVector3(maxCorner);
-		halfWidths.Sum(-1, minCorner);
+		halfWidths.CopyFrom(maxCorner);
+		halfWidths.Subtract(minCorner);
 		halfWidths.MulScalar(0.5f);
 		
-		center = new mjVector3(minCorner);
-		center.Sum(halfWidths);
+		center->CopyFrom(minCorner);
+		center->Add(halfWidths);
 		this->isImmovable = isImmovable;
 		this->type = MJ_AABB;
 }
 
 void mjAABB::UpdateCorners()
 {
-	this->minCorner.Copy(center);
-	this->minCorner.Sum(-1, halfWidths);
-	this->maxCorner.Copy(center);
-	this->maxCorner.Sum(halfWidths);
+	this->minCorner.CopyFrom(*center);
+	this->minCorner.Subtract(halfWidths);
+	this->maxCorner.CopyFrom(*center);
+	this->maxCorner.Add(halfWidths);
 }
 }

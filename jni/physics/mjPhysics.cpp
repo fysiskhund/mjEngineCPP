@@ -79,11 +79,11 @@ void mjPhysics::CollisionDetection()
 						//LOGI("After new Colresult");
 						if (mjCollisionTests::SphereVsSphere((mjSphere*)object0->boundingStructure, (mjSphere*)object1->boundingStructure, colResult) == MJ_OVERLAP)
 						{
-							colResult->effectObj0->otherObject = object1;
-							object0->collisionStack.push_back(colResult->effectObj0);
+							colResult->relocationEffectObj0->otherObject = object1;
+							object0->collisionStack.push_back(colResult->relocationEffectObj0);
 
-							colResult->effectObj1->otherObject = object0;
-							object1->collisionStack.push_back(colResult->effectObj1);
+							colResult->relocationEffectObj1->otherObject = object0;
+							object1->collisionStack.push_back(colResult->relocationEffectObj1);
 
 						} else
 						{

@@ -78,35 +78,35 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 
 			if (out != NULL)
 			{
-				out->relocationEffectObj0 = new mjPhysicsEffect();
-				out->relocationEffectObj1 = new mjPhysicsEffect();
+				/*out->relocationEffectObj0 = new mjPhysicsEffect();
+				out->relocationEffectObj1 = new mjPhysicsEffect();*/
 				// Get the directions for moving the boxes
 				mjVector3 directions;
-				directions.CopyFrom(aabb0->center);
-				directions.Subtract(aabb1->center);
+				directions.CopyFrom(*aabb0->center);
+				directions.Subtract(*aabb1->center);
 
 				mjVector3 maxEndp;
-				maxEndp.Set(Math.min(aabb0->maxCorner.x, aabb1->maxCorner.x), Math.min(aabb0->maxCorner.y, aabb1->maxCorner.y),
-							Math.min(aabb0->maxCorner.z, aabb1->maxCorner.z));
+				maxEndp.Set(fmin(aabb0->maxCorner.x, aabb1->maxCorner.x), fmin(aabb0->maxCorner.y, aabb1->maxCorner.y),
+							fmin(aabb0->maxCorner.z, aabb1->maxCorner.z));
 				mjVector3 minEndp;
-				minEndp.Set(Math.max(aabb0->minCorner.x, aabb1->minCorner.x), Math.max(aabb0->minCorner.y, aabb1->minCorner.y),
-						Math.max(aabb0->minCorner.z, aabb1->minCorner.z));
+				minEndp.Set(fmax(aabb0->minCorner.x, aabb1->minCorner.x), fmax(aabb0->minCorner.y, aabb1->minCorner.y),
+						fmax(aabb0->minCorner.z, aabb1->minCorner.z));
 
 				mjVector3 overlap;
 				overlap.CopyFrom(maxEndp);
 				overlap.Subtract(minEndp);
 
 
-				res.relocationObj0 = new mjPhysicsEffect(EffectType.Collision, EffectAction.changePosition);
-				res.accelObj0 = new mjPhysicsEffect(EffectType.Collision, EffectAction.addVelocity);
+				out->relocationEffectObj0 = new mjPhysicsEffect(MJ_COLLISION, MJ_CHANGE_POSITION);
+				out->changeVelEffectObj0 = new mjPhysicsEffect(MJ_COLLISION, MJ_ADD_VELOCITY);
 
-				res.relocationObj1 = new mjPhysicsEffect(EffectType.Collision, EffectAction.changePosition);
-				res.accelObj1 = new mjPhysicsEffect(EffectType.Collision, EffectAction.addVelocity);
+				out->relocationEffectObj1 = new mjPhysicsEffect(MJ_COLLISION, MJ_CHANGE_POSITION);
+				out->changeVelEffectObj1 = new mjPhysicsEffect(MJ_COLLISION, MJ_ADD_VELOCITY);
 
-				mjVector3 location0;
-				mjVector3 location1;
-				res.relocationObj0.value = location0;
-				res.relocationObj1.value = location1;
+
+
+				mjVector3* location0 = &out->relocationEffectObj0->value;
+				mjVector3* location1 = &out->relocationEffectObj1->value;
 
 				float displacementFactor = 0.5f;
 
@@ -117,57 +117,58 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 
 				if ((overlap.x < overlap.y) && (overlap.x < overlap.z))
 				{
-					location0.x = aabb1->center.x + (mjMathHelper.Sign(directions.x)*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor);
-					location1.x = aabb0->center.x - (mjMathHelper.Sign(directions.x)*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor);
+					location0->x = aabb1->center->x + (mjMathHelper::Sign(directions.x)*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor);
+					location1->x = aabb0->center->x - (mjMathHelper::Sign(directions.x)*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor);
 
-					res.accelObj0.value = new mjVector3(mjMathHelper.Sign(directions.x), 0, 0);
-					res.accelObj1.value = new mjVector3(-mjMathHelper.Sign(directions.x), 0, 0);
+					out->changeVelEffectObj0->value.Set(mjMathHelper::Sign(directions.x), 0, 0);
+					out->changeVelEffectObj1->value.Set(-mjMathHelper::Sign(directions.x), 0, 0);
 
-					res.relocationObj0.mask[1] = false;
-					res.relocationObj0.mask[2] = false;
-					res.accelObj0.mask[1] = false;
-					res.accelObj0.mask[2] = false;
+					out->relocationEffectObj0->mask[1] = false;
+					out->relocationEffectObj0->mask[2] = false;
+					out->changeVelEffectObj0->mask[1] = false;
+					out->changeVelEffectObj0->mask[2] = false;
 
-					res.relocationObj1.mask[1] = false;
-					res.relocationObj1.mask[2] = false;
-					res.accelObj1.mask[1] = false;
-					res.accelObj1.mask[2] = false;
+					out->relocationEffectObj1->mask[1] = false;
+					out->relocationEffectObj1->mask[2] = false;
+					out->changeVelEffectObj1->mask[1] = false;
+					out->changeVelEffectObj1->mask[2] = false;
 				} else if ((overlap.y < overlap.x ) && (overlap.y < overlap.z))
 				{
-					location0.y = aabb1->center.y + (mjMathHelper.Sign(directions.y)*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor);
-					location1.y = aabb0->center.y - (mjMathHelper.Sign(directions.y)*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor);
+					location0->y = aabb1->center->y + (mjMathHelper::Sign(directions.y)*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor);
+					location1->y = aabb0->center->y - (mjMathHelper::Sign(directions.y)*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor);
 
-					res.accelObj0.value = new mjVector3(0, mjMathHelper.Sign(directions.y), 0);
-					res.accelObj1.value = new mjVector3(0, -mjMathHelper.Sign(directions.y), 0);
+					out->changeVelEffectObj0->value.Set(0, mjMathHelper::Sign(directions.y), 0);
+					out->changeVelEffectObj1->value.Set(0, -mjMathHelper::Sign(directions.y), 0);
 
 
-					res.relocationObj0.mask[0] = false;
-					res.relocationObj0.mask[2] = false;
-					res.accelObj0.mask[0] = false;
-					res.accelObj0.mask[2] = false;
+					out->relocationEffectObj0->mask[0] = false;
+					out->relocationEffectObj0->mask[2] = false;
+					out->changeVelEffectObj0->mask[0] = false;
+					out->changeVelEffectObj0->mask[2] = false;
 
-					res.relocationObj1.mask[0] = false;
-					res.relocationObj1.mask[2] = false;
-					res.accelObj1.mask[0] = false;
-					res.accelObj1.mask[2] = false;
+					out->relocationEffectObj1->mask[0] = false;
+					out->relocationEffectObj1->mask[2] = false;
+					out->changeVelEffectObj1->mask[0] = false;
+					out->changeVelEffectObj1->mask[2] = false;
 				} else
 				{
-					location0.z = aabb1->center.z + (mjMathHelper.Sign(directions.z)*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor);
-					location1.z = aabb0->center.z - (mjMathHelper.Sign(directions.z)*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor);
+					location0->z = aabb1->center->z + (mjMathHelper::Sign(directions.z)*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor);
+					location1->z = aabb0->center->z - (mjMathHelper::Sign(directions.z)*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor);
 
-					res.accelObj0.value = new mjVector3(0, 0, mjMathHelper.Sign(directions.z));
-					res.accelObj1.value = new mjVector3(0, 0, -mjMathHelper.Sign(directions.z));
+					out->changeVelEffectObj0->value.Set(0, 0, mjMathHelper::Sign(directions.z));
+					out->changeVelEffectObj1->value.Set(0, 0, -mjMathHelper::Sign(directions.z));
 
-					res.relocationObj0.mask[0] = false;
-					res.relocationObj0.mask[1] = false;
-					res.accelObj0.mask[0] = false;
-					res.accelObj0.mask[1] = false;
+					out->relocationEffectObj0->mask[0] = false;
+					out->relocationEffectObj0->mask[1] = false;
+					out->changeVelEffectObj0->mask[0] = false;
+					out->changeVelEffectObj0->mask[1] = false;
 
-					res.relocationObj1.mask[0] = false;
-					res.relocationObj1.mask[1] = false;
-					res.accelObj1.mask[0] = false;
-					res.accelObj1.mask[1] = false;
+					out->relocationEffectObj1->mask[0] = false;
+					out->relocationEffectObj1->mask[1] = false;
+					out->changeVelEffectObj1->mask[0] = false;
+					out->changeVelEffectObj1->mask[1] = false;
 				}
+
 
 			}
 

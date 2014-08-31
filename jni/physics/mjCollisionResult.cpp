@@ -4,19 +4,29 @@ namespace mjEngine{
 
 mjCollisionResult::mjCollisionResult()
 {
-	effectObj0 = NULL;
-	effectObj1 = NULL;
+	relocationEffectObj0 = NULL;
+	changeVelEffectObj0 = NULL;
+	relocationEffectObj1 = NULL;
+	changeVelEffectObj1 = NULL;
 }
 
 mjCollisionResult::~mjCollisionResult()
 {
-	if (effectObj0 != NULL)
+	if (relocationEffectObj0 != NULL)
 	{
-		delete effectObj0;
+		delete relocationEffectObj0;
 	}
-	if (effectObj1 != NULL)
+	if (changeVelEffectObj0 != NULL)
 	{
-		delete effectObj1;
+		delete changeVelEffectObj0;
+	}
+	if (relocationEffectObj1 != NULL)
+	{
+		delete relocationEffectObj1;
+	}
+	if (changeVelEffectObj1 != NULL)
+	{
+		delete changeVelEffectObj1;
 	}
 }
 }

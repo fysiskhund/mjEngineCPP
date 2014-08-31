@@ -18,6 +18,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   mjVector3.cpp \
 				   graphics/mjCamera.cpp \
 				   extLibs/math/Matrix.cpp \
+				   extLibs/math/mjMathHelper.cpp \
 				   graphics/mjImageLoader.cpp \
 				   graphics/mjModel.cpp \
 				   graphics/mjModelMesh.cpp \
@@ -25,6 +26,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   graphics/mjShader.cpp \
 				   physics/mjPhysics.cpp \
 				   physics/mjSphere.cpp \
+				   physics/mjAABB.cpp \
 				   physics/mjCollisionTests.cpp \
 				   physics/mjPhysicsEffect.cpp \
 				   core/mjObject.cpp \

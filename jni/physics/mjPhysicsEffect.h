@@ -40,7 +40,7 @@ public:
 	mjObject* otherObject;
 
 	mjPhysicsEffect();
-
+	mjPhysicsEffect(EffectType type, EffectAction action);
 
 private:
 };

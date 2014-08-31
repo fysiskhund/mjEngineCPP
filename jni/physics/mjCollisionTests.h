@@ -12,8 +12,10 @@
 #include "mjCollisionResult.h"
 #include "mjSphere.h"
 #include "mjAABB.h"
+#include "../extLibs/math/mjMathHelper.h"
 
 #include "../extLibs/logger/mjLog.h"
+
 
 namespace mjEngine
 {
@@ -26,6 +28,7 @@ public:
 	static mjcolresult SphereVsSphere(mjSphere* s0, mjSphere* s1, mjCollisionResult *out);
 	
 	static mjcolresult AABBVsAABB(mjAABB* a, mjAABB* b, mjCollisionResult* out);
+
 private:
 };
 

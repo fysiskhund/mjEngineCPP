@@ -20,8 +20,11 @@ class mjCollisionResult{
 public:
 	mjcolresult result;
 	mjPhysicsEffect* relocationEffectObj0;
-	mjPhysicsEffect*
+	mjPhysicsEffect* changeVelEffectObj0;
+	mjPhysicsEffect* accelObj0;
 	mjPhysicsEffect* relocationEffectObj1;
+	mjPhysicsEffect* changeVelEffectObj1;
+	mjPhysicsEffect* accelObj1;
 };
 
 }
