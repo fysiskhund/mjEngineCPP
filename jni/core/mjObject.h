@@ -13,6 +13,7 @@
 #include "../physics/mjBoundingStructure.h"
 #include "../physics/mjPhysicsEffect.h"
 #include "../physics/mjSphere.h"
+#include "../physics/mjAABB.h"
 
 namespace mjEngine{
 

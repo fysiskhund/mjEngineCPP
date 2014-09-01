@@ -14,6 +14,18 @@ mjObject::mjObject(mjBoundingStructure* structure)
 	canCollide = true;
 	this->boundingStructure = structure;
 
+	switch(structure->type)
+	{
+	case MJ_AABB:
+	{
+		mjAABB* aabb = (mjAABB*) boundingStructure;
+		aabb->center = &pos;
+	}
+		break;
+	default:
+		break;
+	}
+
 }
 mjObject::mjObject()
 {
@@ -139,6 +151,10 @@ void mjObject::Update(float t_elapsed)
 	switch(boundingStructure->type)
 	{
 	case MJ_AABB:
+	{
+		mjAABB* aabb = (mjAABB*) boundingStructure;
+		aabb->UpdateCorners();
+	}
 		break;
 	default:
 		break;
