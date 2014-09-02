@@ -39,8 +39,8 @@ using namespace mjEngine;
 
 
 
-mjObject bird;
-mjObject character;
+mjObject bird(MJ_AABB);
+mjObject character(MJ_AABB);
 mjCamera camera;
 
 mjDefaultShaders* defaultShaders = new mjDefaultShaders();
@@ -96,7 +96,8 @@ bool setupGraphics(int w, int h) {
     bird.pos.Set(-2,0,3);
     bird.dir.Set(-1, 0, 1);
     bird.dir.Normalize();
-    ((mjSphere*) bird.boundingStructure)->r = 0.3;
+    ((mjAABB*)bird.boundingStructure)->isImmovable = false;
+    //((mjSphere*) bird.boundingStructure)->r = 0.3;
 
     // Test loading png texture
     mjImageLoader* imgLoader = new mjImageLoader();//
@@ -114,7 +115,7 @@ bool setupGraphics(int w, int h) {
     character.pos.Set(0,0,3);
     character.dir.Set(0, 0, 1);
     character.dir.Normalize();
-    ((mjSphere*) character.boundingStructure)->r = 0.5;
+    //((mjSphere*) character.boundingStructure)->r = 0.5;
 
     //LOGI("texture loading. for obj2");
     imgLoader = new mjImageLoader();
@@ -186,7 +187,7 @@ void renderFrame() {
     // Apply the lookAt (viewMatrix) transformation to obtain modelView transformation
     //Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
 
-    theta+= 0.05;
+    theta+= 0.01;
     if (theta >= 2.0*(3.141592))
     {
     	theta -= 2.0*(3.141592);

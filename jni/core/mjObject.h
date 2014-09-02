@@ -42,7 +42,7 @@ public:
 	bool hasKinematics;
 	bool canCollide;
 	mjObject();
-	mjObject(mjBoundingStructure* structure);
+	mjObject(structuretype collisionStructureType);
 	void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
 	void ProcessPhysicsEffects();
 	void Update(float t_elapsed);

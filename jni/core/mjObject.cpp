@@ -2,7 +2,7 @@
 
 namespace mjEngine{
 
-mjObject::mjObject(mjBoundingStructure* structure)
+mjObject::mjObject(structuretype collisionStructureType)
 {
 	// Vectors are initialised with 0, so no need to set them here
 
@@ -12,14 +12,21 @@ mjObject::mjObject(mjBoundingStructure* structure)
 
 	hasKinematics = true;
 	canCollide = true;
-	this->boundingStructure = structure;
 
-	switch(structure->type)
+	switch(collisionStructureType)
 	{
 	case MJ_AABB:
 	{
-		mjAABB* aabb = (mjAABB*) boundingStructure;
+		mjVector3 maxCorner;
+		maxCorner.Set(0.5,1.0,0.5);
+
+		mjVector3 minCorner;
+		minCorner.Set(-0.5,0,-0.5);
+
+		mjAABB* aabb = new mjAABB(&pos, minCorner, maxCorner, false);
+		this->boundingStructure = aabb;
 		aabb->center = &pos;
+		LOGI("Object initialised as AABB");
 	}
 		break;
 	default:
@@ -100,16 +107,16 @@ void mjObject::Update(float t_elapsed)
 				//LOGI("change position");
 				if (collisionEffect->mask[0])
 				{
-					pos.x += collisionEffect->value.x;
+					pos.x = collisionEffect->value.x;
 				}
 				if (collisionEffect->mask[1])
 				{
-					pos.y += collisionEffect->value.y;
+					pos.y = collisionEffect->value.y;
 
 				}
 				if (collisionEffect->mask[2])
 				{
-					pos.z += collisionEffect->value.z;
+					pos.z = collisionEffect->value.z;
 				}
 				break;
 

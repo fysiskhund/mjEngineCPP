@@ -5,6 +5,7 @@
 #ifndef MJMATHHELPER_H
 #define MJMATHHELPER_H
 
+#include "../logger/mjLog.h"
 
 namespace mjEngine{
 

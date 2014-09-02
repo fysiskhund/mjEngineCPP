@@ -70,10 +70,27 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 		if ((aabb0->minCorner.x > aabb1->maxCorner.x) || (aabb0->minCorner.y > aabb1->maxCorner.y) || (aabb0->minCorner.z > aabb1->maxCorner.z) ||
 		    (aabb1->minCorner.x > aabb0->maxCorner.x) || (aabb1->minCorner.y > aabb0->maxCorner.y) || (aabb1->minCorner.z > aabb0->maxCorner.z))
 		{
+			/*LOGI("[%3.3f, %3.3f, %3.3f ; %3.3f, %3.3f, %3.3f] vs [%3.3f, %3.3f, %3.3f ; %3.3f, %3.3f, %3.3f]",
+					aabb0->minCorner.x, aabb0->minCorner.y, aabb0->minCorner.z,
+					aabb0->maxCorner.x, aabb0->maxCorner.y, aabb0->maxCorner.z,
+
+					aabb1->minCorner.x, aabb1->minCorner.y, aabb1->minCorner.z,
+					aabb1->maxCorner.x, aabb1->maxCorner.y, aabb1->maxCorner.z);
+
+			LOGI("%d %d %d\n%d %d %d",
+					 (aabb0->minCorner.x > aabb1->maxCorner.x),
+					 (aabb0->minCorner.y > aabb1->maxCorner.y),
+					 (aabb0->minCorner.z > aabb1->maxCorner.z),
+
+					 (aabb1->minCorner.x > aabb0->maxCorner.x),
+					 (aabb1->minCorner.y > aabb0->maxCorner.y),
+					 (aabb1->minCorner.z > aabb0->maxCorner.z)
+					 );*/
+			//LOGI("No collision AABB");
 			return MJ_NO_COLLISION;
 		} else
 		{
-
+			//LOGI("COLLISION!!AABB");
 			mjcolresult result = MJ_OVERLAP;
 
 			if (out != NULL)
@@ -168,6 +185,11 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 					out->changeVelEffectObj1->mask[0] = false;
 					out->changeVelEffectObj1->mask[1] = false;
 				}
+				LOGI("displacement obj0: %3.3f, %3.3f, %3.3f",
+						out->relocationEffectObj0->value.x,
+						out->relocationEffectObj0->value.y,
+						out->relocationEffectObj0->value.z
+						);
 
 
 			}

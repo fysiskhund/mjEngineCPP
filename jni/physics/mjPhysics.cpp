@@ -84,6 +84,8 @@ void mjPhysics::CollisionDetection()
 
 							colResult->relocationEffectObj1->otherObject = object0;
 							object1->collisionStack.push_back(colResult->relocationEffectObj1);
+							//FIXME:!!! Something must be done with colResult in this case
+							// without altering the inner effects, since those will be destroyed in the object after they'be been used.
 
 						} else
 						{
@@ -97,6 +99,36 @@ void mjPhysics::CollisionDetection()
 					}
 				}
 					break;
+				case MJ_AABB:
+				{
+					switch(object1->boundingStructure->type)
+					{
+					case MJ_AABB:
+					{
+						mjCollisionResult* colResult = new mjCollisionResult();
+
+						if (mjCollisionTests::AABBVsAABB((mjAABB*)object0->boundingStructure, (mjAABB*)object1->boundingStructure, colResult) == MJ_OVERLAP)
+						{
+							colResult->relocationEffectObj0->otherObject = object1;
+							object0->collisionStack.push_back(colResult->relocationEffectObj0);
+
+							colResult->relocationEffectObj1->otherObject = object0;
+							object1->collisionStack.push_back(colResult->relocationEffectObj1);
+							//FIXME:!!! Something must be done with colResult in this case
+							// without altering the inner effects, since those will be destroyed in the object after they'be been used.
+
+						}else
+						{
+							delete colResult;
+							//LOGI("No collision!\n");
+						}
+					}
+					break;
+					default:
+						break;
+					}
+				}
+				break;
 				default:
 					break;
 				}
