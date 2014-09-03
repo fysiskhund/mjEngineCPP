@@ -41,6 +41,8 @@ using namespace mjEngine;
 
 mjObject bird(MJ_AABB);
 mjObject character(MJ_AABB);
+mjObject box0(MJ_AABB);
+
 mjCamera camera;
 
 mjDefaultShaders* defaultShaders = new mjDefaultShaders();
@@ -91,18 +93,41 @@ bool setupGraphics(int w, int h) {
     checkGlError("glViewport");
 
     LOGI("Before first model");
+    box0.model = new mjModel();
+    box0.model->LoadFromFile("/sdcard/mjEngineCPP/box.mesh.xml");
+    box0.pos.Set(0,-4,0);
+    box0.scale.Set(8,8,8);
+    box0.dir.Normalize();
+    mjAABB* box0BoundingStruct = ((mjAABB*)box0.boundingStructure);
+    box0BoundingStruct->isImmovable = true;
+    box0BoundingStruct->halfWidths.CopyFrom(box0.scale);
+    box0.Update(0);
+
+
+    mjImageLoader* imgLoader = new mjImageLoader();//
+
+
+    imgLoader = new mjImageLoader();
+    imgLoader->Load("/sdcard/mjEngineCPP/box_grassy.png");
+    GLuint glTexture = imgLoader->SendToGL();
+    for (int i = 0; i<box0.model->meshes.size(); i++)
+    {
+    	box0.model->meshes[i]->glTexture = glTexture;
+    }
+
+
     bird.model = new mjModel();
     bird.model->LoadFromFile("/sdcard/mjEngineCPP/bird.mesh.xml");
     bird.pos.Set(-2,0,3);
     bird.dir.Set(-1, 0, 1);
     bird.dir.Normalize();
-    ((mjAABB*)bird.boundingStructure)->isImmovable = false;
+    ((mjAABB*)bird.boundingStructure)->isImmovable = true;
     //((mjSphere*) bird.boundingStructure)->r = 0.3;
 
     // Test loading png texture
-    mjImageLoader* imgLoader = new mjImageLoader();//
+
     imgLoader->Load("/sdcard/mjEngineCPP/birdtexture.png");
-    GLuint glTexture = imgLoader->SendToGL();
+    glTexture = imgLoader->SendToGL();
     for (int i = 0; i<bird.model->meshes.size(); i++)
     {
     	bird.model->meshes[i]->glTexture = glTexture;
@@ -112,7 +137,7 @@ bool setupGraphics(int w, int h) {
 
     character.model = new mjModel();
     character.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
-    character.pos.Set(0,0,3);
+    character.pos.Set(0,4,3);
     character.dir.Set(0, 0, 1);
     character.dir.Normalize();
     //((mjSphere*) character.boundingStructure)->r = 0.5;
@@ -141,7 +166,8 @@ bool setupGraphics(int w, int h) {
 
     physics.AddObject(&bird, 0);
     physics.AddObject(&character, 0);
-    physics.gravity.Set0();
+    physics.AddObject(&box0, 0);
+
     return true;
 }
 
@@ -202,7 +228,7 @@ void renderFrame() {
     }
     character.Draw(shaderList, lookAtMatrix, projectionMatrix);
     bird.Draw(shaderList, lookAtMatrix, projectionMatrix);
-
+    box0.Draw(shaderList, lookAtMatrix, projectionMatrix);
 
 }
 
@@ -253,7 +279,6 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown)
 {
-	//LOGI("Controller[%d].button[%d]: %d", controllerID, buttonID, pressedDown);
-	physics.debugVar = true;
+
 }
 

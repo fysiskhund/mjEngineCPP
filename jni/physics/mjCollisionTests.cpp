@@ -130,12 +130,14 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 				if (aabb0->isImmovable || aabb1->isImmovable)
 				{
 					displacementFactor = 1;
+					//LOGI("dispFactor:1");
 				}
 
 				if ((overlap.x < overlap.y) && (overlap.x < overlap.z))
 				{
-					location0->x = aabb1->center->x + (mjMathHelper::Sign(directions.x)*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor);
-					location1->x = aabb0->center->x - (mjMathHelper::Sign(directions.x)*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor);
+					float xDisplacement = mjMathHelper::Sign(directions.x)*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor;
+					location0->x = aabb1->center->x + xDisplacement;
+					location1->x = aabb0->center->x - xDisplacement;
 
 					out->changeVelEffectObj0->value.Set(mjMathHelper::Sign(directions.x), 0, 0);
 					out->changeVelEffectObj1->value.Set(-mjMathHelper::Sign(directions.x), 0, 0);
@@ -151,8 +153,9 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 					out->changeVelEffectObj1->mask[2] = false;
 				} else if ((overlap.y < overlap.x ) && (overlap.y < overlap.z))
 				{
-					location0->y = aabb1->center->y + (mjMathHelper::Sign(directions.y)*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor);
-					location1->y = aabb0->center->y - (mjMathHelper::Sign(directions.y)*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor);
+					float yDisplacement = mjMathHelper::Sign(directions.y)*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor;
+					location0->y = aabb1->center->y + yDisplacement;
+					location1->y = aabb0->center->y - yDisplacement;
 
 					out->changeVelEffectObj0->value.Set(0, mjMathHelper::Sign(directions.y), 0);
 					out->changeVelEffectObj1->value.Set(0, -mjMathHelper::Sign(directions.y), 0);
@@ -169,8 +172,9 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 					out->changeVelEffectObj1->mask[2] = false;
 				} else
 				{
-					location0->z = aabb1->center->z + (mjMathHelper::Sign(directions.z)*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor);
-					location1->z = aabb0->center->z - (mjMathHelper::Sign(directions.z)*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor);
+					float zDisplacement = mjMathHelper::Sign(directions.z)*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor;
+					location0->z = aabb1->center->z + zDisplacement;
+					location1->z = aabb0->center->z - zDisplacement;
 
 					out->changeVelEffectObj0->value.Set(0, 0, mjMathHelper::Sign(directions.z));
 					out->changeVelEffectObj1->value.Set(0, 0, -mjMathHelper::Sign(directions.z));
@@ -185,11 +189,11 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 					out->changeVelEffectObj1->mask[0] = false;
 					out->changeVelEffectObj1->mask[1] = false;
 				}
-				LOGI("displacement obj0: %3.3f, %3.3f, %3.3f",
+				/*LOGI("displacement obj0: %3.3f, %3.3f, %3.3f",
 						out->relocationEffectObj0->value.x,
 						out->relocationEffectObj0->value.y,
 						out->relocationEffectObj0->value.z
-						);
+						);*/
 
 
 			}

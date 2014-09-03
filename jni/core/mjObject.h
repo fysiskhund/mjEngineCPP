@@ -39,8 +39,10 @@ public:
 	std::vector<mjPhysicsEffect*> effectStack;
 	std::vector<mjPhysicsEffect*> collisionStack;
 
-	bool hasKinematics;
-	bool canCollide;
+	bool hasKinematics = true;
+	bool canCollide = true;
+
+	bool autoUpdateStructure = true;
 	mjObject();
 	mjObject(structuretype collisionStructureType);
 	void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);

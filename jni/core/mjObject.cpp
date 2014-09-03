@@ -10,9 +10,6 @@ mjObject::mjObject(structuretype collisionStructureType)
 	dir.Set(0,0,1);
 	scale.Set(1,1,1);
 
-	hasKinematics = true;
-	canCollide = true;
-
 	switch(collisionStructureType)
 	{
 	case MJ_AABB:
@@ -42,8 +39,6 @@ mjObject::mjObject()
 	dir.Set(0,0,1);
 	scale.Set(1,1,1);
 
-	hasKinematics = true;
-	canCollide = true;
 
 	boundingStructure = new mjSphere(&pos, 1);
 }
@@ -154,17 +149,21 @@ void mjObject::Update(float t_elapsed)
 	}
 	collisionStack.clear();
 
+
 	// Update underlying mjBoundingStructure data if necessary
-	switch(boundingStructure->type)
+	if (autoUpdateStructure)
 	{
-	case MJ_AABB:
-	{
-		mjAABB* aabb = (mjAABB*) boundingStructure;
-		aabb->UpdateCorners();
-	}
-		break;
-	default:
-		break;
+		switch(boundingStructure->type)
+		{
+		case MJ_AABB:
+		{
+			mjAABB* aabb = (mjAABB*) boundingStructure;
+			aabb->UpdateCorners();
+		}
+			break;
+		default:
+			break;
+		}
 	}
 }
 }

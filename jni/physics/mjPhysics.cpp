@@ -31,10 +31,8 @@ void mjPhysics::AddObject(mjObject* object, int collisionLayer)
 void mjPhysics::Update(float t_elapsed)
 {
 
-	if (debugVar)
-	{
-		CollisionDetection();
-	}
+
+	CollisionDetection();
 
 	ProcessPhysicsEffects(t_elapsed);
 
@@ -142,7 +140,9 @@ void mjPhysics::ProcessPhysicsEffects(float t_elapsed)
 	{
 		if (allObjects[i]->hasKinematics)
 		{
-			//allObjects[i].effectStack.add(gravityEffect);
+			mjPhysicsEffect* gravityEffect = new mjPhysicsEffect(MJ_GRAVITY, MJ_ADD_ACCEL);
+			gravityEffect->value.Set(0,-9.81,0);
+			allObjects[i]->effectStack.push_back(gravityEffect);
 		}
 		allObjects[i]->ProcessPhysicsEffects();
 		allObjects[i]->Update(t_elapsed);
