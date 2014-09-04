@@ -34,6 +34,7 @@ public:
 	float mass = 1;
 
 	mjModel* model;
+	mjVector3 modelOffset;
 	mjBoundingStructure* boundingStructure;
 
 	std::vector<mjPhysicsEffect*> effectStack;

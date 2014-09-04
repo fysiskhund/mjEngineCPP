@@ -95,13 +95,19 @@ bool setupGraphics(int w, int h) {
     LOGI("Before first model");
     box0.model = new mjModel();
     box0.model->LoadFromFile("/sdcard/mjEngineCPP/box.mesh.xml");
-    box0.pos.Set(0,-4,0);
     box0.scale.Set(8,8,8);
+
+
     box0.dir.Normalize();
     mjAABB* box0BoundingStruct = ((mjAABB*)box0.boundingStructure);
     box0BoundingStruct->isImmovable = true;
-    box0BoundingStruct->halfWidths.CopyFrom(box0.scale);
+    mjVector3 box0HalfScale;
+    box0HalfScale.CopyFrom(box0.scale);
+    box0HalfScale.MulScalar(0.5);
+    box0BoundingStruct->halfWidths.CopyFrom(box0HalfScale);
+    box0.pos.Set(0,-4,0);
     box0.Update(0);
+
 
 
     mjImageLoader* imgLoader = new mjImageLoader();//
@@ -137,9 +143,18 @@ bool setupGraphics(int w, int h) {
 
     character.model = new mjModel();
     character.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
-    character.pos.Set(0,4,3);
+
     character.dir.Set(0, 0, 1);
     character.dir.Normalize();
+    mjAABB* charBoundStruct = (mjAABB*) character.boundingStructure;
+    mjVector3 minCorner;
+    minCorner.Set(-0.3,0,-0.3);
+    mjVector3 maxCorner;
+    maxCorner.Set(0.3,1.65, 0.3);
+    charBoundStruct->SetCorners(minCorner,maxCorner);
+    character.pos.Set(0,10,0);
+    character.modelOffset.Set(0,-0.825,0);
+    //charBoundStruct->SetCorners()
     //((mjSphere*) character.boundingStructure)->r = 0.5;
 
     //LOGI("texture loading. for obj2");
@@ -179,6 +194,7 @@ void renderFrame() {
 
 	// Update phase
 	physics.Update(0.016);
+	LOGI("Char.vel: %3.3f, %3.3f, %3.3f", character.vel.x, character.vel.y, character.vel.z);
 	//character.Update(0.016);
 
 
@@ -230,6 +246,12 @@ void renderFrame() {
     bird.Draw(shaderList, lookAtMatrix, projectionMatrix);
     box0.Draw(shaderList, lookAtMatrix, projectionMatrix);
 
+    if (character.pos.y < -5)
+    {
+    	character.pos.Set0();
+    	character.pos.y = 10;
+    	character.vel.y = 0;
+    }
 }
 
 void PrintGLCapabilities()

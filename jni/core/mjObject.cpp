@@ -49,8 +49,11 @@ void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 	float modelMatrix[16];
 	float modelViewMatrix[16];
 	float modelViewProjectionMatrix[16];
+	mjVector3 positionPlusOffset;
+	positionPlusOffset.CopyFrom(pos);
+	positionPlusOffset.Add(modelOffset);
 
-	Matrix4::GetPositionScaleAndRotationMatrix(pos, dir, up, scale, modelMatrix);
+	Matrix4::GetPositionScaleAndRotationMatrix(positionPlusOffset, dir, up, scale, modelMatrix);
 
 	Matrix4::MultiplyMM(modelViewMatrix, 0,
 			lookAtMatrix, 0,
