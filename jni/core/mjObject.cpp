@@ -132,6 +132,20 @@ void mjObject::Update(float t_elapsed)
 					vel.z += collisionEffect->value.z;
 				}
 				break;
+			case MJ_SET_VELOCITY:
+				if (collisionEffect->mask[0])
+				{
+					vel.x = collisionEffect->value.x;
+				}
+				if (collisionEffect->mask[1])
+				{
+					vel.y = collisionEffect->value.y;
+				}
+				if (collisionEffect->mask[2])
+				{
+					vel.z = collisionEffect->value.z;
+				}
+				break;
 			case MJ_ADD_ACCEL:
 				if (collisionEffect->mask[0])
 				{

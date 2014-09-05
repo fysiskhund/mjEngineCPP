@@ -107,11 +107,46 @@ void mjPhysics::CollisionDetection()
 
 						if (mjCollisionTests::AABBVsAABB((mjAABB*)object0->boundingStructure, (mjAABB*)object1->boundingStructure, colResult) == MJ_OVERLAP)
 						{
+
+							if (object1->boundingStructure->isImmovable)
+							{
+								if (colResult->changeVelEffectObj0->mask[0])
+								{
+									colResult->changeVelEffectObj0->value.x *= fabs(object0->vel.x);
+								}
+								if (colResult->changeVelEffectObj0->mask[1])
+								{
+									colResult->changeVelEffectObj0->value.y *= fabs(object0->vel.y);
+								}
+								if (colResult->changeVelEffectObj0->mask[2])
+								{
+									colResult->changeVelEffectObj0->value.z *= fabs(object0->vel.z);
+								}
+
+							} else if (object0->boundingStructure->isImmovable)
+							{
+								if (colResult->changeVelEffectObj1->mask[0])
+								{
+									colResult->changeVelEffectObj1->value.x *= fabs(object1->vel.x);
+								}
+								if (colResult->changeVelEffectObj1->mask[1])
+								{
+									colResult->changeVelEffectObj1->value.y *= fabs(object1->vel.y);
+								}
+								if (colResult->changeVelEffectObj1->mask[2])
+								{
+									colResult->changeVelEffectObj1->value.z *= fabs(object1->vel.z);
+								}
+
+							}
+
 							colResult->relocationEffectObj0->otherObject = object1;
 							object0->collisionStack.push_back(colResult->relocationEffectObj0);
+							object0->collisionStack.push_back(colResult->changeVelEffectObj0);
 
 							colResult->relocationEffectObj1->otherObject = object0;
 							object1->collisionStack.push_back(colResult->relocationEffectObj1);
+							object1->collisionStack.push_back(colResult->changeVelEffectObj1);
 							//FIXME:!!! Something must be done with colResult in this case
 							// without altering the inner effects, since those will be destroyed in the object after they'be been used.
 
