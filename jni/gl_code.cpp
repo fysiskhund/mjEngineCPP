@@ -189,6 +189,18 @@ bool setupGraphics(int w, int h) {
     physics.AddObject(&character, 0);
     physics.AddObject(&box0, 0);
 
+
+    mjVector3 testDir(1, -1, -1);
+    testDir.Normalize();
+
+    mjVector3 testGravity(0,0,1);
+
+    testGravity.Normalize();
+
+    mjVector3 outForwardDir;
+    mjVector3 outLeftDir;
+    mjMathHelper::GetForwardAndLeftDirections(testDir, testGravity, &outForwardDir, &outLeftDir);
+
     return true;
 }
 
@@ -201,7 +213,7 @@ void renderFrame(float t_elapsed) {
 	// Update phase
 	physics.Update(t_elapsed);
 	camera.Update(t_elapsed);
-	LOGI("camera.dir: %3.3f, %3.3f, %3.3f", camera.dir.x, camera.dir.y, camera.dir.z);
+	//LOGI("camera.dir: %3.3f, %3.3f, %3.3f", camera.dir.x, camera.dir.y, camera.dir.z);
 	//character.Update(0.016);
 
 
