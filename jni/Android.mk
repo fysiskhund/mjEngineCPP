@@ -17,6 +17,7 @@ LOCAL_MODULE    := mjengine
 LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   mjVector3.cpp \
 				   graphics/mjCamera.cpp \
+				   graphics/mj3rdPersonCamera.cpp \
 				   extLibs/math/Matrix.cpp \
 				   extLibs/math/mjMathHelper.cpp \
 				   graphics/mjImageLoader.cpp \

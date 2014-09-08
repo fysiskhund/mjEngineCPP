@@ -46,6 +46,7 @@ import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.opengles.GL10;
 
+
 /**
  * A simple GLSurfaceView sub-class that demonstrate how to perform
  * OpenGL ES 2.0 rendering into a GL Surface. Note the following important
@@ -324,8 +325,20 @@ class GL2JNIView extends GLSurfaceView {
     }
 
     private static class Renderer implements GLSurfaceView.Renderer {
+    	long thisFrameTime = 0;
+    	long previousFrameTime = 0;
+    	
         public void onDrawFrame(GL10 gl) {
-            GL2JNILib.step();
+        	
+        	thisFrameTime = android.os.SystemClock.elapsedRealtime();
+    		float t_elapsed = (float)((thisFrameTime - previousFrameTime)*0.001d);
+    		
+   
+    		GL2JNILib.step(t_elapsed);
+
+    		
+            previousFrameTime = thisFrameTime;
+            
         }
 
         public void onSurfaceChanged(GL10 gl, int width, int height) {

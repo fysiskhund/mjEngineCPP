@@ -32,7 +32,7 @@
 #include "mjVector3.h"
 #include "etc/testImage.h"
 #include "extLibs/math/Matrix.h"
-#include "graphics/mjCamera.h"
+#include "graphics/mj3rdPersonCamera.h"
 #include "physics/mjPhysics.h"
 
 using namespace mjEngine;
@@ -43,7 +43,7 @@ mjObject bird(MJ_AABB);
 mjObject character(MJ_AABB);
 mjObject box0(MJ_AABB);
 
-mjCamera camera;
+mj3rdPersonCamera camera;
 
 mjDefaultShaders* defaultShaders = new mjDefaultShaders();
 
@@ -154,6 +154,12 @@ bool setupGraphics(int w, int h) {
     charBoundStruct->SetCorners(minCorner,maxCorner);
     character.pos.Set(0,10,0);
     character.modelOffset.Set(0,-0.825,0);
+
+
+    mjVector3 cameraOffset;
+    cameraOffset.Set(0,0.2,0);
+    camera.SetTarget(&character.pos, cameraOffset);
+
     //charBoundStruct->SetCorners()
     //((mjSphere*) character.boundingStructure)->r = 0.5;
 
@@ -190,11 +196,12 @@ bool setupGraphics(int w, int h) {
 
 
 
-void renderFrame() {
+void renderFrame(float t_elapsed) {
 
 	// Update phase
-	physics.Update(0.016);
-	LOGI("Char.vel: %3.3f, %3.3f, %3.3f", character.vel.x, character.vel.y, character.vel.z);
+	physics.Update(t_elapsed);
+	camera.Update(t_elapsed);
+	LOGI("camera.dir: %3.3f, %3.3f, %3.3f", camera.dir.x, camera.dir.y, camera.dir.z);
 	//character.Update(0.016);
 
 
@@ -210,10 +217,12 @@ void renderFrame() {
     checkGlError("glClear");
 
 
-    camera.dir.Set(0,0,-1);
-    camera.dir.Normalize();
-    camera.pos.Set(0,1.6,8);
+    //camera.dir.Set(0,0,-1);
+    //camera.dir.Normalize();
+    //camera.pos.Set(0,1.6,8);
+
     camera.GetLookAtMatrix(lookAtMatrix);
+
     //Matrix4::DebugM("lookat", lookAtMatrix);
 
 
@@ -264,7 +273,7 @@ void PrintGLCapabilities()
 
 extern "C" {
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height);
-    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj);
+    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed);
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID, jfloat x, jfloat y);
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown);
 };
@@ -274,9 +283,9 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobje
     setupGraphics(width, height);
 }
 
-JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj)
+JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed)
 {
-    renderFrame();
+    renderFrame(t_elapsed);
 }
 
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID,
