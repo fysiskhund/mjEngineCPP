@@ -183,6 +183,18 @@ bool setupGraphics(int w, int h) {
     physics.AddObject(&character, 0);
     physics.AddObject(&box0, 0);
 
+
+    mjVector3 testDir(1, -1, -1);
+    testDir.Normalize();
+
+    mjVector3 testGravity(0,0,1);
+
+    testGravity.Normalize();
+
+    mjVector3 outForwardDir;
+    mjVector3 outLeftDir;
+    mjMathHelper::GetForwardAndLeftDirections(testDir, testGravity, &outForwardDir, &outLeftDir);
+
     return true;
 }
 
@@ -194,7 +206,7 @@ void renderFrame() {
 
 	// Update phase
 	physics.Update(0.016);
-	LOGI("Char.vel: %3.3f, %3.3f, %3.3f", character.vel.x, character.vel.y, character.vel.z);
+	//LOGI("Char.vel: %3.3f, %3.3f, %3.3f", character.vel.x, character.vel.y, character.vel.z);
 	//character.Update(0.016);
 
 
