@@ -12,16 +12,23 @@ float mjMathHelper::Sign(float x)
 void mjMathHelper::GetForwardAndLeftDirections(mjVector3& cameraDirection, mjVector3& gravity, mjVector3* outForwardDirection, mjVector3* outLeftDirection)
 {
 
+	// Gravity will be the inverse of the normal direction to the imaginary plane in which the forward and left directions must be contained.
+	// Which means it needs to either be multiplied by -1
+
+	mjVector3 invGravity;
+	invGravity.CopyFrom(gravity);
+	invGravity.MulScalar(-1);
+
 	// Get the scalar component of camera dir over the gravity direction (both directions are unitary)
-	float scalarComponent = cameraDirection.Dot(gravity);
+	float scalarComponent = cameraDirection.Dot(invGravity);
 
 	// Subtract the vector component of gravity from the camera direction
 
 	outForwardDirection->CopyFrom(cameraDirection);
-	outForwardDirection->ScaleSubtract(scalarComponent, gravity);
+	outForwardDirection->ScaleSubtract(scalarComponent, invGravity);
 	outForwardDirection->Normalize();
 
-	outForwardDirection->CrossOut(gravity, outLeftDirection);
+	invGravity.CrossOut(*outForwardDirection, outLeftDirection);
 	outLeftDirection->Normalize();
 	LOGI("gravity: %3.3f, %3.3f, %3.3f", gravity.x, gravity.y , gravity.z);
 	LOGI("forwardDir: %3.3f, %3.3f, %3.3f", outForwardDirection->x, outForwardDirection->y, outForwardDirection->z);

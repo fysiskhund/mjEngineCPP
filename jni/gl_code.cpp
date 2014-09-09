@@ -190,17 +190,6 @@ bool setupGraphics(int w, int h) {
     physics.AddObject(&box0, 0);
 
 
-    mjVector3 testDir(1, -1, -1);
-    testDir.Normalize();
-
-    mjVector3 testGravity(0,0,1);
-
-    testGravity.Normalize();
-
-    mjVector3 outForwardDir;
-    mjVector3 outLeftDir;
-    mjMathHelper::GetForwardAndLeftDirections(testDir, testGravity, &outForwardDir, &outLeftDir);
-
     return true;
 }
 
@@ -303,28 +292,50 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobje
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID,
 		jfloat x, jfloat y)
 {
-	mjVector3 dir;
-	dir.Set(x,0,y);
-
-	float norm = dir.GetNorm();
-	if (norm > 0.2)
+	if (joystickID == 0)
 	{
-		mjVector3 outForwardDir;
-		mjVector3 outLeftDir;
-		mjMathHelper::GetForwardAndLeftDirections(camera.dir, physics.gravity, &outForwardDir, &outLeftDir);
+		mjVector3 dir;
+		dir.Set(x,0,y);
 
-		mjVector3 finalForwardDir;
-		finalForwardDir.ScaleAdd(-y, outForwardDir);
-		finalForwardDir.ScaleAdd(-x, outLeftDir);
+		float norm = dir.GetNorm();
+		if (norm > 0.2)
+		{
+			mjVector3 outForwardDir;
+			mjVector3 outLeftDir;
 
-		character.vel.CopyFrom(finalForwardDir);
-		LOGI("initialDir %3.3f, %3.3f, %3.3f", dir.x, dir.y, dir.z);
-		LOGI("finalforwarddir %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);
+			//invGravity.Normalize();
+			mjMathHelper::GetForwardAndLeftDirections(camera.dir, physics.gravity, &outForwardDir, &outLeftDir);
 
-	} else {
-		character.vel.Set0();
+			mjVector3 finalForwardDir;
+			// The joystick directions need to be inverted because technically they are:
+			// in the Y axis, the joystick going "up" outputs a negative y value and viceversa.
+			// In the X axis, pushing the joystick towards the left results in a negative value.
+			// conceptually it needs to be inverted.
+			//
+
+			finalForwardDir.ScaleAdd(-y, outForwardDir);
+			finalForwardDir.ScaleAdd(-x, outLeftDir);
+
+			character.vel.CopyFrom(finalForwardDir);
+			LOGI("initialDir %3.3f, %3.3f, %3.3f", dir.x, dir.y, dir.z);
+			LOGI("cameraDir %3.3f, %3.3f, %3.3f", camera.dir.x, camera.dir.y, camera.dir.z);
+			LOGI("finalforwarddir %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);
+
+		} else {
+			character.vel.Set0();
+		}
+	} else
+	{
+		mjVector3 dir;
+		dir.Set(x,0,y);
+
+		float norm = dir.GetNorm();
+
+		if (norm > 0.2) {
+			camera.theta += -0.01*x;
+			camera.phi += -0.01*y;
+		}
 	}
-
 	//LOGI("Controller[%d].joystick[%d]: %3.3f, %3.3f", controllerID, joystickID, x, y);
 }
 
