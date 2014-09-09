@@ -23,6 +23,7 @@ void mjMathHelper::GetForwardAndLeftDirections(mjVector3& cameraDirection, mjVec
 
 	outForwardDirection->CrossOut(gravity, outLeftDirection);
 	outLeftDirection->Normalize();
+	LOGI("gravity: %3.3f, %3.3f, %3.3f", gravity.x, gravity.y , gravity.z);
 	LOGI("forwardDir: %3.3f, %3.3f, %3.3f", outForwardDirection->x, outForwardDirection->y, outForwardDirection->z);
 
 	LOGI("leftDir: %3.3f, %3.3f, %3.3f", outLeftDirection->x, outLeftDirection->y, outLeftDirection->z);

@@ -309,9 +309,17 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 	float norm = dir.GetNorm();
 	if (norm > 0.2)
 	{
-		character.dir.CopyFrom(dir);
-		character.dir.Normalize();
-		character.vel.CopyFrom(dir);
+		mjVector3 outForwardDir;
+		mjVector3 outLeftDir;
+		mjMathHelper::GetForwardAndLeftDirections(camera.dir, physics.gravity, &outForwardDir, &outLeftDir);
+
+		mjVector3 finalForwardDir;
+		finalForwardDir.ScaleAdd(-y, outForwardDir);
+		finalForwardDir.ScaleAdd(-x, outLeftDir);
+
+		character.vel.CopyFrom(finalForwardDir);
+		LOGI("initialDir %3.3f, %3.3f, %3.3f", dir.x, dir.y, dir.z);
+		LOGI("finalforwarddir %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);
 
 	} else {
 		character.vel.Set0();

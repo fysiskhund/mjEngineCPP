@@ -6,7 +6,7 @@ namespace mjEngine
 
 mjPhysics::mjPhysics()
 {
-
+	gravity.Set(0,-9.81,0);
 }
 
 void mjPhysics::AddObject(mjObject* object, int collisionLayer)
