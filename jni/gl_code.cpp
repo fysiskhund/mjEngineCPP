@@ -58,6 +58,9 @@ float theta = 0;
 mjPhysics physics;
 
 
+mjVector3 cameraAnglesModifier;
+
+
 static void printGLString(const char *name, GLenum s) {
     const char *v = (const char *) glGetString(s);
     LOGI("GL %s = %s\n", name, v);
@@ -202,6 +205,24 @@ void renderFrame(float t_elapsed) {
 	// Update phase
 	physics.Update(t_elapsed);
 	camera.Update(t_elapsed);
+	if (cameraAnglesModifier.GetNorm() > 0.2) {
+		camera.theta += -0.007*cameraAnglesModifier.y;
+		if (camera.theta > 6.29)
+			camera.theta -= 6.29;
+		else if (camera.theta < 0)
+			camera.theta = 6.283184 + camera.theta;
+
+		camera.phi += -0.007*cameraAnglesModifier.x;
+
+		if (camera.phi > 6.29)
+			camera.phi = 6.29;
+		else if (camera.phi < 0)
+			camera.phi = 6.283184 + camera.phi;
+
+	} else
+	{
+		cameraAnglesModifier.Set0();
+	}
 	//LOGI("camera.dir: %3.3f, %3.3f, %3.3f", camera.dir.x, camera.dir.y, camera.dir.z);
 	//character.Update(0.016);
 
@@ -289,9 +310,13 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobje
     renderFrame(t_elapsed);
 }
 
+
+
+
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID,
 		jfloat x, jfloat y)
 {
+
 	if (joystickID == 0)
 	{
 		mjVector3 dir;
@@ -326,16 +351,15 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 		}
 	} else
 	{
-		mjVector3 dir;
-		dir.Set(x,0,y);
 
-		float norm = dir.GetNorm();
+		cameraAnglesModifier.Set(x,y,0);
 
-		if (norm > 0.2) {
-			camera.theta += -0.01*x;
-			camera.phi += -0.01*y;
-		}
+
+
+
 	}
+
+
 	//LOGI("Controller[%d].joystick[%d]: %3.3f, %3.3f", controllerID, joystickID, x, y);
 }
 

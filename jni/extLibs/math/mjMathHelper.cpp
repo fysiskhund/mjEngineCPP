@@ -18,6 +18,9 @@ void mjMathHelper::GetForwardAndLeftDirections(mjVector3& cameraDirection, mjVec
 	mjVector3 invGravity;
 	invGravity.CopyFrom(gravity);
 	invGravity.MulScalar(-1);
+	invGravity.Normalize();
+
+	cameraDirection.Normalize();
 
 	// Get the scalar component of camera dir over the gravity direction (both directions are unitary)
 	float scalarComponent = cameraDirection.Dot(invGravity);
