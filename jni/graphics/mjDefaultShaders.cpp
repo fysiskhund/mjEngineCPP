@@ -151,6 +151,7 @@ const char* mjDefaultShaders::vanillaFragmentShaderCode =
 		 " gl_FragColor = texture2D(uTexture, vTexCoordinates)* vLight;\n"
 		 "} \n";
 
+
 const char* mjDefaultShaders::simpleVertexShaderCode =
 		"attribute vec4 vPosition;\n"
 		"attribute vec2 aTexCoordinates;\n"

@@ -20,10 +20,11 @@ class mjDefaultShaders:  public mjShader
 	void Run(mjModelMesh* mesh,
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
 			float* modelMatrix, float* modelViewProjectionMatrix ) override;
-	static const char* simpleVertexShaderCode;
+	static const char* simpleVertexShaderCode; // The simple shaders can be used in the skybox
 	static const char* simpleFragmentShaderCode;
-	static const char* vanillaVertexShaderCode;
+	static const char* vanillaVertexShaderCode; // Vanilla shaders give a flat shading of surfaces
 	static const char* vanillaFragmentShaderCode;
+
 
 
 	mjVector3 diffuseLightDirection;

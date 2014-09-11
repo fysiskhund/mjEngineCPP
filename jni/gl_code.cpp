@@ -160,8 +160,9 @@ bool setupGraphics(int w, int h) {
 
 
     mjVector3 cameraOffset;
-    cameraOffset.Set(0,0.2,0);
+    cameraOffset.Set(0,0.7,0);
     camera.SetTarget(&character.pos, cameraOffset);
+    camera.r = 10;
 
     //charBoundStruct->SetCorners()
     //((mjSphere*) character.boundingStructure)->r = 0.5;
@@ -206,16 +207,16 @@ void renderFrame(float t_elapsed) {
 	physics.Update(t_elapsed);
 	camera.Update(t_elapsed);
 	if (cameraAnglesModifier.GetNorm() > 0.2) {
-		camera.theta += -0.007*cameraAnglesModifier.y;
-		if (camera.theta > 6.29)
-			camera.theta -= 6.29;
+		camera.theta += -0.02*cameraAnglesModifier.y;
+		if (camera.theta > 6.283184)
+			camera.theta -= 6.283184;
 		else if (camera.theta < 0)
 			camera.theta = 6.283184 + camera.theta;
 
-		camera.phi += -0.007*cameraAnglesModifier.x;
+		camera.phi += -0.02*cameraAnglesModifier.x;
 
-		if (camera.phi > 6.29)
-			camera.phi = 6.29;
+		if (camera.phi > 6.283184)
+			camera.phi -= 6.283184;
 		else if (camera.phi < 0)
 			camera.phi = 6.283184 + camera.phi;
 
@@ -341,10 +342,14 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 			finalForwardDir.ScaleAdd(-y, outForwardDir);
 			finalForwardDir.ScaleAdd(-x, outLeftDir);
 
+
 			character.vel.CopyFrom(finalForwardDir);
-			LOGI("initialDir %3.3f, %3.3f, %3.3f", dir.x, dir.y, dir.z);
+			character.vel.MulScalar(2);
+			character.dir.CopyFrom(finalForwardDir);
+			character.dir.Normalize();
+			/*LOGI("initialDir %3.3f, %3.3f, %3.3f", dir.x, dir.y, dir.z);
 			LOGI("cameraDir %3.3f, %3.3f, %3.3f", camera.dir.x, camera.dir.y, camera.dir.z);
-			LOGI("finalforwarddir %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);
+			LOGI("finalforwarddir %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);*/
 
 		} else {
 			character.vel.Set0();

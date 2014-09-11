@@ -46,8 +46,8 @@ public:
 	bool autoUpdateStructure = true;
 	mjObject();
 	mjObject(structuretype collisionStructureType);
-	void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
-	void ProcessPhysicsEffects();
+	virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
+	virtual void ProcessPhysicsEffects();
 	virtual void Update(float t_elapsed);
 
 
