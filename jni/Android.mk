@@ -24,6 +24,8 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   graphics/mjModel.cpp \
 				   graphics/mjModelMesh.cpp \
 				   graphics/mjDefaultShaders.cpp \
+				   graphics/mjSkyboxShaders.cpp \
+				   graphics/mjSkybox.cpp \
 				   graphics/mjShader.cpp \
 				   physics/mjPhysics.cpp \
 				   physics/mjSphere.cpp \
