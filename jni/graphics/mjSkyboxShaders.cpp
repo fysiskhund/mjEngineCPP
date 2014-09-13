@@ -6,8 +6,8 @@ mjSkyboxShaders::mjSkyboxShaders()
 {
 	// Set up shader
 	CreateProgram(skyboxVertexShaderCode, skyboxFragmentShaderCode);
-	name = new char[8];
-	strncpy(name, "skybox", 8);
+	name = new char[7];
+	strncpy(name, "skybox", strnlen("skybox", 10));
 
 	maPositionHandle = glGetAttribLocation(glProgramHandle, "vPosition");
 
