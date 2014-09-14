@@ -35,7 +35,11 @@ public:
 
 	mjImageLoader();
 
+	GLuint LoadToGLAndFreeMemory(const char *name);
+
+private:
 	bool Load(const char *name);
+
 	GLuint SendToGL();
 
 };

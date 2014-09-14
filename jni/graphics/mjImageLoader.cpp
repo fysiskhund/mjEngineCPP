@@ -162,6 +162,16 @@ GLuint mjImageLoader::SendToGL()
 	glTexImage2D(GL_TEXTURE_2D, 0, hasAlpha? GL_RGBA : GL_RGB, width, height, 0, hasAlpha? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, imageData);//testImage.pixel_data);
 	return textures[0];
 }
+GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName)
+{
+	GLuint result = 0;
+	if (Load(fileName))
+	{
+		result = SendToGL();
+		delete [] imageData;
+	}
+	return result;
+}
 
 }// namespace mjEngine
 

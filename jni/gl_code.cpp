@@ -42,6 +42,7 @@ using namespace mjEngine;
 mjObject bird(MJ_AABB);
 mjObject character(MJ_AABB);
 mjObject box0(MJ_AABB);
+mjObject skybox;
 
 mj3rdPersonCamera camera;
 
@@ -82,6 +83,9 @@ void InitShaders()
 	mjDefaultShaders* defaultShaders = new mjDefaultShaders();
 	shaderList.push_back(defaultShaders);
 }
+
+
+
 bool setupGraphics(int w, int h) {
 
 
@@ -117,12 +121,13 @@ bool setupGraphics(int w, int h) {
 
 
     imgLoader = new mjImageLoader();
-    imgLoader->Load("/sdcard/mjEngineCPP/box_grassy.png");
-    GLuint glTexture = imgLoader->SendToGL();
+
+    GLuint glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/box_grassy.png");
     for (int i = 0; i<box0.model->meshes.size(); i++)
     {
     	box0.model->meshes[i]->glTexture = glTexture;
     }
+
 
 
     bird.model = new mjModel();
@@ -135,8 +140,8 @@ bool setupGraphics(int w, int h) {
 
     // Test loading png texture
 
-    imgLoader->Load("/sdcard/mjEngineCPP/birdtexture.png");
-    glTexture = imgLoader->SendToGL();
+
+    glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/birdtexture.png");
     for (int i = 0; i<bird.model->meshes.size(); i++)
     {
     	bird.model->meshes[i]->glTexture = glTexture;
@@ -167,21 +172,24 @@ bool setupGraphics(int w, int h) {
     //charBoundStruct->SetCorners()
     //((mjSphere*) character.boundingStructure)->r = 0.5;
 
-    //LOGI("texture loading. for obj2");
-    imgLoader = new mjImageLoader();
-    imgLoader->Load("/sdcard/mjEngineCPP/suit_test.png");
-    glTexture = imgLoader->SendToGL();
+
+    glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/suit_test.png");
     for (int i = 0; i<character.model->meshes.size(); i++)
     {
        	character.model->meshes[i]->glTexture = glTexture;
     }
 
-    delete [] imgLoader->imageData;
+
 
     float closeUpFactor = 0.1;
     ratio = closeUpFactor*((float)w)/((float)h);
     Matrix4::FrustumM(projectionMatrix, 0,
             				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 50);
+
+
+    skybox.model = new mjModel();
+    skybox.model->LoadFromFile("/sdcard/mjEngineCPP/skybox.mesh.xml");
+
 
     InitShaders();
     bird.model->TieShaders(shaderList);
