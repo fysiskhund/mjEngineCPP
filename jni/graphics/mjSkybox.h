@@ -8,8 +8,12 @@ namespace mjEngine{
 class mjSkybox: public mjObject
 {
 public:
-	void Draw();
+
+	void SetCameraPos(mjVector3* cameraPos);
+	virtual void Update(float t_elapsed) override;
+	virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix) override;
 private:
+	mjVector3* cameraPos;
 };
 
 }

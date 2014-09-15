@@ -19,9 +19,18 @@ public:
 
 
 
-	int x, y;
 
-	png_uint_32 width, height, rowbytes;
+
+	png_uint_32 width, height;
+
+
+	mjImageLoader();
+
+	GLuint LoadToGLAndFreeMemory(const char *name);
+
+private:
+	png_uint_32 rowbytes;
+	int x, y;
 	bool hasAlpha;
 	GLubyte *imageData;
 
@@ -33,11 +42,6 @@ public:
 	int number_of_passes;
 	png_bytep * row_pointers;
 
-	mjImageLoader();
-
-	GLuint LoadToGLAndFreeMemory(const char *name);
-
-private:
 	bool Load(const char *name);
 
 	GLuint SendToGL();

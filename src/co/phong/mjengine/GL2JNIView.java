@@ -34,6 +34,7 @@ package co.phong.mjengine;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -104,6 +105,8 @@ class GL2JNIView extends GLSurfaceView {
                              new ConfigChooser(8, 8, 8, 8, depth, stencil) :
                              new ConfigChooser(5, 6, 5, 0, depth, stencil) );
 
+        
+        
         /* Set the renderer responsible for frame rendering */
         setRenderer(new Renderer());
     }

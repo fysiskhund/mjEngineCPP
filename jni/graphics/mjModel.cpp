@@ -182,17 +182,24 @@ void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
 
 	for(int i = 0; i < meshes.size(); i++)
 	{
-		if (meshes[i]->shaderName == NULL)
+		if (meshes[i]->shaderName == NULL || true)
 		{
+			LOGI("Mesh %s: Default shader attached", meshes[i]->name);
 			meshes[i]->mjShaderListIndex = 0; // 0 will always be the default shader.
 		} else
 		{
 			for (int j = 0; j < shaderList.size(); j++)
 			{
-				if (strncmp(meshes[i]->shaderName,shaderList[j]->name, 96) == 0)
+				//LOGI("Considering shader %s", shaderList[j]->name);
+				if (strncmp(meshes[i]->shaderName, shaderList[j]->name, 96) == 0)
 				{
+					//LOGI("Mesh %s: %s shader attached",meshes[i]->name, shaderList[j]->name);
 					meshes[i]->mjShaderListIndex = j;
 				}
+			}
+			if (meshes[i]->mjShaderListIndex == 0)
+			{
+				LOGI("Mesh %s: %s shader not found", meshes[i]->name, meshes[i]->shaderName);
 			}
 		}
 	}

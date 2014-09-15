@@ -29,10 +29,12 @@
 #include "core/mjObject.h"
 #include "graphics/mjImageLoader.h"
 #include "graphics/mjDefaultShaders.h"
+#include "graphics/mjSkyboxShaders.h"
 #include "mjVector3.h"
 #include "etc/testImage.h"
 #include "extLibs/math/Matrix.h"
 #include "graphics/mj3rdPersonCamera.h"
+#include "graphics/mjSkybox.h"
 #include "physics/mjPhysics.h"
 
 using namespace mjEngine;
@@ -42,7 +44,7 @@ using namespace mjEngine;
 mjObject bird(MJ_AABB);
 mjObject character(MJ_AABB);
 mjObject box0(MJ_AABB);
-mjObject skybox;
+mjSkybox skybox;
 
 mj3rdPersonCamera camera;
 
@@ -81,14 +83,19 @@ std::vector<mjShader*> shaderList;
 void InitShaders()
 {
 	mjDefaultShaders* defaultShaders = new mjDefaultShaders();
+	mjSkyboxShaders* skyboxShaders = new mjSkyboxShaders();
+
 	shaderList.push_back(defaultShaders);
+	shaderList.push_back(skyboxShaders);
 }
 
 
 
 bool setupGraphics(int w, int h) {
 
-
+	// Some adjustments
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 
     LOGI("setupGraphics(%d, %d)", w, h);
 
@@ -99,7 +106,7 @@ bool setupGraphics(int w, int h) {
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
 
-    LOGI("Before first model");
+
     box0.model = new mjModel();
     box0.model->LoadFromFile("/sdcard/mjEngineCPP/box.mesh.xml");
     box0.scale.Set(8,8,8);
@@ -119,10 +126,11 @@ bool setupGraphics(int w, int h) {
 
     mjImageLoader* imgLoader = new mjImageLoader();//
 
-
+LOGI("Before first imgload");
     imgLoader = new mjImageLoader();
 
     GLuint glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/box_grassy.png");
+
     for (int i = 0; i<box0.model->meshes.size(); i++)
     {
     	box0.model->meshes[i]->glTexture = glTexture;
@@ -140,13 +148,12 @@ bool setupGraphics(int w, int h) {
 
     // Test loading png texture
 
-
+    LOGI("Here");
     glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/birdtexture.png");
     for (int i = 0; i<bird.model->meshes.size(); i++)
     {
     	bird.model->meshes[i]->glTexture = glTexture;
     }
-    delete [] imgLoader->imageData;
 
 
     character.model = new mjModel();
@@ -172,7 +179,7 @@ bool setupGraphics(int w, int h) {
     //charBoundStruct->SetCorners()
     //((mjSphere*) character.boundingStructure)->r = 0.5;
 
-
+    LOGI("or here");
     glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/suit_test.png");
     for (int i = 0; i<character.model->meshes.size(); i++)
     {
@@ -189,11 +196,19 @@ bool setupGraphics(int w, int h) {
 
     skybox.model = new mjModel();
     skybox.model->LoadFromFile("/sdcard/mjEngineCPP/skybox.mesh.xml");
+    skybox.SetCameraPos(&camera.pos);
+
+    glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/skybox.png");
+    for (int i = 0; i < skybox.model->meshes.size(); i++)
+    {
+    	skybox.model->meshes[i]->glTexture = glTexture;
+    }
 
 
     InitShaders();
     bird.model->TieShaders(shaderList);
     character.model->TieShaders(shaderList);
+    skybox.model->TieShaders(shaderList);
 
 
 
@@ -214,6 +229,7 @@ void renderFrame(float t_elapsed) {
 	// Update phase
 	physics.Update(t_elapsed);
 	camera.Update(t_elapsed);
+	skybox.Update(t_elapsed);
 	if (cameraAnglesModifier.GetNorm() > 0.2) {
 		camera.theta += -0.02*cameraAnglesModifier.y;
 		if (camera.theta > 6.283184)
@@ -236,16 +252,15 @@ void renderFrame(float t_elapsed) {
 	//character.Update(0.016);
 
 
+	///////// Draw start
+
 	float lookAtMatrix[16];
-    static float grey = 0.3;
-    grey += 0.001f;
-    if (grey > 0.7f) {
-        grey = 0.3f;
-    }
-    glClearColor(grey*0.5, grey*0.5, grey, 1.0f);
-    checkGlError("glClearColor");
+
+    glClearColor(0.5, 0.5, 0.8, 1.0f);
+    //checkGlError("glClearColor");
     glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-    checkGlError("glClear");
+    //checkGlError("glClear");
+
 
 
     //camera.dir.Set(0,0,-1);
@@ -253,6 +268,8 @@ void renderFrame(float t_elapsed) {
     //camera.pos.Set(0,1.6,8);
 
     camera.GetLookAtMatrix(lookAtMatrix);
+
+    skybox.Draw(shaderList, lookAtMatrix, projectionMatrix);
 
     //Matrix4::DebugM("lookat", lookAtMatrix);
 
