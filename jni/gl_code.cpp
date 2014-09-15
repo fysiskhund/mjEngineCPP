@@ -78,6 +78,7 @@ static void checkGlError(const char* op) {
 
 
 
+
 std::vector<mjShader*> shaderList;
 
 void InitShaders()
@@ -148,7 +149,7 @@ LOGI("Before first imgload");
 
     // Test loading png texture
 
-    LOGI("Here");
+    //LOGI("Here");
     glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/birdtexture.png");
     for (int i = 0; i<bird.model->meshes.size(); i++)
     {
@@ -268,8 +269,8 @@ void renderFrame(float t_elapsed) {
     //camera.pos.Set(0,1.6,8);
 
     camera.GetLookAtMatrix(lookAtMatrix);
-
     skybox.Draw(shaderList, lookAtMatrix, projectionMatrix);
+
 
     //Matrix4::DebugM("lookat", lookAtMatrix);
 
@@ -302,6 +303,7 @@ void renderFrame(float t_elapsed) {
     character.Draw(shaderList, lookAtMatrix, projectionMatrix);
     bird.Draw(shaderList, lookAtMatrix, projectionMatrix);
     box0.Draw(shaderList, lookAtMatrix, projectionMatrix);
+
 
     if (character.pos.y < -5)
     {
