@@ -195,8 +195,14 @@ LOGI("Before first imgload");
             				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 50);
 
 
-    skybox.model = new mjModel();
-    skybox.model->LoadFromFile("/sdcard/mjEngineCPP/skybox.mesh.xml");
+    mjModel* skyboxBox = new mjModel();
+    skyboxBox->LoadFromFile("/sdcard/mjEngineCPP/skybox.mesh.xml");
+
+    mjModel* skyboxPlane = new mjModel();
+    skyboxPlane->LoadFromFile("/sdcard/mjEngineCPP/skybox_plane.mesh.xml");
+
+    skybox.SetModels(skyboxBox, skyboxPlane);
+
     skybox.SetCameraPos(&camera.pos);
 
     glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/skybox.png");
