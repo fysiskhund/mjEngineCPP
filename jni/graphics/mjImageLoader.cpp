@@ -1,11 +1,5 @@
 #include "mjImageLoader.h"
 
-#include <jni.h>
-#include <android/log.h>
-
-#define  LOG_TAG    "mj"
-#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
-#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 
 namespace mjEngine{
@@ -22,7 +16,7 @@ bool mjImageLoader::Load(const char* name)
 	// http://blog.nobel-joergensen.com/2010/11/07/loading-a-png-as-texture-in-opengl-using-libpng/
 	// with many thanks!
 
-	LOGI("Name is %s start", name);
+	//LOGI("Name is %s start", name);
 	png_structp png_ptr;
 	    png_infop info_ptr;
 	    unsigned int sig_read = 0;
@@ -45,7 +39,7 @@ bool mjImageLoader::Load(const char* name)
 	     */
 	    png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING,
 	                                     NULL, NULL, NULL);
-	    LOGI("Name is %s after create_read_Struct", name);
+	    //LOGI("Name is %s after create_read_Struct", name);
 	    if (png_ptr == NULL) {
 	        fclose(fp);
 	        return false;
@@ -54,7 +48,7 @@ bool mjImageLoader::Load(const char* name)
 	    /* Allocate/initialize the memory
 	     * for image information.  REQUIRED. */
 	    info_ptr = png_create_info_struct(png_ptr);
-	    LOGI("Name is %s after png_create_info_truct", name);
+	    //LOGI("Name is %s after png_create_info_truct", name);
 	    if (info_ptr == NULL) {
 	        fclose(fp);
 	        png_destroy_read_struct(&png_ptr, NULL, NULL);
@@ -107,9 +101,9 @@ bool mjImageLoader::Load(const char* name)
 	     * PNG_TRANSFORM_EXPAND forces to
 	     *  expand a palette into RGB
 	     */
-	    LOGI("Name is %s before read_png", name);
+	    //LOGI("Name is %s before read_png", name);
 	    png_read_png(png_ptr, info_ptr, PNG_TRANSFORM_STRIP_16 | PNG_TRANSFORM_PACKING | PNG_TRANSFORM_EXPAND, NULL);
-	    LOGI("Name is %s after read_png", name);
+	    //LOGI("Name is %s after read_png", name);
 
 	    int bit_depth;
 	    png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type,
@@ -126,9 +120,9 @@ bool mjImageLoader::Load(const char* name)
 
 
 
-	    LOGI("Name is %s before new unsigned whatever", name);
+	    //LOGI("Name is %s before new unsigned whatever", name);
 	    imageData = new unsigned char[row_bytes * height];
-	    LOGI("Name is %s after new unsigned whatever", name);
+	    //LOGI("Name is %s after new unsigned whatever", name);
 
 	    for (int i = 0; i < height; i++) {
 	        // note that png is ordered top to
@@ -146,7 +140,7 @@ bool mjImageLoader::Load(const char* name)
 	    /* Clean up after the read,
 	     * and free any memory allocated */
 	    png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-	    LOGI("Name is %s after destroying read structures", name);
+	    //LOGI("Name is %s after destroying read structures", name);
 	    /* Close the file */
 	    fclose(fp);
 	    return true;
@@ -169,11 +163,11 @@ GLuint mjImageLoader::SendToGL()
 GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName)
 {
 	GLuint result = 0;
-	LOGI("At load for %s", fileName);
+	//LOGI("At load for %s", fileName);
 	if (Load(fileName))
 	{
 		result = SendToGL();
-		LOGI("Loaded %s to texture %d",  fileName, result);
+		//LOGI("Loaded %s to texture %d",  fileName, result);
 
 		//delete [] imageData;
 	}

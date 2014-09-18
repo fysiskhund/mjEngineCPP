@@ -260,7 +260,7 @@ void renderFrame(float t_elapsed) {
 
 	float lookAtMatrix[16];
 
-    glClearColor(0.5, 0.5, 0.8, 1.0f);
+    glClearColor(1, 0, 0, 1.0f);
     //checkGlError("glClearColor");
     glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     //checkGlError("glClear");

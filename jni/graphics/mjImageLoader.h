@@ -11,6 +11,7 @@
 #include <GLES2/gl2ext.h>
 
 #include "../extLibs/png/include/png.h"
+#include "../extLibs/logger/mjLog.h"
 namespace mjEngine{
 
 class mjImageLoader
