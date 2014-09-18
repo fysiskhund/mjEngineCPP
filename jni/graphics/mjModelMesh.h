@@ -13,6 +13,7 @@ public:
 	char* name;
 	char* material;
 	char* shaderName;
+	int meshNumber;
 	int mjShaderListIndex;
 	unsigned short* drawOrderBuffer;
 	unsigned int drawOrderCount;

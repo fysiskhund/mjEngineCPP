@@ -203,19 +203,16 @@ LOGI("Before first imgload");
 
     skybox.SetModels(skyboxBox, skyboxPlane);
 
+    skybox.LoadTexturesFromPrefix("/sdcard/mjEngineCPP/bluesky/skybox");
+
     skybox.SetCameraPos(&camera.pos);
 
-    glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/skybox.png");
-    for (int i = 0; i < skybox.model->meshes.size(); i++)
-    {
-    	skybox.model->meshes[i]->glTexture = glTexture;
-    }
-
+    LOGI("after SetCamerapos");
 
     InitShaders();
     bird.model->TieShaders(shaderList);
     character.model->TieShaders(shaderList);
-    skybox.model->TieShaders(shaderList);
+    skybox.TieShaders(shaderList);
 
 
 
@@ -223,7 +220,7 @@ LOGI("Before first imgload");
     physics.AddObject(&character, 0);
     physics.AddObject(&box0, 0);
 
-
+    LOGI("End of init");
     return true;
 }
 

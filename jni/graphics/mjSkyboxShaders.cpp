@@ -19,7 +19,6 @@ mjSkyboxShaders::mjSkyboxShaders()
 	maTextureHandle = glGetUniformLocation(glProgramHandle, "uTexture");
 
 	maMVPMatrixHandle = glGetUniformLocation(glProgramHandle, "maMVPMatrix");
-
 }
 
 

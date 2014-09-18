@@ -12,6 +12,7 @@ namespace mjEngine {
 class mjSkyboxShaders: public mjShader{
 public:
 	mjSkyboxShaders();
+
 	void Run(mjModelMesh* mesh,
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
 			float* modelMatrix, float* modelViewProjectionMatrix ) override;
@@ -30,6 +31,7 @@ public:
 	GLuint maTextureCoordHandle;
 	GLuint maTextureHandle;
 	GLuint maMVPMatrixHandle;
+	GLuint boxTextures[6];
 	//GLuint maMVMatrixHandle;
 
 };
