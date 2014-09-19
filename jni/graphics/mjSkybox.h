@@ -29,8 +29,6 @@ private:
 	mjVector3* cameraPos;
 	std::vector<GLuint> levels;
 
-
-
 };
 
 }

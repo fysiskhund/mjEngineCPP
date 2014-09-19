@@ -146,7 +146,7 @@ bool mjImageLoader::Load(const char* name)
 	    return true;
 }
 
-GLuint mjImageLoader::SendToGL()
+GLuint mjImageLoader::SendToGL(GLfloat textureWrapParam)
 {
 	GLuint textures[1];
 	glGenTextures(1, &textures[0]);
@@ -155,23 +155,27 @@ GLuint mjImageLoader::SendToGL()
 	// Set parameters
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, textureWrapParam);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, textureWrapParam);
 	glTexImage2D(GL_TEXTURE_2D, 0, hasAlpha? GL_RGBA : GL_RGB, width, height, 0, hasAlpha? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, imageData);//testImage.pixel_data);
 	return textures[0];
 }
-GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName)
+GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName, GLfloat textureWrapParam)
 {
 	GLuint result = 0;
 	//LOGI("At load for %s", fileName);
 	if (Load(fileName))
 	{
-		result = SendToGL();
+		result = SendToGL(textureWrapParam);
 		//LOGI("Loaded %s to texture %d",  fileName, result);
 
 		//delete [] imageData;
 	}
 	return result;
+}
+GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName)
+{
+	return LoadToGLAndFreeMemory(fileName, GL_REPEAT);
 }
 
 }// namespace mjEngine

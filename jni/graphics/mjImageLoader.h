@@ -28,6 +28,7 @@ public:
 	mjImageLoader();
 
 	GLuint LoadToGLAndFreeMemory(const char *name);
+	GLuint LoadToGLAndFreeMemory(const char* fileName, GLfloat textureWrapParam);
 
 private:
 	png_uint_32 rowbytes;
@@ -45,7 +46,7 @@ private:
 
 	bool Load(const char *name);
 
-	GLuint SendToGL();
+	GLuint SendToGL(GLfloat textureWrapParam);
 
 };
 

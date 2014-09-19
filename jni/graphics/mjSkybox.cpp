@@ -35,7 +35,7 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 		char* name = boxModel->meshes[i]->name;
 
 
-		LOGI("name: %s", name);
+		//LOGI("name: %s", name);
 		for (int j = 0; j < strnlen(name, 1024)-1; j++)
 		{
 			if (name[j] == '_')
@@ -45,12 +45,12 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 		}
 		char* suffix = &name[suffixIndex];
 
-		LOGI("Suffix: %s", suffix);
+		//LOGI("Suffix: %s", suffix);
 
 		snprintf(pathName, 1024, "%s%s%s", prefix, suffix, extension);
 
-		boxModel->meshes[i]->glTexture =  imgLoader.LoadToGLAndFreeMemory(pathName);
-		LOGI("loading %s -> texture%d", pathName, boxModel->meshes[i]->glTexture);
+		boxModel->meshes[i]->glTexture =  imgLoader.LoadToGLAndFreeMemory(pathName, GL_CLAMP_TO_EDGE);
+		//LOGI("loading %s -> texture%d", pathName, boxModel->meshes[i]->glTexture);
 	}
 
 
