@@ -23,6 +23,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   graphics/mjImageLoader.cpp \
 				   graphics/mjModel.cpp \
 				   graphics/mjModelMesh.cpp \
+				   graphics/mjSkyboxLevelData.cpp \
 				   graphics/mjDefaultShaders.cpp \
 				   graphics/mjSkyboxShaders.cpp \
 				   graphics/mjSkybox.cpp \

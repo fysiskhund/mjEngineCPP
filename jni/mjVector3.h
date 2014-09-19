@@ -44,6 +44,9 @@ public:
 
 	float DistanceTo(mjVector3& v1);
 
+
+	void SetRotations(float theta, float phi);
+
 	float x;
 	float y;
 	float z;

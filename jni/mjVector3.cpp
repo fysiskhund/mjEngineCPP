@@ -8,6 +8,9 @@ namespace mjEngine{
 /* 
  *
  */
+
+#define MJ_3_2_PI 4.712388
+#define MJ_1_2_PI 1.570796
  
  mjVector3::mjVector3()
  {
@@ -148,6 +151,12 @@ namespace mjEngine{
 	 return sqrt(dist);
  }
 
+void mjVector3::SetRotations(float theta, float phi)
+{
+	x = sin(theta + MJ_1_2_PI)*sin(phi);
+	y = cos(theta + MJ_1_2_PI);
+	z = sin(theta + MJ_1_2_PI)*cos(phi);
+}
 
 }
 

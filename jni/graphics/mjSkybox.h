@@ -4,6 +4,7 @@
 #include <vector>
 #include "../core/mjObject.h"
 #include "mjImageLoader.h"
+#include "mjSkyboxLevelData.h"
 
 namespace mjEngine{
 
@@ -24,6 +25,8 @@ public:
 
 	mjModel* boxModel;
 	mjModel* planeModel;
+
+	mjSkyboxLevelData level0Data;
 
 private:
 	mjVector3* cameraPos;

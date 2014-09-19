@@ -6,6 +6,8 @@ namespace mjEngine {
 mjSkybox::mjSkybox()
 {
 	scale.Set(10,10,10);
+	level0Data.deltaH = 0.01;
+	//level0Data.deltaH = 0.01;
 }
 
 void mjSkybox::PushLevel(GLuint texture)
@@ -86,6 +88,9 @@ void mjSkybox::Update(float t_elapsed)
 	{
 		pos.CopyFrom(*cameraPos);
 	}
+	level0Data.Update(t_elapsed);
+
+	dir.SetRotations(level0Data.angleH, level0Data.angleV);
 }
 void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
