@@ -148,6 +148,35 @@ void Matrix4::SetTranslationM(float* m, int offsetIgnored, float tX, float tY, f
 
 }
 
+void Matrix4::SetRotateM(float* m, int offsetIgnored, float a, float x, float y, float z)
+{
+	float c = cos(a);
+	float s = sin(a);
+	float d = 1.0f-c;
+
+
+
+	m[0] = (x*x*(d))+c;
+	m[1] = (x*y*(d))+(z*s);
+	m[2] = (x*z*(d))-(y*s);
+	m[3] = 0;
+
+	m[4] = (x*y*(d))-(z*s);
+	m[5] = (y*y*(d))+c;
+	m[6] = (y*z*(d))+(x*s);
+	m[7] = 0;
+
+	m[8] = (x*z*(d))+(y*s);
+	m[9] = (y*z*(d))-(x*s);
+	m[10]= (z*z*(d))+c;
+	m[11]= 0;
+
+	m[12]= 0;
+	m[13]= 0;
+	m[14]= 0;
+	m[15]= 1;
+}
+
 void Matrix4::DebugM(const char* name, float* m)
 {
 	for(int i = 0; i< 16; i++)
