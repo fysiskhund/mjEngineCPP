@@ -19,7 +19,7 @@ public:
 	void SetModels(mjModel* boxModel, mjModel* planeModel);
 	void LoadTexturesFromPrefix(const char* prefix);
 	void TieShaders(std::vector<mjShader*>& shaderList);
-	virtual void PushLevel(GLuint texture);
+	virtual void PushLevel(mjSkyboxLevelData* data);
 	virtual void Update(float t_elapsed) override;
 	virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix) override;
 
@@ -30,7 +30,7 @@ public:
 
 private:
 	mjVector3* cameraPos;
-	std::vector<GLuint> levels;
+	std::vector<mjSkyboxLevelData* > levels;
 
 };
 

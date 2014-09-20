@@ -6,13 +6,13 @@ namespace mjEngine {
 mjSkybox::mjSkybox()
 {
 	scale.Set(10,10,10);
-	level0Data.deltaH = 0.01;
+	level0Data.deltaH = 0.001;
 	//level0Data.deltaH = 0.01;
 }
 
-void mjSkybox::PushLevel(GLuint texture)
+void mjSkybox::PushLevel(mjSkyboxLevelData* data)
 {
-	levels.push_back(texture);
+	levels.push_back(data);
 }
 void mjSkybox::SetModels(mjModel* boxModel, mjModel* planeModel)
 {
@@ -91,6 +91,7 @@ void mjSkybox::Update(float t_elapsed)
 	level0Data.Update(t_elapsed);
 
 	dir.SetRotations(level0Data.angleH, level0Data.angleV);
+	//LOGI("angles: %3.3f, %3.3f -> %3.3f %3.3f %3.3f", level0Data.angleH, level0Data.angleV, dir.x, dir.y, dir.z);
 }
 void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
@@ -102,12 +103,13 @@ void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 	model = boxModel;
 	mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix);
 
-	/*
 	model = planeModel;
 	for(int i = 0; i < levels.size(); i++)
 	{
+		mjSkyboxLevelData* data = levels[i];
+		model->meshes[0]->glTexture = data->texture;
 		mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix);
-	}*/
+	}
 
 
 	glDepthMask(GL_TRUE);

@@ -90,6 +90,28 @@ void InitShaders()
 	shaderList.push_back(skyboxShaders);
 }
 
+void SetUpSkybox()
+{
+	mjImageLoader imgLoader;
+	mjModel* skyboxBox = new mjModel();
+	skyboxBox->LoadFromFile("/sdcard/mjEngineCPP/skybox.mesh.xml");
+
+	mjModel* skyboxPlane = new mjModel();
+	skyboxPlane->LoadFromFile("/sdcard/mjEngineCPP/skybox_plane.mesh.xml");
+
+	skybox.SetModels(skyboxBox, skyboxPlane);
+
+	skybox.LoadTexturesFromPrefix("/sdcard/mjEngineCPP/bluesky/skybox");
+	GLuint tex0 = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png", GL_CLAMP_TO_EDGE);
+	mjSkyboxLevelData* skyboxL0Data = new mjSkyboxLevelData(tex0, 0, 0, 0.002, 0);
+	skybox.PushLevel(skyboxL0Data);
+
+
+
+	skybox.SetCameraPos(&camera.pos);
+
+	LOGI("after SetCamerapos");
+}
 
 
 bool setupGraphics(int w, int h) {
@@ -97,6 +119,7 @@ bool setupGraphics(int w, int h) {
 	// Some adjustments
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+	InitShaders();
 
     LOGI("setupGraphics(%d, %d)", w, h);
 
@@ -195,21 +218,9 @@ LOGI("Before first imgload");
             				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 50);
 
 
-    mjModel* skyboxBox = new mjModel();
-    skyboxBox->LoadFromFile("/sdcard/mjEngineCPP/skybox.mesh.xml");
+    SetUpSkybox();
 
-    mjModel* skyboxPlane = new mjModel();
-    skyboxPlane->LoadFromFile("/sdcard/mjEngineCPP/skybox_plane.mesh.xml");
 
-    skybox.SetModels(skyboxBox, skyboxPlane);
-
-    skybox.LoadTexturesFromPrefix("/sdcard/mjEngineCPP/bluesky/skybox");
-
-    skybox.SetCameraPos(&camera.pos);
-
-    LOGI("after SetCamerapos");
-
-    InitShaders();
     bird.model->TieShaders(shaderList);
     character.model->TieShaders(shaderList);
     skybox.TieShaders(shaderList);

@@ -153,9 +153,9 @@ namespace mjEngine{
 
 void mjVector3::SetRotations(float theta, float phi)
 {
-	x = sin(theta + MJ_1_2_PI)*sin(phi);
-	y = cos(theta + MJ_1_2_PI);
-	z = sin(theta + MJ_1_2_PI)*cos(phi);
+	x = sin(theta)*cos(phi);
+	y = sin(theta)*sin(phi);
+	z = cos(theta);
 }
 
 }
