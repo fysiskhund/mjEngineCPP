@@ -26,7 +26,7 @@ public:
 	mjModel* boxModel;
 	mjModel* planeModel;
 
-	mjSkyboxLevelData level0Data;
+	mjSkyboxLevelData backgroundData;
 
 private:
 	mjVector3* cameraPos;

@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <unistd.h>
 
 
 
@@ -102,8 +103,10 @@ void SetUpSkybox()
 	skybox.SetModels(skyboxBox, skyboxPlane);
 
 	skybox.LoadTexturesFromPrefix("/sdcard/mjEngineCPP/bluesky/skybox");
-	GLuint tex0 = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png", GL_CLAMP_TO_EDGE);
-	mjSkyboxLevelData* skyboxL0Data = new mjSkyboxLevelData(tex0, 0, 0, 0.002, 0);
+	GLuint tex0 = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png");
+	mjSkyboxLevelData* skyboxL0Data = new mjSkyboxLevelData(tex0, 0, 0, 0.2, 0);
+	//skyboxL0Data->texture = tex0;
+
 	skybox.PushLevel(skyboxL0Data);
 
 
@@ -115,10 +118,12 @@ void SetUpSkybox()
 
 
 bool setupGraphics(int w, int h) {
-
+	sleep(3); // For debugger to be able to attach
 	// Some adjustments
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+	glEnable (GL_BLEND);
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	InitShaders();
 
     LOGI("setupGraphics(%d, %d)", w, h);
@@ -173,7 +178,7 @@ LOGI("Before first imgload");
     // Test loading png texture
 
     //LOGI("Here");
-    glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/birdtexture.png");
+    glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/birdtexture.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
     for (int i = 0; i<bird.model->meshes.size(); i++)
     {
     	bird.model->meshes[i]->glTexture = glTexture;
@@ -218,11 +223,14 @@ LOGI("Before first imgload");
             				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 50);
 
 
-    SetUpSkybox();
+
 
 
     bird.model->TieShaders(shaderList);
     character.model->TieShaders(shaderList);
+    box0.model->TieShaders(shaderList);
+
+    SetUpSkybox();
     skybox.TieShaders(shaderList);
 
 
@@ -301,6 +309,7 @@ void renderFrame(float t_elapsed) {
     // Apply the lookAt (viewMatrix) transformation to obtain modelView transformation
     //Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
 
+    //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
     theta+= 0.01;
     if (theta >= 2.0*(3.141592))
     {
@@ -314,10 +323,13 @@ void renderFrame(float t_elapsed) {
     	//character.dir.Set(x, 0, z);
     	bird.pos.Set(3.0*x,0,3.0*z);
     }
+    //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
     character.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
     bird.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
     box0.Draw(shaderList, lookAtMatrix, projectionMatrix);
-
+    //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
 
     if (character.pos.y < -5)
     {
@@ -325,6 +337,7 @@ void renderFrame(float t_elapsed) {
     	character.pos.y = 10;
     	character.vel.y = 0;
     }
+    //LOGI("After renderFrame");
 }
 
 void PrintGLCapabilities()

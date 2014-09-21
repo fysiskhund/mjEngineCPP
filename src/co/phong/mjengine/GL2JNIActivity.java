@@ -33,12 +33,12 @@ public class GL2JNIActivity extends Activity {
 
     @Override protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        try {
-			Thread.sleep(2000);
+        /*try {
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
         mView = new GL2JNIView(getApplication());
         setContentView(mView);
     }

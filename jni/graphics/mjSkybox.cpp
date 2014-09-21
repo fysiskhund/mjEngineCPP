@@ -6,13 +6,15 @@ namespace mjEngine {
 mjSkybox::mjSkybox()
 {
 	scale.Set(10,10,10);
-	level0Data.deltaH = 0.001;
+	backgroundData.deltaH = 0.001;
 	//level0Data.deltaH = 0.01;
 }
 
 void mjSkybox::PushLevel(mjSkyboxLevelData* data)
 {
+	//LOGI("pushdata: 0x%x", data);
 	levels.push_back(data);
+	//planeModel->meshes.at(0)->glTexture = data->texture;
 }
 void mjSkybox::SetModels(mjModel* boxModel, mjModel* planeModel)
 {
@@ -38,6 +40,7 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 
 
 		//LOGI("name: %s", name);
+		//Find the last "_", use it as suffix marker.
 		for (int j = 0; j < strnlen(name, 1024)-1; j++)
 		{
 			if (name[j] == '_')
@@ -75,6 +78,11 @@ void mjSkybox::TieShaders(std::vector<mjShader*>& shaderList)
 	{
 		boxModel->meshes[i]->mjShaderListIndex = skyboxShaderIndex;
 	}
+	for(int i = 0; i < planeModel->meshes.size(); i++)
+	{
+		LOGI("Planemodel 0x%x mesh 0x%x -> skybox shader", planeModel, planeModel->meshes[i]);
+		planeModel->meshes[i]->mjShaderListIndex = skyboxShaderIndex;
+	}
 }
 
 void mjSkybox::SetCameraPos(mjVector3* cameraPos)
@@ -88,9 +96,14 @@ void mjSkybox::Update(float t_elapsed)
 	{
 		pos.CopyFrom(*cameraPos);
 	}
-	level0Data.Update(t_elapsed);
+	backgroundData.Update(t_elapsed);
 
-	dir.SetRotations(level0Data.angleH, level0Data.angleV);
+
+
+	for(int i = 0; i < levels.size(); i++)
+	{
+		levels.at(i)->Update(t_elapsed);
+	}
 	//LOGI("angles: %3.3f, %3.3f -> %3.3f %3.3f %3.3f", level0Data.angleH, level0Data.angleV, dir.x, dir.y, dir.z);
 }
 void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
@@ -101,13 +114,19 @@ void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 	glDisable(GL_DEPTH_TEST);
 
 	model = boxModel;
+
+	dir.SetRotations(backgroundData.angleH, backgroundData.angleV);
 	mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix);
 
 	model = planeModel;
+	//LOGI("planeModel 0x%x, mesh 0x%x", model, model->meshes.at(0));
 	for(int i = 0; i < levels.size(); i++)
 	{
-		mjSkyboxLevelData* data = levels[i];
-		model->meshes[0]->glTexture = data->texture;
+		mjSkyboxLevelData* data = levels.at(i);
+		//LOGI("data: 0x%x, tex: %d", data, data->texture);
+		//LOGI("modelMesh 0x%x", model->meshes.at(0));
+		model->meshes.at(i)->glTexture = data->texture;
+		dir.SetRotations(data->angleH, data->angleV);
 		mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix);
 	}
 

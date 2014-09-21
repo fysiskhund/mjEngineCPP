@@ -157,6 +157,7 @@ GLuint mjImageLoader::SendToGL(GLfloat textureWrapParam)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, textureWrapParam);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, textureWrapParam);
+	//LOGI("Texture hasAlpha: %d", hasAlpha);
 	glTexImage2D(GL_TEXTURE_2D, 0, hasAlpha? GL_RGBA : GL_RGB, width, height, 0, hasAlpha? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, imageData);//testImage.pixel_data);
 	return textures[0];
 }
