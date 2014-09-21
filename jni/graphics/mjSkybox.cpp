@@ -125,7 +125,7 @@ void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 		mjSkyboxLevelData* data = levels.at(i);
 		//LOGI("data: 0x%x, tex: %d", data, data->texture);
 		//LOGI("modelMesh 0x%x", model->meshes.at(0));
-		model->meshes.at(i)->glTexture = data->texture;
+		model->meshes.at(0)->glTexture = data->texture;
 		dir.SetRotations(data->angleH, data->angleV);
 		mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix);
 	}
