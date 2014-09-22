@@ -88,14 +88,10 @@ void mjObject::ProcessPhysicsEffects()
 	effectStack.clear();
 
 }
-void mjObject::Update(float t_elapsed)
+void mjObject::ProcessCollisionEffects()
 {
 	if (!boundingStructure->isImmovable)
 	{
-		vel.ScaleAdd(t_elapsed, accel);
-		pos.ScaleAdd(t_elapsed, vel);
-
-
 		for (int i=0; i < collisionStack.size(); i++)//(mjPhysicsEffect collisionEffect:collisionStack)
 		{
 			mjPhysicsEffect* collisionEffect = collisionStack[i];
@@ -165,6 +161,17 @@ void mjObject::Update(float t_elapsed)
 		}
 	}
 	collisionStack.clear();
+}
+void mjObject::Update(float t_elapsed)
+{
+	if (!boundingStructure->isImmovable)
+	{
+		vel.ScaleAdd(t_elapsed, accel);
+		pos.ScaleAdd(t_elapsed, vel);
+
+	}
+	ProcessCollisionEffects();
+
 
 
 	// Update underlying mjBoundingStructure data if necessary

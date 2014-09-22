@@ -48,8 +48,11 @@ public:
 	mjObject(structuretype collisionStructureType);
 	virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
 	virtual void ProcessPhysicsEffects();
+	virtual void ProcessCollisionEffects();
 	virtual void Update(float t_elapsed);
 
+	int tag = 0;
+	void* tagObject = NULL;
 
 };
 }

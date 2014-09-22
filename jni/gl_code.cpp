@@ -192,6 +192,7 @@ LOGI("Before first imgload");
 
     character.model = new mjModel();
     character.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
+    character.gravity = &physics.gravity;
 
     character.dir.Set(0, 0, 1);
     character.dir.Normalize();
@@ -431,8 +432,9 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv
 {
 	if (character.footing== 1)
 	{
+		LOGI("Char: footing -> no");
 		character.footing = 0;
-		character.vel.ScaleAdd(1, physics.gravity);
+		character.vel.ScaleAdd(-1, physics.gravity);
 	}
 }
 

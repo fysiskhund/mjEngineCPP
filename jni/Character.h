@@ -2,6 +2,7 @@
 #define CHARACTER_H
 
 #include "core/mjObject.h"
+#include "extLibs/logger/mjLog.h"
 using namespace mjEngine;
 
 
@@ -9,7 +10,10 @@ class Character: public mjObject
 {
 public:
 	Character(structuretype type);
-	int footing;
+	int footing = 0;
+	virtual void ProcessCollisionEffects() override;
+	mjVector3* gravity;
+
 };
 
 
