@@ -37,13 +37,14 @@
 #include "graphics/mj3rdPersonCamera.h"
 #include "graphics/mjSkybox.h"
 #include "physics/mjPhysics.h"
+#include "Character.h"
 
 using namespace mjEngine;
 
 
 
 mjObject bird(MJ_AABB);
-mjObject character(MJ_AABB);
+Character character(MJ_AABB);
 mjObject box0(MJ_AABB);
 mjSkybox skybox;
 
@@ -428,6 +429,10 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown)
 {
-
+	if (character.footing== 1)
+	{
+		character.footing = 0;
+		character.vel.ScaleAdd(1, physics.gravity);
+	}
 }
 
