@@ -285,7 +285,7 @@ void renderFrame(float t_elapsed) {
 
 	float lookAtMatrix[16];
 
-    glClearColor(1, 0, 0, 1.0f);
+    glClearColor(0.9, 0, 0.9, 1.0f);
     //checkGlError("glClearColor");
     glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     //checkGlError("glClear");
@@ -344,6 +344,7 @@ void renderFrame(float t_elapsed) {
     	character.vel.y = 0;
     }
     //LOGI("After renderFrame");
+    character.Check();
 }
 
 void PrintGLCapabilities()
@@ -402,17 +403,28 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 			finalForwardDir.ScaleAdd(-y, outForwardDir);
 			finalForwardDir.ScaleAdd(-x, outLeftDir);
 
+			float finalForwardDirNorm = finalForwardDir.GetNorm();
 
-			character.vel.CopyFrom(finalForwardDir);
-			character.vel.MulScalar(2);
-			character.dir.CopyFrom(finalForwardDir);
-			character.dir.Normalize();
+			if (finalForwardDirNorm > 0.01 && finalForwardDirNorm < 4)
+			{
+
+				character.intrinsecVel.CopyFrom(finalForwardDir);
+				character.intrinsecVel.MulScalar(2);
+
+				if (finalForwardDir.Normalize() > 0.1)
+				{
+					character.dir.CopyFrom(finalForwardDir);
+				}
+			} else
+			{
+				LOGI("Strange value in finalForwardDir - %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);
+			}
 			/*LOGI("initialDir %3.3f, %3.3f, %3.3f", dir.x, dir.y, dir.z);
 			LOGI("cameraDir %3.3f, %3.3f, %3.3f", camera.dir.x, camera.dir.y, camera.dir.z);
 			LOGI("finalforwarddir %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);*/
 
 		} else {
-			character.vel.Set0();
+			character.intrinsecVel.Set0();
 		}
 	} else
 	{
@@ -432,9 +444,7 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv
 {
 	if (character.footing== 1)
 	{
-		LOGI("Char: footing -> no");
-		character.footing = 0;
-		character.vel.ScaleAdd(-1, physics.gravity);
+		character.jumping = 1;
 	}
 }
 
