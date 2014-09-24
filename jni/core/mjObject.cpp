@@ -66,7 +66,8 @@ void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 
 	model->Draw(shaderList, modelMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix);
 }
-void mjObject::ProcessPhysicsEffects()
+
+void mjObject::ProcessPhysicsEffects(float t_elapsed)
 {
 	accel.Set0();
 
@@ -87,6 +88,12 @@ void mjObject::ProcessPhysicsEffects()
 	}
 	effectStack.clear();
 
+	if (!boundingStructure->isImmovable)
+	{
+
+		vel.ScaleAdd(t_elapsed, accel);
+
+	}
 }
 void mjObject::ProcessCollisionEffects()
 {
@@ -121,6 +128,7 @@ void mjObject::ProcessCollisionEffects()
 				}
 				if (collisionEffect->mask[1])
 				{
+					//LOGI("Add velocity: %3.3f + %3.3f", vel.y, collisionEffect->value.y);
 					vel.y += collisionEffect->value.y;
 				}
 				if (collisionEffect->mask[2])
@@ -164,15 +172,11 @@ void mjObject::ProcessCollisionEffects()
 }
 void mjObject::Update(float t_elapsed)
 {
-	if (!boundingStructure->isImmovable)
-	{
-		vel.ScaleAdd(t_elapsed, accel);
-		pos.ScaleAdd(t_elapsed, vel);
 
-	}
-	ProcessCollisionEffects();
-
-
+}
+void mjObject::UpdatePosition(float t_elapsed)
+{
+	pos.ScaleAdd(t_elapsed, vel);
 
 	// Update underlying mjBoundingStructure data if necessary
 	if (autoUpdateStructure)
@@ -184,7 +188,7 @@ void mjObject::Update(float t_elapsed)
 			mjAABB* aabb = (mjAABB*) boundingStructure;
 			aabb->UpdateCorners();
 		}
-			break;
+		break;
 		default:
 			break;
 		}

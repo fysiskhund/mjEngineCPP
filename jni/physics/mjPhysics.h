@@ -35,7 +35,10 @@ private:
 	std::vector<std::vector<mjObject*>* > collisionLayers;
 
 	void CollisionDetection();
-	void ProcessPhysicsEffects(float t_elapsed);
+
+	void ProcessPhysicsEffectsAndUpdate(float t_elapsed);
+	void ProcessCollisionEffects();
+	void UpdatePositions(float t_elapsed);
 
 };
 

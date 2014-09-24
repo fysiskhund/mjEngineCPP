@@ -5,9 +5,19 @@ namespace mjEngine{
 
 float mjMathHelper::Sign(float x)
 {
-	int res = (x > 0)? 1:(x== 0)? 0: -1;
+	if (x > 0)
+	{
+		return 1.0f;
+	} else if (x < 0)
+	{
+		return -1.0f;
+	} else
+	{
+		return 0.0f;
+	}
+	/*float res = (x > 0)? 1.0f:(x== 0)? 0.0f: -1.0f;
 	//LOGI("Sign(%3.3f) -> %d", x, res);
-	return res;
+	return res;*/
 }
 void mjMathHelper::GetForwardAndLeftDirections(mjVector3& cameraDirection, mjVector3& gravity, mjVector3* outForwardDirection, mjVector3* outLeftDirection)
 {

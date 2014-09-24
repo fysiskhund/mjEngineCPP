@@ -158,6 +158,16 @@ void mjVector3::SetRotations(float theta, float phi)
 	z = cos(theta);
 }
 
+bool mjVector3::Check(const char* file, int line)
+{
+	if ((fabs(x) > 100)||(fabs(y) > 100)||(fabs(z) > 100))
+	{
+		LOGI("[%s:%d]Weird value: %3.3f %3.3f %3.3f", file, line, x, y ,z);
+		return true;
+	}
+	return false;
+}
+
 }
 
 

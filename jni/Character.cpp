@@ -14,16 +14,24 @@ void Character::ProcessCollisionEffects()
 	{
 		mjPhysicsEffect* collisionEffect = collisionStack[i];
 
-		LOGI("collisionEffect.value: %3.3f %3.3f %3.3f", collisionEffect->value.x,collisionEffect->value.y, collisionEffect->value.z);
+		/*if (collisionEffect->value.Check(__FILE__, __LINE__))
+		{
+			LOGI("CEff: 0x%x, otherObj: 0x%x", collisionEffect, collisionEffect->otherObject);
+		}*/
+		//LOGI("collisionEffect.value: %3.3f %3.3f %3.3f", collisionEffect->value.x,collisionEffect->value.y, collisionEffect->value.z);
 		switch(collisionEffect->action)
 		{
 		case MJ_ADD_VELOCITY:
 			if (gravity)
 			{
+				mjVector3 velocityNormalized;
+				velocityNormalized.CopyFrom(collisionEffect->value);
+				velocityNormalized.Normalize();
+
 				mjVector3 gravityNormalized;
 				gravityNormalized.CopyFrom(*gravity);
 				gravityNormalized.Normalize();
-				if (up.Dot(gravityNormalized)< -0.8)
+				if (gravityNormalized.Dot(velocityNormalized) < -0.4)
 				{
 					if (!previousFootingValue)
 					{
@@ -68,7 +76,11 @@ void Character::Update(float t_elapsed)
 
 			jumping = 0;
 			footing = 0;
-			vel.ScaleAdd(-t_elapsed*100.0, *gravity);
+			if (vel.GetNorm() < gravity->GetNorm()*100.0)
+			{
+				//LOGI("Vel: %3.3f, %3.3f, %3.3f", vel.x, vel.y, vel.z);
+				vel.ScaleAdd(-t_elapsed*25.0, *gravity);
+			}
 			LOGI("char: footing -> no (jumping)");
 		}
 	}

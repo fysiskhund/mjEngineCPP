@@ -30,11 +30,13 @@ void mjPhysics::AddObject(mjObject* object, int collisionLayer)
 
 void mjPhysics::Update(float t_elapsed)
 {
-
+	ProcessPhysicsEffectsAndUpdate(t_elapsed);
 
 	CollisionDetection();
 
-	ProcessPhysicsEffects(t_elapsed);
+	ProcessCollisionEffects();
+
+	UpdatePositions(t_elapsed);
 
 }
 
@@ -112,41 +114,85 @@ void mjPhysics::CollisionDetection()
 							{
 								if (colResult->changeVelEffectObj0->mask[0])
 								{
-									colResult->changeVelEffectObj0->value.x *= fabs(object0->vel.x);
+									if (colResult->changeVelEffectObj0->value.x*object0->vel.x < 0)
+									{
+										colResult->changeVelEffectObj0->value.x = -object0->vel.x;
+									} else{
+										colResult->changeVelEffectObj0->value.x = 0;
+
+									}
 								}
 								if (colResult->changeVelEffectObj0->mask[1])
 								{
-									colResult->changeVelEffectObj0->value.y *= fabs(object0->vel.y);
+									if (colResult->changeVelEffectObj0->value.y*object0->vel.y < 0)
+									{
+										colResult->changeVelEffectObj0->value.y = -object0->vel.y;
+									} else{
+										colResult->changeVelEffectObj0->value.y = 0;
+									}
 								}
 								if (colResult->changeVelEffectObj0->mask[2])
 								{
-									colResult->changeVelEffectObj0->value.z *= fabs(object0->vel.z);
+									if (colResult->changeVelEffectObj0->value.z*object0->vel.z < 0)
+									{
+										colResult->changeVelEffectObj0->value.z = -object0->vel.z;
+									} else{
+										colResult->changeVelEffectObj0->value.z = 0;
+									}
 								}
 
 							} else if (object0->boundingStructure->isImmovable)
 							{
 								if (colResult->changeVelEffectObj1->mask[0])
 								{
-									colResult->changeVelEffectObj1->value.x *= fabs(object1->vel.x);
+									if (colResult->changeVelEffectObj1->value.x*object1->vel.x < 0)
+									{
+										colResult->changeVelEffectObj1->value.x = -object1->vel.x;
+									} else{
+										colResult->changeVelEffectObj1->value.x = 0;
+									}
 								}
 								if (colResult->changeVelEffectObj1->mask[1])
 								{
-									colResult->changeVelEffectObj1->value.y *= fabs(object1->vel.y);
+									if (colResult->changeVelEffectObj1->value.y*object1->vel.y < 0)
+									{
+										colResult->changeVelEffectObj1->value.y = -object1->vel.y;
+									} else{
+										colResult->changeVelEffectObj1->value.y = 0;
+									}
 								}
 								if (colResult->changeVelEffectObj1->mask[2])
 								{
-									colResult->changeVelEffectObj1->value.z *= fabs(object1->vel.z);
+									if (colResult->changeVelEffectObj1->value.z*object1->vel.z < 0)
+									{
+										colResult->changeVelEffectObj1->value.z = -object1->vel.z;
+									} else{
+										colResult->changeVelEffectObj1->value.z = 0;
+									}
 								}
 
 							}
 
 							colResult->relocationEffectObj0->otherObject = object1;
+							colResult->changeVelEffectObj0->otherObject = object1;
 							object0->collisionStack.push_back(colResult->relocationEffectObj0);
 							object0->collisionStack.push_back(colResult->changeVelEffectObj0);
 
 							colResult->relocationEffectObj1->otherObject = object0;
+							colResult->changeVelEffectObj1->otherObject = object0;
 							object1->collisionStack.push_back(colResult->relocationEffectObj1);
 							object1->collisionStack.push_back(colResult->changeVelEffectObj1);
+
+							//LOGI("changeVel: %3.3f, %3.3f, %3.3f", colResult->changeVelEffectObj1->value.x, colResult->changeVelEffectObj1->value.y, colResult->changeVelEffectObj1->value.z);
+
+							/*if (colResult->changeVelEffectObj1->value.Check(__FILE__, __LINE__))
+							{
+								LOGI("CEff: 0x%x, otherObj: 0x%x", colResult->changeVelEffectObj1, colResult->changeVelEffectObj1->otherObject);
+							}
+							if (colResult->changeVelEffectObj0->value.Check(__FILE__, __LINE__))
+							{
+								LOGI("CEff: 0x%x, otherObj: 0x%x", colResult->changeVelEffectObj0, colResult->changeVelEffectObj0->otherObject);
+							}*/
 							//FIXME:!!! Something must be done with colResult in this case
 							// without altering the inner effects, since those will be destroyed in the object after they'be been used.
 
@@ -169,7 +215,7 @@ void mjPhysics::CollisionDetection()
 		}
 	}
 }
-void mjPhysics::ProcessPhysicsEffects(float t_elapsed)
+void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 {
 	for(int i = 0; i < allObjects.size(); i++)
 	{
@@ -178,9 +224,32 @@ void mjPhysics::ProcessPhysicsEffects(float t_elapsed)
 			mjPhysicsEffect* gravityEffect = new mjPhysicsEffect(MJ_GRAVITY, MJ_ADD_ACCEL);
 			gravityEffect->value.Set(0,-9.81,0);
 			allObjects[i]->effectStack.push_back(gravityEffect);
+			allObjects[i]->ProcessPhysicsEffects(t_elapsed);
 		}
-		allObjects[i]->ProcessPhysicsEffects();
+
 		allObjects[i]->Update(t_elapsed);
+
 	}
+
+}
+void mjPhysics::ProcessCollisionEffects()
+{
+	for(int i = 0; i < allObjects.size(); i++)
+	{
+		if (allObjects[i]->hasKinematics){
+			allObjects[i]->ProcessCollisionEffects();
+		}
+	}
+
+}
+void mjPhysics::UpdatePositions(float t_elapsed)
+{
+	for(int i = 0; i < allObjects.size(); i++)
+	{
+		if (allObjects[i]->hasKinematics){
+			allObjects[i]->UpdatePosition(t_elapsed);
+		}
+	}
+
 }
 }

@@ -6,6 +6,7 @@
 #define MJVECTOR3_H
 
 #include <math.h>
+#include "extLibs/logger/mjLog.h"
 
 namespace mjEngine{
 
@@ -46,6 +47,8 @@ public:
 
 
 	void SetRotations(float theta, float phi);
+
+	bool Check(const char* file, int line);
 
 	float x;
 	float y;

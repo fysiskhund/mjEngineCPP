@@ -189,6 +189,7 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 					out->changeVelEffectObj1->mask[0] = false;
 					out->changeVelEffectObj1->mask[1] = false;
 				}
+				//out->relocationEffectObj1->value.Check(__FILE__, __LINE__);
 				/*LOGI("displacement obj0: %3.3f, %3.3f, %3.3f",
 						out->relocationEffectObj0->value.x,
 						out->relocationEffectObj0->value.y,
