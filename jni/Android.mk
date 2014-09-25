@@ -35,6 +35,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   physics/mjPhysicsEffect.cpp \
 				   core/mjObject.cpp \
 				   Character.cpp \
+				   Level.cpp \
 				   gl_code.cpp
 				   
 LOCAL_LDLIBS    := -llog -lGLESv2 -lz
