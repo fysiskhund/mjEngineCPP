@@ -53,7 +53,7 @@ private:
 	int currentVertex;
 	int currentFace;
 	int faceCount;
-
+    
 };
 } // nameSpace mj
 

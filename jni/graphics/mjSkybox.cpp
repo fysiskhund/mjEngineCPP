@@ -80,7 +80,7 @@ void mjSkybox::TieShaders(std::vector<mjShader*>& shaderList)
 	}
 	for(int i = 0; i < planeModel->meshes.size(); i++)
 	{
-		LOGI("Planemodel 0x%x mesh 0x%x -> skybox shader", planeModel, planeModel->meshes[i]);
+		//LOGI("Planemodel 0x%x mesh 0x%x -> skybox shader", planeModel, planeModel->meshes[i]);
 		planeModel->meshes[i]->mjShaderListIndex = skyboxShaderIndex;
 	}
 }

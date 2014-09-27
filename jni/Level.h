@@ -23,6 +23,8 @@ public:
 	void Load(XMLDocument* doc);
 
 private:
+    void ReadVector(XMLElement* element, mjVector3* v);
+
 
 };
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AF0E3A82-6EA5-4834-9A0C-13E94E747206</string>
+	<key>IDESourceControlProjectName</key>
+	<string>mjEngineCPP</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>414763CCC8C8A3764D8C412CA9E09DE3709388DF</key>
+		<string>https://github.com/fysiskhund/mjEngineCPP.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>mjEngineCPP/mjEngineCPP.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>414763CCC8C8A3764D8C412CA9E09DE3709388DF</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/fysiskhund/mjEngineCPP.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>414763CCC8C8A3764D8C412CA9E09DE3709388DF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>414763CCC8C8A3764D8C412CA9E09DE3709388DF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>mjEngineCPP</string>
+		</dict>
+	</array>
+</dict>
+</plist>
