@@ -2,7 +2,7 @@
  * Copyright (C) 2014 Alejandro Valenzuela Roca
  *
  */
-#include "mjVector3.h"
+#include "core/mjVector3.h"
 
 namespace mjEngine{
 /* 

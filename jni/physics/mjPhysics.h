@@ -7,7 +7,7 @@
 #define MJPHYSICS_H
 
 #include <vector>
-#include "../mjVector3.h"
+#include "../core/mjVector3.h"
 #include "../core/mjObject.h"
 #include "mjCollisionResult.h"
 #include "mjCollisionTests.h"

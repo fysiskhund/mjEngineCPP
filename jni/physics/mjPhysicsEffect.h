@@ -6,7 +6,7 @@
 #define MJPHYSICSEFFECT_H
 
 
-#include "../mjVector3.h"
+#include "../core/mjVector3.h"
 
 namespace mjEngine{
 

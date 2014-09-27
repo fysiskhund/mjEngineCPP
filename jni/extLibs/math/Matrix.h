@@ -5,7 +5,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include "../../mjVector3.h"
+#include "../../core/mjVector3.h"
 
 
 #include <string.h>

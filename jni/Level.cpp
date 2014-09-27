@@ -19,13 +19,8 @@ void Level::Load(XMLDocument* doc)
 	while (entity)
 	{
 		mjObject* obj = NULL;
-		if (strncmp(entity->Name(), "player", 200) == 0)
-		{
-			obj = new Character(MJ_AABB);
-            
-            
-            
-		}
+		
+        obj = entityCreator.CreateEntity(entity->Name());
         
         if (obj)
         {

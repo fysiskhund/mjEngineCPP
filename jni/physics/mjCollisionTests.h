@@ -8,7 +8,7 @@
 
 #include <math.h>
 
-#include "../mjVector3.h"
+#include "../core/mjVector3.h"
 #include "mjCollisionResult.h"
 #include "mjSphere.h"
 #include "mjAABB.h"

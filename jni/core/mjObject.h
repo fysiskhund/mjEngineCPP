@@ -7,7 +7,7 @@
 
 #include <vector>
 
-#include "../mjVector3.h"
+#include "../core/mjVector3.h"
 #include "../graphics/mjModel.h"
 #include "../extLibs/math/Matrix.h"
 #include "../physics/mjBoundingStructure.h"

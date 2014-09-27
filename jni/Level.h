@@ -4,9 +4,10 @@
 #include <vector>
 #include "extLibs/tinyxml/tinyxml2.h"
 #include "core/mjObject.h"
-#include "Character.h"
+#include "EntityCreator.h"
+
 //#include "Box.h"
-#include "mjVector3.h"
+#include "core/mjVector3.h"
 #include <string.h>
 
 using namespace mjEngine;
@@ -24,7 +25,7 @@ public:
 
 private:
     void ReadVector(XMLElement* element, mjVector3* v);
-
+    EntityCreator entityCreator;
 
 };
 

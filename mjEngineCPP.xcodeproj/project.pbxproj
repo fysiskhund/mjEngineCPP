@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		A9C59E5619D6CCEE00ACABCA /* EntityCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityCreator.h; sourceTree = "<group>"; };
+		A9C59E5719D6CDD200ACABCA /* EntityCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityCreator.cpp; sourceTree = "<group>"; };
+		A9C7D74319D6D92300C10BA9 /* Bird.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bird.cpp; sourceTree = "<group>"; };
+		A9C7D74419D6D92300C10BA9 /* Bird.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bird.h; sourceTree = "<group>"; };
+		A9C7D74519D6D92300C10BA9 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
+		A9C7D74619D6D92300C10BA9 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		A9C7D74719D6D95D00C10BA9 /* mjVector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjVector3.cpp; sourceTree = "<group>"; };
+		A9C7D74819D6D95E00C10BA9 /* mjVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjVector3.h; sourceTree = "<group>"; };
 		A9E276D719D6A9210021288C /* Android.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Android.mk; sourceTree = "<group>"; };
 		A9E276D819D6A9210021288C /* Application.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Application.mk; sourceTree = "<group>"; };
-		A9E276D919D6A9210021288C /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
-		A9E276DA19D6A9210021288C /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		A9E276DC19D6A9210021288C /* mjInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjInput.h; sourceTree = "<group>"; };
 		A9E276DD19D6A9210021288C /* mjObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjObject.cpp; sourceTree = "<group>"; };
 		A9E276DE19D6A9210021288C /* mjObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjObject.h; sourceTree = "<group>"; };
@@ -55,8 +61,6 @@
 		A9E2771019D6A9220021288C /* mjSkyboxShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjSkyboxShaders.h; sourceTree = "<group>"; };
 		A9E2771119D6A9220021288C /* Level.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Level.cpp; sourceTree = "<group>"; };
 		A9E2771219D6A9220021288C /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
-		A9E2771319D6A9220021288C /* mjVector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjVector3.cpp; sourceTree = "<group>"; };
-		A9E2771419D6A9220021288C /* mjVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjVector3.h; sourceTree = "<group>"; };
 		A9E2771619D6A9220021288C /* mjAABB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjAABB.cpp; sourceTree = "<group>"; };
 		A9E2771719D6A9220021288C /* mjAABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjAABB.h; sourceTree = "<group>"; };
 		A9E2771819D6A9220021288C /* mjBoundingStructure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjBoundingStructure.h; sourceTree = "<group>"; };
@@ -73,6 +77,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		A9C7D74219D6D92300C10BA9 /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				A9C7D74319D6D92300C10BA9 /* Bird.cpp */,
+				A9C7D74419D6D92300C10BA9 /* Bird.h */,
+				A9C7D74519D6D92300C10BA9 /* Character.cpp */,
+				A9C7D74619D6D92300C10BA9 /* Character.h */,
+			);
+			path = entities;
+			sourceTree = "<group>";
+		};
 		A9E276CB19D6A8C00021288C = {
 			isa = PBXGroup;
 			children = (
@@ -83,20 +98,19 @@
 		A9E276D619D6A9210021288C /* jni */ = {
 			isa = PBXGroup;
 			children = (
-				A9E276D719D6A9210021288C /* Android.mk */,
+				A9C7D74219D6D92300C10BA9 /* entities */,
 				A9E276D819D6A9210021288C /* Application.mk */,
-				A9E276D919D6A9210021288C /* Character.cpp */,
-				A9E276DA19D6A9210021288C /* Character.h */,
 				A9E276DB19D6A9210021288C /* core */,
 				A9E276E019D6A9210021288C /* etc */,
 				A9E276E219D6A9210021288C /* extLibs */,
-				A9E276FB19D6A9210021288C /* gl_code.cpp */,
 				A9E276FC19D6A9210021288C /* graphics */,
 				A9E2771119D6A9220021288C /* Level.cpp */,
 				A9E2771219D6A9220021288C /* Level.h */,
-				A9E2771319D6A9220021288C /* mjVector3.cpp */,
-				A9E2771419D6A9220021288C /* mjVector3.h */,
 				A9E2771519D6A9220021288C /* physics */,
+				A9C59E5619D6CCEE00ACABCA /* EntityCreator.h */,
+				A9C59E5719D6CDD200ACABCA /* EntityCreator.cpp */,
+				A9E276FB19D6A9210021288C /* gl_code.cpp */,
+				A9E276D719D6A9210021288C /* Android.mk */,
 			);
 			path = jni;
 			sourceTree = "<group>";
@@ -104,6 +118,8 @@
 		A9E276DB19D6A9210021288C /* core */ = {
 			isa = PBXGroup;
 			children = (
+				A9C7D74719D6D95D00C10BA9 /* mjVector3.cpp */,
+				A9C7D74819D6D95E00C10BA9 /* mjVector3.h */,
 				A9E276DC19D6A9210021288C /* mjInput.h */,
 				A9E276DD19D6A9210021288C /* mjObject.cpp */,
 				A9E276DE19D6A9210021288C /* mjObject.h */,

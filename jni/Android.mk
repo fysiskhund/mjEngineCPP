@@ -15,7 +15,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := mjengine
 LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
-				   mjVector3.cpp \
+				   core/mjVector3.cpp \
 				   graphics/mjCamera.cpp \
 				   graphics/mj3rdPersonCamera.cpp \
 				   extLibs/math/Matrix.cpp \
@@ -34,8 +34,10 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   physics/mjCollisionTests.cpp \
 				   physics/mjPhysicsEffect.cpp \
 				   core/mjObject.cpp \
-				   Character.cpp \
+				   entities/Character.cpp \
+				   entities/Bird.cpp \
 				   Level.cpp \
+				   EntityCreator.cpp \
 				   gl_code.cpp
 				   
 LOCAL_LDLIBS    := -llog -lGLESv2 -lz

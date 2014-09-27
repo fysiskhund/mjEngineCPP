@@ -5,7 +5,7 @@
 #ifndef MJMATHHELPER_H
 #define MJMATHHELPER_H
 
-#include "../../mjVector3.h"
+#include "../../core/mjVector3.h"
 
 #include "../logger/mjLog.h"
 

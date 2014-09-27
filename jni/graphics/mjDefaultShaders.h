@@ -6,7 +6,7 @@
 #define MJDEFAULTSHADERS_H
 
 #include "mjShader.h"
-#include "mjVector3.h"
+#include "core/mjVector3.h"
 #include <string.h>
 
 #include "../extLibs/logger/mjLog.h"

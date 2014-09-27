@@ -5,7 +5,7 @@
 #define MJAABB_H
 
 #include "mjBoundingStructure.h"
-#include "../mjVector3.h"
+#include "../core/mjVector3.h"
 
 namespace mjEngine{
 

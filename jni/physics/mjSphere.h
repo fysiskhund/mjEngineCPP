@@ -6,7 +6,7 @@
 #define MJSPHERE_H
 
 #include "mjBoundingStructure.h"
-#include "../mjVector3.h"
+#include "../core/mjVector3.h"
 
 #include "../extLibs/logger/mjLog.h"
 

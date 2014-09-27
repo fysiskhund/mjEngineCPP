@@ -31,13 +31,13 @@
 #include "graphics/mjImageLoader.h"
 #include "graphics/mjDefaultShaders.h"
 #include "graphics/mjSkyboxShaders.h"
-#include "mjVector3.h"
+#include "core/mjVector3.h"
 #include "etc/testImage.h"
 #include "extLibs/math/Matrix.h"
 #include "graphics/mj3rdPersonCamera.h"
 #include "graphics/mjSkybox.h"
 #include "physics/mjPhysics.h"
-#include "Character.h"
+#include "entities/Character.h"
 
 using namespace mjEngine;
 

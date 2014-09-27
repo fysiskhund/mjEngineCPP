@@ -8,7 +8,7 @@
 
 
 #include "mjModelMesh.h"
-#include "../mjVector3.h"
+#include "../core/mjVector3.h"
 
 #ifdef ANDROID
 #include <GLES2/gl2.h>
