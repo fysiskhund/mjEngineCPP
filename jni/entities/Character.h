@@ -2,6 +2,7 @@
 #define CHARACTER_H
 
 #include "../core/mjObject.h"
+#include "../graphics/mjImageLoader.h"
 #include "../extLibs/logger/mjLog.h"
 using namespace mjEngine;
 

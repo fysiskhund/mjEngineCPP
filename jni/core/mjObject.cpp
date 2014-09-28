@@ -43,6 +43,10 @@ mjObject::mjObject()
 	boundingStructure = new mjSphere(&pos, 1);
 }
 
+void mjObject::TieShaders(std::vector<mjShader*>& shaderList)
+{
+	model->TieShaders(shaderList);
+}
 
 void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {

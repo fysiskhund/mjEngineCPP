@@ -3,7 +3,22 @@
 Character::Character()
 : mjObject(MJ_AABB)
 {
+	model = new mjModel();
+	model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
+	mjAABB* charBoundStruct = (mjAABB*) boundingStructure;
+	mjVector3 minCorner;
+	minCorner.Set(-0.3,0,-0.3);
+	mjVector3 maxCorner;
+	maxCorner.Set(0.3,1.65, 0.3);
+	charBoundStruct->SetCorners(minCorner,maxCorner);
 
+
+	mjImageLoader imgLoader;
+	GLuint glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/suit_test.png");
+	for (int i = 0; i < model->meshes.size(); i++)
+	{
+		model->meshes[i]->glTexture = glTexture;
+	}
 }
 void Character::ProcessCollisionEffects()
 {

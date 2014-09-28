@@ -37,6 +37,7 @@
 #include "graphics/mj3rdPersonCamera.h"
 #include "graphics/mjSkybox.h"
 #include "physics/mjPhysics.h"
+#include "graphics/mjSceneGraph.h"
 #include "entities/Character.h"
 #include "Level.h"
 
@@ -68,6 +69,8 @@ mjPhysics physics;
 
 
 mjVector3 cameraAnglesModifier;
+
+mjSceneGraph sceneGraph;
 
 
 static void printGLString(const char *name, GLenum s) {
@@ -175,37 +178,24 @@ LOGI("Before first imgload");
     }
 
 
-
-    bird.model = new mjModel();
-    bird.model->LoadFromFile("/sdcard/mjEngineCPP/bird.mesh.xml");
     bird.pos.Set(-2,0,3);
     bird.dir.Set(-1, 0, 1);
     bird.dir.Normalize();
-    ((mjAABB*)bird.boundingStructure)->isImmovable = true;
+
     //((mjSphere*) bird.boundingStructure)->r = 0.3;
 
     // Test loading png texture
 
     //LOGI("Here");
-    glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/birdtexture.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
-    for (int i = 0; i<bird.model->meshes.size(); i++)
-    {
-    	bird.model->meshes[i]->glTexture = glTexture;
-    }
 
 
-    character.model = new mjModel();
-    character.model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
+
+
     character.gravity = &physics.gravity;
 
     character.dir.Set(0, 0, 1);
     character.dir.Normalize();
-    mjAABB* charBoundStruct = (mjAABB*) character.boundingStructure;
-    mjVector3 minCorner;
-    minCorner.Set(-0.3,0,-0.3);
-    mjVector3 maxCorner;
-    maxCorner.Set(0.3,1.65, 0.3);
-    charBoundStruct->SetCorners(minCorner,maxCorner);
+
     character.pos.Set(0,10,0);
     character.modelOffset.Set(0,-0.825,0);
 
@@ -218,12 +208,6 @@ LOGI("Before first imgload");
     //charBoundStruct->SetCorners()
     //((mjSphere*) character.boundingStructure)->r = 0.5;
 
-    LOGI("or here");
-    glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/suit_test.png");
-    for (int i = 0; i<character.model->meshes.size(); i++)
-    {
-       	character.model->meshes[i]->glTexture = glTexture;
-    }
 
 
 
@@ -236,9 +220,9 @@ LOGI("Before first imgload");
 
 
 
-    bird.model->TieShaders(shaderList);
-    character.model->TieShaders(shaderList);
-    box0.model->TieShaders(shaderList);
+    bird.TieShaders(shaderList);
+    character.TieShaders(shaderList);
+    box0.TieShaders(shaderList);
 
     SetUpSkybox();
     skybox.TieShaders(shaderList);

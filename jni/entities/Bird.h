@@ -10,6 +10,7 @@
 #define __mjEngineCPP__Bird__
 
 #include "../core/mjObject.h"
+#include "../graphics/mjImageLoader.h"
 using namespace mjEngine;
 
 class Bird: public mjObject

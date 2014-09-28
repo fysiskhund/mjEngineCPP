@@ -51,6 +51,7 @@ public:
 	virtual void ProcessCollisionEffects();
 	virtual void Update(float t_elapsed);
 	virtual void UpdatePosition(float t_elapsed);
+	virtual void TieShaders(std::vector<mjShader*>& shaderList);
 
 	int tag = 0;
 	void* tagObject = NULL;

@@ -18,7 +18,7 @@ public:
 	void SetCameraPos(mjVector3* cameraPos);
 	void SetModels(mjModel* boxModel, mjModel* planeModel);
 	void LoadTexturesFromPrefix(const char* prefix);
-	void TieShaders(std::vector<mjShader*>& shaderList);
+	virtual void TieShaders(std::vector<mjShader*>& shaderList) override;
 	virtual void PushLevel(mjSkyboxLevelData* data);
 	virtual void Update(float t_elapsed) override;
 	virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix) override;
