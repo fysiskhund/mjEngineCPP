@@ -38,13 +38,14 @@
 #include "graphics/mjSkybox.h"
 #include "physics/mjPhysics.h"
 #include "entities/Character.h"
+#include "Level.h"
 
 using namespace mjEngine;
 
 
 
 mjObject bird(MJ_AABB);
-Character character(MJ_AABB);
+Character character;
 mjObject box0(MJ_AABB);
 mjSkybox skybox;
 
@@ -59,6 +60,9 @@ float modelViewMatrix[16];
 float ratio;
 bool debugMatrix = true;
 float theta = 0;
+
+Level level;
+
 
 mjPhysics physics;
 
@@ -246,6 +250,7 @@ LOGI("Before first imgload");
     physics.AddObject(&box0, 0);
 
     LOGI("End of init");
+    level.LoadFromFile("/sdcard/mjEngineCPP/levels/testlevel.xml");
     return true;
 }
 

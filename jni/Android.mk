@@ -36,7 +36,9 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   core/mjObject.cpp \
 				   entities/Character.cpp \
 				   entities/Bird.cpp \
+				   terrainTypes/Box.cpp \
 				   Level.cpp \
+				   TerrainCreator.cpp \
 				   EntityCreator.cpp \
 				   gl_code.cpp
 				   

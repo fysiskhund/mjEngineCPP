@@ -19,6 +19,7 @@ namespace mjEngine{
 	
 	mjAABB(mjVector3* center, mjVector3& minCorner, mjVector3& maxCorner, bool isImmovable);
 	void UpdateCorners();
+	void UpdateCenter();
 	void SetCorners(mjVector3& minCorner, mjVector3& maxCorner);
 
 };

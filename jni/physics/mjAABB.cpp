@@ -24,6 +24,14 @@ void mjAABB::UpdateCorners()
 	this->maxCorner.CopyFrom(*center);
 	this->maxCorner.Add(halfWidths);
 }
+void mjAABB::UpdateCenter()
+{
+	halfWidths.CopyFrom(maxCorner);
+	halfWidths.Subtract(minCorner);
+	halfWidths.MulScalar(0.5);
+	this->center->CopyFrom(minCorner);
+	this->center->Add(halfWidths);
+}
 void mjAABB::SetCorners(mjVector3& minCorner, mjVector3& maxCorner)
 {
 	this->minCorner.CopyFrom(minCorner);

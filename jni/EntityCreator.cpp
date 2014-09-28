@@ -32,7 +32,7 @@ mjObject* EntityCreator::CreateEntity(const char* entityType)
     }
     switch (whichEntity) {
         case 0:
-            return new Character(MJ_AABB);
+            return new Character();
             break;
         case 1:
             return new Bird();

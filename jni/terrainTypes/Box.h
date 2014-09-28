@@ -1,22 +1,25 @@
 //
-//  Bird.h
+//  Box.h
 //  mjEngineCPP
 //
 //  Created by Alejandro Valenzuela Roca on 27/09/14.
 //  Copyright (c) 2014 Phong-shaded hallucinations. All rights reserved.
 //
 
-#ifndef __mjEngineCPP__Bird__
-#define __mjEngineCPP__Bird__
+#ifndef BOX_H
+#define BOX_H
 
 #include "../core/mjObject.h"
+#include "../extLibs/logger/mjLog.h"
+
+
 using namespace mjEngine;
 
-class Bird: public mjObject
+class Box: public mjObject
 {
 public:
-    Bird();
-private:
+	Box();
+	char* modelName = NULL;
 };
 
-#endif /* defined(__mjEngineCPP__Bird__) */
+#endif

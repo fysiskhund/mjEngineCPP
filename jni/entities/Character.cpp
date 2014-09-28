@@ -1,7 +1,7 @@
 #include "Character.h"
 
-Character::Character(structuretype type)
-: mjObject(type)
+Character::Character()
+: mjObject(MJ_AABB)
 {
 
 }

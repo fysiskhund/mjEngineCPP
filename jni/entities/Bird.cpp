@@ -7,3 +7,8 @@
 //
 
 #include "Bird.h"
+Bird::Bird()
+: mjObject(MJ_AABB)
+{
+
+}

@@ -1,15 +1,15 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include "core/mjObject.h"
-#include "extLibs/logger/mjLog.h"
+#include "../core/mjObject.h"
+#include "../extLibs/logger/mjLog.h"
 using namespace mjEngine;
 
 
 class Character: public mjObject
 {
 public:
-	Character(structuretype type);
+	Character();
 	int footing = 0;
 	int jumping = 0;
 	virtual void ProcessCollisionEffects() override;
