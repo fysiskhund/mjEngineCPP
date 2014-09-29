@@ -45,13 +45,17 @@ void mjPhysics::CollisionDetection()
 {
 	// Objects in layer 0 are tested against other objects in layer 0
 
-	if (collisionLayers.size() > 0)
+	int collisionLayerNum = collisionLayers.size();
+	if (collisionLayerNum > 0)
 	{
+		int objectsInCollisionLayerNum = collisionLayers[0]->size();
 
-		for (int i = 0; i < collisionLayers[0]->size(); i++)
+		// Only objects in collision layer 0 are tested against other objects in that same layer.
+		// Objects in other layers are only tested against objects in other layers.
+		for (int i = 0; i < objectsInCollisionLayerNum; i++)
 		{
 			mjObject* objectI = (*collisionLayers[0])[i];
-			for (int j = i+1; j < collisionLayers[0]->size(); j++)
+			for (int j = i+1; j < objectsInCollisionLayerNum; j++)
 			{
 				//LOGI("phys: i:%d, j:%d\n", i, j);
 				mjObject* objectJ = (*collisionLayers[0])[j];
