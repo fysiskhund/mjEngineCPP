@@ -45,9 +45,7 @@ using namespace mjEngine;
 
 
 
-mjObject bird(MJ_AABB);
-Character character;
-mjObject box0(MJ_AABB);
+
 mjSkybox skybox;
 
 mj3rdPersonCamera camera;
@@ -71,6 +69,9 @@ mjPhysics physics;
 mjVector3 cameraAnglesModifier;
 
 mjSceneGraph sceneGraph;
+
+Character* character;
+
 
 
 static void printGLString(const char *name, GLenum s) {
@@ -147,21 +148,13 @@ bool setupGraphics(int w, int h) {
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
 
-
-    box0.model = new mjModel();
-    box0.model->LoadFromFile("/sdcard/mjEngineCPP/box.mesh.xml");
-    box0.scale.Set(8,8,8);
+    level.LoadFromFile("/sdcard/mjEngineCPP/levels/testlevel.xml");
+    character = (Character*) level.GetEntityByID("character0");
 
 
-    box0.dir.Normalize();
-    mjAABB* box0BoundingStruct = ((mjAABB*)box0.boundingStructure);
-    box0BoundingStruct->isImmovable = true;
-    mjVector3 box0HalfScale;
-    box0HalfScale.CopyFrom(box0.scale);
-    box0HalfScale.MulScalar(0.5);
-    box0BoundingStruct->halfWidths.CopyFrom(box0HalfScale);
-    box0.pos.Set(0,-4,0);
-    box0.Update(0);
+    
+
+
 
 
 
@@ -172,16 +165,6 @@ LOGI("Before first imgload");
 
     GLuint glTexture = imgLoader->LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/box_grassy.png");
 
-    for (int i = 0; i<box0.model->meshes.size(); i++)
-    {
-    	box0.model->meshes[i]->glTexture = glTexture;
-    }
-
-
-    bird.pos.Set(-2,0,3);
-    bird.dir.Set(-1, 0, 1);
-    bird.dir.Normalize();
-
     //((mjSphere*) bird.boundingStructure)->r = 0.3;
 
     // Test loading png texture
@@ -191,18 +174,15 @@ LOGI("Before first imgload");
 
 
 
-    character.gravity = &physics.gravity;
+    character->gravity = &physics.gravity;
 
-    character.dir.Set(0, 0, 1);
-    character.dir.Normalize();
 
-    character.pos.Set(0,10,0);
-    character.modelOffset.Set(0,-0.825,0);
+    character->modelOffset.Set(0,-0.825,0);
 
 
     mjVector3 cameraOffset;
     cameraOffset.Set(0,0.7,0);
-    camera.SetTarget(&character.pos, cameraOffset);
+    camera.SetTarget(&character->pos, cameraOffset);
     camera.r = 10;
 
     //charBoundStruct->SetCorners()
@@ -220,21 +200,25 @@ LOGI("Before first imgload");
 
 
 
-    bird.TieShaders(shaderList);
-    character.TieShaders(shaderList);
-    box0.TieShaders(shaderList);
-
+  
     SetUpSkybox();
     skybox.TieShaders(shaderList);
 
 
 
-    physics.AddObject(&bird, 0);
-    physics.AddObject(&character, 0);
-    physics.AddObject(&box0, 0);
+    for (int i = 0; i < level.entities.size(); i++)
+    {
+        physics.AddObject(level.entities[i], 0);
+        sceneGraph.drawableObjects.push_back(level.entities[i]);
+    }
+    for (int i = 0; i < level.terrain.size(); i++)
+    {
+        physics.AddObject(level.terrain[i], 1);
+        sceneGraph.drawableObjects.push_back(level.terrain[i]);
+    }
 
     LOGI("End of init");
-    level.LoadFromFile("/sdcard/mjEngineCPP/levels/testlevel.xml");
+    
     return true;
 }
 
@@ -314,26 +298,27 @@ void renderFrame(float t_elapsed) {
     	float x, z;
     	x = sin(theta);
     	z = cos(theta);
-    	bird.dir.Set(z, 0, -x);
+    	/*bird.dir.Set(z, 0, -x);
     	//character.dir.Set(x, 0, z);
-    	bird.pos.Set(3.0*x,0,3.0*z);
+    	bird.pos.Set(3.0*x,0,3.0*z);*/
     }
+    
     //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
-    character.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    //character.Draw(shaderList, lookAtMatrix, projectionMatrix);
     //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
-    bird.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    //bird.Draw(shaderList, lookAtMatrix, projectionMatrix);
     //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
-    box0.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    //box0.Draw(shaderList, lookAtMatrix, projectionMatrix);
     //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
 
-    if (character.pos.y < -5)
+    if (character->pos.y < -5)
     {
-    	character.pos.Set0();
-    	character.pos.y = 10;
-    	character.vel.y = 0;
+    	character->pos.Set0();
+    	character->pos.y = 10;
+    	character->vel.y = 0;
     }
     //LOGI("After renderFrame");
-    character.Check();
+    //character.Check();
 }
 
 void PrintGLCapabilities()
@@ -397,12 +382,12 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 			if (finalForwardDirNorm > 0.01 && finalForwardDirNorm < 4)
 			{
 
-				character.intrinsecVel.CopyFrom(finalForwardDir);
-				character.intrinsecVel.MulScalar(2);
+				character->intrinsecVel.CopyFrom(finalForwardDir);
+				character->intrinsecVel.MulScalar(2);
 
 				if (finalForwardDir.Normalize() > 0.1)
 				{
-					character.dir.CopyFrom(finalForwardDir);
+					character->dir.CopyFrom(finalForwardDir);
 				}
 			} else
 			{
@@ -413,7 +398,7 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 			LOGI("finalforwarddir %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);*/
 
 		} else {
-			character.intrinsecVel.Set0();
+			character->intrinsecVel.Set0();
 		}
 	} else
 	{
@@ -431,9 +416,9 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown)
 {
-	if (character.footing== 1)
+	if (character->footing== 1)
 	{
-		character.jumping = 1;
+		character->jumping = 1;
 	}
 }
 

@@ -21,6 +21,7 @@ namespace mjEngine{
 class mjObject // Generic mjObject for games
 {
 public:
+    char* id = NULL;
 	mjVector3 pos;
 	mjVector3 dir;
 	mjVector3 up;
@@ -46,6 +47,7 @@ public:
 	bool autoUpdateStructure = true;
 	mjObject();
 	mjObject(structuretype collisionStructureType);
+    void SetID(const char* id);
 	virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
 	virtual void ProcessPhysicsEffects(float t_elapsed);
 	virtual void ProcessCollisionEffects();
@@ -53,6 +55,9 @@ public:
 	virtual void UpdatePosition(float t_elapsed);
 	virtual void TieShaders(std::vector<mjShader*>& shaderList);
 
+    void MatchScaleToAABB();
+    void MatchAABBToModel();
+    
 	int tag = 0;
 	void* tagObject = NULL;
 

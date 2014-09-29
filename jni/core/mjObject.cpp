@@ -42,6 +42,16 @@ mjObject::mjObject()
 
 	boundingStructure = new mjSphere(&pos, 1);
 }
+void mjObject::SetID(const char* id)
+{
+    if (this->id != NULL)
+    {
+        delete this->id;
+    }
+    this->id = new char[strnlen(id, 200)+1];
+    strncpy(this->id, id, strnlen(id, 200));
+    this->id[strnlen(id, 200)] = NULL;
+}
 
 void mjObject::TieShaders(std::vector<mjShader*>& shaderList)
 {
@@ -198,4 +208,23 @@ void mjObject::UpdatePosition(float t_elapsed)
 		}
 	}
 }
+    void mjObject::MatchScaleToAABB()
+    {
+        if (boundingStructure->type == MJ_AABB)
+        {
+            mjAABB* boundingStruct = ((mjAABB*)boundingStructure);
+            scale.CopyFrom(boundingStruct->halfWidths);
+            scale.MulScalar(2);
+        }
+    }
+    void mjObject::MatchAABBToModel()
+    {
+        if (model && boundingStructure->type == MJ_AABB)
+        {
+            mjAABB* boundingStruct = ((mjAABB*)boundingStructure);
+            
+            boundingStruct->minCorner.Set(model->bounds[0],model->bounds[1],model->bounds[2]);
+            boundingStruct->maxCorner.Set(model->bounds[3],model->bounds[4],model->bounds[5]);
+        }
+    }
 }

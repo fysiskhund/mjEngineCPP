@@ -24,7 +24,7 @@ public:
 
 	void LoadFromFile(const char* fileName);
 	void Load(XMLDocument* doc);
-
+    mjObject* GetEntityByID(const char* ID);
 private:
     void ReadVector(XMLElement* element, mjVector3* v);
     EntityCreator entityCreator;

@@ -11,6 +11,7 @@
 
 #include "../core/mjObject.h"
 #include "../extLibs/logger/mjLog.h"
+#include "../graphics/mjImageLoader.h"
 
 
 using namespace mjEngine;
@@ -19,6 +20,7 @@ class Box: public mjObject
 {
 public:
 	Box();
+
 	char* modelName = NULL;
 };
 

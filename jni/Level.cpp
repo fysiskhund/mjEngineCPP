@@ -27,6 +27,7 @@ void Level::Load(XMLDocument* doc)
         if (obj)
         {
             // Read its characteristics
+            obj->SetID(entity->Name());
             ReadVector(entity->FirstChildElement("pos"), &obj->pos);
             ReadVector(entity->FirstChildElement("dir"), &obj->dir);
             ReadVector(entity->FirstChildElement("up"), &obj->up);
@@ -49,10 +50,11 @@ void Level::Load(XMLDocument* doc)
 			if(obj->boundingStructure->type == MJ_AABB)
 			{
 				mjAABB* aabb = (mjAABB*) obj->boundingStructure;
-
+                obj->SetID(terrainElement->Name());
 				ReadVector(terrainElement->FirstChildElement("mincorner"), &aabb->minCorner);
 				ReadVector(terrainElement->FirstChildElement("maxcorner"), &aabb->maxCorner);
 				aabb->UpdateCenter();
+                obj->MatchScaleToAABB();
 			}
 			terrain.push_back(obj);
 		}
@@ -69,6 +71,16 @@ void Level::ReadVector(XMLElement* element, mjVector3* v)
         element->QueryFloatAttribute("y", &v->y);
         element->QueryFloatAttribute("z", &v->z);
     }
+}
+
+mjObject* Level::GetEntityByID(const char* id)
+{
+    for (int i = 0; i < entities.size(); i++) {
+        if (strncmp(entities[i]->id, id, 200) == 0) {
+            return entities[i];
+        }
+    }
+    return NULL;
 }
 
 

@@ -15,6 +15,10 @@
 		A9C7D74619D6D92300C10BA9 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		A9C7D74719D6D95D00C10BA9 /* mjVector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjVector3.cpp; sourceTree = "<group>"; };
 		A9C7D74819D6D95E00C10BA9 /* mjVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjVector3.h; sourceTree = "<group>"; };
+		A9CB2E7719D9E8D000B0463F /* Box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
+		A9CB2E7819D9E8D000B0463F /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
+		A9CB2E8719D9FB3D00B0463F /* mjSceneGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjSceneGraph.cpp; sourceTree = "<group>"; };
+		A9CB2E8819D9FB3D00B0463F /* mjSceneGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjSceneGraph.h; sourceTree = "<group>"; };
 		A9E276D719D6A9210021288C /* Android.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Android.mk; sourceTree = "<group>"; };
 		A9E276D819D6A9210021288C /* Application.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Application.mk; sourceTree = "<group>"; };
 		A9E276DC19D6A9210021288C /* mjInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjInput.h; sourceTree = "<group>"; };
@@ -88,6 +92,15 @@
 			path = entities;
 			sourceTree = "<group>";
 		};
+		A9CB2E7619D9E8D000B0463F /* terrainTypes */ = {
+			isa = PBXGroup;
+			children = (
+				A9CB2E7719D9E8D000B0463F /* Box.cpp */,
+				A9CB2E7819D9E8D000B0463F /* Box.h */,
+			);
+			path = terrainTypes;
+			sourceTree = "<group>";
+		};
 		A9E276CB19D6A8C00021288C = {
 			isa = PBXGroup;
 			children = (
@@ -98,19 +111,20 @@
 		A9E276D619D6A9210021288C /* jni */ = {
 			isa = PBXGroup;
 			children = (
-				A9C7D74219D6D92300C10BA9 /* entities */,
+				A9C59E5719D6CDD200ACABCA /* EntityCreator.cpp */,
+				A9E276FB19D6A9210021288C /* gl_code.cpp */,
+				A9E2771119D6A9220021288C /* Level.cpp */,
+				A9C59E5619D6CCEE00ACABCA /* EntityCreator.h */,
+				A9E2771219D6A9220021288C /* Level.h */,
+				A9E276D719D6A9210021288C /* Android.mk */,
 				A9E276D819D6A9210021288C /* Application.mk */,
 				A9E276DB19D6A9210021288C /* core */,
+				A9C7D74219D6D92300C10BA9 /* entities */,
 				A9E276E019D6A9210021288C /* etc */,
 				A9E276E219D6A9210021288C /* extLibs */,
 				A9E276FC19D6A9210021288C /* graphics */,
-				A9E2771119D6A9220021288C /* Level.cpp */,
-				A9E2771219D6A9220021288C /* Level.h */,
 				A9E2771519D6A9220021288C /* physics */,
-				A9C59E5619D6CCEE00ACABCA /* EntityCreator.h */,
-				A9C59E5719D6CDD200ACABCA /* EntityCreator.cpp */,
-				A9E276FB19D6A9210021288C /* gl_code.cpp */,
-				A9E276D719D6A9210021288C /* Android.mk */,
+				A9CB2E7619D9E8D000B0463F /* terrainTypes */,
 			);
 			path = jni;
 			sourceTree = "<group>";
@@ -238,6 +252,8 @@
 				A9E2770619D6A9210021288C /* mjModel.h */,
 				A9E2770719D6A9210021288C /* mjModelMesh.cpp */,
 				A9E2770819D6A9220021288C /* mjModelMesh.h */,
+				A9CB2E8719D9FB3D00B0463F /* mjSceneGraph.cpp */,
+				A9CB2E8819D9FB3D00B0463F /* mjSceneGraph.h */,
 				A9E2770919D6A9220021288C /* mjShader.cpp */,
 				A9E2770A19D6A9220021288C /* mjShader.h */,
 				A9E2770B19D6A9220021288C /* mjSkybox.cpp */,
