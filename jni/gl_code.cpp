@@ -184,7 +184,7 @@ LOGI("Before first imgload");
     cameraOffset.Set(0,0.7,0);
     LOGI("Here3");
     camera.SetTarget(&character->pos, cameraOffset);
-    camera.r = 10;
+    camera.r = 3;
 
     //charBoundStruct->SetCorners()
     //((mjSphere*) character.boundingStructure)->r = 0.5;
@@ -192,7 +192,7 @@ LOGI("Before first imgload");
 
 
 
-    float closeUpFactor = 0.1;
+    float closeUpFactor = 0.5;
     ratio = closeUpFactor*((float)w)/((float)h);
     Matrix4::FrustumM(projectionMatrix, 0,
             				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 50);

@@ -94,7 +94,7 @@ void Character::Update(float t_elapsed)
 			if (vel.GetNorm() < gravity->GetNorm()*100.0)
 			{
 				//LOGI("Vel: %3.3f, %3.3f, %3.3f", vel.x, vel.y, vel.z);
-				vel.ScaleAdd(-t_elapsed*25.0, *gravity);
+				vel.ScaleAdd(-t_elapsed*35.0, *gravity);
 			}
 			LOGI("char: footing -> no (jumping)");
 		}
