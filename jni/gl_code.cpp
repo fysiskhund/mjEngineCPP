@@ -206,18 +206,19 @@ LOGI("Before first imgload");
     skybox.TieShaders(shaderList);
 
 
-    LOGI("AddingObjects");
+    LOGI("Adding entities");
     for (int i = 0; i < level.entities.size(); i++)
     {
         physics.AddObject(level.entities[i], 0);
         sceneGraph.drawableObjects.push_back(level.entities[i]);
         level.entities[i]->TieShaders(shaderList);
     }
+    LOGI("Now adding terrain");
     for (int i = 0; i < level.terrain.size(); i++)
     {
         physics.AddObject(level.terrain[i], 1);
         sceneGraph.drawableObjects.push_back(level.terrain[i]);
-        level.entities[i]->TieShaders(shaderList);
+        level.terrain[i]->TieShaders(shaderList);
     }
 
     LOGI("End of init");
