@@ -9,6 +9,9 @@
 #ifndef BOX_H
 #define BOX_H
 
+#include <GLES2/gl2.h>
+#include <SDL2/SDL.h>
+
 #include "../core/mjObject.h"
 #include "../extLibs/logger/mjLog.h"
 #include "../graphics/mjImageLoader.h"

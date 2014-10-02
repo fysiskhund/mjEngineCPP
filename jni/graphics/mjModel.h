@@ -6,6 +6,9 @@
 #include <string.h>
 #include <vector>
 
+#include <GLES2/gl2.h>
+#include <SDL2/SDL.h>
+
 
 //#include <android/log.h>
 

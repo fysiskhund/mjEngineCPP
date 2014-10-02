@@ -21,7 +21,7 @@ mjSkyboxLevelData::mjSkyboxLevelData(GLuint texture, float angleH, float angleV,
 
 	this->deltaH = deltaH;
 	this->deltaV = deltaV;
-	LOGI("skyboxLevelData tex: %d", texture);
+	//LOGI("skyboxLevelData tex: %d", texture);
 }
 
 void mjSkyboxLevelData::Update(float t_elapsed)

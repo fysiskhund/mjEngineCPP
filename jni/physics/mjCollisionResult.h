@@ -25,6 +25,8 @@ public:
 	mjPhysicsEffect* relocationEffectObj1;
 	mjPhysicsEffect* changeVelEffectObj1;
 	mjPhysicsEffect* accelObj1;
+
+	mjCollisionResult();
 };
 
 }

@@ -6,7 +6,8 @@
 #define MJVECTOR3_H
 
 #include <math.h>
-#include "extLibs/logger/mjLog.h"
+#include <stdio.h>
+#include "../extLibs/logger/mjLog.h"
 
 namespace mjEngine{
 

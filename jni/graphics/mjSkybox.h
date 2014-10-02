@@ -2,6 +2,9 @@
 #define MJ_SKYBOX_H
 
 #include <vector>
+#include <GLES2/gl2.h>
+#include <SDL2/SDL.h>
+
 #include "../core/mjObject.h"
 #include "mjImageLoader.h"
 #include "mjSkyboxLevelData.h"

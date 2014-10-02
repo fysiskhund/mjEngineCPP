@@ -50,7 +50,7 @@ void mjObject::SetID(const char* id)
     }
     this->id = new char[strnlen(id, 200)+1];
     strncpy(this->id, id, strnlen(id, 200));
-    this->id[strnlen(id, 200)] = NULL;
+    this->id[strnlen(id, 200)] = '\0';
 }
 
 void mjObject::TieShaders(std::vector<mjShader*>& shaderList)

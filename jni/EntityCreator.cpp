@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Phong-shaded hallucinations. All rights reserved.
 //
 
-#include "entityCreator.h"
+#include "EntityCreator.h"
 
 using namespace mjEngine;
 

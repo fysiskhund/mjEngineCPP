@@ -3,6 +3,9 @@
 
 
 #include <string.h>
+#include <GLES2/gl2.h>
+#include <SDL2/SDL.h>
+
 
 #include "mjShader.h"
 #include "../core/mjVector3.h"

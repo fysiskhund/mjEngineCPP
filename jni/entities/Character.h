@@ -1,10 +1,15 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+#include <GLES2/gl2.h>
+#include <SDL2/SDL.h>
+
 #include "../core/mjObject.h"
 #include "../graphics/mjImageLoader.h"
 #include "../extLibs/logger/mjLog.h"
 using namespace mjEngine;
+
+
 
 
 class Character: public mjObject

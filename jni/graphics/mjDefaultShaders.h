@@ -5,8 +5,11 @@
  #ifndef MJDEFAULTSHADERS_H
 #define MJDEFAULTSHADERS_H
 
+#include <GLES2/gl2.h>
+#include <SDL2/SDL.h>
+
 #include "mjShader.h"
-#include "core/mjVector3.h"
+#include "../core/mjVector3.h"
 #include <string.h>
 
 #include "../extLibs/logger/mjLog.h"

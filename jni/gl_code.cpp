@@ -4,46 +4,8 @@
 
 // OpenGL ES 2.0 code
 
-#ifdef ANDROID
-#include <jni.h>
 
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
-#endif
-
-#include "extLibs/logger/mjLog.h"
-
-
-
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <unistd.h>
-
-
-
-
-
-
-#include "graphics/mjModel.h"
-#include "core/mjObject.h"
-#include "graphics/mjImageLoader.h"
-#include "graphics/mjDefaultShaders.h"
-#include "graphics/mjSkyboxShaders.h"
-#include "core/mjVector3.h"
-#include "etc/testImage.h"
-#include "extLibs/math/Matrix.h"
-#include "graphics/mj3rdPersonCamera.h"
-#include "graphics/mjSkybox.h"
-#include "physics/mjPhysics.h"
-#include "graphics/mjSceneGraph.h"
-#include "entities/Character.h"
-#include "Level.h"
-
-using namespace mjEngine;
-
-
+#include "gl_code.h"
 
 
 mjSkybox skybox;
@@ -71,7 +33,6 @@ mjVector3 cameraAnglesModifier;
 mjSceneGraph sceneGraph;
 
 Character* character;
-
 
 
 static void printGLString(const char *name, GLenum s) {
@@ -335,6 +296,7 @@ void PrintGLCapabilities()
 	printGLString("Extensions", GL_EXTENSIONS);
 }
 
+#ifdef ANDROID
 extern "C" {
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height);
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed);
@@ -427,4 +389,5 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv
 		character->jumping = 1;
 	}
 }
+#endif
 

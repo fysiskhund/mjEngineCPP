@@ -32,6 +32,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   physics/mjPhysics.cpp \
 				   physics/mjSphere.cpp \
 				   physics/mjAABB.cpp \
+				   physics/mjCollisionResult.cpp \
 				   physics/mjCollisionTests.cpp \
 				   physics/mjPhysicsEffect.cpp \
 				   core/mjObject.cpp \
