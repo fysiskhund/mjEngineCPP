@@ -15,11 +15,28 @@ int height = 512;
 
 int InitSDL(SDLStruct* sdlData) {
     SDL_Init(SDL_INIT_VIDEO);
+
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+
+
+    sdlData->window = SDL_CreateWindow("mjEngine", 0, 0, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+
+    sdlData->context = SDL_GL_CreateContext(sdlData->window);
+
+    printf("context: %p\n", sdlData->context);
+    if (!sdlData->context)
+    {
+    	SDL_GetError();
+    }
+
+
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-    sdlData->window = SDL_CreateWindow("mjEngine", 0, 0, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-    sdlData->context = SDL_GL_CreateContext(sdlData->window);
+
+
 
     return 0;
 }

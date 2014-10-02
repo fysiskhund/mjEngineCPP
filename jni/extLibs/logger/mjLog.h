@@ -12,7 +12,7 @@
 #endif
 #ifdef DESKTOP_SDL
 
-#define LOGI printf
+#define LOGI(...) printf(__VA_ARGS__); printf("\n");
 
 #endif
 

@@ -8,11 +8,11 @@
 #include "gl_code.h"
 
 
-mjSkybox skybox;
+mjSkybox* skybox;
 
-mj3rdPersonCamera camera;
+mj3rdPersonCamera* camera;
 
-mjDefaultShaders* defaultShaders = new mjDefaultShaders();
+mjDefaultShaders* defaultShaders;
 
 float projectionMatrix[16];
 
@@ -22,15 +22,15 @@ float ratio;
 bool debugMatrix = true;
 float theta = 0;
 
-Level level;
+Level* level;
 
 
-mjPhysics physics;
+mjPhysics* physics;
 
 
 mjVector3 cameraAnglesModifier;
 
-mjSceneGraph sceneGraph;
+mjSceneGraph* sceneGraph;
 
 Character* character;
 
@@ -63,6 +63,8 @@ void InitShaders()
 
 void SetUpSkybox()
 {
+	skybox = new mjSkybox();
+
 	mjImageLoader imgLoader;
 	mjModel* skyboxBox = new mjModel();
 	skyboxBox->LoadFromFile("/sdcard/mjEngineCPP/skybox.mesh.xml");
@@ -70,29 +72,35 @@ void SetUpSkybox()
 	mjModel* skyboxPlane = new mjModel();
 	skyboxPlane->LoadFromFile("/sdcard/mjEngineCPP/skybox_plane.mesh.xml");
 
-	skybox.SetModels(skyboxBox, skyboxPlane);
+	skybox->SetModels(skyboxBox, skyboxPlane);
 
-	skybox.LoadTexturesFromPrefix("/sdcard/mjEngineCPP/bluesky/skybox");
+	skybox->LoadTexturesFromPrefix("/sdcard/mjEngineCPP/bluesky/skybox");
 
 	char wanderingCloudName[1024];
 	for (int i = 0; i < 3; i++)
 	{
 		snprintf(wanderingCloudName, 1024, "%s%d%s",  "/sdcard/mjEngineCPP/bluesky/wandering_cloud", i, ".png");
 		GLuint tex0 = imgLoader.LoadToGLAndFreeMemory(wanderingCloudName);
-		skybox.PushLevel(new mjSkyboxLevelData(tex0, i, 0, 0.01*i+0.02, 0));
+		skybox->PushLevel(new mjSkyboxLevelData(tex0, i, 0, 0.01*i+0.02, 0));
 	}
 
 
 
 
-	skybox.SetCameraPos(&camera.pos);
+	skybox->SetCameraPos(&camera->pos);
 
 	LOGI("after SetCamerapos");
 }
 
 
 bool setupGraphics(int w, int h) {
-	sleep(3); // For debugger to be able to attach
+
+	defaultShaders = new mjDefaultShaders();
+	camera = new mj3rdPersonCamera();
+	level = new Level();
+	sceneGraph = new mjSceneGraph();
+	physics = new mjPhysics();
+
 	// Some adjustments
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
@@ -102,6 +110,9 @@ bool setupGraphics(int w, int h) {
 
     LOGI("setupGraphics(%d, %d)", w, h);
 
+
+
+
     glEnable(GL_DEPTH_TEST);
 
 
@@ -109,8 +120,8 @@ bool setupGraphics(int w, int h) {
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
 
-    level.LoadFromFile("/sdcard/mjEngineCPP/levels/testlevel.xml");
-    character = (Character*) level.GetEntityByID("character0");
+    level->LoadFromFile("/sdcard/mjEngineCPP/levels/testlevel.xml");
+    character = (Character*) level->GetEntityByID("character0");
     LOGI("character is at %p", character);
 
     
@@ -135,7 +146,7 @@ LOGI("Before first imgload");
 
 
 
-    character->gravity = &physics.gravity;
+    character->gravity = &physics->gravity;
 
     LOGI("Here2");
     character->modelOffset.Set(0,-0.825,0);
@@ -144,8 +155,8 @@ LOGI("Before first imgload");
     mjVector3 cameraOffset;
     cameraOffset.Set(0,0.7,0);
     LOGI("Here3");
-    camera.SetTarget(&character->pos, cameraOffset);
-    camera.r = 3;
+    camera->SetTarget(&character->pos, cameraOffset);
+    camera->r = 3;
 
     //charBoundStruct->SetCorners()
     //((mjSphere*) character.boundingStructure)->r = 0.5;
@@ -164,22 +175,22 @@ LOGI("Before first imgload");
 
     LOGI("setupSkybox");
     SetUpSkybox();
-    skybox.TieShaders(shaderList);
+    skybox->TieShaders(shaderList);
 
 
     LOGI("Adding entities");
-    for (int i = 0; i < level.entities.size(); i++)
+    for (int i = 0; i < level->entities.size(); i++)
     {
-        physics.AddObject(level.entities[i], 0);
-        sceneGraph.drawableObjects.push_back(level.entities[i]);
-        level.entities[i]->TieShaders(shaderList);
+        physics->AddObject(level->entities[i], 0);
+        sceneGraph->drawableObjects.push_back(level->entities[i]);
+        level->entities[i]->TieShaders(shaderList);
     }
     LOGI("Now adding terrain");
-    for (int i = 0; i < level.terrain.size(); i++)
+    for (int i = 0; i < level->terrain.size(); i++)
     {
-        physics.AddObject(level.terrain[i], 1);
-        sceneGraph.drawableObjects.push_back(level.terrain[i]);
-        level.terrain[i]->TieShaders(shaderList);
+        physics->AddObject(level->terrain[i], 1);
+        sceneGraph->drawableObjects.push_back(level->terrain[i]);
+        level->terrain[i]->TieShaders(shaderList);
     }
 
     LOGI("End of init");
@@ -200,28 +211,28 @@ void renderFrame(float t_elapsed) {
 		character->pos.y = 10;
 		character->vel.y = 0;
 	}
-	physics.Update(t_elapsed);
-	camera.Update(t_elapsed);
-	skybox.Update(t_elapsed);
+	physics->Update(t_elapsed);
+	camera->Update(t_elapsed);
+	skybox->Update(t_elapsed);
 	if (cameraAnglesModifier.GetNorm() > 0.2) {
-		camera.theta += -0.02*cameraAnglesModifier.y;
-		if (camera.theta > 6.283184)
-			camera.theta -= 6.283184;
-		else if (camera.theta < 0)
-			camera.theta = 6.283184 + camera.theta;
+		camera->theta += -0.02*cameraAnglesModifier.y;
+		if (camera->theta > 6.283184)
+			camera->theta -= 6.283184;
+		else if (camera->theta < 0)
+			camera->theta = 6.283184 + camera->theta;
 
-		camera.phi += -0.02*cameraAnglesModifier.x;
+		camera->phi += -0.02*cameraAnglesModifier.x;
 
-		if (camera.phi > 6.283184)
-			camera.phi -= 6.283184;
-		else if (camera.phi < 0)
-			camera.phi = 6.283184 + camera.phi;
+		if (camera->phi > 6.283184)
+			camera->phi -= 6.283184;
+		else if (camera->phi < 0)
+			camera->phi = 6.283184 + camera->phi;
 
 	} else
 	{
 		cameraAnglesModifier.Set0();
 	}
-	//LOGI("camera.dir: %3.3f, %3.3f, %3.3f", camera.dir.x, camera.dir.y, camera.dir.z);
+	//LOGI("camera->dir: %3.3f, %3.3f, %3.3f", camera->dir.x, camera->dir.y, camera->dir.z);
 	//character.Update(0.016);
 
 
@@ -236,12 +247,12 @@ void renderFrame(float t_elapsed) {
 
 
 
-    //camera.dir.Set(0,0,-1);
-    //camera.dir.Normalize();
-    //camera.pos.Set(0,1.6,8);
+    //camera->dir.Set(0,0,-1);
+    //camera->dir.Normalize();
+    //camera->pos.Set(0,1.6,8);
 
-    camera.GetLookAtMatrix(lookAtMatrix);
-    skybox.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    camera->GetLookAtMatrix(lookAtMatrix);
+    skybox->Draw(shaderList, lookAtMatrix, projectionMatrix);
 
 
     //Matrix4::DebugM("lookat", lookAtMatrix);
@@ -282,7 +293,7 @@ void renderFrame(float t_elapsed) {
     //box0.Draw(shaderList, lookAtMatrix, projectionMatrix);
     //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
 
-    sceneGraph.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    sceneGraph->Draw(shaderList, lookAtMatrix, projectionMatrix);
 
     //LOGI("After renderFrame");
     //character.Check();
@@ -333,7 +344,7 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 			mjVector3 outLeftDir;
 
 			//invGravity.Normalize();
-			mjMathHelper::GetForwardAndLeftDirections(camera.dir, physics.gravity, &outForwardDir, &outLeftDir);
+			mjMathHelper::GetForwardAndLeftDirections(camera->dir, physics->gravity, &outForwardDir, &outLeftDir);
 
 			mjVector3 finalForwardDir;
 			// The joystick directions need to be inverted because technically they are:
@@ -362,7 +373,7 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 				LOGI("Strange value in finalForwardDir - %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);
 			}
 			/*LOGI("initialDir %3.3f, %3.3f, %3.3f", dir.x, dir.y, dir.z);
-			LOGI("cameraDir %3.3f, %3.3f, %3.3f", camera.dir.x, camera.dir.y, camera.dir.z);
+			LOGI("cameraDir %3.3f, %3.3f, %3.3f", camera->dir.x, camera->dir.y, camera->dir.z);
 			LOGI("finalforwarddir %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);*/
 
 		} else {
