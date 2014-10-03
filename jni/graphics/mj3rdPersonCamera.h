@@ -2,7 +2,6 @@
 #define MJ3RDPERSONCAMERA_H
 
 #include <GLES2/gl2.h>
-#include <SDL2/SDL.h>
 
 #include "mjCamera.h"
 

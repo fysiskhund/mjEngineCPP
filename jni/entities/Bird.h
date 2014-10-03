@@ -11,7 +11,6 @@
 
 
 #include <GLES2/gl2.h>
-#include <SDL2/SDL.h>
 
 
 #include "../core/mjObject.h"
