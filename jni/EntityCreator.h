@@ -8,7 +8,6 @@
 
 #ifndef mjEngineCPP_EntityCreator_h
 #define mjEngineCPP_EntityCreator_h
-
 #include <string.h>
 #include <vector>
 

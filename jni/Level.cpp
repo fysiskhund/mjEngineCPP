@@ -40,7 +40,7 @@ void Level::Load(XMLDocument* doc)
 	XMLElement* terrainElement = docHandle.FirstChildElement("level").FirstChildElement("terrain").FirstChild().ToElement();
 	while (terrainElement)
 	{
-		LOGI("TerrainElement %s found, filling up details", terrainElement->Name());
+
 		mjObject* obj = NULL;
 
 		obj = terrainCreator.CreateTerrain(terrainElement->Name());
@@ -52,8 +52,15 @@ void Level::Load(XMLDocument* doc)
 				mjAABB* aabb = (mjAABB*) obj->boundingStructure;
 
                 obj->SetID(terrainElement->Attribute("id"));
+
+
+
 				ReadVector(terrainElement->FirstChildElement("mincorner"), &aabb->minCorner);
 				ReadVector(terrainElement->FirstChildElement("maxcorner"), &aabb->maxCorner);
+
+				LOGI("TerrainElement %s found [%3.3f %3.3f %3.3f] [%3.3f %3.3f %3.3f]", terrainElement->Name(),
+						aabb->minCorner.x, aabb->minCorner.y, aabb->minCorner.z,
+						aabb->maxCorner.x, aabb->maxCorner.y, aabb->maxCorner.z  );
 				aabb->UpdateCenter();
                 obj->MatchScaleToAABB();
 			}
