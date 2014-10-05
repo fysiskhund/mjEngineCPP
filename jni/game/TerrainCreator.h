@@ -12,9 +12,9 @@
 #include <string.h>
 #include <vector>
 
-#include "core/mjObject.h"
-#include "physics/mjBoundingStructure.h"
-#include "terrainTypes/Box.h"
+#include "../core/mjObject.h"
+#include "../physics/mjBoundingStructure.h"
+#include "../terrainTypes/Box.h"
 
 using namespace mjEngine;
 

@@ -1,7 +1,7 @@
 #include <GLES2/gl2.h>
 #include <SDL2/SDL.h>
 
-#include "../gl_code.h"
+#include "../game/gl_code.h"
 
 struct SDLStruct {
     SDL_Window *window;

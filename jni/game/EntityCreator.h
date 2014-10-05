@@ -11,10 +11,10 @@
 #include <string.h>
 #include <vector>
 
-#include "core/mjObject.h"
-#include "physics/mjBoundingStructure.h"
-#include "entities/Character.h"
-#include "entities/Bird.h"
+#include "../core/mjObject.h"
+#include "../physics/mjBoundingStructure.h"
+#include "../entities/Character.h"
+#include "../entities/Bird.h"
 
 using namespace mjEngine;
 

@@ -39,10 +39,10 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   entities/Character.cpp \
 				   entities/Bird.cpp \
 				   terrainTypes/Box.cpp \
-				   Level.cpp \
-				   TerrainCreator.cpp \
-				   EntityCreator.cpp \
-				   gl_code.cpp
+				   game/Level.cpp \
+				   game/TerrainCreator.cpp \
+				   game/EntityCreator.cpp \
+				   game/gl_code.cpp
 				   
 LOCAL_LDLIBS    := -llog -lGLESv2 -lz
 LOCAL_STATIC_LIBRARIES := png
