@@ -1,7 +1,6 @@
 #include "mjImageLoader.h"
 
 
-
 namespace mjEngine{
 
 mjImageLoader::mjImageLoader()
@@ -9,6 +8,26 @@ mjImageLoader::mjImageLoader()
 
 }
 
+#ifdef DESKTOP_SDL
+
+#define LoadWithSDL Load
+
+bool mjImageLoader::LoadWithSDL(const char* name)
+{
+
+    imageSurface = IMG_Load(name);
+
+	width = imageSurface->w;
+	height = imageSurface->h;
+
+	imageData = (GLubyte* ) imageSurface->pixels;
+
+	hasAlpha = SDL_ISPIXELFORMAT_ALPHA(imageSurface->format->format);
+
+	return 1;
+}
+
+#else
 
 bool mjImageLoader::Load(const char* name)
 {
@@ -146,6 +165,8 @@ bool mjImageLoader::Load(const char* name)
 	    return true;
 }
 
+#endif // SDL definition
+
 GLuint mjImageLoader::SendToGL(GLfloat textureWrapParam)
 {
 	GLuint textures[1];
@@ -170,7 +191,13 @@ GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName, GLfloat textur
 		result = SendToGL(textureWrapParam);
 		//LOGI("Loaded %s to texture %d",  fileName, result);
 
-		//delete [] imageData;
+#ifdef DESTKOP_SDL
+		SDL_FreeSurface()
+#else
+		delete [] imageData;
+#endif
+
+
 	}
 	return result;
 }

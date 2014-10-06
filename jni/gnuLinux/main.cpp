@@ -21,6 +21,11 @@ int InitSDL(SDLStruct* sdlData) {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 
 
+    SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32 );
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 4);
+
     sdlData->window = SDL_CreateWindow("mjEngine", 0, 0, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
     sdlData->context = SDL_GL_CreateContext(sdlData->window);
@@ -32,11 +37,23 @@ int InitSDL(SDLStruct* sdlData) {
     }
 
 
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+    int sizes;
 
+    glGetIntegerv(GL_RED_BITS, &sizes);
 
+    printf("Depths: %d,", sizes);
 
+    glGetIntegerv(GL_BLUE_BITS, &sizes);
+
+    printf(" %d,", sizes);
+
+    glGetIntegerv(GL_GREEN_BITS, &sizes);
+
+    printf(" %d,", sizes);
+
+    glGetIntegerv(GL_ALPHA_BITS, &sizes);
+
+    printf(" %d\n", sizes);
 
     return 0;
 }

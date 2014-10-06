@@ -10,8 +10,15 @@
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
 
+#ifdef DESKTOP_SDL
+#include <SDL2/SDL_image.h>
+#endif
+
+
 #include "../extLibs/png/include/png.h"
 #include "../extLibs/logger/mjLog.h"
+
+
 namespace mjEngine{
 
 class mjImageLoader
@@ -44,9 +51,15 @@ private:
 	int number_of_passes;
 	png_bytep * row_pointers;
 
+#ifdef DESKTOP_SDL
+	SDL_Surface* imageSurface;
+#endif
+
 	bool Load(const char *name);
 
 	GLuint SendToGL(GLfloat textureWrapParam);
+
+
 
 };
 

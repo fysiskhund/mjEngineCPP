@@ -11,7 +11,7 @@ SRC	  := $(foreach sdir,$(SRC_DIR),$(wildcard $(sdir)/*.cpp))
 OBJ	  := $(patsubst ./%.cpp,build/%.o,$(SRC))
 INCLUDES  := $(addprefix -I,$(SRC_DIR))
 
-CFLAGS	  := -DDESKTOP_SDL -g -std=c++11 -lSDL2 -lpng16 -lGLESv2
+CFLAGS	  := -DDESKTOP_SDL -g -std=c++11 -lSDL2 -lpng16 -lGLESv2 -lSDL2_image
 
 vpath %.cpp $(SRC_DIR)
 

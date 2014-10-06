@@ -94,6 +94,7 @@ void SetUpSkybox()
 
 
 bool setupGraphics(int w, int h) {
+	PrintGLCapabilities();
 
 	defaultShaders = new mjDefaultShaders();
 	camera = new mj3rdPersonCamera();
@@ -194,7 +195,7 @@ LOGI("Before first imgload");
     }
 
     LOGI("End of init");
-    
+    checkGlError("end of init");
     return true;
 }
 
@@ -295,6 +296,7 @@ void renderFrame(float t_elapsed) {
 
     sceneGraph->Draw(shaderList, lookAtMatrix, projectionMatrix);
 
+    checkGlError("afterFRame");
     //LOGI("After renderFrame");
     //character.Check();
 }

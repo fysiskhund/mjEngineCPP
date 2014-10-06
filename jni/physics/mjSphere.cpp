@@ -18,7 +18,7 @@ mjSphere::mjSphere(mjVector3* c, float r)
 	this->c = c;
 	this->r = r;
 
-	LOGI("sph: c = %p", c);
+	//LOGI("sph: c = %p", c);
 
 
 }
