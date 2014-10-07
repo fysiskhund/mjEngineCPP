@@ -1,0 +1,320 @@
+# depslib dependency file v1.0
+1412353317 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
+	"mjObject.h"
+
+1412353317 /common/github/mjEngineCPP/jni/core/mjObject.h
+	<vector>
+	"../core/mjVector3.h"
+	"../graphics/mjModel.h"
+	"../extLibs/math/Matrix.h"
+	"../physics/mjBoundingStructure.h"
+	"../physics/mjPhysicsEffect.h"
+	"../physics/mjSphere.h"
+	"../physics/mjAABB.h"
+
+1412353317 /common/github/mjEngineCPP/jni/core/mjVector3.h
+	<math.h>
+	<stdio.h>
+	"../extLibs/logger/mjLog.h"
+
+1412353317 /common/github/mjEngineCPP/jni/extLibs/logger/mjLog.h
+	<android/log.h>
+
+1412422019 /common/github/mjEngineCPP/jni/graphics/mjModel.h
+	<stdio.h>
+	<string.h>
+	<vector>
+	<GLES2/gl2.h>
+	"mjModelMesh.h"
+	"mjShader.h"
+	"../extLibs/math/Matrix.h"
+	"../extLibs/tinyxml/tinyxml2.h"
+
+1412353317 /common/github/mjEngineCPP/jni/graphics/mjModelMesh.h
+
+1412353317 /common/github/mjEngineCPP/jni/graphics/mjShader.h
+	"mjModelMesh.h"
+	"../core/mjVector3.h"
+	<GLES2/gl2.h>
+	<GLES2/gl2ext.h>
+	"../extLibs/logger/mjLog.h"
+
+1412353317 /common/github/mjEngineCPP/jni/extLibs/math/Matrix.h
+	"../../core/mjVector3.h"
+	<string.h>
+	"../logger/mjLog.h"
+
+1412353317 /common/github/mjEngineCPP/jni/extLibs/tinyxml/tinyxml2.h
+	<ctype.h>
+	<limits.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdarg.h>
+	<cctype>
+	<climits>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<cstdarg>
+	<android/log.h>
+	<assert.h>
+
+1412353317 /common/github/mjEngineCPP/jni/physics/mjBoundingStructure.h
+
+1412353317 /common/github/mjEngineCPP/jni/physics/mjPhysicsEffect.h
+	"../core/mjVector3.h"
+
+1412353317 /common/github/mjEngineCPP/jni/physics/mjSphere.h
+	"mjBoundingStructure.h"
+	"../core/mjVector3.h"
+	"../extLibs/logger/mjLog.h"
+
+1412353317 /common/github/mjEngineCPP/jni/physics/mjAABB.h
+	"mjBoundingStructure.h"
+	"../core/mjVector3.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/core/mjVector3.cpp
+	"mjVector3.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/entities/Bird.cpp
+	"Bird.h"
+
+1412422019 /common/github/mjEngineCPP/jni/entities/Bird.h
+	<GLES2/gl2.h>
+	"../core/mjObject.h"
+	"../graphics/mjImageLoader.h"
+
+1412637565 /common/github/mjEngineCPP/jni/graphics/mjImageLoader.h
+	<stdlib.h>
+	<stdarg.h>
+	<GLES2/gl2.h>
+	<GLES2/gl2ext.h>
+	<SDL2/SDL_image.h>
+	"../extLibs/png/include/png.h"
+	"../extLibs/logger/mjLog.h"
+
+1412353317 /common/github/mjEngineCPP/jni/extLibs/png/include/png.h
+	"zlib.h"
+	"pngconf.h"
+
+1412353317 /common/github/mjEngineCPP/jni/extLibs/png/include/pngconf.h
+	<limits.h>
+	"config.h"
+	"pngusr.h"
+	<stdio.h>
+	<stdio.h>
+	<sys/types.h>
+	<setjmp.h>
+	<strings.h>
+	<string.h>
+	<time.h>
+	<dos.h>
+
+1412420221 source:/common/github/mjEngineCPP/jni/entities/Character.cpp
+	"Character.h"
+
+1412422019 /common/github/mjEngineCPP/jni/entities/Character.h
+	<GLES2/gl2.h>
+	"../core/mjObject.h"
+	"../graphics/mjImageLoader.h"
+	"../extLibs/logger/mjLog.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/extLibs/math/Matrix.cpp
+	"Matrix.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/extLibs/math/mjMathHelper.cpp
+	"mjMathHelper.h"
+
+1412353317 /common/github/mjEngineCPP/jni/extLibs/math/mjMathHelper.h
+	"../../core/mjVector3.h"
+	"../logger/mjLog.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/extLibs/tinyxml/tinyxml2.cpp
+	"tinyxml2.h"
+	<new>
+	<stddef.h>
+	<cstddef>
+
+1412353317 source:/common/github/mjEngineCPP/jni/game/EntityCreator.cpp
+	"EntityCreator.h"
+
+1412541252 /common/github/mjEngineCPP/jni/game/EntityCreator.h
+	<string.h>
+	<vector>
+	"../core/mjObject.h"
+	"../physics/mjBoundingStructure.h"
+	"../entities/Character.h"
+	"../entities/Bird.h"
+
+1412637683 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
+	"gl_code.h"
+
+1412541200 /common/github/mjEngineCPP/jni/game/gl_code.h
+	<jni.h>
+	<GLES2/gl2.h>
+	<GLES2/gl2ext.h>
+	"../extLibs/logger/mjLog.h"
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<unistd.h>
+	"../graphics/mjModel.h"
+	"../core/mjObject.h"
+	"../graphics/mjImageLoader.h"
+	"../graphics/mjDefaultShaders.h"
+	"../graphics/mjSkyboxShaders.h"
+	"../core/mjVector3.h"
+	"../extLibs/math/Matrix.h"
+	"../graphics/mj3rdPersonCamera.h"
+	"../graphics/mjSkybox.h"
+	"../physics/mjPhysics.h"
+	"../graphics/mjSceneGraph.h"
+	"../entities/Character.h"
+	"Level.h"
+
+1412422019 /common/github/mjEngineCPP/jni/graphics/mjDefaultShaders.h
+	<GLES2/gl2.h>
+	"mjShader.h"
+	"../core/mjVector3.h"
+	<string.h>
+	"../extLibs/logger/mjLog.h"
+
+1412422019 /common/github/mjEngineCPP/jni/graphics/mjSkyboxShaders.h
+	<string.h>
+	<GLES2/gl2.h>
+	"mjShader.h"
+	"../core/mjVector3.h"
+
+1412422019 /common/github/mjEngineCPP/jni/graphics/mj3rdPersonCamera.h
+	<GLES2/gl2.h>
+	"mjCamera.h"
+
+1412422019 /common/github/mjEngineCPP/jni/graphics/mjCamera.h
+	<GLES2/gl2.h>
+	"../core/mjObject.h"
+
+1412422019 /common/github/mjEngineCPP/jni/graphics/mjSkybox.h
+	<vector>
+	<GLES2/gl2.h>
+	"../core/mjObject.h"
+	"mjImageLoader.h"
+	"mjSkyboxLevelData.h"
+
+1412353317 /common/github/mjEngineCPP/jni/graphics/mjSkyboxLevelData.h
+	<GLES2/gl2.h>
+	<GLES2/gl2ext.h>
+	"../extLibs/logger/mjLog.h"
+
+1412353317 /common/github/mjEngineCPP/jni/physics/mjPhysics.h
+	<vector>
+	"../core/mjVector3.h"
+	"../core/mjObject.h"
+	"mjCollisionResult.h"
+	"mjCollisionTests.h"
+	"../extLibs/logger/mjLog.h"
+
+1412353317 /common/github/mjEngineCPP/jni/physics/mjCollisionResult.h
+	"mjPhysicsEffect.h"
+
+1412353317 /common/github/mjEngineCPP/jni/physics/mjCollisionTests.h
+	<math.h>
+	"../core/mjVector3.h"
+	"mjCollisionResult.h"
+	"mjSphere.h"
+	"mjAABB.h"
+	"../extLibs/math/mjMathHelper.h"
+	"../extLibs/logger/mjLog.h"
+
+1412353317 /common/github/mjEngineCPP/jni/graphics/mjSceneGraph.h
+	<vector>
+	"../core/mjObject.h"
+	"../graphics/mjShader.h"
+
+1412541285 /common/github/mjEngineCPP/jni/game/Level.h
+	<vector>
+	"../extLibs/tinyxml/tinyxml2.h"
+	"../core/mjObject.h"
+	"EntityCreator.h"
+	"TerrainCreator.h"
+	"../core/mjVector3.h"
+	<string.h>
+
+1412541262 /common/github/mjEngineCPP/jni/game/TerrainCreator.h
+	<string.h>
+	<vector>
+	"../core/mjObject.h"
+	"../physics/mjBoundingStructure.h"
+	"../terrainTypes/Box.h"
+
+1412422019 /common/github/mjEngineCPP/jni/terrainTypes/Box.h
+	<GLES2/gl2.h>
+	"../core/mjObject.h"
+	"../extLibs/logger/mjLog.h"
+	"../graphics/mjImageLoader.h"
+
+1412539578 source:/common/github/mjEngineCPP/jni/game/Level.cpp
+	"Level.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/game/TerrainCreator.cpp
+	"TerrainCreator.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/graphics/mj3rdPersonCamera.cpp
+	"mj3rdPersonCamera.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjCamera.cpp
+	"mjCamera.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjDefaultShaders.cpp
+	"mjDefaultShaders.h"
+
+1412637585 source:/common/github/mjEngineCPP/jni/graphics/mjImageLoader.cpp
+	"mjImageLoader.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjModel.cpp
+	"mjModel.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjModelMesh.cpp
+	"mjModelMesh.h"
+
+1412635288 source:/common/github/mjEngineCPP/jni/graphics/mjSceneGraph.cpp
+	"mjSceneGraph.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjShader.cpp
+	"mjShader.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjSkybox.cpp
+	"mjSkybox.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjSkyboxLevelData.cpp
+	"mjSkyboxLevelData.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjSkyboxShaders.cpp
+	"mjSkyboxShaders.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/physics/mjAABB.cpp
+	"mjAABB.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/physics/mjCollisionResult.cpp
+	"mjCollisionResult.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/physics/mjCollisionTests.cpp
+	"mjCollisionTests.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/physics/mjPhysics.cpp
+	"mjPhysics.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/physics/mjPhysicsEffect.cpp
+	"mjPhysicsEffect.h"
+
+1412632725 source:/common/github/mjEngineCPP/jni/physics/mjSphere.cpp
+	"mjSphere.h"
+
+1412353317 source:/common/github/mjEngineCPP/jni/terrainTypes/Box.cpp
+	"Box.h"
+
+1412634841 source:/common/github/mjEngineCPP/jni/gnuLinux/main.cpp
+	<GLES2/gl2.h>
+	<SDL2/SDL.h>
+	"../game/gl_code.h"
+

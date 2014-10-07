@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="mjEngine" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="build/Debug/mjEngine" prefix_auto="1" extension_auto="1" />
+				<Option object_output="build/obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-DDESKTOP_SDL" />
+				</Compiler>
+				<Linker>
+					<Add library="SDL2" />
+					<Add library="png16" />
+					<Add library="GLESv2" />
+					<Add library="SDL2_image" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="build/bin/Release/mjEngine" prefix_auto="1" extension_auto="1" />
+				<Option object_output="build/obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../core/mjInput.h" />
+		<Unit filename="../core/mjObject.cpp" />
+		<Unit filename="../core/mjObject.h" />
+		<Unit filename="../core/mjScene.h" />
+		<Unit filename="../core/mjVector3.cpp" />
+		<Unit filename="../core/mjVector3.h" />
+		<Unit filename="../entities/Bird.cpp" />
+		<Unit filename="../entities/Bird.h" />
+		<Unit filename="../entities/Character.cpp" />
+		<Unit filename="../entities/Character.h" />
+		<Unit filename="../extLibs/logger/mjLog.h" />
+		<Unit filename="../extLibs/math/Matrix.cpp" />
+		<Unit filename="../extLibs/math/Matrix.h" />
+		<Unit filename="../extLibs/math/mjMathHelper.cpp" />
+		<Unit filename="../extLibs/math/mjMathHelper.h" />
+		<Unit filename="../extLibs/png/include/png.h" />
+		<Unit filename="../extLibs/tinyxml/tinyxml2.cpp" />
+		<Unit filename="../extLibs/tinyxml/tinyxml2.h" />
+		<Unit filename="../game/EntityCreator.cpp" />
+		<Unit filename="../game/EntityCreator.h" />
+		<Unit filename="../game/Level.cpp" />
+		<Unit filename="../game/Level.h" />
+		<Unit filename="../game/TerrainCreator.cpp" />
+		<Unit filename="../game/TerrainCreator.h" />
+		<Unit filename="../game/gl_code.cpp" />
+		<Unit filename="../game/gl_code.h" />
+		<Unit filename="../graphics/mj3rdPersonCamera.cpp" />
+		<Unit filename="../graphics/mj3rdPersonCamera.h" />
+		<Unit filename="../graphics/mjCamera.cpp" />
+		<Unit filename="../graphics/mjCamera.h" />
+		<Unit filename="../graphics/mjDefaultShaders.cpp" />
+		<Unit filename="../graphics/mjDefaultShaders.h" />
+		<Unit filename="../graphics/mjImageLoader.cpp" />
+		<Unit filename="../graphics/mjImageLoader.h" />
+		<Unit filename="../graphics/mjModel.cpp" />
+		<Unit filename="../graphics/mjModel.h" />
+		<Unit filename="../graphics/mjModelMesh.cpp" />
+		<Unit filename="../graphics/mjModelMesh.h" />
+		<Unit filename="../graphics/mjSceneGraph.cpp" />
+		<Unit filename="../graphics/mjSceneGraph.h" />
+		<Unit filename="../graphics/mjShader.cpp" />
+		<Unit filename="../graphics/mjShader.h" />
+		<Unit filename="../graphics/mjSkybox.cpp" />
+		<Unit filename="../graphics/mjSkybox.h" />
+		<Unit filename="../graphics/mjSkyboxLevelData.cpp" />
+		<Unit filename="../graphics/mjSkyboxLevelData.h" />
+		<Unit filename="../graphics/mjSkyboxShaders.cpp" />
+		<Unit filename="../graphics/mjSkyboxShaders.h" />
+		<Unit filename="../physics/mjAABB.cpp" />
+		<Unit filename="../physics/mjAABB.h" />
+		<Unit filename="../physics/mjBoundingStructure.h" />
+		<Unit filename="../physics/mjCollisionResult.cpp" />
+		<Unit filename="../physics/mjCollisionResult.h" />
+		<Unit filename="../physics/mjCollisionTests.cpp" />
+		<Unit filename="../physics/mjCollisionTests.h" />
+		<Unit filename="../physics/mjPhysics.cpp" />
+		<Unit filename="../physics/mjPhysics.h" />
+		<Unit filename="../physics/mjPhysicsEffect.cpp" />
+		<Unit filename="../physics/mjPhysicsEffect.h" />
+		<Unit filename="../physics/mjSphere.cpp" />
+		<Unit filename="../physics/mjSphere.h" />
+		<Unit filename="../terrainTypes/Box.cpp" />
+		<Unit filename="../terrainTypes/Box.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
