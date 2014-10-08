@@ -77,12 +77,12 @@ void SetUpSkybox()
 	skybox->LoadTexturesFromPrefix("/sdcard/mjEngineCPP/bluesky/skybox");
 
 	char wanderingCloudName[1024];
-	for (int i = 0; i < 3; i++)
+	/*for (int i = 0; i < 3; i++)
 	{
 		snprintf(wanderingCloudName, 1024, "%s%d%s",  "/sdcard/mjEngineCPP/bluesky/wandering_cloud", i, ".png");
 		GLuint tex0 = imgLoader.LoadToGLAndFreeMemory(wanderingCloudName);
 		skybox->PushLevel(new mjSkyboxLevelData(tex0, i, 0, 0.01*i+0.02, 0));
-	}
+	}*/
 
 
 
