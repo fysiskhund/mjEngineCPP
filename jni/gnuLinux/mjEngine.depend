@@ -147,7 +147,7 @@
 	"../entities/Character.h"
 	"../entities/Bird.h"
 
-1412637683 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
+1412805969 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
 	"gl_code.h"
 
 1412541200 /common/github/mjEngineCPP/jni/game/gl_code.h
@@ -317,4 +317,22 @@
 	<GLES2/gl2.h>
 	<SDL2/SDL.h>
 	"../game/gl_code.h"
+
+1412891998 source:/common/github/mjEngineCPP/jni/ai/mjAutomaton.cpp
+	"mjAutomaton.h"
+
+1412892030 /common/github/mjEngineCPP/jni/ai/mjAutomaton.h
+	<vector>
+	"mjAutomatonState.h"
+
+1412892439 /common/github/mjEngineCPP/jni/ai/mjAutomatonState.h
+
+1412892380 source:/common/github/mjEngineCPP/jni/ai/mjAutomatonState.cpp
+	"mjAutomatonState.h"
+
+1412890586 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
+	"BatBot.h"
+
+1412892101 /common/github/mjEngineCPP/jni/entities/BatBot.h
+	"../core/mjObject.h"
 
