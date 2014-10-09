@@ -16,6 +16,7 @@
 					<Add option="-g" />
 					<Add option="-DDESKTOP_SDL" />
 					<Add directory="entities" />
+					<Add directory="ai" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -32,6 +33,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="entities" />
+					<Add directory="ai" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -41,6 +43,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../ai/mjAutomaton.cpp" />
+		<Unit filename="../ai/mjAutomaton.h" />
+		<Unit filename="../ai/mjAutomatonState.cpp" />
+		<Unit filename="../ai/mjAutomatonState.h" />
 		<Unit filename="../core/mjInput.h" />
 		<Unit filename="../core/mjObject.cpp" />
 		<Unit filename="../core/mjObject.h" />
