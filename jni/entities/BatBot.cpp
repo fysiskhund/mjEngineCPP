@@ -5,12 +5,8 @@ BatBot::BatBot()
     //ctor
 }
 
-BatBot::~BatBot()
-{
-    //dtor
-}
 
-BatBot::BatBot(const BatBot& other)
+/*BatBot::BatBot(const BatBot& other)
 {
     //copy ctor
-}
+}*/

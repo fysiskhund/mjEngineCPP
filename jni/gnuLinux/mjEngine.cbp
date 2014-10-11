@@ -55,6 +55,10 @@
 		<Unit filename="../core/mjVector3.h" />
 		<Unit filename="../entities/BatBot.cpp" />
 		<Unit filename="../entities/BatBot.h" />
+		<Unit filename="../entities/BatMaton.cpp" />
+		<Unit filename="../entities/BatMaton.h" />
+		<Unit filename="../entities/BatMatonState.cpp" />
+		<Unit filename="../entities/BatMatonState.h" />
 		<Unit filename="../entities/Bird.cpp" />
 		<Unit filename="../entities/Bird.h" />
 		<Unit filename="../entities/Character.cpp" />

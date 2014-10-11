@@ -318,21 +318,27 @@
 	<SDL2/SDL.h>
 	"../game/gl_code.h"
 
-1412891998 source:/common/github/mjEngineCPP/jni/ai/mjAutomaton.cpp
+1412892953 source:/common/github/mjEngineCPP/jni/ai/mjAutomaton.cpp
 	"mjAutomaton.h"
 
 1412892030 /common/github/mjEngineCPP/jni/ai/mjAutomaton.h
 	<vector>
 	"mjAutomatonState.h"
 
-1412892439 /common/github/mjEngineCPP/jni/ai/mjAutomatonState.h
+1412892873 /common/github/mjEngineCPP/jni/ai/mjAutomatonState.h
 
-1412892380 source:/common/github/mjEngineCPP/jni/ai/mjAutomatonState.cpp
+1412892919 source:/common/github/mjEngineCPP/jni/ai/mjAutomatonState.cpp
 	"mjAutomatonState.h"
 
-1412890586 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
+1413032611 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
 	"BatBot.h"
 
-1412892101 /common/github/mjEngineCPP/jni/entities/BatBot.h
+1413032603 /common/github/mjEngineCPP/jni/entities/BatBot.h
 	"../core/mjObject.h"
+
+1413029022 source:/common/github/mjEngineCPP/jni/entities/BatMaton.cpp
+	"BatMaton.h"
+
+1413033016 /common/github/mjEngineCPP/jni/entities/BatMaton.h
+	"../ai/mjAutomaton.h"
 

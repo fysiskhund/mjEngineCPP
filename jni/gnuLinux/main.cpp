@@ -86,7 +86,7 @@ void QuitSDL(SDLStruct* sdlData) {
     return;
 }
 
-int main() {
+int main(int argc, char** argv) {
     SDLStruct data;
 
     InitSDL(&data);

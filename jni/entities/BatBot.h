@@ -9,8 +9,7 @@ class BatBot: public mjObject
 {
     public:
         BatBot();
-        ~BatBot();
-        BatBot(const BatBot& other);
+        //BatBot(const BatBot& other);
     protected:
     private:
 };
