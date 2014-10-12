@@ -15,6 +15,8 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := mjengine
 LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
+				   ai/mjAutomaton.cpp \
+				   ai/mjAutomatonState.cpp \
 				   core/mjVector3.cpp \
 				   graphics/mjCamera.cpp \
 				   graphics/mj3rdPersonCamera.cpp \
@@ -40,6 +42,9 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   entities/Character.cpp \
 				   entities/Bird.cpp \
 				   entities/BatBot.cpp \
+				   entities/BatMaton.cpp \
+				   entities/BatMatonState.cpp \
+				   entities/batMatonStates/WanderBatMatonState.cpp \
 				   terrainTypes/Box.cpp \
 				   game/Level.cpp \
 				   game/TerrainCreator.cpp \

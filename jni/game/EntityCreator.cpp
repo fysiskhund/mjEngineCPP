@@ -68,7 +68,7 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
             return new Bird();
             break;
         case 2:
-            return new BatBot();
+            return new BatBot(levelData);
             break;
         default:
             return NULL;

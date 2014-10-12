@@ -1,6 +1,6 @@
 #include "BatMaton.h"
 
-BatMaton::BatMaton()
+BatMaton::BatMaton(Level* levelData)
 {
-    //ctor
+    this->levelData = levelData;
 }

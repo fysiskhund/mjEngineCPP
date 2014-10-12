@@ -335,18 +335,20 @@
 1412892919 source:/common/github/mjEngineCPP/jni/ai/mjAutomatonState.cpp
 	"mjAutomatonState.h"
 
-1413144288 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
+1413151272 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
 	"BatBot.h"
 
-1413144278 /common/github/mjEngineCPP/jni/entities/BatBot.h
+1413151214 /common/github/mjEngineCPP/jni/entities/BatBot.h
 	"../core/mjObject.h"
 	"../game/Level.h"
-
-1413029022 source:/common/github/mjEngineCPP/jni/entities/BatMaton.cpp
 	"BatMaton.h"
 
-1413033016 /common/github/mjEngineCPP/jni/entities/BatMaton.h
+1413150817 source:/common/github/mjEngineCPP/jni/entities/BatMaton.cpp
+	"BatMaton.h"
+
+1413150804 /common/github/mjEngineCPP/jni/entities/BatMaton.h
 	"../ai/mjAutomaton.h"
+	"../game/Level.h"
 
 1413036048 source:/common/github/mjEngineCPP/jni/entities/BatMatonState.cpp
 	"BatMatonState.h"
@@ -361,4 +363,10 @@
 1413145856 /common/github/mjEngineCPP/jni/extLibs/util/mjXMLHelper.h
 	"../../core/mjVector3.h"
 	"../tinyxml/tinyxml2.h"
+
+1413151347 source:/common/github/mjEngineCPP/jni/entities/batMatonStates/WanderBatMatonState.cpp
+	"WanderBatMatonState.h"
+
+1413151329 /common/github/mjEngineCPP/jni/entities/batMatonStates/WanderBatMatonState.h
+	"../BatMatonState.h"
 

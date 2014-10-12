@@ -1,8 +1,9 @@
 #include "BatBot.h"
 
-BatBot::BatBot()
+BatBot::BatBot(Level* levelData)
+:BatMaton(levelData)
 {
-
+    this->levelData = levelData;
 }
 
 

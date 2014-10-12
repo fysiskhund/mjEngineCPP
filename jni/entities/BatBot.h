@@ -3,14 +3,15 @@
 
 #include "../core/mjObject.h"
 #include "../game/Level.h"
+#include "BatMaton.h"
 
 
 using namespace mjEngine;
 
-class BatBot: public mjObject
+class BatBot: public mjObject, public BatMaton
 {
     public:
-        BatBot();
+        BatBot(Level* levelData);
         //BatBot(const BatBot& other);
         Level* levelData;
     protected:

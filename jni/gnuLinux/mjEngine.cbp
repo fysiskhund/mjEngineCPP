@@ -18,6 +18,7 @@
 					<Add directory="entities" />
 					<Add directory="ai" />
 					<Add directory="extLibs/util" />
+					<Add directory="entities/batMatonStates" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -36,6 +37,7 @@
 					<Add directory="entities" />
 					<Add directory="ai" />
 					<Add directory="extLibs/util" />
+					<Add directory="entities/batMatonStates" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -65,6 +67,8 @@
 		<Unit filename="../entities/Bird.h" />
 		<Unit filename="../entities/Character.cpp" />
 		<Unit filename="../entities/Character.h" />
+		<Unit filename="../entities/batMatonStates/WanderBatMatonState.cpp" />
+		<Unit filename="../entities/batMatonStates/WanderBatMatonState.h" />
 		<Unit filename="../extLibs/logger/mjLog.h" />
 		<Unit filename="../extLibs/math/Matrix.cpp" />
 		<Unit filename="../extLibs/math/Matrix.h" />
