@@ -85,7 +85,7 @@ void mjObject::ProcessPhysicsEffects(float t_elapsed)
 {
 	accel.Set0();
 
-	for (int i = 0; i < effectStack.size(); i++)
+	for (unsigned i = 0; i < effectStack.size(); i++)
 	{
 		switch(effectStack[i]->type)
 		{
@@ -113,7 +113,7 @@ void mjObject::ProcessCollisionEffects()
 {
 	if (!boundingStructure->isImmovable)
 	{
-		for (int i=0; i < collisionStack.size(); i++)//(mjPhysicsEffect collisionEffect:collisionStack)
+		for (unsigned i=0; i < collisionStack.size(); i++)//(mjPhysicsEffect collisionEffect:collisionStack)
 		{
 			mjPhysicsEffect* collisionEffect = collisionStack[i];
 			switch(collisionEffect->action)
@@ -222,7 +222,7 @@ void mjObject::UpdatePosition(float t_elapsed)
         if (model && boundingStructure->type == MJ_AABB)
         {
             mjAABB* boundingStruct = ((mjAABB*)boundingStructure);
-            
+
             boundingStruct->minCorner.Set(model->bounds[0],model->bounds[1],model->bounds[2]);
             boundingStruct->maxCorner.Set(model->bounds[3],model->bounds[4],model->bounds[5]);
         }

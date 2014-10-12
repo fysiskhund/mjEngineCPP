@@ -31,6 +31,7 @@
 #include "../graphics/mjSceneGraph.h"
 #include "../entities/Character.h"
 #include "Level.h"
+#include "EntityCreator.h"
 
 using namespace mjEngine;
 

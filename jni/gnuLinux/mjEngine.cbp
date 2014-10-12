@@ -17,6 +17,7 @@
 					<Add option="-DDESKTOP_SDL" />
 					<Add directory="entities" />
 					<Add directory="ai" />
+					<Add directory="extLibs/util" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -34,6 +35,7 @@
 					<Add option="-O2" />
 					<Add directory="entities" />
 					<Add directory="ai" />
+					<Add directory="extLibs/util" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -71,6 +73,8 @@
 		<Unit filename="../extLibs/png/include/png.h" />
 		<Unit filename="../extLibs/tinyxml/tinyxml2.cpp" />
 		<Unit filename="../extLibs/tinyxml/tinyxml2.h" />
+		<Unit filename="../extLibs/util/mjXMLHelper.cpp" />
+		<Unit filename="../extLibs/util/mjXMLHelper.h" />
 		<Unit filename="../game/EntityCreator.cpp" />
 		<Unit filename="../game/EntityCreator.h" />
 		<Unit filename="../game/Level.cpp" />

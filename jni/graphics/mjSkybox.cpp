@@ -120,7 +120,7 @@ void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 
 	model = planeModel;
 	//LOGI("planeModel 0x%x, mesh 0x%x", model, model->meshes.at(0));
-	for(int i = 0; i < levels.size(); i++)
+	for(unsigned i = 0; i < levels.size(); i++)
 	{
 		mjSkyboxLevelData* data = levels.at(i);
 		//LOGI("data: 0x%x, tex: %d", data, data->texture);

@@ -3,7 +3,7 @@
 CC	   := g++
 LD	   := g++
 
-MODULES   := game gnuLinux core entities extLibs graphics physics terrainTypes extLibs/logger extLibs/math extLibs/png/include  extLibs/tinyxml
+MODULES   := game gnuLinux ai core entities extLibs graphics physics terrainTypes extLibs/logger extLibs/math extLibs/png/include  extLibs/tinyxml extLibs/util
 SRC_DIR   := $(addprefix ./,$(MODULES))
 BUILD_DIR := $(addprefix build/,$(MODULES))
 

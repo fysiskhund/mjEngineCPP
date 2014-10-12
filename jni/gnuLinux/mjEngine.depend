@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1412353317 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
+1413143806 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
 	"mjObject.h"
 
 1412353317 /common/github/mjEngineCPP/jni/core/mjObject.h
@@ -136,21 +136,25 @@
 	<stddef.h>
 	<cstddef>
 
-1412353317 source:/common/github/mjEngineCPP/jni/game/EntityCreator.cpp
+1413148122 source:/common/github/mjEngineCPP/jni/game/EntityCreator.cpp
 	"EntityCreator.h"
 
-1412541252 /common/github/mjEngineCPP/jni/game/EntityCreator.h
+1413148113 /common/github/mjEngineCPP/jni/game/EntityCreator.h
 	<string.h>
 	<vector>
 	"../core/mjObject.h"
 	"../physics/mjBoundingStructure.h"
 	"../entities/Character.h"
 	"../entities/Bird.h"
+	"../entities/BatBot.h"
+	"Level.h"
+	"../extLibs/tinyxml/tinyxml2.h"
+	"../extLibs/util/mjXMLHelper.h"
 
-1412805969 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
+1413148061 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
 	"gl_code.h"
 
-1412541200 /common/github/mjEngineCPP/jni/game/gl_code.h
+1413147386 /common/github/mjEngineCPP/jni/game/gl_code.h
 	<jni.h>
 	<GLES2/gl2.h>
 	<GLES2/gl2ext.h>
@@ -172,6 +176,7 @@
 	"../graphics/mjSceneGraph.h"
 	"../entities/Character.h"
 	"Level.h"
+	"EntityCreator.h"
 
 1412422019 /common/github/mjEngineCPP/jni/graphics/mjDefaultShaders.h
 	<GLES2/gl2.h>
@@ -231,14 +236,14 @@
 	"../core/mjObject.h"
 	"../graphics/mjShader.h"
 
-1412541285 /common/github/mjEngineCPP/jni/game/Level.h
+1413147998 /common/github/mjEngineCPP/jni/game/Level.h
 	<vector>
 	"../extLibs/tinyxml/tinyxml2.h"
 	"../core/mjObject.h"
-	"EntityCreator.h"
 	"TerrainCreator.h"
 	"../core/mjVector3.h"
 	<string.h>
+	"../extLibs/util/mjXMLHelper.h"
 
 1412541262 /common/github/mjEngineCPP/jni/game/TerrainCreator.h
 	<string.h>
@@ -253,7 +258,7 @@
 	"../extLibs/logger/mjLog.h"
 	"../graphics/mjImageLoader.h"
 
-1412539578 source:/common/github/mjEngineCPP/jni/game/Level.cpp
+1413148002 source:/common/github/mjEngineCPP/jni/game/Level.cpp
 	"Level.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/game/TerrainCreator.cpp
@@ -283,7 +288,7 @@
 1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjShader.cpp
 	"mjShader.h"
 
-1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjSkybox.cpp
+1413144524 source:/common/github/mjEngineCPP/jni/graphics/mjSkybox.cpp
 	"mjSkybox.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjSkyboxLevelData.cpp
@@ -313,7 +318,7 @@
 1412353317 source:/common/github/mjEngineCPP/jni/terrainTypes/Box.cpp
 	"Box.h"
 
-1412634841 source:/common/github/mjEngineCPP/jni/gnuLinux/main.cpp
+1413032715 source:/common/github/mjEngineCPP/jni/gnuLinux/main.cpp
 	<GLES2/gl2.h>
 	<SDL2/SDL.h>
 	"../game/gl_code.h"
@@ -330,15 +335,30 @@
 1412892919 source:/common/github/mjEngineCPP/jni/ai/mjAutomatonState.cpp
 	"mjAutomatonState.h"
 
-1413032611 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
+1413144288 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
 	"BatBot.h"
 
-1413032603 /common/github/mjEngineCPP/jni/entities/BatBot.h
+1413144278 /common/github/mjEngineCPP/jni/entities/BatBot.h
 	"../core/mjObject.h"
+	"../game/Level.h"
 
 1413029022 source:/common/github/mjEngineCPP/jni/entities/BatMaton.cpp
 	"BatMaton.h"
 
 1413033016 /common/github/mjEngineCPP/jni/entities/BatMaton.h
 	"../ai/mjAutomaton.h"
+
+1413036048 source:/common/github/mjEngineCPP/jni/entities/BatMatonState.cpp
+	"BatMatonState.h"
+
+1413036014 /common/github/mjEngineCPP/jni/entities/BatMatonState.h
+	"../ai/mjAutomatonState.h"
+	"../game/Level.h"
+
+1413145848 source:/common/github/mjEngineCPP/jni/extLibs/util/mjXMLHelper.cpp
+	"mjXMLHelper.h"
+
+1413145856 /common/github/mjEngineCPP/jni/extLibs/util/mjXMLHelper.h
+	"../../core/mjVector3.h"
+	"../tinyxml/tinyxml2.h"
 

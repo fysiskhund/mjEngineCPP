@@ -1,8 +1,8 @@
 #include "BatMatonState.h"
 
-BatMatonState::BatMatonState()
+BatMatonState::BatMatonState(Level* levelData)
 {
-    //ctor
+    this->levelData = levelData;
 }
 
 BatMatonState::~BatMatonState()

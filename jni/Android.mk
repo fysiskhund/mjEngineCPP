@@ -20,6 +20,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   graphics/mj3rdPersonCamera.cpp \
 				   extLibs/math/Matrix.cpp \
 				   extLibs/math/mjMathHelper.cpp \
+				   extLibs/util/mjXMLHelper.cpp \
 				   graphics/mjImageLoader.cpp \
 				   graphics/mjModel.cpp \
 				   graphics/mjModelMesh.cpp \
@@ -38,6 +39,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   core/mjObject.cpp \
 				   entities/Character.cpp \
 				   entities/Bird.cpp \
+				   entities/BatBot.cpp \
 				   terrainTypes/Box.cpp \
 				   game/Level.cpp \
 				   game/TerrainCreator.cpp \

@@ -4,14 +4,15 @@
 #include <vector>
 #include "../extLibs/tinyxml/tinyxml2.h"
 #include "../core/mjObject.h"
-#include "EntityCreator.h"
+//#include "EntityCreator.h"
 #include "TerrainCreator.h"
 
 //#include "..Box.h"
 #include "../core/mjVector3.h"
 #include <string.h>
 
-using namespace mjEngine;
+#include "../extLibs/util/mjXMLHelper.h"
+
 
 using namespace tinyxml2;
 
@@ -25,9 +26,11 @@ public:
 	void LoadFromFile(const char* fileName);
 	void Load(XMLDocument* doc);
     mjObject* GetEntityByID(const char* ID);
+
+    XMLDocument doc;
 private:
-    void ReadVector(XMLElement* element, mjVector3* v);
-    EntityCreator entityCreator;
+
+    //EntityCreator entityCreator;
     TerrainCreator terrainCreator;
 
 };

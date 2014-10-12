@@ -34,6 +34,8 @@ mjSceneGraph* sceneGraph;
 
 Character* character;
 
+EntityCreator entityCreator;
+
 
 static void printGLString(const char *name, GLenum s) {
     const char *v = (const char *) glGetString(s);
@@ -122,10 +124,13 @@ bool setupGraphics(int w, int h) {
     checkGlError("glViewport");
 
     level->LoadFromFile("/sdcard/mjEngineCPP/levels/testlevel.xml");
+    entityCreator.PopulateLevel(&level->doc, level);
+
+
     character = (Character*) level->GetEntityByID("character0");
     LOGI("character is at %p", character);
 
-    
+
 
 
 
@@ -180,14 +185,14 @@ LOGI("Before first imgload");
 
 
     LOGI("Adding entities");
-    for (int i = 0; i < level->entities.size(); i++)
+    for (unsigned i = 0; i < level->entities.size(); i++)
     {
         physics->AddObject(level->entities[i], 0);
         sceneGraph->drawableObjects.push_back(level->entities[i]);
         level->entities[i]->TieShaders(shaderList);
     }
     LOGI("Now adding terrain");
-    for (int i = 0; i < level->terrain.size(); i++)
+    for (unsigned i = 0; i < level->terrain.size(); i++)
     {
         physics->AddObject(level->terrain[i], 1);
         sceneGraph->drawableObjects.push_back(level->terrain[i]);
@@ -285,7 +290,7 @@ void renderFrame(float t_elapsed) {
     	//character.dir.Set(x, 0, z);
     	bird.pos.Set(3.0*x,0,3.0*z);*/
     }
-    
+
     //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
     //character.Draw(shaderList, lookAtMatrix, projectionMatrix);
     //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);

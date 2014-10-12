@@ -15,6 +15,14 @@
 #include "../physics/mjBoundingStructure.h"
 #include "../entities/Character.h"
 #include "../entities/Bird.h"
+#include "../entities/BatBot.h"
+
+#include "Level.h"
+
+#include "../extLibs/tinyxml/tinyxml2.h"
+#include "../extLibs/util/mjXMLHelper.h"
+
+
 
 using namespace mjEngine;
 
@@ -22,10 +30,13 @@ class EntityCreator
 {
 public:
     EntityCreator();
-    mjObject* CreateEntity(const char* entityType);
-    
+    void PopulateLevel(XMLDocument* levelDoc, Level* levelData);
+
+
 private:
+    mjObject* CreateEntity(const char* entityType, Level* levelData);
     std::vector<const char*> entityTypes;
+
 };
 
 

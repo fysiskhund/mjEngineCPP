@@ -2,7 +2,7 @@
 
 BatBot::BatBot()
 {
-    //ctor
+
 }
 
 
