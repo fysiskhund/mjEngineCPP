@@ -11,3 +11,8 @@ BatBot::BatBot(Level* levelData)
 {
     //copy ctor
 }*/
+
+BatBot::BatAutomatonState::BatAutomatonState(BatBot* bat)
+{
+    this->bat = bat;
+}

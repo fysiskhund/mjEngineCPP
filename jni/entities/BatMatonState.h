@@ -3,13 +3,14 @@
 
 #include "../ai/mjAutomatonState.h"
 #include "../game/Level.h"
+//#include "BatBot.h"
 
 using namespace mjEngine;
 
 class BatMatonState : public mjAutomatonState
 {
     public:
-        BatMatonState(Level* levelData);
+        BatMatonState(Level* levelData);//, BatBot* batbot);
         ~BatMatonState();
         Level* levelData;
     protected:

@@ -1,13 +1,12 @@
 #ifndef WANDERBATMATONSTATE_H
 #define WANDERBATMATONSTATE_H
 
-#include "../BatMatonState.h"
+#include "../BatBot.h"
 
 
-class WanderBatMatonState : public BatMatonState
+class WanderBatMatonState : public BatBot::BatAutomatonState
 {
     public:
-        WanderBatMatonState(Level* levelData);
     protected:
     private:
 };

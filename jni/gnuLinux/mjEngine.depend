@@ -136,7 +136,7 @@
 	<stddef.h>
 	<cstddef>
 
-1413148122 source:/common/github/mjEngineCPP/jni/game/EntityCreator.cpp
+1413151355 source:/common/github/mjEngineCPP/jni/game/EntityCreator.cpp
 	"EntityCreator.h"
 
 1413148113 /common/github/mjEngineCPP/jni/game/EntityCreator.h
@@ -335,12 +335,14 @@
 1412892919 source:/common/github/mjEngineCPP/jni/ai/mjAutomatonState.cpp
 	"mjAutomatonState.h"
 
-1413151272 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
+1413235166 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
 	"BatBot.h"
 
-1413151214 /common/github/mjEngineCPP/jni/entities/BatBot.h
+1413235793 /common/github/mjEngineCPP/jni/entities/BatBot.h
+	<vector>
 	"../core/mjObject.h"
 	"../game/Level.h"
+	"../ai/mjAutomatonState.h"
 	"BatMaton.h"
 
 1413150817 source:/common/github/mjEngineCPP/jni/entities/BatMaton.cpp
@@ -350,10 +352,10 @@
 	"../ai/mjAutomaton.h"
 	"../game/Level.h"
 
-1413036048 source:/common/github/mjEngineCPP/jni/entities/BatMatonState.cpp
+1413234120 source:/common/github/mjEngineCPP/jni/entities/BatMatonState.cpp
 	"BatMatonState.h"
 
-1413036014 /common/github/mjEngineCPP/jni/entities/BatMatonState.h
+1413234097 /common/github/mjEngineCPP/jni/entities/BatMatonState.h
 	"../ai/mjAutomatonState.h"
 	"../game/Level.h"
 
@@ -364,9 +366,16 @@
 	"../../core/mjVector3.h"
 	"../tinyxml/tinyxml2.h"
 
-1413151347 source:/common/github/mjEngineCPP/jni/entities/batMatonStates/WanderBatMatonState.cpp
+1413235157 source:/common/github/mjEngineCPP/jni/entities/batMatonStates/WanderBatMatonState.cpp
 	"WanderBatMatonState.h"
 
-1413151329 /common/github/mjEngineCPP/jni/entities/batMatonStates/WanderBatMatonState.h
-	"../BatMatonState.h"
+1413235148 /common/github/mjEngineCPP/jni/entities/batMatonStates/WanderBatMatonState.h
+	"../BatBot.h"
+
+1413235376 source:/common/github/mjEngineCPP/jni/entities/batMatonStates/BatAutomatonCreator.cpp
+	"BatAutomatonCreator.h"
+
+1413235415 /common/github/mjEngineCPP/jni/entities/batMatonStates/BatAutomatonCreator.h
+	"../BatBot.h"
+	"WanderBatMatonState.h"
 

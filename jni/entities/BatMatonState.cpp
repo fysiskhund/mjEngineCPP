@@ -1,6 +1,6 @@
 #include "BatMatonState.h"
 
-BatMatonState::BatMatonState(Level* levelData)
+BatMatonState::BatMatonState(Level* levelData)//, BatBot* batbot)
 {
     this->levelData = levelData;
 }
