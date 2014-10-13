@@ -57,7 +57,7 @@ public:
 
     void MatchScaleToAABB();
     void MatchAABBToModel();
-    
+
 	int tag = 0;
 	void* tagObject = NULL;
 

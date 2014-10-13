@@ -18,7 +18,7 @@ Bird::Bird()
 	((mjAABB*)boundingStructure)->isImmovable = true;
 
 	glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/birdtexture.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
-	for (int i = 0; i < model->meshes.size(); i++)
+	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;
 	}

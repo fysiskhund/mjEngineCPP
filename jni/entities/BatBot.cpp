@@ -1,18 +1,89 @@
 #include "BatBot.h"
 
-BatBot::BatBot(Level* levelData)
-:BatMaton(levelData)
+// Putting the BatMaton header files here makes it possible to use the BatMaton states without having definition problems.
+// Both classes have been defined by now, so they can be used directly
+
+#include "batMatonStates/WanderBatMatonState.h"
+
+BatBot::BatBot(Level* levelData):
+mjObject(MJ_AABB)
+//:BatMaton(levelData)
 {
     this->levelData = levelData;
-}
+
+    wanderDir.Set(1,0,0);
+    pos.Set(0,20,0);
+
+    BatAutomatonState* wander = new WanderBatMatonState(this);
+    states.push_back(wander);
+
+    currentState = wander;
 
 
-/*BatBot::BatBot(const BatBot& other)
-{
-    //copy ctor
-}*/
+
+    mjImageLoader imgLoader;
+	GLuint glTexture;
+
+	model = new mjModel();
+	model->LoadFromFile("/sdcard/mjEngineCPP/bird.mesh.xml");
+	((mjAABB*)boundingStructure)->isImmovable = true;
+
+	glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/birdtexture.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+	for (unsigned i = 0; i < model->meshes.size(); i++)
+	{
+		model->meshes[i]->glTexture = glTexture;
+	}}
+
 
 BatBot::BatAutomatonState::BatAutomatonState(BatBot* bat)
 {
     this->bat = bat;
+}
+
+
+void BatBot::Update(float t_elapsed)
+{
+	if (t_elapsed < 1)
+	{
+		mjAutomaton::Update(t_elapsed);
+		mjObject::UpdatePosition(t_elapsed);
+
+	} else
+	{
+		LOGI("Bat->Update *cough*");
+	}
+}
+
+void BatBot::ProcessPhysicsEffects(float t_elapsed)
+{
+	accel.Set0();
+
+	for (unsigned i = 0; i < effectStack.size(); i++)
+	{
+		switch(effectStack[i]->type)
+		{
+			case MJ_ACCELERATION:
+                accel.Add(effectStack[i]->value);
+                break;
+			case MJ_GRAVITY:
+				if (!ignoresGravity)
+				{
+                    accel.Add(effectStack[i]->value);
+				}
+
+			break;
+			default:
+				break;
+		}
+
+		//if (effectStack[i]->)
+	}
+	effectStack.clear();
+
+	if (!boundingStructure->isImmovable)
+	{
+
+		vel.ScaleAdd(t_elapsed, accel);
+
+	}
 }

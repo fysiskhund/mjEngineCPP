@@ -1,6 +1,7 @@
 #include "BatAutomatonCreator.h"
 
-BatAutomatonCreator::BatAutomatonCreator()
+BatAutomatonCreator::BatAutomatonCreator(BatBot* bat)
 {
-    //ctor
+    BatBot::BatAutomatonState* wander = new WanderBatMatonState(bat);
+
 }

@@ -5,8 +5,8 @@
 
 #include "../core/mjObject.h"
 #include "../game/Level.h"
-#include "../ai/mjAutomatonState.h"
-#include "BatMaton.h"
+#include "../ai/mjAutomaton.h"
+//#include "../ai/mjAutomatonState.h"
 
 
 
@@ -15,15 +15,22 @@ using namespace mjEngine;
 
 
 
-
-class BatBot: public mjObject, public BatMaton
+class BatBot: public mjObject, public mjAutomaton
 {
     public:
         BatBot(Level* levelData);
         //BatBot(const BatBot& other);
         Level* levelData;
 
+        float wanderRadiusMin = 3;
+        float wanderRadiusMax = 10;
+        mjVector3 wanderDir;
 
+        bool ignoresGravity = true;
+
+        virtual void Update(float t_elapsed) override;
+
+        virtual void ProcessPhysicsEffects(float t_elapsed) override;
 
 
         class BatAutomatonState: public mjAutomatonState
@@ -33,11 +40,11 @@ class BatBot: public mjObject, public BatMaton
             BatBot* bat;
         };
 
-        std::vector<BatAutomatonState*> states;
 
     protected:
     private:
 };
+
 
 
 

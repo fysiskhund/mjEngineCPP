@@ -7,7 +7,7 @@
 class BatAutomatonCreator
 {
     public:
-        BatAutomatonCreator();
+        BatAutomatonCreator(BatBot* bat);
     protected:
     private:
 };

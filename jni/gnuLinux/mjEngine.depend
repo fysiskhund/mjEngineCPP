@@ -2,7 +2,7 @@
 1413143806 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
 	"mjObject.h"
 
-1412353317 /common/github/mjEngineCPP/jni/core/mjObject.h
+1413237931 /common/github/mjEngineCPP/jni/core/mjObject.h
 	<vector>
 	"../core/mjVector3.h"
 	"../graphics/mjModel.h"
@@ -77,7 +77,7 @@
 1412353317 source:/common/github/mjEngineCPP/jni/core/mjVector3.cpp
 	"mjVector3.h"
 
-1412353317 source:/common/github/mjEngineCPP/jni/entities/Bird.cpp
+1413239775 source:/common/github/mjEngineCPP/jni/entities/Bird.cpp
 	"Bird.h"
 
 1412422019 /common/github/mjEngineCPP/jni/entities/Bird.h
@@ -335,15 +335,15 @@
 1412892919 source:/common/github/mjEngineCPP/jni/ai/mjAutomatonState.cpp
 	"mjAutomatonState.h"
 
-1413235166 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
+1413239767 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
 	"BatBot.h"
+	"batMatonStates/WanderBatMatonState.h"
 
-1413235793 /common/github/mjEngineCPP/jni/entities/BatBot.h
+1413238570 /common/github/mjEngineCPP/jni/entities/BatBot.h
 	<vector>
 	"../core/mjObject.h"
 	"../game/Level.h"
-	"../ai/mjAutomatonState.h"
-	"BatMaton.h"
+	"../ai/mjAutomaton.h"
 
 1413150817 source:/common/github/mjEngineCPP/jni/entities/BatMaton.cpp
 	"BatMaton.h"
@@ -366,16 +366,16 @@
 	"../../core/mjVector3.h"
 	"../tinyxml/tinyxml2.h"
 
-1413235157 source:/common/github/mjEngineCPP/jni/entities/batMatonStates/WanderBatMatonState.cpp
+1413238365 source:/common/github/mjEngineCPP/jni/entities/batMatonStates/WanderBatMatonState.cpp
 	"WanderBatMatonState.h"
 
-1413235148 /common/github/mjEngineCPP/jni/entities/batMatonStates/WanderBatMatonState.h
+1413238385 /common/github/mjEngineCPP/jni/entities/batMatonStates/WanderBatMatonState.h
 	"../BatBot.h"
 
-1413235376 source:/common/github/mjEngineCPP/jni/entities/batMatonStates/BatAutomatonCreator.cpp
+1413236847 source:/common/github/mjEngineCPP/jni/entities/batMatonStates/BatAutomatonCreator.cpp
 	"BatAutomatonCreator.h"
 
-1413235415 /common/github/mjEngineCPP/jni/entities/batMatonStates/BatAutomatonCreator.h
+1413236838 /common/github/mjEngineCPP/jni/entities/batMatonStates/BatAutomatonCreator.h
 	"../BatBot.h"
 	"WanderBatMatonState.h"
 
