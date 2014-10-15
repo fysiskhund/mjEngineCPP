@@ -25,6 +25,7 @@ class BatBot: public mjObject, public mjAutomaton
         float wanderRadiusMin = 3;
         float wanderRadiusMax = 10;
         mjVector3 wanderDir;
+        mjVector3 anchor;
 
         bool ignoresGravity = true;
 
