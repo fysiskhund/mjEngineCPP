@@ -11,6 +11,7 @@ class BatMaton : public mjAutomaton
     public:
         BatMaton(Level* levelData);
         Level* levelData;
+
     protected:
     private:
 };

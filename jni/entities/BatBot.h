@@ -22,8 +22,8 @@ class BatBot: public mjObject, public mjAutomaton
         //BatBot(const BatBot& other);
         Level* levelData;
 
-        float wanderRadiusMin = 3;
-        float wanderRadiusMax = 10;
+        float wanderRadiusMin = 1;
+        float wanderRadiusMax = 8;
         mjVector3 wanderDir;
         mjVector3 anchor;
 
