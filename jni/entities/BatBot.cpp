@@ -12,7 +12,6 @@ mjObject(MJ_AABB)
     this->levelData = levelData;
 
     wanderDir.Set(-1,0,0);
-    pos.Set(0,3,0);
     anchor.Set(2.34, 7.9, -7.42);
 
     BatAutomatonState* wander = new WanderBatMatonState(this);
@@ -33,7 +32,8 @@ mjObject(MJ_AABB)
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;
-	}}
+	}
+}
 
 
 BatBot::BatAutomatonState::BatAutomatonState(BatBot* bat)

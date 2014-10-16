@@ -67,6 +67,8 @@
 		<Unit filename="../entities/Bird.h" />
 		<Unit filename="../entities/Character.cpp" />
 		<Unit filename="../entities/Character.h" />
+		<Unit filename="../entities/Grass.cpp" />
+		<Unit filename="../entities/Grass.h" />
 		<Unit filename="../entities/batMatonStates/BatAutomatonCreator.cpp" />
 		<Unit filename="../entities/batMatonStates/BatAutomatonCreator.h" />
 		<Unit filename="../entities/batMatonStates/WanderBatMatonState.cpp" />
