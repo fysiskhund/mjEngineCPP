@@ -2,10 +2,12 @@
  * Copyright (C) 2014 Alejandro Valenzuela Roca
  */
 
- #ifndef MJOBJECT_H
+#ifndef MJOBJECT_H
 #define MJOBJECT_H
 
 #include <vector>
+#include "../extLibs/tinyxml/tinyxml2.h"
+#include "../extLibs/util/mjXMLHelper.h"
 
 #include "../core/mjVector3.h"
 #include "../graphics/mjModel.h"
@@ -48,6 +50,7 @@ public:
 	mjObject();
 	mjObject(structuretype collisionStructureType);
     void SetID(const char* id);
+    virtual void SetDetailsFromXML(XMLElement* entity);
 	virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
 	virtual void ProcessPhysicsEffects(float t_elapsed);
 	virtual void ProcessCollisionEffects();

@@ -1,9 +1,11 @@
 # depslib dependency file v1.0
-1413143806 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
+1413738936 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
 	"mjObject.h"
 
-1413237931 /common/github/mjEngineCPP/jni/core/mjObject.h
+1413739162 /common/github/mjEngineCPP/jni/core/mjObject.h
 	<vector>
+	"../extLibs/tinyxml/tinyxml2.h"
+	"../extLibs/util/mjXMLHelper.h"
 	"../core/mjVector3.h"
 	"../graphics/mjModel.h"
 	"../extLibs/math/Matrix.h"
@@ -111,7 +113,7 @@
 	<time.h>
 	<dos.h>
 
-1413668028 source:/common/github/mjEngineCPP/jni/entities/Character.cpp
+1413746270 source:/common/github/mjEngineCPP/jni/entities/Character.cpp
 	"Character.h"
 
 1412422019 /common/github/mjEngineCPP/jni/entities/Character.h
@@ -136,12 +138,14 @@
 	<stddef.h>
 	<cstddef>
 
-1413151355 source:/common/github/mjEngineCPP/jni/game/EntityCreator.cpp
+1413738953 source:/common/github/mjEngineCPP/jni/game/EntityCreator.cpp
 	"EntityCreator.h"
 
-1413709429 /common/github/mjEngineCPP/jni/game/EntityCreator.h
+1413739152 /common/github/mjEngineCPP/jni/game/EntityCreator.h
 	<string.h>
 	<vector>
+	"../extLibs/tinyxml/tinyxml2.h"
+	"../extLibs/util/mjXMLHelper.h"
 	"../core/mjObject.h"
 	"../physics/mjBoundingStructure.h"
 	"../entities/Character.h"
@@ -149,13 +153,11 @@
 	"../entities/BatBot.h"
 	"../entities/Grass.h"
 	"Level.h"
-	"../extLibs/tinyxml/tinyxml2.h"
-	"../extLibs/util/mjXMLHelper.h"
 
-1413148061 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
+1413750607 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
 	"gl_code.h"
 
-1413147386 /common/github/mjEngineCPP/jni/game/gl_code.h
+1413750729 /common/github/mjEngineCPP/jni/game/gl_code.h
 	<jni.h>
 	<GLES2/gl2.h>
 	<GLES2/gl2ext.h>
@@ -319,10 +321,11 @@
 1412353317 source:/common/github/mjEngineCPP/jni/terrainTypes/Box.cpp
 	"Box.h"
 
-1413032715 source:/common/github/mjEngineCPP/jni/gnuLinux/main.cpp
+1413751932 source:/common/github/mjEngineCPP/jni/gnuLinux/main.cpp
 	<GLES2/gl2.h>
 	<SDL2/SDL.h>
 	"../game/gl_code.h"
+	"../core/mjVector3.h"
 
 1412892953 source:/common/github/mjEngineCPP/jni/ai/mjAutomaton.cpp
 	"mjAutomaton.h"
@@ -380,10 +383,10 @@
 	"../BatBot.h"
 	"WanderBatMatonState.h"
 
-1413495347 source:/common/github/mjEngineCPP/jni/entities/Grass.cpp
+1413753798 source:/common/github/mjEngineCPP/jni/entities/Grass.cpp
 	"Grass.h"
 
-1413491824 /common/github/mjEngineCPP/jni/entities/Grass.h
+1413746544 /common/github/mjEngineCPP/jni/entities/Grass.h
 	"../core/mjObject.h"
 	"../ai/mjAutomaton.h"
 	"../game/Level.h"

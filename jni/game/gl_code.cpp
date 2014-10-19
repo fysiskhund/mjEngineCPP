@@ -314,32 +314,10 @@ void PrintGLCapabilities()
 	printGLString("Extensions", GL_EXTENSIONS);
 }
 
-#ifdef ANDROID
-extern "C" {
-    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height);
-    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed);
-    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID, jfloat x, jfloat y);
-    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown);
-};
-
-JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height)
+void JoystickEvent(int controllerID, int joystickID,
+		float x, float y)
 {
-    setupGraphics(width, height);
-}
-
-JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed)
-{
-    renderFrame(t_elapsed);
-}
-
-
-
-
-JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID,
-		jfloat x, jfloat y)
-{
-
-	if (joystickID == 0)
+if (joystickID == 0)
 	{
 		mjVector3 dir;
 		dir.Set(x,0,y);
@@ -399,13 +377,46 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIE
 
 	//LOGI("Controller[%d].joystick[%d]: %3.3f, %3.3f", controllerID, joystickID, x, y);
 }
-
-JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown)
+void JoystickButtonEvent(int controllerID, int buttonID, bool pressedDown)
 {
-	if (character->footing== 1)
+    if (character->footing== 1)
 	{
 		character->jumping = 1;
 	}
+}
+
+#ifdef ANDROID
+extern "C" {
+    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height);
+    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed);
+    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID, jfloat x, jfloat y);
+    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown);
+};
+
+JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height)
+{
+    setupGraphics(width, height);
+}
+
+JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed)
+{
+    renderFrame(t_elapsed);
+}
+
+
+
+
+JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID,
+		jfloat x, jfloat y)
+{
+    JoystickEvent(controllerID, joystickID,
+		x, y);
+
+}
+
+JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown)
+{
+	JoystickButtonEvent(controllerID, buttonID, pressedDown);
 }
 #endif
 

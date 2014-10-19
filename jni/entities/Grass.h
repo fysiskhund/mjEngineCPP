@@ -15,6 +15,7 @@ class Grass : public mjObject, public mjAutomaton
         //BatBot(const BatBot& other);
         Level* levelData;
         ~Grass();
+        virtual void ProcessPhysicsEffects(float t_elapsed) override;
     protected:
     private:
 };

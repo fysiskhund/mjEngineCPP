@@ -4,7 +4,7 @@ Character::Character()
 : mjObject(MJ_AABB)
 {
 	model = new mjModel();
-	model->LoadFromFile("/sdcard/mjEngineCPP/grass.mesh.xml");
+	model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
 	mjAABB* charBoundStruct = (mjAABB*) boundingStructure;
 	mjVector3 minCorner;
 	minCorner.Set(-0.3,0,-0.3);
@@ -14,7 +14,7 @@ Character::Character()
 
 
 	mjImageLoader imgLoader;
-	GLuint glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/grass0.png");
+	GLuint glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/suit_test.png");
 	for (int i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;

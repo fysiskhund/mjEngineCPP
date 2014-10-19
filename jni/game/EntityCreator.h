@@ -11,6 +11,9 @@
 #include <string.h>
 #include <vector>
 
+#include "../extLibs/tinyxml/tinyxml2.h"
+#include "../extLibs/util/mjXMLHelper.h"
+
 #include "../core/mjObject.h"
 #include "../physics/mjBoundingStructure.h"
 #include "../entities/Character.h"
@@ -20,8 +23,7 @@
 
 #include "Level.h"
 
-#include "../extLibs/tinyxml/tinyxml2.h"
-#include "../extLibs/util/mjXMLHelper.h"
+
 
 
 

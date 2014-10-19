@@ -36,11 +36,7 @@ void EntityCreator::PopulateLevel(XMLDocument* levelDoc, Level* levelData)
         if (obj)
         {
             // Read its characteristics
-            obj->SetID(entity->Attribute("id"));
-            mjXMLHelper::ReadVector(entity->FirstChildElement("pos"), &obj->pos);
-            mjXMLHelper::ReadVector(entity->FirstChildElement("dir"), &obj->dir);
-            mjXMLHelper::ReadVector(entity->FirstChildElement("up"), &obj->up);
-            mjXMLHelper::ReadVector(entity->FirstChildElement("vel"), &obj->vel);
+            obj->SetDetailsFromXML(entity);
             levelData->entities.push_back(obj);
         }
 

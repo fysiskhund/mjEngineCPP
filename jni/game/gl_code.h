@@ -53,4 +53,9 @@ void renderFrame(float t_elapsed);
 
 void PrintGLCapabilities();
 
+void JoystickEvent(int controllerID, int joystickID,
+		float x, float y);
+
+void JoystickButtonEvent(int controllerID, int buttonID, bool pressedDown);
+
 #endif

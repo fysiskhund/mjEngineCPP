@@ -31,6 +31,7 @@ mjObject::mjObject(structuretype collisionStructureType)
 	}
 
 }
+
 mjObject::mjObject()
 {
 	// Vectors are initialised with 0, so no need to set them here
@@ -42,6 +43,17 @@ mjObject::mjObject()
 
 	boundingStructure = new mjSphere(&pos, 1);
 }
+
+void mjObject::SetDetailsFromXML(XMLElement* entity)
+{
+    // Read its characteristics
+            SetID(entity->Attribute("id"));
+            mjXMLHelper::ReadVector(entity->FirstChildElement("pos"), &pos);
+            mjXMLHelper::ReadVector(entity->FirstChildElement("dir"), &dir);
+            mjXMLHelper::ReadVector(entity->FirstChildElement("up"), &up);
+            mjXMLHelper::ReadVector(entity->FirstChildElement("vel"), &vel);
+}
+
 void mjObject::SetID(const char* id)
 {
     if (this->id != NULL)

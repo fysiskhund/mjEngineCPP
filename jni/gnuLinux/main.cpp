@@ -2,19 +2,31 @@
 #include <SDL2/SDL.h>
 
 #include "../game/gl_code.h"
+#include "../core/mjVector3.h"
 
 struct SDLStruct {
-    SDL_Window *window;
+    SDL_Window* window;
     SDL_GLContext context;
 };
 
 float t_elapsed = 0.016f;
 
-int width = 512;
-int height = 512;
+int width = 768;
+int height = 768;
+
+int xWindow = 3840 - width - 50;
+int yWindow = 1080 - width - 20;
+
+mjEngine::mjVector3 lJoystick;
+mjEngine::mjVector3 rJoystick;
+
+SDL_Joystick* joystick;
 
 int InitSDL(SDLStruct* sdlData) {
     SDL_Init(SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK);
+    SDL_JoystickEventState(SDL_ENABLE);
+    joystick = SDL_JoystickOpen(0);
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
@@ -26,7 +38,7 @@ int InitSDL(SDLStruct* sdlData) {
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 4);
 
-    sdlData->window = SDL_CreateWindow("mjEngine", 0, 0, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    sdlData->window = SDL_CreateWindow("mjEngine", xWindow, yWindow, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
     sdlData->context = SDL_GL_CreateContext(sdlData->window);
 
@@ -35,25 +47,6 @@ int InitSDL(SDLStruct* sdlData) {
     {
     	SDL_GetError();
     }
-
-
-    int sizes;
-
-    glGetIntegerv(GL_RED_BITS, &sizes);
-
-    printf("Depths: %d,", sizes);
-
-    glGetIntegerv(GL_BLUE_BITS, &sizes);
-
-    printf(" %d,", sizes);
-
-    glGetIntegerv(GL_GREEN_BITS, &sizes);
-
-    printf(" %d,", sizes);
-
-    glGetIntegerv(GL_ALPHA_BITS, &sizes);
-
-    printf(" %d\n", sizes);
 
     return 0;
 }
@@ -67,11 +60,57 @@ int InitGL(SDLStruct* sdlData) {
 int stepFunc(SDLStruct* sdlData) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
+
+        switch(event.type)
+        {
+
+        case SDL_QUIT: {
             return 1;
+        }
+        break;
+        case SDL_JOYAXISMOTION:
+        {
+            float axisValue = (float) event.jaxis.value / 32767.0;
+
+            switch(event.jaxis.axis)
+            {
+
+                case 0: // x
+                    lJoystick.x  = axisValue;
+                break;
+                case 1: // y
+                    lJoystick.y = axisValue;
+                break;
+                case 3:
+                    rJoystick.x = axisValue;
+                break;
+                case 4:
+                    rJoystick.y = axisValue;
+                default:
+                break;
+            }
+            //printf("Joystick event\n");
+
+
+        }
+        break;
+        case SDL_JOYBUTTONDOWN:
+        {
+            JoystickButtonEvent(0, event.jbutton.button, true);
+        }
+        break;
+        break;
+        default:
+        /*
+        {
+           printf("event %d\n", event.type);
+        }*/
+        break;
         }
     }
 
+    JoystickEvent(0, 0, lJoystick.x, lJoystick.y);
+    JoystickEvent(0, 1, rJoystick.x, rJoystick.y);
     renderFrame(t_elapsed);
 
     SDL_GL_SwapWindow(sdlData->window);
