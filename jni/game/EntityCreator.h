@@ -16,6 +16,7 @@
 #include "../entities/Character.h"
 #include "../entities/Bird.h"
 #include "../entities/BatBot.h"
+#include "../entities/Grass.h"
 
 #include "Level.h"
 
