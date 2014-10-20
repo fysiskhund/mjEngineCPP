@@ -204,4 +204,63 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 
 
 	}
+
+
+mjcolresult mjCollisionTests::SphereVsAABB(mjSphere* s0, mjAABB* aabb0, mjCollisionResult* out)
+{
+    // Test distance from centers to be > (r + halfWidths)
+
+
+    mjVector3 aabb0cS0c;
+
+    aabb0cS0c.CopyFrom(*aabb0->center);
+    aabb0cS0c.Subtract(*s0->c);
+
+
+
+    float dist = aabb0cS0c.GetNorm();
+
+    mjVector3 overlap;
+
+    overlap.CopyFrom(aabb0cS0c);
+
+    overlap.x -= s0->r+aabb0->halfWidths.x;
+    overlap.y -= s0->r+aabb0->halfWidths.y;
+    overlap.z -= s0->r+aabb0->halfWidths.z;
+
+
+
+    if (overlap.x < 0 && overlap.y < 0 && overlap.z < 0)
+    {
+        float displacementFactor = 0.5;
+        if (s0->isImmovable || aabb0->isImmovable)
+		{
+					displacementFactor = 1;
+					//LOGI("dispFactor:1");
+        }
+
+
+        if (out != NULL)
+        {
+
+
+            if ((overlap.x < overlap.y) && (overlap.x < overlap.z))
+            {
+
+            } else if ((overlap.y < overlap.x ) && (overlap.y < overlap.z))
+            {
+
+            } else
+            {
+
+            }
+
+        }
+        return MJ_OVERLAP;
+    } else
+        return MJ_NO_COLLISION;
+
+
+
+}
 }
