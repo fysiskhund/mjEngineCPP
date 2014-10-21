@@ -13,6 +13,8 @@ class mjSceneGraph
 public:
 	std::vector<mjObject*> drawableObjects;
 	std::vector<mjObject*> shadowCasters;
+
+	void Update(float t_elapsed);
 	void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
 };
 

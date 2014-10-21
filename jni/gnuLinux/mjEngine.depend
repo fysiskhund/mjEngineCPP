@@ -234,7 +234,7 @@
 	"../extLibs/math/mjMathHelper.h"
 	"../extLibs/logger/mjLog.h"
 
-1412353317 /common/github/mjEngineCPP/jni/graphics/mjSceneGraph.h
+1413925973 /common/github/mjEngineCPP/jni/graphics/mjSceneGraph.h
 	<vector>
 	"../core/mjObject.h"
 	"../graphics/mjShader.h"
@@ -285,7 +285,7 @@
 1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjModelMesh.cpp
 	"mjModelMesh.h"
 
-1412635288 source:/common/github/mjEngineCPP/jni/graphics/mjSceneGraph.cpp
+1413926019 source:/common/github/mjEngineCPP/jni/graphics/mjSceneGraph.cpp
 	"mjSceneGraph.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjShader.cpp
@@ -390,4 +390,21 @@
 	"../core/mjObject.h"
 	"../ai/mjAutomaton.h"
 	"../game/Level.h"
+
+1413926843 source:/common/github/mjEngineCPP/jni/core/mjScene.cpp
+	"mjScene.h"
+
+1413927203 /common/github/mjEngineCPP/jni/core/mjScene.h
+	<vector>
+	"../core/mjObject.h"
+	"../graphics/mjShader.h"
+	"../physics/mjPhysics.h"
+	"../graphics/mjSceneGraph.h"
+
+1413926524 source:/common/github/mjEngineCPP/jni/core/mjSceneManager.cpp
+	"mjSceneManager.h"
+
+1413927324 /common/github/mjEngineCPP/jni/core/mjSceneManager.h
+	<vector>
+	"mjScene.h"
 

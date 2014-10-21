@@ -19,6 +19,7 @@
 					<Add directory="ai" />
 					<Add directory="extLibs/util" />
 					<Add directory="entities/batMatonStates" />
+					<Add directory="core" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -38,6 +39,7 @@
 					<Add directory="ai" />
 					<Add directory="extLibs/util" />
 					<Add directory="entities/batMatonStates" />
+					<Add directory="core" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -54,7 +56,10 @@
 		<Unit filename="../core/mjInput.h" />
 		<Unit filename="../core/mjObject.cpp" />
 		<Unit filename="../core/mjObject.h" />
+		<Unit filename="../core/mjScene.cpp" />
 		<Unit filename="../core/mjScene.h" />
+		<Unit filename="../core/mjSceneManager.cpp" />
+		<Unit filename="../core/mjSceneManager.h" />
 		<Unit filename="../core/mjVector3.cpp" />
 		<Unit filename="../core/mjVector3.h" />
 		<Unit filename="../entities/BatBot.cpp" />
