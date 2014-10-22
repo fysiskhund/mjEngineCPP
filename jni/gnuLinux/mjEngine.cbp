@@ -94,6 +94,8 @@
 		<Unit filename="../game/EntityCreator.h" />
 		<Unit filename="../game/Level.cpp" />
 		<Unit filename="../game/Level.h" />
+		<Unit filename="../game/PlatformUniverseScene.cpp" />
+		<Unit filename="../game/PlatformUniverseScene.h" />
 		<Unit filename="../game/TerrainCreator.cpp" />
 		<Unit filename="../game/TerrainCreator.h" />
 		<Unit filename="../game/gl_code.cpp" />

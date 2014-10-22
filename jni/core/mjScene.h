@@ -7,6 +7,8 @@
 
 #include "../physics/mjPhysics.h"
 #include "../graphics/mjSceneGraph.h"
+#include "../graphics/mjCamera.h"
+#include "../graphics/mjSkybox.h"
 
 namespace mjEngine{
 
@@ -15,14 +17,16 @@ class mjScene
     public:
         mjPhysics physics;
         mjSceneGraph sceneGraph;
+        mjCamera* camera;
+        mjSkybox* skybox = NULL;
 
         char* sceneName;
 
         char* nextSceneByName = NULL;
 
         std::vector<mjShader*> shaderList;
-        float* lookAtMatrix;
-        float* projectionMatrix;
+        float lookAtMatrix[16];
+        float projectionMatrix[16];
 
 
         mjScene();

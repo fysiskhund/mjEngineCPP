@@ -22,6 +22,7 @@ void mjScene::Update(float t_elapsed)
 
 void mjScene::Draw()
 {
+    camera->GetLookAtMatrix(lookAtMatrix);
     sceneGraph.Draw(shaderList, lookAtMatrix, projectionMatrix);
 }
 

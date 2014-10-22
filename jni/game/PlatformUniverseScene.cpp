@@ -74,3 +74,8 @@ void PlatformUniverseScene::Update(float t_elapsed)
 	}
 
 }
+void PlatformUniverseScene::Draw()
+{
+    glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
+}

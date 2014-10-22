@@ -277,19 +277,7 @@ void renderFrame(float t_elapsed) {
     //Matrix4::MultiplyMM(modelViewMatrix, 0, viewMatrix, 0, modelMatrix, 0);
 
     //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
-    theta+= 0.01;
-    if (theta >= 2.0*(3.141592))
-    {
-    	theta -= 2.0*(3.141592);
-    }
-    {
-    	float x, z;
-    	x = sin(theta);
-    	z = cos(theta);
-    	/*bird.dir.Set(z, 0, -x);
-    	//character.dir.Set(x, 0, z);
-    	bird.pos.Set(3.0*x,0,3.0*z);*/
-    }
+
 
     //LOGI("%s:%d hasn't crashed yet", __FILE__, __LINE__);
     //character.Draw(shaderList, lookAtMatrix, projectionMatrix);

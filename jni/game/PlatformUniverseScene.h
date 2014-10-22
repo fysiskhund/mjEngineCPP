@@ -69,7 +69,8 @@ class PlatformUniverseScene : public mjScene
         PlatformUniverseScene();
         void InitShaders();
         void SetUpSkybox();
-        virtual void Update(float t_elapsed) override;
+        void Update(float t_elapsed) override;
+        void Draw() override;
     protected:
     private:
 };
