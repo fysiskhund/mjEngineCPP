@@ -401,10 +401,38 @@
 	"../physics/mjPhysics.h"
 	"../graphics/mjSceneGraph.h"
 
-1413926524 source:/common/github/mjEngineCPP/jni/core/mjSceneManager.cpp
+1414007426 source:/common/github/mjEngineCPP/jni/core/mjSceneManager.cpp
 	"mjSceneManager.h"
 
 1413927324 /common/github/mjEngineCPP/jni/core/mjSceneManager.h
 	<vector>
 	"mjScene.h"
+
+1414007754 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
+	"PlatformUniverseScene.h"
+
+1414009386 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
+	<jni.h>
+	<GLES2/gl2.h>
+	<GLES2/gl2ext.h>
+	"../extLibs/logger/mjLog.h"
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<unistd.h>
+	"../core/mjObject.h"
+	"../core/mjScene.h"
+	"../graphics/mjModel.h"
+	"../graphics/mjImageLoader.h"
+	"../graphics/mjDefaultShaders.h"
+	"../graphics/mjSkyboxShaders.h"
+	"../core/mjVector3.h"
+	"../extLibs/math/Matrix.h"
+	"../graphics/mj3rdPersonCamera.h"
+	"../graphics/mjSkybox.h"
+	"../physics/mjPhysics.h"
+	"../graphics/mjSceneGraph.h"
+	"../entities/Character.h"
+	"Level.h"
+	"EntityCreator.h"
 

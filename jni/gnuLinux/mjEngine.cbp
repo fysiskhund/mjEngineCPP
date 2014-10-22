@@ -20,6 +20,7 @@
 					<Add directory="extLibs/util" />
 					<Add directory="entities/batMatonStates" />
 					<Add directory="core" />
+					<Add directory="game" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -40,6 +41,7 @@
 					<Add directory="extLibs/util" />
 					<Add directory="entities/batMatonStates" />
 					<Add directory="core" />
+					<Add directory="game" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
