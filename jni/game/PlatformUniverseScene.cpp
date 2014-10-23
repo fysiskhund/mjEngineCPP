@@ -2,8 +2,108 @@
 
 PlatformUniverseScene::PlatformUniverseScene()
 {
-    //ctor
+
+
 }
+
+void PlatformUniverseScene::Initialise(int width, int height)
+{
+InitShaders();
+    camera = new mj3rdPersonCamera();
+    level = new Level();
+    // Some adjustments
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glEnable (GL_BLEND);
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glEnable(GL_DEPTH_TEST);
+
+
+
+    glViewport(0, 0, width, height);
+    //checkGlError("glViewport");
+
+    level->LoadFromFile("/sdcard/mjEngineCPP/levels/testlevel.xml");
+    entityCreator.PopulateLevel(&level->doc, level);
+
+
+    character = (Character*) level->GetEntityByID("character0");
+    LOGI("character is at %p", character);
+
+
+
+
+
+
+
+    mjImageLoader* imgLoader = new mjImageLoader();//
+
+LOGI("Before first imgload");
+
+
+
+
+    //((mjSphere*) bird.boundingStructure)->r = 0.3;
+
+    // Test loading png texture
+
+    LOGI("Here");
+
+
+
+
+    character->gravity = &physics.gravity;
+
+    LOGI("Here2");
+    character->modelOffset.Set(0,-0.825,0);
+
+
+    mjVector3 cameraOffset;
+    cameraOffset.Set(0,0.7,0);
+    LOGI("Here3");
+    camera->SetTarget(&character->pos, cameraOffset);
+    camera->r = 3;
+
+    //charBoundStruct->SetCorners()
+    //((mjSphere*) character.boundingStructure)->r = 0.5;
+
+
+
+
+    float closeUpFactor = 0.5;
+    ratio = closeUpFactor*((float)width)/((float)height);
+    Matrix4::FrustumM(projectionMatrix, 0,
+            				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 50);
+
+
+
+
+
+    LOGI("setupSkybox");
+    SetUpSkybox();
+    skybox->TieShaders(shaderList);
+
+
+    LOGI("Adding entities");
+    for (unsigned i = 0; i < level->entities.size(); i++)
+    {
+        physics.AddObject(level->entities[i], 0);
+        sceneGraph.drawableObjects.push_back(level->entities[i]);
+        level->entities[i]->TieShaders(shaderList);
+    }
+    LOGI("Now adding terrain");
+    for (unsigned i = 0; i < level->terrain.size(); i++)
+    {
+        physics.AddObject(level->terrain[i], 1);
+        sceneGraph.drawableObjects.push_back(level->terrain[i]);
+        level->terrain[i]->TieShaders(shaderList);
+    }
+
+    LOGI("End of init");
+    //checkGlError("end of init");
+}
+
 void PlatformUniverseScene::InitShaders()
 {
 	mjDefaultShaders* defaultShaders = new mjDefaultShaders();
@@ -77,5 +177,9 @@ void PlatformUniverseScene::Update(float t_elapsed)
 void PlatformUniverseScene::Draw()
 {
     glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    skybox->Draw(shaderList, lookAtMatrix, projectionMatrix);
+    camera->GetLookAtMatrix(lookAtMatrix);
+    sceneGraph.Draw(shaderList, lookAtMatrix, projectionMatrix);
+
 
 }

@@ -59,7 +59,7 @@ class PlatformUniverseScene : public mjScene
 
         mjVector3 cameraAnglesModifier;
 
-        mjSceneGraph* sceneGraph;
+        mjSceneGraph sceneGraph;
 
         Character* character;
 
@@ -67,6 +67,7 @@ class PlatformUniverseScene : public mjScene
 
 
         PlatformUniverseScene();
+        void Initialise(int width, int height);
         void InitShaders();
         void SetUpSkybox();
         void Update(float t_elapsed) override;

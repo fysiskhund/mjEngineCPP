@@ -154,10 +154,10 @@
 	"../entities/Grass.h"
 	"Level.h"
 
-1414010956 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
+1414101393 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
 	"gl_code.h"
 
-1413750729 /common/github/mjEngineCPP/jni/game/gl_code.h
+1414100738 /common/github/mjEngineCPP/jni/game/gl_code.h
 	<jni.h>
 	<GLES2/gl2.h>
 	<GLES2/gl2ext.h>
@@ -180,6 +180,7 @@
 	"../entities/Character.h"
 	"Level.h"
 	"EntityCreator.h"
+	"PlatformUniverseScene.h"
 
 1412422019 /common/github/mjEngineCPP/jni/graphics/mjDefaultShaders.h
 	<GLES2/gl2.h>
@@ -391,16 +392,17 @@
 	"../ai/mjAutomaton.h"
 	"../game/Level.h"
 
-1414010855 source:/common/github/mjEngineCPP/jni/core/mjScene.cpp
+1414100273 source:/common/github/mjEngineCPP/jni/core/mjScene.cpp
 	"mjScene.h"
 
-1414010822 /common/github/mjEngineCPP/jni/core/mjScene.h
+1414011286 /common/github/mjEngineCPP/jni/core/mjScene.h
 	<vector>
 	"../core/mjObject.h"
 	"../graphics/mjShader.h"
 	"../physics/mjPhysics.h"
 	"../graphics/mjSceneGraph.h"
 	"../graphics/mjCamera.h"
+	"../graphics/mjSkybox.h"
 
 1414007426 source:/common/github/mjEngineCPP/jni/core/mjSceneManager.cpp
 	"mjSceneManager.h"
@@ -409,10 +411,10 @@
 	<vector>
 	"mjScene.h"
 
-1414010496 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
+1414101473 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
 	"PlatformUniverseScene.h"
 
-1414011144 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
+1414101380 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
 	<jni.h>
 	<GLES2/gl2.h>
 	<GLES2/gl2ext.h>
