@@ -20,7 +20,7 @@ class mjScene
         mjCamera* camera;
         mjSkybox* skybox = NULL;
 
-        char* sceneName;
+        const char* sceneName = "";
 
         char* nextSceneByName = NULL;
 

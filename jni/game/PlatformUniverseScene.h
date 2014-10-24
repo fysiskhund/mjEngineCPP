@@ -41,6 +41,7 @@ using namespace mjEngine;
 class PlatformUniverseScene : public mjScene
 {
     public:
+        const char* sceneName = "platformuniverse";
         mjSkybox* skybox;
 
         mj3rdPersonCamera* camera;

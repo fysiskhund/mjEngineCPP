@@ -18,6 +18,7 @@ bool setupGraphics(int w, int h) {
 void renderFrame(float t_elapsed) {
     platformUniverse->Update(t_elapsed);
     platformUniverse->Draw();
+
 }
 void PrintGLCapabilities()
 {

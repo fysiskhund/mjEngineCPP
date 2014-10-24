@@ -3,7 +3,6 @@
 PlatformUniverseScene::PlatformUniverseScene()
 {
 
-
 }
 
 void PlatformUniverseScene::Initialise(int width, int height)
