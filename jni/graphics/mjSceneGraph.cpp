@@ -10,10 +10,16 @@ void mjSceneGraph::Update(float t_elapsed)
 }
 void mjSceneGraph::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
-	int numObjects = drawableObjects.size();
-	for (int i= 0 ; i < numObjects; i++)
+	unsigned numObjects = drawableObjects.size();
+	for (unsigned i= 0 ; i < numObjects; i++)
 	{
 		drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix);
+	}
+	// The translucent objects should be sorted depending the distance to the camera, and then drawn in z-order
+	numObjects = translucentObjects.size();
+	for (unsigned i= 0 ; i < numObjects; i++)
+	{
+		translucentObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix);
 	}
 }
 }

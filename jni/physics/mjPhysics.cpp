@@ -249,7 +249,7 @@ void mjPhysics::CollisionDetection()
 }
 void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 {
-	for(int i = 0; i < allObjects.size(); i++)
+	for(unsigned i = 0; i < allObjects.size(); i++)
 	{
 		if (allObjects[i]->hasKinematics)
 		{
@@ -258,7 +258,7 @@ void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 			gravityEffect->value.Set(0,-9.81,0);
 			allObjects[i]->effectStack.push_back(gravityEffect);
 
-			for (int j = 0; j < globalEffects.size(); j++)
+			for (unsigned j = 0; j < globalEffects.size(); j++)
             {
                 allObjects[i]->effectStack.push_back(globalEffects[j]);
             }
@@ -271,7 +271,7 @@ void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 
 	}
 
-	for (int j = 0; j < globalEffects.size(); j++)
+	for (unsigned j = 0; j < globalEffects.size(); j++)
     {
         globalEffects.pop_back();
     }
@@ -279,7 +279,7 @@ void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 }
 void mjPhysics::ProcessCollisionEffects()
 {
-	for(int i = 0; i < allObjects.size(); i++)
+	for(unsigned i = 0; i < allObjects.size(); i++)
 	{
 		if (allObjects[i]->hasKinematics){
 			allObjects[i]->ProcessCollisionEffects();
@@ -289,7 +289,7 @@ void mjPhysics::ProcessCollisionEffects()
 }
 void mjPhysics::UpdatePositions(float t_elapsed)
 {
-	for(int i = 0; i < allObjects.size(); i++)
+	for(unsigned i = 0; i < allObjects.size(); i++)
 	{
 		if (allObjects[i]->hasKinematics){
 			allObjects[i]->UpdatePosition(t_elapsed);

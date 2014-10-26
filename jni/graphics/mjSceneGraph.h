@@ -12,6 +12,7 @@ class mjSceneGraph
 {
 public:
 	std::vector<mjObject*> drawableObjects;
+	std::vector<mjObject*> translucentObjects;
 	std::vector<mjObject*> shadowCasters;
 
 	void Update(float t_elapsed);

@@ -106,8 +106,8 @@ void mjObject::ProcessPhysicsEffects(float t_elapsed)
 				accel.Add(effectStack[i]->value);
 
 			break;
-			case MJ_ADD_FORCE:
-                accel.ScaleAdd(1/mass, effectStack[i]->value);
+			case MJ_FORCE:
+                accel.ScaleAdd(1.0/mass, effectStack[i]->value);
 			break;
 			default:
 				break;
@@ -193,6 +193,22 @@ void mjObject::ProcessCollisionEffects()
 					accel.z += collisionEffect->value.z;
 				}
 				break;
+            case MJ_ADD_FORCE:
+                float invMass = 1.0/mass;
+
+                if (collisionEffect->mask[0])
+				{
+					accel.x += collisionEffect->value.x*invMass;
+				}
+				if (collisionEffect->mask[1])
+				{
+					accel.y += collisionEffect->value.y*invMass;
+				}
+				if (collisionEffect->mask[2])
+				{
+					accel.z += collisionEffect->value.z*invMass;
+				}
+                break;
 			}
 
 		}

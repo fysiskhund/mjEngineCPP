@@ -18,6 +18,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   ai/mjAutomaton.cpp \
 				   ai/mjAutomatonState.cpp \
 				   core/mjVector3.cpp \
+				   core/mjScene.cpp \
 				   graphics/mjCamera.cpp \
 				   graphics/mj3rdPersonCamera.cpp \
 				   extLibs/math/Matrix.cpp \
@@ -50,6 +51,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   game/Level.cpp \
 				   game/TerrainCreator.cpp \
 				   game/EntityCreator.cpp \
+				   game/PlatformUniverseScene.cpp \
 				   game/gl_code.cpp
 				   
 LOCAL_LDLIBS    := -llog -lGLESv2 -lz

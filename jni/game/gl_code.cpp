@@ -13,6 +13,7 @@ PlatformUniverseScene* platformUniverse;
 bool setupGraphics(int w, int h) {
     platformUniverse = new PlatformUniverseScene();
     platformUniverse->Initialise(w,h);
+    return true;
 }
 
 void renderFrame(float t_elapsed) {

@@ -2,12 +2,41 @@
 
 PlatformUniverseScene::PlatformUniverseScene()
 {
+    wind.Set(0,0,0.01);
+    srand(time(0));
 
+}
+
+void PlatformUniverseScene::InitGlowBeings()
+{
+    unsigned total = 100;
+
+
+    for (unsigned i = 0; i < total; i++)
+    {
+        GlowBeing* glowBeing = new GlowBeing(camera);
+
+
+
+
+
+
+
+        glowBeing->TieShaders(shaderList);
+
+        physics.AddObject(glowBeing, 0);
+
+        sceneGraph.translucentObjects.push_back(glowBeing);
+
+        glowBeing->Reposition();
+
+        glowBeings.push_back(glowBeing);
+    }
 }
 
 void PlatformUniverseScene::Initialise(int width, int height)
 {
-InitShaders();
+    InitShaders();
     camera = new mj3rdPersonCamera();
     level = new Level();
     // Some adjustments
@@ -22,6 +51,7 @@ InitShaders();
 
     glViewport(0, 0, width, height);
     //checkGlError("glViewport");
+    InitGlowBeings();
 
     level->LoadFromFile("/sdcard/mjEngineCPP/levels/testlevel.xml");
     entityCreator.PopulateLevel(&level->doc, level);
@@ -29,28 +59,6 @@ InitShaders();
 
     character = (Character*) level->GetEntityByID("character0");
     LOGI("character is at %p", character);
-
-
-
-
-
-
-
-    mjImageLoader* imgLoader = new mjImageLoader();//
-
-LOGI("Before first imgload");
-
-
-
-
-    //((mjSphere*) bird.boundingStructure)->r = 0.3;
-
-    // Test loading png texture
-
-    LOGI("Here");
-
-
-
 
     character->gravity = &physics.gravity;
 
@@ -76,9 +84,6 @@ LOGI("Before first imgload");
             				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 50);
 
 
-
-
-
     LOGI("setupSkybox");
     SetUpSkybox();
     skybox->TieShaders(shaderList);
@@ -87,16 +92,16 @@ LOGI("Before first imgload");
     LOGI("Adding entities");
     for (unsigned i = 0; i < level->entities.size(); i++)
     {
-        physics.AddObject(level->entities[i], 0);
-        sceneGraph.drawableObjects.push_back(level->entities[i]);
         level->entities[i]->TieShaders(shaderList);
+        sceneGraph.drawableObjects.push_back(level->entities[i]);
+        physics.AddObject(level->entities[i], 0);
     }
     LOGI("Now adding terrain");
     for (unsigned i = 0; i < level->terrain.size(); i++)
     {
-        physics.AddObject(level->terrain[i], 1);
-        sceneGraph.drawableObjects.push_back(level->terrain[i]);
         level->terrain[i]->TieShaders(shaderList);
+        sceneGraph.drawableObjects.push_back(level->terrain[i]);
+        physics.AddObject(level->terrain[i], 1);
     }
 
     LOGI("End of init");
@@ -126,8 +131,8 @@ void PlatformUniverseScene::SetUpSkybox()
 
 	skybox->LoadTexturesFromPrefix("/sdcard/mjEngineCPP/bluesky/skybox");
 
-	char wanderingCloudName[1024];
-	/*for (int i = 0; i < 3; i++)
+	/*char wanderingCloudName[1024];
+	for (unsigned i = 0; i < 3; i++)
 	{
 		snprintf(wanderingCloudName, 1024, "%s%d%s",  "/sdcard/mjEngineCPP/bluesky/wandering_cloud", i, ".png");
 		GLuint tex0 = imgLoader.LoadToGLAndFreeMemory(wanderingCloudName);
@@ -151,7 +156,7 @@ void PlatformUniverseScene::Update(float t_elapsed)
 		character->vel.y = 0;
 	}
     mjPhysicsEffect* windEffect = new mjPhysicsEffect();
-    windEffect->type = MJ_ACCELERATION;
+    windEffect->type = MJ_FORCE;
     windEffect->action = MJ_ADD_FORCE;
     windEffect->value.CopyFrom(wind);
 

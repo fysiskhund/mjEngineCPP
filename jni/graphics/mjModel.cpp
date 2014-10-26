@@ -14,7 +14,7 @@ mjModel::mjModel()
 void mjModel::LoadFromFile(const char* fileName)
 {
 	XMLDocument doc;
-	
+
 	doc.LoadFile(fileName);
 	Load(&doc);
 }
@@ -24,7 +24,7 @@ void mjModel::Load(XMLDocument* doc)
 
 
 	// Doc needs to already have been parsed or loaded by this line
-	
+
 	XMLElement* mesh = doc->FirstChildElement();
 	if (mesh != NULL)
 	{
@@ -107,7 +107,7 @@ void mjModel::Load(XMLDocument* doc)
 
 
 		faces->QueryIntAttribute("count", &faceCount);
-		
+
 		modelMesh->drawOrderCount = faceCount*3;
 
 		modelMesh-> drawOrderBuffer = new unsigned short[faceCount*3];
@@ -168,7 +168,7 @@ void mjModel::Load(XMLDocument* doc)
 		snprintf(status, 1024, "%s", tmp);
 
 
-	
+
 
 	}
 	else
@@ -180,7 +180,7 @@ void mjModel::Load(XMLDocument* doc)
 void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
 {
 
-	for(int i = 0; i < meshes.size(); i++)
+	for(unsigned i = 0; i < meshes.size(); i++)
 	{
 		if (meshes[i]->shaderName == NULL)
 		{
@@ -188,7 +188,7 @@ void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
 			meshes[i]->mjShaderListIndex = 0; // 0 will always be the default shader.
 		} else
 		{
-			for (int j = 0; j < shaderList.size(); j++)
+			for (unsigned j = 0; j < shaderList.size(); j++)
 			{
 				//LOGI("Considering shader %s", shaderList[j]->name);
 				if (strncmp(meshes[i]->shaderName, shaderList[j]->name, 96) == 0)
@@ -209,7 +209,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 		float* modelMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix)
 {
 	//Matrix4::DebugM("mvp", modelViewProjectionMatrix);
-	for(int i = 0; i < meshes.size(); i++)
+	for(unsigned i = 0; i < meshes.size(); i++)
 	{
 
 		shaderList[meshes[i]->mjShaderListIndex]->Run(meshes[i],

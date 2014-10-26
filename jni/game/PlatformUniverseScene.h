@@ -16,6 +16,9 @@
 #include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
+#include <vector>
 
 #include "../core/mjObject.h"
 #include "../core/mjScene.h"
@@ -32,6 +35,7 @@
 #include "../physics/mjPhysics.h"
 #include "../graphics/mjSceneGraph.h"
 #include "../entities/Character.h"
+#include "../entities/GlowBeing.h"
 #include "Level.h"
 #include "EntityCreator.h"
 
@@ -64,12 +68,15 @@ class PlatformUniverseScene : public mjScene
 
         Character* character;
 
+        std::vector<GlowBeing*> glowBeings;
+
         EntityCreator entityCreator;
 
         mjVector3 wind;
 
         PlatformUniverseScene();
         void Initialise(int width, int height);
+        void InitGlowBeings();
         void InitShaders();
         void SetUpSkybox();
         void Update(float t_elapsed) override;

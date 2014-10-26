@@ -5,14 +5,15 @@
  #ifndef MJMODELMESH_H
 #define MJMODELMESH_H
 
+#include <stdio.h>
 
 namespace mjEngine{
 class mjModelMesh
 {
 public:
-	char* name;
-	char* material;
-	char* shaderName;
+	char* name = NULL;
+	char* material = NULL;
+	char* shaderName = NULL;
 	int meshNumber;
 	int mjShaderListIndex;
 	unsigned short* drawOrderBuffer;

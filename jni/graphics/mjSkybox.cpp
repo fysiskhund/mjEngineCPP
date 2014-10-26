@@ -41,7 +41,7 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 
 		//LOGI("name: %s", name);
 		//Find the last "_", use it as suffix marker.
-		for (int j = 0; j < strnlen(name, 1024)-1; j++)
+		for (unsigned j = 0; j < strnlen(name, 1024)-1; j++)
 		{
 			if (name[j] == '_')
 			{
@@ -66,7 +66,7 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 void mjSkybox::TieShaders(std::vector<mjShader*>& shaderList)
 {
 	int skyboxShaderIndex = 0;
-	for (int j = 0; j < shaderList.size(); j++)
+	for (unsigned j = 0; j < shaderList.size(); j++)
 	{
 		//LOGI("Considering shader %s", shaderList[j]->name);
 		if (strncmp("skybox", shaderList[j]->name, 96) == 0)
@@ -74,11 +74,11 @@ void mjSkybox::TieShaders(std::vector<mjShader*>& shaderList)
 			skyboxShaderIndex = j;
 		}
 	}
-	for(int i = 0; i < boxModel->meshes.size(); i++)
+	for(unsigned i = 0; i < boxModel->meshes.size(); i++)
 	{
 		boxModel->meshes[i]->mjShaderListIndex = skyboxShaderIndex;
 	}
-	for(int i = 0; i < planeModel->meshes.size(); i++)
+	for(unsigned i = 0; i < planeModel->meshes.size(); i++)
 	{
 		//LOGI("Planemodel 0x%x mesh 0x%x -> skybox shader", planeModel, planeModel->meshes[i]);
 		planeModel->meshes[i]->mjShaderListIndex = skyboxShaderIndex;
@@ -100,7 +100,7 @@ void mjSkybox::Update(float t_elapsed)
 
 
 
-	for(int i = 0; i < levels.size(); i++)
+	for(unsigned i = 0; i < levels.size(); i++)
 	{
 		levels.at(i)->Update(t_elapsed);
 	}

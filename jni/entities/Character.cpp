@@ -15,9 +15,43 @@ Character::Character()
 
 	mjImageLoader imgLoader;
 	GLuint glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/suit_test.png");
-	for (int i = 0; i < model->meshes.size(); i++)
+	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;
+	}
+}
+void Character::ProcessPhysicsEffects(float t_elapsed)
+{
+	accel.Set0();
+
+	for (unsigned i = 0; i < effectStack.size(); i++)
+	{
+		switch(effectStack[i]->type)
+		{
+			case MJ_ACCELERATION:
+			case MJ_GRAVITY:
+				accel.Add(effectStack[i]->value);
+
+			break;
+			case MJ_FORCE:
+                if (effectStack[i]->value.GetNorm() > 0.1)
+                {
+                    accel.ScaleAdd(1.0/mass, effectStack[i]->value);
+                }
+			break;
+			default:
+				break;
+		}
+
+		//if (effectStack[i]->)
+	}
+	effectStack.clear();
+
+	if (!boundingStructure->isImmovable)
+	{
+
+		vel.ScaleAdd(t_elapsed, accel);
+
 	}
 }
 void Character::ProcessCollisionEffects()
@@ -25,7 +59,7 @@ void Character::ProcessCollisionEffects()
 	bool previousFootingValue = footing;
 	footing = 0;
 
-	for (int i=0; i < collisionStack.size(); i++)
+	for (unsigned i=0; i < collisionStack.size(); i++)
 	{
 		mjPhysicsEffect* collisionEffect = collisionStack[i];
 

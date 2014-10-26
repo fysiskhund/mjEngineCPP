@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1413738936 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
+1414323864 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
 	"mjObject.h"
 
 1413739162 /common/github/mjEngineCPP/jni/core/mjObject.h
@@ -32,7 +32,8 @@
 	"../extLibs/math/Matrix.h"
 	"../extLibs/tinyxml/tinyxml2.h"
 
-1412353317 /common/github/mjEngineCPP/jni/graphics/mjModelMesh.h
+1414350758 /common/github/mjEngineCPP/jni/graphics/mjModelMesh.h
+	<stdio.h>
 
 1412353317 /common/github/mjEngineCPP/jni/graphics/mjShader.h
 	"mjModelMesh.h"
@@ -64,7 +65,7 @@
 
 1412353317 /common/github/mjEngineCPP/jni/physics/mjBoundingStructure.h
 
-1414287083 /common/github/mjEngineCPP/jni/physics/mjPhysicsEffect.h
+1414323876 /common/github/mjEngineCPP/jni/physics/mjPhysicsEffect.h
 	"../core/mjVector3.h"
 
 1412353317 /common/github/mjEngineCPP/jni/physics/mjSphere.h
@@ -113,10 +114,10 @@
 	<time.h>
 	<dos.h>
 
-1413746270 source:/common/github/mjEngineCPP/jni/entities/Character.cpp
+1414327078 source:/common/github/mjEngineCPP/jni/entities/Character.cpp
 	"Character.h"
 
-1412422019 /common/github/mjEngineCPP/jni/entities/Character.h
+1414342754 /common/github/mjEngineCPP/jni/entities/Character.h
 	<GLES2/gl2.h>
 	"../core/mjObject.h"
 	"../graphics/mjImageLoader.h"
@@ -154,10 +155,10 @@
 	"../entities/Grass.h"
 	"Level.h"
 
-1414187135 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
+1414323948 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
 	"gl_code.h"
 
-1414100738 /common/github/mjEngineCPP/jni/game/gl_code.h
+1414323963 /common/github/mjEngineCPP/jni/game/gl_code.h
 	<jni.h>
 	<GLES2/gl2.h>
 	<GLES2/gl2ext.h>
@@ -235,7 +236,7 @@
 	"../extLibs/math/mjMathHelper.h"
 	"../extLibs/logger/mjLog.h"
 
-1413925973 /common/github/mjEngineCPP/jni/graphics/mjSceneGraph.h
+1414349904 /common/github/mjEngineCPP/jni/graphics/mjSceneGraph.h
 	<vector>
 	"../core/mjObject.h"
 	"../graphics/mjShader.h"
@@ -280,19 +281,19 @@
 1412637585 source:/common/github/mjEngineCPP/jni/graphics/mjImageLoader.cpp
 	"mjImageLoader.h"
 
-1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjModel.cpp
+1414345767 source:/common/github/mjEngineCPP/jni/graphics/mjModel.cpp
 	"mjModel.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjModelMesh.cpp
 	"mjModelMesh.h"
 
-1413926019 source:/common/github/mjEngineCPP/jni/graphics/mjSceneGraph.cpp
+1414350992 source:/common/github/mjEngineCPP/jni/graphics/mjSceneGraph.cpp
 	"mjSceneGraph.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjShader.cpp
 	"mjShader.h"
 
-1413144524 source:/common/github/mjEngineCPP/jni/graphics/mjSkybox.cpp
+1414324066 source:/common/github/mjEngineCPP/jni/graphics/mjSkybox.cpp
 	"mjSkybox.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjSkyboxLevelData.cpp
@@ -310,7 +311,7 @@
 1413842057 source:/common/github/mjEngineCPP/jni/physics/mjCollisionTests.cpp
 	"mjCollisionTests.h"
 
-1414285580 source:/common/github/mjEngineCPP/jni/physics/mjPhysics.cpp
+1414324117 source:/common/github/mjEngineCPP/jni/physics/mjPhysics.cpp
 	"mjPhysics.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/physics/mjPhysicsEffect.cpp
@@ -319,7 +320,7 @@
 1412632725 source:/common/github/mjEngineCPP/jni/physics/mjSphere.cpp
 	"mjSphere.h"
 
-1412353317 source:/common/github/mjEngineCPP/jni/terrainTypes/Box.cpp
+1414324121 source:/common/github/mjEngineCPP/jni/terrainTypes/Box.cpp
 	"Box.h"
 
 1413751932 source:/common/github/mjEngineCPP/jni/gnuLinux/main.cpp
@@ -411,10 +412,10 @@
 	<vector>
 	"mjScene.h"
 
-1414287192 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
+1414352917 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
 	"PlatformUniverseScene.h"
 
-1414283253 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
+1414346858 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
 	<jni.h>
 	<GLES2/gl2.h>
 	<GLES2/gl2ext.h>
@@ -423,6 +424,9 @@
 	<stdlib.h>
 	<math.h>
 	<unistd.h>
+	<stdlib.h>
+	<time.h>
+	<vector>
 	"../core/mjObject.h"
 	"../core/mjScene.h"
 	"../graphics/mjModel.h"
@@ -436,6 +440,15 @@
 	"../physics/mjPhysics.h"
 	"../graphics/mjSceneGraph.h"
 	"../entities/Character.h"
+	"../entities/GlowBeing.h"
 	"Level.h"
 	"EntityCreator.h"
+
+1414353762 source:/common/github/mjEngineCPP/jni/entities/GlowBeing.cpp
+	"GlowBeing.h"
+
+1414353744 /common/github/mjEngineCPP/jni/entities/GlowBeing.h
+	"../core/mjObject.h"
+	"../graphics/mjImageLoader.h"
+	"../graphics/mjCamera.h"
 
