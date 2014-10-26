@@ -66,6 +66,7 @@ class PlatformUniverseScene : public mjScene
 
         EntityCreator entityCreator;
 
+        mjVector3 wind;
 
         PlatformUniverseScene();
         void Initialise(int width, int height);
@@ -73,6 +74,8 @@ class PlatformUniverseScene : public mjScene
         void SetUpSkybox();
         void Update(float t_elapsed) override;
         void Draw() override;
+
+
     protected:
     private:
 };

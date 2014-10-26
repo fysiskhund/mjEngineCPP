@@ -106,6 +106,9 @@ void mjObject::ProcessPhysicsEffects(float t_elapsed)
 				accel.Add(effectStack[i]->value);
 
 			break;
+			case MJ_ADD_FORCE:
+                accel.ScaleAdd(1/mass, effectStack[i]->value);
+			break;
 			default:
 				break;
 		}

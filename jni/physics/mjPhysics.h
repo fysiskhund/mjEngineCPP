@@ -2,7 +2,7 @@
  * Copyright (C) 2014 Alejandro Valenzuela Roca
  */
 
- 
+
 #ifndef MJPHYSICS_H
 #define MJPHYSICS_H
 
@@ -20,19 +20,27 @@ namespace mjEngine
 class mjPhysics{
 public:
 
+    mjVector3 gravity;
+    std::vector<mjPhysicsEffect* > globalEffects;
+
+
+	bool debugVar = 0;
 
 	mjPhysics();
 
 
 	void Update(float delta_t);
-	mjVector3 gravity;
+
 	void AddObject(mjObject* object, int collisionLayer);
-	bool debugVar = 0;
+
+	//void AddPhysicsEffect(mjPhysicsEffect* physicsEffect);
+
 
 private:
 	std::vector<mjObject*> allObjects;
 	std::vector<mjObject*> objectsWithKinematics;
 	std::vector<std::vector<mjObject*>* > collisionLayers;
+
 
 	void CollisionDetection();
 

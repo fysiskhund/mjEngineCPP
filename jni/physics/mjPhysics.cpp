@@ -253,15 +253,28 @@ void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 	{
 		if (allObjects[i]->hasKinematics)
 		{
+
 			mjPhysicsEffect* gravityEffect = new mjPhysicsEffect(MJ_GRAVITY, MJ_ADD_ACCEL);
 			gravityEffect->value.Set(0,-9.81,0);
 			allObjects[i]->effectStack.push_back(gravityEffect);
+
+			for (int j = 0; j < globalEffects.size(); j++)
+            {
+                allObjects[i]->effectStack.push_back(globalEffects[j]);
+            }
+
 			allObjects[i]->ProcessPhysicsEffects(t_elapsed);
 		}
+
 
 		allObjects[i]->Update(t_elapsed);
 
 	}
+
+	for (int j = 0; j < globalEffects.size(); j++)
+    {
+        globalEffects.pop_back();
+    }
 
 }
 void mjPhysics::ProcessCollisionEffects()

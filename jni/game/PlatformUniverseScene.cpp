@@ -150,6 +150,12 @@ void PlatformUniverseScene::Update(float t_elapsed)
 		character->pos.y = 10;
 		character->vel.y = 0;
 	}
+    mjPhysicsEffect* windEffect = new mjPhysicsEffect();
+    windEffect->type = MJ_ACCELERATION;
+    windEffect->action = MJ_ADD_FORCE;
+    windEffect->value.CopyFrom(wind);
+
+    physics.globalEffects.push_back(windEffect);
 	physics.Update(t_elapsed);
 	camera->Update(t_elapsed);
 	skybox->Update(t_elapsed);

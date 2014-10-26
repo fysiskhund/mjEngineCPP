@@ -10,10 +10,10 @@ Grass::Grass(Level* levelData)
 	GLuint glTexture;
 
 	model = new mjModel();
-	model->LoadFromFile("/sdcard/mjEngineCPP/grass.mesh.xml");
+	model->LoadFromFile("/sdcard/mjEngineCPP/leaf.mesh.xml");
 	((mjAABB*)boundingStructure)->isImmovable = true;
 
-	glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/grass0.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+	glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/leaf.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;
