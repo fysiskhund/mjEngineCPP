@@ -13,7 +13,11 @@ class mjAutomaton
         mjAutomaton();
         ~mjAutomaton();
         mjAutomaton(const mjAutomaton& other);
+
+        void Start(mjAutomatonState* initialState);
+
         virtual void Update(float t_elapsed);
+
 
         mjAutomatonState* currentState;
         std::vector<mjAutomatonState*> states;

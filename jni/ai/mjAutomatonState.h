@@ -17,10 +17,14 @@ class mjAutomatonState
 
         int destStateOnTimeExpiration = -1;
 
+        virtual void Enter();
+
         virtual void Execute(float t_elapsed);
         virtual void Update(float t_elapsed);
 
         virtual void Reset();
+
+        virtual void Leave();
     protected:
     private:
 };

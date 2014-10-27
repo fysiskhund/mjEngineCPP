@@ -12,9 +12,15 @@ mjAutomatonState::~mjAutomatonState()
     //dtor
 }
 
+void mjAutomatonState::Enter()
+{
+
+}
+
 void mjAutomatonState::Execute(float t_elapsed)
 {
 }
+
 void mjAutomatonState::Update(float t_elapsed)
 {
     if (maxTime > 0)
@@ -23,9 +29,14 @@ void mjAutomatonState::Update(float t_elapsed)
     }
 }
 
+
 void mjAutomatonState::Reset()
 {
     accumulatedTime = 0;
+}
+
+void mjAutomatonState::Leave()
+{
 }
 
 }

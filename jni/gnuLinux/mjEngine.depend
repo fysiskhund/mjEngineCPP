@@ -329,16 +329,16 @@
 	"../game/gl_code.h"
 	"../core/mjVector3.h"
 
-1412892953 source:/common/github/mjEngineCPP/jni/ai/mjAutomaton.cpp
+1414364358 source:/common/github/mjEngineCPP/jni/ai/mjAutomaton.cpp
 	"mjAutomaton.h"
 
-1412892030 /common/github/mjEngineCPP/jni/ai/mjAutomaton.h
+1414363049 /common/github/mjEngineCPP/jni/ai/mjAutomaton.h
 	<vector>
 	"mjAutomatonState.h"
 
-1412892873 /common/github/mjEngineCPP/jni/ai/mjAutomatonState.h
+1414356609 /common/github/mjEngineCPP/jni/ai/mjAutomatonState.h
 
-1412892919 source:/common/github/mjEngineCPP/jni/ai/mjAutomatonState.cpp
+1414361898 source:/common/github/mjEngineCPP/jni/ai/mjAutomatonState.cpp
 	"mjAutomatonState.h"
 
 1413493030 source:/common/github/mjEngineCPP/jni/entities/BatBot.cpp
@@ -412,10 +412,10 @@
 	<vector>
 	"mjScene.h"
 
-1414352917 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
+1414367322 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
 	"PlatformUniverseScene.h"
 
-1414346858 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
+1414362663 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
 	<jni.h>
 	<GLES2/gl2.h>
 	<GLES2/gl2ext.h>
@@ -441,14 +441,42 @@
 	"../graphics/mjSceneGraph.h"
 	"../entities/Character.h"
 	"../entities/GlowBeing.h"
+	"Ambient.h"
 	"Level.h"
 	"EntityCreator.h"
 
-1414353762 source:/common/github/mjEngineCPP/jni/entities/GlowBeing.cpp
+1414366262 source:/common/github/mjEngineCPP/jni/entities/GlowBeing.cpp
 	"GlowBeing.h"
 
-1414353744 /common/github/mjEngineCPP/jni/entities/GlowBeing.h
+1414370017 /common/github/mjEngineCPP/jni/entities/GlowBeing.h
 	"../core/mjObject.h"
+	"../physics/mjSphere.h"
 	"../graphics/mjImageLoader.h"
 	"../graphics/mjCamera.h"
+
+1414363207 source:/common/github/mjEngineCPP/jni/game/Ambient.cpp
+	"Ambient.h"
+
+1414358978 /common/github/mjEngineCPP/jni/game/Ambient.h
+	<stdlib.h>
+	<time.h>
+	"../ai/mjAutomaton.h"
+	"../ai/mjAutomatonState.h"
+	"windStates/SteadyDirectionState.h"
+
+1414364419 source:/common/github/mjEngineCPP/jni/game/windStates/WindState.cpp
+	"WindState.h"
+
+1414361965 /common/github/mjEngineCPP/jni/game/windStates/WindState.h
+	<stdlib.h>
+	<time.h>
+	"../../ai/mjAutomatonState.h"
+	"../../core/mjVector3.h"
+
+1414365947 source:/common/github/mjEngineCPP/jni/game/windStates/SteadyDirectionState.cpp
+	"SteadyDirectionState.h"
+
+1414362801 /common/github/mjEngineCPP/jni/game/windStates/SteadyDirectionState.h
+	"WindState.h"
+	"../../extLibs/logger/mjLog.h"
 

@@ -2,14 +2,14 @@
 
 PlatformUniverseScene::PlatformUniverseScene()
 {
-    wind.Set(0,0,0.01);
+
     srand(time(0));
 
 }
 
 void PlatformUniverseScene::InitGlowBeings()
 {
-    unsigned total = 100;
+    unsigned total = 50;
 
 
     for (unsigned i = 0; i < total; i++)
@@ -155,10 +155,11 @@ void PlatformUniverseScene::Update(float t_elapsed)
 		character->pos.y = 10;
 		character->vel.y = 0;
 	}
+	ambient.Update(t_elapsed);
     mjPhysicsEffect* windEffect = new mjPhysicsEffect();
     windEffect->type = MJ_FORCE;
     windEffect->action = MJ_ADD_FORCE;
-    windEffect->value.CopyFrom(wind);
+    windEffect->value.CopyFrom(ambient.wind);
 
     physics.globalEffects.push_back(windEffect);
 	physics.Update(t_elapsed);

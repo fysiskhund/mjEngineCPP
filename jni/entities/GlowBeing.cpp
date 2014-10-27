@@ -23,6 +23,10 @@ GlowBeing::GlowBeing(mjCamera* camera)
 	}
 
 	scale.Set(0.3, 0.3, 0.3);
+
+    mjSphere* boundingStruct = ((mjSphere*)boundingStructure);
+    boundingStruct->r = 0;
+
 }
 
 void GlowBeing::Update(float t_elapsed)
@@ -33,7 +37,7 @@ void GlowBeing::Update(float t_elapsed)
 
     //vel.y += velNorm*0.005;
 
-    if (pos.DistanceSquaredTo(camera->pos) > MaxCameraDist)
+    if (pos.DistanceSquaredTo(camera->pos) > MaxCameraDist*MaxCameraDist)
     {
         Reposition();
     }
@@ -48,9 +52,9 @@ void GlowBeing::Update(float t_elapsed)
 void GlowBeing::Reposition()
 {
     pos.CopyFrom(camera->pos);
-    pos.x += -10.0 + ((float)rand()/(float)RAND_MAX) * 20.0;
-    pos.y += -10.0 + ((float)rand()/(float)RAND_MAX) * 20.0;
-    pos.z += -10.0 + ((float)rand()/(float)RAND_MAX) * 20.0;
+    pos.x += -MaxCameraDist +( ((float)rand()/(float)RAND_MAX) * 2.0*MaxCameraDist);
+    pos.y += -MaxCameraDist +( ((float)rand()/(float)RAND_MAX) * 2.0*MaxCameraDist);
+    pos.z += -MaxCameraDist +( ((float)rand()/(float)RAND_MAX) * 2.0*MaxCameraDist);
     vel.Set0();
 }
 
@@ -64,7 +68,7 @@ void GlowBeing::ProcessPhysicsEffects(float t_elapsed)
 		{
 
             case MJ_GRAVITY: // Gravity is reduced to simulate floating on air
-				accel.ScaleAdd(0.1, effectStack[i]->value);
+				//accel.ScaleAdd(0.001, effectStack[i]->value);
 			case MJ_ACCELERATION:
 
 

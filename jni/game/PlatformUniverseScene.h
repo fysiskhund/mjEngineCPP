@@ -36,6 +36,7 @@
 #include "../graphics/mjSceneGraph.h"
 #include "../entities/Character.h"
 #include "../entities/GlowBeing.h"
+#include "Ambient.h"
 #include "Level.h"
 #include "EntityCreator.h"
 
@@ -72,7 +73,7 @@ class PlatformUniverseScene : public mjScene
 
         EntityCreator entityCreator;
 
-        mjVector3 wind;
+        Ambient ambient;
 
         PlatformUniverseScene();
         void Initialise(int width, int height);

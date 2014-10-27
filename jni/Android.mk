@@ -47,11 +47,15 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   entities/BatMatonState.cpp \
 				   entities/batMatonStates/WanderBatMatonState.cpp \
 				   entities/Grass.cpp \
+				   entities/GlowBeing.cpp \
 				   terrainTypes/Box.cpp \
 				   game/Level.cpp \
 				   game/TerrainCreator.cpp \
 				   game/EntityCreator.cpp \
 				   game/PlatformUniverseScene.cpp \
+				   game/Ambient.cpp \
+				   game/windStates/WindState.cpp \
+				   game/windStates/SteadyDirectionState.cpp \
 				   game/gl_code.cpp
 				   
 LOCAL_LDLIBS    := -llog -lGLESv2 -lz

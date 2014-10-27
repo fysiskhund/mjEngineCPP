@@ -6,6 +6,12 @@ mjAutomaton::mjAutomaton()
     //ctor
 }
 
+void mjAutomaton::Start(mjAutomatonState* initialState)
+{
+currentState = initialState;
+currentState->Enter();
+}
+
 mjAutomaton::~mjAutomaton()
 {
     //dtor
@@ -21,9 +27,10 @@ void mjAutomaton::Update(float t_elapsed)
         {
             if (currentState->destStateOnTimeExpiration > -1)
             {
-                currentState->Reset();
+                currentState->Leave();
                 int destStateOnTimeExpiration = currentState->destStateOnTimeExpiration;
                 currentState = states[destStateOnTimeExpiration];
+                currentState->Enter();
             }
         }
 
