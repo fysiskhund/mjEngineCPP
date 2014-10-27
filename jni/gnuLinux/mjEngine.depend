@@ -454,15 +454,16 @@
 	"../graphics/mjImageLoader.h"
 	"../graphics/mjCamera.h"
 
-1414363207 source:/common/github/mjEngineCPP/jni/game/Ambient.cpp
+1414451626 source:/common/github/mjEngineCPP/jni/game/Ambient.cpp
 	"Ambient.h"
 
-1414358978 /common/github/mjEngineCPP/jni/game/Ambient.h
+1414451427 /common/github/mjEngineCPP/jni/game/Ambient.h
 	<stdlib.h>
 	<time.h>
 	"../ai/mjAutomaton.h"
 	"../ai/mjAutomatonState.h"
 	"windStates/SteadyDirectionState.h"
+	"windStates/DustDevilState.h"
 
 1414364419 source:/common/github/mjEngineCPP/jni/game/windStates/WindState.cpp
 	"WindState.h"
@@ -473,10 +474,16 @@
 	"../../ai/mjAutomatonState.h"
 	"../../core/mjVector3.h"
 
-1414365947 source:/common/github/mjEngineCPP/jni/game/windStates/SteadyDirectionState.cpp
+1414370055 source:/common/github/mjEngineCPP/jni/game/windStates/SteadyDirectionState.cpp
 	"SteadyDirectionState.h"
 
 1414362801 /common/github/mjEngineCPP/jni/game/windStates/SteadyDirectionState.h
 	"WindState.h"
 	"../../extLibs/logger/mjLog.h"
+
+1414451308 /common/github/mjEngineCPP/jni/game/windStates/DustDevilState.h
+	"WindState.h"
+
+1414452093 source:/common/github/mjEngineCPP/jni/game/windStates/DustDevilState.cpp
+	"DustDevilState.h"
 

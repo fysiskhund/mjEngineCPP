@@ -21,6 +21,7 @@
 					<Add directory="entities/batMatonStates" />
 					<Add directory="core" />
 					<Add directory="game" />
+					<Add directory="game/windStates" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -42,6 +43,7 @@
 					<Add directory="entities/batMatonStates" />
 					<Add directory="core" />
 					<Add directory="game" />
+					<Add directory="game/windStates" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -92,6 +94,8 @@
 		<Unit filename="../extLibs/tinyxml/tinyxml2.h" />
 		<Unit filename="../extLibs/util/mjXMLHelper.cpp" />
 		<Unit filename="../extLibs/util/mjXMLHelper.h" />
+		<Unit filename="../game/Ambient.cpp" />
+		<Unit filename="../game/Ambient.h" />
 		<Unit filename="../game/EntityCreator.cpp" />
 		<Unit filename="../game/EntityCreator.h" />
 		<Unit filename="../game/Level.cpp" />
@@ -102,6 +106,12 @@
 		<Unit filename="../game/TerrainCreator.h" />
 		<Unit filename="../game/gl_code.cpp" />
 		<Unit filename="../game/gl_code.h" />
+		<Unit filename="../game/windStates/DustDevilState.cpp" />
+		<Unit filename="../game/windStates/DustDevilState.h" />
+		<Unit filename="../game/windStates/SteadyDirectionState.cpp" />
+		<Unit filename="../game/windStates/SteadyDirectionState.h" />
+		<Unit filename="../game/windStates/WindState.cpp" />
+		<Unit filename="../game/windStates/WindState.h" />
 		<Unit filename="../graphics/mj3rdPersonCamera.cpp" />
 		<Unit filename="../graphics/mj3rdPersonCamera.h" />
 		<Unit filename="../graphics/mjCamera.cpp" />

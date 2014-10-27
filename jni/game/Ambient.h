@@ -7,6 +7,7 @@
 #include "../ai/mjAutomaton.h"
 #include "../ai/mjAutomatonState.h"
 #include "windStates/SteadyDirectionState.h"
+#include "windStates/DustDevilState.h"
 
 
 using namespace mjEngine;
