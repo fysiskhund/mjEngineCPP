@@ -120,7 +120,7 @@ void mjPhysics::CollisionDetection()
 
 								} else
 								{
-									delete colResult;
+
 									//LOGI("No collision!\n");
 								}
 							}
@@ -281,9 +281,10 @@ void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 
 	for (unsigned j = 0; j < globalEffects.size(); j++)
     {
-		//delete globalEffects[j];
-        globalEffects.pop_back();
+		delete globalEffects[j];
+
     }
+    globalEffects.clear();
 
 }
 void mjPhysics::ProcessCollisionEffects()
@@ -293,6 +294,12 @@ void mjPhysics::ProcessCollisionEffects()
 		if (allObjects[i]->hasKinematics){
 			allObjects[i]->ProcessCollisionEffects();
 		}
+		for (unsigned j = 0; j < allObjects[i]->collisionStack.size(); j++)
+		{
+            delete allObjects[i]->collisionStack[j];
+
+		}
+		allObjects[i]->collisionStack.clear();
 	}
 
 }

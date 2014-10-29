@@ -213,7 +213,7 @@ void mjObject::ProcessCollisionEffects()
 
 		}
 	}
-	collisionStack.clear();
+	// The stack is cleared and the effect objects deleted automatically by mjPhysics.
 }
 void mjObject::Update(float t_elapsed)
 {

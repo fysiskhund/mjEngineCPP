@@ -34,7 +34,7 @@ void DustDevilState::Execute(float t_elapsed)
     }
 
     wind->x = cos(theta);
-    wind->z = sin(theta);
+    //wind->z = sin(theta);
     wind->y = 0;
 
      LOGI("wind: %3.3f, %3.3f, %3.3f\n", wind->x, wind->y, wind->z);

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1414323864 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
+1414622285 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
 	"mjObject.h"
 
 1413739162 /common/github/mjEngineCPP/jni/core/mjObject.h
@@ -14,7 +14,7 @@
 	"../physics/mjSphere.h"
 	"../physics/mjAABB.h"
 
-1412353317 /common/github/mjEngineCPP/jni/core/mjVector3.h
+1414612223 /common/github/mjEngineCPP/jni/core/mjVector3.h
 	<math.h>
 	<stdio.h>
 	"../extLibs/logger/mjLog.h"
@@ -311,7 +311,7 @@
 1413842057 source:/common/github/mjEngineCPP/jni/physics/mjCollisionTests.cpp
 	"mjCollisionTests.h"
 
-1414324117 source:/common/github/mjEngineCPP/jni/physics/mjPhysics.cpp
+1414622432 source:/common/github/mjEngineCPP/jni/physics/mjPhysics.cpp
 	"mjPhysics.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/physics/mjPhysicsEffect.cpp
@@ -412,7 +412,7 @@
 	<vector>
 	"mjScene.h"
 
-1414367322 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
+1414613716 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
 	"PlatformUniverseScene.h"
 
 1414362663 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
@@ -454,7 +454,7 @@
 	"../graphics/mjImageLoader.h"
 	"../graphics/mjCamera.h"
 
-1414451626 source:/common/github/mjEngineCPP/jni/game/Ambient.cpp
+1414612980 source:/common/github/mjEngineCPP/jni/game/Ambient.cpp
 	"Ambient.h"
 
 1414451427 /common/github/mjEngineCPP/jni/game/Ambient.h
@@ -465,7 +465,7 @@
 	"windStates/SteadyDirectionState.h"
 	"windStates/DustDevilState.h"
 
-1414364419 source:/common/github/mjEngineCPP/jni/game/windStates/WindState.cpp
+1414612550 source:/common/github/mjEngineCPP/jni/game/windStates/WindState.cpp
 	"WindState.h"
 
 1414361965 /common/github/mjEngineCPP/jni/game/windStates/WindState.h
@@ -484,6 +484,6 @@
 1414451308 /common/github/mjEngineCPP/jni/game/windStates/DustDevilState.h
 	"WindState.h"
 
-1414612059 source:/common/github/mjEngineCPP/jni/game/windStates/DustDevilState.cpp
+1414621880 source:/common/github/mjEngineCPP/jni/game/windStates/DustDevilState.cpp
 	"DustDevilState.h"
 
