@@ -3,7 +3,7 @@
 DustDevilState::DustDevilState(mjVector3* wind)
 :WindState(wind)
 {
-
+	this->wind = wind;
 }
 
 void DustDevilState::Enter()
@@ -33,9 +33,9 @@ void DustDevilState::Execute(float t_elapsed)
         theta += 2.0*3.141592;
     }
 
-    wind->x = cos(theta);
+    //wind->x = (float)0.15;
     //wind->z = sin(theta);
-    wind->y = 0;
+    //wind->y = (float) 0;
 
      LOGI("wind: %3.3f, %3.3f, %3.3f\n", wind->x, wind->y, wind->z);
     //wind->y = (((float)rand()/(float)RAND_MAX) - 0.3)*0.5;

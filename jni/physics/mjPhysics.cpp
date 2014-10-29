@@ -268,7 +268,10 @@ void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 
 			for (unsigned j = 0; j < globalEffects.size(); j++)
             {
-                allObjects[i]->effectStack.push_back(globalEffects[j]);
+				//if (allObjects[i]->)
+				//{
+					allObjects[i]->effectStack.push_back(globalEffects[j]);
+				//}
             }
 
 			allObjects[i]->ProcessPhysicsEffects(t_elapsed);

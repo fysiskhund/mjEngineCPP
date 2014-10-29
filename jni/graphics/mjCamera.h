@@ -13,6 +13,7 @@ namespace mjEngine{
 
 class mjCamera: public mjObject{
 public:
+	bool hasKinematics = false;
 	mjCamera();
 	void GetLookAtMatrix(float* m);
 };
