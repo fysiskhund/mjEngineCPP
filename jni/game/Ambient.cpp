@@ -2,9 +2,11 @@
 
 Ambient::Ambient()
 {
-   // windAutomaton.states.push_back(new SteadyDirectionState(&wind));
+	LOGI("Wind is at %p\n", &wind);
+    //windAutomaton.states.push_back(new SteadyDirectionState(&wind));
     windAutomaton.states.push_back(new DustDevilState(&wind));
     windAutomaton.Start(windAutomaton.states[0]);
+
 
 
     for (unsigned i = 0; i < windAutomaton.states.size(); i++)

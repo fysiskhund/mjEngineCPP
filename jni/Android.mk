@@ -56,6 +56,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   game/Ambient.cpp \
 				   game/windStates/WindState.cpp \
 				   game/windStates/SteadyDirectionState.cpp \
+				   game/windStates/DustDevilState.cpp \
 				   game/gl_code.cpp
 				   
 LOCAL_LDLIBS    := -llog -lGLESv2 -lz

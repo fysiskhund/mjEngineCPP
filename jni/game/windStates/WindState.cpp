@@ -6,6 +6,7 @@ WindState::WindState(mjVector3* wind)
 {
     srand(time(NULL));
     this->wind = wind;
+    LOGI("Wind assigned %p in %p.\n", wind, &(this->wind));
 }
 void WindState::Enter()
 {

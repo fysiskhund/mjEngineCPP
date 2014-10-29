@@ -17,8 +17,8 @@ void DustDevilState::Enter()
         hDirection = -1;
     }
 
-    intensity = 4;//((float)rand()/(float)RAND_MAX)*0.03;
-    LOGI("Dust devil intensity %f hdir %d\n", intensity, hDirection);
+    intensity = 0.11;//((float)rand()/(float)RAND_MAX)*0.03;
+    //LOGI("Dust devil intensity %f hdir %d\n", intensity, hDirection);
 }
 
 void DustDevilState::Execute(float t_elapsed)
@@ -35,8 +35,9 @@ void DustDevilState::Execute(float t_elapsed)
 
     wind->x = cos(theta);
     wind->z = sin(theta);
+    wind->y = 0;
 
-    LOGI("wind: %3.1f, %3.1f, %3.1f\n", wind->x, wind->y, wind->z);
+     LOGI("wind: %3.3f, %3.3f, %3.3f\n", wind->x, wind->y, wind->z);
     //wind->y = (((float)rand()/(float)RAND_MAX) - 0.3)*0.5;
 
 }

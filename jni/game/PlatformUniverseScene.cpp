@@ -161,6 +161,7 @@ void PlatformUniverseScene::Update(float t_elapsed)
     windEffect->action = MJ_ADD_FORCE;
     windEffect->value.CopyFrom(ambient.wind);
 
+    //LOGI("ambient.wind %p, windEffect %3.3f %3.3f %3.3f\n", &ambient.wind, windEffect->value.x, windEffect->value.y, windEffect->value.z);
     physics.globalEffects.push_back(windEffect);
 	physics.Update(t_elapsed);
 	camera->Update(t_elapsed);
