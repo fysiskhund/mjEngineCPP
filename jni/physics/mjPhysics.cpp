@@ -97,6 +97,7 @@ void mjPhysics::CollisionDetection()
 							object1 = objectI;
 						}
 
+						mjCollisionResult* colResult = new mjCollisionResult(); // Prepare the collision result
 						switch(object0->boundingStructure->type)
 						{
 						case MJ_SPHERE:
@@ -105,7 +106,7 @@ void mjPhysics::CollisionDetection()
 							case MJ_SPHERE:
 							{
 								//LOGI("sphVsph");
-								mjCollisionResult* colResult = new mjCollisionResult();
+
 								//LOGI("After new Colresult");
 								if (mjCollisionTests::SphereVsSphere((mjSphere*)object0->boundingStructure, (mjSphere*)object1->boundingStructure, colResult) == MJ_OVERLAP)
 								{
@@ -135,7 +136,7 @@ void mjPhysics::CollisionDetection()
 							{
 							case MJ_AABB:
 							{
-								mjCollisionResult* colResult = new mjCollisionResult();
+
 
 								if (mjCollisionTests::AABBVsAABB((mjAABB*)object0->boundingStructure, (mjAABB*)object1->boundingStructure, colResult) == MJ_OVERLAP)
 								{
@@ -228,7 +229,7 @@ void mjPhysics::CollisionDetection()
 
 								}else
 								{
-									delete colResult;
+
 									//LOGI("No collision!\n");
 								}
 							}
@@ -241,22 +242,29 @@ void mjPhysics::CollisionDetection()
 						default:
 							break;
 						}
+						delete colResult; // Delete the collision result whether it has been used or not.
+
 					}
+
 				}
+
 			}
 		}
 	}
 }
 void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 {
+	mjPhysicsEffect gravityEffect(MJ_GRAVITY, MJ_ADD_ACCEL);
+	gravityEffect.value.CopyFrom(gravity);
+
 	for(unsigned i = 0; i < allObjects.size(); i++)
 	{
 		if (allObjects[i]->hasKinematics)
 		{
 
-			mjPhysicsEffect* gravityEffect = new mjPhysicsEffect(MJ_GRAVITY, MJ_ADD_ACCEL);
-			gravityEffect->value.Set(0,-9.81,0);
-			allObjects[i]->effectStack.push_back(gravityEffect);
+
+
+			allObjects[i]->effectStack.push_back(&gravityEffect);
 
 			for (unsigned j = 0; j < globalEffects.size(); j++)
             {
@@ -273,6 +281,7 @@ void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 
 	for (unsigned j = 0; j < globalEffects.size(); j++)
     {
+		//delete globalEffects[j];
         globalEffects.pop_back();
     }
 
