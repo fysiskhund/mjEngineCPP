@@ -7,32 +7,6 @@ PlatformUniverseScene::PlatformUniverseScene()
 
 }
 
-void PlatformUniverseScene::InitGlowBeings()
-{
-    unsigned total = 50;
-
-
-    for (unsigned i = 0; i < total; i++)
-    {
-        GlowBeing* glowBeing = new GlowBeing(camera);
-
-
-
-
-
-
-
-        glowBeing->TieShaders(shaderList);
-
-        physics.AddObject(glowBeing, 0);
-
-        sceneGraph.translucentObjects.push_back(glowBeing);
-
-        glowBeing->Reposition();
-
-        glowBeings.push_back(glowBeing);
-    }
-}
 
 void PlatformUniverseScene::Initialise(int width, int height)
 {
@@ -51,7 +25,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
 
     glViewport(0, 0, width, height);
     //checkGlError("glViewport");
-    InitGlowBeings();
+    ambient.InitGlowBeings(camera, &physics, &shaderList, &sceneGraph);
 
     level->LoadFromFile("/sdcard/mjEngineCPP/levels/testlevel.xml");
     entityCreator.PopulateLevel(&level->doc, level);

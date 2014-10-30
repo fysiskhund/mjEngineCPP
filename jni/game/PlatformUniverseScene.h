@@ -69,7 +69,7 @@ class PlatformUniverseScene : public mjScene
 
         Character* character;
 
-        std::vector<GlowBeing*> glowBeings;
+
 
         EntityCreator entityCreator;
 
@@ -77,7 +77,7 @@ class PlatformUniverseScene : public mjScene
 
         PlatformUniverseScene();
         void Initialise(int width, int height);
-        void InitGlowBeings();
+
         void InitShaders();
         void SetUpSkybox();
         void Update(float t_elapsed) override;

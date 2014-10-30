@@ -34,7 +34,7 @@ void Character::ProcessPhysicsEffects(float t_elapsed)
 
 			break;
 			case MJ_FORCE:
-                if (effectStack[i]->value.GetNorm() > 0.1)
+                if (effectStack[i]->value.GetNorm() > 3)
                 {
                     accel.ScaleAdd(1.0/mass, effectStack[i]->value);
                 }

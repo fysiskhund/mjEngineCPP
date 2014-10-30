@@ -114,7 +114,7 @@
 	<time.h>
 	<dos.h>
 
-1414327078 source:/common/github/mjEngineCPP/jni/entities/Character.cpp
+1414627565 source:/common/github/mjEngineCPP/jni/entities/Character.cpp
 	"Character.h"
 
 1414342754 /common/github/mjEngineCPP/jni/entities/Character.h
@@ -200,7 +200,7 @@
 	<GLES2/gl2.h>
 	"mjCamera.h"
 
-1412422019 /common/github/mjEngineCPP/jni/graphics/mjCamera.h
+1414625613 /common/github/mjEngineCPP/jni/graphics/mjCamera.h
 	<GLES2/gl2.h>
 	"../core/mjObject.h"
 
@@ -311,7 +311,7 @@
 1413842057 source:/common/github/mjEngineCPP/jni/physics/mjCollisionTests.cpp
 	"mjCollisionTests.h"
 
-1414622432 source:/common/github/mjEngineCPP/jni/physics/mjPhysics.cpp
+1414625464 source:/common/github/mjEngineCPP/jni/physics/mjPhysics.cpp
 	"mjPhysics.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/physics/mjPhysicsEffect.cpp
@@ -412,10 +412,10 @@
 	<vector>
 	"mjScene.h"
 
-1414613716 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
+1414699220 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
 	"PlatformUniverseScene.h"
 
-1414362663 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
+1414699250 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
 	<jni.h>
 	<GLES2/gl2.h>
 	<GLES2/gl2ext.h>
@@ -454,16 +454,25 @@
 	"../graphics/mjImageLoader.h"
 	"../graphics/mjCamera.h"
 
-1414624920 source:/common/github/mjEngineCPP/jni/game/Ambient.cpp
+1414704002 source:/common/github/mjEngineCPP/jni/game/Ambient.cpp
 	"Ambient.h"
 
-1414451427 /common/github/mjEngineCPP/jni/game/Ambient.h
+1414699467 /common/github/mjEngineCPP/jni/game/Ambient.h
 	<stdlib.h>
 	<time.h>
+	<vector>
+	"../core/mjVector3.h"
 	"../ai/mjAutomaton.h"
 	"../ai/mjAutomatonState.h"
 	"windStates/SteadyDirectionState.h"
 	"windStates/DustDevilState.h"
+	"../entities/GlowBeing.h"
+	"../physics/mjCollisionTests.h"
+	"../physics/mjCollisionResult.h"
+	"../physics/mjPhysics.h"
+	"../graphics/mjShader.h"
+	"../graphics/mjSceneGraph.h"
+	"../graphics/mjCamera.h"
 
 1414612550 source:/common/github/mjEngineCPP/jni/game/windStates/WindState.cpp
 	"WindState.h"
@@ -484,6 +493,6 @@
 1414451308 /common/github/mjEngineCPP/jni/game/windStates/DustDevilState.h
 	"WindState.h"
 
-1414621880 source:/common/github/mjEngineCPP/jni/game/windStates/DustDevilState.cpp
+1414627688 source:/common/github/mjEngineCPP/jni/game/windStates/DustDevilState.cpp
 	"DustDevilState.h"
 
