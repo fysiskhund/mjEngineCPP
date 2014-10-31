@@ -412,7 +412,7 @@
 	<vector>
 	"mjScene.h"
 
-1414699220 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
+1414714607 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
 	"PlatformUniverseScene.h"
 
 1414699250 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
@@ -454,13 +454,14 @@
 	"../graphics/mjImageLoader.h"
 	"../graphics/mjCamera.h"
 
-1414704002 source:/common/github/mjEngineCPP/jni/game/Ambient.cpp
+1414715241 source:/common/github/mjEngineCPP/jni/game/Ambient.cpp
 	"Ambient.h"
 
-1414699467 /common/github/mjEngineCPP/jni/game/Ambient.h
+1414714862 /common/github/mjEngineCPP/jni/game/Ambient.h
 	<stdlib.h>
 	<time.h>
 	<vector>
+	<math.h>
 	"../core/mjVector3.h"
 	"../ai/mjAutomaton.h"
 	"../ai/mjAutomatonState.h"

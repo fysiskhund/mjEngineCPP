@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <vector>
+#include <math.h>
 
 
 #include "../core/mjVector3.h"
@@ -23,6 +24,8 @@
 using namespace mjEngine;
 
 
+#define MAX_ROTSPEED 20
+
 class DustDevil
 {
     public:
@@ -30,12 +33,15 @@ class DustDevil
         float r;
         float h;
 
-        int phase;
+        int phase = 0;
         float rotSpeed;
         float vertSpeed;
+        float rotAccel;
+        float rReduction;
         std::vector<GlowBeing*>* beings;
         std::vector<float>* angles;
-}
+        std::vector<float>* rForParticle;
+};
 
 class Ambient
 {
