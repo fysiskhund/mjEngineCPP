@@ -24,7 +24,7 @@ void mjScene::Draw()
 {
     glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     camera->GetLookAtMatrix(lookAtMatrix);
-    sceneGraph.Draw(shaderList, lookAtMatrix, projectionMatrix);
+    sceneGraph.Draw(camera, shaderList, lookAtMatrix, projectionMatrix);
 }
 
 void mjScene::OnDeactivate()

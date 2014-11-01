@@ -19,6 +19,7 @@
 #include "../graphics/mjShader.h"
 #include "../graphics/mjSceneGraph.h"
 #include "../graphics/mjCamera.h"
+#include "ambient/DustDevil.h"
 
 
 using namespace mjEngine;
@@ -26,22 +27,6 @@ using namespace mjEngine;
 
 #define MAX_ROTSPEED 20
 
-class DustDevil
-{
-    public:
-        mjVector3 pos;
-        float r;
-        float h;
-
-        int phase = 0;
-        float rotSpeed;
-        float vertSpeed;
-        float rotAccel;
-        float rReduction;
-        std::vector<GlowBeing*>* beings;
-        std::vector<float>* angles;
-        std::vector<float>* rForParticle;
-};
 
 class Ambient
 {

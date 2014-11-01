@@ -75,12 +75,8 @@ void Ambient::CreateDustDevil(mjVector3& pos, float r, float h)
     }
     if (inDustDevil->size() > 0)
     {
-        DustDevil* dustDevil = new DustDevil();
-        dustDevil->beings = inDustDevil;
-        dustDevil->angles = angles;
-        dustDevil->rForParticle = rForParticle;
-        dustDevil->h = h;
-        dustDevil->r = r;
+        DustDevil* dustDevil = new DustDevil(r, h, inDustDevil, angles, rForParticle);
+
         dustDevil->rotSpeed = 1.5;
         dustDevil->rotAccel = 0.01;
         dustDevil->vertSpeed = 0.1;
@@ -101,45 +97,7 @@ void Ambient::UpdateDustDevils(float t_elapsed)
     {
         DustDevil* devil = dustDevils[i];
 
-        // Take all the particles and start revolving them
-        for(unsigned j = 0; j < devil->beings->size(); j++)
-        {
-            GlowBeing* being = (*devil->beings)[j];
-            float angle = (*devil->angles)[j];
-            float rForParticle = (*devil->rForParticle)[j];
-
-            if (devil->rotSpeed < MAX_ROTSPEED)
-            {
-                devil->rotSpeed += devil->rotAccel*t_elapsed;
-            } else
-            {
-                devil->phase = 1;
-            }
-
-            angle += devil->rotSpeed*t_elapsed;
-            if ( angle < 0)
-            {
-                angle += 2.0*M_PI;
-            } else if (angle > 2.0*M_PI)
-            {
-                angle -= 2.0*M_PI;
-            }
-
-            being->pos.x = sin(angle)*rForParticle;
-            being->pos.z = cos(angle)*rForParticle;
-            being->vel.y += devil->vertSpeed*t_elapsed;
-
-            rForParticle -= devil->rReduction*t_elapsed;
-            if (rForParticle > 0)
-            {
-                (*devil->rForParticle)[j] = rForParticle;
-            }
-
-
-
-            (*devil->angles)[j] = angle;
-
-        }
+        devil->Update(t_elapsed);
 
     }
     for (int i = dustDevils.size()-1; i >= 0; i--)
@@ -147,7 +105,8 @@ void Ambient::UpdateDustDevils(float t_elapsed)
 
         if (dustDevils[i]->phase == 1)
         {
-
+            delete dustDevils[i];
+            dustDevils.pop_back();
         }
     }
 }

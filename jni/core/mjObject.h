@@ -24,6 +24,12 @@ class mjObject // Generic mjObject for games
 {
 public:
     char* id = NULL;
+
+    int tag = 0;
+	void* tagObject = NULL;
+
+
+
 	mjVector3 pos;
 	mjVector3 dir;
 	mjVector3 up;
@@ -35,6 +41,9 @@ public:
 	mjVector3 vel;
 
 	float mass = 1;
+
+	float distSqToCamera; // Set by SceneGraph on the previous frame, only from comparison
+                          // with pos and only if object is semitransparent.
 
 	mjModel* model;
 	mjVector3 modelOffset;
@@ -61,8 +70,7 @@ public:
     void MatchScaleToAABB();
     void MatchAABBToModel();
 
-	int tag = 0;
-	void* tagObject = NULL;
+
 
 };
 }

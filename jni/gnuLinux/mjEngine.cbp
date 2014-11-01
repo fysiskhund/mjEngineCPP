@@ -22,6 +22,7 @@
 					<Add directory="core" />
 					<Add directory="game" />
 					<Add directory="game/windStates" />
+					<Add directory="game/ambient" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -44,6 +45,7 @@
 					<Add directory="core" />
 					<Add directory="game" />
 					<Add directory="game/windStates" />
+					<Add directory="game/ambient" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -104,6 +106,8 @@
 		<Unit filename="../game/PlatformUniverseScene.h" />
 		<Unit filename="../game/TerrainCreator.cpp" />
 		<Unit filename="../game/TerrainCreator.h" />
+		<Unit filename="../game/ambient/DustDevil.cpp" />
+		<Unit filename="../game/ambient/DustDevil.h" />
 		<Unit filename="../game/gl_code.cpp" />
 		<Unit filename="../game/gl_code.h" />
 		<Unit filename="../game/windStates/DustDevilState.cpp" />
