@@ -1,7 +1,7 @@
 #ifndef MJSKYBOXLEVELDATA_H
 #define MJSKYBOXLEVELDATA_H
 
-#include "../extLibs/util/mjMultiplatform.h"
+#include "../extLibs/util/mjMultiPlatform.h"
 
 #include "../extLibs/logger/mjLog.h"
 

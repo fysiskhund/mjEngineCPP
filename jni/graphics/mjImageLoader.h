@@ -7,13 +7,14 @@
 
 #include <stdlib.h>
 #include <stdarg.h>
-#include "../extLibs/util/mjMultiplatform.h"
+#include "../extLibs/util/mjMultiPlatform.h"
 
 #ifdef DESKTOP_SDL
 #include <SDL2/SDL_image.h>
-#else
+#ifndef WIN32
 #include "../extLibs/png/include/png.h"
-#endif
+#endif // WIN32
+#endif // DESKTOP_SDL
 #include "../extLibs/logger/mjLog.h"
 
 

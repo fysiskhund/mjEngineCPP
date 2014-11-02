@@ -15,7 +15,7 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-DDESKTOP_SDL" />
-					<Add option="-D__USE_GNU" />
+					<Add option="-DUSE_GLES" />
 					<Add directory="entities" />
 					<Add directory="ai" />
 					<Add directory="extLibs/util" />

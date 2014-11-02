@@ -5,7 +5,7 @@
  #ifndef MJCAMERA_H
 #define MJCAMERA_H
 
-#include "../extLibs/util/mjMultiplatform.h"
+#include "../extLibs/util/mjMultiPlatform.h"
 
 #include "../core/mjObject.h"
 

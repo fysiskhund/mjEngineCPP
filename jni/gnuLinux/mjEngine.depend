@@ -2,8 +2,10 @@
 1414622285 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
 	"mjObject.h"
 
-1414846803 /common/github/mjEngineCPP/jni/core/mjObject.h
+1414971763 /common/github/mjEngineCPP/jni/core/mjObject.h
 	<vector>
+	<string.h>
+	"../extLibs/util/mjMultiPlatform.h"
 	"../extLibs/tinyxml/tinyxml2.h"
 	"../extLibs/util/mjXMLHelper.h"
 	"../core/mjVector3.h"
@@ -22,11 +24,11 @@
 1412353317 /common/github/mjEngineCPP/jni/extLibs/logger/mjLog.h
 	<android/log.h>
 
-1412422019 /common/github/mjEngineCPP/jni/graphics/mjModel.h
+1414971746 /common/github/mjEngineCPP/jni/graphics/mjModel.h
 	<stdio.h>
 	<string.h>
 	<vector>
-	<GLES2/gl2.h>
+	"../extLibs/util/mjMultiPlatform.h"
 	"mjModelMesh.h"
 	"mjShader.h"
 	"../extLibs/math/Matrix.h"
@@ -35,11 +37,10 @@
 1414350758 /common/github/mjEngineCPP/jni/graphics/mjModelMesh.h
 	<stdio.h>
 
-1412353317 /common/github/mjEngineCPP/jni/graphics/mjShader.h
+1414971753 /common/github/mjEngineCPP/jni/graphics/mjShader.h
 	"mjModelMesh.h"
 	"../core/mjVector3.h"
-	<GLES2/gl2.h>
-	<GLES2/gl2ext.h>
+	"../extLibs/util/mjMultiPlatform.h"
 	"../extLibs/logger/mjLog.h"
 
 1412353317 /common/github/mjEngineCPP/jni/extLibs/math/Matrix.h
@@ -83,16 +84,15 @@
 1413239775 source:/common/github/mjEngineCPP/jni/entities/Bird.cpp
 	"Bird.h"
 
-1412422019 /common/github/mjEngineCPP/jni/entities/Bird.h
-	<GLES2/gl2.h>
+1414971851 /common/github/mjEngineCPP/jni/entities/Bird.h
+	"../extLibs/util/mjMultiPlatform.h"
 	"../core/mjObject.h"
 	"../graphics/mjImageLoader.h"
 
-1412637565 /common/github/mjEngineCPP/jni/graphics/mjImageLoader.h
+1414971832 /common/github/mjEngineCPP/jni/graphics/mjImageLoader.h
 	<stdlib.h>
 	<stdarg.h>
-	<GLES2/gl2.h>
-	<GLES2/gl2ext.h>
+	"../extLibs/util/mjMultiPlatform.h"
 	<SDL2/SDL_image.h>
 	"../extLibs/png/include/png.h"
 	"../extLibs/logger/mjLog.h"
@@ -117,8 +117,8 @@
 1414627565 source:/common/github/mjEngineCPP/jni/entities/Character.cpp
 	"Character.h"
 
-1414342754 /common/github/mjEngineCPP/jni/entities/Character.h
-	<GLES2/gl2.h>
+1414971856 /common/github/mjEngineCPP/jni/entities/Character.h
+	"../extLibs/util/mjMultiPlatform.h"
 	"../core/mjObject.h"
 	"../graphics/mjImageLoader.h"
 	"../extLibs/logger/mjLog.h"
@@ -158,10 +158,9 @@
 1414323948 source:/common/github/mjEngineCPP/jni/game/gl_code.cpp
 	"gl_code.h"
 
-1414323963 /common/github/mjEngineCPP/jni/game/gl_code.h
+1414971890 /common/github/mjEngineCPP/jni/game/gl_code.h
 	<jni.h>
-	<GLES2/gl2.h>
-	<GLES2/gl2ext.h>
+	"../extLibs/util/mjMultiPlatform.h"
 	"../extLibs/logger/mjLog.h"
 	<stdio.h>
 	<stdlib.h>
@@ -183,37 +182,36 @@
 	"EntityCreator.h"
 	"PlatformUniverseScene.h"
 
-1412422019 /common/github/mjEngineCPP/jni/graphics/mjDefaultShaders.h
-	<GLES2/gl2.h>
+1414971899 /common/github/mjEngineCPP/jni/graphics/mjDefaultShaders.h
+	"../extLibs/util/mjMultiPlatform.h"
 	"mjShader.h"
 	"../core/mjVector3.h"
 	<string.h>
 	"../extLibs/logger/mjLog.h"
 
-1412422019 /common/github/mjEngineCPP/jni/graphics/mjSkyboxShaders.h
+1414971905 /common/github/mjEngineCPP/jni/graphics/mjSkyboxShaders.h
 	<string.h>
-	<GLES2/gl2.h>
+	"../extLibs/util/mjMultiPlatform.h"
 	"mjShader.h"
 	"../core/mjVector3.h"
 
-1412422019 /common/github/mjEngineCPP/jni/graphics/mj3rdPersonCamera.h
-	<GLES2/gl2.h>
+1414971909 /common/github/mjEngineCPP/jni/graphics/mj3rdPersonCamera.h
+	"../extLibs/util/mjMultiPlatform.h"
 	"mjCamera.h"
 
-1414625613 /common/github/mjEngineCPP/jni/graphics/mjCamera.h
-	<GLES2/gl2.h>
+1414971769 /common/github/mjEngineCPP/jni/graphics/mjCamera.h
+	"../extLibs/util/mjMultiPlatform.h"
 	"../core/mjObject.h"
 
-1412422019 /common/github/mjEngineCPP/jni/graphics/mjSkybox.h
+1414971774 /common/github/mjEngineCPP/jni/graphics/mjSkybox.h
 	<vector>
-	<GLES2/gl2.h>
+	"../extLibs/util/mjMultiPlatform.h"
 	"../core/mjObject.h"
 	"mjImageLoader.h"
 	"mjSkyboxLevelData.h"
 
-1412353317 /common/github/mjEngineCPP/jni/graphics/mjSkyboxLevelData.h
-	<GLES2/gl2.h>
-	<GLES2/gl2ext.h>
+1414971784 /common/github/mjEngineCPP/jni/graphics/mjSkyboxLevelData.h
+	"../extLibs/util/mjMultiPlatform.h"
 	"../extLibs/logger/mjLog.h"
 
 1414285225 /common/github/mjEngineCPP/jni/physics/mjPhysics.h
@@ -259,8 +257,8 @@
 	"../physics/mjBoundingStructure.h"
 	"../terrainTypes/Box.h"
 
-1412422019 /common/github/mjEngineCPP/jni/terrainTypes/Box.h
-	<GLES2/gl2.h>
+1414971843 /common/github/mjEngineCPP/jni/terrainTypes/Box.h
+	"../extLibs/util/mjMultiPlatform.h"
 	"../core/mjObject.h"
 	"../extLibs/logger/mjLog.h"
 	"../graphics/mjImageLoader.h"
@@ -289,7 +287,7 @@
 1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjModelMesh.cpp
 	"mjModelMesh.h"
 
-1414847352 source:/common/github/mjEngineCPP/jni/graphics/mjSceneGraph.cpp
+1414847572 source:/common/github/mjEngineCPP/jni/graphics/mjSceneGraph.cpp
 	"mjSceneGraph.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjShader.cpp
@@ -325,8 +323,8 @@
 1414324121 source:/common/github/mjEngineCPP/jni/terrainTypes/Box.cpp
 	"Box.h"
 
-1413751932 source:/common/github/mjEngineCPP/jni/gnuLinux/main.cpp
-	<GLES2/gl2.h>
+1414972111 source:/common/github/mjEngineCPP/jni/gnuLinux/main.cpp
+	"../extLibs/util/mjMultiPlatform.h"
 	<SDL2/SDL.h>
 	"../game/gl_code.h"
 	"../core/mjVector3.h"
@@ -387,7 +385,7 @@
 	"../BatBot.h"
 	"WanderBatMatonState.h"
 
-1414247848 source:/common/github/mjEngineCPP/jni/entities/Grass.cpp
+1414880654 source:/common/github/mjEngineCPP/jni/entities/Grass.cpp
 	"Grass.h"
 
 1413746544 /common/github/mjEngineCPP/jni/entities/Grass.h
@@ -417,10 +415,9 @@
 1414847274 source:/common/github/mjEngineCPP/jni/game/PlatformUniverseScene.cpp
 	"PlatformUniverseScene.h"
 
-1414699250 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
+1414971914 /common/github/mjEngineCPP/jni/game/PlatformUniverseScene.h
 	<jni.h>
-	<GLES2/gl2.h>
-	<GLES2/gl2ext.h>
+	"../extLibs/util/mjMultiPlatform.h"
 	"../extLibs/logger/mjLog.h"
 	<stdio.h>
 	<stdlib.h>
@@ -512,7 +509,7 @@
 	"../../graphics/mjSceneGraph.h"
 	"../../graphics/mjCamera.h"
 
-1414846296 source:/common/github/mjEngineCPP/jni/game/ambient/DustDevil.cpp
+1414855524 source:/common/github/mjEngineCPP/jni/game/ambient/DustDevil.cpp
 	"DustDevil.h"
 
 1414434280 source:e:\common\github\mjenginecpp\jni\ai\mjautomaton.cpp
@@ -1370,5 +1367,15 @@
 	"../core/mjVector3.h"
 
 1414966794 source:e:\common\github\mjenginecpp\jni\extlibs\util\mjmultiplatform.cpp
+	"mjMultiPlatform.h"
+
+1414972082 /common/github/mjEngineCPP/jni/extLibs/util/mjMultiPlatform.h
+	<GLES2/gl2.h>
+	<GLES2/gl2ext.h>
+	<Windows.h>
+	<GL/glew.h>
+	<GL/gl.h>
+
+1414971871 source:/common/github/mjEngineCPP/jni/extLibs/util/mjMultiPlatform.cpp
 	"mjMultiPlatform.h"
 

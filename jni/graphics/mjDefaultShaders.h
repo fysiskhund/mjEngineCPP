@@ -5,7 +5,7 @@
  #ifndef MJDEFAULTSHADERS_H
 #define MJDEFAULTSHADERS_H
 
-#include "../extLibs/util/mjMultiplatform.h"
+#include "../extLibs/util/mjMultiPlatform.h"
 
 #include "mjShader.h"
 #include "../core/mjVector3.h"

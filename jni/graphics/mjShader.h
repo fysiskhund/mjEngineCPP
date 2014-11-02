@@ -10,7 +10,7 @@
 #include "mjModelMesh.h"
 #include "../core/mjVector3.h"
 
-#include "../extLibs/util/mjMultiplatform.h"
+#include "../extLibs/util/mjMultiPlatform.h"
 
 #include "../extLibs/logger/mjLog.h"
 

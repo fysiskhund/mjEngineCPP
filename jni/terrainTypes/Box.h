@@ -9,7 +9,7 @@
 #ifndef BOX_H
 #define BOX_H
 
-#include "../extLibs/util/mjMultiplatform.h"
+#include "../extLibs/util/mjMultiPlatform.h"
 
 #include "../core/mjObject.h"
 #include "../extLibs/logger/mjLog.h"

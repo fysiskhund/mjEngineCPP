@@ -6,7 +6,7 @@
 #endif
 
 
-#include "../extLibs/util/mjMultiplatform.h"
+#include "../extLibs/util/mjMultiPlatform.h"
 
 #include "../extLibs/logger/mjLog.h"
 

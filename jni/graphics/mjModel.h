@@ -6,7 +6,7 @@
 #include <string.h>
 #include <vector>
 
-#include "../extLibs/util/mjMultiplatform.h"
+#include "../extLibs/util/mjMultiPlatform.h"
 
 
 

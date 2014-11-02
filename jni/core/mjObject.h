@@ -8,6 +8,8 @@
 #include <vector>
 #include <string.h>
 
+#include "../extLibs/util/mjMultiPlatform.h"
+
 #include "../extLibs/tinyxml/tinyxml2.h"
 #include "../extLibs/util/mjXMLHelper.h"
 
@@ -18,7 +20,7 @@
 #include "../physics/mjPhysicsEffect.h"
 #include "../physics/mjSphere.h"
 #include "../physics/mjAABB.h"
-#include "../extLibs/util/mjMultiplatform.h"
+
 
 namespace mjEngine{
 

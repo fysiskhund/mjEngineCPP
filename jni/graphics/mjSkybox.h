@@ -2,7 +2,7 @@
 #define MJ_SKYBOX_H
 
 #include <vector>
-#include "../extLibs/util/mjMultiplatform.h"
+#include "../extLibs/util/mjMultiPlatform.h"
 
 
 #include "../core/mjObject.h"
