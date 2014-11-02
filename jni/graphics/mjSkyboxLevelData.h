@@ -1,8 +1,7 @@
 #ifndef MJSKYBOXLEVELDATA_H
 #define MJSKYBOXLEVELDATA_H
 
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
+#include "../extLibs/util/mjMultiplatform.h"
 
 #include "../extLibs/logger/mjLog.h"
 

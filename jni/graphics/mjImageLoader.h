@@ -7,15 +7,13 @@
 
 #include <stdlib.h>
 #include <stdarg.h>
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
+#include "../extLibs/util/mjMultiplatform.h"
 
 #ifdef DESKTOP_SDL
 #include <SDL2/SDL_image.h>
-#endif
-
-
+#else
 #include "../extLibs/png/include/png.h"
+#endif
 #include "../extLibs/logger/mjLog.h"
 
 
@@ -46,11 +44,13 @@ private:
 	png_byte color_type;
 	png_byte bit_depth;
 
+#ifndef DESKTOP_SDL
 	png_structp png_ptr;
 	png_infop info_ptr;
-	int number_of_passes;
-	png_bytep * row_pointers;
 
+	png_bytep * row_pointers;
+#endif
+    int number_of_passes;
 #ifdef DESKTOP_SDL
 	SDL_Surface* imageSurface;
 #endif

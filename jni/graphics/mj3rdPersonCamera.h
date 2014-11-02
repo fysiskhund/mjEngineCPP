@@ -1,7 +1,7 @@
 #ifndef MJ3RDPERSONCAMERA_H
 #define MJ3RDPERSONCAMERA_H
 
-#include <GLES2/gl2.h>
+#include "../extLibs/util/mjMultiplatform.h"
 
 #include "mjCamera.h"
 

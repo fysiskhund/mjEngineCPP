@@ -10,8 +10,7 @@
 #include "mjModelMesh.h"
 #include "../core/mjVector3.h"
 
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
+#include "../extLibs/util/mjMultiplatform.h"
 
 #include "../extLibs/logger/mjLog.h"
 

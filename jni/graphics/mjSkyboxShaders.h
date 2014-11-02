@@ -3,7 +3,7 @@
 
 
 #include <string.h>
-#include <GLES2/gl2.h>
+#include "../extLibs/util/mjMultiplatform.h"
 
 
 #include "mjShader.h"

@@ -1,4 +1,4 @@
-#include <GLES2/gl2.h>
+#include "../extLibs/util/mjMultiplatform.h"
 #include <SDL2/SDL.h>
 
 #include "../game/gl_code.h"

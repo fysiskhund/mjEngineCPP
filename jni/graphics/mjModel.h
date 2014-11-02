@@ -6,7 +6,7 @@
 #include <string.h>
 #include <vector>
 
-#include <GLES2/gl2.h>
+#include "../extLibs/util/mjMultiplatform.h"
 
 
 
@@ -56,7 +56,7 @@ private:
 	int currentVertex;
 	int currentFace;
 	int faceCount;
-    
+
 };
 } // nameSpace mj
 

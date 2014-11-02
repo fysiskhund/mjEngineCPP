@@ -10,7 +10,7 @@
 #define __mjEngineCPP__Bird__
 
 
-#include <GLES2/gl2.h>
+#include "../extLibs/util/mjMultiplatform.h"
 
 
 #include "../core/mjObject.h"

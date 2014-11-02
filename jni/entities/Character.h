@@ -1,7 +1,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include <GLES2/gl2.h>
+#include "../extLibs/util/mjMultiplatform.h"
 
 #include "../core/mjObject.h"
 #include "../graphics/mjImageLoader.h"
