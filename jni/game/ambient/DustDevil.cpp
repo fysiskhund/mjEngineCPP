@@ -63,8 +63,8 @@ DustDevil::~DustDevil()
         float angle = (*angles)[i];
         float rForParticle = (*rsForParticle)[i];
 
-        being->vel.x = MAX_ROTSPEED*sin(angle);
-        being->vel.z = MAX_ROTSPEED*cos(angle);
+        being->vel.x = sin(angle);
+        being->vel.z = cos(angle);
     }
     delete beings;
     delete angles;
