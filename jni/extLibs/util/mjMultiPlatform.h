@@ -11,6 +11,7 @@
     unsigned strnlen(const char* str, unsigned n);
     #define png_uint_32 unsigned
     #define png_byte char
+    #define GLEW_STATIC
     #include <GL/glew.h>
 #endif // WIN32
     #include <GL/gl.h>

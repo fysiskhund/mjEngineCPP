@@ -582,7 +582,7 @@
 	"../extLibs/math/Matrix.h"
 	"../extLibs/tinyxml/tinyxml2.h"
 
-1414966692 e:\common\github\mjenginecpp\jni\extlibs\util\mjmultiplatform.h
+1414970209 e:\common\github\mjenginecpp\jni\extlibs\util\mjmultiplatform.h
 	<GLES2/gl2.h>
 	<GLES2/gl2ext.h>
 	<Windows.h>
@@ -1363,9 +1363,12 @@
 1414434280 source:e:\common\github\mjenginecpp\jni\terraintypes\box.cpp
 	"Box.h"
 
-1414966663 source:e:\common\github\mjenginecpp\jni\gnulinux\main.cpp
+1414970564 source:e:\common\github\mjenginecpp\jni\gnulinux\main.cpp
 	"../extLibs/util/mjMultiplatform.h"
 	<SDL2/SDL.h>
 	"../game/gl_code.h"
 	"../core/mjVector3.h"
+
+1414966794 source:e:\common\github\mjenginecpp\jni\extlibs\util\mjmultiplatform.cpp
+	"mjMultiPlatform.h"
 

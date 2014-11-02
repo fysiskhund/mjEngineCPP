@@ -61,7 +61,6 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-DDESKTOP_SDL" />
-					<Add option="-D__USE_GNU" />
 					<Add option="-DWIN32" />
 					<Add directory="entities" />
 					<Add directory="ai" />
@@ -75,9 +74,11 @@
 					<Add directory="../../../../glew/glew-1.11.0/include" />
 				</Compiler>
 				<Linker>
-					<Add option="-lstdc++" />
 					<Add library="SDL2" />
+					<Add library="SDL2main" />
 					<Add library="SDL2_image" />
+					<Add library="glew32s" />
+					<Add library="opengl32" />
 					<Add directory="../../../../glew/glew-1.11.0/lib/Release/Win32" />
 					<Add directory="../../../../sdl/x86_64-w64-mingw32/lib" />
 				</Linker>
@@ -125,6 +126,7 @@
 		<Unit filename="../extLibs/png/include/png.h" />
 		<Unit filename="../extLibs/tinyxml/tinyxml2.cpp" />
 		<Unit filename="../extLibs/tinyxml/tinyxml2.h" />
+		<Unit filename="../extLibs/util/mjMultiPlatform.cpp" />
 		<Unit filename="../extLibs/util/mjMultiPlatform.h" />
 		<Unit filename="../extLibs/util/mjXMLHelper.cpp" />
 		<Unit filename="../extLibs/util/mjXMLHelper.h" />
@@ -183,7 +185,6 @@
 		<Unit filename="../physics/mjPhysicsEffect.h" />
 		<Unit filename="../physics/mjSphere.cpp" />
 		<Unit filename="../physics/mjSphere.h" />
-		<Unit filename="../src/mjGLChooser.cpp" />
 		<Unit filename="../terrainTypes/Box.cpp" />
 		<Unit filename="../terrainTypes/Box.h" />
 		<Unit filename="main.cpp" />
