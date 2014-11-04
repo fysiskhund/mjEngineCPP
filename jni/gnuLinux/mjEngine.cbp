@@ -24,6 +24,7 @@
 					<Add directory="game" />
 					<Add directory="game/windStates" />
 					<Add directory="game/ambient" />
+					<Add directory="extLibs/math" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -47,6 +48,7 @@
 					<Add directory="game" />
 					<Add directory="game/windStates" />
 					<Add directory="game/ambient" />
+					<Add directory="extLibs/math" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -72,6 +74,7 @@
 					<Add directory="game/ambient" />
 					<Add directory="../../../../sdl/x86_64-w64-mingw32/include" />
 					<Add directory="../../../../glew/glew-1.11.0/include" />
+					<Add directory="extLibs/math" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -123,6 +126,8 @@
 		<Unit filename="../extLibs/math/Matrix.h" />
 		<Unit filename="../extLibs/math/mjMathHelper.cpp" />
 		<Unit filename="../extLibs/math/mjMathHelper.h" />
+		<Unit filename="../extLibs/math/mjMatrixStack.cpp" />
+		<Unit filename="../extLibs/math/mjMatrixStack.h" />
 		<Unit filename="../extLibs/png/include/png.h" />
 		<Unit filename="../extLibs/tinyxml/tinyxml2.cpp" />
 		<Unit filename="../extLibs/tinyxml/tinyxml2.h" />
