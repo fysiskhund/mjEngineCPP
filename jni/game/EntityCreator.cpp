@@ -13,7 +13,7 @@ EntityCreator::EntityCreator()
     entityTypes.push_back("player");
     entityTypes.push_back("bird");
     entityTypes.push_back("bat");
-    entityTypes.push_back("grass");
+    entityTypes.push_back("plant");
 
 }
 
