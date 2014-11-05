@@ -68,7 +68,7 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
             return new BatBot(levelData);
             break;
         case 3:
-            return new Grass(levelData);
+            return new Plant(levelData);
             break;
         default:
             return NULL;

@@ -1,5 +1,5 @@
-#ifndef GRASS_H
-#define GRASS_H
+#ifndef PLANT_H
+#define PLANT_H
 
 #include "../core/mjObject.h"
 #include "../ai/mjAutomaton.h"
@@ -8,16 +8,16 @@
 
 using namespace mjEngine;
 
-class Grass : public mjObject, public mjAutomaton
+class Plant : public mjObject, public mjAutomaton
 {
     public:
-        Grass(Level* levelData);
+        Plant(Level* levelData);
         //BatBot(const BatBot& other);
         Level* levelData;
-        ~Grass();
+        ~Plant();
         virtual void ProcessPhysicsEffects(float t_elapsed) override;
     protected:
     private:
 };
 
-#endif // GRASS_H
+#endif // PLANT_H

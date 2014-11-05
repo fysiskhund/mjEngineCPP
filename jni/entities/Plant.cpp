@@ -1,6 +1,6 @@
-#include "Grass.h"
+#include "Plant.h"
 
-Grass::Grass(Level* levelData)
+Plant::Plant(Level* levelData)
 :mjObject(MJ_AABB)
 {
     this->levelData = levelData;
@@ -21,12 +21,12 @@ Grass::Grass(Level* levelData)
 
 }
 
-void Grass::ProcessPhysicsEffects(float t_elapsed)
+void Plant::ProcessPhysicsEffects(float t_elapsed)
 {
-    // Nothing. The grass does not respond to effects for now.
+    // Nothing. The Plant does not respond to effects for now.
 }
 
-Grass::~Grass()
+Plant::~Plant()
 {
     //dtor
 }

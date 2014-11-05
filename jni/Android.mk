@@ -46,7 +46,7 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   entities/BatMaton.cpp \
 				   entities/BatMatonState.cpp \
 				   entities/batMatonStates/WanderBatMatonState.cpp \
-				   entities/Grass.cpp \
+				   entities/Plant.cpp \
 				   entities/GlowBeing.cpp \
 				   terrainTypes/Box.cpp \
 				   game/Level.cpp \
