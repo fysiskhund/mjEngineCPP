@@ -5,6 +5,10 @@
 # Files for the Dalvik VM
 *.dex
 
+# Random files from codeblocks
+*.depend
+*.layout
+
 # Java class files
 *.class
 
