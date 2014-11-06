@@ -90,7 +90,7 @@ void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 						modelViewMatrix, 0);
 	//Matrix4::DebugM("mvpp", modelViewProjectionMatrix);
 
-	model->Draw(shaderList, modelMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix);
+	model->Draw(shaderList, modelMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, pose);
 }
 
 void mjObject::ProcessPhysicsEffects(float t_elapsed)
@@ -217,6 +217,10 @@ void mjObject::ProcessCollisionEffects()
 }
 void mjObject::Update(float t_elapsed)
 {
+    if (animation && pose)
+    {
+        animation->Update(t_elapsed, pose, animationState);
+    }
 
 }
 void mjObject::UpdatePosition(float t_elapsed)

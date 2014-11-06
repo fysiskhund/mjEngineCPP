@@ -14,12 +14,15 @@
 #include "../extLibs/util/mjXMLHelper.h"
 
 #include "../core/mjVector3.h"
-#include "../graphics/mjModel.h"
 #include "../extLibs/math/Matrix.h"
+#include "../graphics/mjModel.h"
+#include "../graphics/animation/mjModelPose.h"
+#include "../graphics/animation/mjModelAnimation.h"
 #include "../physics/mjBoundingStructure.h"
 #include "../physics/mjPhysicsEffect.h"
 #include "../physics/mjSphere.h"
 #include "../physics/mjAABB.h"
+
 
 
 namespace mjEngine{
@@ -51,6 +54,9 @@ public:
                           // with pos and only if object is semitransparent.
 
 	mjModel* model;
+	int animationState = 0;
+	mjModelAnimation* animation = NULL;
+	mjModelPose* pose = NULL;
 	mjVector3 modelOffset;
 	mjBoundingStructure* boundingStructure;
 

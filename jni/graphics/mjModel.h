@@ -12,6 +12,7 @@
 
 //#include <android/log.h>
 
+#include "animation/mjModelPose.h"
 #include "mjModelMesh.h"
 #include "mjShader.h"
 
@@ -49,7 +50,7 @@ public:
 	void TieShaders(std::vector<mjShader*>& shaderList);
 
 	void Draw(std::vector<mjShader*>& shaderList,
-			float* modelMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix);
+			float* modelMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, mjModelPose* pose);
 
 private:
 	int numVertices;

@@ -25,6 +25,7 @@
 					<Add directory="game/windStates" />
 					<Add directory="game/ambient" />
 					<Add directory="extLibs/math" />
+					<Add directory="graphics/animation" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -49,6 +50,7 @@
 					<Add directory="game/windStates" />
 					<Add directory="game/ambient" />
 					<Add directory="extLibs/math" />
+					<Add directory="graphics/animation" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -75,6 +77,7 @@
 					<Add directory="../../../../sdl/x86_64-w64-mingw32/include" />
 					<Add directory="../../../../glew/glew-1.11.0/include" />
 					<Add directory="extLibs/math" />
+					<Add directory="graphics/animation" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -155,6 +158,10 @@
 		<Unit filename="../game/windStates/SteadyDirectionState.h" />
 		<Unit filename="../game/windStates/WindState.cpp" />
 		<Unit filename="../game/windStates/WindState.h" />
+		<Unit filename="../graphics/animation/mjModelAnimation.cpp" />
+		<Unit filename="../graphics/animation/mjModelAnimation.h" />
+		<Unit filename="../graphics/animation/mjModelPose.cpp" />
+		<Unit filename="../graphics/animation/mjModelPose.h" />
 		<Unit filename="../graphics/mj3rdPersonCamera.cpp" />
 		<Unit filename="../graphics/mj3rdPersonCamera.h" />
 		<Unit filename="../graphics/mjCamera.cpp" />

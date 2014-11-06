@@ -1,16 +1,18 @@
 # depslib dependency file v1.0
-1414622285 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
+1415315801 source:/common/github/mjEngineCPP/jni/core/mjObject.cpp
 	"mjObject.h"
 
-1414971763 /common/github/mjEngineCPP/jni/core/mjObject.h
+1415315794 /common/github/mjEngineCPP/jni/core/mjObject.h
 	<vector>
 	<string.h>
 	"../extLibs/util/mjMultiPlatform.h"
 	"../extLibs/tinyxml/tinyxml2.h"
 	"../extLibs/util/mjXMLHelper.h"
 	"../core/mjVector3.h"
-	"../graphics/mjModel.h"
 	"../extLibs/math/Matrix.h"
+	"../graphics/mjModel.h"
+	"../graphics/animation/mjModelPose.h"
+	"../graphics/animation/mjModelAnimation.h"
 	"../physics/mjBoundingStructure.h"
 	"../physics/mjPhysicsEffect.h"
 	"../physics/mjSphere.h"
@@ -24,11 +26,12 @@
 1412353317 /common/github/mjEngineCPP/jni/extLibs/logger/mjLog.h
 	<android/log.h>
 
-1414971746 /common/github/mjEngineCPP/jni/graphics/mjModel.h
+1415315380 /common/github/mjEngineCPP/jni/graphics/mjModel.h
 	<stdio.h>
 	<string.h>
 	<vector>
 	"../extLibs/util/mjMultiPlatform.h"
+	"animation/mjModelPose.h"
 	"mjModelMesh.h"
 	"mjShader.h"
 	"../extLibs/math/Matrix.h"
@@ -281,7 +284,7 @@
 1412637585 source:/common/github/mjEngineCPP/jni/graphics/mjImageLoader.cpp
 	"mjImageLoader.h"
 
-1414345767 source:/common/github/mjEngineCPP/jni/graphics/mjModel.cpp
+1415315350 source:/common/github/mjEngineCPP/jni/graphics/mjModel.cpp
 	"mjModel.h"
 
 1412353317 source:/common/github/mjEngineCPP/jni/graphics/mjModelMesh.cpp
@@ -1378,4 +1381,21 @@
 
 1414971871 source:/common/github/mjEngineCPP/jni/extLibs/util/mjMultiPlatform.cpp
 	"mjMultiPlatform.h"
+
+1415135306 source:/common/github/mjEngineCPP/jni/extLibs/math/mjMatrixStack.cpp
+	"mjMatrixStack.h"
+
+1415135247 /common/github/mjEngineCPP/jni/extLibs/math/mjMatrixStack.h
+	"Matrix.h"
+
+1415315493 /common/github/mjEngineCPP/jni/graphics/animation/mjModelPose.h
+
+1415315664 /common/github/mjEngineCPP/jni/graphics/animation/mjModelAnimation.h
+	"mjModelPose.h"
+
+1415315643 source:/common/github/mjEngineCPP/jni/graphics/animation/mjModelAnimation.cpp
+	"mjModelAnimation.h"
+
+1415315488 source:/common/github/mjEngineCPP/jni/graphics/animation/mjModelPose.cpp
+	"mjModelPose.h"
 
