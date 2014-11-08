@@ -66,6 +66,7 @@
 					<Add option="-g" />
 					<Add option="-DDESKTOP_SDL" />
 					<Add option="-DWIN32" />
+					<Add option="-DNON_GLES_CONTEXT" />
 					<Add directory="entities" />
 					<Add directory="ai" />
 					<Add directory="extLibs/util" />
