@@ -74,19 +74,21 @@
 					<Add directory="game" />
 					<Add directory="game/windStates" />
 					<Add directory="game/ambient" />
-					<Add directory="../../../../sdl/x86_64-w64-mingw32/include" />
+					<Add directory="../../../../sdl/i686-w64-mingw32/include" />
 					<Add directory="../../../../glew/glew-1.11.0/include" />
 					<Add directory="extLibs/math" />
 					<Add directory="graphics/animation" />
 				</Compiler>
 				<Linker>
-					<Add library="SDL2" />
+					<Add option="-mwindows" />
+					<Add library="mingw32" />
 					<Add library="SDL2main" />
+					<Add library="SDL2" />
 					<Add library="SDL2_image" />
 					<Add library="glew32s" />
 					<Add library="opengl32" />
 					<Add directory="../../../../glew/glew-1.11.0/lib/Release/Win32" />
-					<Add directory="../../../../sdl/x86_64-w64-mingw32/lib" />
+					<Add directory="../../../../sdl/i686-w64-mingw32/lib" />
 				</Linker>
 			</Target>
 		</Build>
