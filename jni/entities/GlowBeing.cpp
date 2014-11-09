@@ -1,16 +1,16 @@
 #include "GlowBeing.h"
 
 
-GlowBeing::GlowBeing(mjCamera* camera)
+GlowBeing::GlowBeing(mjCamera* camera, mjResourceManager& resourceManager)
 {
     this->camera = camera;
-    model = new mjModel();
-	model->LoadFromFile("/sdcard/mjEngineCPP/sprite.mesh.xml");
+
+    model = resourceManager.FetchModel("/sdcard/mjEngineCPP/sprite.mesh.xml");
 
 
 
-	mjImageLoader imgLoader;
-	GLuint glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/glowbeing.png");
+	GLuint glTexture = resourceManager.FetchTexture("/sdcard/mjEngineCPP/glowbeing.png");
+
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;

@@ -1,19 +1,20 @@
 #include "Plant.h"
 
-Plant::Plant(Level* levelData)
+Plant::Plant(Level* levelData, mjResourceManager& resourceManager)
 :mjObject(MJ_AABB)
 {
     this->levelData = levelData;
     this->canCollide = false;
 
-    mjImageLoader imgLoader;
-	GLuint glTexture;
 
-	model = new mjModel();
-	model->LoadFromFile("/sdcard/mjEngineCPP/plant.mesh.xml");
+
+	std::string path = "/sdcard/mjEngineCPP/plant.mesh.xml";
+    model = resourceManager.FetchModel(path);
+
 	((mjAABB*)boundingStructure)->isImmovable = true;
 
-	glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/leaf.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+	path = "/sdcard/mjEngineCPP/leaf.png";
+	GLuint glTexture = resourceManager.FetchTexture(path);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;

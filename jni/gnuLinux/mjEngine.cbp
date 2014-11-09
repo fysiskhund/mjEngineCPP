@@ -26,6 +26,7 @@
 					<Add directory="game/ambient" />
 					<Add directory="extLibs/math" />
 					<Add directory="graphics/animation" />
+					<Add directory="util" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -51,6 +52,7 @@
 					<Add directory="game/ambient" />
 					<Add directory="extLibs/math" />
 					<Add directory="graphics/animation" />
+					<Add directory="util" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -79,6 +81,7 @@
 					<Add directory="../../../../glew/glew-1.11.0/include" />
 					<Add directory="extLibs/math" />
 					<Add directory="graphics/animation" />
+					<Add directory="util" />
 				</Compiler>
 				<Linker>
 					<Add option="-mwindows" />
@@ -202,6 +205,12 @@
 		<Unit filename="../physics/mjSphere.h" />
 		<Unit filename="../terrainTypes/Box.cpp" />
 		<Unit filename="../terrainTypes/Box.h" />
+		<Unit filename="../util/mjModelResource.cpp" />
+		<Unit filename="../util/mjModelResource.h" />
+		<Unit filename="../util/mjResource.cpp" />
+		<Unit filename="../util/mjResource.h" />
+		<Unit filename="../util/mjResourceManager.cpp" />
+		<Unit filename="../util/mjResourceManager.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

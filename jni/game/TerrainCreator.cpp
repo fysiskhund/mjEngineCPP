@@ -5,7 +5,7 @@ TerrainCreator::TerrainCreator()
 	terrainTypes.push_back("box");
 }
 
-mjObject* TerrainCreator::CreateTerrain(const char* terrainType)
+mjObject* TerrainCreator::CreateTerrain(const char* terrainType, mjResourceManager& resourceManager)
 {
     int whichTerrainType = -1;
     int i = 0;
@@ -20,7 +20,7 @@ mjObject* TerrainCreator::CreateTerrain(const char* terrainType)
     }
     switch (whichTerrainType) {
         case 0:
-            return new Box();
+            return new Box(resourceManager);
             break;
 
 

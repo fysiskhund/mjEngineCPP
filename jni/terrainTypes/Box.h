@@ -12,8 +12,8 @@
 #include "../extLibs/util/mjMultiPlatform.h"
 
 #include "../core/mjObject.h"
+#include "../util/mjResourceManager.h"
 #include "../extLibs/logger/mjLog.h"
-#include "../graphics/mjImageLoader.h"
 
 
 using namespace mjEngine;
@@ -21,7 +21,7 @@ using namespace mjEngine;
 class Box: public mjObject
 {
 public:
-	Box();
+	Box(mjResourceManager& resourceManager);
 
 	char* modelName = NULL;
 };

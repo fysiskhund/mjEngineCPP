@@ -28,6 +28,8 @@
 #include "../graphics/mjSkyboxShaders.h"
 #include "../core/mjVector3.h"
 
+#include "../util/mjResourceManager.h"
+
 #include "../extLibs/math/Matrix.h"
 #include "../graphics/mj3rdPersonCamera.h"
 #include "../graphics/mjSkybox.h"
@@ -68,9 +70,9 @@ class PlatformUniverseScene : public mjScene
 
         Character* character;
 
+        mjResourceManager resourceManager;
 
-
-        EntityCreator entityCreator;
+        EntityCreator* entityCreator;
 
         Ambient ambient;
 
@@ -81,6 +83,7 @@ class PlatformUniverseScene : public mjScene
         void SetUpSkybox();
         void Update(float t_elapsed) override;
         void Draw() override;
+
 
 
     protected:

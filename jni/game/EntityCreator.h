@@ -13,6 +13,7 @@
 
 #include "../extLibs/tinyxml/tinyxml2.h"
 #include "../extLibs/util/mjXMLHelper.h"
+#include "../util/mjResourceManager.h"
 
 #include "../core/mjObject.h"
 #include "../physics/mjBoundingStructure.h"
@@ -32,13 +33,14 @@ using namespace mjEngine;
 class EntityCreator
 {
 public:
-    EntityCreator();
+    EntityCreator(mjResourceManager* resourceManager);
     void PopulateLevel(XMLDocument* levelDoc, Level* levelData);
 
 
 private:
     mjObject* CreateEntity(const char* entityType, Level* levelData);
     std::vector<const char*> entityTypes;
+    mjResourceManager* resourceManager;
 
 };
 

@@ -4,10 +4,14 @@
 
 #define GLOWBEING_TTL 4
 
+
+#include <string>
+
 #include "../core/mjObject.h"
 #include "../physics/mjSphere.h"
-#include "../graphics/mjImageLoader.h"
 #include "../graphics/mjCamera.h"
+#include "../util/mjResourceManager.h"
+
 
 
 using namespace mjEngine;
@@ -21,7 +25,7 @@ class GlowBeing: public mjObject
 
         mjCamera* camera;
 
-        GlowBeing(mjCamera* camera);
+        GlowBeing(mjCamera* camera, mjResourceManager& resourceManager);
 
         const float MaxCameraDist = 4;
 

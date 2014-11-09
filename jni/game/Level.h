@@ -12,6 +12,7 @@
 #include <string.h>
 
 #include "../extLibs/util/mjXMLHelper.h"
+#include "../util/mjResourceManager.h"
 
 
 using namespace tinyxml2;
@@ -23,13 +24,14 @@ public:
 	std::vector<mjObject*> entities;
 	std::vector<mjObject*> terrain;
 
+    Level(mjResourceManager* resourceManager);
 	void LoadFromFile(const char* fileName);
 	void Load(XMLDocument* doc);
     mjObject* GetEntityByID(const char* ID);
 
     XMLDocument doc;
 private:
-
+    mjResourceManager* resourceManager;
     //EntityCreator entityCreator;
     TerrainCreator terrainCreator;
 

@@ -1,15 +1,16 @@
 #include "Box.h"
 
-Box::Box()
+Box::Box(mjResourceManager& resourceManager)
 : mjObject(MJ_AABB)
 {
-    model = new mjModel();
-    model->LoadFromFile("/sdcard/mjEngineCPP/box.mesh.xml");
+
+    model = resourceManager.FetchModel("/sdcard/mjEngineCPP/box.mesh.xml");
+
     mjAABB* boundingStruct = ((mjAABB*)boundingStructure);
     boundingStruct->isImmovable = true;
 
-    mjImageLoader imgLoader;
-    GLuint glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/box_grassy.png");
+
+    GLuint glTexture = resourceManager.FetchTexture("/sdcard/mjEngineCPP/box_grassy.png");
 
     for (unsigned i = 0; i<model->meshes.size(); i++)
     {

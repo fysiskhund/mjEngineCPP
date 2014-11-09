@@ -13,8 +13,10 @@
 #include <vector>
 
 #include "../core/mjObject.h"
+#include "../util/mjResourceManager.h"
 #include "../physics/mjBoundingStructure.h"
 #include "../terrainTypes/Box.h"
+
 
 using namespace mjEngine;
 
@@ -24,7 +26,7 @@ class TerrainCreator
 {
 public:
 	TerrainCreator();
-    mjObject* CreateTerrain(const char* terrainType);
+    mjObject* CreateTerrain(const char* terrainType, mjResourceManager& resourceManager);
 
 private:
     std::vector<const char*> terrainTypes;

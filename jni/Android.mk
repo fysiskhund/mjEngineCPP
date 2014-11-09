@@ -25,6 +25,10 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   extLibs/math/Matrix.cpp \
 				   extLibs/math/mjMathHelper.cpp \
 				   extLibs/util/mjXMLHelper.cpp \
+				   util/mjResourceManager.cpp \
+				   util/mjResource.cpp \
+				   util/mjModelResource.cpp \
+				   util/mjTextureResource.cpp \
 				   graphics/mjImageLoader.cpp \
 				   graphics/mjModel.cpp \
 				   graphics/animation/mjModelPose.cpp \

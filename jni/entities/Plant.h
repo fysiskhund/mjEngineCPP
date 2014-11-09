@@ -3,15 +3,17 @@
 
 #include "../core/mjObject.h"
 #include "../ai/mjAutomaton.h"
+#include "../util/mjResourceManager.h"
 
 #include "../game/Level.h"
+
 
 using namespace mjEngine;
 
 class Plant : public mjObject, public mjAutomaton
 {
     public:
-        Plant(Level* levelData);
+        Plant(Level* levelData, mjResourceManager& resourceManager);
         //BatBot(const BatBot& other);
         Level* levelData;
         ~Plant();

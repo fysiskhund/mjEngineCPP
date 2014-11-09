@@ -41,7 +41,7 @@ class Ambient
 
         void Update(float t_elapsed);
 
-        void InitGlowBeings(mjCamera* camera, mjPhysics* physics, std::vector<mjShader*>* shaderList, mjSceneGraph* sceneGraph);
+        void InitGlowBeings(mjCamera* camera, mjPhysics* physics, std::vector<mjShader*>* shaderList, mjSceneGraph* sceneGraph,  mjResourceManager& resourceManager);
 
         void CreateDustDevil(mjVector3& pos, float r, float h);
 

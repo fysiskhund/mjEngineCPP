@@ -8,8 +8,9 @@
 
 #include "EntityCreator.h"
 
-EntityCreator::EntityCreator()
+EntityCreator::EntityCreator(mjResourceManager* resourceManager)
 {
+    this->resourceManager = resourceManager;
     entityTypes.push_back("player");
     entityTypes.push_back("bird");
     entityTypes.push_back("bat");
@@ -68,7 +69,7 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
             return new BatBot(levelData);
             break;
         case 3:
-            return new Plant(levelData);
+            return new Plant(levelData, *resourceManager);
             break;
         default:
             return NULL;

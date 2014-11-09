@@ -1,5 +1,9 @@
 #include "Level.h"
 
+Level::Level(mjResourceManager* resourceManager)
+{
+    this->resourceManager = resourceManager;
+}
 
 void Level::LoadFromFile(const char* fileName)
 {
@@ -21,7 +25,7 @@ void Level::Load(XMLDocument* doc)
 
 		mjObject* obj = NULL;
 
-		obj = terrainCreator.CreateTerrain(terrainElement->Name());
+		obj = terrainCreator.CreateTerrain(terrainElement->Name(), * resourceManager);
 
 		if (obj)
 		{
