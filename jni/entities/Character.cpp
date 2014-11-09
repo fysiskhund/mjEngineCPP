@@ -110,14 +110,7 @@ void Character::Update(float t_elapsed)
 {
 
 
-	if (intrinsecVel.GetNorm() < 10)
-	{
 
-		pos.ScaleAdd(t_elapsed, intrinsecVel);
-	} else
-	{
-
-	}
 	if (gravity)
 	{
 		if (jumping)
@@ -138,6 +131,16 @@ void Character::Update(float t_elapsed)
 
 
 }
+void Character::UpdatePosition(float t_elapsed)
+{
+    if (intrinsecVel.GetNorm() < 10)
+        {
+
+            pos.ScaleAdd(t_elapsed, intrinsecVel);
+        }
+	mjObject::UpdatePosition(t_elapsed);
+}
+
 void Character::Check()
 {
 	if (pos.GetNorm() > 15)
@@ -145,3 +148,4 @@ void Character::Check()
 		LOGI("Weird position %3.3f, %3.3f, %3.3f", pos.x, pos.y, pos.z);
 	}
 }
+

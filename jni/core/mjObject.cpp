@@ -223,6 +223,7 @@ void mjObject::Update(float t_elapsed)
     }
 
 }
+
 void mjObject::UpdatePosition(float t_elapsed)
 {
 	pos.ScaleAdd(t_elapsed, vel);
@@ -243,6 +244,7 @@ void mjObject::UpdatePosition(float t_elapsed)
 		}
 	}
 }
+
     void mjObject::MatchScaleToAABB()
     {
         if (boundingStructure->type == MJ_AABB)

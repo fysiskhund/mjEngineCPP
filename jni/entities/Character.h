@@ -20,6 +20,7 @@ public:
 	void ProcessPhysicsEffects(float t_elapsed) override;
 	void ProcessCollisionEffects() override;
 	void Update(float t_elapsed) override;
+	void UpdatePosition(float t_elapsed) override;
 	mjVector3* gravity;
 	mjVector3 intrinsecVel;
 
