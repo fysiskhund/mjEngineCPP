@@ -46,7 +46,7 @@ void Level::Load(XMLDocument* doc)
 		}
 		terrainElement = terrainElement->NextSiblingElement();
 	}
-	LOGI("%ld entities, %ld terrain elements", entities.size(), terrain.size());
+	LOGI("%u entities, %u terrain elements", entities.size(), terrain.size());
 }
 
 

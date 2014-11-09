@@ -11,10 +11,10 @@
 
 #ifdef DESKTOP_SDL
 #include <SDL2/SDL_image.h>
-#ifndef WIN32
-#include "../extLibs/png/include/png.h"
-#endif // WIN32
 #endif // DESKTOP_SDL
+#ifdef USE_LIBPNG
+#include "../extLibs/png/include/png.h"
+#endif
 #include "../extLibs/logger/mjLog.h"
 
 
@@ -28,7 +28,7 @@ public:
 
 
 
-	png_uint_32 width, height;
+	unsigned width, height;
 
 
 	mjImageLoader();
@@ -37,13 +37,13 @@ public:
 	GLuint LoadToGLAndFreeMemory(const char* fileName, GLfloat textureWrapParam);
 
 private:
-	png_uint_32 rowbytes;
+	unsigned rowbytes;
 	int x, y;
 	bool hasAlpha;
 	GLubyte *imageData;
 
-	png_byte color_type;
-	png_byte bit_depth;
+	char color_type;
+	char bit_depth;
 
 #ifndef DESKTOP_SDL
 	png_structp png_ptr;

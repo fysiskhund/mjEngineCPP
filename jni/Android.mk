@@ -15,6 +15,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := mjengine
 LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
+				   extLibs/util/mjMultiPlatform.cpp \
 				   ai/mjAutomaton.cpp \
 				   ai/mjAutomatonState.cpp \
 				   core/mjVector3.cpp \
@@ -26,6 +27,8 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   extLibs/util/mjXMLHelper.cpp \
 				   graphics/mjImageLoader.cpp \
 				   graphics/mjModel.cpp \
+				   graphics/animation/mjModelPose.cpp \
+				   graphics/animation/mjModelAnimation.cpp \
 				   graphics/mjModelMesh.cpp \
 				   graphics/mjSkyboxLevelData.cpp \
 				   graphics/mjDefaultShaders.cpp \
