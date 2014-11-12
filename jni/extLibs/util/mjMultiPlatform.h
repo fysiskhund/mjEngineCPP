@@ -17,14 +17,16 @@
     #include <GL/gl.h>
 #endif // !USE_GLES
 
+#include <string>
 
-/*
-class mjGLChooser
+class mjMultiPlatform
 {
-    public:
-        mjGLChooser();
-    protected:
-    private:
-};*/
+public:
+    std::string prefix;
+protected:
+
+private:
+
+};
 
 #endif // MJMULTIPLATFORM_H
