@@ -17,16 +17,6 @@
     #include <GL/gl.h>
 #endif // !USE_GLES
 
-#include <string>
-
-class mjMultiPlatform
-{
-public:
-    std::string prefix;
-protected:
-
-private:
-
-};
+// Decided not to store the pathPrefix in N places. The mjResourceManager should be enough
 
 #endif // MJMULTIPLATFORM_H

@@ -17,7 +17,7 @@ public class GL2JNILib {
      * @param width the current view width
      * @param height the current view height
      */
-     public static native void init(int width, int height);
+     public static native void init(int width, int height, String jPathPrefix);
      public static native void step(float t_elapsed);
      
      public static native boolean HandleJoystickInput(int controllerID, int joystickID, float x, float y);

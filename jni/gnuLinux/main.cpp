@@ -145,7 +145,8 @@ int main(int argc, char* argv[]) {
 
     InitGL(&data);
 
-    setupGraphics(width, height);
+    std::string pathPrefix = "/sdcard/mjEngineCPP";
+    setupGame(width, height, new mjResourceManager(pathPrefix));
 
     while (!stepFunc(&data));
 

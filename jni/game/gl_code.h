@@ -42,11 +42,8 @@ using namespace mjEngine;
 
 //static void checkGlError(const char* op);
 
-void InitShaders();
 
-void SetUpSkybox();
-
-bool setupGraphics(int w, int h);
+bool setupGame(int w, int h, mjResourceManager* resourceManager);
 
 void renderFrame(float t_elapsed);
 

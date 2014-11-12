@@ -4,6 +4,7 @@
 #include <vector>
 #include "../core/mjObject.h"
 #include "../graphics/mjShader.h"
+#include "../util/mjResourceManager.h"
 
 #include "../physics/mjPhysics.h"
 #include "../graphics/mjSceneGraph.h"
@@ -20,6 +21,8 @@ class mjScene
         mjCamera* camera;
         mjSkybox* skybox = NULL;
 
+        mjResourceManager* resourceManager;
+
         const char* sceneName = "";
 
         char* nextSceneByName = NULL;
@@ -29,7 +32,7 @@ class mjScene
         float projectionMatrix[16];
 
 
-        mjScene();
+        mjScene(mjResourceManager* resourceManager);
 
         virtual void OnActivate();
         virtual void Update(float t_elapsed);

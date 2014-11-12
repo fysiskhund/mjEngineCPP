@@ -10,8 +10,8 @@
 PlatformUniverseScene* platformUniverse;
 
 
-bool setupGraphics(int w, int h) {
-    platformUniverse = new PlatformUniverseScene();
+bool setupGame(int w, int h, mjResourceManager* resourceManager) {
+    platformUniverse = new PlatformUniverseScene(resourceManager);
     platformUniverse->Initialise(w,h);
     return true;
 }
@@ -104,15 +104,17 @@ void JoystickButtonEvent(int controllerID, int buttonID, bool pressedDown)
 
 #ifdef ANDROID
 extern "C" {
-    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height);
+    JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height, jstring jPathPrefix);
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed);
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID, jfloat x, jfloat y);
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleButtonInput(JNIEnv * env, jobject obj, jint controllerID, jint buttonID, jboolean pressedDown);
 };
 
-JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height)
+JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height, jstring jPathPrefix)
 {
-    setupGraphics(width, height);
+	const char* jPathPrefixChars = env->GetStringUTFChars(jPathPrefix, 0);
+	std::string pathPrefix = jPathPrefixChars;
+    setupGame(width, height, new mjResourceManager(pathPrefix));
 }
 
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed)

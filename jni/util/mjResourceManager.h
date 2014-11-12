@@ -14,7 +14,7 @@ namespace mjEngine{
 class mjResourceManager
 {
     public:
-        mjResourceManager();
+        mjResourceManager(std::string& pathPrefix);
         ~mjResourceManager();
 
         mjModel* FetchModel(const char* path);
@@ -26,7 +26,10 @@ class mjResourceManager
         std::vector<mjResource*> models;
         std::vector<mjResource*> textures;
 
+        std::string pathPrefix;
+
         mjResource* SearchByPath(std::vector<mjResource*>& repo, std::string& path);
+
     private:
 };
 

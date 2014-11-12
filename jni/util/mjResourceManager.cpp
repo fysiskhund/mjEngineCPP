@@ -1,9 +1,9 @@
 #include "mjResourceManager.h"
 namespace mjEngine{
 
-mjResourceManager::mjResourceManager()
+mjResourceManager::mjResourceManager(std::string& pathPrefix)
 {
-    //ctor
+    this->pathPrefix = pathPrefix;
 }
 
 mjResourceManager::~mjResourceManager()

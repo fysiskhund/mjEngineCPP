@@ -3,9 +3,9 @@
 namespace mjEngine
 {
 
-mjScene::mjScene()
+mjScene::mjScene(mjResourceManager* resourceManager)
 {
-    //ctor
+    this->resourceManager = resourceManager;
 }
 
 void mjScene::OnActivate()

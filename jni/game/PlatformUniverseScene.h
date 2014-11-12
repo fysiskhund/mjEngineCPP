@@ -70,13 +70,11 @@ class PlatformUniverseScene : public mjScene
 
         Character* character;
 
-        mjResourceManager resourceManager;
-
         EntityCreator* entityCreator;
 
         Ambient ambient;
 
-        PlatformUniverseScene();
+        PlatformUniverseScene(mjResourceManager* resourceManager);
         void Initialise(int width, int height);
 
         void InitShaders();

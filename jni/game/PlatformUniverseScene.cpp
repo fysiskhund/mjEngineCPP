@@ -1,9 +1,10 @@
 #include "PlatformUniverseScene.h"
 
-PlatformUniverseScene::PlatformUniverseScene()
+PlatformUniverseScene::PlatformUniverseScene(mjResourceManager* resourceManager)
+:mjScene(resourceManager)
 {
 
-    entityCreator = new EntityCreator(&resourceManager);
+    entityCreator = new EntityCreator(resourceManager);
     srand(time(0));
 
 }
@@ -13,7 +14,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
 {
     InitShaders();
     camera = new mj3rdPersonCamera();
-    level = new Level(&resourceManager);
+    level = new Level(resourceManager);
     // Some adjustments
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
@@ -28,7 +29,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
     //checkGlError("glViewport");
     mjVector3 o;
 
-    ambient.InitGlowBeings(camera, &physics, &shaderList, &sceneGraph, resourceManager);
+    ambient.InitGlowBeings(camera, &physics, &shaderList, &sceneGraph, *resourceManager);
     ambient.CreateDustDevil(o, 12, 10);
 
     level->LoadFromFile("/sdcard/mjEngineCPP/levels/testLevel.xml");

@@ -36,6 +36,7 @@ import android.content.Context;
 import android.graphics.PixelFormat;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -345,7 +346,8 @@ class GL2JNIView extends GLSurfaceView {
         }
 
         public void onSurfaceChanged(GL10 gl, int width, int height) {
-            GL2JNILib.init(width, height);
+        	String pathPrefix = Environment.getExternalStorageDirectory().getAbsolutePath()+"/mjEngineCPP";
+            GL2JNILib.init(width, height, pathPrefix);
         }
 
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
