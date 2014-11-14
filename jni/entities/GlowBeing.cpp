@@ -5,11 +5,11 @@ GlowBeing::GlowBeing(mjCamera* camera, mjResourceManager& resourceManager)
 {
     this->camera = camera;
 
-    model = resourceManager.FetchModel("/sdcard/mjEngineCPP/sprite.mesh.xml");
+    model = resourceManager.FetchModel("sprite.mesh.xml");
 
 
 
-	GLuint glTexture = resourceManager.FetchTexture("/sdcard/mjEngineCPP/glowbeing.png");
+	GLuint glTexture = resourceManager.FetchTexture("glowbeing.png");
 
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{

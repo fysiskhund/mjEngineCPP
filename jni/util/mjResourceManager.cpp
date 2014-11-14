@@ -18,7 +18,9 @@ mjModel* mjResourceManager::FetchModel(const char* path)
 
 mjModel* mjResourceManager::FetchModel(std::string& path)
 {
-    mjResource* res = SearchByPath(models, path);
+    std::string fullPath = pathPrefix + "/" + path;
+
+    mjResource* res = SearchByPath(models, fullPath);
     if (res != NULL)
     {
         return ((mjModelResource*) res)->model;
@@ -28,10 +30,10 @@ mjModel* mjResourceManager::FetchModel(std::string& path)
 
 
     mjModel* newModel = new mjModel();
-    newModel->LoadFromFile(path.c_str());
+    newModel->LoadFromFile(fullPath.c_str());
 
     newResource->model = newModel;
-    newResource->path = path;
+    newResource->path = fullPath;
     models.push_back(newResource);
 
 
@@ -48,7 +50,9 @@ GLuint mjResourceManager::FetchTexture(const char* path)
 
 GLuint mjResourceManager::FetchTexture(std::string& path)
 {
-    mjResource* res = SearchByPath(textures, path);
+    std::string fullPath = pathPrefix + "/" + path;
+
+    mjResource* res = SearchByPath(textures, fullPath);
     if (res != NULL)
     {
         return ((mjTextureResource*) res)->glResourceID;
@@ -59,20 +63,20 @@ GLuint mjResourceManager::FetchTexture(std::string& path)
 
     mjImageLoader loader;
 
-    newResource->glResourceID = loader.LoadToGLAndFreeMemory(path.c_str());
-    newResource->path = path;
+    newResource->glResourceID = loader.LoadToGLAndFreeMemory(fullPath.c_str());
+    newResource->path = fullPath;
     textures.push_back(newResource);
 
 
     return newResource->glResourceID;
 }
-mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std::string& path)
+mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std::string& fullPath)
 {
 
     for(unsigned i = 0; i < repo.size(); i++)
     {
         mjResource* res = repo[i];
-        if (res->path == path)
+        if (res->path == fullPath)
         {
             return res;
         }

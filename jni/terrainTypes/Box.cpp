@@ -4,13 +4,13 @@ Box::Box(mjResourceManager& resourceManager)
 : mjObject(MJ_AABB)
 {
 
-    model = resourceManager.FetchModel("/sdcard/mjEngineCPP/box.mesh.xml");
+    model = resourceManager.FetchModel("box.mesh.xml");
 
     mjAABB* boundingStruct = ((mjAABB*)boundingStructure);
     boundingStruct->isImmovable = true;
 
 
-    GLuint glTexture = resourceManager.FetchTexture("/sdcard/mjEngineCPP/box_grassy.png");
+    GLuint glTexture = resourceManager.FetchTexture("box_grassy.png");
 
     for (unsigned i = 0; i<model->meshes.size(); i++)
     {

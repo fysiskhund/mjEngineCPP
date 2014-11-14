@@ -14,13 +14,14 @@
 
 
 #include "../core/mjObject.h"
+#include "../util/mjResourceManager.h"
 #include "../graphics/mjImageLoader.h"
 using namespace mjEngine;
 
 class Bird: public mjObject
 {
 public:
-    Bird();
+    Bird(mjResourceManager& resourceManager);
 private:
 };
 

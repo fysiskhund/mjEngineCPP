@@ -4,6 +4,7 @@
 #include "../extLibs/util/mjMultiPlatform.h"
 
 #include "../core/mjObject.h"
+#include "../util/mjResourceManager.h"
 #include "../graphics/mjImageLoader.h"
 #include "../extLibs/logger/mjLog.h"
 using namespace mjEngine;
@@ -14,7 +15,7 @@ using namespace mjEngine;
 class Character: public mjObject
 {
 public:
-	Character();
+	Character(mjResourceManager& resourceManager);
 	int footing = 0;
 	int jumping = 0;
 	void ProcessPhysicsEffects(float t_elapsed) override;

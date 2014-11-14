@@ -7,17 +7,16 @@
 //
 
 #include "Bird.h"
-Bird::Bird()
+Bird::Bird(mjResourceManager& resourceManager)
 : mjObject(MJ_AABB)
 {
-	mjImageLoader imgLoader;
+
 	GLuint glTexture;
 
-	model = new mjModel();
-	model->LoadFromFile("/sdcard/mjEngineCPP/bird.mesh.xml");
+	model = resourceManager.FetchModel("bird.mesh.xml");
 	((mjAABB*)boundingStructure)->isImmovable = true;
 
-	glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/birdtexture.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+	glTexture = resourceManager.FetchTexture("birdtexture.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;

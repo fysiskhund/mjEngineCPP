@@ -8,13 +8,11 @@ Plant::Plant(Level* levelData, mjResourceManager& resourceManager)
 
 
 
-	std::string path = "/sdcard/mjEngineCPP/plant.mesh.xml";
-    model = resourceManager.FetchModel(path);
+    model = resourceManager.FetchModel("plant.mesh.xml");
 
 	((mjAABB*)boundingStructure)->isImmovable = true;
 
-	path = "/sdcard/mjEngineCPP/leaf.png";
-	GLuint glTexture = resourceManager.FetchTexture(path);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+	GLuint glTexture = resourceManager.FetchTexture("leaf.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;

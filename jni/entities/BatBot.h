@@ -18,7 +18,7 @@ using namespace mjEngine;
 class BatBot: public mjObject, public mjAutomaton
 {
     public:
-        BatBot(Level* levelData);
+        BatBot(Level* levelData, mjResourceManager& resourceManager);
         //BatBot(const BatBot& other);
         Level* levelData;
 

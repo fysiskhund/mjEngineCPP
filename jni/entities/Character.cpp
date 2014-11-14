@@ -1,10 +1,9 @@
 #include "Character.h"
 
-Character::Character()
+Character::Character(mjResourceManager& resourceManager)
 : mjObject(MJ_AABB)
 {
-	model = new mjModel();
-	model->LoadFromFile("/sdcard/mjEngineCPP/char0.mesh.xml");
+	model = resourceManager.FetchModel("char0.mesh.xml");
 	mjAABB* charBoundStruct = (mjAABB*) boundingStructure;
 	mjVector3 minCorner;
 	minCorner.Set(-0.3,0,-0.3);
@@ -13,8 +12,8 @@ Character::Character()
 	charBoundStruct->SetCorners(minCorner,maxCorner);
 
 
-	mjImageLoader imgLoader;
-	GLuint glTexture = imgLoader.LoadToGLAndFreeMemory("/sdcard/mjEngineCPP/suit_test.png");
+
+	GLuint glTexture = resourceManager.FetchTexture("suit_test.png");
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;
