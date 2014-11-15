@@ -22,7 +22,7 @@ mjDefaultShaders::mjDefaultShaders()
 
 
 	// Set up shader
-	CreateProgram(vanillaVertexShaderCode, vanillaFragmentShaderCode);
+	CreateProgram(vanillaVertexShaderCode, vanillaFragmentShaderCode);//vanillaFragmentShaderCode_GL3_3);//
 	name = new char[8];
 	strncpy(name, "default", 8);
 
@@ -139,7 +139,7 @@ const char* mjDefaultShaders::vanillaVertexShaderCode =
 	        "} \n";
 
 const char* mjDefaultShaders::vanillaFragmentShaderCode =
-		"precision mediump float;\n"
+		 "precision mediump float;\n"
 
 		 "varying vec2 vTexCoordinates;\n"
 		 "uniform sampler2D uTexture;\n"
@@ -151,6 +151,17 @@ const char* mjDefaultShaders::vanillaFragmentShaderCode =
 		 " gl_FragColor = texture2D(uTexture, vTexCoordinates)* vLight;\n"
 		 "} \n";
 
+const char* mjDefaultShaders::vanillaFragmentShaderCode_GL3_3 =
+"#version 150\n"
+
+"in vec3 Color;\n"
+"out vec4 outputF;\n"
+
+"void main()\n"
+"{\n"
+"    outputF = vec4(Color,1.0);\n"
+"}\n"
+;
 
 const char* mjDefaultShaders::simpleVertexShaderCode =
 		"attribute vec4 vPosition;\n"

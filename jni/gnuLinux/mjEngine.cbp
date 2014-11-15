@@ -95,6 +95,35 @@
 					<Add directory="../../../../sdl/i686-w64-mingw32/lib" />
 				</Linker>
 			</Target>
+			<Target title="Debug-LinuxNonGLES">
+				<Option output="build/Debug/mjEngine" prefix_auto="1" extension_auto="1" />
+				<Option object_output="build/obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-DDESKTOP_SDL" />
+					<Add directory="entities" />
+					<Add directory="ai" />
+					<Add directory="extLibs/util" />
+					<Add directory="entities/batMatonStates" />
+					<Add directory="core" />
+					<Add directory="game" />
+					<Add directory="game/windStates" />
+					<Add directory="game/ambient" />
+					<Add directory="extLibs/math" />
+					<Add directory="graphics/animation" />
+					<Add directory="util" />
+				</Compiler>
+				<Linker>
+					<Add library="SDL2" />
+					<Add library="png16" />
+					<Add library="GLESv2" />
+					<Add library="SDL2_image" />
+					<Add library="GLEW" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />

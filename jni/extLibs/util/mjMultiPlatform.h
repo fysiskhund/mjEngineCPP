@@ -18,11 +18,11 @@
     #include <SDL2/SDL.h>
 #endif // !USE_GLES
 
-class glMultiPlatform
+/*class glMultiPlatform
 {
 public:
     static void CreateGLContext();
-};
+};*/
 // Decided not to store the pathPrefix in N places. The mjResourceManager should be enough
 
 #endif // MJMULTIPLATFORM_H

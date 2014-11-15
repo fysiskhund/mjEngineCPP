@@ -5,6 +5,7 @@
  #ifndef MJSHADER_H
 #define MJSHADER_H
 
+#include <stdlib.h>
 
 
 #include "mjModelMesh.h"
@@ -13,6 +14,7 @@
 #include "../extLibs/util/mjMultiPlatform.h"
 
 #include "../extLibs/logger/mjLog.h"
+
 
 namespace mjEngine
 {

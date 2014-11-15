@@ -14,13 +14,13 @@ GLuint mjShader::LoadShader(GLenum shaderType, const char* pSource)
 			GLint infoLen = 0;
 			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
 			if (infoLen) {
-				/*char* buf = (char*) malloc(infoLen);
+				char* buf = (char*) malloc(infoLen);
 				if (buf) {
 					glGetShaderInfoLog(shader, infoLen, NULL, buf);
-					//LOGE("Could not compile shader %d:\n%s\n",
-					//		shaderType, buf);
+					LOGI("Could not compile shader %d:\n%s\n",
+							shaderType, buf);
 					free(buf);
-				}*/
+				}
 				glDeleteShader(shader);
 				shader = 0;
 			}

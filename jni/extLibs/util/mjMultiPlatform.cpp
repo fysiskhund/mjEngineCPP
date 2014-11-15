@@ -7,7 +7,7 @@ unsigned strnlen(const char* str, unsigned n)
 }
 
 #endif
-void glMultiPlatform::CreateGLContext()
+/*void glMultiPlatform::CreateGLContext()
 {
 
-}
+}*/

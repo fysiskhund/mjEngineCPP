@@ -26,6 +26,7 @@ class mjDefaultShaders:  public mjShader
 	static const char* simpleFragmentShaderCode;
 	static const char* vanillaVertexShaderCode; // Vanilla shaders give a flat shading of surfaces
 	static const char* vanillaFragmentShaderCode;
+	static const char* vanillaFragmentShaderCode_GL3_3;
 
 
 
@@ -46,6 +47,7 @@ class mjDefaultShaders:  public mjShader
 	//GLuint maMVMatrixHandle;
 	private:
 		float diffuseLightDirectionArray[3];
+
 };
 }
 #endif
