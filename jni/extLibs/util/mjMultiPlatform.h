@@ -11,12 +11,18 @@
     unsigned strnlen(const char* str, unsigned n);
     #define png_uint_32 unsigned
     #define png_byte char
+#endif // WIN32
     #define GLEW_STATIC
     #include <GL/glew.h>
-#endif // WIN32
     #include <GL/gl.h>
+    #include <SDL2/SDL.h>
 #endif // !USE_GLES
 
+class glMultiPlatform
+{
+public:
+    static void CreateGLContext();
+};
 // Decided not to store the pathPrefix in N places. The mjResourceManager should be enough
 
 #endif // MJMULTIPLATFORM_H

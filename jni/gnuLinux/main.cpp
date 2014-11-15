@@ -23,20 +23,21 @@ mjEngine::mjVector3 rJoystick;
 SDL_Joystick* joystick;
 
 int InitSDL(SDLStruct* sdlData) {
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_Init(SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK);
+   SDL_Init(SDL_INIT_VIDEO|SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK);
     SDL_JoystickEventState(SDL_ENABLE);
     joystick = SDL_JoystickOpen(0);
 
-    #ifdef NON_GLES_CONTEXT
+    #ifndef USE_GLES
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+
     #else
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
     #endif // NON_GLES_CONTEXT
+
 
 
 
@@ -60,7 +61,9 @@ int InitSDL(SDLStruct* sdlData) {
     {
     	SDL_GetError();
     }
-
+    #ifndef USE_GLES
+    glewInit();
+    #endif
     return 0;
 }
 
