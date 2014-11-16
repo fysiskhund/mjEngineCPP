@@ -33,6 +33,12 @@ mjObject(MJ_AABB)
 	}
 }
 
+void BatBot::SetDetailsFromXML(XMLElement* entity)
+{
+    mjObject::SetDetailsFromXML(entity);
+    anchor.CopyFrom(pos);
+}
+
 
 BatBot::BatAutomatonState::BatAutomatonState(BatBot* bat)
 {

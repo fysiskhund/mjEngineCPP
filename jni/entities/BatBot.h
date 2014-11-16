@@ -6,6 +6,7 @@
 #include "../core/mjObject.h"
 #include "../game/Level.h"
 #include "../ai/mjAutomaton.h"
+#include "../extLibs/util/mjXMLHelper.h"
 //#include "../ai/mjAutomatonState.h"
 
 
@@ -32,6 +33,7 @@ class BatBot: public mjObject, public mjAutomaton
         virtual void Update(float t_elapsed) override;
 
         virtual void ProcessPhysicsEffects(float t_elapsed) override;
+        virtual void SetDetailsFromXML(XMLElement* entity) override;
 
 
         class BatAutomatonState: public mjAutomatonState

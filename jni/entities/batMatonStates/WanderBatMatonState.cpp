@@ -18,6 +18,14 @@ void WanderBatMatonState::Execute(float t_elapsed)
     dirToAnchor.Subtract(bat->pos);
     float dist = dirToAnchor.Normalize();
 
+    if (dist < 0.001)
+    {
+        bat->pos.x += 0.001;
+        dirToAnchor.CopyFrom(bat->anchor);
+        dirToAnchor.Subtract(bat->pos);
+        dist = 0.001;
+    }
+
     if (dist > bat->wanderRadiusMax)
     {
         bat->wanderDir.CopyFrom(dirToAnchor);
