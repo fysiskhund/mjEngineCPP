@@ -8,3 +8,9 @@ mjObject(MJ_AABB)
     glTexture = resourceManager.FetchTexture("frog.png");
 
 }
+
+
+Frog::FrogAutomatonState::FrogAutomatonState(Frog* frog)
+{
+    this->frog = frog;
+}

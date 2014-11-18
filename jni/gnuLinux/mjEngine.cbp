@@ -151,6 +151,8 @@
 		<Unit filename="../entities/Bird.h" />
 		<Unit filename="../entities/Character.cpp" />
 		<Unit filename="../entities/Character.h" />
+		<Unit filename="../entities/Frog.cpp" />
+		<Unit filename="../entities/Frog.h" />
 		<Unit filename="../entities/GlowBeing.cpp" />
 		<Unit filename="../entities/GlowBeing.h" />
 		<Unit filename="../entities/Plant.cpp" />
