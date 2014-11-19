@@ -27,6 +27,7 @@
 					<Add directory="extLibs/math" />
 					<Add directory="graphics/animation" />
 					<Add directory="util" />
+					<Add directory="entities/frogAutomatonStates" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -53,6 +54,7 @@
 					<Add directory="extLibs/math" />
 					<Add directory="graphics/animation" />
 					<Add directory="util" />
+					<Add directory="entities/frogAutomatonStates" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -82,6 +84,7 @@
 					<Add directory="extLibs/math" />
 					<Add directory="graphics/animation" />
 					<Add directory="util" />
+					<Add directory="entities/frogAutomatonStates" />
 				</Compiler>
 				<Linker>
 					<Add option="-mwindows" />
@@ -115,6 +118,7 @@
 					<Add directory="extLibs/math" />
 					<Add directory="graphics/animation" />
 					<Add directory="util" />
+					<Add directory="entities/frogAutomatonStates" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -145,8 +149,6 @@
 		<Unit filename="../entities/BatBot.h" />
 		<Unit filename="../entities/BatMaton.cpp" />
 		<Unit filename="../entities/BatMaton.h" />
-		<Unit filename="../entities/BatMatonState.cpp" />
-		<Unit filename="../entities/BatMatonState.h" />
 		<Unit filename="../entities/Bird.cpp" />
 		<Unit filename="../entities/Bird.h" />
 		<Unit filename="../entities/Character.cpp" />
@@ -161,6 +163,10 @@
 		<Unit filename="../entities/batMatonStates/BatAutomatonCreator.h" />
 		<Unit filename="../entities/batMatonStates/WanderBatMatonState.cpp" />
 		<Unit filename="../entities/batMatonStates/WanderBatMatonState.h" />
+		<Unit filename="../entities/frogAutomatonStates/FrogAutomatonStopState.cpp" />
+		<Unit filename="../entities/frogAutomatonStates/FrogAutomatonStopState.h" />
+		<Unit filename="../entities/frogAutomatonStates/FrogJumpAutomatonState.cpp" />
+		<Unit filename="../entities/frogAutomatonStates/FrogJumpAutomatonState.h" />
 		<Unit filename="../extLibs/logger/mjLog.h" />
 		<Unit filename="../extLibs/math/Matrix.cpp" />
 		<Unit filename="../extLibs/math/Matrix.h" />
