@@ -1,11 +1,18 @@
 #ifndef FROGAUTOMATONSTOPSTATE_H
 #define FROGAUTOMATONSTOPSTATE_H
 
+#include "../Frog.h"
+#include <math.h>
 
-class FrogAutomatonStopState
+
+// Frog stops and chooses another direction
+
+class FrogAutomatonStopState: Frog::FrogAutomatonState
 {
     public:
-        FrogAutomatonStopState();
+        Frog* frog;
+        FrogAutomatonStopState(Frog* frog);
+        void Enter() override;
     protected:
     private:
 };

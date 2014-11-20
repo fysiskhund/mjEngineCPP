@@ -51,7 +51,6 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   entities/Bird.cpp \
 				   entities/BatBot.cpp \
 				   entities/BatMaton.cpp \
-				   entities/BatMatonState.cpp \
 				   entities/batMatonStates/WanderBatMatonState.cpp \
 				   entities/Plant.cpp \
 				   entities/GlowBeing.cpp \

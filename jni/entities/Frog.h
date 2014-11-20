@@ -3,6 +3,8 @@
 
 
 #include <vector>
+#include <time.h>
+#include <random.h>
 
 #include "../core/mjObject.h"
 #include "../game/Level.h"
@@ -15,6 +17,8 @@ class Frog : public mjObject
         Frog(Level* levelData, mjResourceManager& resourceManager);
         Level* levelData;
         unsigned glTexture;
+        mjVector3 jumpDirection;
+
 
 class FrogAutomatonState: public mjAutomatonState
         {

@@ -2,10 +2,12 @@
 #define FROGJUMPAUTOMATONSTATE_H
 
 
-class FrogJumpAutomatonState
+class FrogAutomatonJumpState: Frog::FrogAutomatonState
 {
     public:
-        FrogJumpAutomatonState();
+        FrogAutomatonJumpState(Frog* frog);
+        void Enter() override;
+
     protected:
     private:
 };
