@@ -20,7 +20,10 @@
 #include "../entities/Character.h"
 #include "../entities/Bird.h"
 #include "../entities/BatBot.h"
+#include "../entities/Frog.h"
+
 #include "../entities/Plant.h"
+
 
 #include "Level.h"
 

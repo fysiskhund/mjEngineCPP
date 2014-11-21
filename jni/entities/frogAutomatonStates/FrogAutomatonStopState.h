@@ -5,14 +5,16 @@
 #include <math.h>
 
 
+
 // Frog stops and chooses another direction
 
-class FrogAutomatonStopState: Frog::FrogAutomatonState
+class FrogAutomatonStopState: public Frog::FrogAutomatonState
 {
     public:
-        Frog* frog;
         FrogAutomatonStopState(Frog* frog);
         void Enter() override;
+        void Execute(float t_elapsed) override;
+        void Leave() override;
     protected:
     private:
 };

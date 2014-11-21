@@ -132,7 +132,7 @@ void PlatformUniverseScene::Update(float t_elapsed)
 	{
 		character->pos.Set0();
 		character->pos.y = 10;
-		character->vel.y = 0;
+		character->vel.Set0();
 	}
 	ambient.Update(t_elapsed);
     mjPhysicsEffect* windEffect = new mjPhysicsEffect();

@@ -37,6 +37,7 @@ void mjAutomatonState::Reset()
 
 void mjAutomatonState::Leave()
 {
+    Reset();
 }
 
 }

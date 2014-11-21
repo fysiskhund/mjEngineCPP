@@ -17,7 +17,7 @@ mjObject(MJ_AABB)
     BatAutomatonState* wander = new WanderBatMatonState(this);
     states.push_back(wander);
 
-    currentState = wander;
+    Start(wander);
 
 
 

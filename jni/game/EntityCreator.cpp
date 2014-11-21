@@ -15,6 +15,7 @@ EntityCreator::EntityCreator(mjResourceManager* resourceManager)
     entityTypes.push_back("bird");
     entityTypes.push_back("bat");
     entityTypes.push_back("plant");
+    entityTypes.push_back("frog");
 
 }
 
@@ -70,6 +71,9 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
             break;
         case 3:
             return new Plant(levelData, *resourceManager);
+            break;
+        case 4:
+            return new Frog(levelData, *resourceManager);
             break;
         default:
             return NULL;

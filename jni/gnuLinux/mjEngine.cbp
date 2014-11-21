@@ -159,8 +159,6 @@
 		<Unit filename="../entities/GlowBeing.h" />
 		<Unit filename="../entities/Plant.cpp" />
 		<Unit filename="../entities/Plant.h" />
-		<Unit filename="../entities/batMatonStates/BatAutomatonCreator.cpp" />
-		<Unit filename="../entities/batMatonStates/BatAutomatonCreator.h" />
 		<Unit filename="../entities/batMatonStates/WanderBatMatonState.cpp" />
 		<Unit filename="../entities/batMatonStates/WanderBatMatonState.h" />
 		<Unit filename="../entities/frogAutomatonStates/FrogAutomatonStopState.cpp" />

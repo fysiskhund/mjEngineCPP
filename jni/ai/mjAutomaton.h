@@ -19,10 +19,11 @@ class mjAutomaton
         virtual void Update(float t_elapsed);
 
 
-        mjAutomatonState* currentState;
+
         std::vector<mjAutomatonState*> states;
     protected:
     private:
+        mjAutomatonState* currentState;
 };
 
 }
