@@ -202,6 +202,37 @@ void mjPhysics::CollisionDetection()
 											}
 										}
 
+									} else
+									{
+                                        /*colResult->changeVelEffectObj0->mask[0] = false;
+                                        colResult->changeVelEffectObj0->mask[1] = false;
+                                        colResult->changeVelEffectObj0->mask[2] = false;
+
+                                        colResult->changeVelEffectObj1->mask[0] = false;
+                                        colResult->changeVelEffectObj1->mask[1] = false;
+                                        colResult->changeVelEffectObj1->mask[2] = false;*/
+
+                                        float invMasses = 1.0/(object0->mass+object1->mass);
+                                        float vel0 = object0->vel.GetNorm();
+                                        float vel1 = object1->vel.GetNorm();
+                                        float coeff = 0.2;
+
+                                        float v0final = coeff*( (vel0*(object0->mass-object1->mass)*invMasses)+ (vel1*(2.0*object1->mass)*invMasses) );
+                                        float v1final = coeff*((vel1*(object1->mass-object0->mass)*invMasses)+ (vel0*(2.0*object0->mass)*invMasses));
+
+                                        colResult->changeVelEffectObj0->value.MulScalar(v0final);
+                                        colResult->changeVelEffectObj1->value.MulScalar(v1final);
+                                        //mjVector3 obj0Obj1(object1.pos);
+
+                                        //obj0Obj1.Subtract(object0.pos);
+
+                                        //obj0Obj1.Normalize();
+
+                                        //colResult->accelObj0 = new mjPhysicsEffect(MJ_COLLISION, MJ_ADD_FORCE);
+                                        //colResult->accelObj0->value.ScaleAdd(object1->mass, object1.vel);
+
+                                        //colResult->accelObj0->value;
+
 									}
 
 									colResult->relocationEffectObj0->otherObject = object1;
