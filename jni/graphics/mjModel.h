@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <vector>
+#include <float.h>
 
 #include "../extLibs/util/mjMultiPlatform.h"
 
@@ -25,6 +26,7 @@ namespace mjEngine{
 using namespace tinyxml2;
 
 #define MJMODEL_MAXATTRSIZE 96
+#define OVER_9000 FLT_MAX
 
 class mjModel
 {
@@ -34,7 +36,8 @@ public:
 	float* normalComponentBuffer;
 
 
-	float* bounds;
+	float bounds[6] = {  OVER_9000,  OVER_9000,  OVER_9000,
+                        -OVER_9000, -OVER_9000, -OVER_9000};
 
 	char status[1024];
 

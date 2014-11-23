@@ -52,6 +52,20 @@ void mjModel::Load(XMLDocument* doc)
 		vertexData->QueryFloatAttribute("y", &vertexBuffer[posIn3Array+1]);
 		vertexData->QueryFloatAttribute("z", &vertexBuffer[posIn3Array+2]);
 
+		for (unsigned l = 0; l < 3; l++)
+		{
+            if (vertexBuffer[posIn3Array + l] < bounds[0 + l])
+            {
+                bounds[0 + l] = vertexBuffer[posIn3Array + l];
+            }
+
+            if (vertexBuffer[posIn3Array + l] > bounds[3 + l])
+            {
+                bounds[3 + l] = vertexBuffer[posIn3Array + l];
+            }
+		}
+
+
 		vertexData = vertex->FirstChildElement("normal");
 		vertexData->QueryFloatAttribute("x", &normalComponentBuffer[posIn3Array]);
 		vertexData->QueryFloatAttribute("y", &normalComponentBuffer[posIn3Array+1]);

@@ -13,9 +13,9 @@ mjObject(MJ_AABB)
     //model = resourceManager.FetchModel("frog.mesh.xml");
     //glTexture = resourceManager.FetchTexture("frog.png");
 
-    model = resourceManager.FetchModel("bird.mesh.xml");
+    model = resourceManager.FetchModel("frog.mesh.xml");
 
-    glTexture = resourceManager.FetchTexture("birdtexture.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+    glTexture = resourceManager.FetchTexture("frog.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;
@@ -27,6 +27,8 @@ mjObject(MJ_AABB)
     states.push_back(stopState);
     states.push_back(jumpState);
     Start(stopState);
+
+    MatchAABBToModel();
 
 }
 

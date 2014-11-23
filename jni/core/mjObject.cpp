@@ -260,8 +260,14 @@ void mjObject::UpdatePosition(float t_elapsed)
         {
             mjAABB* boundingStruct = ((mjAABB*)boundingStructure);
 
-            boundingStruct->minCorner.Set(model->bounds[0],model->bounds[1],model->bounds[2]);
-            boundingStruct->maxCorner.Set(model->bounds[3],model->bounds[4],model->bounds[5]);
+            boundingStruct->halfWidths.Set(model->bounds[3],model->bounds[4],model->bounds[5]);
+            mjVector3 maxCorner(model->bounds[0],model->bounds[1],model->bounds[2]);
+
+            boundingStruct->halfWidths.Subtract(maxCorner);
+            boundingStruct->halfWidths.MulScalar(0.5);
+
+            boundingStruct->UpdateCorners();
+
         }
     }
 }
