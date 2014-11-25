@@ -215,7 +215,7 @@ void mjPhysics::CollisionDetection()
                                         float invMasses = 1.0/(object0->mass+object1->mass);
                                         float vel0 = object0->vel.GetNorm();
                                         float vel1 = object1->vel.GetNorm();
-                                        float coeff = 0.2;
+                                        float coeff = 1;
 
                                         float v0final = coeff*( (vel0*(object0->mass-object1->mass)*invMasses)+ (vel1*(2.0*object1->mass)*invMasses) );
                                         float v1final = coeff*((vel1*(object1->mass-object0->mass)*invMasses)+ (vel0*(2.0*object0->mass)*invMasses));

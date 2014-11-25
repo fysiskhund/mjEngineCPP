@@ -55,8 +55,9 @@ void Character::ProcessPhysicsEffects(float t_elapsed)
 }
 void Character::ProcessCollisionEffects()
 {
+
 	int previousFootingValue = footing;
-	int characterHasFootingThisFrame = 0;
+	footing = 0;
 
 	for (unsigned i=0; i < collisionStack.size(); i++)
 	{
@@ -72,23 +73,26 @@ void Character::ProcessCollisionEffects()
 		case MJ_CHANGE_POSITION:
 			if (gravity) // If gravity is set..
 			{
-				mjVector3 repositionNormalized;
+				mjVector3 maskDirection;
 
-				repositionNormalized.CopyFrom(collisionEffect->value);
-				repositionNormalized.Subtract(pos);
-				repositionNormalized.Normalize();
+				maskDirection.Set(collisionEffect->mask[0], collisionEffect->mask[1], collisionEffect->mask[2]);
+
+
+				maskDirection.Normalize();
 
 				mjVector3 gravityNormalized;
 				gravityNormalized.CopyFrom(*gravity);
 				gravityNormalized.Normalize();
-				if (gravityNormalized.Dot(repositionNormalized) < -0.4)
+				if (gravityNormalized.Dot(maskDirection) < -0.4)
 				{
 					if (!previousFootingValue)
 					{
 						LOGI("char: footing -> yes");
 
 					}
-					characterHasFootingThisFrame = 1;
+					footing = 1;
+				} else {
+                    LOGI("noFooting");
 				}
 			}
 			break;
@@ -97,9 +101,9 @@ void Character::ProcessCollisionEffects()
 			break;
 		}
 	}
-	if (previousFootingValue && footing == 0)
+
+	if (previousFootingValue && (footing == 0))
 	{
-	    previousFootingValue
 		LOGI("char: footing -> *no*");
 	}
 

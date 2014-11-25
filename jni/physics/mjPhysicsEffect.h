@@ -39,7 +39,7 @@ public:
 	EffectType type = MJ_ACCELERATION;
 	EffectAction action= MJ_ADD_ACCEL;
 	mjVector3 value;
-	bool mask[3];
+	signed char mask[3] = {1, 1, 1};
 
 	mjObject* otherObject;
 

@@ -3,7 +3,7 @@
 
 #include "../BatBot.h"
 
-class DetectBatMatonState
+class DetectBatMatonState: public BatBot::BatAutomatonState
 {
     public:
         DetectBatMatonState(BatBot* bat);

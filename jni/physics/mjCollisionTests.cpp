@@ -1,6 +1,12 @@
 #include "mjCollisionTests.h"
 
 namespace mjEngine{
+
+// The FUZZ value is an Epsilon to avoid "vibration" due to floating point imprecisions and achieve practical results,
+// The value chosen is a less than a tenth of a millimetre, which is for most game purposes perfectly fine.
+
+#define FUZZ 0.00005
+
 mjcolresult mjCollisionTests::SphereVsSphere(mjSphere* s0, mjSphere* s1, mjCollisionResult *out){
 
 
@@ -64,11 +70,12 @@ mjcolresult mjCollisionTests::SphereVsSphere(mjSphere* s0, mjSphere* s1, mjColli
 
 
 
+
 mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisionResult* out)
 	{
 
-		if ((aabb0->minCorner.x > aabb1->maxCorner.x) || (aabb0->minCorner.y > aabb1->maxCorner.y) || (aabb0->minCorner.z > aabb1->maxCorner.z) ||
-		    (aabb1->minCorner.x > aabb0->maxCorner.x) || (aabb1->minCorner.y > aabb0->maxCorner.y) || (aabb1->minCorner.z > aabb0->maxCorner.z))
+		if (( aabb0->minCorner.x -  aabb1->maxCorner.x > FUZZ) || (  aabb0->minCorner.y -  aabb1->maxCorner.y > FUZZ) || (  aabb0->minCorner.z -  aabb1->maxCorner.z > FUZZ) ||
+		    ( aabb1->minCorner.x -  aabb0->maxCorner.x > FUZZ) || (  aabb1->minCorner.y -  aabb0->maxCorner.y > FUZZ) || (  aabb1->minCorner.z -  aabb0->maxCorner.z > FUZZ))
 		{
 			/*LOGI("[%3.3f, %3.3f, %3.3f ; %3.3f, %3.3f, %3.3f] vs [%3.3f, %3.3f, %3.3f ; %3.3f, %3.3f, %3.3f]",
 					aabb0->minCorner.x, aabb0->minCorner.y, aabb0->minCorner.z,
@@ -135,12 +142,21 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 
 				if ((overlap.x < overlap.y) && (overlap.x < overlap.z))
 				{
-					float xDisplacement = mjMathHelper::Sign(directions.x)*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor;
+                    out->relocationEffectObj0->mask[0] = mjMathHelper::Sign(directions.x);
+
+                    if (out->relocationEffectObj0->mask[0] == 0) out->relocationEffectObj0->mask[0] = 1;
+
+					out->relocationEffectObj1->mask[0] = -out->relocationEffectObj0->mask[0];
+
+					float xDisplacement = out->relocationEffectObj0->mask[0]*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor;
 					location0->x = aabb1->center->x + xDisplacement;
 					location1->x = aabb0->center->x - xDisplacement;
 
-					out->changeVelEffectObj0->value.Set(mjMathHelper::Sign(directions.x), 0, 0);
-					out->changeVelEffectObj1->value.Set(-mjMathHelper::Sign(directions.x), 0, 0);
+
+
+					out->changeVelEffectObj0->value.Set(out->relocationEffectObj0->mask[0], 0, 0);
+					out->changeVelEffectObj1->value.Set(out->relocationEffectObj1->mask[0], 0, 0);
+
 
 					out->relocationEffectObj0->mask[1] = false;
 					out->relocationEffectObj0->mask[2] = false;
@@ -153,12 +169,20 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 					out->changeVelEffectObj1->mask[2] = false;
 				} else if ((overlap.y < overlap.x ) && (overlap.y < overlap.z))
 				{
-					float yDisplacement = mjMathHelper::Sign(directions.y)*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor;
+                    out->relocationEffectObj0->mask[1] = mjMathHelper::Sign(directions.y);
+
+                    if (out->relocationEffectObj0->mask[1] == 0) out->relocationEffectObj0->mask[1] = 1;
+
+					float yDisplacement = out->relocationEffectObj0->mask[1]*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor;
 					location0->y = aabb1->center->y + yDisplacement;
 					location1->y = aabb0->center->y - yDisplacement;
 
-					out->changeVelEffectObj0->value.Set(0, mjMathHelper::Sign(directions.y), 0);
-					out->changeVelEffectObj1->value.Set(0, -mjMathHelper::Sign(directions.y), 0);
+
+
+					out->relocationEffectObj1->mask[1] = -out->relocationEffectObj0->mask[1];
+
+					out->changeVelEffectObj0->value.Set(0, out->relocationEffectObj0->mask[1], 0);
+					out->changeVelEffectObj1->value.Set(0, out->relocationEffectObj1->mask[1], 0);
 
 
 					out->relocationEffectObj0->mask[0] = false;
@@ -172,12 +196,21 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 					out->changeVelEffectObj1->mask[2] = false;
 				} else
 				{
-					float zDisplacement = mjMathHelper::Sign(directions.z)*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor;
+                    out->relocationEffectObj0->mask[2] = mjMathHelper::Sign(directions.z);
+
+                    if (out->relocationEffectObj0->mask[2] == 0) out->relocationEffectObj0->mask[2] = 1;
+
+					out->relocationEffectObj1->mask[2] = -out->relocationEffectObj0->mask[2];
+
+					float zDisplacement = out->relocationEffectObj0->mask[2]*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor;
+
 					location0->z = aabb1->center->z + zDisplacement;
 					location1->z = aabb0->center->z - zDisplacement;
 
-					out->changeVelEffectObj0->value.Set(0, 0, mjMathHelper::Sign(directions.z));
-					out->changeVelEffectObj1->value.Set(0, 0, -mjMathHelper::Sign(directions.z));
+
+
+					out->changeVelEffectObj0->value.Set(0, 0, out->relocationEffectObj0->mask[2]);
+					out->changeVelEffectObj1->value.Set(0, 0, out->relocationEffectObj1->mask[2]);
 
 					out->relocationEffectObj0->mask[0] = false;
 					out->relocationEffectObj0->mask[1] = false;
