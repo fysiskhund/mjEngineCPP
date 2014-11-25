@@ -159,6 +159,10 @@
 		<Unit filename="../entities/GlowBeing.h" />
 		<Unit filename="../entities/Plant.cpp" />
 		<Unit filename="../entities/Plant.h" />
+		<Unit filename="../entities/batMatonStates/AttackBatMatonState.cpp" />
+		<Unit filename="../entities/batMatonStates/AttackBatMatonState.h" />
+		<Unit filename="../entities/batMatonStates/DetectBatMatonState.cpp" />
+		<Unit filename="../entities/batMatonStates/DetectBatMatonState.h" />
 		<Unit filename="../entities/batMatonStates/WanderBatMatonState.cpp" />
 		<Unit filename="../entities/batMatonStates/WanderBatMatonState.h" />
 		<Unit filename="../entities/frogAutomatonStates/FrogAutomatonStopState.cpp" />

@@ -55,8 +55,8 @@ void Character::ProcessPhysicsEffects(float t_elapsed)
 }
 void Character::ProcessCollisionEffects()
 {
-	bool previousFootingValue = footing;
-	footing = 0;
+	int previousFootingValue = footing;
+	int characterHasFootingThisFrame = 0;
 
 	for (unsigned i=0; i < collisionStack.size(); i++)
 	{
@@ -69,24 +69,26 @@ void Character::ProcessCollisionEffects()
 		//LOGI("collisionEffect.value: %3.3f %3.3f %3.3f", collisionEffect->value.x,collisionEffect->value.y, collisionEffect->value.z);
 		switch(collisionEffect->action)
 		{
-		case MJ_ADD_VELOCITY:
-			if (gravity)
+		case MJ_CHANGE_POSITION:
+			if (gravity) // If gravity is set..
 			{
-				mjVector3 velocityNormalized;
-				velocityNormalized.CopyFrom(collisionEffect->value);
-				velocityNormalized.Normalize();
+				mjVector3 repositionNormalized;
+
+				repositionNormalized.CopyFrom(collisionEffect->value);
+				repositionNormalized.Subtract(pos);
+				repositionNormalized.Normalize();
 
 				mjVector3 gravityNormalized;
 				gravityNormalized.CopyFrom(*gravity);
 				gravityNormalized.Normalize();
-				if (gravityNormalized.Dot(velocityNormalized) < -0.4)
+				if (gravityNormalized.Dot(repositionNormalized) < -0.4)
 				{
 					if (!previousFootingValue)
 					{
 						LOGI("char: footing -> yes");
 
 					}
-					footing = 1;
+					characterHasFootingThisFrame = 1;
 				}
 			}
 			break;
@@ -97,6 +99,7 @@ void Character::ProcessCollisionEffects()
 	}
 	if (previousFootingValue && footing == 0)
 	{
+	    previousFootingValue
 		LOGI("char: footing -> *no*");
 	}
 
