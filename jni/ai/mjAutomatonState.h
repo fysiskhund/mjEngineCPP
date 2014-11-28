@@ -12,7 +12,7 @@ class mjAutomatonState
         mjAutomatonState();
         ~mjAutomatonState();
 
-               float maxTime = 0;
+               float maxTime = -1;
         float accumulatedTime = 0;
 
         int destStateOnTimeExpiration = -1;

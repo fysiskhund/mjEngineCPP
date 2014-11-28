@@ -4,6 +4,7 @@
 // Both classes have been defined by now, so they can be used directly
 
 #include "batMatonStates/WanderBatMatonState.h"
+#include "batMatonStates/DetectBatMatonState.h"
 
 BatBot::BatBot(Level* levelData, mjResourceManager& resourceManager):
 mjObject(MJ_AABB)
@@ -15,7 +16,9 @@ mjObject(MJ_AABB)
     anchor.Set(2.34, 7.9, -7.42);
 
     BatAutomatonState* wander = new WanderBatMatonState(this);
+    BatAutomatonState* detect = new DetectBatMatonState(this);
     states.push_back(wander);
+    states.push_back(detect);
 
     Start(wander);
 

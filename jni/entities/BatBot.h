@@ -25,6 +25,7 @@ class BatBot: public mjObject, public mjAutomaton
 
         float wanderRadiusMin = 1;
         float wanderRadiusMax = 8;
+        float attackDistance = 4;
         mjVector3 wanderDir;
         mjVector3 anchor;
         mjVector3 attackVector;

@@ -76,8 +76,18 @@ void WanderBatMatonState::Execute(float t_elapsed)
 
     //LOGI("wanderDir: %3.3f, %3.3f, %3.3f", bat->wanderDir.x, bat->wanderDir.y, bat->wanderDir.z);
     //LOGI("batPos: %3.3f, %3.3f, %3.3f", bat->pos.x, bat->pos.y, bat->pos.z);
-	if (player)
-	{
+    bat->attackVector.CopyFrom(player->pos);
+    bat->attackVector.Subtract(bat->pos);
+    float distToPlayer = bat->attackVector.Normalize();
+	if ((distToPlayer < bat->attackDistance) && (bat->wanderDir.Dot(bat->attackVector) < M_PI))
+    {
+        destStateOnTimeExpiration = 1;
+        maxTime = 0.5;
 
-	}
+    }
+}
+void WanderBatMatonState::Reset()
+{
+    BatBot::BatAutomatonState::Reset();
+    maxTime = -1;
 }
