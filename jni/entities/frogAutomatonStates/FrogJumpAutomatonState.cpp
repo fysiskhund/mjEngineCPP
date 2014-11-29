@@ -20,7 +20,7 @@ void FrogAutomatonJumpState::Enter()
 
 void FrogAutomatonJumpState::Execute(float t_elapsed)
 {
-    if (frog->pos.y < -3)
+    if (mjCollisionTests::AABBVsAABB((mjAABB*)frog->boundingStructure, frog->levelData->hardLimits, NULL) == MJ_NO_COLLISION)
     {
         frog->pos.CopyFrom(frog->startPosition);
         frog->vel.Set0();

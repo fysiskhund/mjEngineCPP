@@ -127,24 +127,46 @@ void Character::Update(float t_elapsed)
 			if (vel.GetNorm() < gravity->GetNorm()*100.0)
 			{
 				//LOGI("Vel: %3.3f, %3.3f, %3.3f", vel.x, vel.y, vel.z);
-				vel.ScaleAdd(-t_elapsed*35.0, *gravity);
+				vel.ScaleAdd(-t_elapsed*40.0, *gravity);
 			}
 			LOGI("char: footing -> no (jumping)");
 		}
 	}
+	if (intrinsecVel.GetNorm() < 10 && footing)
+    {
 
+        if ((intrinsecVel.x*vel.x < 0))// || fabs(intrinsecVel.x + vel.x) < MAX_VEL_FOR_CHARACTER)
+        {
+            vel.x += intrinsecVel.x;
+        }
+
+
+        if ((intrinsecVel.y*vel.y < 0))// || fabs(intrinsecVel.y + vel.y) < MAX_VEL_FOR_CHARACTER)
+        {
+            vel.y += intrinsecVel.y;
+        }
+
+        if ((intrinsecVel.z*vel.z < 0))// || fabs(intrinsecVel.z + vel.z) < MAX_VEL_FOR_CHARACTER)
+        {
+            vel.z += intrinsecVel.z;
+        }
+    }
+
+    vel.MulScalar(0.99);
 	mjObject::Update(t_elapsed);
 
 
 }
 void Character::UpdatePosition(float t_elapsed)
 {
-    if (intrinsecVel.GetNorm() < 10)
-        {
 
-            pos.ScaleAdd(t_elapsed, intrinsecVel);
-        }
+    if (intrinsecVel.GetNorm() < 10)
+    {
+
+        pos.ScaleAdd(t_elapsed, intrinsecVel);
+    }
 	mjObject::UpdatePosition(t_elapsed);
+
 }
 
 void Character::Check()

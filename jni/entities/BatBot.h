@@ -14,6 +14,9 @@
 
 using namespace mjEngine;
 
+enum batMatonStates{
+  BM_WANDER=0, BM_DETECT, BM_ATTACK
+};
 
 
 class BatBot: public mjObject, public mjAutomaton

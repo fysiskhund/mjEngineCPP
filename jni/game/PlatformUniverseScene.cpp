@@ -30,7 +30,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
     mjVector3 o;
 
     ambient.InitGlowBeings(camera, &physics, &shaderList, &sceneGraph, *resourceManager);
-    ambient.CreateDustDevil(o, 12, 10);
+    //ambient.CreateDustDevil(o, 12, 10);
 
     level->LoadFromFile("/sdcard/mjEngineCPP/levels/testLevel.xml");
     entityCreator->PopulateLevel(&level->doc, level);

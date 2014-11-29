@@ -5,8 +5,10 @@ DetectBatMatonState::DetectBatMatonState(BatBot* bat)
 {
 
 	player = bat->levelData->GetEntityByID("character0");
-    destStateOnTimeExpiration = 3;
-    maxTime = 2;
+    destStateOnTimeExpiration = BM_ATTACK;
+    maxTime = 0.8;
+
+
 }
 void DetectBatMatonState::Reset()
 {
@@ -25,6 +27,17 @@ void DetectBatMatonState::Execute(float t_elapsed)
     bat->dir.CopyFrom(bat->attackVector);
     bat->dir.y = 0;
     bat->dir.Normalize();
+
+    bat->vel.Set0();
+
+    exciteAngle += 8.0*M_PI*t_elapsed;
+
+    if (exciteAngle > 2.0*M_PI)
+    {
+        exciteAngle -= 2.0*M_PI;
+    }
+
+    bat->modelOffset.y = 0.2*sin(exciteAngle);
 
 
 }

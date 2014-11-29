@@ -5,6 +5,7 @@
 
 #include "batMatonStates/WanderBatMatonState.h"
 #include "batMatonStates/DetectBatMatonState.h"
+#include "batMatonStates/AttackBatMatonState.h"
 
 BatBot::BatBot(Level* levelData, mjResourceManager& resourceManager):
 mjObject(MJ_AABB)
@@ -17,17 +18,19 @@ mjObject(MJ_AABB)
 
     BatAutomatonState* wander = new WanderBatMatonState(this);
     BatAutomatonState* detect = new DetectBatMatonState(this);
+    BatAutomatonState* attack = new AttackBatMatonState(this);
     states.push_back(wander);
     states.push_back(detect);
+    states.push_back(attack);
 
-    Start(wander);
+    SetStartState(wander);
 
 
 
 	GLuint glTexture;
 
 	model = resourceManager.FetchModel("bird.mesh.xml");
-	((mjAABB*)boundingStructure)->isImmovable = true;
+	((mjAABB*)boundingStructure)->isImmovable = false;
 
 	glTexture = resourceManager.FetchTexture("birdtexture.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)

@@ -10,6 +10,9 @@ class DetectBatMatonState: public BatBot::BatAutomatonState
     public:
         DetectBatMatonState(BatBot* bat);
         mjObject* player;
+
+        float exciteAngle = 0;
+
         virtual void Execute(float t_elapsed) override;
         virtual void Reset() override;
         virtual ~DetectBatMatonState();

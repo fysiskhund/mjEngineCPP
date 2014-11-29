@@ -7,6 +7,12 @@ WanderBatMatonState::WanderBatMatonState(BatBot* bat)
 	player = bat->levelData->GetEntityByID("character0");
 
 }
+void WanderBatMatonState::Enter()
+{
+    BatBot::BatAutomatonState::Enter();
+
+    bat->vel.Set0(); // Stop him if he's moving around
+}
 
 void WanderBatMatonState::Execute(float t_elapsed)
 {
@@ -81,9 +87,17 @@ void WanderBatMatonState::Execute(float t_elapsed)
     float distToPlayer = bat->attackVector.Normalize();
 	if ((distToPlayer < bat->attackDistance) && (bat->wanderDir.Dot(bat->attackVector) < M_PI))
     {
-        SwitchToState(1);
+        SwitchToState(BM_DETECT);
 
     }
+}
+void WanderBatMatonState::Leave()
+{
+    bat->attackVector.CopyFrom(player->pos);
+    bat->attackVector.Subtract(bat->pos);
+    bat->attackVector.Normalize(); // One last copy in case the player has moved
+
+    BatBot::BatAutomatonState::Leave();
 }
 void WanderBatMatonState::Reset()
 {

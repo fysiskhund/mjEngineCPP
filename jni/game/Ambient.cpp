@@ -5,7 +5,7 @@ Ambient::Ambient()
 	//LOGI("Wind is at %p\n", &wind);
     windAutomaton.states.push_back(new SteadyDirectionState(&wind));
     //windAutomaton.states.push_back(new DustDevilState(&wind));
-    windAutomaton.Start(windAutomaton.states[0]);
+    windAutomaton.SetStartState(windAutomaton.states[0]);
 
 
 

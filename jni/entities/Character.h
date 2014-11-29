@@ -10,7 +10,7 @@
 using namespace mjEngine;
 
 
-
+#define MAX_VEL_FOR_CHARACTER 2
 
 class Character: public mjObject
 {

@@ -30,6 +30,13 @@ public:
     mjObject* GetEntityByID(const char* ID);
 
     XMLDocument doc;
+
+    mjVector3 levelCenter;
+    mjAABB* bounds;
+
+    float hardLimitExtra = 0.5;
+    mjAABB* hardLimits; // now with hardLimitExtra% more space than bounds
+
 private:
     mjResourceManager* resourceManager;
     //EntityCreator entityCreator;

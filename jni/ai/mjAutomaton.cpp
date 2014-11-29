@@ -6,7 +6,7 @@ mjAutomaton::mjAutomaton()
     //ctor
 }
 
-void mjAutomaton::Start(mjAutomatonState* initialState)
+void mjAutomaton::SetStartState(mjAutomatonState* initialState)
 {
 currentState = initialState;
 currentState->Enter();
@@ -28,7 +28,7 @@ void mjAutomaton::Update(float t_elapsed)
         if (currentState->switchToStateNow > -1)
         {
             destState = currentState->switchToStateNow;
-        } else if (currentState->destStateOnTimeExpiration > -1)
+        } else if ((currentState->maxTime > 0) && (currentState->accumulatedTime > currentState->maxTime) && (currentState->destStateOnTimeExpiration > -1))
         {
             destState = currentState->destStateOnTimeExpiration;
         }

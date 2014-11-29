@@ -3,6 +3,13 @@
 Level::Level(mjResourceManager* resourceManager)
 {
     this->resourceManager = resourceManager;
+
+    mjVector3 initialMinCorner(OVER_9000, OVER_9000, OVER_9000);
+    mjVector3 initialMaxCorner(-OVER_9000, -OVER_9000, -OVER_9000);
+
+    bounds = new mjAABB(&levelCenter, initialMinCorner, initialMaxCorner, true);
+    hardLimits = new mjAABB(*bounds);
+
 }
 
 void Level::LoadFromFile(const char* fileName)
@@ -15,6 +22,7 @@ void Level::LoadFromFile(const char* fileName)
 
 void Level::Load(XMLDocument* doc)
 {
+
 	XMLHandle docHandle(doc);
 
 	// Entity load has been implemented in EntityCreator.cpp
@@ -40,6 +48,32 @@ void Level::Load(XMLDocument* doc)
                 mjXMLHelper::ReadVector(terrainElement->FirstChildElement("mincorner"), &aabb->minCorner);
 				mjXMLHelper::ReadVector(terrainElement->FirstChildElement("maxcorner"), &aabb->maxCorner);
 
+				if (aabb->minCorner.x < bounds->minCorner.x)
+				{
+                    bounds->minCorner.x = aabb->minCorner.x;
+				}
+				if (aabb->minCorner.y < bounds->minCorner.y)
+				{
+                    bounds->minCorner.y = aabb->minCorner.y;
+				}
+				if (aabb->minCorner.z < bounds->minCorner.z)
+				{
+                    bounds->minCorner.z = aabb->minCorner.z;
+				}
+
+				if (aabb->maxCorner.x > bounds->maxCorner.x)
+				{
+                    bounds->maxCorner.x = aabb->maxCorner.x;
+				}
+				if (aabb->maxCorner.y > bounds->maxCorner.y)
+				{
+                    bounds->maxCorner.y = aabb->maxCorner.y;
+				}
+				if (aabb->maxCorner.z > bounds->maxCorner.z)
+				{
+                    bounds->maxCorner.z = aabb->maxCorner.z;
+				}
+
 				LOGI("TerrainElement %s found [%3.3f %3.3f %3.3f] [%3.3f %3.3f %3.3f]", terrainElement->Name(),
 						aabb->minCorner.x, aabb->minCorner.y, aabb->minCorner.z,
 						aabb->maxCorner.x, aabb->maxCorner.y, aabb->maxCorner.z  );
@@ -50,7 +84,27 @@ void Level::Load(XMLDocument* doc)
 		}
 		terrainElement = terrainElement->NextSiblingElement();
 	}
-	LOGI("%u entities, %u terrain elements", entities.size(), terrain.size());
+
+	bounds->UpdateCenter();
+
+	hardLimits->halfWidths.CopyFrom(bounds->halfWidths);
+
+	// Add 30%
+	hardLimits->halfWidths.MulScalar(1.0 + hardLimitExtra);
+	// Update
+	hardLimits->UpdateCorners();
+
+
+
+	LOGI("%u entities, %u terrain elements, bounds [%3.3f %3.3f %3.3f] [%3.3f %3.3f %3.3f]; hardLimits [%3.3f %3.3f %3.3f] [%3.3f %3.3f %3.3f]",
+         entities.size(), terrain.size(),
+
+         bounds->minCorner.x, bounds->minCorner.y, bounds->minCorner.z,
+         bounds->maxCorner.x, bounds->maxCorner.y, bounds->maxCorner.z,
+
+         hardLimits->minCorner.x, hardLimits->minCorner.y, hardLimits->minCorner.z,
+         hardLimits->maxCorner.x, hardLimits->maxCorner.y, hardLimits->maxCorner.z
+         );
 }
 
 

@@ -26,9 +26,11 @@ mjObject(MJ_AABB)
 
     states.push_back(stopState);
     states.push_back(jumpState);
-    Start(stopState);
+    SetStartState(stopState);
 
     MatchAABBToModel();
+
+
 
 }
 

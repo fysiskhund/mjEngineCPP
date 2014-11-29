@@ -22,7 +22,6 @@ mjObject::mjObject(structuretype collisionStructureType)
 
 		mjAABB* aabb = new mjAABB(&pos, minCorner, maxCorner, false);
 		this->boundingStructure = aabb;
-		aabb->center = &pos;
 		LOGI("Object initialised as AABB");
 	}
 		break;

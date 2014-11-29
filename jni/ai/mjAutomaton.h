@@ -14,7 +14,7 @@ class mjAutomaton
         ~mjAutomaton();
         mjAutomaton(const mjAutomaton& other);
 
-        void Start(mjAutomatonState* initialState);
+        void SetStartState(mjAutomatonState* initialState);
 
         virtual void Update(float t_elapsed);
 

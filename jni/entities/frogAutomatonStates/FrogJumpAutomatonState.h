@@ -2,6 +2,7 @@
 #define FROGJUMPAUTOMATONSTATE_H
 
 #include "../Frog.h"
+#include "../../physics/mjCollisionTests.h"
 
 class FrogAutomatonJumpState: public Frog::FrogAutomatonState
 {
