@@ -5,12 +5,14 @@ DetectBatMatonState::DetectBatMatonState(BatBot* bat)
 {
 
 	player = bat->levelData->GetEntityByID("character0");
-
+    destStateOnTimeExpiration = 3;
+    maxTime = 2;
 }
 void DetectBatMatonState::Reset()
 {
     BatBot::BatAutomatonState::Reset();
-    maxTime = -1;
+
+
 }
 
 void DetectBatMatonState::Execute(float t_elapsed)
@@ -24,12 +26,7 @@ void DetectBatMatonState::Execute(float t_elapsed)
     bat->dir.y = 0;
     bat->dir.Normalize();
 
-	if (distToPlayer > bat->attackDistance)
-    {
-        destStateOnTimeExpiration = 0;
-        maxTime = 0.5;
 
-    }
 }
 
 

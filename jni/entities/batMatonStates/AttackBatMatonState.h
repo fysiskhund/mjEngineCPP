@@ -1,12 +1,16 @@
 #ifndef ATTACKBATMATONSTATE_H
 #define ATTACKBATMATONSTATE_H
 
+#include "../BatBot.h"
 
-class AttackBatMatonState
+class AttackBatMatonState: public BatBot::BatAutomatonState
 {
     public:
-        AttackBatMatonState();
+        AttackBatMatonState(BatBot* bat);
+        //virtual void Execute(float t_elapsed) override;
+        //virtual void Reset() override;
         virtual ~AttackBatMatonState();
+        mjObject* player = NULL;
     protected:
     private:
 };

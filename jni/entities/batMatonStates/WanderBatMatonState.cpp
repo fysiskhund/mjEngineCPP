@@ -81,8 +81,7 @@ void WanderBatMatonState::Execute(float t_elapsed)
     float distToPlayer = bat->attackVector.Normalize();
 	if ((distToPlayer < bat->attackDistance) && (bat->wanderDir.Dot(bat->attackVector) < M_PI))
     {
-        destStateOnTimeExpiration = 1;
-        maxTime = 0.5;
+        SwitchToState(1);
 
     }
 }

@@ -34,6 +34,10 @@ void mjAutomatonState::Reset()
 {
     accumulatedTime = 0;
 }
+void mjAutomatonState::SwitchToState(int destState)
+{
+    switchToStateNow = destState;
+}
 
 void mjAutomatonState::Leave()
 {

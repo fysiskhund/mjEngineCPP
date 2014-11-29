@@ -25,8 +25,11 @@ class mjAutomatonState
         virtual void Reset();
 
         virtual void Leave();
+        void SwitchToState(int destState);
+        int switchToStateNow = -1;
     protected:
     private:
+
 };
 
 }

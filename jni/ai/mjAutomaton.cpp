@@ -23,17 +23,22 @@ void mjAutomaton::Update(float t_elapsed)
     {
         currentState->Execute(t_elapsed);
         currentState->Update(t_elapsed);
-        if (currentState->maxTime > 0 && (currentState->accumulatedTime > currentState->maxTime))
-        {
-            if (currentState->destStateOnTimeExpiration > -1)
-            {
-                currentState->Leave();
-                int destStateOnTimeExpiration = currentState->destStateOnTimeExpiration;
-                currentState = states[destStateOnTimeExpiration];
-                currentState->Enter();
-            }
-        }
 
+        int destState = -1;
+        if (currentState->switchToStateNow > -1)
+        {
+            destState = currentState->switchToStateNow;
+        } else if (currentState->destStateOnTimeExpiration > -1)
+        {
+            destState = currentState->destStateOnTimeExpiration;
+        }
+        if (destState > -1)
+        {
+            currentState->Leave();
+            currentState->switchToStateNow = -1;
+            currentState = states[destState];
+            currentState->Enter();
+        }
     }
 }
 
