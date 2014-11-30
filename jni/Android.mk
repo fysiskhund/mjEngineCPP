@@ -52,6 +52,11 @@ LOCAL_SRC_FILES := extLibs/tinyxml/tinyxml2.cpp \
 				   entities/BatBot.cpp \
 				   entities/BatMaton.cpp \
 				   entities/batMatonStates/WanderBatMatonState.cpp \
+				   entities/batMatonStates/DetectBatMatonState.cpp \
+				   entities/batMatonStates/AttackBatMatonState.cpp \
+				   entities/Frog.cpp \
+				   entities/frogAutomatonStates/FrogAutomatonStopState.cpp \
+				   entities/frogAutomatonStates/FrogJumpAutomatonState.cpp \
 				   entities/Plant.cpp \
 				   entities/GlowBeing.cpp \
 				   terrainTypes/Box.cpp \
