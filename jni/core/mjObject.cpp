@@ -80,16 +80,9 @@ void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 
 	Matrix4::GetPositionScaleAndRotationMatrix(positionPlusOffset, dir, up, scale, modelMatrix);
 
-	Matrix4::MultiplyMM(modelViewMatrix, 0,
-			lookAtMatrix, 0,
-			modelMatrix, 0);
-
-	Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
-						projectionMatrix, 0,
-						modelViewMatrix, 0);
 	//Matrix4::DebugM("mvpp", modelViewProjectionMatrix);
 
-	model->Draw(shaderList, modelMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, pose);
+	model->Draw(shaderList, modelMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, pose);
 }
 
 void mjObject::ProcessPhysicsEffects(float t_elapsed)

@@ -51,6 +51,7 @@ public:
 
 	}
 	static void GetPositionScaleAndRotationMatrix(mjVector3& pos, mjVector3& dir, mjVector3& up, mjVector3& scale, float* matrixR);
+	static void GetPositionScaleAndAngleRotationMatrix(mjVector3& pos, mjVector3& angles, float* matrixR);
 	static void SetLookAtM(float* m, int offsetIgnored,
 			mjVector3& pos,
 			mjVector3& backDir,
