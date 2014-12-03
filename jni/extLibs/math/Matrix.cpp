@@ -95,6 +95,29 @@ void Matrix4::GetPositionScaleAndRotationMatrix(mjVector3& pos, mjVector3& dir, 
 	matrixR[15] = 1;
 }
 void Matrix4::GetPositionScaleAndAngleRotationMatrix(mjVector3& pos, mjVector3& angles, float* matrixR)
+/*{
+        matrixR[0] = cos(angles.y)*cos(angles.z);
+		matrixR[1] = (sin(angles.x)*sin(angles.y)*cos(angles.z)) + (cos(angles.x)*sin(angles.z));
+		matrixR[2] = (-cos(angles.x)*sin(angles.y)*cos(angles.z)) + (sin(angles.x)*sin(angles.z));
+        matrixR[3] = 0;
+
+		matrixR[4] = -cos(angles.y)*sin(angles.z);
+		matrixR[5] = (-sin(angles.x)*sin(angles.y)*sin(angles.z)) + (cos(angles.x)*cos(angles.z));
+		matrixR[6] = (cos(angles.x)*sin(angles.y)*sin(angles.z)+(sin(angles.x)*cos(angles.z)));
+		matrixR[7] = 0;
+
+		matrixR[8] = sin(angles.y);
+		matrixR[9] = -sin(angles.x)*cos(angles.y);
+		matrixR[10] = cos(angles.x)*cos(angles.y);
+		matrixR[11] = 0;
+
+		matrixR[12] = 0;
+		matrixR[13] = 0;
+		matrixR[14] = 0;
+		matrixR[15] = 1;
+
+
+}*/
 {
 		matrixR[0] = (cos(angles.z)*cos(angles.y));
 		matrixR[1] = ((-sin(angles.z)*cos(angles.x)) + (cos(angles.z)*sin(angles.y)*sin(angles.x)));

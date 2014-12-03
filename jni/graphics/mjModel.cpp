@@ -244,6 +244,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
             Matrix4::MultiplyMM(tempMatrix, 0,
                                 modelMatrix, 0,
                                 poseMatrix, 0);
+
             Matrix4::MultiplyMM(modelViewMatrix, 0,
 			lookAtMatrix, 0,
 			tempMatrix, 0);
