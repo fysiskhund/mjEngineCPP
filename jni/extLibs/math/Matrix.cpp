@@ -95,49 +95,35 @@ void Matrix4::GetPositionScaleAndRotationMatrix(mjVector3& pos, mjVector3& dir, 
 	matrixR[15] = 1;
 }
 void Matrix4::GetPositionScaleAndAngleRotationMatrix(mjVector3& pos, mjVector3& angles, float* matrixR)
-/*{
-        matrixR[0] = cos(angles.y)*cos(angles.z);
-		matrixR[1] = (sin(angles.x)*sin(angles.y)*cos(angles.z)) + (cos(angles.x)*sin(angles.z));
-		matrixR[2] = (-cos(angles.x)*sin(angles.y)*cos(angles.z)) + (sin(angles.x)*sin(angles.z));
-        matrixR[3] = 0;
-
-		matrixR[4] = -cos(angles.y)*sin(angles.z);
-		matrixR[5] = (-sin(angles.x)*sin(angles.y)*sin(angles.z)) + (cos(angles.x)*cos(angles.z));
-		matrixR[6] = (cos(angles.x)*sin(angles.y)*sin(angles.z)+(sin(angles.x)*cos(angles.z)));
-		matrixR[7] = 0;
-
-		matrixR[8] = sin(angles.y);
-		matrixR[9] = -sin(angles.x)*cos(angles.y);
-		matrixR[10] = cos(angles.x)*cos(angles.y);
-		matrixR[11] = 0;
-
-		matrixR[12] = 0;
-		matrixR[13] = 0;
-		matrixR[14] = 0;
-		matrixR[15] = 1;
-
-
-}*/
 {
-		matrixR[0] = (cos(angles.z)*cos(angles.y));
-		matrixR[1] = ((-sin(angles.z)*cos(angles.x)) + (cos(angles.z)*sin(angles.y)*sin(angles.x)));
-		matrixR[2] = ((sin(angles.z)*sin(angles.x)) + (cos(angles.z)*sin(angles.y)*cos(angles.x)));
-		matrixR[3] = 0;
+    float cosX = cos(angles.x);
+    float cosY = cos(angles.y);
+    float cosZ = cos(angles.z);
 
-		matrixR[4] = (sin(angles.z)*cos(angles.y));
-		matrixR[5] = ((cos(angles.z)*cos(angles.x)) + (sin(angles.z)*sin(angles.y)*sin(angles.x)));
-		matrixR[6] = (-(cos(angles.z)*sin(angles.x)) + (sin(angles.z)*sin(angles.y)*cos(angles.x)));
-		matrixR[7] = 0;
+    float sinX = sin(angles.x);
+    float sinY = sin(angles.y);
+    float sinZ = sin(angles.z);
 
-		matrixR[8] = -sin(angles.y);
-		matrixR[9] = (cos(angles.y)*sin(angles.x));
-		matrixR[10] = (cos(angles.y)*cos(angles.x));
-		matrixR[11] = 0;
 
-		matrixR[12] = pos.x;
-		matrixR[13] = pos.y;
-		matrixR[14] = pos.z;
-		matrixR[15] = 1;
+    matrixR[0] = (cosZ*cosY);
+	matrixR[1] = ((-sinZ*cosX) + (cosZ*sinY*sinX));
+	matrixR[2] = ((sinZ*sinX) + (cosZ*sinY*cosX));
+	matrixR[3] = 0;
+
+	matrixR[4] = (sinZ*cosY);
+	matrixR[5] = ((cosZ*cosX) + (sinZ*sinY*sinX));
+	matrixR[6] = (-(cosZ*sinX) + (sinZ*sinY*cosX));
+	matrixR[7] = 0;
+
+	matrixR[8] = -sinY;
+	matrixR[9] = (cosY*sinX);
+	matrixR[10] = (cosY*cosX);
+	matrixR[11] = 0;
+
+	matrixR[12] = pos.x;
+	matrixR[13] = pos.y;
+	matrixR[14] = pos.z;
+    matrixR[15] = 1;
 }
 
 

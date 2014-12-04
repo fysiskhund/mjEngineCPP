@@ -11,7 +11,7 @@ Character::Character(mjResourceManager& resourceManager)
 	maxCorner.Set(0.3,1.65, 0.3);
 	charBoundStruct->SetCorners(minCorner,maxCorner);
 
-
+    pose = new mjModelPose();
 
 	GLuint glTexture = resourceManager.FetchTexture("suit_test.png");
 	for (unsigned i = 0; i < model->meshes.size(); i++)

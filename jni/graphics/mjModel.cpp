@@ -233,12 +233,12 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
 	for(unsigned i = 0; i < meshes.size(); i++)
 	{
-	    if (1)//(pose)
+	    if (pose)
         {
 
 
             mjVector3 testPos(0,0,0);
-            mjVector3 testAngles(M_PI_4*0.5,0,0);
+            mjVector3 testAngles(M_PI_2,0,0);
 
             Matrix4::GetPositionScaleAndAngleRotationMatrix(testPos, testAngles, poseMatrix);//(*pose->positions[i], *pose->angles[i], poseMatrix);
             Matrix4::MultiplyMM(tempMatrix, 0,
