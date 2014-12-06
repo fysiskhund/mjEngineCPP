@@ -203,6 +203,14 @@
 		<Unit filename="../game/windStates/SteadyDirectionState.h" />
 		<Unit filename="../game/windStates/WindState.cpp" />
 		<Unit filename="../game/windStates/WindState.h" />
+		<Unit filename="../graphics/animation/mjAnimation.cpp" />
+		<Unit filename="../graphics/animation/mjAnimation.h" />
+		<Unit filename="../graphics/animation/mjAnimationKeyframe.cpp" />
+		<Unit filename="../graphics/animation/mjAnimationKeyframe.h" />
+		<Unit filename="../graphics/animation/mjAnimationSegment.cpp" />
+		<Unit filename="../graphics/animation/mjAnimationSegment.h" />
+		<Unit filename="../graphics/animation/mjAnimator.cpp" />
+		<Unit filename="../graphics/animation/mjAnimator.h" />
 		<Unit filename="../graphics/animation/mjModelAnimation.cpp" />
 		<Unit filename="../graphics/animation/mjModelAnimation.h" />
 		<Unit filename="../graphics/animation/mjModelPose.cpp" />

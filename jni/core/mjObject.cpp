@@ -47,11 +47,11 @@ mjObject::mjObject()
 void mjObject::SetDetailsFromXML(XMLElement* entity)
 {
     // Read its characteristics
-            SetID(entity->Attribute("id"));
-            mjXMLHelper::ReadVector(entity->FirstChildElement("pos"), &pos);
-            mjXMLHelper::ReadVector(entity->FirstChildElement("dir"), &dir);
-            mjXMLHelper::ReadVector(entity->FirstChildElement("up"), &up);
-            mjXMLHelper::ReadVector(entity->FirstChildElement("vel"), &vel);
+    SetID(entity->Attribute("id"));
+    mjXMLHelper::ReadVector(entity->FirstChildElement("pos"), &pos);
+    mjXMLHelper::ReadVector(entity->FirstChildElement("dir"), &dir);
+    mjXMLHelper::ReadVector(entity->FirstChildElement("up"), &up);
+    mjXMLHelper::ReadVector(entity->FirstChildElement("vel"), &vel);
 }
 
 void mjObject::SetID(const char* id)
