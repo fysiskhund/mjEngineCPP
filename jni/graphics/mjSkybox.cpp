@@ -7,6 +7,7 @@ mjSkybox::mjSkybox()
 {
 	scale.Set(10,10,10);
 	backgroundData.deltaH = 0.001;
+
 	//level0Data.deltaH = 0.01;
 }
 

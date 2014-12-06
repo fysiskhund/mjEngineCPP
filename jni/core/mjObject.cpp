@@ -4,6 +4,7 @@ namespace mjEngine{
 
 mjObject::mjObject(structuretype collisionStructureType)
 {
+
 	// Vectors are initialised with 0, so no need to set them here
 
 	up.Set(0,1,0);

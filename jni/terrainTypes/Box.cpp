@@ -4,6 +4,7 @@ Box::Box(mjResourceManager& resourceManager)
 : mjObject(MJ_AABB)
 {
 
+
     model = resourceManager.FetchModel("box.mesh.xml");
 
     mjAABB* boundingStruct = ((mjAABB*)boundingStructure);
