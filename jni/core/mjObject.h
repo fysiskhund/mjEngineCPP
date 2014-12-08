@@ -69,6 +69,7 @@ public:
 	bool autoUpdateStructure = true;
 	mjObject();
 	mjObject(structuretype collisionStructureType);
+	virtual ~mjObject();
     void SetID(const char* id);
     virtual void SetDetailsFromXML(XMLElement* entity);
 	virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);

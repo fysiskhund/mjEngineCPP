@@ -263,4 +263,10 @@ void mjObject::UpdatePosition(float t_elapsed)
 
         }
     }
+
+mjObject::~mjObject()
+{
+
+}
+
 }
