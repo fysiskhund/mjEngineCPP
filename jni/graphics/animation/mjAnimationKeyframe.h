@@ -6,6 +6,8 @@
 
 namespace mjEngine{
 
+enum keyframeAnimType { };
+
 class mjAnimationKeyframe
 {
     public:
