@@ -6,7 +6,7 @@
 
 namespace mjEngine{
 
-enum keyframeAnimType { };
+enum keyframeAnimType {KEYFRAMETYPE_LINEAR, KEYFRAMETYPE_QUADRATIC };
 
 class mjAnimationKeyframe
 {
@@ -15,6 +15,9 @@ class mjAnimationKeyframe
         mjVector3 angles;
         mjVector3 rotationDirections;
         mjVector3 pos;
+
+        keyframeAnimType rotationAnimTypes[3];
+        keyframeAnimType displacementAnimTypes[3];
 
         mjAnimationKeyframe();
         virtual ~mjAnimationKeyframe();
