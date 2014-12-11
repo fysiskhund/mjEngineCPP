@@ -3,9 +3,15 @@
 
 namespace mjEngine{
 
+#include <vector>
+#include "mjAnimationSegment.h"
+
 class mjAnimation
 {
     public:
+
+        std::vector<mjAnimationSegment* > segments;
+
         mjAnimation();
         virtual ~mjAnimation();
     protected:
