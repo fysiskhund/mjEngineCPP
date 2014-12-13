@@ -12,6 +12,8 @@ class mjAnimationKeyframe
 {
     public:
 
+        float timeStamp;
+
         mjVector3 angles;
         mjVector3 rotationDirections;
         mjVector3 pos;

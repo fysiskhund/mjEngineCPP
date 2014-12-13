@@ -7,6 +7,11 @@
 #include "../game/Level.h"
 #include "../ai/mjAutomaton.h"
 #include "../extLibs/util/mjXMLHelper.h"
+#include "../graphics/animation/mjAnimation.h"
+#include "../graphics/animation/mjAnimationKeyframe.h"
+#include "../graphics/animation/mjAnimator.h"
+#include "../graphics/animation/mjModelAnimation.h"
+#include "../graphics/animation/mjModelPose.h"
 //#include "../ai/mjAutomatonState.h"
 
 
@@ -22,6 +27,11 @@ enum batMatonStates{
 class BatBot: public mjObject, public mjAutomaton
 {
     public:
+
+        mjAnimation animation;
+        mjAnimator animator;
+        float tAnimation = 0;
+
         BatBot(Level* levelData, mjResourceManager& resourceManager);
         //BatBot(const BatBot& other);
         Level* levelData;
@@ -32,6 +42,7 @@ class BatBot: public mjObject, public mjAutomaton
         mjVector3 wanderDir;
         mjVector3 anchor;
         mjVector3 attackVector;
+
 
 
         bool ignoresGravity = true;

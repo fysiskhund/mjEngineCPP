@@ -52,14 +52,14 @@ void mjAnimator::UpdatePose(float t, mjModelPose& pose, mjAnimation& animation)
                    // Perform the interpolation.
                    // Fixme: for now only linear. But more animation types will be supported in the future
                    // FIXME: for now the angle "direction" isn't taken into account, but it should be.
-                   mjVector3 angles(segment->keyframes[previousKeyframeNum].angles);
-                   mjVector3 delta(segment->keyframes[nextKeyframeNum].angles);
+                   mjVector3 angles(segment->keyframes[previousKeyframeNum]->angles);
+                   mjVector3 delta(segment->keyframes[nextKeyframeNum]->angles);
 
                    delta.Subtract(angles);
 
                    // Add delta vector to "current" vector, scaled by "time percentage"
 
-                   float t_percentage = (t_segment - segment.keyframes[previousKeyframeNum]->timeStamp)/(segment->keyframes[nextKeyframeNum]->timeStamp - segment->keyframes[previousKeyframeNum]->timeStamp);
+                   float t_percentage = (t_segment - segment->keyframes[previousKeyframeNum]->timeStamp)/(segment->keyframes[nextKeyframeNum]->timeStamp - segment->keyframes[previousKeyframeNum]->timeStamp);
 
                    // Perform interpolation
                    angles.ScaleAdd(t_percentage, delta);

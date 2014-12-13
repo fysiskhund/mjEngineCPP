@@ -11,6 +11,43 @@ BatBot::BatBot(Level* levelData, mjResourceManager& resourceManager):
 mjObject(MJ_AABB)
 //:BatMaton(levelData)
 {
+
+    //Animation test
+    mjAnimationSegment* segment0 = new mjAnimationSegment();
+    segment0->meshNum = 0;
+    segment0->totalTime = 0.8;
+
+    mjAnimationKeyframe* keyframe0 = new mjAnimationKeyframe();
+
+    keyframe0->angles.y = M_PI_4;
+    keyframe0->timeStamp = 0;
+
+    mjAnimationKeyframe* keyframe1 = new mjAnimationKeyframe();
+
+    keyframe1->angles.y = -M_PI_4;
+    keyframe1->timeStamp = 0.4;
+
+    mjAnimationKeyframe* keyframe2 = new mjAnimationKeyframe();
+
+    keyframe2->angles.y = M_PI_4;
+    keyframe2->timeStamp = 0.8;
+
+
+
+    segment0->keyframes.push_back(keyframe0);
+    segment0->keyframes.push_back(keyframe1);
+    segment0->keyframes.push_back(keyframe2);
+
+    animation.segments.push_back(segment0);
+
+    pose = new mjModelPose();
+    pose->angles.push_back(new mjVector3());
+    pose->positions.push_back(new mjVector3());
+
+
+//////////// end of animation test (init)
+
+
     this->levelData = levelData;
 
     wanderDir.Set(-1,0,0);
@@ -56,6 +93,13 @@ void BatBot::Update(float t_elapsed)
 {
 	if (t_elapsed < 1)
 	{
+        tAnimation += t_elapsed;
+
+        if (tAnimation > 0.8)
+            tAnimation -= 0.8;
+
+        animator.UpdatePose(tAnimation, *pose, animation);
+
 		mjAutomaton::Update(t_elapsed);
 		mjObject::UpdatePosition(t_elapsed);
 

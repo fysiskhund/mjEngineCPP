@@ -1,10 +1,12 @@
 #ifndef MJANIMATION_H
 #define MJANIMATION_H
 
-namespace mjEngine{
 
 #include <vector>
 #include "mjAnimationSegment.h"
+
+namespace mjEngine{
+
 
 class mjAnimation
 {

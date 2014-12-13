@@ -238,7 +238,9 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
 
             mjVector3 testPos(0,0,0);
-            mjVector3 testAngles(M_PI_2,0,0);
+            mjVector3 testAngles;
+
+            testAngles.CopyFrom(*pose->angles[i]);
 
             Matrix4::GetPositionScaleAndAngleRotationMatrix(testPos, testAngles, poseMatrix);//(*pose->positions[i], *pose->angles[i], poseMatrix);
             Matrix4::MultiplyMM(tempMatrix, 0,
