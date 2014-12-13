@@ -269,4 +269,15 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 	}
 }
 
+mjModelPose* mjModel::CreateSimplePose()
+{
+    mjModelPose* pose = new mjModelPose();
+    for (unsigned i = 0; i < meshes.size(); i++)
+    {
+        pose->angles.push_back(new mjVector3());
+        pose->positions.push_back(new mjVector3());
+    }
+    return pose;
+}
+
 }// namespace mj

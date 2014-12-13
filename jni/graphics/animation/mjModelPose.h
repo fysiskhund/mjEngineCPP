@@ -11,6 +11,7 @@ class mjModelPose
 {
     public:
         mjModelPose();
+
         std::vector<mjVector3*> positions;
         std::vector<mjVector3*> angles;
         ~mjModelPose();

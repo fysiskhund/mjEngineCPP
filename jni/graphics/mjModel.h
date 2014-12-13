@@ -55,6 +55,8 @@ public:
 	void Draw(std::vector<mjShader*>& shaderList,
 			float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, mjModelPose* pose);
 
+    mjModelPose* CreateSimplePose();
+
 private:
 	int numVertices;
 	int currentVertex;

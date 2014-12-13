@@ -252,6 +252,8 @@
 		<Unit filename="../physics/mjSphere.h" />
 		<Unit filename="../terrainTypes/Box.cpp" />
 		<Unit filename="../terrainTypes/Box.h" />
+		<Unit filename="../util/mjModelPoseResource.cpp" />
+		<Unit filename="../util/mjModelPoseResource.h" />
 		<Unit filename="../util/mjModelResource.cpp" />
 		<Unit filename="../util/mjModelResource.h" />
 		<Unit filename="../util/mjResource.cpp" />
