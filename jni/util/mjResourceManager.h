@@ -6,8 +6,10 @@
 
 #include "../graphics/mjModel.h"
 #include "../graphics/mjImageLoader.h"
+#include "../graphics/animation/mjModelStructure.h"
 #include "mjModelResource.h"
 #include "mjTextureResource.h"
+#include "mjModelStructureResource.h"
 
 namespace mjEngine{
 
@@ -23,12 +25,12 @@ class mjResourceManager
         GLuint FetchTexture(const char* path);
         GLuint FetchTexture(std::string& path);
 
-        mjModelPose* FetchPose(const char* path);
-        mjModelPose* FetchPose(std::string& path);
+        mjModelStructure* FetchModelStructure(const char* path);
+        mjModelStructure* FetchModelStructure(std::string& path);
     protected:
         std::vector<mjResource*> models;
         std::vector<mjResource*> textures;
-        std::vector<mjResource*> poses;
+        std::vector<mjResource*> modelStructures;
 
         std::string pathPrefix;
 

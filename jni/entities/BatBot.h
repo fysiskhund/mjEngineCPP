@@ -1,7 +1,10 @@
 #ifndef BATBOT_H
 #define BATBOT_H
 
+#include <math.h>
 #include <vector>
+#include "../extLibs/math/MathConstants.h"
+
 
 #include "../core/mjObject.h"
 #include "../game/Level.h"

@@ -71,30 +71,30 @@ GLuint mjResourceManager::FetchTexture(std::string& path)
     return newResource->glResourceID;
 }
 
-mjModelPose* mjResourceManager::FetchPose(const char* path)
+mjModelStructure* mjResourceManager::FetchModelStructure(const char* path)
 {
     std::string pathStr = path;
-    return FetchPose(pathStr);
+    return FetchModelStructure(pathStr);
 }
 
-mjModelPose* mjResourceManager::FetchPose(std::string& path)
+mjModelStructure* mjResourceManager::FetchModelStructure(std::string& path)
 {
     std::string fullPath = pathPrefix + "/" + path;
 
-    mjResource* res = SearchByPath(textures, fullPath);
+    mjResource* res = SearchByPath(modelStructures, fullPath);
     if (res != NULL)
     {
-        return ((mjPoseResource*) res)->pose;
+        return ((mjModelStructureResource*) res)->structure;
     }
 
-    mjPoseResource* newResource = new mjPoseResource(fullPath.c_str());
+    mjModelStructureResource* newResource = new mjPoseResource(fullPath.c_str());
 
 
     newResource->path = fullPath;
-    poses.push_back(newResource);
+    modelStructures.push_back(newResource);
 
 
-    return newResource->pose;
+    return newResource->structure;
 }
 
 mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std::string& fullPath)
