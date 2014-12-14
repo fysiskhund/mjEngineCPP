@@ -10,7 +10,6 @@ class mjModelStructureResource: public mjResource
 {
     public:
         mjModelStructure* structure;
-        mjModelStructureResource();
         virtual ~mjModelStructureResource();
     protected:
     private:

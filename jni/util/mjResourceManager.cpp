@@ -87,8 +87,9 @@ mjModelStructure* mjResourceManager::FetchModelStructure(std::string& path)
         return ((mjModelStructureResource*) res)->structure;
     }
 
-    mjModelStructureResource* newResource = new mjPoseResource(fullPath.c_str());
+    mjModelStructureResource* newResource = new mjModelStructureResource();
 
+    newResource->structure = new mjModelStructure(fullPath.c_str());
 
     newResource->path = fullPath;
     modelStructures.push_back(newResource);

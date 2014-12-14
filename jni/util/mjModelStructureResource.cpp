@@ -2,10 +2,6 @@
 
 namespace mjEngine{
 
-mjModelStructureResource::mjModelStructureResource()
-{
-    //ctor
-}
 
 mjModelStructureResource::~mjModelStructureResource()
 {

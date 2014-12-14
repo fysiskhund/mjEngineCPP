@@ -7,6 +7,7 @@ class mjModelStructure
 {
     public:
         mjModelStructure();
+        mjModelStructure(const char* fullPath);
         virtual ~mjModelStructure();
     protected:
     private:

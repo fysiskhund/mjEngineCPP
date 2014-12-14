@@ -170,6 +170,7 @@
 		<Unit filename="../entities/frogAutomatonStates/FrogJumpAutomatonState.cpp" />
 		<Unit filename="../entities/frogAutomatonStates/FrogJumpAutomatonState.h" />
 		<Unit filename="../extLibs/logger/mjLog.h" />
+		<Unit filename="../extLibs/math/MathConstants.h" />
 		<Unit filename="../extLibs/math/Matrix.cpp" />
 		<Unit filename="../extLibs/math/Matrix.h" />
 		<Unit filename="../extLibs/math/mjMathHelper.cpp" />
@@ -215,6 +216,8 @@
 		<Unit filename="../graphics/animation/mjModelAnimation.h" />
 		<Unit filename="../graphics/animation/mjModelPose.cpp" />
 		<Unit filename="../graphics/animation/mjModelPose.h" />
+		<Unit filename="../graphics/animation/mjModelStructure.cpp" />
+		<Unit filename="../graphics/animation/mjModelStructure.h" />
 		<Unit filename="../graphics/mj3rdPersonCamera.cpp" />
 		<Unit filename="../graphics/mj3rdPersonCamera.h" />
 		<Unit filename="../graphics/mjCamera.cpp" />
@@ -252,14 +255,16 @@
 		<Unit filename="../physics/mjSphere.h" />
 		<Unit filename="../terrainTypes/Box.cpp" />
 		<Unit filename="../terrainTypes/Box.h" />
-		<Unit filename="../util/mjModelPoseResource.cpp" />
-		<Unit filename="../util/mjModelPoseResource.h" />
 		<Unit filename="../util/mjModelResource.cpp" />
 		<Unit filename="../util/mjModelResource.h" />
+		<Unit filename="../util/mjModelStructureResource.cpp" />
+		<Unit filename="../util/mjModelStructureResource.h" />
 		<Unit filename="../util/mjResource.cpp" />
 		<Unit filename="../util/mjResource.h" />
 		<Unit filename="../util/mjResourceManager.cpp" />
 		<Unit filename="../util/mjResourceManager.h" />
+		<Unit filename="../util/mjTextureResource.cpp" />
+		<Unit filename="../util/mjTextureResource.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
