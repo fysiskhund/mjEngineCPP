@@ -233,7 +233,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
 	for(unsigned i = 0; i < meshes.size(); i++)
 	{
-	    if (pose)
+	    if (0)//(pose)
         {
 
 

@@ -48,7 +48,10 @@ void PlatformUniverseScene::Initialise(int width, int height)
     mjVector3 cameraOffset;
     cameraOffset.Set(0,0.7,0);
     LOGI("Here3");
-    camera->SetTarget(&character->pos, cameraOffset);
+
+    mjObject* batBot0 = level->GetEntityByID("bat.002");
+
+    camera->SetTarget(&batBot0->pos, cameraOffset);
     camera->r = 3;
 
     //charBoundStruct->SetCorners()

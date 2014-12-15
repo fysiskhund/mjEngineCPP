@@ -79,6 +79,7 @@ mjObject(MJ_AABB)
 void BatBot::SetDetailsFromXML(XMLElement* entity)
 {
     mjObject::SetDetailsFromXML(entity);
+    LOGI("batbot: pos set to %3.3f %3.3f %3.3f", pos.x, pos.y , pos.z);
     anchor.CopyFrom(pos);
 }
 
@@ -100,8 +101,9 @@ void BatBot::Update(float t_elapsed)
 
         animator.UpdatePose(tAnimation, *pose, animation);
 
-		mjAutomaton::Update(t_elapsed);
+		//mjAutomaton::Update(t_elapsed);
 		mjObject::UpdatePosition(t_elapsed);
+		LOGI("Batbot: I exist at %3.3f %3.3f %3.3f", bat->pos.x,bat->pos.y,bat->pos.z);
 
 	} else
 	{

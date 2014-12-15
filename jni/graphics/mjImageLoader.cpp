@@ -43,8 +43,10 @@ bool mjImageLoader::Load(const char* name)
 	    FILE *fp;
 
 	    if ((fp = fopen(name, "rb")) == NULL)
-	        return false;
-
+	    {
+	    	LOGI("ImageLoader: Error while opening file %s", name);
+	    	return false;
+	    }
 	    /* Create and initialize the png_struct
 	     * with the desired error handler
 	     * functions.  If you want to use the

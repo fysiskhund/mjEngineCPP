@@ -16,8 +16,14 @@ void mjScene::OnActivate()
 
 void mjScene::Update(float t_elapsed)
 {
-    physics.Update(t_elapsed);
-    sceneGraph.Update(t_elapsed);
+	if (t_elapsed < 0.1)
+	{
+		physics.Update(t_elapsed);
+		sceneGraph.Update(t_elapsed);
+	} else
+	{
+		LOGI("Scene: *cough* %3.3f", t_elapsed);
+	}
 }
 
 void mjScene::Draw()
