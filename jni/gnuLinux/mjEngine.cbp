@@ -28,6 +28,7 @@
 					<Add directory="graphics/animation" />
 					<Add directory="util" />
 					<Add directory="entities/frogAutomatonStates" />
+					<Add directory="terrainTypes" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -55,6 +56,7 @@
 					<Add directory="graphics/animation" />
 					<Add directory="util" />
 					<Add directory="entities/frogAutomatonStates" />
+					<Add directory="terrainTypes" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -85,6 +87,7 @@
 					<Add directory="graphics/animation" />
 					<Add directory="util" />
 					<Add directory="entities/frogAutomatonStates" />
+					<Add directory="terrainTypes" />
 				</Compiler>
 				<Linker>
 					<Add option="-mwindows" />
@@ -119,6 +122,7 @@
 					<Add directory="graphics/animation" />
 					<Add directory="util" />
 					<Add directory="entities/frogAutomatonStates" />
+					<Add directory="terrainTypes" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -257,6 +261,8 @@
 		<Unit filename="../physics/mjSphere.h" />
 		<Unit filename="../terrainTypes/Box.cpp" />
 		<Unit filename="../terrainTypes/Box.h" />
+		<Unit filename="../terrainTypes/FallingBox.cpp" />
+		<Unit filename="../terrainTypes/FallingBox.h" />
 		<Unit filename="../util/mjModelResource.cpp" />
 		<Unit filename="../util/mjModelResource.h" />
 		<Unit filename="../util/mjModelStructureResource.cpp" />
