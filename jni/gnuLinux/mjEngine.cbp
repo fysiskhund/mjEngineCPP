@@ -218,6 +218,8 @@
 		<Unit filename="../graphics/animation/mjModelPose.h" />
 		<Unit filename="../graphics/animation/mjModelStructure.cpp" />
 		<Unit filename="../graphics/animation/mjModelStructure.h" />
+		<Unit filename="../graphics/animation/mjModelStructureNode.cpp" />
+		<Unit filename="../graphics/animation/mjModelStructureNode.h" />
 		<Unit filename="../graphics/mj3rdPersonCamera.cpp" />
 		<Unit filename="../graphics/mj3rdPersonCamera.h" />
 		<Unit filename="../graphics/mjCamera.cpp" />
