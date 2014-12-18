@@ -52,6 +52,7 @@ void mjObject::SetDetailsFromXML(XMLElement* entity)
     mjXMLHelper::ReadVector(entity->FirstChildElement("dir"), &dir);
     mjXMLHelper::ReadVector(entity->FirstChildElement("up"), &up);
     mjXMLHelper::ReadVector(entity->FirstChildElement("vel"), &vel);
+    entity->FirstChildElement("model")
 }
 
 void mjObject::SetID(const char* id)
