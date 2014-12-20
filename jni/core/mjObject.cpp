@@ -52,7 +52,14 @@ void mjObject::SetDetailsFromXML(XMLElement* entity)
     mjXMLHelper::ReadVector(entity->FirstChildElement("dir"), &dir);
     mjXMLHelper::ReadVector(entity->FirstChildElement("up"), &up);
     mjXMLHelper::ReadVector(entity->FirstChildElement("vel"), &vel);
-    entity->FirstChildElement("model")
+    if (entity->FirstChildElement("model"))
+    {
+        char* stdResModel = entity->FirstChildElement("model")->Attribute("stdres");
+        modelName = new char[strnlen(stdResModel, 128)+1];
+        strncpy(modelName, stdResModel, strnlen(stdResModel)+1);
+    }
+
+
 }
 
 void mjObject::SetID(const char* id)

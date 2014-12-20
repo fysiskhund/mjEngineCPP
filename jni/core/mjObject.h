@@ -53,6 +53,7 @@ public:
 	float distSqToCamera; // Set by SceneGraph on the previous frame, only from comparison
                           // with pos and only if object is semitransparent.
 
+    char* modelName = NULL;
 	mjModel* model;
 	int animationState = 0;
 	mjModelAnimation* animation = NULL;
