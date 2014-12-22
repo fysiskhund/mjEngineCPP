@@ -103,7 +103,7 @@ void BatBot::Update(float t_elapsed)
 
 		//mjAutomaton::Update(t_elapsed);
 		mjObject::UpdatePosition(t_elapsed);
-		LOGI("Batbot: I exist at %3.3f %3.3f %3.3f", bat->pos.x,bat->pos.y,bat->pos.z);
+		LOGI("Batbot: I exist at %3.3f %3.3f %3.3f", this->pos.x,this->pos.y,this->pos.z);
 
 	} else
 	{

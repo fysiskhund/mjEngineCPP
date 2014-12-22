@@ -54,9 +54,9 @@ void mjObject::SetDetailsFromXML(XMLElement* entity)
     mjXMLHelper::ReadVector(entity->FirstChildElement("vel"), &vel);
     if (entity->FirstChildElement("model"))
     {
-        char* stdResModel = entity->FirstChildElement("model")->Attribute("stdres");
+        const char* stdResModel = entity->FirstChildElement("model")->Attribute("stdres");
         modelName = new char[strnlen(stdResModel, 128)+1];
-        strncpy(modelName, stdResModel, strnlen(stdResModel)+1);
+        strncpy(modelName, stdResModel, strnlen(stdResModel, 120));
     }
 
 
