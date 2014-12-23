@@ -1,9 +1,9 @@
 #include "FallingBox.h"
 
-FallingBox::FallingBox(mjResourceManager& resourceManager)
+FallingBox::FallingBox(mjResourceManager& resourceManager, mjVector3* gravity)
 :Box(resourceManager)
 {
-    //ctor
+    this->gravity = gravity;
 }
 
 void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
@@ -27,7 +27,7 @@ void FallingBox::ProcessCollisionEffects()
             {
             case MJ_ADD_VELOCITY:
                 {
-                    if (collisionEffect->value.Dot(gravity)< -0.1)
+                    if (collisionEffect->value.Dot(*gravity)< -0.1)
                     {
                         hasWeight = true;
                     }
@@ -38,7 +38,7 @@ void FallingBox::ProcessCollisionEffects()
             }
         }
     }
-    Box::ProcessCollisionEffects()
+    Box::ProcessCollisionEffects();
 }
 
 void FallingBox::Update(float t_elapsed)
@@ -50,10 +50,10 @@ void FallingBox::Update(float t_elapsed)
     if (timeToFall > totalTimeToFall)
     {
         // Get affected by gravity "manually"
-        isImmovable = false;
+        hasKinematics = false;
     }
     Box::Update(t_elapsed);
-    isImmovable = true;
+    hasKinematics = true;
 }
 
 

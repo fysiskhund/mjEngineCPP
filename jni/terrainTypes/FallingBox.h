@@ -11,7 +11,8 @@ class FallingBox: public Box
         int fallingState = 0;
         bool hasWeight = 0;
         mjVector3 startPosition;
-        FallingBox(mjResourceManager& resourceManager);
+        mjVector3* gravity;
+        FallingBox(mjResourceManager& resourceManager, mjVector3* gravity);
         virtual void SetDetailsFromXML(XMLElement* fallingBoxElem) override;
         virtual void ProcessCollisionEffects() override;
         virtual void Update(float t_elapsed) override;
