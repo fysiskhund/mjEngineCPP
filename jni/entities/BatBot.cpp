@@ -114,6 +114,10 @@ void BatBot::Update(float t_elapsed)
 		LOGI("Bat->Update *cough*");
 	}
 }
+void BatBot::ProcessCollisionEffects()
+{
+
+}
 
 void BatBot::ProcessPhysicsEffects(float t_elapsed)
 {
@@ -141,10 +145,17 @@ void BatBot::ProcessPhysicsEffects(float t_elapsed)
 	}
 	effectStack.clear();
 
+
 	if (!boundingStructure->isImmovable)
 	{
+		if (accel.GetNormSquared() < 100)
+		{
+			vel.ScaleAdd(t_elapsed, accel);
+		} else
+		{
+			LOGI("Bat %s: accelAdd: %3.3f %3.3f %3.3f", id, accel.x, accel.y, accel.z);
+		}
 
-		vel.ScaleAdd(t_elapsed, accel);
 
 	}
 }

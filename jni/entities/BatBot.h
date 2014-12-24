@@ -52,6 +52,8 @@ class BatBot: public mjObject, public mjAutomaton
 
         virtual void Update(float t_elapsed) override;
 
+        virtual void ProcessCollisionEffects() override;
+
         virtual void ProcessPhysicsEffects(float t_elapsed) override;
         virtual void SetDetailsFromXML(XMLElement* entity) override;
 

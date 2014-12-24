@@ -51,7 +51,8 @@ void PlatformUniverseScene::Initialise(int width, int height)
 
     mjObject* batBot0 = level->GetEntityByID("bat.002");
 
-    camera->SetTarget(&batBot0->pos, cameraOffset);
+    //camera->SetTarget(&batBot0->pos, cameraOffset);
+    camera->SetTarget(&character->pos, cameraOffset);
     camera->r = 3;
 
     //charBoundStruct->SetCorners()
