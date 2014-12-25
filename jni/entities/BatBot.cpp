@@ -53,14 +53,14 @@ mjObject(MJ_AABB)
     wanderDir.Set(-1,0,0);
    // anchor.Set(2.34, 7.9, -7.42);
 
-    /*BatAutomatonState* wander = new WanderBatMatonState(this);
+    BatAutomatonState* wander = new WanderBatMatonState(this);
     BatAutomatonState* detect = new DetectBatMatonState(this);
     BatAutomatonState* attack = new AttackBatMatonState(this);
     states.push_back(wander);
     states.push_back(detect);
     states.push_back(attack);
 
-    SetStartState(wander);*/
+    SetStartState(wander);
 
 
 
@@ -104,7 +104,7 @@ void BatBot::Update(float t_elapsed)
 
         animator.UpdatePose(tAnimation, *pose, animation);
 
-		//mjAutomaton::Update(t_elapsed);
+		mjAutomaton::Update(t_elapsed);
 		mjObject::UpdatePosition(t_elapsed);
 		LOGI("Batbot: I exist at %3.3f %3.3f %3.3f with anchor %3.3f, %3.3f, %3.3f", this->pos.x, this->pos.y, this->pos.z, this->anchor.x, this->anchor.y, this->anchor.z);
 		LOGI("v: %3.3f, %3.3f, %3.3f", this->vel.x, this->vel.y, this->vel.z);
@@ -114,10 +114,7 @@ void BatBot::Update(float t_elapsed)
 		LOGI("Bat->Update *cough*");
 	}
 }
-void BatBot::ProcessCollisionEffects()
-{
 
-}
 
 void BatBot::ProcessPhysicsEffects(float t_elapsed)
 {

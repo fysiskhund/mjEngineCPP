@@ -131,41 +131,46 @@ void PlatformUniverseScene::SetUpSkybox()
 }
 void PlatformUniverseScene::Update(float t_elapsed)
 {
-// Update phase
-	if (character->pos.y < -5)
+	if (t_elapsed < 0.1)
 	{
-		character->pos.Set0();
-		character->pos.y = 10;
-		character->vel.Set0();
-	}
-	ambient.Update(t_elapsed);
-    mjPhysicsEffect* windEffect = new mjPhysicsEffect();
-    windEffect->type = MJ_FORCE;
-    windEffect->action = MJ_ADD_FORCE;
-    windEffect->value.CopyFrom(ambient.wind);
+		// Update phase
+		if (character->pos.y < -5)
+		{
+			character->pos.Set0();
+			character->pos.y = 10;
+			character->vel.Set0();
+		}
+		ambient.Update(t_elapsed);
+		mjPhysicsEffect* windEffect = new mjPhysicsEffect();
+		windEffect->type = MJ_FORCE;
+		windEffect->action = MJ_ADD_FORCE;
+		windEffect->value.CopyFrom(ambient.wind);
 
-    //LOGI("ambient.wind %p, windEffect %3.3f %3.3f %3.3f\n", &ambient.wind, windEffect->value.x, windEffect->value.y, windEffect->value.z);
-    physics.globalEffects.push_back(windEffect);
-	physics.Update(t_elapsed);
-	camera->Update(t_elapsed);
-	skybox->Update(t_elapsed);
-	if (cameraAnglesModifier.GetNorm() > 0.2) {
-		camera->theta += -0.02*cameraAnglesModifier.y;
-		if (camera->theta > 6.283184)
-			camera->theta -= 6.283184;
-		else if (camera->theta < 0)
-			camera->theta = 6.283184 + camera->theta;
+		//LOGI("ambient.wind %p, windEffect %3.3f %3.3f %3.3f\n", &ambient.wind, windEffect->value.x, windEffect->value.y, windEffect->value.z);
+		physics.globalEffects.push_back(windEffect);
+		physics.Update(t_elapsed);
+		camera->Update(t_elapsed);
+		skybox->Update(t_elapsed);
+		if (cameraAnglesModifier.GetNorm() > 0.2) {
+			camera->theta += -0.02*cameraAnglesModifier.y;
+			if (camera->theta > 6.283184)
+				camera->theta -= 6.283184;
+			else if (camera->theta < 0)
+				camera->theta = 6.283184 + camera->theta;
 
-		camera->phi += -0.02*cameraAnglesModifier.x;
+			camera->phi += -0.02*cameraAnglesModifier.x;
 
-		if (camera->phi > 6.283184)
-			camera->phi -= 6.283184;
-		else if (camera->phi < 0)
-			camera->phi = 6.283184 + camera->phi;
+			if (camera->phi > 6.283184)
+				camera->phi -= 6.283184;
+			else if (camera->phi < 0)
+				camera->phi = 6.283184 + camera->phi;
 
-	} else
-	{
-		cameraAnglesModifier.Set0();
+		} else
+		{
+			cameraAnglesModifier.Set0();
+		}
+	} else {
+		LOGI("Scene: Cough %3.3f", t_elapsed);
 	}
 
 }
