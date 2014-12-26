@@ -13,8 +13,12 @@ class mjSceneManager
 {
     public:
         std::vector<mjScene*> scenes;
+        mjScene* currentScene = NULL;
 
         mjSceneManager();
+        void SetFirstScene(mjScene* firstScene);
+
+        void Update(float t_elapsed);
     protected:
     private:
 };

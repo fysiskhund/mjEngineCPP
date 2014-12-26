@@ -8,17 +8,19 @@
 #include "gl_code.h"
 
 PlatformUniverseScene* platformUniverse;
+mjSceneManager sceneManager;
 
 
 bool setupGame(int w, int h, mjResourceManager* resourceManager) {
     platformUniverse = new PlatformUniverseScene(resourceManager);
     platformUniverse->Initialise(w,h);
+    sceneManager.SetFirstScene(platformUniverse);
     return true;
 }
 
 void renderFrame(float t_elapsed) {
-    platformUniverse->Update(t_elapsed);
-    platformUniverse->Draw();
+	sceneManager.Update(t_elapsed);
+
 
 }
 void PrintGLCapabilities()

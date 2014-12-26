@@ -17,6 +17,7 @@
 
 
 #include "../graphics/mjModel.h"
+#include "../core/mjSceneManager.h"
 #include "../core/mjObject.h"
 #include "../graphics/mjImageLoader.h"
 #include "../graphics/mjDefaultShaders.h"
