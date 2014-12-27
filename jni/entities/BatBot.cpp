@@ -82,8 +82,8 @@ void BatBot::SetDetailsFromXML(XMLElement* entity)
 
     anchor.CopyFrom(pos);
     pos.x += 1; // Avoid pos === anchor, which causes problems.
-    LOGI("batbot: pos set to %3.3f %3.3f %3.3f", pos.x, pos.y , pos.z);
-    LOGI("vInit: %3.3f, %3.3f, %3.3f", this->vel.x, this->vel.y, this->vel.z);
+    //LOGI("batbot: pos set to %3.3f %3.3f %3.3f", pos.x, pos.y , pos.z);
+    //LOGI("vInit: %3.3f, %3.3f, %3.3f", this->vel.x, this->vel.y, this->vel.z);
 }
 
 
@@ -106,8 +106,8 @@ void BatBot::Update(float t_elapsed)
 
 		mjAutomaton::Update(t_elapsed);
 		mjObject::UpdatePosition(t_elapsed);
-		LOGI("Batbot: I exist at %3.3f %3.3f %3.3f with anchor %3.3f, %3.3f, %3.3f", this->pos.x, this->pos.y, this->pos.z, this->anchor.x, this->anchor.y, this->anchor.z);
-		LOGI("v: %3.3f, %3.3f, %3.3f", this->vel.x, this->vel.y, this->vel.z);
+		//LOGI("Batbot: I exist at %3.3f %3.3f %3.3f with anchor %3.3f, %3.3f, %3.3f", this->pos.x, this->pos.y, this->pos.z, this->anchor.x, this->anchor.y, this->anchor.z);
+		//LOGI("v: %3.3f, %3.3f, %3.3f", this->vel.x, this->vel.y, this->vel.z);
 
 	} else
 	{
@@ -145,14 +145,6 @@ void BatBot::ProcessPhysicsEffects(float t_elapsed)
 
 	if (!boundingStructure->isImmovable)
 	{
-		if (accel.GetNormSquared() < 100)
-		{
-			vel.ScaleAdd(t_elapsed, accel);
-		} else
-		{
-			LOGI("Bat %s: accelAdd: %3.3f %3.3f %3.3f", id, accel.x, accel.y, accel.z);
-		}
-
-
+		vel.ScaleAdd(t_elapsed, accel);
 	}
 }

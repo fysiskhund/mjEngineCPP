@@ -87,12 +87,13 @@ void Character::ProcessCollisionEffects()
 				{
 					if (!previousFootingValue)
 					{
-						LOGI("char: footing -> yes");
+						//LOGI("char: footing -> yes");
+
 
 					}
 					footing = 1;
 				} else {
-                    LOGI("noFooting");
+                    //LOGI("noFooting");
 				}
 			}
 			break;
@@ -104,7 +105,7 @@ void Character::ProcessCollisionEffects()
 
 	if (previousFootingValue && (footing == 0))
 	{
-		LOGI("char: footing -> *no*");
+		//LOGI("char: footing -> *no*");
 	}
 
 
