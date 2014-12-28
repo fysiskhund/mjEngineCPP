@@ -36,15 +36,10 @@ mjObject(MJ_AABB)
 
 void Frog::Update(float t_elapsed)
 {
-	if (t_elapsed < 1)
-	{
-		mjAutomaton::Update(t_elapsed);
-		mjObject::UpdatePosition(t_elapsed);
 
-	} else
-	{
-		LOGI("Frog->Update *cough*");
-	}
+	mjAutomaton::Update(t_elapsed);
+	mjObject::UpdatePosition(t_elapsed);
+
 }
 
 Frog::FrogAutomatonState::FrogAutomatonState(Frog* frog)

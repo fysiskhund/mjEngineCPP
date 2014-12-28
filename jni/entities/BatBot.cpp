@@ -95,24 +95,18 @@ BatBot::BatAutomatonState::BatAutomatonState(BatBot* bat)
 
 void BatBot::Update(float t_elapsed)
 {
-	if (t_elapsed < 1)
-	{
-        tAnimation += t_elapsed;
+	tAnimation += t_elapsed;
 
-        if (tAnimation > 0.8)
-            tAnimation -= 0.8;
+	if (tAnimation > 0.8)
+		tAnimation -= 0.8;
 
-        animator.UpdatePose(tAnimation, *pose, animation);
+	animator.UpdatePose(tAnimation, *pose, animation);
 
-		mjAutomaton::Update(t_elapsed);
-		mjObject::UpdatePosition(t_elapsed);
-		//LOGI("Batbot: I exist at %3.3f %3.3f %3.3f with anchor %3.3f, %3.3f, %3.3f", this->pos.x, this->pos.y, this->pos.z, this->anchor.x, this->anchor.y, this->anchor.z);
-		//LOGI("v: %3.3f, %3.3f, %3.3f", this->vel.x, this->vel.y, this->vel.z);
+	mjAutomaton::Update(t_elapsed);
+	mjObject::UpdatePosition(t_elapsed);
+	//LOGI("Batbot: I exist at %3.3f %3.3f %3.3f with anchor %3.3f, %3.3f, %3.3f", this->pos.x, this->pos.y, this->pos.z, this->anchor.x, this->anchor.y, this->anchor.z);
+	//LOGI("v: %3.3f, %3.3f, %3.3f", this->vel.x, this->vel.y, this->vel.z);
 
-	} else
-	{
-		LOGI("Bat->Update *cough*");
-	}
 }
 
 
