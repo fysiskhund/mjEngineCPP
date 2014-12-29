@@ -39,6 +39,8 @@ class mjScene
         virtual void Draw();
         virtual void OnDeactivate();
 
+        void SetNextScene(const char* name);
+
         ~mjScene();
     protected:
     private:

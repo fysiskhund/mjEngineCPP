@@ -20,5 +20,9 @@ void mjSceneManager::Update(float t_elapsed)
 	{
 		LOGI("Hiccup: t_elapsed is too big (%3.3f)", t_elapsed);
 	}
+	if (currentScene->nextSceneByName)
+	{
+
+	}
 }
 }

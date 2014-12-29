@@ -16,14 +16,8 @@ void mjScene::OnActivate()
 
 void mjScene::Update(float t_elapsed)
 {
-	if (t_elapsed < 0.1)
-	{
-		physics.Update(t_elapsed);
-		sceneGraph.Update(t_elapsed);
-	} else
-	{
-		LOGI("Scene: *cough* %3.3f", t_elapsed);
-	}
+    physics.Update(t_elapsed);
+    sceneGraph.Update(t_elapsed);
 }
 
 void mjScene::Draw()
@@ -36,6 +30,15 @@ void mjScene::Draw()
 void mjScene::OnDeactivate()
 {
 
+}
+void mjScene::SetNextScene(const char* name)
+{
+    if (nextSceneByName)
+    {
+        delete [] nextSceneByName;
+    }
+    nextSceneByName = new char[strnlen(name, 128)+1];
+    strncpy(nextSceneByName, name, strnlen(name, 128));
 }
 
 mjScene::~mjScene()
