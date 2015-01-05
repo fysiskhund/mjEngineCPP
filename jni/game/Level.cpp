@@ -73,6 +73,7 @@ void Level::Load(XMLDocument* doc)
 				{
                     bounds->maxCorner.z = aabb->maxCorner.z;
 				}
+				obj->SetDetailsFromXML(terrainElement);
 
 				LOGI("TerrainElement %s found [%3.3f %3.3f %3.3f] [%3.3f %3.3f %3.3f]", terrainElement->Name(),
 						aabb->minCorner.x, aabb->minCorner.y, aabb->minCorner.z,

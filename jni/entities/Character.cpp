@@ -18,6 +18,7 @@ Character::Character(mjResourceManager& resourceManager)
 	{
 		model->meshes[i]->glTexture = glTexture;
 	}
+	mass = 55;
 }
 void Character::ProcessPhysicsEffects(float t_elapsed)
 {

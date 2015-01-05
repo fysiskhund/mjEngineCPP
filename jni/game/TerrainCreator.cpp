@@ -2,13 +2,16 @@
 
 TerrainCreator::TerrainCreator()
 {
+
 	terrainTypes.push_back("box");
+	terrainTypes.push_back("fallingbox");
 }
 
 mjObject* TerrainCreator::CreateTerrain(const char* terrainType, mjResourceManager& resourceManager)
 {
     int whichTerrainType = -1;
     int i = 0;
+    mjObject* obj = NULL;
 
     while(whichTerrainType == -1 && i < terrainTypes.size())
     {
@@ -20,7 +23,10 @@ mjObject* TerrainCreator::CreateTerrain(const char* terrainType, mjResourceManag
     }
     switch (whichTerrainType) {
         case 0:
-            return new Box(resourceManager);
+            obj = new Box(resourceManager);
+            break;
+        case 1:
+            obj = new FallingBox(resourceManager);
             break;
 
 
@@ -28,4 +34,6 @@ mjObject* TerrainCreator::CreateTerrain(const char* terrainType, mjResourceManag
             return NULL;
             break;
     }
+
+    return obj;
 }

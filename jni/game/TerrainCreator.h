@@ -16,6 +16,7 @@
 #include "../util/mjResourceManager.h"
 #include "../physics/mjBoundingStructure.h"
 #include "../terrainTypes/Box.h"
+#include "../terrainTypes/FallingBox.h"
 
 
 using namespace mjEngine;
@@ -29,6 +30,7 @@ public:
     mjObject* CreateTerrain(const char* terrainType, mjResourceManager& resourceManager);
 
 private:
+
     std::vector<const char*> terrainTypes;
 };
 
