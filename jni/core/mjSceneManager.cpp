@@ -9,6 +9,7 @@ mjSceneManager::mjSceneManager()
 void mjSceneManager::SetFirstScene(mjScene* firstScene)
 {
 	currentScene = firstScene;
+	currentScene->OnActivate();
 }
 void mjSceneManager::Update(float t_elapsed)
 {
@@ -22,6 +23,23 @@ void mjSceneManager::Update(float t_elapsed)
 	}
 	if (currentScene->nextSceneByName)
 	{
+        mjScene* nextScene = NULL;
+        // Look up next scene
+        for (unsigned i = 0; i < scenes.size(); i++)
+        {
+            if (strncmp(currentScene->nextSceneByName, scenes[i]->sceneName, 128))
+            {
+                nextScene = scenes[i];
+            }
+        }
+        if (nextScene)
+        {
+            delete [] currentScene->nextSceneByName;
+            currentScene->nextSceneByName = NULL; // Remove the "switch scene" indicator
+            currentScene->OnDeactivate();
+            currentScene = nextScene;
+            currentScene->OnActivate();
+        }
 
 	}
 }
