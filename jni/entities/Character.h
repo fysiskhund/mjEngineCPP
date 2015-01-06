@@ -25,6 +25,8 @@ public:
 	mjVector3* gravity;
 	mjVector3 intrinsecVel;
 
+	mjObject* objectProvidingFooting;
+
 	void Check();
 };
 

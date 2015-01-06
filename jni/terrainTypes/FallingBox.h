@@ -13,9 +13,12 @@ class FallingBox: public Box
         mjVector3 startPosition;
         mjVector3 gravity;
         mjVector3 gravityNormalized;
+        mjVector3 travelDirection;
+
         FallingBox(mjResourceManager& resourceManager);
         virtual void SetDetailsFromXML(XMLElement* fallingBoxElem) override;
         virtual void ProcessCollisionEffects() override;
+        virtual void ProcessPhysicsEffects(float t_elapsed) override;
         virtual void Update(float t_elapsed) override;
 
         virtual ~FallingBox();

@@ -93,6 +93,7 @@ void Character::ProcessCollisionEffects()
 
 					}
 					footing = 1;
+					objectProvidingFooting = collisionEffect->otherObject;
 				} else {
                     //LOGI("noFooting");
 				}
@@ -116,6 +117,7 @@ void Character::ProcessCollisionEffects()
 }
 void Character::Update(float t_elapsed)
 {
+
 
 
 
@@ -155,9 +157,24 @@ void Character::Update(float t_elapsed)
     }
 
     vel.MulScalar(0.99);
+
 	mjObject::Update(t_elapsed);
 
-
+    if (footing)
+    {
+        if (fabs(vel.x) < fabs(objectProvidingFooting->vel.x))
+        {
+            vel.x = objectProvidingFooting->vel.x;
+        }
+        if (fabs(vel.y) < fabs(objectProvidingFooting->vel.y))
+        {
+            vel.y = objectProvidingFooting->vel.y;
+        }
+        if (fabs(vel.z) < fabs(objectProvidingFooting->vel.z))
+        {
+            vel.z = objectProvidingFooting->vel.z;
+        }
+    }
 }
 void Character::UpdatePosition(float t_elapsed)
 {
