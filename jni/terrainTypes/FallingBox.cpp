@@ -87,6 +87,8 @@ void FallingBox::Update(float t_elapsed)
 
     // hasWeight must be updated per-frame.
     hasWeight = false;
+
+    //if (pos.DistanceSquaredTo())
 }
 
 

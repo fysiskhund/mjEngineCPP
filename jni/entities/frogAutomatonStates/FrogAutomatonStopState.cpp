@@ -19,7 +19,7 @@ void FrogAutomatonStopState::Enter()
 
 void FrogAutomatonStopState::Execute(float t_elapsed)
 {
-    if (frog->pos.y < -3)
+    if (mjCollisionTests::AABBVsAABB((mjAABB*) frog->boundingStructure, frog->levelData->hardLimits, NULL) != MJ_OVERLAP)
     {
         frog->pos.CopyFrom(frog->startPosition);
         frog->vel.Set0();
