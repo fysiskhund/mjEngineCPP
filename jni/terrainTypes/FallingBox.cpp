@@ -27,6 +27,7 @@ void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
     mjObject::SetDetailsFromXML(fallingBoxElem);
     mjXMLHelper::ReadVector(fallingBoxElem->FirstChildElement("gravity"), &gravity);
 
+
     startPosition.CopyFrom(pos);
     gravityNormalized.CopyFrom(gravity);
     gravityNormalized.Normalize();
@@ -88,7 +89,12 @@ void FallingBox::Update(float t_elapsed)
     // hasWeight must be updated per-frame.
     hasWeight = false;
 
-    //if (pos.DistanceSquaredTo())
+    if (pos.GetNormSquared() > 40000)
+    {
+        vel.Set0();
+        timeToFall = 0;
+        pos.CopyFrom(startPosition);
+    }
 }
 
 
