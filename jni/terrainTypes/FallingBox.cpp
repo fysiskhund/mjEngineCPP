@@ -27,7 +27,7 @@ void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
     mjObject::SetDetailsFromXML(fallingBoxElem);
     mjXMLHelper::ReadVector(fallingBoxElem->FirstChildElement("gravity"), &gravity);
 
-
+    ((mjAABB*) boundingStructure)->UpdateCenter();
     startPosition.CopyFrom(pos);
     gravityNormalized.CopyFrom(gravity);
     gravityNormalized.Normalize();
