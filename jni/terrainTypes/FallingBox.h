@@ -2,6 +2,11 @@
 #define FALLINGBOX_H
 
 #include "Box.h"
+#include <vector>
+
+// The "falling box" should really be called "scriptable box"
+// It has two behaviours, one is that it travels along a specific direction once it is set in motion
+// The other is that if control points are specified, it will travel between them.
 
 class FallingBox: public Box
 {
@@ -16,6 +21,11 @@ class FallingBox: public Box
         mjVector3 travelDirection;
 
         FallingBox(mjResourceManager& resourceManager);
+
+        int currentControlPointIndex = 1;
+        bool active = false;
+        std::vector<mjVector3*> controlPoints;
+
         virtual void SetDetailsFromXML(XMLElement* fallingBoxElem) override;
         virtual void ProcessCollisionEffects() override;
         virtual void ProcessPhysicsEffects(float t_elapsed) override;

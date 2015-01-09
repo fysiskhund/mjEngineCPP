@@ -20,6 +20,9 @@ FallingBox::FallingBox(mjResourceManager& resourceManager)
         model->meshes[i]->glTexture = glTexture;
     }
     hasKinematics = true;
+
+
+
 }
 
 void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
@@ -32,16 +35,60 @@ void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
     gravityNormalized.CopyFrom(gravity);
     gravityNormalized.Normalize();
     hasWeight = false;
+
+
+
+    /////// Travelling box test
+    controlPoints.push_back(&startPosition);
+
+    mjVector3* point1 = new mjVector3();
+    point1->CopyFrom(startPosition);
+    point1->x += 16;
+    controlPoints.push_back(point1);
 }
 
 void FallingBox::ProcessPhysicsEffects(float t_elapsed)
 {
 	Box::ProcessPhysicsEffects(t_elapsed);
 
-	if (timeToFall > totalTimeToFall)
+	if (active)
 	{
-        // Start falling!
-		vel.ScaleAdd(t_elapsed, travelDirection);
+        if (controlPoints.size() > 0)
+        {
+            // Select the control point we're travelling to
+
+
+            travelDirection.CopyFrom(*controlPoints[currentControlPointIndex]);
+            travelDirection.Subtract(pos);
+            if (travelDirection.Normalize() < 0.1)
+            {
+
+                vel.Set0();
+
+                if ((currentControlPointIndex == 0) && !hasWeight)
+                {
+                        // Reset the box,
+                        //FIXME: add a behaviour switch whether the box should continue on its own or wait for the player again.
+                        // By default, wait for the player.
+
+                    timeToFall = 0;
+                    pos.CopyFrom(startPosition);
+                    active = false;
+                }
+                // Select next control point
+                currentControlPointIndex++;
+
+                if (currentControlPointIndex >= controlPoints.size())
+                {
+                    currentControlPointIndex = 0;
+                }
+            }
+
+
+        }
+            // Start falling using the established travel direction
+            vel.ScaleAdd(t_elapsed, travelDirection);
+
 	}
 }
 
@@ -80,7 +127,11 @@ void FallingBox::Update(float t_elapsed)
     if (hasWeight)
     {
         timeToFall += t_elapsed;
-        LOGI("Accumulated time: %3.3f", timeToFall);
+        //LOGI("Accumulated time: %3.3f", timeToFall);
+        if (timeToFall > totalTimeToFall)
+        {
+            active = true;
+        }
     }
 
     Box::Update(t_elapsed);
@@ -94,6 +145,7 @@ void FallingBox::Update(float t_elapsed)
         vel.Set0();
         timeToFall = 0;
         pos.CopyFrom(startPosition);
+        active = false;
     }
 }
 
