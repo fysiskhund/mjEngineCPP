@@ -43,7 +43,7 @@ void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
 
     mjVector3* point1 = new mjVector3();
     point1->CopyFrom(startPosition);
-    point1->x += 16;
+    point1->y += 16;
     controlPoints.push_back(point1);
 }
 

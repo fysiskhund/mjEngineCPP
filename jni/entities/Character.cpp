@@ -160,9 +160,21 @@ void Character::Update(float t_elapsed)
 
 	mjObject::Update(t_elapsed);
 
+
+}
+void Character::UpdatePosition(float t_elapsed)
+{
+
+    if (intrinsecVel.GetNorm() < 10)
+    {
+
+        pos.ScaleAdd(t_elapsed, intrinsecVel);
+    }
+
     if (footing)
     {
-        if (fabs(vel.x) < fabs(objectProvidingFooting->vel.x))
+        pos.ScaleAdd(t_elapsed, objectProvidingFooting->vel);
+        /*if (fabs(vel.x) < fabs(objectProvidingFooting->vel.x))
         {
             vel.x = objectProvidingFooting->vel.x;
         }
@@ -173,17 +185,9 @@ void Character::Update(float t_elapsed)
         if (fabs(vel.z) < fabs(objectProvidingFooting->vel.z))
         {
             vel.z = objectProvidingFooting->vel.z;
-        }
+        }*/
     }
-}
-void Character::UpdatePosition(float t_elapsed)
-{
 
-    if (intrinsecVel.GetNorm() < 10)
-    {
-
-        pos.ScaleAdd(t_elapsed, intrinsecVel);
-    }
 	mjObject::UpdatePosition(t_elapsed);
 
 }
