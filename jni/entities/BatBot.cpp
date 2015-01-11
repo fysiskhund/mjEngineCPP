@@ -44,6 +44,9 @@ mjObject(MJ_AABB)
     pose->angles.push_back(new mjVector3());
     pose->positions.push_back(new mjVector3());
 
+    pose->angles.push_back(new mjVector3());
+    pose->positions.push_back(new mjVector3()); // As many "angles" and "positions" as the number of meshes the model has!
+
 
 //////////// end of animation test (init)
 

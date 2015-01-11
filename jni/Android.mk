@@ -74,6 +74,7 @@ LOCAL_SRC_FILES := ./physics/mjSphere.cpp\
 				   ./ai/mjAutomaton.cpp\
 				   ./ai/mjAutomatonState.cpp\
 				   ./terrainTypes/Box.cpp\
+				   ./terrainTypes/FallingBox.cpp\
 				   ./core/mjObject.cpp\
 				   ./core/mjScene.cpp\
 				   ./core/mjSceneManager.cpp\

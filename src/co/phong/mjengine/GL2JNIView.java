@@ -348,6 +348,7 @@ class GL2JNIView extends GLSurfaceView {
         public void onSurfaceChanged(GL10 gl, int width, int height) {
         	String pathPrefix = Environment.getExternalStorageDirectory().getAbsolutePath()+"/mjEngineCPP";
             GL2JNILib.init(width, height, pathPrefix);
+            int uselessVarJustToStopTheDebuggerHere = 1;
         }
 
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {

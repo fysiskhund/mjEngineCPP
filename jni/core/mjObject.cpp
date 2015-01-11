@@ -87,6 +87,11 @@ void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 	positionPlusOffset.CopyFrom(pos);
 	positionPlusOffset.Add(modelOffset);
 
+
+	/*if (pose)
+	{
+		LOGI("id: %s; pAngles: %d", id, pose->angles.size());
+	}*/
 	Matrix4::GetPositionScaleAndRotationMatrix(positionPlusOffset, dir, up, scale, modelMatrix);
 
 	//Matrix4::DebugM("mvpp", modelViewProjectionMatrix);
