@@ -39,12 +39,34 @@ void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
 
 
     /////// Travelling box test
-    controlPoints.push_back(&startPosition);
+    XMLElement* controlPointElement = fallingBoxElem->FirstChildElement("controlpoint");
+    if (controlPointElement)
+    {
+        // The very start position is always added first
+        controlPoints.push_back(&startPosition);
 
-    mjVector3* point1 = new mjVector3();
-    point1->CopyFrom(startPosition);
-    point1->y += 16;
-    controlPoints.push_back(point1);
+        mjVector3* previousControlPoint = &startPosition;
+        while (controlPointElement)
+        {
+            mjVector3* cPointVector = new mjVector3();
+            mjXMLHelper::ReadVector(controlPointElement, cPointVector);
+            bool isRelativeToPreviousPosition = false;
+            controlPointElement->QueryBoolAttribute("isrelative", &isRelativeToPreviousPosition);
+
+            if ( isRelativeToPreviousPosition)
+            {
+                cPointVector->Add(*previousControlPoint);
+            }
+
+            controlPoints.push_back(cPointVector);
+
+            previousControlPoint = cPointVector;
+
+            controlPointElement = controlPointElement->NextSiblingElement();
+
+        }
+    }
+
 }
 
 void FallingBox::ProcessPhysicsEffects(float t_elapsed)
