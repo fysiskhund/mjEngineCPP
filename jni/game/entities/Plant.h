@@ -1,11 +1,11 @@
 #ifndef PLANT_H
 #define PLANT_H
 
-#include "../core/mjObject.h"
-#include "../ai/mjAutomaton.h"
-#include "../util/mjResourceManager.h"
+#include <core/mjObject.h>
+#include <ai/mjAutomaton.h>
+#include <util/mjResourceManager.h>
 
-#include "../game/Level.h"
+#include "../Level.h"
 
 
 using namespace mjEngine;

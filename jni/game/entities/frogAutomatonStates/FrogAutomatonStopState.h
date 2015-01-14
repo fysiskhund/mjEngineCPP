@@ -4,7 +4,7 @@
 #include "../Frog.h"
 #include <math.h>
 
-#include "../../physics/mjCollisionTests.h"
+#include <physics/mjCollisionTests.h>
 
 
 

@@ -1,8 +1,10 @@
 #ifndef FROGJUMPAUTOMATONSTATE_H
 #define FROGJUMPAUTOMATONSTATE_H
 
+#include <physics/mjCollisionTests.h>
+
 #include "../Frog.h"
-#include "../../physics/mjCollisionTests.h"
+
 
 class FrogAutomatonJumpState: public Frog::FrogAutomatonState
 {

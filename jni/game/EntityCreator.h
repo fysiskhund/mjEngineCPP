@@ -11,18 +11,19 @@
 #include <string.h>
 #include <vector>
 
-#include "../extLibs/tinyxml/tinyxml2.h"
-#include "../extLibs/util/mjXMLHelper.h"
-#include "../util/mjResourceManager.h"
+#include <extLibs/tinyxml/tinyxml2.h>
+#include <extLibs/util/mjXMLHelper.h>
+#include <util/mjResourceManager.h>
 
-#include "../core/mjObject.h"
-#include "../physics/mjBoundingStructure.h"
-#include "../entities/Character.h"
-#include "../entities/Bird.h"
-#include "../entities/BatBot.h"
-#include "../entities/Frog.h"
+#include <core/mjObject.h>
+#include <physics/mjBoundingStructure.h>
 
-#include "../entities/Plant.h"
+#include "entities/Character.h"
+#include "entities/Bird.h"
+#include "entities/BatBot.h"
+#include "entities/Frog.h"
+
+#include "entities/Plant.h"
 
 
 #include "Level.h"

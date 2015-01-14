@@ -7,10 +7,10 @@
 
 #include <string>
 
-#include "../core/mjObject.h"
-#include "../physics/mjSphere.h"
-#include "../graphics/mjCamera.h"
-#include "../util/mjResourceManager.h"
+#include <core/mjObject.h>
+#include <physics/mjSphere.h>
+#include <graphics/mjCamera.h>
+#include <util/mjResourceManager.h>
 
 
 

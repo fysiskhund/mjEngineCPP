@@ -6,10 +6,10 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "../core/mjObject.h"
-#include "../game/Level.h"
-#include "../ai/mjAutomaton.h"
-#include "../extLibs/util/mjXMLHelper.h"
+#include <core/mjObject.h>
+#include <game/Level.h>
+#include <ai/mjAutomaton.h>
+#include <extLibs/util/mjXMLHelper.h>
 
 class Frog : public mjObject, public mjAutomaton
 {

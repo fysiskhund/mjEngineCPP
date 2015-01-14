@@ -3,19 +3,19 @@
 
 #include <math.h>
 #include <vector>
-#include "../extLibs/math/MathConstants.h"
+#include <extLibs/math/MathConstants.h>
 
 
-#include "../core/mjObject.h"
-#include "../game/Level.h"
-#include "../ai/mjAutomaton.h"
-#include "../extLibs/util/mjXMLHelper.h"
-#include "../graphics/animation/mjAnimation.h"
-#include "../graphics/animation/mjAnimationKeyframe.h"
-#include "../graphics/animation/mjAnimator.h"
-#include "../graphics/animation/mjModelAnimation.h"
-#include "../graphics/animation/mjModelPose.h"
-//#include "../ai/mjAutomatonState.h"
+#include <core/mjObject.h>
+#include <game/Level.h>
+#include <ai/mjAutomaton.h>
+#include <extLibs/util/mjXMLHelper.h>
+#include <graphics/animation/mjAnimation.h>
+#include <graphics/animation/mjAnimationKeyframe.h>
+#include <graphics/animation/mjAnimator.h>
+#include <graphics/animation/mjModelAnimation.h>
+#include <graphics/animation/mjModelPose.h>
+//#include <ai/mjAutomatonState>
 
 
 

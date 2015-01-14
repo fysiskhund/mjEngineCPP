@@ -12,11 +12,12 @@
 #include <string.h>
 #include <vector>
 
-#include "../core/mjObject.h"
-#include "../util/mjResourceManager.h"
-#include "../physics/mjBoundingStructure.h"
-#include "../terrainTypes/Box.h"
-#include "../terrainTypes/FallingBox.h"
+#include <core/mjObject.h>
+#include <util/mjResourceManager.h>
+#include <physics/mjBoundingStructure.h>
+
+#include "terrainTypes/Box.h"
+#include "terrainTypes/FallingBox.h"
 
 
 using namespace mjEngine;

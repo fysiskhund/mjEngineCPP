@@ -1,8 +1,9 @@
 #ifndef BATMATON_H
 #define BATMATON_H
 
-#include "../ai/mjAutomaton.h"
-#include "../game/Level.h"
+#include <ai/mjAutomaton.h>
+
+#include "../Level.h"
 
 using namespace mjEngine;
 

@@ -10,12 +10,12 @@
 #define __mjEngineCPP__Bird__
 
 
-#include "../extLibs/util/mjMultiPlatform.h"
+#include <extLibs/util/mjMultiPlatform.h>
 
 
-#include "../core/mjObject.h"
-#include "../util/mjResourceManager.h"
-#include "../graphics/mjImageLoader.h"
+#include <core/mjObject.h>
+#include <util/mjResourceManager.h>
+#include <graphics/mjImageLoader.h>
 
 using namespace mjEngine;
 

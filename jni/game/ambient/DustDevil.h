@@ -2,16 +2,16 @@
 #define DUSTDEVIL_H
 
 
-#include "../../core/mjVector3.h"
-#include "../../ai/mjAutomaton.h"
-#include "../../ai/mjAutomatonState.h"
-#include "../../entities/GlowBeing.h"
-#include "../../physics/mjCollisionTests.h"
-#include "../../physics/mjCollisionResult.h"
-#include "../../physics/mjPhysics.h"
-#include "../../graphics/mjShader.h"
-#include "../../graphics/mjSceneGraph.h"
-#include "../../graphics/mjCamera.h"
+#include <core/mjVector3.h>
+#include <ai/mjAutomaton.h>
+#include <ai/mjAutomatonState.h>
+#include "../entities/GlowBeing.h"
+#include <physics/mjCollisionTests.h>
+#include <physics/mjCollisionResult.h>
+#include <physics/mjPhysics.h>
+#include <graphics/mjShader.h>
+#include <graphics/mjSceneGraph.h>
+#include <graphics/mjCamera.h>
 
 
 using namespace mjEngine;

@@ -9,11 +9,11 @@
 #ifndef BOX_H
 #define BOX_H
 
-#include "../extLibs/util/mjMultiPlatform.h"
+#include <extLibs/util/mjMultiPlatform.h>
 
-#include "../core/mjObject.h"
-#include "../util/mjResourceManager.h"
-#include "../extLibs/logger/mjLog.h"
+#include <core/mjObject.h>
+#include <util/mjResourceManager.h>
+#include <extLibs/logger/mjLog.h>
 
 
 using namespace mjEngine;

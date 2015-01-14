@@ -12,7 +12,7 @@
 #include "../ai/mjAutomatonState.h"
 #include "windStates/SteadyDirectionState.h"
 #include "windStates/DustDevilState.h"
-#include "../entities/GlowBeing.h"
+#include "entities/GlowBeing.h"
 #include "../physics/mjCollisionTests.h"
 #include "../physics/mjCollisionResult.h"
 #include "../physics/mjPhysics.h"
