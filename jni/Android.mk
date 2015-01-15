@@ -13,6 +13,8 @@ include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 
+LOCAL_CFLAGS := -I.
+
 LOCAL_MODULE    := mjengine
 LOCAL_SRC_FILES := ./physics/mjSphere.cpp\
 				   ./physics/mjPhysicsEffect.cpp\
@@ -38,18 +40,18 @@ LOCAL_SRC_FILES := ./physics/mjSphere.cpp\
 				   ./graphics/animation/mjModelAnimation.cpp\
 				   ./graphics/animation/mjAnimationSegment.cpp\
 				   ./graphics/mjImageLoader.cpp\
-				   ./entities/BatMaton.cpp\
-				   ./entities/Character.cpp\
-				   ./entities/Frog.cpp\
-				   ./entities/BatBot.cpp\
-				   ./entities/Bird.cpp\
-				   ./entities/Plant.cpp\
-				   ./entities/GlowBeing.cpp\
-				   ./entities/frogAutomatonStates/FrogJumpAutomatonState.cpp\
-				   ./entities/frogAutomatonStates/FrogAutomatonStopState.cpp\
-				   ./entities/batMatonStates/DetectBatMatonState.cpp\
-				   ./entities/batMatonStates/AttackBatMatonState.cpp\
-				   ./entities/batMatonStates/WanderBatMatonState.cpp\
+				   ./game/entities/BatMaton.cpp\
+				   ./game/entities/Character.cpp\
+				   ./game/entities/Frog.cpp\
+				   ./game/entities/BatBot.cpp\
+				   ./game/entities/Bird.cpp\
+				   ./game/entities/Plant.cpp\
+				   ./game/entities/GlowBeing.cpp\
+				   ./game/entities/frogAutomatonStates/FrogJumpAutomatonState.cpp\
+				   ./game/entities/frogAutomatonStates/FrogAutomatonStopState.cpp\
+				   ./game/entities/batMatonStates/DetectBatMatonState.cpp\
+				   ./game/entities/batMatonStates/AttackBatMatonState.cpp\
+				   ./game/entities/batMatonStates/WanderBatMatonState.cpp\
 				   ./extLibs/math/mjMatrixStack.cpp\
 				   ./extLibs/math/Matrix.cpp\
 				   ./extLibs/math/mjMathHelper.cpp\
@@ -73,8 +75,8 @@ LOCAL_SRC_FILES := ./physics/mjSphere.cpp\
 				   ./game/EntityCreator.cpp\
 				   ./ai/mjAutomaton.cpp\
 				   ./ai/mjAutomatonState.cpp\
-				   ./terrainTypes/Box.cpp\
-				   ./terrainTypes/FallingBox.cpp\
+				   ./game/terrainTypes/Box.cpp\
+				   ./game/terrainTypes/FallingBox.cpp\
 				   ./core/mjObject.cpp\
 				   ./core/mjScene.cpp\
 				   ./core/mjSceneManager.cpp\
