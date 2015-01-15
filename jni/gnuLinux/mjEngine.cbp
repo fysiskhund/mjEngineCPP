@@ -6,7 +6,7 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
+			<Target title="Debug-GNULinux">
 				<Option output="build/Debug/mjEngine" prefix_auto="1" extension_auto="1" />
 				<Option object_output="build/obj/Debug/" />
 				<Option type="1" />
@@ -16,19 +16,7 @@
 					<Add option="-g" />
 					<Add option="-DDESKTOP_SDL" />
 					<Add option="-DUSE_GLES" />
-					<Add directory="entities" />
-					<Add directory="ai" />
-					<Add directory="extLibs/util" />
-					<Add directory="entities/batMatonStates" />
-					<Add directory="core" />
-					<Add directory="game" />
-					<Add directory="game/windStates" />
-					<Add directory="game/ambient" />
-					<Add directory="extLibs/math" />
-					<Add directory="graphics/animation" />
-					<Add directory="util" />
-					<Add directory="entities/frogAutomatonStates" />
-					<Add directory="terrainTypes" />
+					<Add directory=".." />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -37,26 +25,14 @@
 					<Add library="SDL2_image" />
 				</Linker>
 			</Target>
-			<Target title="Release">
+			<Target title="Release-GNULinux">
 				<Option output="build/bin/Release/mjEngine" prefix_auto="1" extension_auto="1" />
 				<Option object_output="build/obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add directory="entities" />
-					<Add directory="ai" />
-					<Add directory="extLibs/util" />
-					<Add directory="entities/batMatonStates" />
-					<Add directory="core" />
-					<Add directory="game" />
-					<Add directory="game/windStates" />
-					<Add directory="game/ambient" />
-					<Add directory="extLibs/math" />
-					<Add directory="graphics/animation" />
-					<Add directory="util" />
-					<Add directory="entities/frogAutomatonStates" />
-					<Add directory="terrainTypes" />
+					<Add directory=".." />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
