@@ -136,8 +136,7 @@ void PlatformUniverseScene::Update(float t_elapsed)
 		// Update phase
 		if (character->pos.y < -5)
 		{
-			character->pos.Set0();
-			character->pos.y = 10;
+			character->pos.CopyFrom(character->startPosition);
 			character->vel.Set0();
 		}
 		ambient.Update(t_elapsed);

@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 
 #include "../game/gl_code.h"
-#include "../core/mjVector3.h"
+#include <core/mjVector3.h>
 
 struct SDLStruct {
     SDL_Window* window;

@@ -13,6 +13,8 @@ Character::Character(mjResourceManager& resourceManager)
 
 
 
+
+
 	GLuint glTexture = resourceManager.FetchTexture("suit_test.png");
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
@@ -20,6 +22,7 @@ Character::Character(mjResourceManager& resourceManager)
 	}
 	mass = 55;
 }
+
 void Character::ProcessPhysicsEffects(float t_elapsed)
 {
 	accel.Set0();
@@ -199,4 +202,8 @@ void Character::Check()
 		LOGI("Weird position %3.3f, %3.3f, %3.3f", pos.x, pos.y, pos.z);
 	}
 }
-
+void Character::SetDetailsFromXML(XMLElement* entity)
+{
+    mjObject::SetDetailsFromXML(entity);
+    startPosition.CopyFrom(pos);
+}
