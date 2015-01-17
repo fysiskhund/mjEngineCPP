@@ -100,8 +100,10 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 			//LOGI("COLLISION!!AABB");
 			mjcolresult result = MJ_OVERLAP;
 
+
 			if (out != NULL)
 			{
+                out->result = result;
 				/*out->relocationEffectObj0 = new mjPhysicsEffect();
 				out->relocationEffectObj1 = new mjPhysicsEffect();*/
 				// Get the directions for moving the boxes
