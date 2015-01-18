@@ -52,4 +52,6 @@ void Frog::SetDetailsFromXML(XMLElement* entity)
 {
     mjObject::SetDetailsFromXML(entity);
     startPosition.CopyFrom(pos);
+    mjAABB* mjaabbStruct = (mjAABB*) boundingStructure;
+    mjaabbStruct->UpdateCorners();
 }
