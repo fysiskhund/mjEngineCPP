@@ -2,6 +2,14 @@
 
 namespace mjEngine{
 
+#ifdef USE_SDL_AUDIO
+
+#include "mjMusicPlayer-SDL.cpp"
+
+
+
+#else
+
 mjMusicPlayer::mjMusicPlayer()
 {
     //ctor
@@ -30,4 +38,5 @@ mjMusicPlayer::~mjMusicPlayer()
     //dtor
 }
 
+#endif // not USE_SDL_AUDIO
 }
