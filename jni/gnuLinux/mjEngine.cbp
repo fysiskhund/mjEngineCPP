@@ -17,6 +17,7 @@
 					<Add option="-DDESKTOP_SDL" />
 					<Add option="-DUSE_GLES" />
 					<Add directory=".." />
+					<Add directory="audio" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -33,6 +34,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory=".." />
+					<Add directory="audio" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -52,6 +54,7 @@
 					<Add directory="../../../../sdl/i686-w64-mingw32/include" />
 					<Add directory="../../../../glew/glew-1.11.0/include" />
 					<Add directory="E:/common/github/mjEngineCPP/jni/" />
+					<Add directory="audio" />
 				</Compiler>
 				<Linker>
 					<Add option="-mwindows" />
@@ -87,6 +90,7 @@
 					<Add directory="util" />
 					<Add directory="entities/frogAutomatonStates" />
 					<Add directory="terrainTypes" />
+					<Add directory="audio" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -104,6 +108,10 @@
 		<Unit filename="../ai/mjAutomaton.h" />
 		<Unit filename="../ai/mjAutomatonState.cpp" />
 		<Unit filename="../ai/mjAutomatonState.h" />
+		<Unit filename="../audio/mjMusicPlayer.cpp" />
+		<Unit filename="../audio/mjMusicPlayer.h" />
+		<Unit filename="../audio/mjSoundSource.cpp" />
+		<Unit filename="../audio/mjSoundSource.h" />
 		<Unit filename="../core/mjInput.h" />
 		<Unit filename="../core/mjObject.cpp" />
 		<Unit filename="../core/mjObject.h" />
