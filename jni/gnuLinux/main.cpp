@@ -23,7 +23,7 @@ mjEngine::mjVector3 rJoystick;
 SDL_Joystick* joystick;
 
 int InitSDL(SDLStruct* sdlData) {
-   SDL_Init(SDL_INIT_VIDEO|SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK);
+   SDL_Init(SDL_INIT_VIDEO|SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK|SDL_INIT_AUDIO);
     SDL_JoystickEventState(SDL_ENABLE);
     joystick = SDL_JoystickOpen(0);
 

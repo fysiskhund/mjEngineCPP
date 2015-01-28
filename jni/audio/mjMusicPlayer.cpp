@@ -4,7 +4,7 @@ namespace mjEngine{
 
 #ifdef USE_SDL_AUDIO
 
-#include "mjMusicPlayer-SDL.cpp"
+#include "sdl/mjMusicPlayer_SDL.cpp"
 
 
 
