@@ -98,6 +98,35 @@ mjModelStructure* mjResourceManager::FetchModelStructure(std::string& path)
     return newResource->structure;
 }
 
+mjSoundResource* mjResourceManager::FetchSound(const char* path)
+{
+    std::string pathStr = path;
+    return FetchSound(pathStr);
+}
+
+mjSoundResource* mjResourceManager::FetchSound(std::string& path)
+{
+    std::string fullPath = pathPrefix + "/" + path;
+
+    mjResource* res = SearchByPath(soundResources, fullPath);
+    if (res != NULL)
+    {
+        return ((mjSoundResource*) res);
+    }
+
+    mjSoundResource* newResource = new mjSoundResource();
+
+
+    newResource->path = fullPath;
+    soundResources.push_back(newResource);
+
+
+    return newResource;
+}
+
+
+
+
 mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std::string& fullPath)
 {
 

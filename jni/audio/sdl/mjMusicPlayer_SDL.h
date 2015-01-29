@@ -1,17 +1,5 @@
-#ifndef MJMUSICPLAYER_H
-#define MJMUSICPLAYER_H
 
-#include "mjSoundSource.h"
-
-
-#ifdef USE_SDL_AUDIO
-
-#include "sdl/mjMusicPlayer_SDL.h"
-
-
-
-#else
-
+#include "SDL2/SDL_mixer.h"
 
 
 namespace mjEngine{
@@ -29,9 +17,7 @@ class mjMusicPlayer: public mjSoundSource
         virtual ~mjMusicPlayer();
     protected:
     private:
+
 };
 
 }
-#endif // USE_SDL_AUDIO
-
-#endif // MJMUSICPLAYER_H

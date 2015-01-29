@@ -10,6 +10,7 @@
 #include "mjModelResource.h"
 #include "mjTextureResource.h"
 #include "mjModelStructureResource.h"
+#include "mjSoundResource.h"
 
 namespace mjEngine{
 
@@ -27,10 +28,14 @@ class mjResourceManager
 
         mjModelStructure* FetchModelStructure(const char* path);
         mjModelStructure* FetchModelStructure(std::string& path);
+
+        mjSoundResource* FetchSound(const char* path);
+        mjSoundResource* FetchSound(std::string& path);
     protected:
         std::vector<mjResource*> models;
         std::vector<mjResource*> textures;
         std::vector<mjResource*> modelStructures;
+        std::vector<mjResource*> soundResources;
 
         std::string pathPrefix;
 
