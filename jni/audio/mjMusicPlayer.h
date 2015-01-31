@@ -21,6 +21,7 @@ class mjMusicPlayer: public mjSoundSource
     public:
         mjMusicPlayer();
 
+        virtual void Load(mjSoundResource* soundRes, int sampleNum) override;
         virtual void Play() override;
         virtual void Play(int sampleIndex) override;
         virtual void Pause() override;
