@@ -5,6 +5,11 @@ mjMusicPlayer::mjMusicPlayer()
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 512);
 }
 
+void mjMusicPlayer::Load(mjSoundResource* soundRes, int sampleNumber)
+{
+
+}
+
 void mjMusicPlayer::Play()
 {
 

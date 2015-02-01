@@ -7,6 +7,10 @@ mjSoundSource::mjSoundSource()
     //ctor
 }
 
+void mjSoundSource::Load(mjSoundResource* soundRes, int sampleNumber)
+{
+
+}
 void mjSoundSource::Play()
 {
 
