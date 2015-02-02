@@ -18,6 +18,8 @@ class mjMusicPlayer: public mjSoundSource
         virtual ~mjMusicPlayer();
     protected:
     private:
+        Mix_Music* currentMusic;
+        int channel;
 
 };
 
