@@ -9,10 +9,15 @@ namespace mjEngine{
 
 
 #else
-ñl
+
 mjMusicPlayer::mjMusicPlayer()
 {
     //ctor
+}
+
+void mjMusicPlayer::Load(mjSoundResource* soundRes, int sampleNum)
+{
+
 }
 
 void mjMusicPlayer::Play()

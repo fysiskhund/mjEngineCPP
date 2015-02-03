@@ -32,6 +32,8 @@ package co.phong.mjengine;
  */
 
 
+import java.nio.charset.Charset;
+
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.opengl.GLES20;
@@ -338,7 +340,10 @@ class GL2JNIView extends GLSurfaceView {
     		float t_elapsed = (float)((thisFrameTime - previousFrameTime)*0.001d);
     		
    
-    		GL2JNILib.step(t_elapsed);
+    		if (GL2JNILib.step(t_elapsed))
+    		{
+    			String str = new String(GL2JNILib.HandleEngineQuery(), Charset.forName("UTF-8"));
+    		}
 
     		
             previousFrameTime = thisFrameTime;

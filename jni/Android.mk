@@ -16,7 +16,9 @@ include $(CLEAR_VARS)
 LOCAL_CFLAGS := -I.
 
 LOCAL_MODULE    := mjengine
-LOCAL_SRC_FILES := ./physics/mjSphere.cpp\
+LOCAL_SRC_FILES := ./audio/mjMusicPlayer.cpp\
+				   ./audio/mjSoundSource.cpp\
+				   ./physics/mjSphere.cpp\
 				   ./physics/mjPhysicsEffect.cpp\
 				   ./physics/mjPhysics.cpp\
 				   ./physics/mjCollisionTests.cpp\
@@ -63,6 +65,7 @@ LOCAL_SRC_FILES := ./physics/mjSphere.cpp\
 				   ./util/mjResourceManager.cpp\
 				   ./util/mjTextureResource.cpp\
 				   ./util/mjResource.cpp\
+				   ./util/mjSoundResource.cpp\
 				   ./game/ambient/DustDevil.cpp\
 				   ./game/Ambient.cpp\
 				   ./game/windStates/WindState.cpp\

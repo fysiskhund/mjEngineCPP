@@ -18,8 +18,10 @@ public class GL2JNILib {
      * @param height the current view height
      */
      public static native void init(int width, int height, String jPathPrefix);
-     public static native void step(float t_elapsed);
+     public static native boolean step(float t_elapsed);
      
-     public static native boolean HandleJoystickInput(int controllerID, int joystickID, float x, float y);
-     public static native boolean HandleButtonInput(int controllerID, int buttonID, boolean pressedDown);
+     
+     public static native byte[] HandleEngineQuery();     
+     public static native void HandleJoystickInput(int controllerID, int joystickID, float x, float y);
+     public static native void HandleButtonInput(int controllerID, int buttonID, boolean pressedDown);
 }
