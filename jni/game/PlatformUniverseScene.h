@@ -36,6 +36,8 @@
 #include <physics/mjPhysics.h>
 #include <graphics/mjSceneGraph.h>
 
+#include <audio/mjMusicPlayer.h>
+
 #include "entities/Character.h"
 #include "entities/GlowBeing.h"
 #include "Ambient.h"
@@ -82,6 +84,8 @@ class PlatformUniverseScene : public mjScene
         void SetUpSkybox();
         void Update(float t_elapsed) override;
         void Draw() override;
+
+        mjMusicPlayer musicPlayer;
 
 
 

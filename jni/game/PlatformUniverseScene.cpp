@@ -15,6 +15,8 @@ void PlatformUniverseScene::Initialise(int width, int height)
     InitShaders();
     camera = new mj3rdPersonCamera();
     level = new Level(resourceManager);
+    musicPlayer.Load(resourceManager->FetchSound("music/fyra.ogg"), 0);
+    musicPlayer.Play();
     // Some adjustments
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);

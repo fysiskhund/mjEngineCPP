@@ -25,6 +25,7 @@
 					<Add library="png16" />
 					<Add library="GLESv2" />
 					<Add library="SDL2_image" />
+					<Add library="SDL2_mixer" />
 				</Linker>
 			</Target>
 			<Target title="Release-GNULinux">
