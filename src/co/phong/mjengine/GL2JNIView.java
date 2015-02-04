@@ -343,6 +343,7 @@ class GL2JNIView extends GLSurfaceView {
     		if (GL2JNILib.step(t_elapsed))
     		{
     			String str = new String(GL2JNILib.HandleEngineQuery(), Charset.forName("UTF-8"));
+    			mjJNICommandInterpreter.ParseCommands(str);
     		}
 
     		
