@@ -1,20 +1,4 @@
-#ifndef MJMUSICPLAYER_H
-#define MJMUSICPLAYER_H
 
-#include "mjSoundSource.h"
-
-
-#ifdef USE_SDL_AUDIO
-
-#include "sdl/mjMusicPlayer_SDL.h"
-
-
-
-#elseifdef USE_ANDROID_AUDIO
-
-#include "android/mjMusicPlayer_android.h"
-
-#else
 
 
 namespace mjEngine{
@@ -33,9 +17,8 @@ class mjMusicPlayer: public mjSoundSource
         virtual ~mjMusicPlayer();
     protected:
     private:
+
+
 };
 
 }
-#endif // USE_SDL_AUDIO
-
-#endif // MJMUSICPLAYER_H

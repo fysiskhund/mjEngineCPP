@@ -7,6 +7,9 @@ unsigned strnlen(const char* str, unsigned n)
 }
 
 #endif
+
+std::string mjMultiPlatform::commandsForJNI = "";
+bool mjMultiPlatform::commandsForJNIPresent = false;
 /*void glMultiPlatform::CreateGLContext()
 {
 

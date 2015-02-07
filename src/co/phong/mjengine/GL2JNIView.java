@@ -67,9 +67,11 @@ import javax.microedition.khronos.opengles.GL10;
 class GL2JNIView extends GLSurfaceView {
     private static String TAG = "GL2JNIView";
     private static final boolean DEBUG = false;
+    private static Context androidContext;
 
     public GL2JNIView(Context context) {
         super(context);
+        androidContext = context;
         init(true, 16, 4);
     }
 
@@ -338,7 +340,7 @@ class GL2JNIView extends GLSurfaceView {
     		if (GL2JNILib.step(t_elapsed))
     		{
     			String str = new String(GL2JNILib.HandleEngineQuery(), Charset.forName("UTF-8"));
-    			mjJNICommandInterpreter.ParseCommands(str);
+    			mjJNICommandInterpreter.ParseCommands(str, androidContext);
     		}
 
     		

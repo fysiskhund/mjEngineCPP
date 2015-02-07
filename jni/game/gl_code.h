@@ -29,6 +29,7 @@
 #include <graphics/mjSkybox.h>
 #include <physics/mjPhysics.h>
 #include <graphics/mjSceneGraph.h>
+#include <extLibs/util/mjMultiplatform.h>
 #include "entities/Character.h"
 #include "Level.h"
 #include "EntityCreator.h"

@@ -1,18 +1,4 @@
-#include "mjMusicPlayer.h"
 
-namespace mjEngine{
-
-#ifdef USE_SDL_AUDIO
-
-#include "sdl/mjMusicPlayer_SDL.cpp"
-
-
-
-#elseifdef USE_ANDROID_AUDIO
-
-#include "android/mjMusicPlayer_android.cpp"
-
-#else
 
 mjMusicPlayer::mjMusicPlayer()
 {
@@ -45,7 +31,4 @@ void mjMusicPlayer::Rewind()
 mjMusicPlayer::~mjMusicPlayer()
 {
     //dtor
-}
-
-#endif // not USE_SDL_AUDIO
 }

@@ -5,6 +5,7 @@ import java.io.File;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Environment;
 
 public class mjJNICommandInterpreter {
 	
@@ -26,13 +27,19 @@ public class mjJNICommandInterpreter {
 						musicPlayer.release();
 						musicPlayer = null;
 					}
-					File f = new File(cmdAndArg[1]);
+
 					
-					musicPlayer = MediaPlayer.create(androidContext, f.toURI());
+					musicPlayer = MediaPlayer.create(androidContext, Uri.parse(Environment.getExternalStorageDirectory().getPath()+cmdAndArg[1]));
 					//MusicPlayer::LoadMusic
 					break;
 				case 2:
-					//MusicPlayer::PlayMusic
+					musicPlayer.start();
+					break;
+				case 3:
+					musicPlayer.pause();
+					break;
+				case 4:
+					musicPlayer.stop();
 					break;
 				default:
 					break;

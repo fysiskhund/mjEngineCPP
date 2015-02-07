@@ -18,11 +18,14 @@
     #include <SDL2/SDL.h>
 #endif // !USE_GLES
 
-/*class glMultiPlatform
+#include <string>
+
+class mjMultiPlatform
 {
 public:
-    static void CreateGLContext();
-};*/
-// Decided not to store the pathPrefix in N places. The mjResourceManager should be enough
+    static std::string commandsForJNI;
+    static bool commandsForJNIPresent;
+};
+
 
 #endif // MJMULTIPLATFORM_H

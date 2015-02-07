@@ -11,6 +11,7 @@ PlatformUniverseScene* platformUniverse;
 mjSceneManager sceneManager;
 
 
+
 bool setupGame(int w, int h, mjResourceManager* resourceManager) {
     platformUniverse = new PlatformUniverseScene(resourceManager);
     platformUniverse->Initialise(w,h);
@@ -125,19 +126,21 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobje
 JNIEXPORT jboolean JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed)
 {
     renderFrame(t_elapsed);
-    return 0;
+    return mjMultiPlatform::commandsForJNIPresent;
+
 }
 
 
 JNIEXPORT jbyteArray JNICALL Java_co_phong_mjengine_GL2JNILib_HandleEngineQuery(JNIEnv * env)
 {
-    std::string message = "";
+	std::string message = mjMultiPlatform::commandsForJNI;
 
     int byteCount = message.length();
     jbyte* pNativeMessage = (jbyte*)message.c_str();
     jbyteArray bytes = env->NewByteArray(byteCount);
     env->SetByteArrayRegion(bytes, 0, byteCount, pNativeMessage);
 
+    mjMultiPlatform::commandsForJNIPresent = false; // turn off flag.
     return bytes;
 }
 
