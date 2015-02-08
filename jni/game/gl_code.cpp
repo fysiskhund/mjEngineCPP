@@ -133,10 +133,9 @@ JNIEXPORT jboolean JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, j
 
 JNIEXPORT jbyteArray JNICALL Java_co_phong_mjengine_GL2JNILib_HandleEngineQuery(JNIEnv * env)
 {
-	std::string message = mjMultiPlatform::commandsForJNI;
 
-    int byteCount = message.length();
-    jbyte* pNativeMessage = (jbyte*)message.c_str();
+    int byteCount = mjMultiPlatform::commandsForJNI.length();
+    jbyte* pNativeMessage = (jbyte*)mjMultiPlatform::commandsForJNI.c_str();
     jbyteArray bytes = env->NewByteArray(byteCount);
     env->SetByteArrayRegion(bytes, 0, byteCount, pNativeMessage);
 

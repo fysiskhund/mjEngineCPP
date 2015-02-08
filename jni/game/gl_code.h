@@ -6,7 +6,7 @@
 #endif
 
 
-#include <extLibs/util/mjMultiPlatform.h>
+
 
 #include <extLibs/logger/mjLog.h>
 
@@ -29,7 +29,7 @@
 #include <graphics/mjSkybox.h>
 #include <physics/mjPhysics.h>
 #include <graphics/mjSceneGraph.h>
-#include <extLibs/util/mjMultiplatform.h>
+#include <extLibs/util/mjMultiPlatform.h>
 #include "entities/Character.h"
 #include "Level.h"
 #include "EntityCreator.h"

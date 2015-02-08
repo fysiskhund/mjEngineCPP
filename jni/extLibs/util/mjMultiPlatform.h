@@ -23,6 +23,7 @@
 class mjMultiPlatform
 {
 public:
+    static void AddCommandForJNI(std::string& command);
     static std::string commandsForJNI;
     static bool commandsForJNIPresent;
 };
