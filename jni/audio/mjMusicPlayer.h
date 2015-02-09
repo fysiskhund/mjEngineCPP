@@ -2,7 +2,7 @@
 #define MJMUSICPLAYER_H
 
 #include "mjSoundSource.h"
-
+#include "../extLibs/logger/mjLog.h"
 
 #ifdef USE_SDL_AUDIO
 
@@ -10,7 +10,7 @@
 
 
 
-#elseifdef USE_ANDROID_AUDIO
+#elif USE_ANDROID_AUDIO
 
 #include "android/mjMusicPlayer_android.h"
 

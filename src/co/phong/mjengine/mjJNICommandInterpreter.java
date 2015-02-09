@@ -1,6 +1,7 @@
 package co.phong.mjengine;
 
 import java.io.File;
+import java.io.IOException;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -22,15 +23,27 @@ public class mjJNICommandInterpreter {
 				switch(cmd)
 				{
 				case 1:
-					if (musicPlayer != null)
-					{
-						musicPlayer.release();
-						musicPlayer = null;
-					}
-
 					
-					musicPlayer = MediaPlayer.create(androidContext, Uri.parse(Environment.getExternalStorageDirectory().getPath()+cmdAndArg[1]));
-					//MusicPlayer::LoadMusic
+
+					//Uri fileUri = Uri.parse(Environment.getExternalStorageDirectory().getPath()+cmdAndArg[1]);
+					try {
+						musicPlayer.setDataSource(cmdAndArg[1]);
+						musicPlayer.prepare();
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					musicPlayer.start();
 					break;
 				case 2:
 					musicPlayer.start();

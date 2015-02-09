@@ -62,7 +62,7 @@ GLuint mjResourceManager::FetchTexture(std::string& path)
 
 
     mjImageLoader loader;
-
+    //LOGI("Texture's full path: %s", fullPath.c_str());
     newResource->glResourceID = loader.LoadToGLAndFreeMemory(fullPath.c_str());
     newResource->path = fullPath;
     textures.push_back(newResource);

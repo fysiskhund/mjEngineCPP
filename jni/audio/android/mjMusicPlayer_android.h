@@ -1,5 +1,6 @@
 
 #include "../../extLibs/util/mjMultiPlatform.h"
+#include <string>
 
 namespace mjEngine{
 
