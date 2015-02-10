@@ -4,13 +4,17 @@ import java.io.File;
 import java.io.IOException;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Environment;
 
 public class mjJNICommandInterpreter {
 	
 	public static MediaPlayer musicPlayer = new MediaPlayer();
+	
+	public static SoundPool soundPool = new SoundPool(16, AudioManager.STREAM_MUSIC, 0);
 	
 	public static void ParseCommands(String commandsFromJNI, Context androidContext)
 	{
@@ -25,7 +29,6 @@ public class mjJNICommandInterpreter {
 				case 1:
 					
 
-					//Uri fileUri = Uri.parse(Environment.getExternalStorageDirectory().getPath()+cmdAndArg[1]);
 					try {
 						musicPlayer.setDataSource(cmdAndArg[1]);
 						musicPlayer.prepare();
