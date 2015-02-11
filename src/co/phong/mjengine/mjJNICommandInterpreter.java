@@ -46,7 +46,7 @@ public class mjJNICommandInterpreter {
 						e.printStackTrace();
 					}
 					
-					musicPlayer.start();
+					
 					break;
 				case 2:
 					musicPlayer.start();
@@ -56,6 +56,21 @@ public class mjJNICommandInterpreter {
 					break;
 				case 4:
 					musicPlayer.stop();
+					break;
+				
+				//instructions for the soundPool (aka sound effects)
+				case 51:
+					soundPool.load(cmdAndArg[1], 1);
+					break;
+				case 52:
+					
+					soundPool.play(Integer.parseInt(cmdAndArg[1]), Float.parseFloat(cmdAndArg[2]), Float.parseFloat(cmdAndArg[3]), 
+							Integer.parseInt(cmdAndArg[4]), Integer.parseInt(cmdAndArg[5]), Float.parseFloat(cmdAndArg[5]));
+				case 53:
+					soundPool.pause(Integer.parseInt(cmdAndArg[1]));
+					break;
+				case 54:
+					soundPool.stop(Integer.parseInt(cmdAndArg[1]));
 					break;
 				default:
 					break;
