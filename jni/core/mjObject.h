@@ -22,6 +22,7 @@
 #include "../physics/mjPhysicsEffect.h"
 #include "../physics/mjSphere.h"
 #include "../physics/mjAABB.h"
+//#include "../audio/mjSoundSource.h"
 
 
 
@@ -60,6 +61,8 @@ public:
 	mjModelPose* pose = NULL;
 	mjVector3 modelOffset;
 	mjBoundingStructure* boundingStructure;
+
+	//mjSoundSource* soundSource;
 
 	std::vector<mjPhysicsEffect*> effectStack;
 	std::vector<mjPhysicsEffect*> collisionStack;

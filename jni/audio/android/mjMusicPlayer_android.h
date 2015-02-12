@@ -4,18 +4,18 @@
 
 namespace mjEngine{
 
-class mjMusicPlayer: public mjSoundSource
+class mjMusicPlayer
 {
     public:
         mjMusicPlayer();
 
-        virtual void Load(mjSoundResource* soundRes, int sampleNum) override;
-        virtual void Play() override;
-        virtual void Play(int sampleIndex) override;
-        virtual void Pause() override;
-        virtual void Rewind() override;
+        void Load(mjSoundResource* soundRes, int sampleNum);
+        void Play();
+        void Play(int sampleIndex);
+        void Pause();
+        void Rewind();
 
-        virtual ~mjMusicPlayer();
+        ~mjMusicPlayer();
     protected:
     private:
 

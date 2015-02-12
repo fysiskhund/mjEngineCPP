@@ -1,4 +1,5 @@
 
+namespace mjEngine{
 
 mjMusicPlayer::mjMusicPlayer()
 {
@@ -37,4 +38,6 @@ void mjMusicPlayer::Rewind()
 mjMusicPlayer::~mjMusicPlayer()
 {
     //dtor
+}
+
 }

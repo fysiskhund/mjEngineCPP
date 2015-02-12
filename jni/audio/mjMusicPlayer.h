@@ -1,8 +1,9 @@
 #ifndef MJMUSICPLAYER_H
 #define MJMUSICPLAYER_H
 
-#include "mjSoundSource.h"
+
 #include "../extLibs/logger/mjLog.h"
+#include "../util/mjSoundResource.h"
 
 #ifdef USE_SDL_AUDIO
 
@@ -19,16 +20,16 @@
 
 namespace mjEngine{
 
-class mjMusicPlayer: public mjSoundSource
+class mjMusicPlayer
 {
     public:
         mjMusicPlayer();
 
-        virtual void Load(mjSoundResource* soundRes, int sampleNum) override;
-        virtual void Play() override;
-        virtual void Play(int sampleIndex) override;
-        virtual void Pause() override;
-        virtual void Rewind() override;
+        void Load(mjSoundResource* soundRes, int sampleNum);
+        void Play();
+        void Play(int sampleIndex);
+        void Pause();
+        void Rewind();
 
         virtual ~mjMusicPlayer();
     protected:

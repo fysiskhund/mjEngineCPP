@@ -1,6 +1,6 @@
 #include "mjMusicPlayer.h"
 
-namespace mjEngine{
+
 
 #ifdef USE_SDL_AUDIO
 
@@ -13,6 +13,10 @@ namespace mjEngine{
 #include "android/mjMusicPlayer_android.cpp"
 
 #else
+
+
+
+namespace mjEngine{
 
 mjMusicPlayer::mjMusicPlayer()
 {
@@ -47,5 +51,6 @@ mjMusicPlayer::~mjMusicPlayer()
     //dtor
 }
 
-#endif // not USE_SDL_AUDIO
 }
+#endif // not USE_SDL_AUDIO
+
