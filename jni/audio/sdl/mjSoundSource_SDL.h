@@ -18,7 +18,7 @@ class mjSoundSource
         void Pause();
         void Rewind();
 
-        float attenuation;
+        float attenuation = 0.0025; // Sound sources further than 20m cannot be heard.
 
         virtual ~mjSoundSource();
     protected:

@@ -5,9 +5,33 @@ namespace mjEngine{
 
 
 
-bool mjSoundSource::CalculateVolumes(mjVector3& sourceLocation, mjVector3& listenerLocation, float* leftChannel, float* rightChannel){
+bool mjSoundSource::CalculateVolumeLevels(mjVector3& sourceLocation, mjVector3& listenerLocation, mjVector3& listenerDirection, mjVector3& listenerUp,
+		float* leftChannel, float* rightChannel){
 
-	return true;
+	mjVector3 sourceToListener;
+	float distance;
+	float attenuationDueToDistance;
+
+	sourceToListener.CopyFrom(listenerLocation);
+	sourceToListener.Subtract(sourceLocation);
+
+	distance = sourceToListener.Normalize();
+
+	attenuationDueToDistance = 1.0-(distance*attenuation);
+
+	if (attenuationDueToDistance <= 0)
+	{
+		return false; // Sound source is too far away. Nothing is emitted.
+	} else
+	{
+		float cosTheta = sourceToListener.Dot(listenerDirection);
+
+		*leftChannel = cosTheta*attenuationDueToDistance;
+
+		*rightChannel = (1.0-cosTheta)*attenuationDueToDistance;
+
+		return true;
+	}
 }
 
 

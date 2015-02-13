@@ -17,11 +17,13 @@ class mjSoundSource
         void Pause();
         void Rewind();
 
-        float attenuation;
+        float attenuation = 0.05; // Sound sources further than 20m cannot be heard.
+
 
         virtual ~mjSoundSource();
     protected:
-        bool CalculateVolumes(mjVector3& sourceLocation, mjVector3& listenerLocation, float* leftChannel, float* rightChannel);
+        bool CalculateVolumeLevels(mjVector3& sourceLocation, mjVector3& listenerLocation, mjVector3& listenerDirection, mjVector3& listenerUp,
+        		float* leftChannel, float* rightChannel);
 
     private:
 };
