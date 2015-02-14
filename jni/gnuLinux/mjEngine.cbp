@@ -138,6 +138,7 @@
 		<Unit filename="../extLibs/tinyxml/tinyxml2.h" />
 		<Unit filename="../extLibs/util/mjMultiPlatform.cpp" />
 		<Unit filename="../extLibs/util/mjMultiPlatform.h" />
+		<Unit filename="../extLibs/util/mjMultiPlatformAudio.h" />
 		<Unit filename="../extLibs/util/mjXMLHelper.cpp" />
 		<Unit filename="../extLibs/util/mjXMLHelper.h" />
 		<Unit filename="../game/Ambient.cpp" />
