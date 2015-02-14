@@ -3,7 +3,16 @@
 
 namespace mjEngine{
 
-
+void mjSoundSource::Play(mjVector3& sourceLocation, int sampleIndex)
+{
+    if (mjCamera::currentCamera)
+    {
+        Play(sourceLocation, mjCamera::currentCamera->pos, mjCamera::currentCamera->dir,
+             mjCamera::currentCamera->up, sampleIndex);
+    } else{
+        LOGI("mjCamera::CurrentCamera has not been set, cannot play positional audio effect.")
+    }
+}
 
 bool mjSoundSource::CalculateVolumeLevels(mjVector3& sourceLocation, mjVector3& listenerLocation, mjVector3& listenerDirection, mjVector3& listenerUp,
 		float* leftChannel, float* rightChannel){

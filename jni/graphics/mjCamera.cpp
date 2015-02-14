@@ -2,6 +2,8 @@
 
 namespace mjEngine{
 
+mjCamera* mjCamera::currentCamera = NULL;
+
 mjCamera::mjCamera()
 {
 	pos.Set(0,0,0);
@@ -12,6 +14,11 @@ mjCamera::mjCamera()
 void mjCamera::GetLookAtMatrix(float* m)
 {
 	Matrix4::SetLookAtM(m, 0, pos, dir, up);
+}
+
+void mjCamera::SetAsCurrentCamera()
+{
+    mjCamera::currentCamera = this;
 }
 
 }

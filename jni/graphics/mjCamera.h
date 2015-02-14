@@ -16,6 +16,10 @@ public:
 	bool hasKinematics = false;
 	mjCamera();
 	void GetLookAtMatrix(float* m);
+
+	void SetAsCurrentCamera();
+
+	static mjCamera* currentCamera;
 };
 
 }

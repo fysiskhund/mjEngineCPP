@@ -10,6 +10,7 @@
 #include <game/Level.h>
 #include <ai/mjAutomaton.h>
 #include <extLibs/util/mjXMLHelper.h>
+#include <audio/mjSoundSource.h>
 
 class Frog : public mjObject, public mjAutomaton
 {
@@ -21,6 +22,7 @@ class Frog : public mjObject, public mjAutomaton
         unsigned glTexture;
         mjVector3 jumpDirection;
         mjVector3 startPosition;
+        mjSoundSource* soundSource;
 
 
 class FrogAutomatonState: public mjAutomatonState

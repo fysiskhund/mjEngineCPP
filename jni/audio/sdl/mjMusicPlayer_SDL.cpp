@@ -1,3 +1,4 @@
+namespace mjEngine{
 
 mjMusicPlayer::mjMusicPlayer()
 {
@@ -37,3 +38,4 @@ mjMusicPlayer::~mjMusicPlayer()
     //dtor
 }
 
+}

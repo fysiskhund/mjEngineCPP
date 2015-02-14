@@ -30,6 +30,9 @@ mjObject(MJ_AABB)
 
     MatchAABBToModel();
 
+    soundSource = new mjSoundSource();
+    soundSource->Load(resourceManager.FetchSound("audio/ribbit.wav"), 0);
+
 
 
 }

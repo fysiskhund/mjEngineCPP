@@ -13,6 +13,7 @@ void FrogAutomatonJumpState::Enter()
     frog->jumpDirection.y = 2;
 
     frog->vel.CopyFrom(frog->jumpDirection);
+    frog->soundSource->Play(frog->pos, 0);
 
     maxTime = 1; // Jump each 3 secnds
     //FIXME: change to detect frog has footing

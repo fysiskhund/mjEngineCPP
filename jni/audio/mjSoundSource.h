@@ -3,19 +3,11 @@
 
 #include "../util/mjSoundResource.h"
 #include "../core/mjVector3.h"
-
-
-#ifdef USE_SDL_AUDIO
-
-#include "sdl/mjSoundSource_SDL.h"
+#include "../extLibs/util/mjMultiPlatformAudio.h"
+#include "../graphics/mjCamera.h"
 
 
 
-#elif USE_ANDROID_AUDIO
-
-#include "android/mjSoundSource_android.h"
-
-#else
 
 
 namespace mjEngine{
@@ -29,8 +21,10 @@ class mjSoundSource
 
         void Load(mjSoundResource* soundRes, int sampleNumber);
 
-        void Play(mjVector3& sourceLocation, mjVector3& listenerLocation, int sampleIndex);
+        void Play(mjVector3& sourceLocation, mjVector3& listenerLocation, mjVector3& listenerDirection, mjVector3& listenerUp,
+                    int sampleIndex);
 
+        void Play(mjVector3& sourceLocation, int sampleIndex);
         void Play();
         void Play(int sampleIndex);
         void Pause();
@@ -40,14 +34,27 @@ class mjSoundSource
 
 
         virtual ~mjSoundSource();
+
     protected:
         bool CalculateVolumeLevels(mjVector3& sourceLocation, mjVector3& listenerLocation, mjVector3& listenerDirection, mjVector3& listenerUp,
         		float* leftChannel, float* rightChannel);
 
-    private:
+#ifdef USE_SDL_AUDIO
+
+#include "sdl/mjSoundSource_SDL.h"
+
+
+
+#elif USE_ANDROID_AUDIO
+
+#include "android/mjSoundSource_android.h"
+
+#else
+
+#endif
 };
 
 }
-#endif
+
 
 #endif // MJSOUNDSOURCE_H
