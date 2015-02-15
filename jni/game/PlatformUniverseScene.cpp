@@ -57,6 +57,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
     //camera->SetTarget(&batBot0->pos, cameraOffset);
     camera->SetTarget(&character->pos, cameraOffset);
     camera->r = 3;
+    camera->SetAsCurrentCamera();
 
     //charBoundStruct->SetCorners()
     //((mjSphere*) character.boundingStructure)->r = 0.5;

@@ -35,7 +35,8 @@ bool mjSoundSource::CalculateVolumeLevels(mjVector3& sourceLocation, mjVector3& 
 	{
 		float cosTheta = sourceToListener.Dot(listenerDirection);
 
-		*leftChannel = cosTheta*attenuationDueToDistance;
+        *leftChannel = 0.5;
+		//*leftChannel = cosTheta*attenuationDueToDistance;
 
 		*rightChannel = (1.0-cosTheta)*attenuationDueToDistance;
 

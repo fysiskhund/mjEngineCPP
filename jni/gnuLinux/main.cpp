@@ -3,6 +3,7 @@
 
 #include "../game/gl_code.h"
 #include <core/mjVector3.h>
+#include <SDL2/SDL_mixer.h>
 
 struct SDLStruct {
     SDL_Window* window;
@@ -39,7 +40,10 @@ int InitSDL(SDLStruct* sdlData) {
     #endif // NON_GLES_CONTEXT
 
 
-
+    #ifdef USE_SDL_AUDIO
+    Mix_Init(MIX_INIT_OGG);
+    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 512);
+    #endif
 
 
 
