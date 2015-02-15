@@ -18,9 +18,11 @@ void mjSoundSource::Play(mjVector3& sourceLocation, mjVector3& listenerLocation,
 
     if (CalculateVolumeLevels(sourceLocation, listenerLocation, listenerDirection, listenerUp, &leftChannel, &rightChannel))
     {
-        leftChannel *= 127;
+        leftChannel *= 254;
+        rightChannel *= 254;
         int playingChannel = Mix_PlayChannel(-1, samples[sampleIndex], 0);
-        Mix_SetPanning(playingChannel, leftChannel, 254-leftChannel);
+
+        Mix_SetPanning(playingChannel, leftChannel, rightChannel);
     }
 }
 

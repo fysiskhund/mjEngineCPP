@@ -10,7 +10,7 @@
 
 #elif USE_ANDROID_AUDIO
 
-
+#include <string.h>
 
 
 #endif // USE_ANDROID_AUDIO

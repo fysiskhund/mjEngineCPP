@@ -10,7 +10,7 @@ void mjSoundSource::Play(mjVector3& sourceLocation, int sampleIndex)
         Play(sourceLocation, mjCamera::currentCamera->pos, mjCamera::currentCamera->dir,
              mjCamera::currentCamera->up, sampleIndex);
     } else{
-        LOGI("mjCamera::CurrentCamera has not been set, cannot play positional audio effect.")
+        LOGI("mjCamera::CurrentCamera has not been set, cannot play positional audio effect.");
     }
 }
 
@@ -21,10 +21,13 @@ bool mjSoundSource::CalculateVolumeLevels(mjVector3& sourceLocation, mjVector3& 
 	float distance;
 	float attenuationDueToDistance;
 
-	sourceToListener.CopyFrom(listenerLocation);
-	sourceToListener.Subtract(sourceLocation);
+	sourceToListener.CopyFrom(sourceLocation);
+	sourceToListener.Subtract(listenerLocation);
 
-	distance = sourceToListener.Normalize();
+	distance = sourceToListener.GetNorm();
+
+
+
 
 	attenuationDueToDistance = 1.0-(distance*attenuation);
 
@@ -33,12 +36,22 @@ bool mjSoundSource::CalculateVolumeLevels(mjVector3& sourceLocation, mjVector3& 
 		return false; // Sound source is too far away. Nothing is emitted.
 	} else
 	{
-		float cosTheta = sourceToListener.Dot(listenerDirection);
+		mjVector3 leftVector;
 
-        *leftChannel = 0.5;
-		//*leftChannel = cosTheta*attenuationDueToDistance;
+        listenerUp.CrossOut(listenerDirection, &leftVector);
+        //leftVector.MulScalar(1.0/attenuation);
+        // Get scalar component of the sourceToListener vector on leftVector
+        float scalarComponentForSound = leftVector.Dot(sourceToListener);
 
-		*rightChannel = (1.0-cosTheta)*attenuationDueToDistance;
+        // Scale the component so that it is maximum 1.0?
+        scalarComponentForSound *= attenuation;
+
+
+        *leftChannel = (0.5*scalarComponentForSound) + 0.5;
+        *rightChannel = 1.0 - *leftChannel;
+
+        *leftChannel *= attenuationDueToDistance;
+        *rightChannel *= attenuationDueToDistance;
 
 		return true;
 	}
