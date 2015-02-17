@@ -1,6 +1,6 @@
 #include "mjMusicPlayer.h"
 
-namespace mjEngine{
+
 
 #ifdef USE_SDL_AUDIO
 
@@ -8,15 +8,19 @@ namespace mjEngine{
 
 
 
-#elseifdef USE_ANDROID_AUDIO
+#elif USE_ANDROID_AUDIO
 
 #include "android/mjMusicPlayer_android.cpp"
 
 #else
 
+
+
+namespace mjEngine{
+
 mjMusicPlayer::mjMusicPlayer()
 {
-    //ctor
+    LOGI("Fake mjMusicPlayer in use. No music will be played. Check compilation switches to enable the proper audio system for the platform");
 }
 
 void mjMusicPlayer::Load(mjSoundResource* soundRes, int sampleNum)
@@ -47,5 +51,6 @@ mjMusicPlayer::~mjMusicPlayer()
     //dtor
 }
 
-#endif // not USE_SDL_AUDIO
 }
+#endif // not USE_SDL_AUDIO
+

@@ -1,18 +1,23 @@
 
+namespace mjEngine{
 
 mjMusicPlayer::mjMusicPlayer()
 {
-    //ctor
+    LOGI("Music player subsystem is Android-JNI bridge");
 }
 
 void mjMusicPlayer::Load(mjSoundResource* soundRes, int sampleNum)
 {
-	mjMultiPlatform::AddCommandForJNI("1:" + soundRes->path);
+	std::string cmd = "1:" + soundRes->path;
+	//LOGI("loading %s", soundRes->path.c_str());
+	mjMultiPlatform::AddCommandForJNI(cmd);
+
 }
 
 void mjMusicPlayer::Play()
 {
-	mjMultiPlatform::AddCommandForJNI("2:");
+	std::string cmd = "2:";
+	mjMultiPlatform::AddCommandForJNI(cmd);
 }
 void mjMusicPlayer::Play(int sampleIndex)
 {
@@ -20,15 +25,19 @@ void mjMusicPlayer::Play(int sampleIndex)
 }
 void mjMusicPlayer::Pause()
 {
-	mjMultiPlatform::AddCommandForJNI("3:");
+	std::string cmd = "3:";
+	mjMultiPlatform::AddCommandForJNI(cmd);
 }
 
 void mjMusicPlayer::Rewind()
 {
-	mjMultiPlatform::AddCommandForJNI("4:");
+	std::string cmd = "4:";
+	mjMultiPlatform::AddCommandForJNI(cmd);
 }
 
 mjMusicPlayer::~mjMusicPlayer()
 {
     //dtor
+}
+
 }

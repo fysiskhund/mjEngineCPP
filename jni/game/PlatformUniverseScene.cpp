@@ -15,6 +15,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
     InitShaders();
     camera = new mj3rdPersonCamera();
     level = new Level(resourceManager);
+    //LOGI("Fetching sound %s", "music/fyra.ogg");
     musicPlayer.Load(resourceManager->FetchSound("music/fyra.ogg"), 0);
     musicPlayer.Play();
     // Some adjustments
@@ -49,13 +50,14 @@ void PlatformUniverseScene::Initialise(int width, int height)
 
     mjVector3 cameraOffset;
     cameraOffset.Set(0,0.7,0);
-    LOGI("Here3");
+    //LOGI("Here3");
 
     mjObject* batBot0 = level->GetEntityByID("bat.002");
 
     //camera->SetTarget(&batBot0->pos, cameraOffset);
     camera->SetTarget(&character->pos, cameraOffset);
     camera->r = 3;
+    camera->SetAsCurrentCamera();
 
     //charBoundStruct->SetCorners()
     //((mjSphere*) character.boundingStructure)->r = 0.5;
@@ -69,7 +71,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
             				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 50);
 
 
-    LOGI("setupSkybox");
+    //LOGI("setupSkybox");
     SetUpSkybox();
     skybox->TieShaders(shaderList);
 

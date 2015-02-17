@@ -47,12 +47,14 @@ public class GL2JNIActivity extends Activity {
         super.onPause();
         Log.i("mjEngine_J", "App is paused");
         mView.onPause();
+        mjJNICommandInterpreter.musicPlayer.pause();
     }
 
     @Override protected void onResume() {
         super.onResume();
         Log.i("mjEngine_J", "App is resumed");
         mView.onResume();
+        mjJNICommandInterpreter.musicPlayer.start(); // (this resumes playback)
     }
     @Override
     public boolean onTouchEvent(MotionEvent e) {

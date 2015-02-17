@@ -119,7 +119,9 @@ extern "C" {
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height, jstring jPathPrefix)
 {
 	const char* jPathPrefixChars = env->GetStringUTFChars(jPathPrefix, 0);
+
 	std::string pathPrefix = jPathPrefixChars;
+	LOGI("Platform path is %s", pathPrefix.c_str());
     setupGame(width, height, new mjResourceManager(pathPrefix));
 }
 
@@ -133,7 +135,7 @@ JNIEXPORT jboolean JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, j
 
 JNIEXPORT jbyteArray JNICALL Java_co_phong_mjengine_GL2JNILib_HandleEngineQuery(JNIEnv * env)
 {
-
+	LOGI("Sending command %s", mjMultiPlatform::commandsForJNI.c_str());
     int byteCount = mjMultiPlatform::commandsForJNI.length();
     jbyte* pNativeMessage = (jbyte*)mjMultiPlatform::commandsForJNI.c_str();
     jbyteArray bytes = env->NewByteArray(byteCount);
@@ -141,6 +143,13 @@ JNIEXPORT jbyteArray JNICALL Java_co_phong_mjengine_GL2JNILib_HandleEngineQuery(
 
     mjMultiPlatform::commandsForJNIPresent = false; // turn off flag.
     return bytes;
+}
+
+JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_SendEngineQuery(JNIEnv * env, jstring cmdStr)
+{
+	//char* cmdCChar;
+	//cmdCChar = env->GetStringUTFChars(env, cmdStr, NULL);
+
 }
 
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID,

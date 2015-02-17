@@ -12,7 +12,7 @@ void FrogAutomatonStopState::Enter()
     float theta = ((float)rand() / (float) RAND_MAX)*2.0*3.141592;
 
     frog->jumpDirection.Set(sin(theta), 0, cos(theta));
-     maxTime = 3.0*((float)rand() / (float) RAND_MAX) + 0.5;
+     maxTime = 5.0*((float)rand() / (float) RAND_MAX) + 0.2;
     frog->vel.Set0();
 }
 
