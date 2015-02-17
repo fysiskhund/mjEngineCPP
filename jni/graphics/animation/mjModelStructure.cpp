@@ -9,7 +9,15 @@ mjModelStructure::mjModelStructure()
 
 mjModelStructure::mjModelStructure(const char* fullPath)
 {
-    //ctor
+    XMLDocument doc;
+
+	doc.LoadFile(fileName);
+	Load(&doc);
+}
+
+mjModelStructure::Load(XMLDocument* doc)
+{
+
 }
 
 
