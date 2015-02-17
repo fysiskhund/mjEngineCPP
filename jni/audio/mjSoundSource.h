@@ -16,10 +16,14 @@ class mjSoundSource
 {
     public:
         bool loop = false;
+        float attenuation = 0.05; // Sound sources further than 20m cannot be heard.
+
+
+
         mjSoundSource();
 
 
-        void Load(mjSoundResource* soundRes, int sampleNumber);
+        int Load(mjSoundResource* soundRes, int sampleNumber);
 
         void Play(mjVector3& sourceLocation, mjVector3& listenerLocation, mjVector3& listenerDirection, mjVector3& listenerUp,
                     int sampleIndex);
@@ -30,7 +34,7 @@ class mjSoundSource
         void Pause();
         void Rewind();
 
-        float attenuation = 0.05; // Sound sources further than 20m cannot be heard.
+
 
 
         virtual ~mjSoundSource();

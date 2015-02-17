@@ -117,9 +117,12 @@ mjSoundResource* mjResourceManager::FetchSound(std::string& path)
     mjSoundResource* newResource = new mjSoundResource();
 
 
+    newResource->soundIndexAndroid = this->soundIndexAndroid;
+
+    this->soundIndexAndroid++;
+
     newResource->path = fullPath;
     soundResources.push_back(newResource);
-
 
     return newResource;
 }

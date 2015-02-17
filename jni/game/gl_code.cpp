@@ -145,6 +145,13 @@ JNIEXPORT jbyteArray JNICALL Java_co_phong_mjengine_GL2JNILib_HandleEngineQuery(
     return bytes;
 }
 
+JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_SendEngineQuery(JNIEnv * env, jstring cmdStr)
+{
+	//char* cmdCChar;
+	//cmdCChar = env->GetStringUTFChars(env, cmdStr, NULL);
+
+}
+
 JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID,
 		jfloat x, jfloat y)
 {

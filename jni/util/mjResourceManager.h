@@ -39,6 +39,8 @@ class mjResourceManager
 
         std::string pathPrefix;
 
+        int soundIndexAndroid = 0;
+
         mjResource* SearchByPath(std::vector<mjResource*>& repo, std::string& path);
 
     private:

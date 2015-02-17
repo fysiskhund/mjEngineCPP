@@ -6,11 +6,18 @@ mjSoundSource::mjSoundSource()
 	LOGI("mjSoundSource subsystem is Android-JNI bridge");
 }
 
-void mjSoundSource::Load(mjSoundResource* soundRes, int sampleNumber)
+int mjSoundSource::Load(mjSoundResource* soundRes, int sampleNumber)
 {
-	std::string cmd = "51:" + soundRes->path;
+	char cmdCharArray[256];
+	snprintf(cmdCharArray, 256, "51:%s:%d", soundRes->path.c_str(), soundRes->soundIndexAndroid);
+	std::string cmd = cmdCharArray;
 		//LOGI("loading %s", soundRes->path.c_str());
-		mjMultiPlatform::AddCommandForJNI(cmd);
+	mjMultiPlatform::AddCommandForJNI(cmd);
+
+	samples.push_back(soundRes);
+
+	return samples.size()-1;
+
 }
 
 void mjSoundSource::Play(mjVector3& sourceLocation, mjVector3& listenerLocation,
@@ -22,7 +29,7 @@ void mjSoundSource::Play(mjVector3& sourceLocation, mjVector3& listenerLocation,
 	if (CalculateVolumeLevels(sourceLocation, listenerLocation, listenerDirection, listenerUp, &leftChannel, &rightChannel))
 	{
 		char cmdCharArray[256];
-		snprintf(cmdCharArray, 256, "52:%d:%f:%f:%d:%d:%d:%f", sampleIndex, leftChannel, rightChannel, 0, 0, 0, 1.0 );
+		snprintf(cmdCharArray, 256, "52:%d:%f:%f:%d:%d:%d:%f", samples[sampleIndex]->soundIndexAndroid, leftChannel, rightChannel, 0, 0, 0, 1.0 );
 		std::string cmd = cmdCharArray;
 		mjMultiPlatform::AddCommandForJNI(cmd);
 	}
