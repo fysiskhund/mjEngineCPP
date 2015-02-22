@@ -14,7 +14,7 @@ namespace mjEngine{
 class mjModelStructure
 {
     public:
-		std::vector<modelStructureNodeType> nodes;
+		std::vector<mjModelStructureNode*> nodes;
         mjModelStructure();
         mjModelStructure(const char* fileName);
         void Load(XMLDocument* doc);

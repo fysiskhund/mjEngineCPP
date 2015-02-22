@@ -19,6 +19,7 @@
 
 #include "../extLibs/math/Matrix.h"
 #include "../extLibs/tinyxml/tinyxml2.h"
+#include "animation/mjModelStructure.h"
 
 
 namespace mjEngine{
@@ -34,6 +35,7 @@ public:
 	float* vertexBuffer;
 	float* texCoordBuffer;
 	float* normalComponentBuffer;
+	mjModelStructure* structure;
 
 
 	float bounds[6] = {  OVER_9000,  OVER_9000,  OVER_9000,
