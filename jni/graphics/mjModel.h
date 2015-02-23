@@ -35,7 +35,7 @@ public:
 	float* vertexBuffer;
 	float* texCoordBuffer;
 	float* normalComponentBuffer;
-	mjModelStructure* structure;
+	mjModelStructure* structure = NULL;
 
 
 	float bounds[6] = {  OVER_9000,  OVER_9000,  OVER_9000,

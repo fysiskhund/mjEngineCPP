@@ -1,8 +1,12 @@
 #ifndef MJMODELSTRUCTURE_H
 #define MJMODELSTRUCTURE_H
 
-#include "../../extLibs/tinyxml/tinyxml2.h"
+#include <string>
 #include <vector>
+
+#include "../../extLibs/tinyxml/tinyxml2.h"
+#include "mjModelStructureNode.h"
+
 
 using namespace tinyxml2;
 
