@@ -37,6 +37,13 @@ void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
     hasWeight = false;
 
 
+    XMLElement* timingElement = fallingBoxElem->FirstChildElement("timing");
+    if (timingElement)
+    {
+    	timingElement->QueryFloatAttribute("fall", &this->totalTimeToFall);
+    	timingElement->QueryFloatAttribute("return", &this->totalTimeToReturn);
+    }
+
 
     /////// Travelling box test
     XMLElement* controlPointElement = fallingBoxElem->FirstChildElement("controlpoint");
@@ -102,7 +109,22 @@ void FallingBox::ProcessPhysicsEffects(float t_elapsed)
 
                 if (currentControlPointIndex >= controlPoints.size())
                 {
-                    currentControlPointIndex = 0;
+                	if (totalTimeToReturn < 0)
+                	{
+                		active = false; // The box never returns
+                	} else
+					{
+                		if (timeToReturn < totalTimeToReturn )
+                		{
+                			currentControlPointIndex = controlPoints.size()-1; // Keep box in current control point
+                			timeToReturn += t_elapsed;
+                		} else
+                		{
+                			currentControlPointIndex = 0;
+                		}
+
+					}
+
                 }
             }
 

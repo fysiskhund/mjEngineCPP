@@ -42,5 +42,17 @@ void mjMatrixStack::Pop()
         current = mStack[currentIndex];
     }
 }
+void mjMatrixStack::Pop(unsigned howMany)
+{
+	for(int i = 0; i < howMany; i++)
+	{
+		Pop();
+	}
+}
+void mjMatrixStack::PopAll()
+{
+	currentIndex = 0;
+	current = mStack[currentIndex];
+}
 
 }

@@ -224,7 +224,9 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 {
     float poseMatrix[16];
     float tempMatrix[16];
+    float matrixAfterStack[16];
     float* whichMatrix;
+
 	//Matrix4::DebugM("mvp", modelViewProjectionMatrix);
 
 
@@ -248,9 +250,30 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
     				modelMatrix, 0,
 					poseMatrix, 0);
 
+    		switch(structure->nodes[i]->operation)
+    		{
+    		case MJ_NODE_NOOP:
+    			//Nothing.
+    			break;
+    		case MJ_NODE_PUSH:
+    			mStack.Push(tempMatrix);
+    			break;
+    		case MJ_NODE_POP:
+    			mStack.Pop();
+    			break;
+    		case MJ_NODE_RESET:
+    			mStack.PopAll();
+    			break;
+    		}
+    		Matrix4::MultiplyMM(matrixAfterStack, 0,
+    		    				tempMatrix, 0,
+    							mStack.current, 0);
+
     		Matrix4::MultiplyMM(modelViewMatrix, 0,
     				lookAtMatrix, 0,
-					tempMatrix, 0);
+					matrixAfterStack, 0);
+
+
 
     		unsigned meshNum = structure->nodes[i]->meshIndex;
 
