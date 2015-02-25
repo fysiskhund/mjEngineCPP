@@ -7,6 +7,11 @@
 #include <util/mjResourceManager.h>
 #include <graphics/mjImageLoader.h>
 #include <extLibs/logger/mjLog.h>
+#include <graphics/animation/mjAnimation.h>
+#include <graphics/animation/mjAnimationKeyframe.h>
+#include <graphics/animation/mjAnimator.h>
+#include <graphics/animation/mjModelAnimation.h>
+#include <graphics/animation/mjModelPose.h>
 using namespace mjEngine;
 
 
@@ -31,6 +36,12 @@ public:
 	mjObject* objectProvidingFooting;
 
 	void Check();
+private:
+	void SetUpSillyAnimation();
+    mjAnimation animation;
+    mjAnimator animator;
+    float tAnimation = 0;
+
 };
 
 

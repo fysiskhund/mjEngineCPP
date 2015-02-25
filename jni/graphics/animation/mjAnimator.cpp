@@ -57,15 +57,22 @@ void mjAnimator::UpdatePose(float t, mjModelPose& pose, mjAnimation& animation)
 
                    delta.Subtract(angles);
 
+                   mjVector3 positions(segment->keyframes[previousKeyframeNum]->pos);
+                   mjVector3 deltaPos(segment->keyframes[nextKeyframeNum]->pos);
+
                    // Add delta vector to "current" vector, scaled by "time percentage"
 
                    float t_percentage = (t_segment - segment->keyframes[previousKeyframeNum]->timeStamp)/(segment->keyframes[nextKeyframeNum]->timeStamp - segment->keyframes[previousKeyframeNum]->timeStamp);
 
                    // Perform interpolation
                    angles.ScaleAdd(t_percentage, delta);
+                   positions.ScaleAdd(t_percentage, deltaPos);
 
                    // Update pose angles with the result.
                    pose.angles[segment->meshNum]->CopyFrom(angles);
+
+                   // Update pose positions with the result;
+                   pose.positions[segment->meshNum]->CopyFrom(positions);
 
         }
     }

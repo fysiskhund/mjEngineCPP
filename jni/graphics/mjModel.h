@@ -65,7 +65,7 @@ private:
 	int currentVertex;
 	int currentFace;
 	int faceCount;
-	mjMatrixStack mStack;
+	//mjMatrixStack mStack;
 
 };
 } // nameSpace mj

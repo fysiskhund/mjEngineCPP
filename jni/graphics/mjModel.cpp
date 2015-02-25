@@ -232,9 +232,9 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
 
 
-    if (structure)
+    if (0)//(structure)
     {
-    	for (unsigned i = 0; i < structure->nodes.size(); i++)
+    	/*for (unsigned i = 0; i < structure->nodes.size(); i++)
     	{
     		// Pose and structure should have the exact same number of nodes.
 
@@ -282,7 +282,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 					modelMatrix, modelViewProjectionMatrix);
 
     		glDrawElements(GL_TRIANGLES, meshes[meshNum]->drawOrderCount, GL_UNSIGNED_SHORT, meshes[meshNum]->drawOrderBuffer);
-    	}
+    	}*/
     } else
     {
     	for(unsigned i = 0; i < meshes.size(); i++)
@@ -291,9 +291,10 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
     		{
 
 
-    			mjVector3 testPos(0,0,0);
+    			mjVector3 testPos;
     			mjVector3 angles;
     			angles.CopyFrom(*pose->angles[i]);
+    			testPos.CopyFrom(*pose->positions[i]);
 
     			Matrix4::GetPositionScaleAndAngleRotationMatrix(testPos, angles, poseMatrix);//(*pose->positions[i], *pose->angles[i], poseMatrix);
     			Matrix4::MultiplyMM(tempMatrix, 0,
