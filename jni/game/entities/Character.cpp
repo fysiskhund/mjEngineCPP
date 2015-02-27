@@ -169,6 +169,10 @@ void Character::Update(float t_elapsed)
 				tAnimation -= 2;
 
 			animator.UpdatePose(tAnimation, *pose, animation);
+	} else
+	{
+		tAnimation = 0; // Reset animation
+		animator.UpdatePose(tAnimation, *pose, animation);
 	}
 
     vel.MulScalar(0.99);

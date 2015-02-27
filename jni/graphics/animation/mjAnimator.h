@@ -9,12 +9,13 @@ namespace mjEngine{
 class mjAnimator
 {
     public:
-        float t;
+        //float t;
 
         mjAnimator();
         virtual ~mjAnimator();
 
         void UpdatePose(float t, mjModelPose& pose, mjAnimation& animation);
+
 
     protected:
     private:
