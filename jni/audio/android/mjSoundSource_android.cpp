@@ -22,7 +22,7 @@ void mjSoundSource::Play(mjVector3& sourceLocation, mjVector3& listenerLocation,
 	if (CalculateVolumeLevels(sourceLocation, listenerLocation, listenerDirection, listenerUp, &leftChannel, &rightChannel))
 	{
 		char cmdCharArray[256];
-		snprintf(cmdCharArray, 256, "52:%d:%f:%f:%d:%d:%d:%f", sampleIndex, leftChannel, rightChannel, 0, 0, 0, 1.0 );
+		snprintf(cmdCharArray, 256, "52:%d:%f:%f:0:0:0:1.0", sampleIndex, leftChannel, rightChannel );
 		std::string cmd = cmdCharArray;
 		mjMultiPlatform::AddCommandForJNI(cmd);
 	}
@@ -30,11 +30,12 @@ void mjSoundSource::Play(mjVector3& sourceLocation, mjVector3& listenerLocation,
 
 void mjSoundSource::Play()
 {
-
+	Play(0);
 }
 void mjSoundSource::Play(int sampleIndex)
 {
-
+	char cmdCharArray[256];
+	snprintf(cmdCharArray, 256, "52:%d:128:128:0:0:0:1.0", sampleIndex );
 }
 void mjSoundSource::Pause()
 {
