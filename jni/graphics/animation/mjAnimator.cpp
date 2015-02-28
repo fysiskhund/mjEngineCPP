@@ -52,27 +52,49 @@ void mjAnimator::UpdatePose(float t, mjModelPose& pose, mjAnimation& animation)
                    // Perform the interpolation.
                    // Fixme: for now only linear. But more animation types will be supported in the future
                    // FIXME: for now the angle "direction" isn't taken into account, but it should be.
-                   mjVector3 angles(segment->keyframes[previousKeyframeNum]->angles);
-                   mjVector3 delta(segment->keyframes[nextKeyframeNum]->angles);
 
-                   delta.Subtract(angles);
-
-                   mjVector3 positions(segment->keyframes[previousKeyframeNum]->pos);
-                   mjVector3 deltaPos(segment->keyframes[nextKeyframeNum]->pos);
-
-                   // Add delta vector to "current" vector, scaled by "time percentage"
-
+                   // movements will be scaled by a "time percentage", calculated in the following line
                    float t_percentage = (t_segment - segment->keyframes[previousKeyframeNum]->timeStamp)/(segment->keyframes[nextKeyframeNum]->timeStamp - segment->keyframes[previousKeyframeNum]->timeStamp);
 
-                   // Perform interpolation
-                   angles.ScaleAdd(t_percentage, delta);
-                   positions.ScaleAdd(t_percentage, deltaPos);
 
-                   // Update pose angles with the result.
-                   pose.angles[segment->meshNum]->CopyFrom(angles);
 
-                   // Update pose positions with the result;
-                   pose.positions[segment->meshNum]->CopyFrom(positions);
+				   if (segment->keyframes[nextKeyframeNum]->rotationAnimTypes[0] != KEYFRAMETYPE_IGNORE)
+				   {
+					   mjVector3 angles(segment->keyframes[previousKeyframeNum]->angles);
+					   mjVector3 delta(segment->keyframes[nextKeyframeNum]->angles);
+
+					   delta.Subtract(angles);
+
+					   // Perform interpolation
+					   angles.ScaleAdd(t_percentage, delta);
+
+					   // Update pose angles with the result.
+					   pose.angles[segment->meshNum]->CopyFrom(angles);
+                   }
+
+
+
+                   if (segment->keyframes[nextKeyframeNum]->displacementAnimTypes[0] != KEYFRAMETYPE_IGNORE)
+                   {
+                	   mjVector3 positions(segment->keyframes[previousKeyframeNum]->pos);
+                	   mjVector3 deltaPos(segment->keyframes[nextKeyframeNum]->pos);
+
+                	   deltaPos.Subtract(positions);
+
+                	   // Perform interpolation
+                	   positions.ScaleAdd(t_percentage, deltaPos);
+
+                	   // Update pose positions with the result;
+                	   pose.positions[segment->meshNum]->CopyFrom(positions);
+                   }
+
+
+
+
+
+
+
+
 
         }
     }

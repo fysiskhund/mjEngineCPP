@@ -168,13 +168,15 @@ void Character::Update(float t_elapsed)
 			if (tAnimation > 2)
 				tAnimation -= 2;
 
-			pose->angles[0]->x = intrinsecVelNorm*0.01*1.5707; // inclination when running
+			pose->angles[0]->x = -intrinsecVelNorm*1.5707*0.02; // inclination when running
 
 			animator.UpdatePose(tAnimation, *pose, animation);
 	} else
 	{
 		tAnimation = 0; // Reset animation
+		pose->angles[0]->x = 0; // Reset inclination
 		animator.UpdatePose(tAnimation, *pose, animation);
+
 	}
 
     vel.MulScalar(0.99);
@@ -240,17 +242,20 @@ void Character::SetUpSillyAnimation()
 
 	    // Keyframe0 and 2 are simply the normal pose
 	    keyframe0->timeStamp = 0;
+	    keyframe0->rotationAnimTypes[0] = KEYFRAMETYPE_IGNORE;
 
 	    mjAnimationKeyframe* keyframe1 = new mjAnimationKeyframe();
 
 	    // Keyframe1 is a slight hop
 	    keyframe1->pos.y = 0.03;
 	    keyframe1->timeStamp = 0.25;
+	    keyframe1->rotationAnimTypes[0] = KEYFRAMETYPE_IGNORE;
 
 	    mjAnimationKeyframe* keyframe2 = new mjAnimationKeyframe();
 
 
 	    keyframe2->timeStamp = 0.5;
+	    keyframe2->rotationAnimTypes[0] = KEYFRAMETYPE_IGNORE;
 
 
 

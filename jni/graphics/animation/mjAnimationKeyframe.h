@@ -6,7 +6,7 @@
 
 namespace mjEngine{
 
-enum keyframeAnimType {KEYFRAMETYPE_LINEAR, KEYFRAMETYPE_QUADRATIC };
+enum keyframeAnimType { KEYFRAMETYPE_LINEAR=0, KEYFRAMETYPE_QUADRATIC, KEYFRAMETYPE_IGNORE};
 
 class mjAnimationKeyframe
 {
