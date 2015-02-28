@@ -168,6 +168,8 @@ void Character::Update(float t_elapsed)
 			if (tAnimation > 2)
 				tAnimation -= 2;
 
+			pose->angles[0]->x = intrinsecVelNorm*0.01*1.5707; // inclination when running
+
 			animator.UpdatePose(tAnimation, *pose, animation);
 	} else
 	{
