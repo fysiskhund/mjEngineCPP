@@ -18,7 +18,9 @@
 #include "mjShader.h"
 
 #include "../extLibs/math/Matrix.h"
+#include "../extLibs/math/mjMatrixStack.h"
 #include "../extLibs/tinyxml/tinyxml2.h"
+#include "animation/mjModelStructure.h"
 
 
 namespace mjEngine{
@@ -34,6 +36,7 @@ public:
 	float* vertexBuffer;
 	float* texCoordBuffer;
 	float* normalComponentBuffer;
+	mjModelStructure* structure = NULL;
 
 
 	float bounds[6] = {  OVER_9000,  OVER_9000,  OVER_9000,
@@ -62,6 +65,7 @@ private:
 	int currentVertex;
 	int currentFace;
 	int faceCount;
+	//mjMatrixStack mStack;
 
 };
 } // nameSpace mj

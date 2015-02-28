@@ -8,6 +8,8 @@ namespace mjEngine{
 class mjSoundResource: public mjResource
 {
     public:
+
+		int soundIndexAndroid;
         mjSoundResource();
         virtual ~mjSoundResource();
     protected:

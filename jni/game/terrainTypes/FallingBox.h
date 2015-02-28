@@ -13,6 +13,8 @@ class FallingBox: public Box
     public:
         float totalTimeToFall = 3; // 3s-
         float timeToFall = 0;
+        float totalTimeToReturn = 0;
+        float timeToReturn = 0;
         int fallingState = 0;
         bool hasWeight = 0;
         mjVector3 startPosition;

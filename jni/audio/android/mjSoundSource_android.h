@@ -1,1 +1,2 @@
 
+std::vector<mjSoundResource*> samples;

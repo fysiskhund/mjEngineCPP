@@ -24,4 +24,5 @@ public class GL2JNILib {
      public static native byte[] HandleEngineQuery();     
      public static native void HandleJoystickInput(int controllerID, int joystickID, float x, float y);
      public static native void HandleButtonInput(int controllerID, int buttonID, boolean pressedDown);
+     public static native void SendEngineQuery(String cmdStr);
 }

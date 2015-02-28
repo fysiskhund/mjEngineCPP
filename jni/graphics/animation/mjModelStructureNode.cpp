@@ -1,5 +1,7 @@
 #include "mjModelStructureNode.h"
 
+namespace mjEngine{
+
 mjModelStructureNode::mjModelStructureNode()
 {
     //ctor
@@ -8,4 +10,6 @@ mjModelStructureNode::mjModelStructureNode()
 mjModelStructureNode::~mjModelStructureNode()
 {
     //dtor
+}
+
 }

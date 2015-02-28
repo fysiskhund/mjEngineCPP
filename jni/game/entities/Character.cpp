@@ -3,6 +3,7 @@
 Character::Character(mjResourceManager& resourceManager)
 : mjObject(MJ_AABB)
 {
+	SetUpSillyAnimation();
 	model = resourceManager.FetchModel("char0.mesh.xml");
 	mjAABB* charBoundStruct = (mjAABB*) boundingStructure;
 	mjVector3 minCorner;
@@ -139,7 +140,8 @@ void Character::Update(float t_elapsed)
 			LOGI("char: footing -> no (jumping)");
 		}
 	}
-	if (intrinsecVel.GetNorm() < 10 && footing)
+	float intrinsecVelNorm = intrinsecVel.GetNorm();
+	if (intrinsecVelNorm < 10 && footing)
     {
 
         if ((intrinsecVel.x*vel.x < 0))// || fabs(intrinsecVel.x + vel.x) < MAX_VEL_FOR_CHARACTER)
@@ -158,6 +160,22 @@ void Character::Update(float t_elapsed)
             vel.z += intrinsecVel.z;
         }
     }
+
+	if (intrinsecVelNorm > 0.01)
+	{
+		tAnimation += t_elapsed*intrinsecVelNorm;
+
+			if (tAnimation > 2)
+				tAnimation -= 2;
+
+			pose->angles[0]->x = intrinsecVelNorm*0.01*1.5707; // inclination when running
+
+			animator.UpdatePose(tAnimation, *pose, animation);
+	} else
+	{
+		tAnimation = 0; // Reset animation
+		animator.UpdatePose(tAnimation, *pose, animation);
+	}
 
     vel.MulScalar(0.99);
 
@@ -209,4 +227,46 @@ void Character::SetDetailsFromXML(XMLElement* entity)
 
     mjAABB* mjaabbStruct = (mjAABB*) boundingStructure;
     mjaabbStruct->UpdateCorners();
+}
+
+void Character::SetUpSillyAnimation()
+{
+	//Animation test
+	    mjAnimationSegment* segment0 = new mjAnimationSegment();
+	    segment0->meshNum = 0;
+	    segment0->totalTime = 0.5;
+
+	    mjAnimationKeyframe* keyframe0 = new mjAnimationKeyframe();
+
+	    // Keyframe0 and 2 are simply the normal pose
+	    keyframe0->timeStamp = 0;
+
+	    mjAnimationKeyframe* keyframe1 = new mjAnimationKeyframe();
+
+	    // Keyframe1 is a slight hop
+	    keyframe1->pos.y = 0.03;
+	    keyframe1->timeStamp = 0.25;
+
+	    mjAnimationKeyframe* keyframe2 = new mjAnimationKeyframe();
+
+
+	    keyframe2->timeStamp = 0.5;
+
+
+
+	    segment0->keyframes.push_back(keyframe0);
+	    segment0->keyframes.push_back(keyframe1);
+	    segment0->keyframes.push_back(keyframe2);
+
+	    animation.segments.push_back(segment0);
+
+	    pose = new mjModelPose();
+	    pose->angles.push_back(new mjVector3());
+	    pose->positions.push_back(new mjVector3());
+
+	    pose->angles.push_back(new mjVector3());
+	    pose->positions.push_back(new mjVector3()); // As many "angles" and "positions" as the number of meshes the model has!
+
+
+	//////////// end of animation test (init)
 }

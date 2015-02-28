@@ -16,6 +16,8 @@ class mjMatrixStack
         mjMatrixStack(unsigned size);
         void Push(float* m);
         void Pop();
+        void Pop(unsigned howMany);
+        void PopAll();
     protected:
         void CreateStack(unsigned size);
     private:

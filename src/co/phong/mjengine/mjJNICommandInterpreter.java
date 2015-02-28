@@ -3,6 +3,7 @@ package co.phong.mjengine;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.content.Context;
 import android.media.AudioManager;
@@ -17,7 +18,8 @@ public class mjJNICommandInterpreter {
 	
 	public static SoundPool soundPool = new SoundPool(16, AudioManager.STREAM_MUSIC, 0);
 	
-	public static ArrayList<Integer> soundIDs = new ArrayList<Integer>();
+	public static HashMap<Integer, Integer> soundIDs = new HashMap(); 
+	
 	
 	public static void ParseCommands(String commandsFromJNI, Context androidContext)
 	{
@@ -63,7 +65,7 @@ public class mjJNICommandInterpreter {
 				
 				//instructions for the soundPool (aka sound effects)
 				case 51:
-					soundIDs.add(soundPool.load(cmdAndArg[1], 1));
+					soundIDs.put(Integer.parseInt(cmdAndArg[2]), soundPool.load(cmdAndArg[1], 1));
 					break;
 				case 52:
 					
