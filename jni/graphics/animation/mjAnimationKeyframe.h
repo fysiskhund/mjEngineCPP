@@ -18,8 +18,8 @@ class mjAnimationKeyframe
         mjVector3 rotationDirections;
         mjVector3 pos;
 
-        keyframeAnimType rotationAnimTypes[3];
-        keyframeAnimType displacementAnimTypes[3];
+        keyframeAnimType rotationAnimType = KEYFRAMETYPE_LINEAR;
+        keyframeAnimType displacementAnimType = KEYFRAMETYPE_LINEAR;
 
         mjAnimationKeyframe();
         virtual ~mjAnimationKeyframe();

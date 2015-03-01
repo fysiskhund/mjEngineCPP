@@ -58,7 +58,7 @@ void mjAnimator::UpdatePose(float t, mjModelPose& pose, mjAnimation& animation)
 
 
 
-				   if (segment->keyframes[nextKeyframeNum]->rotationAnimTypes[0] != KEYFRAMETYPE_IGNORE)
+				   if (segment->keyframes[nextKeyframeNum]->rotationAnimType != KEYFRAMETYPE_IGNORE)
 				   {
 					   mjVector3 angles(segment->keyframes[previousKeyframeNum]->angles);
 					   mjVector3 delta(segment->keyframes[nextKeyframeNum]->angles);
@@ -74,7 +74,7 @@ void mjAnimator::UpdatePose(float t, mjModelPose& pose, mjAnimation& animation)
 
 
 
-                   if (segment->keyframes[nextKeyframeNum]->displacementAnimTypes[0] != KEYFRAMETYPE_IGNORE)
+                   if (segment->keyframes[nextKeyframeNum]->displacementAnimType != KEYFRAMETYPE_IGNORE)
                    {
                 	   mjVector3 positions(segment->keyframes[previousKeyframeNum]->pos);
                 	   mjVector3 deltaPos(segment->keyframes[nextKeyframeNum]->pos);
