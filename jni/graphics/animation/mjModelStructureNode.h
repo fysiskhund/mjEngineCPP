@@ -1,6 +1,7 @@
 #ifndef MJMODELSTRUCTURENODE_H
 #define MJMODELSTRUCTURENODE_H
 
+#include <string>
 #include "../../core/mjVector3.h"
 
 namespace mjEngine{

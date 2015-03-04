@@ -10,7 +10,7 @@ int mjSoundSource::Load(mjSoundResource* soundRes, int sampleNumber)
 {
     samples.push_back(Mix_LoadWAV(soundRes->path.c_str()));
 
-    samples.push_back(soundRes);
+    //samples.push_back(soundRes);
 
     return samples.size()-1;
 }
