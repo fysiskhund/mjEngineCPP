@@ -31,3 +31,4 @@ proguard/
 lint.xml
 
 *.xcuserstate
+/jni/gnuLinux/mjEngine/mjEngine.userprefs
