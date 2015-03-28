@@ -4,6 +4,13 @@ namespace mjEngine{
 mjResourceManager::mjResourceManager(std::string& pathPrefix)
 {
     this->pathPrefix = pathPrefix;
+    #ifdef WIN32
+        separator = '\\';
+    #else
+        separator = '/';
+    #endif // WIN32
+
+    std::replace(this->pathPrefix.begin(), this->pathPrefix.end(), '/', separator);
 }
 
 mjResourceManager::~mjResourceManager()
@@ -18,7 +25,7 @@ mjModel* mjResourceManager::FetchModel(const char* path)
 
 mjModel* mjResourceManager::FetchModel(std::string& path)
 {
-    std::string fullPath = pathPrefix + "/" + path;
+    std::string fullPath = pathPrefix + separator + path;
 
     mjResource* res = SearchByPath(models, fullPath);
     if (res != NULL)
@@ -50,7 +57,7 @@ GLuint mjResourceManager::FetchTexture(const char* path)
 
 GLuint mjResourceManager::FetchTexture(std::string& path)
 {
-    std::string fullPath = pathPrefix + "/" + path;
+    std::string fullPath = pathPrefix + separator + path;
 
     mjResource* res = SearchByPath(textures, fullPath);
     if (res != NULL)
@@ -79,7 +86,7 @@ mjModelStructure* mjResourceManager::FetchModelStructure(const char* path)
 
 mjModelStructure* mjResourceManager::FetchModelStructure(std::string& path)
 {
-    std::string fullPath = pathPrefix + "/" + path;
+    std::string fullPath = pathPrefix + separator + path;
 
     mjResource* res = SearchByPath(modelStructures, fullPath);
     if (res != NULL)
@@ -106,7 +113,7 @@ mjSoundResource* mjResourceManager::FetchSound(const char* path)
 
 mjSoundResource* mjResourceManager::FetchSound(std::string& path)
 {
-    std::string fullPath = pathPrefix + "/" + path;
+    std::string fullPath = pathPrefix + separator + path;
 
     mjResource* res = SearchByPath(soundResources, fullPath);
     if (res != NULL)
@@ -145,6 +152,11 @@ mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std:
     return NULL;
 }
 
+void mjResourceManager::PrependFullFilePath(std::string& filePath)
+{
+    filePath = pathPrefix + separator + filePath;
+    std::replace(filePath.begin(), filePath.end(), '/', separator);
+}
 
 
 

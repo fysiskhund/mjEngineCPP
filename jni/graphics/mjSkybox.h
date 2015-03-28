@@ -6,6 +6,8 @@
 
 
 #include "../core/mjObject.h"
+#include "../util/mjResourceManager.h"
+
 #include "mjImageLoader.h"
 #include "mjSkyboxLevelData.h"
 
@@ -15,7 +17,7 @@ class mjSkybox: public mjObject
 {
 public:
 
-	mjSkybox();
+	mjSkybox(mjResourceManager* resourceManager);
 
 
 	void SetCameraPos(mjVector3* cameraPos);
@@ -34,6 +36,7 @@ public:
 private:
 	mjVector3* cameraPos;
 	std::vector<mjSkyboxLevelData* > levels;
+	mjResourceManager* resourceManager;
 
 };
 

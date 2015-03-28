@@ -7,6 +7,8 @@ PlatformUniverseScene::PlatformUniverseScene(mjResourceManager* resourceManager)
     entityCreator = new EntityCreator(resourceManager);
     srand(time(0));
 
+    levelFilename  = "levels/testLevel.xml";
+    resourceManager->PrependFullFilePath(levelFilename);
 }
 
 
@@ -35,7 +37,8 @@ void PlatformUniverseScene::Initialise(int width, int height)
     ambient.InitGlowBeings(camera, &physics, &shaderList, &sceneGraph, *resourceManager);
     //ambient.CreateDustDevil(o, 12, 10);
 
-    level->LoadFromFile("/sdcard/mjEngineCPP/levels/testLevel.xml");
+
+    level->LoadFromFile(levelFilename.c_str());
     entityCreator->PopulateLevel(&level->doc, level);
 
 
@@ -105,18 +108,19 @@ void PlatformUniverseScene::InitShaders()
 }
 void PlatformUniverseScene::SetUpSkybox()
 {
-	skybox = new mjSkybox();
+	skybox = new mjSkybox(resourceManager);
 
 	mjImageLoader imgLoader;
-	mjModel* skyboxBox = new mjModel();
-	skyboxBox->LoadFromFile("/sdcard/mjEngineCPP/skybox.mesh.xml");
+	mjModel* skyboxBox;
 
-	mjModel* skyboxPlane = new mjModel();
-	skyboxPlane->LoadFromFile("/sdcard/mjEngineCPP/skybox_plane.mesh.xml");
+	skyboxBox = resourceManager->FetchModel("skybox.mesh.xml");
+
+	mjModel* skyboxPlane;
+	skyboxPlane= resourceManager->FetchModel("skybox_plane.mesh.xml");
 
 	skybox->SetModels(skyboxBox, skyboxPlane);
 
-	skybox->LoadTexturesFromPrefix("/sdcard/mjEngineCPP/bluesky/skybox");
+	skybox->LoadTexturesFromPrefix("bluesky/skybox");
 
 	/*char wanderingCloudName[1024];
 	for (unsigned i = 0; i < 3; i++)

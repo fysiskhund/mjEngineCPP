@@ -86,7 +86,7 @@ class PlatformUniverseScene : public mjScene
         void Draw() override;
 
         mjMusicPlayer musicPlayer;
-
+        std::string levelFilename;
 
 
     protected:

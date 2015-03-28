@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "../graphics/mjModel.h"
 #include "../graphics/mjImageLoader.h"
@@ -31,6 +32,13 @@ class mjResourceManager
 
         mjSoundResource* FetchSound(const char* path);
         mjSoundResource* FetchSound(std::string& path);
+
+
+        void PrependFullFilePath(std::string& filePath);
+
+
+
+
     protected:
         std::vector<mjResource*> models;
         std::vector<mjResource*> textures;
@@ -42,6 +50,8 @@ class mjResourceManager
         int soundIndexAndroid = 0;
 
         mjResource* SearchByPath(std::vector<mjResource*>& repo, std::string& path);
+
+        char separator;
 
     private:
 };

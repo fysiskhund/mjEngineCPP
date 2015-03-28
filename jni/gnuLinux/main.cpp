@@ -152,7 +152,11 @@ int main(int argc, char* argv[]) {
 
     InitGL(&data);
 
-    std::string pathPrefix = "/sdcard/mjEngineCPP";
+    #ifndef WIN32
+        std::string pathPrefix = "/sdcard/mjEngineCPP";
+    #else
+        std::string pathPrefix = "C:/mjEngineCPP";
+    #endif
     setupGame(width, height, new mjResourceManager(pathPrefix));
 
     while (!stepFunc(&data));
