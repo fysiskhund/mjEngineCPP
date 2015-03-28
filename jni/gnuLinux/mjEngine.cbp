@@ -82,20 +82,10 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-DDESKTOP_SDL" />
-					<Add directory="entities" />
-					<Add directory="ai" />
-					<Add directory="extLibs/util" />
-					<Add directory="entities/batMatonStates" />
-					<Add directory="core" />
-					<Add directory="game" />
-					<Add directory="game/windStates" />
-					<Add directory="game/ambient" />
-					<Add directory="extLibs/math" />
-					<Add directory="graphics/animation" />
-					<Add directory="util" />
-					<Add directory="entities/frogAutomatonStates" />
-					<Add directory="terrainTypes" />
-					<Add directory="audio" />
+					<Add option="-DNON_GLES_CONTEXT" />
+					<Add option="-DUSE_SDL_AUDIO" />
+					<Add option="-DUSE_GL3" />
+					<Add directory=".." />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -103,6 +93,7 @@
 					<Add library="GLESv2" />
 					<Add library="SDL2_image" />
 					<Add library="GLEW" />
+					<Add library="SDL2_mixer" />
 				</Linker>
 			</Target>
 		</Build>
@@ -206,6 +197,10 @@
 		<Unit filename="../graphics/animation/mjModelStructure.h" />
 		<Unit filename="../graphics/animation/mjModelStructureNode.cpp" />
 		<Unit filename="../graphics/animation/mjModelStructureNode.h" />
+		<Unit filename="../graphics/gl3/defaultShaderSources-gl3.h" />
+		<Unit filename="../graphics/gl3/skyboxShaderSources-gl3.h" />
+		<Unit filename="../graphics/gles2/defaultShaderSources-gles2.h" />
+		<Unit filename="../graphics/gles2/skyboxShaderSources-gles2.h" />
 		<Unit filename="../graphics/mj3rdPersonCamera.cpp" />
 		<Unit filename="../graphics/mj3rdPersonCamera.h" />
 		<Unit filename="../graphics/mjCamera.cpp" />

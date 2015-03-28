@@ -1,8 +1,8 @@
 
 
 const char* mjSkyboxShaders::skyboxVertexShaderCode =
-		"#version 330 \n"
-		
+		"#version 130 \n"
+
 		"in vec4 vPosition;\n"
 		"in vec2 aTexCoordinates;\n"
 		"uniform mat4 maMVPMatrix;\n"
@@ -14,6 +14,7 @@ const char* mjSkyboxShaders::skyboxVertexShaderCode =
 	    "}\n";
 
 const char* mjSkyboxShaders::skyboxFragmentShaderCode =
+        "#version 130\n"
 		//"precision mediump float;\n" does this exist in GL3?
 		"in vec2 vTexCoordinates;\n"
 		"uniform sampler2D uTexture;\n"

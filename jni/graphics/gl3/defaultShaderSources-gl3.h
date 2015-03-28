@@ -4,8 +4,8 @@
 
 
 const char* mjDefaultShaders::vanillaVertexShaderCode =
-			"#version 330\n"
-			
+			"#version 130\n"
+
 			"in vec4 vPosition; \n"
 	        "in vec2 aTexCoordinates;\n"
 	        "in vec3 aNormal;\n"
@@ -55,6 +55,7 @@ const char* mjDefaultShaders::vanillaVertexShaderCode =
 	        "} \n";
 
 const char* mjDefaultShaders::vanillaFragmentShaderCode =
+         "#version 130\n"
 		 //"precision mediump float;\n"
 
 		 "in vec2 vTexCoordinates;\n"
