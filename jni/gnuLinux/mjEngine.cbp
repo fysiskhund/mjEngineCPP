@@ -82,7 +82,6 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-DDESKTOP_SDL" />
-					<Add option="-DNON_GLES_CONTEXT" />
 					<Add option="-DUSE_SDL_AUDIO" />
 					<Add option="-DUSE_GL3" />
 					<Add directory=".." />

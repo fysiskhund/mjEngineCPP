@@ -28,16 +28,18 @@ int InitSDL(SDLStruct* sdlData) {
     SDL_JoystickEventState(SDL_ENABLE);
     joystick = SDL_JoystickOpen(0);
 
-    #ifndef USE_GLES
+    #ifdef USE_GL3
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 
-    #else
+    #elif USE_GLES2
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-    #endif // NON_GLES_CONTEXT
+    #else
+        #error "Either USE_GL3 or USE_GLES2 need to be specified."
+    #endif
 
 
     #ifdef USE_SDL_AUDIO
@@ -56,18 +58,23 @@ int InitSDL(SDLStruct* sdlData) {
 
     sdlData->context = SDL_GL_CreateContext(sdlData->window);
 
+
+    if (!sdlData->context)
+    {
+    	SDL_GetError();
+    }
+
+    #ifdef USE_GL3
+    glewInit();
+    #endif
+
     const unsigned char* versionStr = glGetString(GL_VERSION);
 
     printf("GL Version: %s\n", versionStr);
 
     printf("context: %p\n", sdlData->context);
-    if (!sdlData->context)
-    {
-    	SDL_GetError();
-    }
-    #ifndef USE_GLES
-    glewInit();
-    #endif
+
+
     return 0;
 }
 
