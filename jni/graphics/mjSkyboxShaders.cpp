@@ -51,25 +51,15 @@ void mjSkyboxShaders::Run(mjModelMesh* mesh,
 
 }
 
+#ifdef USE_GLES
 
-const char* mjSkyboxShaders::skyboxVertexShaderCode =
-		"attribute vec4 vPosition;\n"
-		"attribute vec2 aTexCoordinates;\n"
-		"uniform mat4 maMVPMatrix;\n"
+	#include "gles2/skyboxShaderSources-gles2.h"
 
-		"varying vec2 vTexCoordinates;\n"
-	    "void main() {\n"
-	    "  gl_Position = maMVPMatrix*vPosition;\n"
-		"  vTexCoordinates = aTexCoordinates;\n"
-	    "}\n";
+#else
 
-const char* mjSkyboxShaders::skyboxFragmentShaderCode =
-		"precision mediump float;\n"
-		"varying vec2 vTexCoordinates;\n"
-		"uniform sampler2D uTexture;\n"
-	    "void main() {\n"
-	    "  gl_FragColor = texture2D(uTexture, vTexCoordinates);\n"
-	    "}\n";
+	#include "gl3/skyboxShaderSources-gl3.h"
+	
+#endif
 
 
 }

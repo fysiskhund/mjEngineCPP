@@ -53,12 +53,12 @@ void mjShader::CreateProgram(const char* vertexShaderCode, const char* fragmentS
 			GLint bufLength = 0;
 			glGetProgramiv(glProgramHandle, GL_INFO_LOG_LENGTH, &bufLength);
 			if (bufLength) {
-				/*char* buf = (char*) malloc(bufLength);
+				char* buf = (char*) malloc(bufLength);
 				if (buf) {
 					glGetProgramInfoLog(glProgramHandle, bufLength, NULL, buf);
-					//LOGE("Could not link program:\n%s\n", buf);
+					LOGI("Could not link program %d:\n%s\n", glProgramHandle, buf);
 					free(buf);
-				}*/
+				}
 			}
 			//LOGI("At glDeleteProgram :(");
 			glDeleteProgram(glProgramHandle);
