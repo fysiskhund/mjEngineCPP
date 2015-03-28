@@ -15,8 +15,8 @@ float t_elapsed = 0.016f;
 int width = 768;
 int height = 768;
 
-int xWindow = 3840 - width - 50;
-int yWindow = 1080 - width - 20;
+int xWindow = 0;//3840 - width - 50;
+int yWindow = 0;//1080 - width - 20;
 
 mjEngine::mjVector3 lJoystick;
 mjEngine::mjVector3 rJoystick;
@@ -29,7 +29,7 @@ int InitSDL(SDLStruct* sdlData) {
     joystick = SDL_JoystickOpen(0);
 
     #ifndef USE_GLES
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 
@@ -52,7 +52,7 @@ int InitSDL(SDLStruct* sdlData) {
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 4);
 
-    sdlData->window = SDL_CreateWindow("mjEngine", xWindow, yWindow, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    sdlData->window = SDL_CreateWindow("mjEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
     sdlData->context = SDL_GL_CreateContext(sdlData->window);
 
