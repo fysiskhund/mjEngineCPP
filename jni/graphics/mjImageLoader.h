@@ -10,7 +10,11 @@
 #include "../extLibs/util/mjMultiPlatform.h"
 
 #ifdef DESKTOP_SDL
-#include <SDL2/SDL_image.h>
+    #ifdef OSX
+        #include <SDL2_image/SDL_image.h>
+    #else
+        #include <SDL2/SDL_image.h>
+    #endif
 #endif // DESKTOP_SDL
 #ifdef USE_LIBPNG
 #include "../extLibs/png/include/png.h"

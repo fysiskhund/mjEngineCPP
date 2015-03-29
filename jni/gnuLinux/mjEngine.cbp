@@ -57,8 +57,7 @@
 					<Add option="-DUSE_GL3" />
 					<Add directory="../../../../sdl/i686-w64-mingw32/include" />
 					<Add directory="../../../../glew/glew-1.11.0/include" />
-					<Add directory="E:/common/github/mjEngineCPP/jni/" />
-					<Add directory="audio" />
+					<Add directory=".." />
 				</Compiler>
 				<Linker>
 					<Add option="-mwindows" />

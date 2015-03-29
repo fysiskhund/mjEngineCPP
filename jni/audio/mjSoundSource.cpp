@@ -78,12 +78,12 @@ mjSoundSource::mjSoundSource()
     LOGI("Fake SoundSource created. Check the USE_SDL_AUDIO or USE_ANDROID_AUDIO compilation variables are set to ensure that the proper version of mjSoundSource is compiled in")
 }
 
-void mjSoundSource::Load(mjSoundResource* soundRes, int sampleNumber)
+int mjSoundSource::Load(mjSoundResource* soundRes, int sampleNumber)
 {
-
+    return 0;
 }
 
-void mjSoundSource::Play(mjVector3& sourceLocation, mjVector3& listenerLocation, int sampleIndex)
+void mjSoundSource::Play(mjEngine::mjVector3&, mjEngine::mjVector3&, mjEngine::mjVector3&, mjEngine::mjVector3&, int)
 {
 
 }
