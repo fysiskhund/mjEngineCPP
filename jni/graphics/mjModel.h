@@ -33,9 +33,9 @@ using namespace tinyxml2;
 class mjModel
 {
 public:
-	float* vertexBuffer;
-	float* texCoordBuffer;
-	float* normalComponentBuffer;
+	GLfloat* vertexBuffer;
+	GLfloat* texCoordBuffer;
+	GLfloat* normalComponentBuffer;
 	mjModelStructure* structure = NULL;
 
 
@@ -56,7 +56,7 @@ public:
 	void TieShaders(std::vector<mjShader*>& shaderList);
 
 	void Draw(std::vector<mjShader*>& shaderList,
-			float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, mjModelPose* pose);
+			GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose);
 
     mjModelPose* CreateSimplePose();
 

@@ -12,11 +12,11 @@ namespace mjEngine{
 class mj3rdPersonCamera: public mjCamera{
 public:
 	void SetTarget(mjVector3* target, mjVector3& offset);
-	void Update(float t_elapsed) override;
+	void Update(GLfloat t_elapsed) override;
 
-	float theta = 0;
-	float phi   = 0;
-	float r     = 4;
+	GLfloat theta = 0;
+	GLfloat phi   = 0;
+	GLfloat r     = 4;
 
 private:
 	mjVector3* target;

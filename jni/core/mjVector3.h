@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "../extLibs/logger/mjLog.h"
+#include "../extLibs/util/mjMultiPlatform.h"
 
 namespace mjEngine{
 
@@ -16,44 +17,44 @@ class mjVector3
 public:
 	mjVector3();
 	mjVector3(mjVector3& copy);
-	mjVector3(float x, float y, float z);
+	mjVector3(GLfloat x, GLfloat y, GLfloat z);
 
-	void Set(float x, float y, float z);
+	void Set(GLfloat x, GLfloat y, GLfloat z);
 	void Set0();
 
 	void CopyFrom(mjVector3& v);
-	void CopyFromArray(float* v);
+	void CopyFromArray(GLfloat* v);
 
 	void Add(mjVector3& v);
-	void ScaleAdd(float a, mjVector3& v);
+	void ScaleAdd(GLfloat a, mjVector3& v);
 	void Subtract(mjVector3& v);
-	void ScaleSubtract(float a, mjVector3& v);
+	void ScaleSubtract(GLfloat a, mjVector3& v);
 
 
 
-	void MulScalar(float a);
+	void MulScalar(GLfloat a);
 
-	float GetNorm();
-	float GetNormSquared();
-	float Normalize();
+	GLfloat GetNorm();
+	GLfloat GetNormSquared();
+	GLfloat Normalize();
 
-	float Dot(mjVector3& v);
+	GLfloat Dot(mjVector3& v);
 	void CrossOut(mjVector3& v, mjVector3* r);
 
-	void CopyToArray(float* array);
+	void CopyToArray(GLfloat* array);
 
-	float DistanceSquaredTo(mjVector3& v1);
+	GLfloat DistanceSquaredTo(mjVector3& v1);
 
-	float DistanceTo(mjVector3& v1);
+	GLfloat DistanceTo(mjVector3& v1);
 
 
-	void SetRotations(float theta, float phi);
+	void SetRotations(GLfloat theta, GLfloat phi);
 
 	bool Check(const char* file, int line);
 
-	float x;
-	float y;
-	float z;
+	GLfloat x;
+	GLfloat y;
+	GLfloat z;
 private:
 
 };

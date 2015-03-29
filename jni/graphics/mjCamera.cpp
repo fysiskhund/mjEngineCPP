@@ -11,7 +11,7 @@ mjCamera::mjCamera()
 	up.Set(0,1,0);
 
 }
-void mjCamera::GetLookAtMatrix(float* m)
+void mjCamera::GetLookAtMatrix(GLfloat* m)
 {
 	Matrix4::SetLookAtM(m, 0, pos, dir, up);
 }

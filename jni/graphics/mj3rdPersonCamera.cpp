@@ -11,7 +11,7 @@ void mj3rdPersonCamera::SetTarget(mjVector3* target, mjVector3& offset)
 	this->offset.CopyFrom(offset);
 
 }
-void mj3rdPersonCamera::Update(float t_elapsed)
+void mj3rdPersonCamera::Update(GLfloat t_elapsed)
 {
 	if (target)
 	{

@@ -210,7 +210,7 @@ void Matrix4::SetRotateM(float* m, int offsetIgnored, float a, float x, float y,
 	m[15]= 1;
 }
 
-void Matrix4::DebugM(const char* name, float* m)
+void Matrix4::DebugM(const char* name, GLfloat* m)
 {
 	for(int i = 0; i< 16; i++)
 	{

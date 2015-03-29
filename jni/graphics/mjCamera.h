@@ -15,7 +15,7 @@ class mjCamera: public mjObject{
 public:
 	bool hasKinematics = false;
 	mjCamera();
-	void GetLookAtMatrix(float* m);
+	void GetLookAtMatrix(GLfloat* m);
 
 	void SetAsCurrentCamera();
 

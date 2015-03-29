@@ -5,7 +5,9 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include "../../extLibs/util/mjMultiPlatform.h"
 #include "../../core/mjVector3.h"
+
 
 
 #include <string.h>
@@ -18,16 +20,16 @@ class Matrix4{
 
 public:
 
-	static void SetIdentityM(float* m, int ignoredMOffset);
+	static void SetIdentityM(GLfloat* m, int ignoredMOffset);
 
-	static void OrthoM(float* m, int ignoredMOffset, float left, float right, float bottom, float top, float near, float far);
-	static void FrustumM(float* m, int ignoredMOffset, float left, float right, float bottom, float top, float near, float far);
+	static void OrthoM(GLfloat* m, int ignoredMOffset, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat near, GLfloat far);
+	static void FrustumM(GLfloat* m, int ignoredMOffset, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat near, GLfloat far);
 
 
 
-	static inline void MultiplyMM(float* result, int ignoredResultOffset,
-								  float* lhs, int ignoredLhsOffset,
-								  float* rhs, int ignoredRhsOffset){
+	static inline void MultiplyMM(GLfloat* result, int ignoredResultOffset,
+								  GLfloat* lhs, int ignoredLhsOffset,
+								  GLfloat* rhs, int ignoredRhsOffset){
 
 		result[0] = (lhs[0]*rhs[0]) + (lhs[4]*rhs[1]) + (lhs[8]*rhs[2]) + (lhs[12]*rhs[3]);
 		result[1] = (lhs[1]*rhs[0]) + (lhs[5]*rhs[1]) + (lhs[9]*rhs[2]) + (lhs[13]*rhs[3]);
@@ -50,20 +52,20 @@ public:
 		result[15] = (lhs[3]*rhs[12]) + (lhs[7]*rhs[13]) + (lhs[11]*rhs[14]) + (lhs[15]*rhs[15]);
 
 	}
-	static void GetPositionScaleAndRotationMatrix(mjVector3& pos, mjVector3& dir, mjVector3& up, mjVector3& scale, float* matrixR);
-	static void GetPositionScaleAndAngleRotationMatrix(mjVector3& pos, mjVector3& angles, float* matrixR);
-	static void SetLookAtM(float* m, int offsetIgnored,
+	static void GetPositionScaleAndRotationMatrix(mjVector3& pos, mjVector3& dir, mjVector3& up, mjVector3& scale, GLfloat* matrixR);
+	static void GetPositionScaleAndAngleRotationMatrix(mjVector3& pos, mjVector3& angles, GLfloat* matrixR);
+	static void SetLookAtM(GLfloat* m, int offsetIgnored,
 			mjVector3& pos,
 			mjVector3& backDir,
 			mjVector3& up);
 
-	static void SetScaleM(float* m, int offsetIgnored, float sX, float sY, float sZ);
+	static void SetScaleM(GLfloat* m, int offsetIgnored, GLfloat sX, GLfloat sY, GLfloat sZ);
 
-	static void SetTranslationM(float* m, int offsetIgnored, float tX, float tY, float tZ);
+	static void SetTranslationM(GLfloat* m, int offsetIgnored, GLfloat tX, GLfloat tY, GLfloat tZ);
 
-	static void SetRotateM(float* m, int offsetIgnored, float a, float x, float y, float z);
+	static void SetRotateM(GLfloat* m, int offsetIgnored, GLfloat a, GLfloat x, GLfloat y, GLfloat z);
 
-	static void DebugM(const char* name, float* m);
+	static void DebugM(const char* name, GLfloat* m);
 };
 
 }
