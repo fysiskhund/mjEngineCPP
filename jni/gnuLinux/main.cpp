@@ -3,8 +3,12 @@
 
 #include "../game/gl_code.h"
 #include <core/mjVector3.h>
-#include <SDL2/SDL_mixer.h>
 
+#ifdef OSX
+    #include <SDL2_mixer/SDL_mixer.h>
+#else
+    #include <SDL2/SDL_mixer.h>
+#endif
 struct SDLStruct {
     SDL_Window* window;
     SDL_GLContext context;
@@ -64,7 +68,7 @@ int InitSDL(SDLStruct* sdlData) {
     	SDL_GetError();
     }
 
-    #ifdef USE_GL3
+    #if defined(USE_GL3) && !defined(OSX)
     glewInit();
     #endif
 

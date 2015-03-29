@@ -6,17 +6,26 @@
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
 #else
-#ifdef WIN32
-    #include <Windows.h>
-    unsigned strnlen(const char* str, unsigned n);
-    #define png_uint_32 unsigned
-    #define png_byte char
-#endif // WIN32
-    #define GLEW_STATIC
-    #include <GL/glew.h>
-    #include <GL/gl.h>
-    #include <SDL2/SDL.h>
-#endif // !USE_GLES
+
+#ifdef OSX
+    #include <OpenGL/gl.h>
+    #include <OpenGL/glu.h>
+    #include <OpenGL/glext.h>
+#else
+
+    #ifdef WIN32
+        #include <Windows.h>
+        unsigned strnlen(const char* str, unsigned n);
+        #define png_uint_32 unsigned
+        #define png_byte char
+    #endif // WIN32
+        #define GLEW_STATIC
+        #include <GL/glew.h>
+        #include <GL/gl.h>
+        #include <SDL2/SDL.h>
+    #endif // !USE_GLES
+
+#endif // !OSX
 
 #include <string>
 
