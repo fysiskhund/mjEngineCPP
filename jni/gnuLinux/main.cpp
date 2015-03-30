@@ -103,21 +103,24 @@ int stepFunc(SDLStruct* sdlData) {
         {
             float axisValue = (float) event.jaxis.value / 32767.0;
 
-            switch(event.jaxis.axis)
+            int axis = event.jaxis.axis;
+            switch(axis)
             {
 
-                case 0: // x
+                case MJ_LEFT_JOYSTICK_X:
                     lJoystick.x  = axisValue;
                 break;
-                case 1: // y
+                case MJ_LEFT_JOYSTICK_Y:
                     lJoystick.y = axisValue;
                 break;
-                case 3:
+                case MJ_RIGHT_JOYSTICK_X:
                     rJoystick.x = axisValue;
                 break;
-                case 4:
+                case MJ_RIGHT_JOYSTICK_Y:
                     rJoystick.y = axisValue;
+                    break;
                 default:
+                    //axis = event.jaxis.axis;
                 break;
             }
             //printf("Joystick event\n");

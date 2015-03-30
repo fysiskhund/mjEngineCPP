@@ -2,30 +2,30 @@
 
 namespace mjEngine{
 
-void Matrix4::SetIdentityM(float* m, int ignoredMOffset)
+void Matrix4::SetIdentityM(GLfloat* m, int ignoredMOffset)
 {
 	m[0] = m[5] = m[10] = m[15] = 1;
 	m[1] = m[2] = m[3] = m[4] = m[6] = m[7] = m[8] = m[9] = m[11] = m[12] = m[13] = m[14] = 0;
 }
 
 
-void Matrix4::FrustumM(float* m, int ignoredMOffset,
-		float left, float right, float bottom, float top, float near, float far)
+void Matrix4::FrustumM(GLfloat* m, int ignoredMOffset,
+		GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane)
 {
 
-	float A = (right + left)/(right - left);
-	float B = (top + bottom)/(top - bottom);
-	float C = -(far + near)/(far - near);
-	float D = -2*far*near/(far - near);
+	GLfloat A = (right + left)/(right - left);
+	GLfloat B = (top + bottom)/(top - bottom);
+	GLfloat C = -(farPlane + nearPlane)/(farPlane - nearPlane);
+	GLfloat D = -2*farPlane*nearPlane/(farPlane - nearPlane);
 
 
-	m[0] = 2*near/(right - left);
+	m[0] = 2*nearPlane/(right - left);
 	m[1] = 0;
 	m[2] = 0;
 	m[3] = 0;
 
 	m[4] = 0;
-	m[5] = 2*near/(top - bottom);
+	m[5] = 2*nearPlane/(top - bottom);
 	m[6] = 0;
 	m[7] = 0;
 
@@ -39,11 +39,11 @@ void Matrix4::FrustumM(float* m, int ignoredMOffset,
 	m[14] = D;
 	m[15] = 0;
 }
-void Matrix4::OrthoM(float* m, int ignoredMOffset, float left, float right, float bottom, float top, float near, float far)
+void Matrix4::OrthoM(GLfloat* m, int ignoredMOffset, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane)
 {
-	float tx = (right + left)/(right - left);
-	float ty = (top + bottom)/(top - bottom);
-	float tz = (far + near)/(far - near);
+	GLfloat tx = (right + left)/(right - left);
+	GLfloat ty = (top + bottom)/(top - bottom);
+	GLfloat tz = (farPlane + nearPlane)/(farPlane - nearPlane);
 
 	m[0] = 2/(right - left);
 	m[1] = 0;
@@ -57,7 +57,7 @@ void Matrix4::OrthoM(float* m, int ignoredMOffset, float left, float right, floa
 
 	m[8] = 0;
 	m[9] = 0;
-	m[10] = -2.0/(far - near);
+	m[10] = -2.0/(farPlane - nearPlane);
 	m[11] = 0;
 
 	m[12] = tx;
@@ -66,7 +66,7 @@ void Matrix4::OrthoM(float* m, int ignoredMOffset, float left, float right, floa
 	m[15] = 1;
 }
 
-void Matrix4::GetPositionScaleAndRotationMatrix(mjVector3& pos, mjVector3& dir, mjVector3& up, mjVector3& scale, float* matrixR)
+void Matrix4::GetPositionScaleAndRotationMatrix(mjVector3& pos, mjVector3& dir, mjVector3& up, mjVector3& scale, GLfloat* matrixR)
 {
 	mjVector3 s;
 	mjVector3 u;
@@ -94,15 +94,15 @@ void Matrix4::GetPositionScaleAndRotationMatrix(mjVector3& pos, mjVector3& dir, 
 	matrixR[14] = pos.z;
 	matrixR[15] = 1;
 }
-void Matrix4::GetPositionScaleAndAngleRotationMatrix(mjVector3& pos, mjVector3& angles, float* matrixR)
+void Matrix4::GetPositionScaleAndAngleRotationMatrix(mjVector3& pos, mjVector3& angles, GLfloat* matrixR)
 {
-    float cosX = cos(angles.x);
-    float cosY = cos(angles.y);
-    float cosZ = cos(angles.z);
+    GLfloat cosX = cos(angles.x);
+    GLfloat cosY = cos(angles.y);
+    GLfloat cosZ = cos(angles.z);
 
-    float sinX = sin(angles.x);
-    float sinY = sin(angles.y);
-    float sinZ = sin(angles.z);
+    GLfloat sinX = sin(angles.x);
+    GLfloat sinY = sin(angles.y);
+    GLfloat sinZ = sin(angles.z);
 
 
     matrixR[0] = (cosZ*cosY);
@@ -127,7 +127,7 @@ void Matrix4::GetPositionScaleAndAngleRotationMatrix(mjVector3& pos, mjVector3& 
 }
 
 
-void Matrix4::SetLookAtM(float* m, int offsetIgnored,
+void Matrix4::SetLookAtM(GLfloat* m, int offsetIgnored,
 		mjVector3& pos,
 		mjVector3& dir,
 		mjVector3& up)
@@ -162,7 +162,7 @@ void Matrix4::SetLookAtM(float* m, int offsetIgnored,
 }
 
 
-void Matrix4::SetScaleM(float* m, int offsetIgnored, float sX, float sY, float sZ){
+void Matrix4::SetScaleM(GLfloat* m, int offsetIgnored, GLfloat sX, GLfloat sY, GLfloat sZ){
 	m[0] = sX;
 	m[5] = sY;
 	m[10] = sZ;
@@ -170,7 +170,7 @@ void Matrix4::SetScaleM(float* m, int offsetIgnored, float sX, float sY, float s
 	m[15] = 1;
 }
 
-void Matrix4::SetTranslationM(float* m, int offsetIgnored, float tX, float tY, float tZ){
+void Matrix4::SetTranslationM(GLfloat* m, int offsetIgnored, GLfloat tX, GLfloat tY, GLfloat tZ){
 	m[0] = m[5] = m[10] = m[15] = 1;
 
 	m[12] = tX;
@@ -181,11 +181,11 @@ void Matrix4::SetTranslationM(float* m, int offsetIgnored, float tX, float tY, f
 
 }
 
-void Matrix4::SetRotateM(float* m, int offsetIgnored, float a, float x, float y, float z)
+void Matrix4::SetRotateM(GLfloat* m, int offsetIgnored, GLfloat a, GLfloat x, GLfloat y, GLfloat z)
 {
-	float c = cos(a);
-	float s = sin(a);
-	float d = 1.0f-c;
+	GLfloat c = cos(a);
+	GLfloat s = sin(a);
+	GLfloat d = 1.0f-c;
 
 
 

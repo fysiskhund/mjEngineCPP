@@ -5,12 +5,15 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include "../../extLibs/util/mjMultiPlatform.h"
+
+#include <string.h>
+
+//#include "../../extLibs/util/mjMultiPlatform.h"
 #include "../../core/mjVector3.h"
 
 
 
-#include <string.h>
+
 
 #include "../logger/mjLog.h"
 
@@ -22,8 +25,8 @@ public:
 
 	static void SetIdentityM(GLfloat* m, int ignoredMOffset);
 
-	static void OrthoM(GLfloat* m, int ignoredMOffset, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat near, GLfloat far);
-	static void FrustumM(GLfloat* m, int ignoredMOffset, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat near, GLfloat far);
+	static void OrthoM(GLfloat* m, int ignoredMOffset, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane);
+	static void FrustumM(GLfloat* m, int ignoredMOffset, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane);
 
 
 
