@@ -56,7 +56,7 @@
 					<Add option="-DUSE_SDL_AUDIO" />
 					<Add option="-DUSE_GL3" />
 					<Add directory="../../../../sdl/i686-w64-mingw32/include" />
-					<Add directory="../../../../glew/glew-1.11.0/include" />
+					<Add directory="../../../../glew/include" />
 					<Add directory=".." />
 				</Compiler>
 				<Linker>
@@ -68,7 +68,7 @@
 					<Add library="glew32s" />
 					<Add library="opengl32" />
 					<Add library="SDL2_mixer" />
-					<Add directory="../../../../glew/glew-1.11.0/lib/Release/Win32" />
+					<Add directory="../../../../glew/lib/Release/Win32" />
 					<Add directory="../../../../sdl/i686-w64-mingw32/lib" />
 				</Linker>
 			</Target>

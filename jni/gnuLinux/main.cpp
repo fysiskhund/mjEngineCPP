@@ -173,7 +173,19 @@ int main(int argc, char* argv[]) {
     #endif
     setupGame(width, height, new mjResourceManager(pathPrefix));
 
-    while (!stepFunc(&data));
+    int beforeFrame;
+    int exitResult;
+    do{
+
+        beforeFrame = SDL_GetTicks();
+        exitResult = stepFunc(&data);
+        int total = SDL_GetTicks() - beforeFrame;
+        if (total < 16) // lock to 60 fps. In case SDL is not following vertical sync
+        {
+            SDL_Delay(16-total);
+        }
+
+    } while(!exitResult);
 
     QuitSDL(&data);
 
