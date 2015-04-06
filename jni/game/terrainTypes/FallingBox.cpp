@@ -36,14 +36,19 @@ void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
     gravityNormalized.Normalize();
     hasWeight = false;
 
+    XMLElement* timingElement;
 
-    XMLElement* timingElement = fallingBoxElem->FirstChildElement("timing");
+    timingElement = fallingBoxElem->FirstChildElement("totaltimetofall");
     if (timingElement)
     {
-    	timingElement->QueryFloatAttribute("fall", &this->totalTimeToFall);
-    	timingElement->QueryFloatAttribute("return", &this->totalTimeToReturn);
+    	timingElement->QueryFloatAttribute("value", &this->totalTimeToFall);
     }
 
+    timingElement = fallingBoxElem->FirstChildElement("totaltimetoreturn");
+    if (timingElement)
+    {
+        timingElement->QueryFloatAttribute("value", &this->totalTimeToReturn);
+    }
 
     /////// Travelling box test
     XMLElement* controlPointElement = fallingBoxElem->FirstChildElement("controlpoint");
