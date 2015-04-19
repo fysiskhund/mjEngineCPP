@@ -105,9 +105,7 @@ void FallingBox::ProcessPhysicsEffects(float t_elapsed)
                         //FIXME: add a behaviour switch whether the box should continue on its own or wait for the player again.
                         // By default, wait for the player.
 
-                    timeToFall = 0;
-                    pos.CopyFrom(startPosition);
-                    active = false;
+                    Reset();
                 }
                 // Select next control point
                 currentControlPointIndex++;
@@ -187,15 +185,28 @@ void FallingBox::Update(float t_elapsed)
     //hasKinematics = false;
 
     // hasWeight must be updated per-frame.
-    hasWeight = false;
+    // If the box must fall after first contact
+    // then this hasWeight variable isn't set to false until the box is reset.
+    if (timeToFallIsAccumulative)
+    {
+        hasWeight = false;
+    }
+
 
     if (pos.GetNormSquared() > 40000)
     {
-        vel.Set0();
-        timeToFall = 0;
-        pos.CopyFrom(startPosition);
-        active = false;
+        Reset();
+
     }
+}
+
+void FallingBox::Reset()
+{
+    vel.Set0();
+    timeToFall = 0;
+    pos.CopyFrom(startPosition);
+    active = false;
+    hasWeight = false;
 }
 
 

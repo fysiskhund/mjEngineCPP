@@ -17,6 +17,7 @@ class FallingBox: public Box
         float timeToReturn = 0;
         int fallingState = 0;
         bool hasWeight = 0;
+        bool timeToFallIsAccumulative = false;
         mjVector3 startPosition;
         mjVector3 gravity;
         mjVector3 gravityNormalized;
@@ -32,6 +33,8 @@ class FallingBox: public Box
         virtual void ProcessCollisionEffects() override;
         virtual void ProcessPhysicsEffects(float t_elapsed) override;
         virtual void Update(float t_elapsed) override;
+
+        void Reset();
 
         virtual ~FallingBox();
     protected:
