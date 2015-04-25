@@ -76,37 +76,41 @@ public class GL2JNIActivity extends Activity {
     @Override public boolean dispatchGenericMotionEvent(MotionEvent event)
     {
 
-    	
+
     	InputDevice controllerDevice = event.getDevice();
     	if ((controllerDevice.getSources() & InputDevice.SOURCE_CLASS_JOYSTICK) != 0) {
 
     		int controllerID = controllerDevice.getId();
-    		switch(event.getAction())
-    		{
-	    		case MotionEvent.ACTION_MOVE:
-	    			float x0, y0;
-	    			float x1, y1;
-	    			for (int i = 0; i < event.getHistorySize(); i++)
-	    			{
-	    				x0 = event.getHistoricalAxisValue(MotionEvent.AXIS_X, i);
-	    				y0 = event.getHistoricalAxisValue(MotionEvent.AXIS_Y, i);
-	    				GL2JNILib.HandleJoystickInput(controllerID, 0, x0, y0);
-	
-	    				x1 = event.getHistoricalAxisValue(MotionEvent.AXIS_Z, i);
-	    				y1 = event.getHistoricalAxisValue(MotionEvent.AXIS_RZ, i);
-	    				GL2JNILib.HandleJoystickInput(controllerID, 1, x1, y1);
-	    			}
-	
-	    			x0 = event.getAxisValue(MotionEvent.AXIS_X); 
-	    			y0 = event.getAxisValue(MotionEvent.AXIS_Y);
-	    			GL2JNILib.HandleJoystickInput(controllerID, 0, x0, y0);
-	
-	    			x1 = event.getAxisValue(MotionEvent.AXIS_Z);
-	    			y1 = event.getAxisValue(MotionEvent.AXIS_RZ);
-	    			GL2JNILib.HandleJoystickInput(controllerID, 1, x1, y1);
-	    			return true;
-	    		default:
-	    			break;
+    		if (GL2JNILib.isReady){
+    			switch(event.getAction())
+    			{
+    			case MotionEvent.ACTION_MOVE:
+    				float x0, y0;
+    				float x1, y1;
+    				for (int i = 0; i < event.getHistorySize(); i++)
+    				{
+    					x0 = event.getHistoricalAxisValue(MotionEvent.AXIS_X, i);
+    					y0 = event.getHistoricalAxisValue(MotionEvent.AXIS_Y, i);
+    					GL2JNILib.HandleJoystickInput(controllerID, 0, x0, y0);
+
+    					x1 = event.getHistoricalAxisValue(MotionEvent.AXIS_Z, i);
+    					y1 = event.getHistoricalAxisValue(MotionEvent.AXIS_RZ, i);
+    					GL2JNILib.HandleJoystickInput(controllerID, 1, x1, y1);
+    				}
+
+    				x0 = event.getAxisValue(MotionEvent.AXIS_X); 
+    				y0 = event.getAxisValue(MotionEvent.AXIS_Y);
+    				GL2JNILib.HandleJoystickInput(controllerID, 0, x0, y0);
+
+    				x1 = event.getAxisValue(MotionEvent.AXIS_Z);
+    				y1 = event.getAxisValue(MotionEvent.AXIS_RZ);
+
+    				GL2JNILib.HandleJoystickInput(controllerID, 1, x1, y1);
+
+    				return true;
+    			default:
+    				break;
+    			}
     		}
 
     	
@@ -118,11 +122,14 @@ public class GL2JNIActivity extends Activity {
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
     	
+    	
+    	
     	if (KeyEvent.isGamepadButton(event.getKeyCode()))
     	{
     		
-    		
-    		GL2JNILib.HandleButtonInput(event.getDevice().getId(), event.getKeyCode(), event.getAction() == KeyEvent.ACTION_DOWN);
+    		if (GL2JNILib.isReady){
+    			GL2JNILib.HandleButtonInput(event.getDevice().getId(), event.getKeyCode(), event.getAction() == KeyEvent.ACTION_DOWN);
+    		}
     		return true;
     	}
     	return super.dispatchKeyEvent(event);

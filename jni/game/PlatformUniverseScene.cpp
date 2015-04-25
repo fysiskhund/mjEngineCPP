@@ -71,7 +71,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
     float closeUpFactor = 0.5;
     ratio = closeUpFactor*((float)width)/((float)height);
     Matrix4::FrustumM(projectionMatrix, 0,
-            				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 50);
+            				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 70);
 
 
     //LOGI("setupSkybox");

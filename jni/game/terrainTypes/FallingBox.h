@@ -1,8 +1,10 @@
 #ifndef FALLINGBOX_H
 #define FALLINGBOX_H
 
-#include "Box.h"
 #include <vector>
+#include "Box.h"
+#include <audio/mjSoundSource.h>
+
 
 // The "falling box" should really be called "scriptable box"
 // It has two behaviours, one is that it travels along a specific direction once it is set in motion
@@ -18,10 +20,14 @@ class FallingBox: public Box
         int fallingState = 0;
         bool hasWeight = 0;
         bool timeToFallIsAccumulative = false;
+        bool slidingSoundPlaying = false;
+
         mjVector3 startPosition;
         mjVector3 gravity;
         mjVector3 gravityNormalized;
         mjVector3 travelDirection;
+        mjSoundSource cinderBlockSlide;
+
 
         FallingBox(mjResourceManager& resourceManager);
 

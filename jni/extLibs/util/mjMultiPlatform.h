@@ -2,9 +2,15 @@
 #define MJMULTIPLATFORM_H
 
 // Macros for choosing GL versions
-#ifdef USE_GLES
+#ifdef USE_GLES2
     #include <GLES2/gl2.h>
     #include <GLES2/gl2ext.h>
+
+    #define MJ_LEFT_JOYSTICK_X 0
+    #define MJ_LEFT_JOYSTICK_Y 1
+    #define MJ_RIGHT_JOYSTICK_X 3
+    #define MJ_RIGHT_JOYSTICK_Y 4
+
 #else
 
     #ifdef OSX

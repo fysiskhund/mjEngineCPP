@@ -232,7 +232,7 @@ mjModelPose* mjModel::CreateSimplePose()
     return pose;
 }
 
-#if defined(USE_GLES) || defined(USE_GL3)
+#if defined(USE_GLES2) || defined(USE_GL3)
 // Drawing routine for OpenGL ES 2.0 & OpenGL 3
 
 void mjModel::Draw(std::vector<mjShader*>& shaderList,
@@ -348,7 +348,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 	// Nothing is rendered, this is useful for the dedicated-server version of the games
 }
 #else
-	#error "No rendering system is defined. Choose USE_GLES, USE_GL3 or USE_NULL_RENDERER
+	#error "No rendering system is defined. Choose USE_GLES2, USE_GL3 or USE_NULL_RENDERER
 #endif
 
 }// namespace mj

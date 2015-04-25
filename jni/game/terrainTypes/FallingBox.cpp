@@ -22,6 +22,7 @@ FallingBox::FallingBox(mjResourceManager& resourceManager)
     hasKinematics = true;
 
 
+    cinderBlockSlide.Load(resourceManager.FetchSound("sounds/95000__j1987__cinderblockmove_mono.wav"),0);
 
 }
 
@@ -157,7 +158,7 @@ void FallingBox::ProcessCollisionEffects()
                     if (collisionEffect->value.Dot(gravityNormalized)> 0.9) //pretty much the same angle
                     {
                         hasWeight = true;
-                        LOGI("Has weight");
+                        //LOGI("Has weight");
                     }
                 }
                 break;
@@ -173,10 +174,18 @@ void FallingBox::Update(float t_elapsed)
 {
     if (hasWeight)
     {
+        if ((timeToFall >= totalTimeToFall-1.4) && !slidingSoundPlaying)
+        {
+            // Play the sound effect when the box is close to falling
+            cinderBlockSlide.Play(this->pos, 0);
+            slidingSoundPlaying = true;
+        }
         timeToFall += t_elapsed;
+
         //LOGI("Accumulated time: %3.3f", timeToFall);
         if (timeToFall > totalTimeToFall)
         {
+
             active = true;
         }
     }
@@ -207,6 +216,7 @@ void FallingBox::Reset()
     pos.CopyFrom(startPosition);
     active = false;
     hasWeight = false;
+    slidingSoundPlaying = false;
 }
 
 

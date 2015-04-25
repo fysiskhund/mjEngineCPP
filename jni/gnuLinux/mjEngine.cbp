@@ -15,7 +15,7 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-DDESKTOP_SDL" />
-					<Add option="-DUSE_GLES" />
+					<Add option="-DUSE_GLES2" />
 					<Add option="-DUSE_SDL_AUDIO" />
 					<Add directory=".." />
 					<Add directory="audio" />

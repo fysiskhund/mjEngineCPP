@@ -9,14 +9,14 @@ mjDefaultShaders::mjDefaultShaders()
 {
 	//Set up lights
 
-	diffuseLightDirection.Set(0.2, 1, -0.2);
+	diffuseLightDirection.Set(0.5, 1, -0.2);
 	diffuseLightDirection.Normalize();
 	diffuseLightDirection.CopyToArray(diffuseLightDirectionArray);
 
-	diffuseLightColor[0] = diffuseLightColor[1] = diffuseLightColor[2] = 0.9;
+	diffuseLightColor[0] = diffuseLightColor[1] = diffuseLightColor[2] = 0.8;
 	diffuseLightColor[3] = 1;
 
-	ambientLightColor[0] = ambientLightColor[1] = ambientLightColor[2] = 0.5;
+	ambientLightColor[0] = ambientLightColor[1] = ambientLightColor[2] = 0.69;
 	ambientLightColor[3] = 1;
 
 
@@ -87,14 +87,14 @@ void mjDefaultShaders::Run(mjModelMesh* mesh,
 
 
 
-#ifdef USE_GLES
+#ifdef USE_GLES2
 
 	#include "gles2/defaultShaderSources-gles2.h"
 
 #else
 
 	#include "gl3/defaultShaderSources-gl3.h"
-	
+
 #endif
 
 const char* mjDefaultShaders::simpleVertexShaderCode =

@@ -51,14 +51,14 @@ void mjSkyboxShaders::Run(mjModelMesh* mesh,
 
 }
 
-#ifdef USE_GLES
+#ifdef USE_GLES2
 
 	#include "gles2/skyboxShaderSources-gles2.h"
 
 #else
 
 	#include "gl3/skyboxShaderSources-gl3.h"
-	
+
 #endif
 
 
