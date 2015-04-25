@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=ProjectRaduga
+Exec=/common/github/mjEngineCPP/jni/gnuLinux/build/Debug/mjEngine
+Icon=/common/github/mjEngineCPP/jni/gnuLinux/mjEngineIcon.png
+Type=Application
+Categories=Games;
