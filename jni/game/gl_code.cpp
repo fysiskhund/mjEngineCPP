@@ -99,7 +99,7 @@ if (joystickID == 0)
 }
 void JoystickButtonEvent(int controllerID, int buttonID, bool pressedDown)
 {
-    if (platformUniverse->character->footing== 1)
+    if (platformUniverse->character->hasFooting== 1 && (!platformUniverse->character->jumping))
 	{
 		platformUniverse->character->jumping = 1;
 	}

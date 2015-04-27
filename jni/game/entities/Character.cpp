@@ -61,8 +61,8 @@ void Character::ProcessPhysicsEffects(float t_elapsed)
 void Character::ProcessCollisionEffects()
 {
 
-	int previousFootingValue = footing;
-	footing = 0;
+	int previousFootingValue = hasFooting;
+	hasFooting = 0;
 
 	for (unsigned i=0; i < collisionStack.size(); i++)
 	{
@@ -92,11 +92,11 @@ void Character::ProcessCollisionEffects()
 				{
 					if (!previousFootingValue)
 					{
-						//LOGI("char: footing -> yes");
+						//LOGI("char: hasFooting -> yes");
 
 
 					}
-					footing = 1;
+					hasFooting = 1;
 					objectProvidingFooting = collisionEffect->otherObject;
 				} else {
                     //LOGI("noFooting");
@@ -109,9 +109,9 @@ void Character::ProcessCollisionEffects()
 		}
 	}
 
-	if (previousFootingValue && (footing == 0))
+	if (previousFootingValue && (hasFooting == 0))
 	{
-		//LOGI("char: footing -> *no*");
+		//LOGI("char: hasFooting -> *no*");
 	}
 
 
@@ -131,17 +131,17 @@ void Character::Update(float t_elapsed)
 		{
 
 			jumping = 0;
-			footing = 0;
+			hasFooting = 0;
 			if (vel.GetNorm() < gravity->GetNorm()*100.0)
 			{
 				//LOGI("Vel: %3.3f, %3.3f, %3.3f", vel.x, vel.y, vel.z);
 				vel.ScaleAdd(-0.64, *gravity);
 			}
-			LOGI("char: footing -> no (jumping)");
+			LOGI("char: hasFooting -> no (jumping)");
 		}
 	}
 	float intrinsecVelNorm = intrinsecVel.GetNorm();
-	if (intrinsecVelNorm < 10 && footing)
+	if (intrinsecVelNorm < 10 && hasFooting)
     {
 
         if ((intrinsecVel.x*vel.x < 0))// || fabs(intrinsecVel.x + vel.x) < MAX_VEL_FOR_CHARACTER)
@@ -170,7 +170,10 @@ void Character::Update(float t_elapsed)
 
 			pose->angles[0]->x = -intrinsecVelNorm*1.5707*0.02; // inclination when running
 
-			animator.UpdatePose(tAnimation, *pose, animation);
+			if (hasFooting) // wobble _only_ if standing on something :3
+			{
+				animator.UpdatePose(tAnimation, *pose, animation);
+			}
 	} else
 	{
 		tAnimation = 0; // Reset animation
@@ -194,7 +197,7 @@ void Character::UpdatePosition(float t_elapsed)
         pos.ScaleAdd(t_elapsed, intrinsecVel);
     }
 
-    if (footing)
+    if (hasFooting)
     {
         pos.ScaleAdd(t_elapsed, objectProvidingFooting->vel);
         /*if (fabs(vel.x) < fabs(objectProvidingFooting->vel.x))
@@ -247,7 +250,7 @@ void Character::SetUpSillyAnimation()
 	    mjAnimationKeyframe* keyframe1 = new mjAnimationKeyframe();
 
 	    // Keyframe1 is a slight hop
-	    keyframe1->pos.y = 0.03;
+	    keyframe1->pos.y = 0.05;
 	    keyframe1->timeStamp = 0.25;
 	    keyframe1->rotationAnimType = KEYFRAMETYPE_IGNORE;
 

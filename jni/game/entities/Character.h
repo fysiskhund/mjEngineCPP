@@ -23,7 +23,7 @@ public:
 
     mjVector3 startPosition;
 	Character(mjResourceManager& resourceManager);
-	int footing = 0;
+	int hasFooting = 0;
 	int jumping = 0;
 	void ProcessPhysicsEffects(float t_elapsed) override;
 	void ProcessCollisionEffects() override;
