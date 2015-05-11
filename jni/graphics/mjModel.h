@@ -66,6 +66,11 @@ private:
 	int currentFace;
 	int faceCount;
 	//mjMatrixStack mStack;
+    
+#ifdef OSX
+    GLuint vertexArrayObject;
+    GLuint objectBuffers[3];
+#endif
 
 };
 } // nameSpace mj
