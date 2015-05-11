@@ -13,6 +13,11 @@
 
 #else
 
+    #define MJ_LEFT_JOYSTICK_X 0
+    #define MJ_LEFT_JOYSTICK_Y 1
+    #define MJ_RIGHT_JOYSTICK_X 2
+    #define MJ_RIGHT_JOYSTICK_Y 3
+
     #ifdef OSX
         #include <OpenGL/gl.h>
         #include <OpenGL/glu.h>
@@ -28,10 +33,7 @@
 
         #endif //! WIN32
 
-        #define MJ_LEFT_JOYSTICK_X 0
-        #define MJ_LEFT_JOYSTICK_Y 1
-        #define MJ_RIGHT_JOYSTICK_X 2
-        #define MJ_RIGHT_JOYSTICK_Y 3
+
 
         #define GLEW_STATIC
         #include <GL/glew.h>

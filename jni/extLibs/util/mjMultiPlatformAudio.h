@@ -3,7 +3,11 @@
 
 #ifdef USE_SDL_AUDIO
 
+#ifndef OSX
 #include <SDL2/SDL_mixer.h>
+#else
+#include <SDL2_mixer/SDL_mixer.h>
+#endif
 #include <vector>
 
 
