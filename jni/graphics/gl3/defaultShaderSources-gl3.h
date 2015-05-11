@@ -4,7 +4,7 @@
 
 
 const char* mjDefaultShaders::vanillaVertexShaderCode =
-			"#version 130\n"
+			"#version 150\n"
 
 			"in vec4 vPosition; \n"
 	        "in vec2 aTexCoordinates;\n"
@@ -55,7 +55,7 @@ const char* mjDefaultShaders::vanillaVertexShaderCode =
 	        "} \n";
 
 const char* mjDefaultShaders::vanillaFragmentShaderCode =
-         "#version 130\n"
+         "#version 150\n"
 		 //"precision mediump float;\n"
 
 		 "in vec2 vTexCoordinates;\n"
@@ -63,9 +63,11 @@ const char* mjDefaultShaders::vanillaFragmentShaderCode =
 
 		 "in vec4 vLight;\n"
 
+        "out vec4 fragColorOut;\n"
+
 		 "void main(){ \n"
 		//"gl_FragColor = vec4(0,1,0,1)*vLight; \n"
-		 " gl_FragColor = texture2D(uTexture, vTexCoordinates)* vLight;\n"
+		 " fragColorOut = texture(uTexture, vTexCoordinates)* vLight;\n"
 		 "} \n";
 
 

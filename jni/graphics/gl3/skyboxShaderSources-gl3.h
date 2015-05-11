@@ -1,7 +1,7 @@
 
 
 const char* mjSkyboxShaders::skyboxVertexShaderCode =
-		"#version 130 \n"
+		"#version 150 \n"
 
 		"in vec4 vPosition;\n"
 		"in vec2 aTexCoordinates;\n"
@@ -14,10 +14,11 @@ const char* mjSkyboxShaders::skyboxVertexShaderCode =
 	    "}\n";
 
 const char* mjSkyboxShaders::skyboxFragmentShaderCode =
-        "#version 130\n"
+        "#version 150\n"
 		//"precision mediump float;\n" does this exist in GL3?
 		"in vec2 vTexCoordinates;\n"
 		"uniform sampler2D uTexture;\n"
+        "out vec4 fragColorOut;\n"
 	    "void main() {\n"
-	    "  gl_FragColor = texture2D(uTexture, vTexCoordinates);\n"
+	    "  fragColorOut = texture(uTexture, vTexCoordinates);\n"
 	    "}\n";
