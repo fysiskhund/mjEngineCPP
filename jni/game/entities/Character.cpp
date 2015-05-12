@@ -127,7 +127,7 @@ void Character::Update(float t_elapsed)
 
 	if (gravity)
 	{
-		if (jumping)
+		if (jumping == 1)
 		{
 
 			jumping = 0;

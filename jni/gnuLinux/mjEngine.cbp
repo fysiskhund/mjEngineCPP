@@ -19,6 +19,7 @@
 					<Add option="-DUSE_SDL_AUDIO" />
 					<Add directory=".." />
 					<Add directory="audio" />
+					<Add directory="gnuLinux" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -37,6 +38,7 @@
 					<Add option="-O2" />
 					<Add directory=".." />
 					<Add directory="audio" />
+					<Add directory="gnuLinux" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -58,6 +60,7 @@
 					<Add directory="../../../../sdl/i686-w64-mingw32/include" />
 					<Add directory="../../../../glew/include" />
 					<Add directory=".." />
+					<Add directory="gnuLinux" />
 				</Compiler>
 				<Linker>
 					<Add option="-mwindows" />
@@ -84,6 +87,7 @@
 					<Add option="-DUSE_SDL_AUDIO" />
 					<Add option="-DUSE_GL3" />
 					<Add directory=".." />
+					<Add directory="gnuLinux" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -246,6 +250,8 @@
 		<Unit filename="../util/mjSoundResource.h" />
 		<Unit filename="../util/mjTextureResource.cpp" />
 		<Unit filename="../util/mjTextureResource.h" />
+		<Unit filename="keyboardcontrol.cpp" />
+		<Unit filename="keyboardcontrol.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

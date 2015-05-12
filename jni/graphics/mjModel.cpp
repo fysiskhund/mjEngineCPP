@@ -9,7 +9,7 @@ mjModel::mjModel()
 	currentFace = -1;
 	faceCount = -1;
 	status[0] = '\0';
-    
+
 #ifdef OSX
     // Generate the buffers needed for CORE profile compliance
     glGenVertexArraysAPPLE(1, &vertexArrayObject);
@@ -52,7 +52,7 @@ void mjModel::Load(XMLDocument* doc)
 	snprintf(status, 1024, "%s", "About to go into vertex data");
 	while(vertex)
 	{
-        
+
         // Read the vertices' components
 		XMLElement* vertexData;
 		vertexData = vertex->FirstChildElement("position");
@@ -78,7 +78,7 @@ void mjModel::Load(XMLDocument* doc)
 		vertexData->QueryFloatAttribute("x", &normalComponentBuffer[posIn3Array]);
 		vertexData->QueryFloatAttribute("y", &normalComponentBuffer[posIn3Array+1]);
 		vertexData->QueryFloatAttribute("z", &normalComponentBuffer[posIn3Array+2]);
-        
+
         // Read texture coordinates
 		vertexData = vertex->FirstChildElement("texcoord");
 		vertexData->QueryFloatAttribute("u", &texCoordBuffer[posIn2Array]);
@@ -89,22 +89,22 @@ void mjModel::Load(XMLDocument* doc)
 		posIn2Array += 2;
 		vertex = vertex->NextSiblingElement("vertex");
 	}
-        
-    
+
+
 #ifdef OSX
     glBindVertexArrayAPPLE(vertexArrayObject);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, objectBuffers[0]);
     glBufferData(GL_ARRAY_BUFFER, numVertices*sizeof(GLfloat)*3, vertexBuffer, GL_STATIC_DRAW);
-        
+
     glBindBuffer(GL_ARRAY_BUFFER, objectBuffers[1]);
     glBufferData(GL_ARRAY_BUFFER, numVertices*sizeof(GLfloat)*3, normalComponentBuffer, GL_STATIC_DRAW);
-        
+
     glBindBuffer(GL_ARRAY_BUFFER, objectBuffers[2]);
     glBufferData(GL_ARRAY_BUFFER, numVertices*sizeof(GLfloat)*2, texCoordBuffer, GL_STATIC_DRAW);
 #endif
-        
-    
+
+
     /* debug stuff
 	char tmp[1024];
 
@@ -175,8 +175,8 @@ void mjModel::Load(XMLDocument* doc)
 		submesh= submesh->NextSiblingElement("submesh");
 	}
 
-	snprintf(tmp, 1024, "%s\nParsed %d faces & %d meshes", status, faceCount, meshes.size());
-	snprintf(status, 1024, "%s", tmp);
+//	snprintf(tmp, 1024, "%s\nParsed %d faces & %d meshes", status, faceCount, meshes.size());
+//	snprintf(status, 1024, "%s", tmp);
 
 
 	XMLElement* submeshnames = mesh->FirstChildElement("submeshnames");
@@ -203,8 +203,8 @@ void mjModel::Load(XMLDocument* doc)
 		submesh = submesh->NextSiblingElement("submesh");
 	}
 
-	snprintf(tmp, 1024, "%s\nParsed %d submeshnames", status, numSubMeshNames);
-		snprintf(status, 1024, "%s", tmp);
+//	snprintf(tmp, 1024, "%s\nParsed %d submeshnames", status, numSubMeshNames);
+//		snprintf(status, 1024, "%s", tmp);
 
 
 

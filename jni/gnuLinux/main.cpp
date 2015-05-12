@@ -2,6 +2,8 @@
 #include <SDL2/SDL.h>
 
 #include "../game/gl_code.h"
+#include "keyboardcontrol.h"
+
 #include <core/mjVector3.h>
 
 #ifdef OSX
@@ -27,6 +29,8 @@ mjEngine::mjVector3 rJoystick;
 
 SDL_Joystick* joystick;
 
+KeyboardControl keyboardControl;
+
 int InitSDL(SDLStruct* sdlData) {
    SDL_Init(SDL_INIT_VIDEO|SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK|SDL_INIT_AUDIO);
     SDL_JoystickEventState(SDL_ENABLE);
@@ -42,7 +46,7 @@ int InitSDL(SDLStruct* sdlData) {
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
         #endif
-    
+
 
     #elif USE_GLES2
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
@@ -97,10 +101,18 @@ int InitGL(SDLStruct* sdlData) {
 
 int stepFunc(SDLStruct* sdlData) {
     SDL_Event event;
+
+
+
     while (SDL_PollEvent(&event)) {
 
         switch(event.type)
         {
+
+        case SDL_KEYDOWN:
+        case SDL_KEYUP:
+            keyboardControl.HandleSDLKeyboardEvent(event.key);
+        break;
 
         case SDL_QUIT: {
             return 1;
@@ -136,9 +148,12 @@ int stepFunc(SDLStruct* sdlData) {
         }
         break;
         case SDL_JOYBUTTONDOWN:
+        case SDL_JOYBUTTONUP:
         {
-            JoystickButtonEvent(0, event.jbutton.button, true);
+            JoystickButtonEvent(0, event.jbutton.button, event.type == SDL_JOYBUTTONDOWN);
         }
+        break;
+
         break;
         break;
         default:
@@ -149,6 +164,13 @@ int stepFunc(SDLStruct* sdlData) {
         break;
         }
     }
+    if (keyboardControl.jumpKeyEvent)
+    {
+        JoystickButtonEvent(0, 0, keyboardControl.jumpKeyState);
+    }
+    keyboardControl.Update(t_elapsed);
+    keyboardControl.GetJoystickValues(&lJoystick, &rJoystick);
+
 
     JoystickEvent(0, 0, lJoystick.x, lJoystick.y);
     JoystickEvent(0, 1, rJoystick.x, rJoystick.y);
