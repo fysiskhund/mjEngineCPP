@@ -17,6 +17,8 @@ class KeyboardControl
         bool allKeysLetGo = false;
         bool cameraControl = false;
 
+
+
         bool jumpKeyState = false;
         bool jumpKeyEvent = false;
 

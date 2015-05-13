@@ -60,11 +60,21 @@ void KeyboardControl::HandleSDLKeyboardEvent(SDL_KeyboardEvent& keyEvent)
     }
     if (keyEvent.keysym.mod&KMOD_CTRL)
     {
-        allKeysLetGo = true;
+        if (!cameraControl)
+        {
+            allKeysLetGo = true;
+            cameraControl = true;
+        }
+
 
     } else
     {
-        cameraControl = false;
+        if (cameraControl)
+        {
+            allKeysLetGo = true;
+            cameraControl = false;
+        }
+
     }
 
 }
@@ -95,6 +105,7 @@ void KeyboardControl::GetJoystickValues(mjVector3* lJoystick, mjVector3* rJoysti
     }
     if (keysDown[0] || keysDown[1] || keysDown[2] || keysDown[3])
     {
+        rJoystick->Set0();
         whichJoystick->Set0();
         if (keysDown[0])
         {
@@ -118,7 +129,7 @@ void KeyboardControl::GetJoystickValues(mjVector3* lJoystick, mjVector3* rJoysti
         whichJoystick->Set0();
     }
     allKeysLetGo = false;
-    cameraControl = false;
+
 }
 
 KeyboardControl::~KeyboardControl()
