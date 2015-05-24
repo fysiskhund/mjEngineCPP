@@ -31,7 +31,7 @@ void Ambient::InitGlowBeings(mjCamera* camera, mjPhysics* physics, std::vector<m
 
     for (unsigned i = 0; i < total; i++)
     {
-        GlowBeing* glowBeing = new GlowBeing(camera, resourceManager);
+        GlowBeing* glowBeing = new GlowBeing(camera, &resourceManager);
 
 
         glowBeing->TieShaders(*shaderList);

@@ -15,6 +15,7 @@
 
 #include "../core/mjVector3.h"
 #include "../extLibs/math/Matrix.h"
+#include "../util/mjResourceManager.h"
 #include "../graphics/mjModel.h"
 #include "../graphics/animation/mjModelPose.h"
 #include "../graphics/animation/mjModelAnimation.h"
@@ -71,8 +72,12 @@ public:
 	bool canCollide = true;
 
 	bool autoUpdateStructure = true;
-	mjObject();
-	mjObject(structuretype collisionStructureType);
+
+	bool useModelFromXMLDetails = false;
+	mjResourceManager* resourceManager;
+
+	mjObject(mjResourceManager* resourceManager = NULL);
+	mjObject(structuretype collisionStructureType, mjResourceManager* resourceManager = NULL);
 	virtual ~mjObject();
     void SetID(const char* id);
     virtual void SetDetailsFromXML(XMLElement* entity);

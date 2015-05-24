@@ -3,8 +3,8 @@
 #include "frogAutomatonStates/FrogAutomatonStopState.h"
 #include "frogAutomatonStates/FrogJumpAutomatonState.h"
 
-Frog::Frog(Level* levelData, mjResourceManager& resourceManager):
-mjObject(MJ_AABB)
+Frog::Frog(Level* levelData, mjResourceManager* resourceManager)
+: mjObject(MJ_AABB, resourceManager)
 {
     srand(time(0));
     this->levelData = levelData;
@@ -13,9 +13,9 @@ mjObject(MJ_AABB)
     //model = resourceManager.FetchModel("frog.mesh.xml");
     //glTexture = resourceManager.FetchTexture("frog.png");
 
-    model = resourceManager.FetchModel("frog.mesh.xml");
+    model = resourceManager->FetchModel("frog.mesh.xml");
 
-    glTexture = resourceManager.FetchTexture("frog.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+    glTexture = resourceManager->FetchTexture("frog.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;
@@ -31,7 +31,7 @@ mjObject(MJ_AABB)
     MatchAABBToModel();
 
     soundSource = new mjSoundSource();
-    soundSource->Load(resourceManager.FetchSound("sounds/ribbit.wav"), 0);
+    soundSource->Load(resourceManager->FetchSound("sounds/ribbit.wav"), 0);
 
 
 

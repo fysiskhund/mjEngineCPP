@@ -7,8 +7,8 @@
 #include "batMatonStates/DetectBatMatonState.h"
 #include "batMatonStates/AttackBatMatonState.h"
 
-BatBot::BatBot(Level* levelData, mjResourceManager& resourceManager):
-mjObject(MJ_AABB)
+BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
+: mjObject(MJ_AABB, resourceManager)
 //:BatMaton(levelData)
 {
 
@@ -69,10 +69,10 @@ mjObject(MJ_AABB)
 
 	GLuint glTexture;
 
-	model = resourceManager.FetchModel("bird.mesh.xml");
+	model = resourceManager->FetchModel("bird.mesh.xml");
 	((mjAABB*)boundingStructure)->isImmovable = false;
 
-	glTexture = resourceManager.FetchTexture("birdtexture.png");//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+	glTexture = resourceManager->FetchTexture("birdtexture.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;

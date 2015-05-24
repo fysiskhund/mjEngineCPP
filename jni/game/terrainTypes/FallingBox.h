@@ -29,7 +29,7 @@ class FallingBox: public Box
         mjSoundSource cinderBlockSlide;
 
 
-        FallingBox(mjResourceManager& resourceManager);
+        FallingBox(mjResourceManager* resourceManager);
 
         int currentControlPointIndex = 1;
         bool active = false;

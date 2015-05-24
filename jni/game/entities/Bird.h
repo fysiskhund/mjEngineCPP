@@ -22,7 +22,7 @@ using namespace mjEngine;
 class Bird: public mjObject
 {
 public:
-    Bird(mjResourceManager& resourceManager);
+    Bird(mjResourceManager* resourceManager);
 private:
 };
 

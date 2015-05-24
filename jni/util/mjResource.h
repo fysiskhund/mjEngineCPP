@@ -9,6 +9,7 @@ class mjResource
 {
     public:
         std::string path;
+        int modifier = 0;
     protected:
     private:
 };

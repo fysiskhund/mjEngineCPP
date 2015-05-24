@@ -35,7 +35,7 @@ class BatBot: public mjObject, public mjAutomaton
         mjAnimator animator;
         float tAnimation = 0;
 
-        BatBot(Level* levelData, mjResourceManager& resourceManager);
+        BatBot(Level* levelData, mjResourceManager* resourceManager);
         //BatBot(const BatBot& other);
         Level* levelData;
 

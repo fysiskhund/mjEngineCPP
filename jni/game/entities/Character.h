@@ -22,7 +22,7 @@ class Character: public mjObject
 public:
 
     mjVector3 startPosition;
-	Character(mjResourceManager& resourceManager);
+	Character(mjResourceManager* resourceManager);
 	int hasFooting = 0;
 	int jumping = -1;
 

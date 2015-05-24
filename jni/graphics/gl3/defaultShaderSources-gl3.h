@@ -4,7 +4,12 @@
 
 
 const char* mjDefaultShaders::vanillaVertexShaderCode =
-			"#version 150\n"
+#ifdef OSX
+// "I'm different!!!!!!!!!!!!!!!!!!!!!111 LOOK AT ME!!! OMG!!" ¬¬
+		"#version 150 \n"
+#else
+		"#version 130 \n"
+#endif
 
 			"in vec4 vPosition; \n"
 	        "in vec2 aTexCoordinates;\n"
@@ -55,7 +60,12 @@ const char* mjDefaultShaders::vanillaVertexShaderCode =
 	        "} \n";
 
 const char* mjDefaultShaders::vanillaFragmentShaderCode =
-         "#version 150\n"
+#ifdef OSX
+// "I'm different!!!!!!!!!!!!!!!!!!!!!111 LOOK AT ME!!! OMG!!" ¬¬
+		"#version 150 \n"
+#else
+		"#version 130 \n"
+#endif
 		 //"precision mediump float;\n"
 
 		 "in vec2 vTexCoordinates;\n"

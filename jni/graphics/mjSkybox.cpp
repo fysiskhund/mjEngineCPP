@@ -6,7 +6,7 @@ namespace mjEngine {
 mjSkybox::mjSkybox(mjResourceManager* resourceManager)
 {
 	scale.Set(10,10,10);
-	backgroundData.deltaH = 0.001;
+	backgroundData.deltaH = 0.005;
     this->resourceManager = resourceManager;
 	//level0Data.deltaH = 0.01;
 }
@@ -55,7 +55,7 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 
 		snprintf(pathName, 1024, "%s%s%s", prefix, suffix, extension);
 
-		boxModel->meshes[i]->glTexture =  resourceManager->FetchTexture(pathName);//imgLoader.LoadToGLAndFreeMemory(pathName, GL_CLAMP_TO_EDGE);
+		boxModel->meshes[i]->glTexture =  resourceManager->FetchTexture(pathName, GL_CLAMP_TO_EDGE);//imgLoader.LoadToGLAndFreeMemory(pathName, GL_CLAMP_TO_EDGE);
 		//LOGI("loading %s -> texture%d", pathName, boxModel->meshes[i]->glTexture);
 	}
 

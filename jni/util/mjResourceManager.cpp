@@ -49,28 +49,29 @@ mjModel* mjResourceManager::FetchModel(std::string& path)
 
 }
 
-GLuint mjResourceManager::FetchTexture(const char* path)
+GLuint mjResourceManager::FetchTexture(const char* path, unsigned glTextureWrapParameter)
 {
     std::string pathStr = path;
-    return FetchTexture(pathStr);
+    return FetchTexture(pathStr, glTextureWrapParameter);
 }
 
-GLuint mjResourceManager::FetchTexture(std::string& path)
+GLuint mjResourceManager::FetchTexture(std::string& path, unsigned glTextureWrapParameter)
 {
     std::string fullPath = pathPrefix + separator + path;
 
-    mjResource* res = SearchByPath(textures, fullPath);
+    mjResource* res = SearchByPath(textures, fullPath, glTextureWrapParameter);
     if (res != NULL)
     {
         return ((mjTextureResource*) res)->glResourceID;
     }
 
     mjTextureResource* newResource = new mjTextureResource();
+    newResource->modifier = glTextureWrapParameter;
 
 
     mjImageLoader loader;
     //LOGI("Texture's full path: %s", fullPath.c_str());
-    newResource->glResourceID = loader.LoadToGLAndFreeMemory(fullPath.c_str());
+    newResource->glResourceID = loader.LoadToGLAndFreeMemory(fullPath.c_str(), glTextureWrapParameter);
     newResource->path = fullPath;
     textures.push_back(newResource);
 
@@ -137,13 +138,13 @@ mjSoundResource* mjResourceManager::FetchSound(std::string& path)
 
 
 
-mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std::string& fullPath)
+mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std::string& fullPath, int modifier)
 {
 
     for(unsigned i = 0; i < repo.size(); i++)
     {
         mjResource* res = repo[i];
-        if (res->path == fullPath)
+        if (res->path == fullPath && modifier == res->modifier)
         {
             return res;
         }

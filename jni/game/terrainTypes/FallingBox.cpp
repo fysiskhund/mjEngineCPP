@@ -1,19 +1,26 @@
 #include "FallingBox.h"
 
-FallingBox::FallingBox(mjResourceManager& resourceManager)
+FallingBox::FallingBox(mjResourceManager* resourceManager)
 :Box(resourceManager)
 {
+    useModelFromXMLDetails = true;
+
     gravity.Set(0, -9.81, 0);
 
     travelDirection.Set(0, -1,0);
 
-    model = resourceManager.FetchModel("fallingbox.mesh.xml");
+    GLuint glTexture;
+
+    glTexture = resourceManager->FetchTexture("falling_box.png", GL_CLAMP_TO_EDGE);
+    model = resourceManager->FetchModel("fallingbox.mesh.xml");
+
 
     mjAABB* boundingStruct = ((mjAABB*)boundingStructure);
+
     boundingStruct->isImmovable = true;
 
 
-    GLuint glTexture = resourceManager.FetchTexture("falling_box.png");
+
 
     for (unsigned i = 0; i<model->meshes.size(); i++)
     {
@@ -22,7 +29,7 @@ FallingBox::FallingBox(mjResourceManager& resourceManager)
     hasKinematics = true;
 
 
-    cinderBlockSlide.Load(resourceManager.FetchSound("sounds/95000__j1987__cinderblockmove_mono.wav"),0);
+    cinderBlockSlide.Load(resourceManager->FetchSound("sounds/95000__j1987__cinderblockmove_mono.wav"),0);
 
 }
 

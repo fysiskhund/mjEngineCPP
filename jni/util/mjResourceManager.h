@@ -24,8 +24,8 @@ class mjResourceManager
         mjModel* FetchModel(const char* path);
         mjModel* FetchModel(std::string& path);
 
-        GLuint FetchTexture(const char* path);
-        GLuint FetchTexture(std::string& path);
+        GLuint FetchTexture(const char* path, unsigned glTextureWrapParameter);
+        GLuint FetchTexture(std::string& path, unsigned glTextureWrapParameter);
 
         mjModelStructure* FetchModelStructure(const char* path);
         mjModelStructure* FetchModelStructure(std::string& path);
@@ -49,7 +49,7 @@ class mjResourceManager
 
         int soundIndexAndroid = 0;
 
-        mjResource* SearchByPath(std::vector<mjResource*>& repo, std::string& path);
+        mjResource* SearchByPath(std::vector<mjResource*>& repo, std::string& path, int modifier=0);
 
         char separator;
 

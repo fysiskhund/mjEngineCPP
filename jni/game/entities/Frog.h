@@ -15,7 +15,7 @@
 class Frog : public mjObject, public mjAutomaton
 {
     public:
-        Frog(Level* levelData, mjResourceManager& resourceManager);
+        Frog(Level* levelData, mjResourceManager* resourceManager);
         void SetDetailsFromXML(XMLElement* entity) override;
         void Update(float t_elapsed) override;
         Level* levelData;

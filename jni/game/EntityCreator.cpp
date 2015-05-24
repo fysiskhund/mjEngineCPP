@@ -61,19 +61,19 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
     }
     switch (whichEntity) {
         case 0:
-            return new Character(*resourceManager);
+            return new Character(resourceManager);
             break;
         case 1:
-            return new Bird(*resourceManager);
+            return new Bird(resourceManager);
             break;
         case 2:
-            return new BatBot(levelData, *resourceManager);
+            return new BatBot(levelData, resourceManager);
             break;
         case 3:
-            return new Plant(levelData, *resourceManager);
+            return new Plant(levelData, resourceManager);
             break;
         case 4:
-            return new Frog(levelData, *resourceManager);
+            return new Frog(levelData, resourceManager);
             break;
         default:
             return NULL;

@@ -10,9 +10,8 @@ mjImageLoader::mjImageLoader()
 
 #ifdef DESKTOP_SDL
 
-#define LoadWithSDL Load
 
-bool mjImageLoader::LoadWithSDL(const char* name)
+bool mjImageLoader::Load(const char* name)
 {
 
     imageSurface = IMG_Load(name);
@@ -203,10 +202,7 @@ GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName, GLfloat textur
 	}
 	return result;
 }
-GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName)
-{
-	return LoadToGLAndFreeMemory(fileName, GL_REPEAT);
-}
+
 
 }// namespace mjEngine
 

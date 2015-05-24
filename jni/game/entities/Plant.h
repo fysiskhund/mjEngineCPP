@@ -13,7 +13,7 @@ using namespace mjEngine;
 class Plant : public mjObject, public mjAutomaton
 {
     public:
-        Plant(Level* levelData, mjResourceManager& resourceManager);
+        Plant(Level* levelData, mjResourceManager* resourceManager);
         //BatBot(const BatBot& other);
         Level* levelData;
         ~Plant();

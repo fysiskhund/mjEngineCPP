@@ -37,7 +37,6 @@ public:
 
 	mjImageLoader();
 
-	GLuint LoadToGLAndFreeMemory(const char *name);
 	GLuint LoadToGLAndFreeMemory(const char* fileName, GLfloat textureWrapParam);
 
 private:

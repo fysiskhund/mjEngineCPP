@@ -25,7 +25,7 @@ class GlowBeing: public mjObject
 
         mjCamera* camera;
 
-        GlowBeing(mjCamera* camera, mjResourceManager& resourceManager);
+        GlowBeing(mjCamera* camera, mjResourceManager* resourceManager);
 
         const float MaxCameraDist = 4;
 

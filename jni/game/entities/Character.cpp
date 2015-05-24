@@ -1,10 +1,10 @@
 #include "Character.h"
 
-Character::Character(mjResourceManager& resourceManager)
-: mjObject(MJ_AABB)
+Character::Character(mjResourceManager* resourceManager)
+: mjObject(MJ_AABB, resourceManager)
 {
 	SetUpSillyAnimation();
-	model = resourceManager.FetchModel("char0.mesh.xml");
+	model = resourceManager->FetchModel("char0.mesh.xml");
 	mjAABB* charBoundStruct = (mjAABB*) boundingStructure;
 	mjVector3 minCorner;
 	minCorner.Set(-0.3,0,-0.3);
@@ -16,7 +16,7 @@ Character::Character(mjResourceManager& resourceManager)
 
 
 
-	GLuint glTexture = resourceManager.FetchTexture("suit_test.png");
+	GLuint glTexture = resourceManager->FetchTexture("suit_test.png", GL_CLAMP_TO_EDGE);
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;

@@ -21,7 +21,7 @@ using namespace mjEngine;
 class Box: public mjObject
 {
 public:
-	Box(mjResourceManager& resourceManager);
+	Box(mjResourceManager* resourceManager);
 
 	char* modelName = NULL;
 };

@@ -2,7 +2,7 @@
 
 namespace mjEngine{
 
-mjObject::mjObject(structuretype collisionStructureType)
+mjObject::mjObject(structuretype collisionStructureType, mjResourceManager* resourceManager)
 {
 
 	// Vectors are initialised with 0, so no need to set them here
@@ -30,9 +30,11 @@ mjObject::mjObject(structuretype collisionStructureType)
 		break;
 	}
 
+	this->resourceManager = resourceManager;
+
 }
 
-mjObject::mjObject()
+mjObject::mjObject(mjResourceManager* resourceManager)
 {
 	// Vectors are initialised with 0, so no need to set them here
 
@@ -42,6 +44,8 @@ mjObject::mjObject()
 
 
 	boundingStructure = new mjSphere(&pos, 1);
+
+	this->resourceManager = resourceManager;
 }
 
 void mjObject::SetDetailsFromXML(XMLElement* entity)
@@ -52,11 +56,28 @@ void mjObject::SetDetailsFromXML(XMLElement* entity)
     mjXMLHelper::ReadVector(entity->FirstChildElement("dir"), &dir);
     mjXMLHelper::ReadVector(entity->FirstChildElement("up"), &up);
     mjXMLHelper::ReadVector(entity->FirstChildElement("vel"), &vel);
+
     if (entity->FirstChildElement("model"))
     {
         const char* stdResModel = entity->FirstChildElement("model")->Attribute("stdres");
         modelName = new char[strnlen(stdResModel, 128)+1];
         strncpy(modelName, stdResModel, strnlen(stdResModel, 120));
+
+        if (useModelFromXMLDetails && resourceManager)
+        {
+            char tmp[128];
+            snprintf(tmp, 128, "%s.mesh.xml", modelName);
+            model = resourceManager->FetchModel(tmp);
+
+            snprintf(tmp, 128, "%s.png", modelName);
+
+            int glTexture = resourceManager->FetchTexture(tmp, GL_REPEAT);
+
+            for (unsigned i = 0; i<model->meshes.size(); i++)
+            {
+                model->meshes[i]->glTexture = glTexture;
+            }
+        }
     }
 
 

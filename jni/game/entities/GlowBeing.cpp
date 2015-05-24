@@ -1,15 +1,16 @@
 #include "GlowBeing.h"
 
 
-GlowBeing::GlowBeing(mjCamera* camera, mjResourceManager& resourceManager)
+GlowBeing::GlowBeing(mjCamera* camera, mjResourceManager* resourceManager)
+: mjObject(resourceManager)
 {
     this->camera = camera;
 
-    model = resourceManager.FetchModel("sprite.mesh.xml");
+    model = resourceManager->FetchModel("sprite.mesh.xml");
 
 
 
-	GLuint glTexture = resourceManager.FetchTexture("glowbeing.png");
+	GLuint glTexture = resourceManager->FetchTexture("glowbeing.png", GL_CLAMP_TO_EDGE);
 
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{

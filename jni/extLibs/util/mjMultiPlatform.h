@@ -38,11 +38,16 @@
         #define GLEW_STATIC
         #include <GL/glew.h>
         #include <GL/gl.h>
-        #include <SDL2/SDL.h>
+
 
     #endif // !OSX
 
 #endif // !USE_GLES
+
+#ifdef DESKTOP_SDL
+    #include <SDL2/SDL.h>
+#endif // USE_SDL_AUDIO
+
 
 #include <string>
 
