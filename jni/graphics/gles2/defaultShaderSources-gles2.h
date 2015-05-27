@@ -63,6 +63,10 @@ const char* mjDefaultShaders::vanillaFragmentShaderCode =
 		 "void main(){ \n"
 		//"gl_FragColor = vec4(0,1,0,1)*vLight; \n"
 		 " gl_FragColor = texture2D(uTexture, vTexCoordinates)* vLight;\n"
+         "  if (gl_FragColor.a < 0.1)\n"
+         "  {\n"
+         "       discard;\n"
+         "  }\n"
 		 "} \n";
 
 

@@ -86,6 +86,7 @@
 					<Add option="-DDESKTOP_SDL" />
 					<Add option="-DUSE_SDL_AUDIO" />
 					<Add option="-DUSE_GL3" />
+					<Add option="-DGNULINUX" />
 					<Add directory=".." />
 					<Add directory="gnuLinux" />
 				</Compiler>

@@ -6,17 +6,11 @@
     #include <GLES2/gl2.h>
     #include <GLES2/gl2ext.h>
 
-    #define MJ_LEFT_JOYSTICK_X 0
-    #define MJ_LEFT_JOYSTICK_Y 1
-    #define MJ_RIGHT_JOYSTICK_X 3
-    #define MJ_RIGHT_JOYSTICK_Y 4
+
 
 #else
 
-    #define MJ_LEFT_JOYSTICK_X 0
-    #define MJ_LEFT_JOYSTICK_Y 1
-    #define MJ_RIGHT_JOYSTICK_X 2
-    #define MJ_RIGHT_JOYSTICK_Y 3
+
 
     #ifdef OSX
         #include <OpenGL/gl.h>
@@ -47,6 +41,24 @@
 #ifdef DESKTOP_SDL
     #include <SDL2/SDL.h>
 #endif // USE_SDL_AUDIO
+
+// Set up joystick
+#ifdef WIN32
+    #define MJ_LEFT_JOYSTICK_X 0
+    #define MJ_LEFT_JOYSTICK_Y 1
+    #define MJ_RIGHT_JOYSTICK_X 2
+    #define MJ_RIGHT_JOYSTICK_Y 3
+#elifdef GNULINUX
+    #define MJ_LEFT_JOYSTICK_X 0
+    #define MJ_LEFT_JOYSTICK_Y 1
+    #define MJ_RIGHT_JOYSTICK_X 3
+    #define MJ_RIGHT_JOYSTICK_Y 4
+#else
+    #define MJ_LEFT_JOYSTICK_X 0
+    #define MJ_LEFT_JOYSTICK_Y 1
+    #define MJ_RIGHT_JOYSTICK_X 3
+    #define MJ_RIGHT_JOYSTICK_Y 4
+#endif // WIN32
 
 
 #include <string>
