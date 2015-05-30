@@ -60,8 +60,10 @@ void mjObject::SetDetailsFromXML(XMLElement* entity)
     if (entity->FirstChildElement("model"))
     {
         const char* stdResModel = entity->FirstChildElement("model")->Attribute("stdres");
-        modelName = new char[strnlen(stdResModel, 128)+1];
-        strncpy(modelName, stdResModel, strnlen(stdResModel, 120));
+        int nameLength = strnlen(stdResModel, 128)+1;
+        modelName = new char[nameLength];
+        snprintf(modelName, nameLength, "%s", stdResModel);
+        //strncpy(modelName, stdResModel, nameLength);
 
         if (useModelFromXMLDetails && resourceManager)
         {
