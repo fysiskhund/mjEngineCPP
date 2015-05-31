@@ -48,17 +48,20 @@
     #define MJ_LEFT_JOYSTICK_Y 1
     #define MJ_RIGHT_JOYSTICK_X 2
     #define MJ_RIGHT_JOYSTICK_Y 3
-#elifdef GNULINUX
-    #define MJ_LEFT_JOYSTICK_X 0
-    #define MJ_LEFT_JOYSTICK_Y 1
-    #define MJ_RIGHT_JOYSTICK_X 3
-    #define MJ_RIGHT_JOYSTICK_Y 4
 #else
-    #define MJ_LEFT_JOYSTICK_X 0
-    #define MJ_LEFT_JOYSTICK_Y 1
-    #define MJ_RIGHT_JOYSTICK_X 3
-    #define MJ_RIGHT_JOYSTICK_Y 4
+    #ifdef GNULINUX
+        #define MJ_LEFT_JOYSTICK_X 0
+        #define MJ_LEFT_JOYSTICK_Y 1
+        #define MJ_RIGHT_JOYSTICK_X 3
+        #define MJ_RIGHT_JOYSTICK_Y 4
+    #else
+        #define MJ_LEFT_JOYSTICK_X 0
+        #define MJ_LEFT_JOYSTICK_Y 1
+        #define MJ_RIGHT_JOYSTICK_X 3
+        #define MJ_RIGHT_JOYSTICK_Y 4
+    #endif // GNULINUX
 #endif // WIN32
+
 
 
 #include <string>

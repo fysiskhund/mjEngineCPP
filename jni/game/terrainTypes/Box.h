@@ -23,7 +23,6 @@ class Box: public mjObject
 public:
 	Box(mjResourceManager* resourceManager);
 
-	char* modelName = NULL;
 };
 
 #endif

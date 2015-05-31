@@ -273,24 +273,12 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
 
 
-    if (0)//(structure)
+    if (structure)
     {
-    	/*for (unsigned i = 0; i < structure->nodes.size(); i++)
+    	for (unsigned i = 0; i < structure->nodes.size(); i++)
     	{
-    		// Pose and structure should have the exact same number of nodes.
 
-
-
-    		mjVector3 angles;
-    		angles.CopyFrom(*pose->angles[i]);
-    		Matrix4::GetPositionScaleAndAngleRotationMatrix(structure->nodes[i]->meshPos,
-    				angles,
-					poseMatrix);//(*pose->positions[i], *pose->angles[i], poseMatrix);
-
-    		Matrix4::MultiplyMM(tempMatrix, 0,
-    				modelMatrix, 0,
-					poseMatrix, 0);
-
+            //Perform the stack operation
     		switch(structure->nodes[i]->operation)
     		{
     		case MJ_NODE_NOOP:
@@ -306,6 +294,29 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
     			mStack.PopAll();
     			break;
     		}
+
+    		// Get the particular mesh we're operating on in this node of the structure
+            unsigned meshNum = structure->nodes[i]->meshIndex;
+
+
+    		mjVector3 positions;
+
+    		// Get the positions from the pose. Add them as displacement from the base position for this structure node
+    		positions.CopyFrom(structure->nodes[i]->meshPos);
+    		positions.Add(*pose->positions[meshNum]);
+
+            // Get the angles for the pose for this particular structure node.
+            // I think I decided not to have any other angle than 0 as base in the structure; therefore no summing angles
+    		mjVector3 angles;
+    		angles.CopyFrom(*pose->angles[meshNum]);
+    		Matrix4::GetPositionScaleAndAngleRotationMatrix(positions,
+    				angles,
+					poseMatrix);//(*pose->positions[i], *pose->angles[i], poseMatrix);
+
+    		Matrix4::MultiplyMM(tempMatrix, 0,
+    				modelMatrix, 0,
+					poseMatrix, 0);
+
     		Matrix4::MultiplyMM(matrixAfterStack, 0,
     		    				tempMatrix, 0,
     							mStack.current, 0);
@@ -316,14 +327,14 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
 
 
-    		unsigned meshNum = structure->nodes[i]->meshIndex;
+
 
     		shaderList[meshes[meshNum]->mjShaderListIndex]->Run(meshes[meshNum],
     				vertexBuffer, texCoordBuffer, normalComponentBuffer,
 					modelMatrix, modelViewProjectionMatrix);
 
     		glDrawElements(GL_TRIANGLES, meshes[meshNum]->drawOrderCount, GL_UNSIGNED_SHORT, meshes[meshNum]->drawOrderBuffer);
-    	}*/
+    	}
     } else
     {
     	for(unsigned i = 0; i < meshes.size(); i++)

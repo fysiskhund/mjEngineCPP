@@ -8,8 +8,8 @@ Box::Box(mjResourceManager* resourceManager)
     GLuint glTexture;
 
 
-    model = resourceManager->FetchModel("bush.mesh.xml");
-    glTexture = resourceManager->FetchTexture("bush.png", GL_CLAMP_TO_EDGE);
+    model = resourceManager->FetchModel("box.mesh.xml");
+    glTexture = resourceManager->FetchTexture("box_grassy.png", GL_CLAMP_TO_EDGE);
 
 
     mjAABB* boundingStruct = ((mjAABB*)boundingStructure);
