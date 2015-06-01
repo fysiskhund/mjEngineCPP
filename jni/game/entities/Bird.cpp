@@ -14,6 +14,10 @@ Bird::Bird(mjResourceManager* resourceManager)
 	GLuint glTexture;
 
 	model = resourceManager->FetchModel("bird.mesh.xml");
+
+
+
+
 	((mjAABB*)boundingStructure)->isImmovable = true;
 
 	glTexture = resourceManager->FetchTexture("birdtexture.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //

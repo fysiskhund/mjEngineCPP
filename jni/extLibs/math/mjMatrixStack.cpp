@@ -12,13 +12,21 @@ mjMatrixStack::mjMatrixStack(unsigned size)
     maxSize = size;
     CreateStack(maxSize);
 }
+mjMatrixStack::~mjMatrixStack()
+{
+    for (unsigned i = 0; i < maxSize; i++)
+    {
+        delete[] mStack[i];
+    }
+    delete[]  mStack;
+}
 
 void mjMatrixStack::CreateStack(unsigned size)
 {
     mStack = new float * [size];
     for(unsigned i = 0; i < size; i++)
     {
-        mStack[size] = new float[16];
+        mStack[i] = new float[16];
     }
     current = mStack[0];
     Matrix4::SetIdentityM(mStack[0], 0);

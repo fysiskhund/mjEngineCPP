@@ -65,8 +65,9 @@ private:
 	int currentVertex;
 	int currentFace;
 	int faceCount;
-	//mjMatrixStack mStack;
-    
+	mjMatrixStack mStack;
+
+
 #ifdef OSX
     GLuint vertexArrayObject;
     GLuint objectBuffers[3];

@@ -12,6 +12,7 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
 //:BatMaton(levelData)
 {
 
+
     //Animation test
     mjAnimationSegment* segment0 = new mjAnimationSegment();
     segment0->meshNum = 0;
@@ -77,6 +78,29 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
 	{
 		model->meshes[i]->glTexture = glTexture;
 	}
+
+	// model structure test.
+	if (!model->structure)
+    {
+
+
+        model->structure = new mjModelStructure();
+        mjModelStructureNode* baseNode = new mjModelStructureNode();
+        baseNode->operation = MJ_NODE_NOOP;
+        baseNode->meshIndex = 1; // The exporter for whatever reason inverts the order. Later they need to be coupled automatically by name so this won't happen
+        baseNode->meshName = "birdBody";
+
+        model->structure->nodes.push_back(baseNode);
+
+        mjModelStructureNode* headNode = new mjModelStructureNode();
+        headNode->operation = MJ_NODE_PUSH;
+        headNode->meshIndex = 0; // The exporter for whatever reason inverts the order. Later they need to be coupled automatically by name so this won't happen
+        headNode->meshName = "birdHead";
+
+        model->structure->nodes.push_back(headNode);
+    }
+	//// end of model structure test
+
 }
 
 void BatBot::SetDetailsFromXML(XMLElement* entity)

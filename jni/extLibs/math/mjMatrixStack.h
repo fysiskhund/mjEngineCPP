@@ -14,6 +14,7 @@ class mjMatrixStack
         unsigned maxSize = 15;
         mjMatrixStack();
         mjMatrixStack(unsigned size);
+        ~mjMatrixStack();
         void Push(float* m);
         void Pop();
         void Pop(unsigned howMany);

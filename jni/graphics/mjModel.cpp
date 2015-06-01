@@ -268,6 +268,8 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
     float matrixAfterStack[16];
     float* whichMatrix;
 
+
+
 	//Matrix4::DebugM("mvp", modelViewProjectionMatrix);
 
 
@@ -275,9 +277,15 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
     if (structure)
     {
+        mStack.PopAll();
+        Matrix4::SetIdentityM(mStack.current, 0);
+        int debugVar = structure->nodes.size();
+        printf("dbvar: %d\n", debugVar);
     	for (unsigned i = 0; i < structure->nodes.size(); i++)
     	{
 
+            std::string debugVar = structure->nodes[i]->meshName;
+            printf("dbvar: %s\n", debugVar.c_str());
             //Perform the stack operation
     		switch(structure->nodes[i]->operation)
     		{
@@ -303,7 +311,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
     		// Get the positions from the pose. Add them as displacement from the base position for this structure node
     		positions.CopyFrom(structure->nodes[i]->meshPos);
-    		positions.Add(*pose->positions[meshNum]);
+    		positions.Add(*pose->positions[i]); // pose MUST coincide with modelStructure since one model might use the same mesh in several places, each with its own pose
 
             // Get the angles for the pose for this particular structure node.
             // I think I decided not to have any other angle than 0 as base in the structure; therefore no summing angles
