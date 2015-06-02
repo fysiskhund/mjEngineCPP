@@ -244,6 +244,22 @@ void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
 	}
 }
 
+void mjModel::TieStructure() // Attaches the nodes to the proper meshes
+{
+    if (structure)
+    {
+        for (unsigned i = 0; i < structure->nodes.size(); i++)
+        {
+            for (unsigned j = 0; j < this->meshes.size(); j++)
+            {
+                if (strncmp(structure->nodes[i]->meshName.c_str(), this->meshes[j]->name, 128) == 0)
+                {
+                    structure->nodes[i]->meshIndex = j;
+                }
+            }
+        }
+    }
+}
 
 
 mjModelPose* mjModel::CreateSimplePose()
@@ -317,6 +333,26 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
             // I think I decided not to have any other angle than 0 as base in the structure; therefore no summing angles
     		mjVector3 angles;
     		angles.CopyFrom(*pose->angles[meshNum]);
+
+    		Matrix4::GetPositionScaleAndAngleRotationMatrix(positions, angles, poseMatrix);//(*pose->positions[i], *pose->angles[i], poseMatrix);
+            Matrix4::MultiplyMM(tempMatrix, 0,
+    					modelMatrix, 0,
+						poseMatrix, 0);
+
+            Matrix4::MultiplyMM(modelViewMatrix, 0,
+    					lookAtMatrix, 0,
+						tempMatrix, 0);
+
+            Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
+    				projectionMatrix, 0,
+					modelViewMatrix, 0);
+
+    		shaderList[meshes[i]->mjShaderListIndex]->Run(meshes[i],
+    				vertexBuffer, texCoordBuffer, normalComponentBuffer,
+					modelMatrix, modelViewProjectionMatrix);
+
+    		/*
+
     		Matrix4::GetPositionScaleAndAngleRotationMatrix(positions,
     				angles,
 					poseMatrix);//(*pose->positions[i], *pose->angles[i], poseMatrix);
@@ -340,6 +376,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
     		shaderList[meshes[meshNum]->mjShaderListIndex]->Run(meshes[meshNum],
     				vertexBuffer, texCoordBuffer, normalComponentBuffer,
 					modelMatrix, modelViewProjectionMatrix);
+					*/
 
     		glDrawElements(GL_TRIANGLES, meshes[meshNum]->drawOrderCount, GL_UNSIGNED_SHORT, meshes[meshNum]->drawOrderBuffer);
     	}

@@ -60,12 +60,16 @@ public:
 
     mjModelPose* CreateSimplePose();
 
+    void TieStructure();
+
 private:
 	int numVertices;
 	int currentVertex;
 	int currentFace;
 	int faceCount;
 	mjMatrixStack mStack;
+
+
 
 
 #ifdef OSX

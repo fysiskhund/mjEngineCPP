@@ -98,6 +98,8 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
         headNode->meshName = "birdHead";
 
         model->structure->nodes.push_back(headNode);
+
+        model->TieStructure();
     }
 	//// end of model structure test
 
