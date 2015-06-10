@@ -99,7 +99,7 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
 
         model->structure->nodes.push_back(headNode);
 
-        model->TieStructure();
+        //model->TieStructure();
     }
 	//// end of model structure test
 

@@ -60,7 +60,8 @@ public:
 
     mjModelPose* CreateSimplePose();
 
-    void TieStructure();
+    void TieStructureToMeshes();
+    void TiePoseToStructure();
 
 private:
 	int numVertices;

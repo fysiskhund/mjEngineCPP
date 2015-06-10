@@ -244,7 +244,7 @@ void mjModel::TieShaders(std::vector<mjShader*>& shaderList)
 	}
 }
 
-void mjModel::TieStructure() // Attaches the nodes to the proper meshes
+void mjModel::TieStructureToMeshes() // Attaches the nodes to the proper meshes
 {
     if (structure)
     {
@@ -259,6 +259,22 @@ void mjModel::TieStructure() // Attaches the nodes to the proper meshes
             }
         }
     }
+}
+void mjModel::TiePoseToStructure()
+{
+/*    if (pose && structure)
+    {
+        for (unsigned i = 0; i < structure->nodes.size(); i++)
+        {
+            for (unsigned j = 0; j < pose->nodes.size(); j++)
+            {
+                if (strncmp(structure->nodes[i]->meshName.c_str(), pose->meshes[j]->name, 128) == 0)
+                {
+                    structure->nodes[i]->meshIndex = j;
+                }
+            }
+        }
+    }*/
 }
 
 
@@ -291,7 +307,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
 
 
-    if (structure)
+    if (0)//structure)
     {
         mStack.PopAll();
         Matrix4::SetIdentityM(mStack.current, 0);
