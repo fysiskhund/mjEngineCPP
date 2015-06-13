@@ -11,9 +11,13 @@ void KeyboardControl::HandleSDLKeyboardEvent(SDL_KeyboardEvent& keyEvent)
 
     switch (keyEvent.type)
     {
+
         case SDL_KEYDOWN:
             switch(keyEvent.keysym.sym)
             {
+            case SDLK_f:
+                fullScreen = ! fullScreen;
+            break;
             case SDLK_UP:
                 keysDown[0] = true;
             break;

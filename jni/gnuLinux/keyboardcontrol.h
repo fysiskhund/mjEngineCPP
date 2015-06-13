@@ -22,6 +22,8 @@ class KeyboardControl
         bool jumpKeyState = false;
         bool jumpKeyEvent = false;
 
+        bool fullScreen = false;
+
 
         void Update(float t_elapsed);
         float arrowKeysTimeHeld = 0;
@@ -31,6 +33,7 @@ class KeyboardControl
 
     protected:
     private:
+
 };
 
 #endif // KEYBOARDCONTROL_H

@@ -20,6 +20,7 @@ float t_elapsed = 0.016f;
 
 int width = 768;
 int height = 768;
+bool fullscreen = true;
 
 int xWindow = 0;//3840 - width - 50;
 int yWindow = 0;//1080 - width - 20;
@@ -33,6 +34,15 @@ KeyboardControl keyboardControl;
 
 int InitSDL(SDLStruct* sdlData) {
    SDL_Init(SDL_INIT_VIDEO|SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK|SDL_INIT_AUDIO);
+
+
+    if (fullscreen)
+    {
+        SDL_DisplayMode mode;
+        SDL_GetDesktopDisplayMode(0, &mode);
+        width = mode.w;
+        height = mode.h;
+    }
     SDL_JoystickEventState(SDL_ENABLE);
     joystick = SDL_JoystickOpen(0);
 
@@ -69,7 +79,14 @@ int InitSDL(SDLStruct* sdlData) {
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 4);
 
-    sdlData->window = SDL_CreateWindow("mjEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    if (!fullscreen)
+    {
+        sdlData->window = SDL_CreateWindow("mjEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    } else
+    {
+        sdlData->window = SDL_CreateWindow("mjEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP);
+    }
+
 
     sdlData->context = SDL_GL_CreateContext(sdlData->window);
 
@@ -178,6 +195,7 @@ int stepFunc(SDLStruct* sdlData) {
 
     SDL_GL_SwapWindow(sdlData->window);
 
+
     return 0;
 }
 
@@ -190,6 +208,14 @@ void QuitSDL(SDLStruct* sdlData) {
 
 int main(int argc, char* argv[]) {
     SDLStruct data;
+
+   for (unsigned i = 0; i < argc; i++)
+    {
+        if (strncmp(argv[i], "--windowed", 15) == 0)
+        {
+            fullscreen = false;
+        }
+    }
 
     InitSDL(&data);
 
