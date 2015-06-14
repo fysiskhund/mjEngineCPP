@@ -20,6 +20,7 @@
 					<Add directory=".." />
 					<Add directory="audio" />
 					<Add directory="gnuLinux" />
+					<Add directory="game/entities" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -39,6 +40,7 @@
 					<Add directory=".." />
 					<Add directory="audio" />
 					<Add directory="gnuLinux" />
+					<Add directory="game/entities" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -62,6 +64,7 @@
 					<Add directory="../../../../glew/include" />
 					<Add directory=".." />
 					<Add directory="gnuLinux" />
+					<Add directory="game/entities" />
 				</Compiler>
 				<Linker>
 					<Add option="-mwindows" />
@@ -90,6 +93,7 @@
 					<Add option="-DGNULINUX" />
 					<Add directory=".." />
 					<Add directory="gnuLinux" />
+					<Add directory="game/entities" />
 				</Compiler>
 				<Linker>
 					<Add library="SDL2" />
@@ -161,6 +165,8 @@
 		<Unit filename="../game/entities/Frog.h" />
 		<Unit filename="../game/entities/GlowBeing.cpp" />
 		<Unit filename="../game/entities/GlowBeing.h" />
+		<Unit filename="../game/entities/MysticalDoor.cpp" />
+		<Unit filename="../game/entities/MysticalDoor.h" />
 		<Unit filename="../game/entities/Plant.cpp" />
 		<Unit filename="../game/entities/Plant.h" />
 		<Unit filename="../game/entities/batMatonStates/AttackBatMatonState.cpp" />
