@@ -10,6 +10,8 @@
 #include <util/mjResourceManager.h>
 #include <graphics/mjImageLoader.h>
 
+#include <game/Level.h>
+
 using namespace mjEngine;
 
 
@@ -18,9 +20,12 @@ class MysticalDoor: public mjObject
     public:
 
         std::string counterpartName;
-        MysticalDoor* counterpart;
+        MysticalDoor* counterpart = NULL;
+        mjVector3 offsetOnTeleportArrive;
 
-        MysticalDoor(mjResourceManager* resourceManager);
+        MysticalDoor(Level* levelData, mjResourceManager* resourceManager);
+        void SetDetailsFromXML(XMLElement* entity) override;
+
         virtual ~MysticalDoor();
     protected:
     private:

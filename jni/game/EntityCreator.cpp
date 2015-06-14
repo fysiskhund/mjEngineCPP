@@ -16,6 +16,7 @@ EntityCreator::EntityCreator(mjResourceManager* resourceManager)
     entityTypes.push_back("bat");
     entityTypes.push_back("plant");
     entityTypes.push_back("frog");
+    entityTypes.push_back("door");
 
 }
 
@@ -44,12 +45,42 @@ void EntityCreator::PopulateLevel(XMLDocument* levelDoc, Level* levelData)
 
 		entity = entity->NextSiblingElement();
 	}
+
+	// Tie the doors to their counterparts
+	for (unsigned i = 0; i < levelData->entities.size(); i++)
+	{
+		if (levelData->entities[i]->tag == 5)
+		{
+            MysticalDoor* door = (MysticalDoor*) levelData->entities[i];
+
+            if (!door->counterpartName.empty())
+            {
+                if (!door->counterpartName.compare("endlevel") == 0)
+                {
+                    MysticalDoor* counterPart = (MysticalDoor*) levelData->GetEntityByID(door->counterpartName.c_str());
+                    if (counterPart)
+                    {
+                        door->counterpart = counterPart;
+                    } else
+                    {
+                        LOGI("** Error: door %s without a counterpart (%s)\n", door->id, door->counterpartName.c_str());
+                    }
+                }
+            } else
+            {
+                LOGI("** Error: door %s does not specify any counterpart\n", door->id);
+            }
+        }
+
+	}
 }
 
 mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
 {
     int whichEntity = -1;
     unsigned i = 0;
+
+    mjObject* result;
 
     while(whichEntity == -1 && i < entityTypes.size())
     {
@@ -61,22 +92,30 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
     }
     switch (whichEntity) {
         case 0:
-            return new Character(resourceManager);
+            result = new Character(resourceManager);
             break;
         case 1:
-            return new Bird(resourceManager);
+            result = new Bird(resourceManager);
             break;
         case 2:
-            return new BatBot(levelData, resourceManager);
+            result = new BatBot(levelData, resourceManager);
             break;
         case 3:
-            return new Plant(levelData, resourceManager);
+            result = new Plant(levelData, resourceManager);
             break;
         case 4:
-            return new Frog(levelData, resourceManager);
+            result = new Frog(levelData, resourceManager);
+            break;
+        case 5:
+            result = new MysticalDoor(levelData, resourceManager);
             break;
         default:
-            return NULL;
+            result = NULL;
             break;
     }
+    if (result)
+    {
+    	result->tag = whichEntity;
+    }
+    return result;
 }

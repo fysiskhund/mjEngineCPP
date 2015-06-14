@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0232EA12-D04C-425C-B1BB-DA185A375AC4}</ProjectGuid>
     <Compiler>
@@ -20,21 +20,6 @@
       </Packages>
     </Packages>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug</OutputPath>
-    <Externalconsole>true</Externalconsole>
-    <OutputName>mjEngine</OutputName>
-    <CompileTarget>Bin</CompileTarget>
-    <DefineSymbols>DEBUG MONODEVELOP DESKTOP_SDL USE_GLES USE_SDL_AUDIO</DefineSymbols>
-    <SourceDirectory>.</SourceDirectory>
-    <ExtraCompilerArguments>-std=c++11</ExtraCompilerArguments>
-    <Includes>
-      <Includes>
-        <Include>../../../../</Include>
-      </Includes>
-    </Includes>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release</OutputPath>
     <Externalconsole>true</Externalconsole>
@@ -43,6 +28,27 @@
     <OptimizationLevel>3</OptimizationLevel>
     <DefineSymbols>MONODEVELOP</DefineSymbols>
     <SourceDirectory>.</SourceDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_GNULinuxGL3|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineSymbols>DEBUG MONODEVELOP DESKTOP_SDL USE_SDL_AUDIO USE_GL3</DefineSymbols>
+    <ExtraCompilerArguments>-std=c++11</ExtraCompilerArguments>
+    <Includes>
+      <Includes>
+        <Include>../../../../</Include>
+      </Includes>
+    </Includes>
+    <CompileTarget>Bin</CompileTarget>
+    <OutputName>mjEngine</OutputName>
+    <Externalconsole>true</Externalconsole>
+    <SourceDirectory>.</SourceDirectory>
+    <Commandlineparameters>--windowed</Commandlineparameters>
+    <Libs>
+      <Libs>
+        <Lib>GLEW</Lib>
+      </Libs>
+    </Libs>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="ai\" />
@@ -268,6 +274,12 @@
     <Compile Include="..\..\util\mjTextureResource.cpp">
       <Link>util\mjTextureResource.cpp</Link>
     </Compile>
+    <Compile Include="..\..\game\entities\MysticalDoor.cpp">
+      <Link>game\entities\MysticalDoor.cpp</Link>
+    </Compile>
+    <Compile Include="..\keyboardcontrol.cpp">
+      <Link>gnuLinux\keyboardcontrol.cpp</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\ai\mjAutomaton.h">
@@ -491,6 +503,12 @@
     </None>
     <None Include="..\..\util\mjTextureResource.h">
       <Link>util\mjTextureResource.h</Link>
+    </None>
+    <None Include="..\..\game\entities\MysticalDoor.h">
+      <Link>game\entities\MysticalDoor.h</Link>
+    </None>
+    <None Include="..\keyboardcontrol.h">
+      <Link>gnuLinux\keyboardcontrol.h</Link>
     </None>
   </ItemGroup>
 </Project>

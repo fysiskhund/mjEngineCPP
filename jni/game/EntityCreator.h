@@ -22,6 +22,7 @@
 #include "entities/Bird.h"
 #include "entities/BatBot.h"
 #include "entities/Frog.h"
+#include "entities/MysticalDoor.h"
 
 #include "entities/Plant.h"
 
