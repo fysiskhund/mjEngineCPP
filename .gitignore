@@ -32,3 +32,9 @@ lint.xml
 
 *.xcuserstate
 *.userprefs
+
+# build directories from QTCreator
+build-*/
+
+# *.user QTCreator file
+*.user

@@ -5,6 +5,8 @@
 #include <vector>
 #include <algorithm>
 
+#include "../extLibs/tinyxml/tinyxml2.h"
+
 #include "../graphics/mjModel.h"
 #include "../graphics/mjImageLoader.h"
 #include "../graphics/animation/mjModelStructure.h"
