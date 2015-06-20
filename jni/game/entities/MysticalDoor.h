@@ -26,6 +26,7 @@ class MysticalDoor: public KosmoObject
         std::string counterpartName;
         MysticalDoor* counterpart = NULL;
         mjVector3 offsetOnTeleportArrive;
+        float offsetRadiusOnTeleportArrive;
 
         MysticalDoor(Level* levelData, mjResourceManager* resourceManager);
         void SetDetailsFromXML(XMLElement* entity) override;

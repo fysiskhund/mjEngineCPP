@@ -12,9 +12,11 @@ class KosmoObject : public mjObject
 public:
     bool canGoThroughDoors = false;
     Level* levelData;
+    float teleportCooldown = 0;
 
     KosmoObject(structuretype collisionStructureType, mjResourceManager* resourceManager, Level* levelData);
     KosmoObject(mjResourceManager* resourceManager, Level* levelData);
+    void Update(float t_elapsed) override;
 };
 
 

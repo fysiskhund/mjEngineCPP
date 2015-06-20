@@ -35,66 +35,69 @@ void PrintGLCapabilities()
 void JoystickEvent(int controllerID, int joystickID,
 		float x, float y)
 {
-if (joystickID == 0)
-	{
-		mjVector3 dir;
-		dir.Set(x,0,y);
 
-		float norm = dir.GetNorm();
-		if (norm > 0.2)
-		{
-			mjVector3 outForwardDir;
-			mjVector3 outLeftDir;
+    if (!platformUniverse->character->ignoreInput)
+    {
+        if (joystickID == 0)
+        {
+            mjVector3 dir;
+            dir.Set(x,0,y);
 
-			//invGravity.Normalize();
-			mjMathHelper::GetForwardAndLeftDirections(platformUniverse->camera->dir,
-                                                      platformUniverse->physics.gravity,
-                                                      &outForwardDir, &outLeftDir);
+            float norm = dir.GetNorm();
+            if (norm > 0.2)
+            {
+                mjVector3 outForwardDir;
+                mjVector3 outLeftDir;
 
-			mjVector3 finalForwardDir;
-			// The joystick directions need to be inverted because technically they are:
-			// in the Y axis, the joystick going "up" outputs a negative y value and viceversa.
-			// In the X axis, pushing the joystick towards the left results in a negative value.
-			// conceptually it needs to be inverted.
-			//
+                //invGravity.Normalize();
+                mjMathHelper::GetForwardAndLeftDirections(platformUniverse->camera->dir,
+                                                          platformUniverse->physics.gravity,
+                                                          &outForwardDir, &outLeftDir);
 
-			finalForwardDir.ScaleAdd(-y, outForwardDir);
-			finalForwardDir.ScaleAdd(-x, outLeftDir);
+                mjVector3 finalForwardDir;
+                // The joystick directions need to be inverted because technically they are:
+                // in the Y axis, the joystick going "up" outputs a negative y value and viceversa.
+                // In the X axis, pushing the joystick towards the left results in a negative value.
+                // conceptually it needs to be inverted.
+                //
 
-			float finalForwardDirNorm = finalForwardDir.GetNorm();
+                finalForwardDir.ScaleAdd(-y, outForwardDir);
+                finalForwardDir.ScaleAdd(-x, outLeftDir);
 
-			if (finalForwardDirNorm > 0.01 && finalForwardDirNorm < 4)
-			{
+                float finalForwardDirNorm = finalForwardDir.GetNorm();
 
-				platformUniverse->character->intrinsecVel.CopyFrom(finalForwardDir);
-				platformUniverse->character->intrinsecVel.MulScalar(2);
+                if (finalForwardDirNorm > 0.01 && finalForwardDirNorm < 4)
+                {
 
-				if (finalForwardDir.Normalize() > 0.1)
-				{
-					platformUniverse->character->dir.CopyFrom(finalForwardDir);
-				}
-			} else
-			{
-				LOGI("Strange value in finalForwardDir - %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);
-			}
-			/*LOGI("initialDir %3.3f, %3.3f, %3.3f", dir.x, dir.y, dir.z);
-			LOGI("cameraDir %3.3f, %3.3f, %3.3f", camera->dir.x, camera->dir.y, camera->dir.z);
-			LOGI("finalforwarddir %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);*/
+                    platformUniverse->character->intrinsecVel.CopyFrom(finalForwardDir);
+                    platformUniverse->character->intrinsecVel.MulScalar(2);
 
-		} else {
-			platformUniverse->character->intrinsecVel.Set0();
-		}
-	} else
-	{
+                    if (finalForwardDir.Normalize() > 0.1)
+                    {
+                        platformUniverse->character->dir.CopyFrom(finalForwardDir);
+                    }
+                } else
+                {
+                    LOGI("Strange value in finalForwardDir - %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);
+                }
+                /*LOGI("initialDir %3.3f, %3.3f, %3.3f", dir.x, dir.y, dir.z);
+            LOGI("cameraDir %3.3f, %3.3f, %3.3f", camera->dir.x, camera->dir.y, camera->dir.z);
+            LOGI("finalforwarddir %3.3f, %3.3f, %3.3f", finalForwardDir.x, finalForwardDir.y, finalForwardDir.z);*/
 
-		platformUniverse->cameraAnglesModifier.Set(x,y,0);
+            } else {
+                platformUniverse->character->intrinsecVel.Set0();
+            }
+        } else
+        {
 
-
-
-
-	}
+            platformUniverse->cameraAnglesModifier.Set(x,y,0);
 
 
+
+
+        }
+
+    }
 	//LOGI("Controller[%d].joystick[%d]: %3.3f, %3.3f", controllerID, joystickID, x, y);
 }
 void JoystickButtonEvent(int controllerID, int buttonID, bool pressedDown)

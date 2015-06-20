@@ -6,8 +6,9 @@
 MysticalDoor::MysticalDoor(Level* levelData, mjResourceManager* resourceManager)
     :KosmoObject(MJ_AABB, resourceManager, levelData)
 {
-    offsetOnTeleportArrive.z = 1.5; // By default, objects arriving to this door will be placed 0.5 units in front in the Z axis.
-    offsetOnTeleportArrive.y = 0.5;
+    //offsetOnTeleportArrive.z = 1.5; // By default, objects arriving to this door will be placed 0.5 units in front in the Z axis.
+    offsetOnTeleportArrive.y = 0.3;
+    offsetRadiusOnTeleportArrive = 0.5;
 
     model = resourceManager->FetchModel("door.mesh.xml");
 
@@ -57,13 +58,28 @@ void MysticalDoor::ProcessCollisionEffects()
     for (unsigned i=0; i < collisionStack.size(); i++)
     {
         mjPhysicsEffect* collisionEffect = collisionStack[i];
+
         if (collisionEffect->otherObject->tag > OT_TERRAINTYPESENDMARKERTAG)
         {
             KosmoObject* otherKObject = (KosmoObject*)collisionEffect->otherObject;
-            if (otherKObject->canGoThroughDoors && this->counterpart != NULL)
+            if (otherKObject->canGoThroughDoors  && otherKObject->teleportCooldown <= 0 && counterpart != NULL)
             {
+                mjVector3 directionOnArrival(this->pos);
+                directionOnArrival.Subtract(otherKObject->pos);
+                // For now just remove the "y" component. Later it will have to be transformed to the exit point's orientation
+                directionOnArrival.y = 0;
+                directionOnArrival.Normalize();
+
+                // Adopt the arrival door's position
                 otherKObject->pos.CopyFrom(counterpart->pos);
+                otherKObject->teleportCooldown = 1;
+
+                // displace the object by the radius specified, along the directionOnArrival
+                otherKObject->pos.ScaleAdd(counterpart->offsetRadiusOnTeleportArrive, directionOnArrival);
+
+                // Finally add the static offset
                 otherKObject->pos.Add(counterpart->offsetOnTeleportArrive);
+
             }
         }
     }

@@ -28,6 +28,8 @@ public:
 	int hasFooting = 0;
 	int jumping = -1;
 
+    bool ignoreInput = false;
+
 	void ProcessPhysicsEffects(float t_elapsed) override;
 	void ProcessCollisionEffects() override;
 	void Update(float t_elapsed) override;
