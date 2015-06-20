@@ -34,11 +34,13 @@ void PlatformUniverseScene::Initialise(int width, int height)
     //checkGlError("glViewport");
     mjVector3 o;
 
-    ambient.InitGlowBeings(camera, &physics, &shaderList, &sceneGraph, *resourceManager);
-    //ambient.CreateDustDevil(o, 12, 10);
+
+
 
 
     level->LoadFromFile(levelFilename.c_str());
+    ambient.InitGlowBeings(level, camera, &physics, &shaderList, &sceneGraph, *resourceManager);
+    //ambient.CreateDustDevil(o, 12, 10);
     entityCreator->PopulateLevel(&level->doc, level);
 
 

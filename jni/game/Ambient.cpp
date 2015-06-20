@@ -24,14 +24,14 @@ void Ambient::Update(float t_elapsed)
 
 }
 
-void Ambient::InitGlowBeings(mjCamera* camera, mjPhysics* physics, std::vector<mjShader*>* shaderList, mjSceneGraph* sceneGraph, mjResourceManager& resourceManager)
+void Ambient::InitGlowBeings(Level* levelData, mjCamera* camera, mjPhysics* physics, std::vector<mjShader*>* shaderList, mjSceneGraph* sceneGraph, mjResourceManager& resourceManager)
 {
  unsigned total = 100;
 
 
     for (unsigned i = 0; i < total; i++)
     {
-        GlowBeing* glowBeing = new GlowBeing(camera, &resourceManager);
+        GlowBeing* glowBeing = new GlowBeing(levelData, camera, &resourceManager);
 
 
         glowBeing->TieShaders(*shaderList);

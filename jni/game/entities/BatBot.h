@@ -7,7 +7,7 @@
 
 
 #include <core/mjObject.h>
-#include <game/Level.h>
+
 #include <ai/mjAutomaton.h>
 #include <extLibs/util/mjXMLHelper.h>
 #include <graphics/animation/mjAnimation.h>
@@ -15,6 +15,8 @@
 #include <graphics/animation/mjAnimator.h>
 #include <graphics/animation/mjModelAnimation.h>
 #include <graphics/animation/mjModelPose.h>
+
+#include "../Level.h"
 //#include <ai/mjAutomatonState>
 
 
@@ -26,8 +28,9 @@ enum batMatonStates{
   BM_WANDER=0, BM_DETECT, BM_ATTACK
 };
 
+#include "KosmoObject.h"
 
-class BatBot: public mjObject, public mjAutomaton
+class BatBot: public KosmoObject, public mjAutomaton
 {
     public:
 
@@ -37,7 +40,7 @@ class BatBot: public mjObject, public mjAutomaton
 
         BatBot(Level* levelData, mjResourceManager* resourceManager);
         //BatBot(const BatBot& other);
-        Level* levelData;
+
 
         float wanderRadiusMin = 1;
         float wanderRadiusMax = 8;

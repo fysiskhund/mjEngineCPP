@@ -8,7 +8,7 @@
 #include "batMatonStates/AttackBatMatonState.h"
 
 BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
-: mjObject(MJ_AABB, resourceManager)
+: KosmoObject(MJ_AABB, resourceManager, levelData)
 //:BatMaton(levelData)
 {
 
@@ -51,8 +51,6 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
 
 //////////// end of animation test (init)
 
-
-    this->levelData = levelData;
 
     wanderDir.Set(-1,0,0);
    // anchor.Set(2.34, 7.9, -7.42);
@@ -107,7 +105,7 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
 
 void BatBot::SetDetailsFromXML(XMLElement* entity)
 {
-    mjObject::SetDetailsFromXML(entity);
+    KosmoObject::SetDetailsFromXML(entity);
 
     anchor.CopyFrom(pos);
     pos.x += 1; // Avoid pos === anchor, which causes problems.
@@ -132,7 +130,7 @@ void BatBot::Update(float t_elapsed)
 	animator.UpdatePose(tAnimation, *pose, animation);
 
 	mjAutomaton::Update(t_elapsed);
-	mjObject::UpdatePosition(t_elapsed);
+    KosmoObject::UpdatePosition(t_elapsed);
 	//LOGI("Batbot: I exist at %3.3f %3.3f %3.3f with anchor %3.3f, %3.3f, %3.3f", this->pos.x, this->pos.y, this->pos.z, this->anchor.x, this->anchor.y, this->anchor.z);
 	//LOGI("v: %3.3f, %3.3f, %3.3f", this->vel.x, this->vel.y, this->vel.z);
 

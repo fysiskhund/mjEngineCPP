@@ -7,8 +7,8 @@
 //
 
 #include "Bird.h"
-Bird::Bird(mjResourceManager* resourceManager)
-: mjObject(MJ_AABB, resourceManager)
+Bird::Bird(Level* levelData, mjResourceManager* resourceManager)
+: KosmoObject(MJ_AABB, resourceManager, levelData)
 {
 
 	GLuint glTexture;

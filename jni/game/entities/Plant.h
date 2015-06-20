@@ -7,15 +7,16 @@
 
 #include "../Level.h"
 
+#include "KosmoObject.h"
+
 
 using namespace mjEngine;
 
-class Plant : public mjObject, public mjAutomaton
+class Plant : public KosmoObject, public mjAutomaton
 {
     public:
         Plant(Level* levelData, mjResourceManager* resourceManager);
         //BatBot(const BatBot& other);
-        Level* levelData;
         ~Plant();
         virtual void ProcessPhysicsEffects(float t_elapsed) override;
     protected:

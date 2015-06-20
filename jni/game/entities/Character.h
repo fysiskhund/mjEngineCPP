@@ -12,17 +12,19 @@
 #include <graphics/animation/mjAnimator.h>
 #include <graphics/animation/mjModelAnimation.h>
 #include <graphics/animation/mjModelPose.h>
+
+#include "KosmoObject.h"
 using namespace mjEngine;
 
 
 #define MAX_VEL_FOR_CHARACTER 2
 
-class Character: public mjObject
+class Character: public KosmoObject
 {
 public:
 
     mjVector3 startPosition;
-	Character(mjResourceManager* resourceManager);
+    Character(Level* levelData, mjResourceManager* resourceManager);
 	int hasFooting = 0;
 	int jumping = -1;
 

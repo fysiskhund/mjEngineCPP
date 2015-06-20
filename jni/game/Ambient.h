@@ -21,6 +21,8 @@
 #include "../graphics/mjCamera.h"
 #include "ambient/DustDevil.h"
 
+#include "Level.h"
+
 
 using namespace mjEngine;
 
@@ -41,7 +43,7 @@ class Ambient
 
         void Update(float t_elapsed);
 
-        void InitGlowBeings(mjCamera* camera, mjPhysics* physics, std::vector<mjShader*>* shaderList, mjSceneGraph* sceneGraph,  mjResourceManager& resourceManager);
+        void InitGlowBeings(Level* levelData, mjCamera* camera, mjPhysics* physics, std::vector<mjShader*>* shaderList, mjSceneGraph* sceneGraph,  mjResourceManager& resourceManager);
 
         void CreateDustDevil(mjVector3& pos, float r, float h);
 

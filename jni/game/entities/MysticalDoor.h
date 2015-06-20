@@ -12,10 +12,13 @@
 
 #include <game/Level.h>
 
+
+#include "KosmoObject.h"
+
 using namespace mjEngine;
 
 
-class MysticalDoor: public mjObject
+class MysticalDoor: public KosmoObject
 {
     public:
 
@@ -25,6 +28,7 @@ class MysticalDoor: public mjObject
 
         MysticalDoor(Level* levelData, mjResourceManager* resourceManager);
         void SetDetailsFromXML(XMLElement* entity) override;
+        void ProcessCollisionEffects() override;
 
         virtual ~MysticalDoor();
     protected:

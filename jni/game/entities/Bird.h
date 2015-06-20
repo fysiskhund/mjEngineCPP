@@ -17,12 +17,14 @@
 #include <util/mjResourceManager.h>
 #include <graphics/mjImageLoader.h>
 
+#include "KosmoObject.h"
+
 using namespace mjEngine;
 
-class Bird: public mjObject
+class Bird: public KosmoObject
 {
 public:
-    Bird(mjResourceManager* resourceManager);
+    Bird(Level* levelData, mjResourceManager* resourceManager);
 private:
 };
 

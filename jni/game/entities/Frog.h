@@ -12,13 +12,14 @@
 #include <extLibs/util/mjXMLHelper.h>
 #include <audio/mjSoundSource.h>
 
-class Frog : public mjObject, public mjAutomaton
+#include "KosmoObject.h"
+
+class Frog : public KosmoObject, public mjAutomaton
 {
     public:
         Frog(Level* levelData, mjResourceManager* resourceManager);
         void SetDetailsFromXML(XMLElement* entity) override;
         void Update(float t_elapsed) override;
-        Level* levelData;
         unsigned glTexture;
         mjVector3 jumpDirection;
         mjVector3 startPosition;

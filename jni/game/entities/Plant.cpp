@@ -1,9 +1,8 @@
 #include "Plant.h"
 
 Plant::Plant(Level* levelData, mjResourceManager* resourceManager)
-: mjObject(MJ_AABB, resourceManager)
+: KosmoObject(MJ_AABB, resourceManager, levelData)
 {
-    this->levelData = levelData;
     this->canCollide = false;
 
 

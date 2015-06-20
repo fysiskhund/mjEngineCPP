@@ -92,10 +92,10 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
     }
     switch (whichEntity) {
         case 0:
-            result = new Character(resourceManager);
+            result = new Character(levelData, resourceManager);
             break;
         case 1:
-            result = new Bird(resourceManager);
+            result = new Bird(levelData, resourceManager);
             break;
         case 2:
             result = new BatBot(levelData, resourceManager);

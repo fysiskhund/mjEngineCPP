@@ -1,8 +1,8 @@
 #include "GlowBeing.h"
 
 
-GlowBeing::GlowBeing(mjCamera* camera, mjResourceManager* resourceManager)
-: mjObject(resourceManager)
+GlowBeing::GlowBeing(Level* levelData, mjCamera* camera, mjResourceManager* resourceManager)
+: KosmoObject(resourceManager, levelData)
 {
     this->camera = camera;
 

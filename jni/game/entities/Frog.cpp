@@ -4,10 +4,9 @@
 #include "frogAutomatonStates/FrogJumpAutomatonState.h"
 
 Frog::Frog(Level* levelData, mjResourceManager* resourceManager)
-: mjObject(MJ_AABB, resourceManager)
+: KosmoObject(MJ_AABB, resourceManager, levelData)
 {
     srand(time(0));
-    this->levelData = levelData;
 
 
     //model = resourceManager.FetchModel("frog.mesh.xml");
@@ -41,7 +40,7 @@ void Frog::Update(float t_elapsed)
 {
 
 	mjAutomaton::Update(t_elapsed);
-	mjObject::UpdatePosition(t_elapsed);
+    KosmoObject::UpdatePosition(t_elapsed);
 
 }
 
@@ -53,7 +52,7 @@ Frog::FrogAutomatonState::FrogAutomatonState(Frog* frog)
 
 void Frog::SetDetailsFromXML(XMLElement* entity)
 {
-    mjObject::SetDetailsFromXML(entity);
+    KosmoObject::SetDetailsFromXML(entity);
     startPosition.CopyFrom(pos);
     mjAABB* mjaabbStruct = (mjAABB*) boundingStructure;
     mjaabbStruct->UpdateCorners();

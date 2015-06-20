@@ -96,7 +96,8 @@ HEADERS += \
     util/mjResource.h \
     util/mjResourceManager.h \
     util/mjSoundResource.h \
-    util/mjTextureResource.h
+    util/mjTextureResource.h \
+    game/entities/KosmoObject.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -174,7 +175,8 @@ SOURCES += \
     util/mjResource.cpp \
     util/mjResourceManager.cpp \
     util/mjSoundResource.cpp \
-    util/mjTextureResource.cpp
+    util/mjTextureResource.cpp \
+    game/entities/KosmoObject.cpp
 
 
 

@@ -1,10 +1,10 @@
 #include "Character.h"
 
-Character::Character(mjResourceManager* resourceManager)
-: mjObject(MJ_AABB, resourceManager)
+Character::Character(Level* levelData, mjResourceManager* resourceManager)
+: KosmoObject(MJ_AABB, resourceManager, levelData)
 {
 	SetUpSillyAnimation();
-	model = resourceManager->FetchModel("char0.mesh.xml");
+    model = resourceManager->FetchModel("door.mesh.xml");//("char0.mesh.xml");
 	mjAABB* charBoundStruct = (mjAABB*) boundingStructure;
 	mjVector3 minCorner;
 	minCorner.Set(-0.3,0,-0.3);
@@ -16,7 +16,7 @@ Character::Character(mjResourceManager* resourceManager)
 
 
 
-	GLuint glTexture = resourceManager->FetchTexture("suit_test.png", GL_CLAMP_TO_EDGE);
+    GLuint glTexture = resourceManager->FetchTexture("door.png", GL_CLAMP_TO_EDGE);//("suit_test.png", GL_CLAMP_TO_EDGE);
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;
@@ -115,7 +115,7 @@ void Character::ProcessCollisionEffects()
 	}
 
 
-	mjObject::ProcessCollisionEffects();
+    KosmoObject::ProcessCollisionEffects();
 
 
 }
@@ -184,7 +184,7 @@ void Character::Update(float t_elapsed)
 
     vel.MulScalar(0.99);
 
-	mjObject::Update(t_elapsed);
+    KosmoObject::Update(t_elapsed);
 
 
 }
@@ -214,7 +214,7 @@ void Character::UpdatePosition(float t_elapsed)
         }*/
     }
 
-	mjObject::UpdatePosition(t_elapsed);
+    KosmoObject::UpdatePosition(t_elapsed);
 
 }
 
@@ -227,7 +227,7 @@ void Character::Check()
 }
 void Character::SetDetailsFromXML(XMLElement* entity)
 {
-    mjObject::SetDetailsFromXML(entity);
+    KosmoObject::SetDetailsFromXML(entity);
     startPosition.CopyFrom(pos);
 
     mjAABB* mjaabbStruct = (mjAABB*) boundingStructure;

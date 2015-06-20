@@ -11,12 +11,13 @@
 #include <physics/mjSphere.h>
 #include <graphics/mjCamera.h>
 #include <util/mjResourceManager.h>
+#include "KosmoObject.h"
 
 
 
 using namespace mjEngine;
 
-class GlowBeing: public mjObject
+class GlowBeing: public KosmoObject
 {
     public:
         float mass = 0.3;
@@ -25,7 +26,7 @@ class GlowBeing: public mjObject
 
         mjCamera* camera;
 
-        GlowBeing(mjCamera* camera, mjResourceManager* resourceManager);
+        GlowBeing(Level* levelData, mjCamera* camera, mjResourceManager* resourceManager);
 
         const float MaxCameraDist = 4;
 
