@@ -9,8 +9,9 @@
 #include <core/mjObject.h>
 #include <util/mjResourceManager.h>
 #include <graphics/mjImageLoader.h>
+#include <physics/mjCollisionTests.h>
 
-#include <game/Level.h>
+#include "../Level.h"
 
 
 #include "KosmoObject.h"
@@ -29,6 +30,9 @@ class MysticalDoor: public KosmoObject
         MysticalDoor(Level* levelData, mjResourceManager* resourceManager);
         void SetDetailsFromXML(XMLElement* entity) override;
         void ProcessCollisionEffects() override;
+
+        void DEBUGonCollisionTestStart(mjObject* otherObject) override;
+        void DEBUGonCollisionOccurred(mjObject* otherObject) override;
 
         virtual ~MysticalDoor();
     protected:

@@ -88,9 +88,14 @@ public:
 	virtual void UpdatePosition(float t_elapsed);
 	virtual void TieShaders(std::vector<mjShader*>& shaderList);
 
+
     void MatchScaleToAABB();
     void MatchAABBToModel();
 
+
+    //Debugging functions
+    virtual void DEBUGonCollisionTestStart(mjObject* otherObject){}
+    virtual void DEBUGonCollisionOccurred(mjObject* otherObject){}
 
 
 };

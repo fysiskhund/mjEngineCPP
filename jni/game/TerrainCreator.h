@@ -19,6 +19,8 @@
 #include "terrainTypes/Box.h"
 #include "terrainTypes/FallingBox.h"
 
+#include "ObjectTags.h"
+
 
 using namespace mjEngine;
 

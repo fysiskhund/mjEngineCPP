@@ -10,8 +10,10 @@ qtcAddDeployment()
 QMAKE_CXXFLAGS += -std=c++11 -static
 
 DEFINES -= UNICODE
-DEFINES += DESKTOP_SDL WIN32 NON_GLES_CONTEXT USE_SDL_AUDIO USE_GL3
+DEFINES += DESKTOP_SDL NON_GLES_CONTEXT USE_SDL_AUDIO USE_GL3 DEBUGCOLLISIONS
 
+win32: DEFINES += WIN32
+unix: DEFINES += GNULINUX
 
 HEADERS += \
     ../keyboardcontrol.h \
@@ -97,7 +99,8 @@ HEADERS += \
     util/mjResourceManager.h \
     util/mjSoundResource.h \
     util/mjTextureResource.h \
-    game/entities/KosmoObject.h
+    game/entities/KosmoObject.h \
+    game/ObjectTags.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -186,3 +189,8 @@ win32: LIBS += -L$$PWD/../../../glew/lib/Release/Win32/ -L$$PWD/../../../sdl/i68
 
 win32: LIBS += -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image -lglew32s -lopengl32 -lSDL2_mixer
 
+#linux: LIBS += -lSDL2 -lGL -lGLEW -lSDL2_image -lSDL2_mixer
+
+
+unix: CONFIG += link_pkgconfig
+unix: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer

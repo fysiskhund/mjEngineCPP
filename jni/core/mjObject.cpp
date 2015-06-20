@@ -295,6 +295,8 @@ void mjObject::UpdatePosition(float t_elapsed)
             boundingStruct->halfWidths.Subtract(maxCorner);
             boundingStruct->halfWidths.MulScalar(0.5);
 
+            boundingStruct->center->CopyFrom(pos);
+
             boundingStruct->UpdateCorners();
 
         }

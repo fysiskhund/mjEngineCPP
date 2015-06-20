@@ -96,6 +96,8 @@ void mjPhysics::CollisionDetection()
 							object0 = objectJ;
 							object1 = objectI;
 						}
+                        object0->DEBUGonCollisionTestStart(object1);
+                        object1->DEBUGonCollisionTestStart(object0);
 
 						mjCollisionResult* colResult = new mjCollisionResult(); // Prepare the collision result
 						switch(object0->boundingStructure->type)
@@ -110,6 +112,10 @@ void mjPhysics::CollisionDetection()
 								//LOGI("After new Colresult");
 								if (mjCollisionTests::SphereVsSphere((mjSphere*)object0->boundingStructure, (mjSphere*)object1->boundingStructure, colResult) == MJ_OVERLAP)
 								{
+#ifdef DEBUGCOLLISIONS
+                        object0->DEBUGonCollisionOccurred(object1);
+                        object1->DEBUGonCollisionOccurred(object0);
+#endif
 									colResult->relocationEffectObj0->otherObject = object1;
 									object0->collisionStack.push_back(colResult->relocationEffectObj0);
 
@@ -117,6 +123,8 @@ void mjPhysics::CollisionDetection()
 									object1->collisionStack.push_back(colResult->relocationEffectObj1);
 									//FIXME:!!! Something must be done with colResult in this case
 									// without altering the inner effects, since those will be destroyed in the object after they'be been used.
+
+
 
 								} else
 								{
@@ -137,10 +145,13 @@ void mjPhysics::CollisionDetection()
 							case MJ_AABB:
 							{
 
-
 								if (mjCollisionTests::AABBVsAABB((mjAABB*)object0->boundingStructure, (mjAABB*)object1->boundingStructure, colResult) == MJ_OVERLAP)
 								{
 
+#ifdef DEBUGCOLLISIONS
+                        object0->DEBUGonCollisionOccurred(object1);
+                        object1->DEBUGonCollisionOccurred(object0);
+#endif
 									if (object1->boundingStructure->isImmovable)
 									{
 										if (colResult->changeVelEffectObj0->mask[0])
@@ -234,6 +245,9 @@ void mjPhysics::CollisionDetection()
                                         //colResult->accelObj0->value;
 
 									}
+
+
+
 
 									colResult->relocationEffectObj0->otherObject = object1;
 									colResult->changeVelEffectObj0->otherObject = object1;

@@ -4,7 +4,7 @@ Character::Character(Level* levelData, mjResourceManager* resourceManager)
 : KosmoObject(MJ_AABB, resourceManager, levelData)
 {
 	SetUpSillyAnimation();
-    model = resourceManager->FetchModel("door.mesh.xml");//("char0.mesh.xml");
+    model = resourceManager->FetchModel("char0.mesh.xml");
 	mjAABB* charBoundStruct = (mjAABB*) boundingStructure;
 	mjVector3 minCorner;
 	minCorner.Set(-0.3,0,-0.3);
@@ -16,12 +16,13 @@ Character::Character(Level* levelData, mjResourceManager* resourceManager)
 
 
 
-    GLuint glTexture = resourceManager->FetchTexture("door.png", GL_CLAMP_TO_EDGE);//("suit_test.png", GL_CLAMP_TO_EDGE);
+    GLuint glTexture = resourceManager->FetchTexture("suit_test.png", GL_CLAMP_TO_EDGE);
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;
 	}
 	mass = 55;
+    canGoThroughDoors = true;
 }
 
 void Character::ProcessPhysicsEffects(float t_elapsed)

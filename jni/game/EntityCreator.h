@@ -3,7 +3,7 @@
 //  mjEngineCPP
 //
 //  Created by Alejandro Valenzuela Roca on 27/09/14.
-//  Copyright (c) 2014 Phong-shaded hallucinations. All rights reserved.
+//  Copyright (c) 2014-15 Phong-shaded hallucinations. All rights reserved.
 //
 
 #ifndef mjEngineCPP_EntityCreator_h
@@ -25,6 +25,8 @@
 #include "entities/MysticalDoor.h"
 
 #include "entities/Plant.h"
+
+#include "ObjectTags.h"
 
 
 #include "Level.h"

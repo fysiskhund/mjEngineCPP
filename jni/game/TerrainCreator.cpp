@@ -24,9 +24,11 @@ mjObject* TerrainCreator::CreateTerrain(const char* terrainType, mjResourceManag
     switch (whichTerrainType) {
         case 0:
             obj = new Box(&resourceManager);
+            obj->tag = OT_BOX;
             break;
         case 1:
             obj = new FallingBox(&resourceManager);
+            obj->tag = OT_FALLINGBOX;
             break;
 
 

@@ -49,7 +49,7 @@ void EntityCreator::PopulateLevel(XMLDocument* levelDoc, Level* levelData)
 	// Tie the doors to their counterparts
 	for (unsigned i = 0; i < levelData->entities.size(); i++)
 	{
-		if (levelData->entities[i]->tag == 5)
+        if (levelData->entities[i]->tag == OT_MYSTICALDOOR)
 		{
             MysticalDoor* door = (MysticalDoor*) levelData->entities[i];
 
@@ -93,29 +93,32 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
     switch (whichEntity) {
         case 0:
             result = new Character(levelData, resourceManager);
+            result->tag = OT_CHARACTER;
             break;
         case 1:
             result = new Bird(levelData, resourceManager);
+            result->tag = OT_BIRD;
             break;
         case 2:
             result = new BatBot(levelData, resourceManager);
+            result->tag = OT_BATBOT;
             break;
         case 3:
             result = new Plant(levelData, resourceManager);
+            result->tag = OT_PLANT;
             break;
         case 4:
             result = new Frog(levelData, resourceManager);
+            result->tag = OT_FROG;
             break;
         case 5:
             result = new MysticalDoor(levelData, resourceManager);
+            result->tag = OT_MYSTICALDOOR;
             break;
         default:
             result = NULL;
             break;
     }
-    if (result)
-    {
-    	result->tag = whichEntity;
-    }
+
     return result;
 }
