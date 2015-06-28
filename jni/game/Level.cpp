@@ -75,7 +75,7 @@ void Level::Load(XMLDocument* doc)
 				}
 				obj->SetDetailsFromXML(terrainElement);
 
-				LOGI("TerrainElement %s found [%3.3f %3.3f %3.3f] [%3.3f %3.3f %3.3f]", terrainElement->Name(),
+                LOGI("TerrainElmnt %s (%s) found [%3.3f %3.3f %3.3f] [%3.3f %3.3f %3.3f]", obj->id, terrainElement->Name(),
 						aabb->minCorner.x, aabb->minCorner.y, aabb->minCorner.z,
 						aabb->maxCorner.x, aabb->maxCorner.y, aabb->maxCorner.z  );
 				aabb->UpdateCenter();

@@ -34,7 +34,7 @@ public:
     mjVector3 levelCenter;
     mjAABB* bounds;
 
-    float hardLimitExtra = 0.5;
+    float hardLimitExtra = 0.5; // extra space given so things can wander a bit outside the world
     mjAABB* hardLimits; // now with hardLimitExtra% more space than bounds
 
 private:

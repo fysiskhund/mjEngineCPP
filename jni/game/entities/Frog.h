@@ -22,7 +22,6 @@ class Frog : public KosmoObject, public mjAutomaton
         void Update(float t_elapsed) override;
         unsigned glTexture;
         mjVector3 jumpDirection;
-        mjVector3 startPosition;
         mjSoundSource* soundSource;
 
 

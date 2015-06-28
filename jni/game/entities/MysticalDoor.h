@@ -25,6 +25,8 @@ class MysticalDoor: public KosmoObject
 
         std::string counterpartName;
         MysticalDoor* counterpart = NULL;
+        bool teleportFunctionActive = true;
+        bool isCheckpointForPlayer = true;
         mjVector3 offsetOnTeleportArrive;
         float offsetRadiusOnTeleportArrive;
 

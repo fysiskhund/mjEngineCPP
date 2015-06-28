@@ -24,6 +24,8 @@
 #include "entities/Frog.h"
 #include "entities/MysticalDoor.h"
 
+#include "entities/FrogBoss.h"
+
 #include "entities/Plant.h"
 
 #include "ObjectTags.h"

@@ -32,6 +32,7 @@ Frog::Frog(Level* levelData, mjResourceManager* resourceManager)
     soundSource = new mjSoundSource();
     soundSource->Load(resourceManager->FetchSound("sounds/ribbit.wav"), 0);
 
+    mass = 1000; // SO PHAT!
 
 
 }

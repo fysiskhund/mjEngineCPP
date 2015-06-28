@@ -100,7 +100,11 @@ HEADERS += \
     util/mjSoundResource.h \
     util/mjTextureResource.h \
     game/entities/KosmoObject.h \
-    game/ObjectTags.h
+    game/ObjectTags.h \
+    game/entities/FrogBoss.h \
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonHuntState.h \
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonSlamState.h \
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -179,7 +183,11 @@ SOURCES += \
     util/mjResourceManager.cpp \
     util/mjSoundResource.cpp \
     util/mjTextureResource.cpp \
-    game/entities/KosmoObject.cpp
+    game/entities/KosmoObject.cpp \
+    game/entities/FrogBoss.cpp \
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonHuntState.cpp \
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonSlamState.cpp \
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.cpp
 
 
 

@@ -55,31 +55,40 @@ void MysticalDoor::DEBUGonCollisionOccurred(mjObject* otherObject)
 
 void MysticalDoor::ProcessCollisionEffects()
 {
-    for (unsigned i=0; i < collisionStack.size(); i++)
+    if (teleportFunctionActive)
     {
-        mjPhysicsEffect* collisionEffect = collisionStack[i];
-
-        if (collisionEffect->otherObject->tag > OT_TERRAINTYPESENDMARKERTAG)
+        for (unsigned i=0; i < collisionStack.size(); i++)
         {
-            KosmoObject* otherKObject = (KosmoObject*)collisionEffect->otherObject;
-            if (otherKObject->canGoThroughDoors  && otherKObject->teleportCooldown <= 0 && counterpart != NULL)
+            mjPhysicsEffect* collisionEffect = collisionStack[i];
+
+            if (collisionEffect->otherObject->tag > OT_TERRAINTYPESENDMARKERTAG)
             {
-                mjVector3 directionOnArrival(this->pos);
-                directionOnArrival.Subtract(otherKObject->pos);
-                // For now just remove the "y" component. Later it will have to be transformed to the exit point's orientation
-                directionOnArrival.y = 0;
-                directionOnArrival.Normalize();
+                KosmoObject* otherKObject = (KosmoObject*)collisionEffect->otherObject;
+                if (otherKObject->canGoThroughDoors  && otherKObject->teleportCooldown <= 0 && counterpart != NULL)
+                {
+                    mjVector3 directionOnArrival(this->pos);
+                    directionOnArrival.Subtract(otherKObject->pos);
+                    // For now just remove the "y" component. Later it will have to be transformed to the exit point's orientation
+                    directionOnArrival.y = 0;
+                    directionOnArrival.Normalize();
 
-                // Adopt the arrival door's position
-                otherKObject->pos.CopyFrom(counterpart->pos);
-                otherKObject->teleportCooldown = 1;
+                    // Adopt the arrival door's position
+                    otherKObject->pos.CopyFrom(counterpart->pos);
+                    otherKObject->teleportCooldown = 1;
 
-                // displace the object by the radius specified, along the directionOnArrival
-                otherKObject->pos.ScaleAdd(counterpart->offsetRadiusOnTeleportArrive, directionOnArrival);
+                    // displace the object by the radius specified, along the directionOnArrival
+                    otherKObject->pos.ScaleAdd(counterpart->offsetRadiusOnTeleportArrive, directionOnArrival);
 
-                // Finally add the static offset
-                otherKObject->pos.Add(counterpart->offsetOnTeleportArrive);
+                    // Finally add the static offset
+                    otherKObject->pos.Add(counterpart->offsetOnTeleportArrive);
 
+                    if (isCheckpointForPlayer && otherKObject->tag == OT_CHARACTER)
+                    {
+                        otherKObject->startPosition.CopyFrom(otherKObject->pos);
+
+                    }
+
+                }
             }
         }
     }

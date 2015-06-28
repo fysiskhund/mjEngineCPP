@@ -17,6 +17,7 @@ EntityCreator::EntityCreator(mjResourceManager* resourceManager)
     entityTypes.push_back("plant");
     entityTypes.push_back("frog");
     entityTypes.push_back("door");
+    entityTypes.push_back("frogboss");
 
 }
 
@@ -55,7 +56,12 @@ void EntityCreator::PopulateLevel(XMLDocument* levelDoc, Level* levelData)
 
             if (!door->counterpartName.empty())
             {
-                if (!door->counterpartName.compare("endlevel") == 0)
+                if (door->counterpartName.compare("none") == 0)
+                {
+                    // Door is marked as not active, it is the endpoint of a one-way only pair.
+                    door->teleportFunctionActive = false;
+
+                } else if (!door->counterpartName.compare("endlevel") == 0)
                 {
                     MysticalDoor* counterPart = (MysticalDoor*) levelData->GetEntityByID(door->counterpartName.c_str());
                     if (counterPart)
@@ -63,7 +69,7 @@ void EntityCreator::PopulateLevel(XMLDocument* levelDoc, Level* levelData)
                         door->counterpart = counterPart;
                     } else
                     {
-                        LOGI("** Error: door %s without a counterpart (%s)\n", door->id, door->counterpartName.c_str());
+                        LOGI("** ERROR: door %s without a counterpart (%s)\n", door->id, door->counterpartName.c_str());
                     }
                 }
             } else
@@ -114,6 +120,10 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
         case 5:
             result = new MysticalDoor(levelData, resourceManager);
             result->tag = OT_MYSTICALDOOR;
+            break;
+        case 6:
+            result = new FrogBoss(levelData, resourceManager);
+            result->tag = OT_FROGBOSS;
             break;
         default:
             result = NULL;

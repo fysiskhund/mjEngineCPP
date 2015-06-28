@@ -209,7 +209,9 @@ void FallingBox::Update(float t_elapsed)
     }
 
 
-    if (pos.GetNormSquared() > 40000)
+    mjVector3 startToCurrentPos(pos);
+    startToCurrentPos.Subtract(startPosition);
+    if (startToCurrentPos.GetNormSquared() > 6400)
     {
         Reset();
 

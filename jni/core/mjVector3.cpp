@@ -25,6 +25,12 @@ namespace mjEngine{
 	y = copy.y;
 	z = copy.z;
  }
+ mjVector3::mjVector3(mjVector3& fromPos, mjVector3& toPos)
+ {
+     x = toPos.x - fromPos.x;
+     y = toPos.y - fromPos.y;
+     z = toPos.z - fromPos.z;
+ }
 
  mjVector3::mjVector3(GLfloat x, GLfloat y, GLfloat z)
  {

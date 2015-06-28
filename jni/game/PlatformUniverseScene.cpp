@@ -148,6 +148,7 @@ void PlatformUniverseScene::Update(float t_elapsed)
 		{
 			character->pos.CopyFrom(character->startPosition);
 			character->vel.Set0();
+            character->teleportCooldown = 1;
 		}
 		ambient.Update(t_elapsed);
 		mjPhysicsEffect* windEffect = new mjPhysicsEffect();

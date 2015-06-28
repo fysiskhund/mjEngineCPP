@@ -23,7 +23,7 @@ class Character: public KosmoObject
 {
 public:
 
-    mjVector3 startPosition;
+
     Character(Level* levelData, mjResourceManager* resourceManager);
 	int hasFooting = 0;
 	int jumping = -1;

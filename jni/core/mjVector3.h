@@ -17,6 +17,7 @@ class mjVector3
 public:
 	mjVector3();
 	mjVector3(mjVector3& copy);
+    mjVector3(mjVector3& fromPos, mjVector3& toPos);
 	mjVector3(GLfloat x, GLfloat y, GLfloat z);
 
 	void Set(GLfloat x, GLfloat y, GLfloat z);

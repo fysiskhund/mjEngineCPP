@@ -10,6 +10,9 @@ using namespace mjEngine;
 class KosmoObject : public mjObject
 {
 public:
+
+    mjVector3 startPosition;
+
     bool canGoThroughDoors = false;
     Level* levelData;
     float teleportCooldown = 0;
