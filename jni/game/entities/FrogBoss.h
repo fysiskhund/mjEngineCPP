@@ -32,6 +32,8 @@ class FrogBoss : public KosmoObject, public mjAutomaton
         mjVector3 gravity;
 
         mjSoundSource* soundSource;
+
+        bool firstTimeTargetSeen = true;
         bool wasDefeated = false;
         int defeatedTimes = 0;
         int berserkTimes = 0;

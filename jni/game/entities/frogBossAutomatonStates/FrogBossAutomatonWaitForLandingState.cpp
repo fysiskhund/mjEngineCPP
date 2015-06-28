@@ -32,12 +32,31 @@ void FrogBossAutomatonWaitForLandingState::Execute(float t_elapsed)
        float distToTargetSquared = posToTarget.GetNormSquared();
        if (frogBoss->hasFooting && distToTargetSquared < 900) // 30 m -> 30*30 -> 900
        {
-           if (frogBoss->berserkTimes == 0)
+           if (frogBoss->firstTimeTargetSeen)
            {
-            maxTime = 2;
+               frogBoss->wasDefeated = false;
+               frogBoss->defeatedTimes = 0;
+               frogBoss->berserkTimes = 0;
+               frogBoss->firstTimeTargetSeen = false;
+               accumulatedTime = 0;
+               maxTime = 8;
+               LOGI("FrogBaws: First time target is seen.");
+               maxTimeMustBeReset = false;
            } else
            {
-               maxTime = 0.2;
+
+               if (maxTimeMustBeReset)
+               {
+
+                   if (frogBoss->berserkTimes == 0)
+                   {
+                       maxTime = 0.5;
+                   } else
+                   {
+                       maxTime = 0.1;
+                   }
+                   maxTimeMustBeReset = false;
+               }
            }
        }
     }
@@ -46,6 +65,6 @@ void FrogBossAutomatonWaitForLandingState::Execute(float t_elapsed)
 
 void FrogBossAutomatonWaitForLandingState::Leave()
 {
-
+    maxTimeMustBeReset = true;
     FrogBossAutomatonState::Leave();
 }

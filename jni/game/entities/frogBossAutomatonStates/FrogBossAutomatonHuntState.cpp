@@ -29,7 +29,7 @@ void FrogBossAutomatonHuntState::Enter()
         frogBoss->berserkTimes--;
     } else
     {
-        maxTime = 2.0*((float)rand() / (float) RAND_MAX) + 0.01;
+        maxTime = 2.0*((float)rand() / (float) RAND_MAX) + 2.0;
     }
 
 }

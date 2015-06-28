@@ -164,8 +164,12 @@
 		<Unit filename="../game/entities/Character.h" />
 		<Unit filename="../game/entities/Frog.cpp" />
 		<Unit filename="../game/entities/Frog.h" />
+		<Unit filename="../game/entities/FrogBoss.cpp" />
+		<Unit filename="../game/entities/FrogBoss.h" />
 		<Unit filename="../game/entities/GlowBeing.cpp" />
 		<Unit filename="../game/entities/GlowBeing.h" />
+		<Unit filename="../game/entities/KosmoObject.cpp" />
+		<Unit filename="../game/entities/KosmoObject.h" />
 		<Unit filename="../game/entities/MysticalDoor.cpp" />
 		<Unit filename="../game/entities/MysticalDoor.h" />
 		<Unit filename="../game/entities/Plant.cpp" />
@@ -180,6 +184,12 @@
 		<Unit filename="../game/entities/frogAutomatonStates/FrogAutomatonStopState.h" />
 		<Unit filename="../game/entities/frogAutomatonStates/FrogJumpAutomatonState.cpp" />
 		<Unit filename="../game/entities/frogAutomatonStates/FrogJumpAutomatonState.h" />
+		<Unit filename="../game/entities/frogBossAutomatonStates/FrogBossAutomatonHuntState.cpp" />
+		<Unit filename="../game/entities/frogBossAutomatonStates/FrogBossAutomatonHuntState.h" />
+		<Unit filename="../game/entities/frogBossAutomatonStates/FrogBossAutomatonSlamState.cpp" />
+		<Unit filename="../game/entities/frogBossAutomatonStates/FrogBossAutomatonSlamState.h" />
+		<Unit filename="../game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.cpp" />
+		<Unit filename="../game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.h" />
 		<Unit filename="../game/gl_code.cpp" />
 		<Unit filename="../game/gl_code.h" />
 		<Unit filename="../game/terrainTypes/Box.cpp" />
