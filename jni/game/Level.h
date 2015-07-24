@@ -26,10 +26,10 @@ public:
 
     Level(mjResourceManager* resourceManager);
 	void LoadFromFile(const char* fileName);
-	void Load(XMLDocument* doc);
+    void Load(tinyxml2::XMLDocument* doc);
     mjObject* GetEntityByID(const char* ID);
 
-    XMLDocument doc;
+    tinyxml2::XMLDocument doc;
 
     mjVector3 levelCenter;
     mjAABB* bounds;

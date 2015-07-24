@@ -20,6 +20,8 @@ public:
     KosmoObject(structuretype collisionStructureType, mjResourceManager* resourceManager, Level* levelData);
     KosmoObject(mjResourceManager* resourceManager, Level* levelData);
     void Update(float t_elapsed) override;
+    virtual void StartTransitionForTravel(){}
+    virtual void EndTransitionForTravel(){}
 };
 
 

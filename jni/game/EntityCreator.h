@@ -43,7 +43,7 @@ class EntityCreator
 {
 public:
     EntityCreator(mjResourceManager* resourceManager);
-    void PopulateLevel(XMLDocument* levelDoc, Level* levelData);
+    void PopulateLevel(tinyxml2::XMLDocument* levelDoc, Level* levelData);
 
 
 private:

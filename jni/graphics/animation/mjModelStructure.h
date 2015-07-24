@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-#include "../../extLibs/tinyxml/tinyxml2.h"
 #include "mjModelStructureNode.h"
+#include "../../extLibs/tinyxml/tinyxml2.h"
 
 
 using namespace tinyxml2;
@@ -21,7 +21,7 @@ class mjModelStructure
 		std::vector<mjModelStructureNode*> nodes;
         mjModelStructure();
         mjModelStructure(const char* fileName);
-        void Load(XMLDocument* doc);
+        void Load(tinyxml2::XMLDocument* doc);
         virtual ~mjModelStructure();
     protected:
     private:

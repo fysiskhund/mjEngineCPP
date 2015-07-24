@@ -21,7 +21,7 @@ EntityCreator::EntityCreator(mjResourceManager* resourceManager)
 
 }
 
-void EntityCreator::PopulateLevel(XMLDocument* levelDoc, Level* levelData)
+void EntityCreator::PopulateLevel(tinyxml2::XMLDocument* levelDoc, Level* levelData)
 {
 
 

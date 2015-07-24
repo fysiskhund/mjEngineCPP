@@ -14,7 +14,7 @@ currentState->Enter();
 
 mjAutomaton::~mjAutomaton()
 {
-    //dtor
+    //dtor..
 }
 
 void mjAutomaton::Update(float t_elapsed)

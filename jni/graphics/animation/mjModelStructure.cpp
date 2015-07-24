@@ -9,13 +9,13 @@ mjModelStructure::mjModelStructure()
 
 mjModelStructure::mjModelStructure(const char* fileName)
 {
-    XMLDocument doc;
+    tinyxml2::XMLDocument doc;
 
 	doc.LoadFile(fileName);
 	Load(&doc);
 }
 
-void mjModelStructure::Load(XMLDocument* doc)
+void mjModelStructure::Load(tinyxml2::XMLDocument* doc)
 {
 
 }

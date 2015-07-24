@@ -51,7 +51,7 @@ public:
 
 	void LoadFromFile(const char* fileName);
 
-	void Load(XMLDocument* doc);
+    void Load(tinyxml2::XMLDocument* doc);
 
 	void TieShaders(std::vector<mjShader*>& shaderList);
 

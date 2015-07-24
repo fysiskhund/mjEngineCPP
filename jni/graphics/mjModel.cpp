@@ -20,13 +20,13 @@ mjModel::mjModel()
 }
 void mjModel::LoadFromFile(const char* fileName)
 {
-	XMLDocument doc;
+    tinyxml2::XMLDocument doc;
 
 	doc.LoadFile(fileName);
 	Load(&doc);
 }
 
-void mjModel::Load(XMLDocument* doc)
+void mjModel::Load(tinyxml2::XMLDocument* doc)
 {
 
 
@@ -445,7 +445,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 	// Nothing is rendered, this is useful for the dedicated-server version of the games
 }
 #else
-	#error "No rendering system is defined. Choose USE_GLES2, USE_GL3 or USE_NULL_RENDERER
+    #error "No rendering system is defined. Choose USE_GLES2, USE_GL3 or USE_NULL_RENDERER"
 #endif
 
 }// namespace mj

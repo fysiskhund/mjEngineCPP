@@ -35,6 +35,8 @@ public:
 	void Update(float t_elapsed) override;
 	void UpdatePosition(float t_elapsed) override;
 	void SetDetailsFromXML(XMLElement* entity) override;
+    //void StartTransitionForTravel() override;
+    //void EndTransitionForTravel() override;
 	mjVector3* gravity;
 	mjVector3 intrinsecVel;
 

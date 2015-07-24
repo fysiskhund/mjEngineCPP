@@ -20,7 +20,7 @@ void Level::LoadFromFile(const char* fileName)
 	Load(&doc);
 }
 
-void Level::Load(XMLDocument* doc)
+void Level::Load(tinyxml2::XMLDocument* doc)
 {
 
 	XMLHandle docHandle(doc);
