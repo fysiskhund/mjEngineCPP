@@ -93,7 +93,9 @@ public:
     void MatchAABBToModel();
 
 
-    //Debugging functions
+    // Debugging functions. These get called by mjPhysics exclusively,
+    // and _only_ if DEBUGCOLLISIONS is defined
+
     virtual void DEBUGonCollisionTestStart(mjObject* otherObject){}
     virtual void DEBUGonCollisionOccurred(mjObject* otherObject){}
 

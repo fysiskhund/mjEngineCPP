@@ -96,8 +96,10 @@ void mjPhysics::CollisionDetection()
 							object0 = objectJ;
 							object1 = objectI;
 						}
+#ifdef DEBUGCOLLISIONS
                         object0->DEBUGonCollisionTestStart(object1);
                         object1->DEBUGonCollisionTestStart(object0);
+#endif
 
 						mjCollisionResult* colResult = new mjCollisionResult(); // Prepare the collision result
 						switch(object0->boundingStructure->type)
