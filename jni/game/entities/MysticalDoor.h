@@ -35,7 +35,7 @@ class MysticalDoor: public KosmoObject
         void ProcessCollisionEffects() override;
 
         void DEBUGonCollisionTestStart(mjObject* otherObject) override;
-        void DEBUGonCollisionOccurred(mjObject* otherObject) override;
+        void OnOverlap(mjObject* otherObject) override;
 
         virtual ~MysticalDoor();
     protected:

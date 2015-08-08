@@ -114,10 +114,9 @@ void mjPhysics::CollisionDetection()
 								//LOGI("After new Colresult");
 								if (mjCollisionTests::SphereVsSphere((mjSphere*)object0->boundingStructure, (mjSphere*)object1->boundingStructure, colResult) == MJ_OVERLAP)
 								{
-#ifdef DEBUGCOLLISIONS
-                        object0->DEBUGonCollisionOccurred(object1);
-                        object1->DEBUGonCollisionOccurred(object0);
-#endif
+
+
+
 									colResult->relocationEffectObj0->otherObject = object1;
 									object0->collisionStack.push_back(colResult->relocationEffectObj0);
 
@@ -125,7 +124,8 @@ void mjPhysics::CollisionDetection()
 									object1->collisionStack.push_back(colResult->relocationEffectObj1);
 									//FIXME:!!! Something must be done with colResult in this case
 									// without altering the inner effects, since those will be destroyed in the object after they'be been used.
-
+                                    object0->OnOverlap(object1);
+                                    object1->OnOverlap(object0);
 
 
 								} else
@@ -150,10 +150,7 @@ void mjPhysics::CollisionDetection()
 								if (mjCollisionTests::AABBVsAABB((mjAABB*)object0->boundingStructure, (mjAABB*)object1->boundingStructure, colResult) == MJ_OVERLAP)
 								{
 
-#ifdef DEBUGCOLLISIONS
-                        object0->DEBUGonCollisionOccurred(object1);
-                        object1->DEBUGonCollisionOccurred(object0);
-#endif
+
 									if (object1->boundingStructure->isImmovable)
 									{
 										if (colResult->changeVelEffectObj0->mask[0])
@@ -260,6 +257,9 @@ void mjPhysics::CollisionDetection()
 									colResult->changeVelEffectObj1->otherObject = object0;
 									object1->collisionStack.push_back(colResult->relocationEffectObj1);
 									object1->collisionStack.push_back(colResult->changeVelEffectObj1);
+
+                                    object0->OnOverlap(object1);
+                                    object1->OnOverlap(object0);
 
 									//LOGI("changeVel: %3.3f, %3.3f, %3.3f", colResult->changeVelEffectObj1->value.x, colResult->changeVelEffectObj1->value.y, colResult->changeVelEffectObj1->value.z);
 

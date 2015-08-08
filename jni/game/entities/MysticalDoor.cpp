@@ -44,7 +44,7 @@ void MysticalDoor::DEBUGonCollisionTestStart(mjObject* otherObject)
 }
 
 
-void MysticalDoor::DEBUGonCollisionOccurred(mjObject* otherObject)
+void MysticalDoor::OnOverlap(mjObject* otherObject)
 {
     /*if (otherObject->tag == OT_CHARACTER)
     {
