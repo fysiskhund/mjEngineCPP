@@ -18,6 +18,8 @@
 
 #include "terrainTypes/Box.h"
 #include "terrainTypes/FallingBox.h"
+#include "terrainTypes/TriggerBox.h"
+
 
 #include "ObjectTags.h"
 

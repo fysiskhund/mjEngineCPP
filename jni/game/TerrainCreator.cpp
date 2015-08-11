@@ -5,6 +5,7 @@ TerrainCreator::TerrainCreator()
 
 	terrainTypes.push_back("box");
 	terrainTypes.push_back("fallingbox");
+    terrainTypes.push_back("triggerbox");
 }
 
 mjObject* TerrainCreator::CreateTerrain(const char* terrainType, mjResourceManager& resourceManager)
@@ -30,6 +31,11 @@ mjObject* TerrainCreator::CreateTerrain(const char* terrainType, mjResourceManag
             obj = new FallingBox(&resourceManager);
             obj->tag = OT_FALLINGBOX;
             break;
+        case 2:
+            obj = new TriggerBox(&resourceManager);
+            obj->tag = OT_TRIGGERBOX;
+        break;
+
 
 
         default:

@@ -105,7 +105,8 @@ HEADERS += \
     game/entities/FrogBoss.h \
     game/entities/frogBossAutomatonStates/FrogBossAutomatonHuntState.h \
     game/entities/frogBossAutomatonStates/FrogBossAutomatonSlamState.h \
-    game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.h
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.h \
+    game/terrainTypes/TriggerBox.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -188,7 +189,8 @@ SOURCES += \
     game/entities/FrogBoss.cpp \
     game/entities/frogBossAutomatonStates/FrogBossAutomatonHuntState.cpp \
     game/entities/frogBossAutomatonStates/FrogBossAutomatonSlamState.cpp \
-    game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.cpp
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.cpp \
+    game/terrainTypes/TriggerBox.cpp
 
 
 

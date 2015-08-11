@@ -3,6 +3,7 @@
 enum ObjectTag{
     OT_BOX,
     OT_FALLINGBOX,
+    OT_TRIGGERBOX,
     OT_TERRAINTYPESENDMARKERTAG,
     OT_BATBOT,
     OT_BIRD,
