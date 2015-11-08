@@ -10,7 +10,7 @@ FrogBoss::FrogBossAutomatonState::FrogBossAutomatonState(frogBoss)
 void FrogBossAutomatonWaitForLandingState::Enter()
 {
     maxTime = -1;
-    LOGI("FrogBaws: Waiting for landing..");
+    LOGI("Frogge: Waiting for landing..");
 
 
 }
@@ -40,7 +40,7 @@ void FrogBossAutomatonWaitForLandingState::Execute(float t_elapsed)
                frogBoss->firstTimeTargetSeen = false;
                accumulatedTime = 0;
                maxTime = 8;
-               LOGI("FrogBaws: First time target is seen.");
+               LOGI("Frogge: First time target is seen.");
                maxTimeMustBeReset = false;
            } else
            {

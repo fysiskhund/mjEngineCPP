@@ -60,13 +60,13 @@ bool mjSoundSource::CalculateVolumeLevels(mjVector3& sourceLocation, mjVector3& 
 
 #ifdef USE_SDL_AUDIO
 
-#include "sdl/mjSoundSource_SDL.cpp"
+#include "sdl/mjSoundSource_SDL.txtcpp"
 
 
 
 #elif USE_ANDROID_AUDIO
 
-#include "android/mjSoundSource_android.cpp"
+#include "android/mjSoundSource_android.txtcpp"
 
 #else
 

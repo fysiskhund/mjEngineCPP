@@ -7,13 +7,13 @@
 
 #ifdef USE_SDL_AUDIO
 
-#include "sdl/mjMusicPlayer_SDL.h"
+#include "sdl/mjMusicPlayer_SDL.txth"
 
 
 
 #elif USE_ANDROID_AUDIO
 
-#include "android/mjMusicPlayer_android.h"
+#include "android/mjMusicPlayer_android.txth"
 
 #else
 

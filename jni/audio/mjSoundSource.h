@@ -45,13 +45,13 @@ class mjSoundSource
 
 #ifdef USE_SDL_AUDIO
 
-#include "sdl/mjSoundSource_SDL.h"
+#include "sdl/mjSoundSource_SDL.txth"
 
 
 
 #elif USE_ANDROID_AUDIO
 
-#include "android/mjSoundSource_android.h"
+#include "android/mjSoundSource_android.txth"
 
 #else
 

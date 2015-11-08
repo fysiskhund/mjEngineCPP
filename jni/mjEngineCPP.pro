@@ -20,8 +20,6 @@ HEADERS += \
     ../keyboardcontrol.h \
     ai/mjAutomaton.h \
     ai/mjAutomatonState.h \
-    audio/sdl/mjMusicPlayer_SDL.h \
-    audio/sdl/mjSoundSource_SDL.h \
     audio/mjMusicPlayer.h \
     audio/mjSoundSource.h \
     core/mjInput.h \
@@ -111,8 +109,6 @@ HEADERS += \
 SOURCES += \
     ai/mjAutomaton.cpp \
     ai/mjAutomatonState.cpp \
-    audio/sdl/mjMusicPlayer_SDL.cpp \
-    audio/sdl/mjSoundSource_SDL.cpp \
     audio/mjMusicPlayer.cpp \
     audio/mjSoundSource.cpp \
     core/mjObject.cpp \

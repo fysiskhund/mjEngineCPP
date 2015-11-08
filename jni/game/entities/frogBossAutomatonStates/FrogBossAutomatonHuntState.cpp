@@ -11,7 +11,7 @@ FrogBoss::FrogBossAutomatonState::FrogBossAutomatonState(frogBoss)
 void FrogBossAutomatonHuntState::Enter()
 {
 
-    LOGI("FrogBaws: Searching for Kosmonavt..");
+    LOGI("Frogge: Searching for Kosmonavt..");
 
     frogBoss->vel.Set0();
 
@@ -24,7 +24,7 @@ void FrogBossAutomatonHuntState::Enter()
 
     if (frogBoss->berserkTimes > 0)
     {
-        LOGI("FrogBaws: defeated %d times; BERSERK!!!!! [%d]", frogBoss->defeatedTimes, frogBoss->berserkTimes)
+        LOGI("Frogge: defeated %d times; BERSERK!!!!! [%d]", frogBoss->defeatedTimes, frogBoss->berserkTimes)
         maxTime = ((float)rand() / (float) RAND_MAX) + 0.001;
         frogBoss->berserkTimes--;
     } else
@@ -46,7 +46,7 @@ void FrogBossAutomatonHuntState::Execute(float t_elapsed)
         }
     } else
     {
-        // FrogBaws has acquired target and should always look at it
+        // Frogge has acquired target and should always look at it
         mjVector3 dirToTarget(frogBoss->pos, frogBoss->target->pos);
 
         dirToTarget.y = 0; // remove vertical component

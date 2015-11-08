@@ -9,7 +9,7 @@ FrogBoss::FrogBossAutomatonState::FrogBossAutomatonState(frogBoss)
 
 void FrogBossAutomatonSlamState::Enter()
 {
-    LOGI("FrogBaws: SLAMMIN'!");
+    LOGI("Frogge: SLAMMIN'!");
 
     frogBoss->soundSource->Play(frogBoss->pos, 0);
 
