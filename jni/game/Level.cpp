@@ -121,4 +121,31 @@ mjObject* Level::GetEntityByID(const char* id)
     return NULL;
 }
 
+void Level::Unload()
+{
+    // Remove all the entities
+    while (entities.size() > 0)
+    {
+        delete entities[entities.size()-1];
+        entities.pop_back();
+    }
 
+    while (terrain.size() > 0)
+    {
+        delete terrain[terrain.size()-1];
+        terrain.pop_back();
+    }
+    levelCenter.Set0();
+    delete [] bounds;
+    bounds = NULL;
+
+    delete [] hardLimits;
+    hardLimits = NULL;
+
+    doc.Clear();
+}
+
+Level::~Level()
+{
+    Unload();
+}

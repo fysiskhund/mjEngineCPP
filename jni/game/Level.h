@@ -25,9 +25,11 @@ public:
 	std::vector<mjObject*> terrain;
 
     Level(mjResourceManager* resourceManager);
+    virtual ~Level();
 	void LoadFromFile(const char* fileName);
     void Load(tinyxml2::XMLDocument* doc);
     mjObject* GetEntityByID(const char* ID);
+    void Unload();
 
     tinyxml2::XMLDocument doc;
 

@@ -39,6 +39,7 @@ class BatBot: public KosmoObject, public mjAutomaton
         float tAnimation = 0;
 
         BatBot(Level* levelData, mjResourceManager* resourceManager);
+        virtual ~BatBot();
         //BatBot(const BatBot& other);
 
 

@@ -363,4 +363,23 @@ void mjPhysics::UpdatePositions(float t_elapsed)
 	}
 
 }
+
+void mjPhysics::RemoveAllObjects()
+{
+    // These objects are not the responsibility of Physics.
+    // They are the responsibility of the level loader, etc.
+    // Therefore they are just removed, not deleted
+    allObjects.clear();
+
+    objectsWithKinematics.clear();
+    while(collisionLayers.size()> 0)
+    {
+        delete collisionLayers[collisionLayers.size()-1];
+        collisionLayers.pop_back();
+    }
+}
+mjPhysics::~mjPhysics()
+{
+    RemoveAllObjects();
+}
 }

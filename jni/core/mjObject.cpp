@@ -304,6 +304,24 @@ void mjObject::UpdatePosition(float t_elapsed)
 
 mjObject::~mjObject()
 {
+    delete [] modelName;
+    // The model itself is not the responsibility of mjObject
+    // so it is not deleted here. It is the responsibility of ResourceManager
+    delete animation;
+    delete pose;
+    delete boundingStructure;
+
+    for (int i = 0; i < effectStack.size(); i++)
+    {
+        delete effectStack[i];
+    }
+    effectStack.clear();
+
+    for (int i = 0; i < collisionStack.size(); i++)
+    {
+        delete collisionStack[i];
+    }
+    collisionStack.clear();
 
 }
 

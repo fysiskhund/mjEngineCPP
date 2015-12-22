@@ -27,6 +27,7 @@ public:
 	bool debugVar = 0;
 
 	mjPhysics();
+    virtual ~mjPhysics();
 
 
 	void Update(float delta_t);
@@ -34,6 +35,8 @@ public:
 	void AddObject(mjObject* object, int collisionLayer);
 
 	//void AddPhysicsEffect(mjPhysicsEffect* physicsEffect);
+
+    void RemoveAllObjects();
 
 
 private:

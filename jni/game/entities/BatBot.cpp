@@ -168,4 +168,9 @@ void BatBot::ProcessPhysicsEffects(float t_elapsed)
 	{
 		vel.ScaleAdd(t_elapsed, accel);
 	}
+
+}
+BatBot::~BatBot()
+{
+
 }
