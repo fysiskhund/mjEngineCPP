@@ -75,9 +75,9 @@ void Level::Load(tinyxml2::XMLDocument* doc)
 				}
 				obj->SetDetailsFromXML(terrainElement);
 
-                LOGI("TerrainElmnt %s (%s) found [%3.3f %3.3f %3.3f] [%3.3f %3.3f %3.3f]", obj->id, terrainElement->Name(),
+                /*LOGI("TerrainElmnt %s (%s) found [%3.3f %3.3f %3.3f] [%3.3f %3.3f %3.3f]", obj->id, terrainElement->Name(),
 						aabb->minCorner.x, aabb->minCorner.y, aabb->minCorner.z,
-						aabb->maxCorner.x, aabb->maxCorner.y, aabb->maxCorner.z  );
+                        aabb->maxCorner.x, aabb->maxCorner.y, aabb->maxCorner.z  );*/
 				aabb->UpdateCenter();
                 obj->MatchScaleToAABB();
 			}
@@ -113,11 +113,12 @@ void Level::Load(tinyxml2::XMLDocument* doc)
 mjObject* Level::GetEntityByID(const char* id)
 {
     for (unsigned i = 0; i < entities.size(); i++) {
-    	LOGI("Searching for %s == %s?", entities[i]->id, id);
+        //LOGI("Searching for %s == %s?", entities[i]->id, id);
         if (strncmp(entities[i]->id, id, 200) == 0) {
             return entities[i];
         }
     }
+    LOGI("GetEntityByID: %s: not found!!", id);
     return NULL;
 }
 

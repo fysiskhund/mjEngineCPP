@@ -307,7 +307,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
 
 
-    if (0)//structure)
+    if (structure)
     {
         mStack.PopAll();
         Matrix4::SetIdentityM(mStack.current, 0);
@@ -420,7 +420,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
     			//Matrix4::MultiplyMM(modelViewMatrix, 0, )
     		} else
     		{
-    			Matrix4::MultiplyMM(modelViewMatrix, 0,
+                Matrix4::MultiplyMM(modelViewMatrix, 0,
     					lookAtMatrix, 0,
 						modelMatrix, 0);
     		}

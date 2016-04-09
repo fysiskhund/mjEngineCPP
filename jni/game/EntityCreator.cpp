@@ -3,7 +3,7 @@
 //  mjEngineCPP
 //
 //  Created by Alejandro Valenzuela Roca on 27/09/14.
-//  Copyright (c) 2014 Phong-shaded hallucinations. All rights reserved.
+//  Copyright (c) 2014-16 Phong-shaded hallucinations. All rights reserved.
 //
 
 #include "EntityCreator.h"
@@ -18,6 +18,7 @@ EntityCreator::EntityCreator(mjResourceManager* resourceManager)
     entityTypes.push_back("frog");
     entityTypes.push_back("door");
     entityTypes.push_back("frogboss");
+    entityTypes.push_back("baobab");
 
 }
 
@@ -32,7 +33,7 @@ void EntityCreator::PopulateLevel(tinyxml2::XMLDocument* levelDoc, Level* levelD
 
 	while (entity)
 	{
-		LOGI("Entity %s found, filling up details", entity->Name());
+        //LOGI("Entity %s found, filling up details", entity->Name());
 		mjObject* obj = NULL;
 
         obj = CreateEntity(entity->Name(), levelData);
@@ -125,7 +126,12 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
             result = new FrogBoss(levelData, resourceManager);
             result->tag = OT_FROGBOSS;
             break;
+        case 7:
+            result = new Baobab(levelData, resourceManager);
+            result->tag = OT_BAOBAB;
+        break;
         default:
+            LOGI("** Error: entity type %s has not been defined in game", entityType);
             result = NULL;
             break;
     }

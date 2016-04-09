@@ -23,7 +23,7 @@ mjObject::mjObject(structuretype collisionStructureType, mjResourceManager* reso
 
 		mjAABB* aabb = new mjAABB(&pos, minCorner, maxCorner, false);
 		this->boundingStructure = aabb;
-		LOGI("Object initialised as AABB");
+        //LOGI("Object initialised as AABB");
 	}
 		break;
 	default:
