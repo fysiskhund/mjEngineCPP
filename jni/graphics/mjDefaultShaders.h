@@ -22,6 +22,13 @@ class mjDefaultShaders:  public mjShader
 	void Run(mjModelMesh* mesh,
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
 			float* modelMatrix, float* modelViewProjectionMatrix ) override;
+
+#ifdef USE_ASSIMP
+    void RunForAssimp(const aiMesh* assimpMesh,
+                      float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
+                      float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)  override;
+#endif
+
 	static const char* simpleVertexShaderCode; // The simple shaders can be used in the skybox
 	static const char* simpleFragmentShaderCode;
 	static const char* vanillaVertexShaderCode; // Vanilla shaders give a flat shading of surfaces

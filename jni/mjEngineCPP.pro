@@ -10,7 +10,7 @@ qtcAddDeployment()
 QMAKE_CXXFLAGS += -std=c++11
 
 DEFINES -= UNICODE
-DEFINES += DESKTOP_SDL NON_GLES_CONTEXT USE_SDL_AUDIO USE_GL3 #DEBUGCOLLISIONS
+DEFINES += DESKTOP_SDL NON_GLES_CONTEXT USE_SDL_AUDIO USE_GL3 USE_ASSIMP #DEBUGCOLLISIONS
 #DEFINES += DESKTOP_SDL USE_GLES2 USE_SDL_AUDIO #DEBUGCOLLISIONS
 
 win32: DEFINES += WIN32
@@ -106,7 +106,8 @@ HEADERS += \
     game/entities/frogBossAutomatonStates/FrogBossAutomatonSlamState.h \
     game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.h \
     game/terrainTypes/TriggerBox.h \
-    game/entities/Baobab.h
+    game/entities/Baobab.h \
+    graphics/mjAssimpModel.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -189,7 +190,8 @@ SOURCES += \
     game/entities/frogBossAutomatonStates/FrogBossAutomatonSlamState.cpp \
     game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.cpp \
     game/terrainTypes/TriggerBox.cpp \
-    game/entities/Baobab.cpp
+    game/entities/Baobab.cpp \
+    graphics/mjAssimpModel.cpp
 
 
 
@@ -203,5 +205,5 @@ win32: LIBS += -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image -lglew32s -lop
 
 
 unix: CONFIG += link_pkgconfig
-unix: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer #for GL3 rendering
+unix: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer assimp #for GL3 rendering
 #unix: PKGCONFIG += sdl2 glesv2 libpng SDL2_image SDL2_mixer #for GLESv2 rendering

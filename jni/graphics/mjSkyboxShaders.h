@@ -19,6 +19,12 @@ public:
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
 			float* modelMatrix, float* modelViewProjectionMatrix ) override;
 
+#ifdef USE_ASSIMP
+    void RunForAssimp(const aiMesh* modelMesh,
+                      float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
+                      float* modelMatrix, float* modelViewProjectionMatrix, int glTexture) override  ;
+#endif
+
 	static const char* skyboxVertexShaderCode; // Vanilla shaders give a flat shading of surfaces
 	static const char* skyboxFragmentShaderCode;
 

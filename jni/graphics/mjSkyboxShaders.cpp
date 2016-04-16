@@ -51,6 +51,11 @@ void mjSkyboxShaders::Run(mjModelMesh* mesh,
 
 }
 
+void mjSkyboxShaders::RunForAssimp(const aiMesh *modelMesh, float *vertexBuffer, float *texCoordBuffer, float *normalComponentBuffer, float *modelMatrix, float *modelViewProjectionMatrix, int glTexture)
+{
+
+}
+
 #ifdef USE_GLES2
 
 	#include "gles2/skyboxShaderSources-gles2.h"

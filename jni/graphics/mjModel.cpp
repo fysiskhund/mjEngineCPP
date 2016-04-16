@@ -307,7 +307,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
 
 
-    if (structure)
+    if (0)//structure)
     {
         mStack.PopAll();
         Matrix4::SetIdentityM(mStack.current, 0);
