@@ -9,6 +9,9 @@ PlatformUniverseScene::PlatformUniverseScene(mjResourceManager* resourceManager)
 
     levelFilename  = "levels/testLevel.xml";
     resourceManager->PrependFullFilePath(levelFilename);
+
+    assModel = new mjAssimpModel(resourceManager);
+    assModel->LoadFromFile("/common/svn/vasilisa/other/modelSources/meshes/dandelionSeed.blend");
 }
 
 
@@ -22,7 +25,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
     musicPlayer.Play();
     // Some adjustments
 	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+    //glCullFace(GL_BACK); //FIXME: just testing
 	glEnable (GL_BLEND);
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -190,6 +193,6 @@ void PlatformUniverseScene::Draw()
     skybox->Draw(shaderList, lookAtMatrix, projectionMatrix);
     camera->GetLookAtMatrix(lookAtMatrix);
     sceneGraph.Draw(camera, shaderList, lookAtMatrix, projectionMatrix);
-
+    assModel->Draw(shaderList, lookAtMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix);
 
 }

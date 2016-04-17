@@ -35,6 +35,7 @@
 #include <graphics/mjSkybox.h>
 #include <physics/mjPhysics.h>
 #include <graphics/mjSceneGraph.h>
+#include <graphics/mjAssimpModel.h>
 
 #include <audio/mjMusicPlayer.h>
 
@@ -87,6 +88,8 @@ class PlatformUniverseScene : public mjScene
 
         mjMusicPlayer musicPlayer;
         std::string levelFilename;
+
+        mjAssimpModel* assModel;
 
 
     protected:

@@ -33,8 +33,8 @@ void mjAssimpModel::LoadFromFile(const char* fileName)
 
         do
         {
-            mat->GetTexture(aiTextureType_DIFFUSE, diffuseTextureIndex, &textureFilename);
-            if (textureFilenameWasExtracted)
+            textureFilenameWasExtracted = mat->GetTexture(aiTextureType_DIFFUSE, diffuseTextureIndex, &textureFilename);
+            if (textureFilenameWasExtracted == AI_SUCCESS)
             {
                 // Load using the manager.
 
@@ -42,7 +42,10 @@ void mjAssimpModel::LoadFromFile(const char* fileName)
 
                 if (diffuseTextureIndex == 0)
                 {
-                    glTextureForMaterial.push_back(resManager->FetchTexture(textureFilename.C_Str(), GL_REPEAT));
+                    std::string texFilenameWithoutJunk = textureFilename.C_Str();
+                    int lastDirChar = texFilenameWithoutJunk.find_last_of('/');
+                    texFilenameWithoutJunk = texFilenameWithoutJunk.substr(lastDirChar+1);
+                    glTextureForMaterial.push_back(resManager->FetchTexture(texFilenameWithoutJunk, GL_REPEAT));
                 }
             }
             diffuseTextureIndex++;
