@@ -49,13 +49,13 @@ public:
 
 	mjModel();
 
-	void LoadFromFile(const char* fileName);
+    virtual void LoadFromFile(const char* fileName);
 
     void Load(tinyxml2::XMLDocument* doc);
 
-	void TieShaders(std::vector<mjShader*>& shaderList);
+    virtual void TieShaders(std::vector<mjShader*>& shaderList);
 
-	void Draw(std::vector<mjShader*>& shaderList,
+    virtual void Draw(std::vector<mjShader*>& shaderList,
 			GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose);
 
     mjModelPose* CreateSimplePose();

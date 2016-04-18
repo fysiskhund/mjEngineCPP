@@ -6,6 +6,7 @@
 #include "../extLibs/math/Matrix.h"
 #include "../extLibs/math/mjMatrixStack.h"
 #include "../util/mjResourceManager.h"
+#include "mjModel.h"
 
 
 /* assimp include files. These three are usually needed. */
@@ -16,7 +17,7 @@
 
 namespace mjEngine{
 
-class mjAssimpModel
+class mjAssimpModel: public mjModel
 {
 public:
     const aiScene* scene = NULL;
@@ -26,12 +27,13 @@ public:
 
     mjAssimpModel(mjResourceManager* resManager);
 
-    void LoadFromFile(const char* fileName);
+    void LoadFromFile(const char* fileName) override;
     void TieShaders(std::vector<mjShader*>& shaderList);
     void Draw(std::vector<mjShader*>& shaderList,
-            float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix);
+              GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose) override;
 
 
+    void RecursiveBuild(aiNode *node);
 private:
     mjResourceManager* resManager;
 

@@ -91,6 +91,7 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
 
     while(whichEntity == -1 && i < entityTypes.size())
     {
+        LOGI("New entity instance: %s", entityType);
         if (strncmp(entityType, entityTypes[i], 128) == 0)
         {
             whichEntity = i;

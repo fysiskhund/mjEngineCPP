@@ -87,18 +87,18 @@ void mjDefaultShaders::Run(mjModelMesh* mesh,
 #ifdef USE_ASSIMP
 
 void mjDefaultShaders::RunForAssimp(const aiMesh* assimpMesh,
-                                    float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
+                                    ai* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
                                     float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)
 {
      glUseProgram(glProgramHandle);
      glEnableVertexAttribArray(maPositionHandle);
-     glVertexAttribPointer(maPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, assimpMesh->mVertices);
+     glVertexAttribPointer(maPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, assimpMesh->mVertices); // vertexBuffer
 
      glEnableVertexAttribArray(maNormalHandle);
-     glVertexAttribPointer(maNormalHandle, 3, GL_FLOAT, GL_FALSE, 0, assimpMesh->mNormals);
+     glVertexAttribPointer(maNormalHandle, 3, GL_FLOAT, GL_FALSE, 0, assimpMesh->mNormals); // normalComponentBuffer
 
      glEnableVertexAttribArray(maTextureCoordHandle);
-     glVertexAttribPointer(maTextureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, assimpMesh->mTextureCoords);
+     glVertexAttribPointer(maTextureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, assimpMesh->mTextureCoords); // texCoordBuffer
 
 
 
@@ -111,13 +111,14 @@ void mjDefaultShaders::RunForAssimp(const aiMesh* assimpMesh,
 
      // Send the modelViewProjection Matrix
      glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
-     // Send the modelViewProjection Matrix
+     // Send the model Matrix
      glUniformMatrix4fv(maMMatrixHandle, 1, false, modelMatrix);
 
      // Send the light parameters
      glUniform3fv(uDiffuseLightDirectionHandle, 1, diffuseLightDirectionArray);
      glUniform4fv(uDiffuseLightColorHandle, 1, diffuseLightColor);
      glUniform4fv(uAmbientLightColorHandle, 1, ambientLightColor);
+     checkGlError("runForAssimp");
 }
 
 #endif

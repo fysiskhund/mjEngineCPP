@@ -21,6 +21,15 @@ void mjMultiPlatform::AddCommandForJNI(std::string& command)
 }
 std::string mjMultiPlatform::commandsForJNI = "";
 bool mjMultiPlatform::commandsForJNIPresent = false;
+
+
+void checkGlError(const char *op)
+{
+                for (GLint error = glGetError(); error; error
+                     = glGetError()) {
+                    printf("after %s() glError (0x%x)\n", op, error);
+                }
+            }
 /*void glMultiPlatform::CreateGLContext()
 {
 

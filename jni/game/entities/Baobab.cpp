@@ -7,15 +7,12 @@ Baobab::Baobab(Level* levelData, mjResourceManager* resourceManager)
 
 
 
-    model = resourceManager->FetchModel("plant.mesh.xml");
+    model = new mjAssimpModel(resourceManager);
+    model->LoadFromFile("/common/svn/vasilisa/other/modelSources/meshes/cubemovedx.blend");
 
     ((mjAABB*)boundingStructure)->isImmovable = true;
 
-    GLuint glTexture = resourceManager->FetchTexture("leafR.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
-    for (unsigned i = 0; i < model->meshes.size(); i++)
-    {
-        model->meshes[i]->glTexture = glTexture;
-    }
+
 }
 
 

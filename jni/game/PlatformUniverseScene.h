@@ -35,7 +35,6 @@
 #include <graphics/mjSkybox.h>
 #include <physics/mjPhysics.h>
 #include <graphics/mjSceneGraph.h>
-#include <graphics/mjAssimpModel.h>
 
 #include <audio/mjMusicPlayer.h>
 

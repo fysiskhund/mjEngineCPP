@@ -40,6 +40,10 @@
 
 #ifdef DESKTOP_SDL
     #include <SDL2/SDL.h>
+
+            void checkGlError(const char* op);
+
+
 #endif // USE_SDL_AUDIO
 
 // Set up joystick

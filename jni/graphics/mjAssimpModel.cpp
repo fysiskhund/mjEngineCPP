@@ -44,6 +44,11 @@ void mjAssimpModel::LoadFromFile(const char* fileName)
                 {
                     std::string texFilenameWithoutJunk = textureFilename.C_Str();
                     int lastDirChar = texFilenameWithoutJunk.find_last_of('/');
+                    int lastInvertDirChar = texFilenameWithoutJunk.find_last_of('\\');
+                    if (lastInvertDirChar > lastDirChar)
+                    {
+                        lastDirChar = lastInvertDirChar;
+                    }
                     texFilenameWithoutJunk = texFilenameWithoutJunk.substr(lastDirChar+1);
                     glTextureForMaterial.push_back(resManager->FetchTexture(texFilenameWithoutJunk, GL_REPEAT));
                 }
@@ -54,7 +59,80 @@ void mjAssimpModel::LoadFromFile(const char* fileName)
     }
 
 
+    // Now build the internal data structures ( structure, drawOrderBuffers, etc.)
 
+
+    for (unsigned i = 0; i < scene->mNumMeshes; i++)
+    {
+        meshes.push_back(NULL);
+    }
+
+
+
+    aiNode* node = scene->mRootNode;
+
+
+    RecursiveBuild(node);
+
+}
+
+void mjAssimpModel::RecursiveBuild(aiNode* node)
+{
+
+
+
+    for(unsigned i = 0; i < node->mNumMeshes; i++)
+    {
+        const aiMesh* mesh = scene->mMeshes[node->mMeshes[i]]; // From the scene, fetch the mesh that is in use by the current node.
+        if (meshes[node->mMeshes[i]] == NULL)
+        {
+            mjModelMesh* mMesh = new mjModelMesh();
+
+            meshes[node->mMeshes[i]] = mMesh;
+
+            mMesh->drawOrderCount = 3*mesh->mNumFaces;
+
+            mMesh->drawOrderBuffer = new unsigned short[mMesh->drawOrderCount];
+
+            mMesh->vertexBuffer = new float[mesh->numFaces*3*3]; // *3 because triangle, *3 because xyz
+
+            mMesh->textureCoordsBuffer = new float[mesh->mNumFaces*3*2];
+
+
+
+
+            unsigned drawOrderIndex = 0;
+            for (unsigned f = 0; f < mesh->mNumFaces; f++)
+            {
+                aiFace* face =  &mesh->mFaces[f];
+
+                for (unsigned vIndex = 0; vIndex < face->mNumIndices; vIndex++)
+                {
+                    mMesh->drawOrderBuffer[drawOrderIndex] = face->mIndices[vIndex];
+
+                    mMesh->vertexBuffer[0 + (drawOrderIndex*3)] = mesh->mVertices[face->mIndices[vIndex]].x;
+                    mMesh->vertexBuffer[1 + (drawOrderIndex*3)] = mesh->mVertices[face->mIndices[vIndex]].y;
+                    mMesh->vertexBuffer[2 + (drawOrderIndex*3)] = mesh->mVertices[face->mIndices[vIndex]].z;
+
+
+                    drawOrderIndex++;
+
+
+
+                }
+            }
+
+            LOGI("Mesh %d has %d vertices   ", i, mesh->mNumVertices);
+        }
+        //glDrawElements(GL_TRIANGLES, mesh->, GL_UNSIGNED_SHORT, mesh->mFaces->mIndices);
+        checkGlError("afterDrawElements");
+    }
+
+    // honey I unrolled the children
+    for (unsigned int n = 0; n < node->mNumChildren; n++)
+    {
+        RecursiveBuild(node);
+    }
 }
 
 
@@ -93,7 +171,7 @@ void mjAssimpModel::TieShaders(std::vector<mjShader*>& shaderList)
 // Drawing routine for OpenGL ES 2.0 & OpenGL 3
 
 void mjAssimpModel::Draw(std::vector<mjShader*>& shaderList,
-        float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix)
+                         GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose)
 {
     float poseMatrix[16];
     float tempMatrix[16];
@@ -104,6 +182,17 @@ void mjAssimpModel::Draw(std::vector<mjShader*>& shaderList,
     aiNode* node = scene->mRootNode;
 
     //Matrix4::DebugM("mvp", modelViewProjectionMatrix);
+    //
+
+
+
+    Matrix4::MultiplyMM(modelViewMatrix, 0,
+            lookAtMatrix, 0,
+            modelMatrix, 0);
+
+    Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
+            projectionMatrix, 0,
+            modelViewMatrix, 0);
 
     RecursiveDraw(shaderList, modelMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, node);
 
@@ -112,53 +201,37 @@ void mjAssimpModel::Draw(std::vector<mjShader*>& shaderList,
 
 void mjAssimpModel::RecursiveDraw(std::vector<mjShader*>& shaderList, float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, aiNode *node)
 {
+
+
+    if (node == scene->mRootNode)
+    {
+        LOGI("Root");
+    }
+
     for(unsigned i = 0; i < node->mNumMeshes; i++)
     {
-        const aiMesh* mesh = scene->mMeshes[node->mMeshes[i]]; // From the scene, fetch the mesh that is in use by the current node.
-        if (0)
-        {
+        const aiMesh* assimpMesh = scene->mMeshes[node->mMeshes[i]]; // From the scene, fetch the mesh that is in use by the current node.
 
-
-            /*mjVector3 testPos;
-            mjVector3 angles;
-            angles.CopyFrom(*pose->angles[i]);
-            testPos.CopyFrom(*pose->positions[i]);
-
-            Matrix4::GetPositionScaleAndAngleRotationMatrix(testPos, angles, poseMatrix);//(*pose->positions[i], *pose->angles[i], poseMatrix);
-            Matrix4::MultiplyMM(tempMatrix, 0,
-                    modelMatrix, 0,
-                    poseMatrix, 0);
-
-            Matrix4::MultiplyMM(modelViewMatrix, 0,
-                    lookAtMatrix, 0,
-                    tempMatrix, 0);
-            //Matrix4::MultiplyMM(modelViewMatrix, 0, )
-            */
-        } else
-        {
-            Matrix4::MultiplyMM(modelViewMatrix, 0,
-                    lookAtMatrix, 0,
-                    modelMatrix, 0);
-        }
-        Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
-                projectionMatrix, 0,
-                modelViewMatrix, 0);
+        mjModelMesh* mjMesh = meshes[node->mMeshes[i]];
 
         // FIXME: find a way to tie the shaders from normal models with assimp-loaded models.
         // For now, the default shader is used.
-        shaderList[0]->RunForAssimp(mesh,
-                0, 0, 0,
-                modelMatrix, modelViewProjectionMatrix, glTextureForMaterial[mesh->mMaterialIndex]);
-
-        glDrawElements(GL_TRIANGLES, mesh->mFaces->mNumIndices, GL_UNSIGNED_SHORT, mesh->mFaces->mIndices);
+        shaderList[0]->RunForAssimp(assimpMesh, assimpMesh->mVertices, assimpMesh->mTextureCoords, assimpMesh->mNormals,
+                                    modelMatrix, modelViewProjectionMatrix, glTextureForMaterial[assimpMesh->mMaterialIndex]);
+        //LOGI("Mesh %d has %d vertices   ", i, mesh->mNumVertices);
+        glDrawElements(GL_TRIANGLES, mjMesh->drawOrderCount, GL_UNSIGNED_SHORT, mjMesh->drawOrderBuffer);
+        checkGlError("afterDrawElements");
     }
 
     // honey I unrolled the children
-    for (int n = 0; n < node->mNumChildren; n++)
+    for (unsigned int n = 0; n < node->mNumChildren; n++)
     {
         RecursiveDraw(shaderList, modelMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, node->mChildren[n]);
     }
+
 }
+
+
 
 #elif USE_NULL_RENDERER
 void mjModel::Draw(std::vector<mjShader*>& shaderList,

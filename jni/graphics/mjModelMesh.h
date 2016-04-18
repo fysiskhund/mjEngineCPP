@@ -20,6 +20,10 @@ public:
 	unsigned short* drawOrderBuffer;
 	unsigned int drawOrderCount;
 
+    float* vertexBuffer =  NULL;
+    float* normalBuffer =  NULL;
+    float* textureCoordsBuffer =  NULL;
+
 	int glTexture;
     
     /*#ifdef OSX

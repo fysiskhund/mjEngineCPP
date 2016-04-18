@@ -5,8 +5,11 @@
 #include <core/mjObject.h>
 #include <ai/mjAutomaton.h>
 #include <util/mjResourceManager.h>
+#include <graphics/mjAssimpModel.h>
+
 
 #include "../Level.h"
+
 
 #include "KosmoObject.h"
 
