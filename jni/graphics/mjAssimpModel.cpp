@@ -83,36 +83,70 @@ void mjAssimpModel::RecursiveBuild(aiNode* node)
 
     for(unsigned i = 0; i < node->mNumMeshes; i++)
     {
-        const aiMesh* mesh = scene->mMeshes[node->mMeshes[i]]; // From the scene, fetch the mesh that is in use by the current node.
+        const aiMesh* assimpMesh = scene->mMeshes[node->mMeshes[i]]; // From the scene, fetch the mesh that is in use by the current node.
         if (meshes[node->mMeshes[i]] == NULL)
         {
-            mjModelMesh* mMesh = new mjModelMesh();
+            mjModelMesh* mjMesh = new mjModelMesh();
 
-            meshes[node->mMeshes[i]] = mMesh;
+            meshes[node->mMeshes[i]] = mjMesh;
 
-            mMesh->drawOrderCount = 3*mesh->mNumFaces;
+            mjMesh->drawOrderCount = 3*assimpMesh->mNumFaces;
 
-            mMesh->drawOrderBuffer = new unsigned short[mMesh->drawOrderCount];
+            mjMesh->drawOrderBuffer = new unsigned short[mjMesh->drawOrderCount];
 
-            mMesh->vertexBuffer = new float[mesh->numFaces*3*3]; // *3 because triangle, *3 because xyz
+            mjMesh->vertexBuffer = new float[assimpMesh->mNumFaces*3*3]; // *3 because triangle, *3 because xyz
 
-            mMesh->textureCoordsBuffer = new float[mesh->mNumFaces*3*2];
+            mjMesh->normalBuffer = new float[assimpMesh->mNumFaces*3*3]; // *3 because triangle, *3 because xyz
+
+            mjMesh->textureCoordsBuffer = new float[assimpMesh->mNumFaces*3*2]; // *3 because triangle, *3 because uv
+
 
 
 
 
             unsigned drawOrderIndex = 0;
-            for (unsigned f = 0; f < mesh->mNumFaces; f++)
+            for (unsigned f = 0; f < assimpMesh->mNumFaces; f++)
             {
-                aiFace* face =  &mesh->mFaces[f];
+                aiFace* face =  &assimpMesh->mFaces[f];
+
+                for (unsigned vIndex = 0; vIndex < assimpMesh->mNumVertices; vIndex++)
+                {
+                    mjMesh->vertexBuffer[0 + (vIndex*3)] = assimpMesh->mVertices[vIndex].x;
+                    mjMesh->vertexBuffer[1 + (vIndex*3)] = assimpMesh->mVertices[vIndex].y;
+                    mjMesh->vertexBuffer[2 + (vIndex*3)] = assimpMesh->mVertices[vIndex].z;
+
+                    mjMesh->normalBuffer[0 + (vIndex*3)] = assimpMesh->mNormals[vIndex].x;
+                    mjMesh->normalBuffer[1 + (vIndex*3)] = assimpMesh->mNormals[vIndex].y;
+                    mjMesh->normalBuffer[2 + (vIndex*3)] = assimpMesh->mNormals[vIndex].z;
+
+                    float texCoord = assimpMesh->mTextureCoords[0][vIndex].x;
+                    mjMesh->textureCoordsBuffer[0 + (vIndex*2)] = texCoord;
+
+                    texCoord = assimpMesh->mTextureCoords[0][vIndex].y;
+                    mjMesh->textureCoordsBuffer[1 + (vIndex*2)] = 1-texCoord;
+                }
 
                 for (unsigned vIndex = 0; vIndex < face->mNumIndices; vIndex++)
                 {
-                    mMesh->drawOrderBuffer[drawOrderIndex] = face->mIndices[vIndex];
+                    mjMesh->drawOrderBuffer[drawOrderIndex] = face->mIndices[vIndex];
 
-                    mMesh->vertexBuffer[0 + (drawOrderIndex*3)] = mesh->mVertices[face->mIndices[vIndex]].x;
-                    mMesh->vertexBuffer[1 + (drawOrderIndex*3)] = mesh->mVertices[face->mIndices[vIndex]].y;
-                    mMesh->vertexBuffer[2 + (drawOrderIndex*3)] = mesh->mVertices[face->mIndices[vIndex]].z;
+                    /*unsigned vertexIndex = face->mIndices[vIndex];
+                    mjMesh->vertexBuffer[0 + (drawOrderIndex*3)] = assimpMesh->mVertices[vertexIndex].x;
+                    mjMesh->vertexBuffer[1 + (drawOrderIndex*3)] = assimpMesh->mVertices[vertexIndex].y;
+                    mjMesh->vertexBuffer[2 + (drawOrderIndex*3)] = assimpMesh->mVertices[vertexIndex].z;
+
+                    LOGI("drawOrder[%d]: %3.1f, %3.1f, %3.1f", mjMesh->vertexBuffer[0 + (drawOrderIndex*3)], mjMesh->vertexBuffer[1 + (drawOrderIndex*3)], mjMesh->vertexBuffer[2 + (drawOrderIndex*3)]);
+
+                    mjMesh->normalBuffer[0 + (drawOrderIndex*3)] = assimpMesh->mNormals[vertexIndex].x;
+                    mjMesh->normalBuffer[1 + (drawOrderIndex*3)] = assimpMesh->mNormals[vertexIndex].y;
+                    mjMesh->normalBuffer[2 + (drawOrderIndex*3)] = assimpMesh->mNormals[vertexIndex].z;
+
+                    float texCoord = assimpMesh->mTextureCoords[0][vertexIndex].x;
+                    mjMesh->textureCoordsBuffer[0 + (drawOrderIndex*2)] = texCoord;
+
+                    texCoord = assimpMesh->mTextureCoords[0][vertexIndex].y;
+                    mjMesh->textureCoordsBuffer[1 + (drawOrderIndex*2)] = texCoord;*/
+
 
 
                     drawOrderIndex++;
@@ -122,7 +156,7 @@ void mjAssimpModel::RecursiveBuild(aiNode* node)
                 }
             }
 
-            LOGI("Mesh %d has %d vertices   ", i, mesh->mNumVertices);
+            LOGI("Mesh %d has %d vertices   ", i, assimpMesh->mNumVertices);
         }
         //glDrawElements(GL_TRIANGLES, mesh->, GL_UNSIGNED_SHORT, mesh->mFaces->mIndices);
         checkGlError("afterDrawElements");
@@ -131,7 +165,7 @@ void mjAssimpModel::RecursiveBuild(aiNode* node)
     // honey I unrolled the children
     for (unsigned int n = 0; n < node->mNumChildren; n++)
     {
-        RecursiveBuild(node);
+        RecursiveBuild(node->mChildren[n]);
     }
 }
 
@@ -203,10 +237,10 @@ void mjAssimpModel::RecursiveDraw(std::vector<mjShader*>& shaderList, float* mod
 {
 
 
-    if (node == scene->mRootNode)
+    /*if (node == scene->mRootNode)
     {
         LOGI("Root");
-    }
+    }*/
 
     for(unsigned i = 0; i < node->mNumMeshes; i++)
     {
@@ -216,7 +250,7 @@ void mjAssimpModel::RecursiveDraw(std::vector<mjShader*>& shaderList, float* mod
 
         // FIXME: find a way to tie the shaders from normal models with assimp-loaded models.
         // For now, the default shader is used.
-        shaderList[0]->RunForAssimp(assimpMesh, assimpMesh->mVertices, assimpMesh->mTextureCoords, assimpMesh->mNormals,
+        shaderList[0]->Run(mjMesh, mjMesh->vertexBuffer, mjMesh->textureCoordsBuffer, mjMesh->normalBuffer,
                                     modelMatrix, modelViewProjectionMatrix, glTextureForMaterial[assimpMesh->mMaterialIndex]);
         //LOGI("Mesh %d has %d vertices   ", i, mesh->mNumVertices);
         glDrawElements(GL_TRIANGLES, mjMesh->drawOrderCount, GL_UNSIGNED_SHORT, mjMesh->drawOrderBuffer);

@@ -24,7 +24,7 @@ mjSkyboxShaders::mjSkyboxShaders()
 
 void mjSkyboxShaders::Run(mjModelMesh* mesh,
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-			float* modelMatrix, float* modelViewProjectionMatrix )
+            float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)
 {
 
 	glUseProgram(glProgramHandle);
@@ -39,7 +39,7 @@ void mjSkyboxShaders::Run(mjModelMesh* mesh,
 	// Connect the texture
 	glActiveTexture(GL_TEXTURE0);
 	// Bind the texture handle
-	glBindTexture(GL_TEXTURE_2D, mesh->glTexture);
+    glBindTexture(GL_TEXTURE_2D, glTexture);
 	// Set the sampler texture unit to 0
 	glUniform1i(maTextureHandle, 0);
 
@@ -51,8 +51,9 @@ void mjSkyboxShaders::Run(mjModelMesh* mesh,
 
 }
 
-void mjSkyboxShaders::RunForAssimp(const aiMesh *modelMesh, float *vertexBuffer, float *texCoordBuffer, float *normalComponentBuffer, float *modelMatrix, float *modelViewProjectionMatrix, int glTexture)
-{
+void mjSkyboxShaders::RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh,
+                                   float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
+                                   float* modelMatrix, float* modelViewProjectionMatrix, int glTexture){
 
 }
 

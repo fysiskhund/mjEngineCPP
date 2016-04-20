@@ -365,7 +365,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
     		shaderList[meshes[i]->mjShaderListIndex]->Run(meshes[i],
     				vertexBuffer, texCoordBuffer, normalComponentBuffer,
-					modelMatrix, modelViewProjectionMatrix);
+                    modelMatrix, modelViewProjectionMatrix, meshes[i]->glTexture);
 
     		/*
 
@@ -430,7 +430,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
     		shaderList[meshes[i]->mjShaderListIndex]->Run(meshes[i],
     				vertexBuffer, texCoordBuffer, normalComponentBuffer,
-					modelMatrix, modelViewProjectionMatrix);
+                    modelMatrix, modelViewProjectionMatrix, meshes[i]->glTexture);
 
     		glDrawElements(GL_TRIANGLES, meshes[i]->drawOrderCount, GL_UNSIGNED_SHORT, meshes[i]->drawOrderBuffer);
     	}

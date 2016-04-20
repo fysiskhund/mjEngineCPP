@@ -50,9 +50,10 @@ mjDefaultShaders::mjDefaultShaders()
 
 	LOGI("textureHAndle %d, mvpMAtrixHAndle %d", maTextureHandle, maMVPMatrixHandle);
 }
+
 void mjDefaultShaders::Run(mjModelMesh* mesh,
 		float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-		float* modelMatrix, float* modelViewProjectionMatrix)
+        float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)
 {
 	 glUseProgram(glProgramHandle);
 	 glEnableVertexAttribArray(maPositionHandle);
@@ -69,7 +70,7 @@ void mjDefaultShaders::Run(mjModelMesh* mesh,
 	 // Connect the texture
 	 glActiveTexture(GL_TEXTURE0);
 	 // Bind the texture handle
-	 glBindTexture(GL_TEXTURE_2D, mesh->glTexture);
+     glBindTexture(GL_TEXTURE_2D, glTexture);
 	 // Set the sampler texture unit to 0
 	 glUniform1i(maTextureHandle, 0);
 
@@ -86,19 +87,19 @@ void mjDefaultShaders::Run(mjModelMesh* mesh,
 
 #ifdef USE_ASSIMP
 
-void mjDefaultShaders::RunForAssimp(const aiMesh* assimpMesh,
-                                    ai* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
+void mjDefaultShaders::RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh,
+                                    float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
                                     float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)
 {
      glUseProgram(glProgramHandle);
      glEnableVertexAttribArray(maPositionHandle);
-     glVertexAttribPointer(maPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, assimpMesh->mVertices); // vertexBuffer
+     glVertexAttribPointer(maPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, vertexBuffer); // vertexBuffer
 
      glEnableVertexAttribArray(maNormalHandle);
-     glVertexAttribPointer(maNormalHandle, 3, GL_FLOAT, GL_FALSE, 0, assimpMesh->mNormals); // normalComponentBuffer
+     glVertexAttribPointer(maNormalHandle, 3, GL_FLOAT, GL_FALSE, 0, normalComponentBuffer); // normalComponentBuffer
 
      glEnableVertexAttribArray(maTextureCoordHandle);
-     glVertexAttribPointer(maTextureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, assimpMesh->mTextureCoords); // texCoordBuffer
+     glVertexAttribPointer(maTextureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, texCoordBuffer); // texCoordBuffer
 
 
 

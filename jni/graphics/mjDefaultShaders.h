@@ -21,10 +21,10 @@ class mjDefaultShaders:  public mjShader
 	mjDefaultShaders();
 	void Run(mjModelMesh* mesh,
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-			float* modelMatrix, float* modelViewProjectionMatrix ) override;
+            float* modelMatrix, float* modelViewProjectionMatrix, int glTexture) override;
 
 #ifdef USE_ASSIMP
-    void RunForAssimp(const aiMesh* assimpMesh,
+    void RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh,
                       float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
                       float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)  override;
 #endif

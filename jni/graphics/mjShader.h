@@ -34,13 +34,13 @@ public:
 
 	virtual void Run(mjModelMesh* modelMesh,
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-            float* modelMatrix, float* modelViewProjectionMatrix)= 0; // Gets called in order to draw something
+            float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)= 0; // Gets called in order to draw something
 
 #ifdef USE_ASSIMP
 
-    virtual void RunForAssimp(const aiMesh* modelMesh,
-                              float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-                              float* modelMatrix, float* modelViewProjectionMatrix, int glTexture) = 0;
+    virtual void RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh,
+                      float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
+                      float* modelMatrix, float* modelViewProjectionMatrix, int glTexture) = 0;
 
 #endif
 
