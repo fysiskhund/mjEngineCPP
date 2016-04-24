@@ -26,7 +26,7 @@ public:
 	virtual void TieShaders(std::vector<mjShader*>& shaderList) override;
 	virtual void PushLevel(mjSkyboxLevelData* data);
 	virtual void Update(float t_elapsed) override;
-    virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix) override;
+    virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix, mjMatrixStack* matrixStack) override;
 
 	mjModel* boxModel;
 	mjModel* planeModel;

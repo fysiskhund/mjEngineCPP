@@ -87,17 +87,17 @@ void PlatformUniverseScene::Initialise(int width, int height)
     for (unsigned i = 0; i < level->entities.size(); i++)
     {
         level->entities[i]->TieShaders(shaderList);
-        if (strncmp(level->entities[i]->id, "baobab", 10) == 0)
-        {
+        /*if (strncmp(level->entities[i]->id, "baobab", 10) == 0)
+        {*/
             sceneGraph.drawableObjects.push_back(level->entities[i]);
-        }
+        //}
         physics.AddObject(level->entities[i], 0);
     }
     LOGI("Now adding terrain");
     for (unsigned i = 0; i < level->terrain.size(); i++)
     {
         level->terrain[i]->TieShaders(shaderList);
-        //sceneGraph.drawableObjects.push_back(level->terrain[i]);
+        sceneGraph.drawableObjects.push_back(level->terrain[i]);
         physics.AddObject(level->terrain[i], 1);
     }
 
@@ -192,7 +192,7 @@ void PlatformUniverseScene::Update(float t_elapsed)
 void PlatformUniverseScene::Draw()
 {
     glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-    //skybox->Draw(shaderList, lookAtMatrix, projectionMatrix);
+    skybox->Draw(shaderList, lookAtMatrix, projectionMatrix, NULL); // Skybox takes no matrix stack
     camera->GetLookAtMatrix(lookAtMatrix);
     sceneGraph.Draw(camera, shaderList, lookAtMatrix, projectionMatrix);
 

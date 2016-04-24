@@ -52,7 +52,7 @@ void mjMatrixStack::Pop()
 }
 void mjMatrixStack::Pop(unsigned howMany)
 {
-	for(int i = 0; i < howMany; i++)
+    for(unsigned i = 0; i < howMany; i++)
 	{
 		Pop();
 	}

@@ -56,7 +56,7 @@ public:
     virtual void TieShaders(std::vector<mjShader*>& shaderList);
 
     virtual void Draw(std::vector<mjShader*>& shaderList,
-			GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose);
+            GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose, mjMatrixStack* matrixStack);
 
     mjModelPose* CreateSimplePose();
 

@@ -205,12 +205,13 @@ void mjAssimpModel::TieShaders(std::vector<mjShader*>& shaderList)
 // Drawing routine for OpenGL ES 2.0 & OpenGL 3
 
 void mjAssimpModel::Draw(std::vector<mjShader*>& shaderList,
-                         GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose)
+                         GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose, mjMatrixStack* matrixStack)
 {
-    float poseMatrix[16];
     float tempMatrix[16];
+    float poseMatrix[16];
     float matrixAfterStack[16];
     float* whichMatrix;
+
 
 
     aiNode* node = scene->mRootNode;
@@ -218,22 +219,75 @@ void mjAssimpModel::Draw(std::vector<mjShader*>& shaderList,
     //Matrix4::DebugM("mvp", modelViewProjectionMatrix);
     //
 
+    aiMatrix4x4* baseTrans = &node->mTransformation;
+
+
+
+
+    Matrix4::MultiplyMM(poseMatrix, 0,
+                        (float* )baseTrans, 0,
+                        modelMatrix, 0);
+
+    Matrix4::MultiplyMM(tempMatrix, 0,
+                        lookAtMatrix, 0,
+                        poseMatrix, 0);
+
+
+
+
+    //Matrix4::DebugM("modelMat", modelMatrix);
+    //Matrix4::DebugM("baseTrans", (float*) baseTrans);
+
+    matrixStack->Push(tempMatrix);
+
+    //Matrix4::DebugM("current", matrixStack->current);
+
+    /*
+    poseMatrix[0] = baseTrans->a1;
+    poseMatrix[1] = baseTrans->a2;
+    poseMatrix[2] = baseTrans->a3;
+    poseMatrix[3] = baseTrans->a4;
+
+
+    poseMatrix[4] = baseTrans->b1;
+    poseMatrix[5] = baseTrans->b2;
+    poseMatrix[6] = baseTrans->b3;
+    poseMatrix[7] = baseTrans->b4;
+
+    poseMatrix[8] = baseTrans->c1;
+    poseMatrix[9] = baseTrans->c2;
+    poseMatrix[10] = baseTrans->c3;
+    poseMatrix[11] = baseTrans->c4;
+
+    poseMatrix[12] = baseTrans->d1;
+    poseMatrix[13] = baseTrans->d2;
+    poseMatrix[14] = baseTrans->d3;
+    poseMatrix[15] = baseTrans->d4;
+
+    Matrix4::MultiplyMM(tempMatrix, 0,
+                        poseMatrix, 0,
+                        modelMatrix, 0);
 
 
     Matrix4::MultiplyMM(modelViewMatrix, 0,
             lookAtMatrix, 0,
-            modelMatrix, 0);
+            tempMatrix, 0);
 
     Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
             projectionMatrix, 0,
-            modelViewMatrix, 0);
+            modelViewMatrix, 0);*/
 
-    RecursiveDraw(shaderList, modelMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, node);
 
+
+
+
+    RecursiveDraw(shaderList, modelMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, node, matrixStack);
+
+    matrixStack->Pop();
 
 }
 
-void mjAssimpModel::RecursiveDraw(std::vector<mjShader*>& shaderList, float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, aiNode *node)
+void mjAssimpModel::RecursiveDraw(std::vector<mjShader*>& shaderList, float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, aiNode *node, mjMatrixStack* matrixStack)
 {
 
 
@@ -242,16 +296,38 @@ void mjAssimpModel::RecursiveDraw(std::vector<mjShader*>& shaderList, float* mod
         LOGI("Root");
     }*/
 
+    float tempMatrix[16];
+    float poseMatrix[16];
+
+
+    aiMatrix4x4* nodeTrans = &node->mTransformation;
+
+
+
+    /*Matrix4::MultiplyMM(poseMatrix, 0,
+                        (float* ) nodeTrans, 0,
+                        modelMatrix, 0);*/
+
+    matrixStack->Push((float* ) nodeTrans);
+
+
+
     for(unsigned i = 0; i < node->mNumMeshes; i++)
     {
         const aiMesh* assimpMesh = scene->mMeshes[node->mMeshes[i]]; // From the scene, fetch the mesh that is in use by the current node.
 
         mjModelMesh* mjMesh = meshes[node->mMeshes[i]];
 
+        Matrix4::MultiplyMM(modelViewProjectionMatrix, 0,
+                            projectionMatrix, 0,
+                            matrixStack->current, 0);
+
         // FIXME: find a way to tie the shaders from normal models with assimp-loaded models.
         // For now, the default shader is used.
+
+
         shaderList[0]->Run(mjMesh, mjMesh->vertexBuffer, mjMesh->textureCoordsBuffer, mjMesh->normalBuffer,
-                                    modelMatrix, modelViewProjectionMatrix, glTextureForMaterial[assimpMesh->mMaterialIndex]);
+                                    matrixStack->current, modelViewProjectionMatrix, glTextureForMaterial[assimpMesh->mMaterialIndex]);
         //LOGI("Mesh %d has %d vertices   ", i, mesh->mNumVertices);
         glDrawElements(GL_TRIANGLES, mjMesh->drawOrderCount, GL_UNSIGNED_SHORT, mjMesh->drawOrderBuffer);
         checkGlError("afterDrawElements");
@@ -260,8 +336,9 @@ void mjAssimpModel::RecursiveDraw(std::vector<mjShader*>& shaderList, float* mod
     // honey I unrolled the children
     for (unsigned int n = 0; n < node->mNumChildren; n++)
     {
-        RecursiveDraw(shaderList, modelMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, node->mChildren[n]);
+        RecursiveDraw(shaderList, modelMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, node->mChildren[n], matrixStack);
     }
+    matrixStack->Pop();
 
 }
 

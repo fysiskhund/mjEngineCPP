@@ -15,6 +15,7 @@
 
 #include "../core/mjVector3.h"
 #include "../extLibs/math/Matrix.h"
+#include "../extLibs/math/mjMatrixStack.h"
 #include "../util/mjResourceManager.h"
 #include "../graphics/mjModel.h"
 #include "../graphics/animation/mjModelPose.h"
@@ -81,7 +82,7 @@ public:
 	virtual ~mjObject();
     void SetID(const char* id);
     virtual void SetDetailsFromXML(XMLElement* entity);
-	virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
+    virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix, mjMatrixStack* matrixStack);
 	virtual void ProcessPhysicsEffects(float t_elapsed);
 	virtual void ProcessCollisionEffects();
 	virtual void Update(float t_elapsed);

@@ -101,7 +101,7 @@ void mjObject::TieShaders(std::vector<mjShader*>& shaderList)
 	model->TieShaders(shaderList);
 }
 
-void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
+void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix, mjMatrixStack* matrixStack)
 {
 	float modelMatrix[16];
 	float modelViewMatrix[16];
@@ -119,7 +119,7 @@ void mjObject::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 
 	//Matrix4::DebugM("mvpp", modelViewProjectionMatrix);
 
-	model->Draw(shaderList, modelMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, pose);
+    model->Draw(shaderList, modelMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, pose, matrixStack);
 }
 
 void mjObject::ProcessPhysicsEffects(float t_elapsed)

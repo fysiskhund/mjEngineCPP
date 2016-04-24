@@ -30,7 +30,7 @@ public:
     void LoadFromFile(const char* fileName) override;
     void TieShaders(std::vector<mjShader*>& shaderList);
     void Draw(std::vector<mjShader*>& shaderList,
-              GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose) override;
+              GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose, mjMatrixStack* matrixStack) override;
 
 
     void RecursiveBuild(aiNode *node);
@@ -41,7 +41,7 @@ private:
 
     std::vector<GLuint> glTextureForMaterial;
 
-    void RecursiveDraw(std::vector<mjShader*>& shaderList, float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, aiNode *node);
+    void RecursiveDraw(std::vector<mjShader*>& shaderList, float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, aiNode *node, mjMatrixStack *matrixStack);
 
 };
 

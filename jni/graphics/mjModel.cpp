@@ -293,7 +293,7 @@ mjModelPose* mjModel::CreateSimplePose()
 // Drawing routine for OpenGL ES 2.0 & OpenGL 3
 
 void mjModel::Draw(std::vector<mjShader*>& shaderList,
-		float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, mjModelPose* pose)
+        float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, mjModelPose* pose, mjMatrixStack* stack)
 {
     float poseMatrix[16];
     float tempMatrix[16];

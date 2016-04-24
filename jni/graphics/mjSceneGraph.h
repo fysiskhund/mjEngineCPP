@@ -6,6 +6,8 @@
 #include "../core/mjObject.h"
 #include "../graphics/mjShader.h"
 #include "../graphics/mjCamera.h"
+#include "../extLibs/math/mjMatrixStack.h"
+#include "../extLibs/math/Matrix.h"
 
 namespace mjEngine
 {
@@ -17,6 +19,8 @@ public:
 	std::vector<mjObject*> drawableObjects;
 	std::vector<mjObject*> translucentObjects;
 	std::vector<mjObject*> shadowCasters;
+
+    mjMatrixStack matrixStack;
 
 	void Update(float t_elapsed);
 	void Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);

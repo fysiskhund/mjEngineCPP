@@ -107,7 +107,7 @@ void mjSkybox::Update(float t_elapsed)
 	}
 	//LOGI("angles: %3.3f, %3.3f -> %3.3f %3.3f %3.3f", level0Data.angleH, level0Data.angleV, dir.x, dir.y, dir.z);
 }
-void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
+void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix, mjMatrixStack* matrixStack)
 {
 	//LOGI("draw skybox");
 	// turn off depth buffer
@@ -117,7 +117,7 @@ void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 	model = boxModel;
 
 	dir.SetRotations(backgroundData.angleH, backgroundData.angleV);
-	mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix);
+    mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix, matrixStack);
 
 	model = planeModel;
 	//LOGI("planeModel 0x%x, mesh 0x%x", model, model->meshes.at(0));
@@ -128,7 +128,7 @@ void mjSkybox::Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, flo
 		//LOGI("modelMesh 0x%x", model->meshes.at(0));
 		model->meshes.at(0)->glTexture = data->texture;
 		dir.SetRotations(data->angleH, data->angleV);
-		mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix);
+        mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix, matrixStack);
 	}
 
 

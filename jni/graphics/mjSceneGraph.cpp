@@ -10,10 +10,13 @@ void mjSceneGraph::Update(float t_elapsed)
 }
 void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
+    matrixStack.PopAll();
+    Matrix4::SetIdentityM(matrixStack.current, 0);
+
 	unsigned numObjects = drawableObjects.size();
 	for (unsigned i= 0 ; i < numObjects; i++)
 	{
-		drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix);
+        drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
 	}
 
 
@@ -32,7 +35,7 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
 	}
 
 	for (unsigned i= 0 ; i < numObjects; i++)
-		translucentObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix);
+        translucentObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
 	}
 
 
