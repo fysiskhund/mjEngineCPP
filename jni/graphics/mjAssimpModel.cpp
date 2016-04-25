@@ -21,59 +21,64 @@ void mjAssimpModel::LoadFromFile(const char* fileName)
 {
     scene = aiImportFile(fileName,aiProcessPreset_TargetRealtime_MaxQuality);
 
-    for (int i = 0; i < scene->mNumMaterials; i++)
+    if (scene)
     {
-        // Keep trying to extract textures until it fails
-        aiString textureFilename;
-
-        aiMaterial* mat = scene->mMaterials[i];
-
-        aiReturn textureFilenameWasExtracted;
-        int diffuseTextureIndex = 0;
-
-        do
+        for (int i = 0; i < scene->mNumMaterials; i++)
         {
-            textureFilenameWasExtracted = mat->GetTexture(aiTextureType_DIFFUSE, diffuseTextureIndex, &textureFilename);
-            if (textureFilenameWasExtracted == AI_SUCCESS)
+            // Keep trying to extract textures until it fails
+            aiString textureFilename;
+
+            aiMaterial* mat = scene->mMaterials[i];
+
+            aiReturn textureFilenameWasExtracted;
+            int diffuseTextureIndex = 0;
+
+            do
             {
-                // Load using the manager.
-
-                //FIXME: For now only the first texture is used :3
-
-                if (diffuseTextureIndex == 0)
+                textureFilenameWasExtracted = mat->GetTexture(aiTextureType_DIFFUSE, diffuseTextureIndex, &textureFilename);
+                if (textureFilenameWasExtracted == AI_SUCCESS)
                 {
-                    std::string texFilenameWithoutJunk = textureFilename.C_Str();
-                    int lastDirChar = texFilenameWithoutJunk.find_last_of('/');
-                    int lastInvertDirChar = texFilenameWithoutJunk.find_last_of('\\');
-                    if (lastInvertDirChar > lastDirChar)
+                    // Load using the manager.
+
+                    //FIXME: For now only the first texture is used :3
+
+                    if (diffuseTextureIndex == 0)
                     {
-                        lastDirChar = lastInvertDirChar;
+                        std::string texFilenameWithoutJunk = textureFilename.C_Str();
+                        int lastDirChar = texFilenameWithoutJunk.find_last_of('/');
+                        int lastInvertDirChar = texFilenameWithoutJunk.find_last_of('\\');
+                        if (lastInvertDirChar > lastDirChar)
+                        {
+                            lastDirChar = lastInvertDirChar;
+                        }
+                        texFilenameWithoutJunk = texFilenameWithoutJunk.substr(lastDirChar+1);
+                        glTextureForMaterial.push_back(resManager->FetchTexture(texFilenameWithoutJunk, GL_REPEAT));
                     }
-                    texFilenameWithoutJunk = texFilenameWithoutJunk.substr(lastDirChar+1);
-                    glTextureForMaterial.push_back(resManager->FetchTexture(texFilenameWithoutJunk, GL_REPEAT));
                 }
-            }
-            diffuseTextureIndex++;
-        } while (textureFilenameWasExtracted == AI_SUCCESS);
+                diffuseTextureIndex++;
+            } while (textureFilenameWasExtracted == AI_SUCCESS);
 
-    }
-
-
-    // Now build the internal data structures ( structure, drawOrderBuffers, etc.)
+        }
 
 
-    for (unsigned i = 0; i < scene->mNumMeshes; i++)
+        // Now build the internal data structures ( structure, drawOrderBuffers, etc.)
+
+
+        for (unsigned i = 0; i < scene->mNumMeshes; i++)
+        {
+            meshes.push_back(NULL);
+        }
+
+
+
+        aiNode* node = scene->mRootNode;
+
+
+        RecursiveBuild(node);
+    } else
     {
-        meshes.push_back(NULL);
+        LOGI("Assimp import error: %s", aiGetErrorString());
     }
-
-
-
-    aiNode* node = scene->mRootNode;
-
-
-    RecursiveBuild(node);
-
 }
 
 void mjAssimpModel::RecursiveBuild(aiNode* node)
@@ -112,12 +117,22 @@ void mjAssimpModel::RecursiveBuild(aiNode* node)
                 for (unsigned vIndex = 0; vIndex < assimpMesh->mNumVertices; vIndex++)
                 {
                     mjMesh->vertexBuffer[0 + (vIndex*3)] = assimpMesh->mVertices[vIndex].x;
-                    mjMesh->vertexBuffer[1 + (vIndex*3)] = assimpMesh->mVertices[vIndex].y;
-                    mjMesh->vertexBuffer[2 + (vIndex*3)] = assimpMesh->mVertices[vIndex].z;
+                    // Switchy switchy -y <-> z
+                    mjMesh->vertexBuffer[1 + (vIndex*3)] = assimpMesh->mVertices[vIndex].z;
+                    mjMesh->vertexBuffer[2 + (vIndex*3)] = -assimpMesh->mVertices[vIndex].y;
+
+
+                    /*mjMesh->vertexBuffer[1 + (vIndex*3)] = assimpMesh->mVertices[vIndex].y;
+                    mjMesh->vertexBuffer[2 + (vIndex*3)] = assimpMesh->mVertices[vIndex].z;*/
+
 
                     mjMesh->normalBuffer[0 + (vIndex*3)] = assimpMesh->mNormals[vIndex].x;
-                    mjMesh->normalBuffer[1 + (vIndex*3)] = assimpMesh->mNormals[vIndex].y;
-                    mjMesh->normalBuffer[2 + (vIndex*3)] = assimpMesh->mNormals[vIndex].z;
+                    // Switchy switchy -y <-> z
+                    mjMesh->normalBuffer[1 + (vIndex*3)] = assimpMesh->mNormals[vIndex].z;
+                    mjMesh->normalBuffer[2 + (vIndex*3)] = -assimpMesh->mNormals[vIndex].y;
+
+                    /*mjMesh->normalBuffer[1 + (vIndex*3)] = assimpMesh->mNormals[vIndex].y;
+                    mjMesh->normalBuffer[2 + (vIndex*3)] = assimpMesh->mNormals[vIndex].z;*/
 
                     float texCoord = assimpMesh->mTextureCoords[0][vIndex].x;
                     mjMesh->textureCoordsBuffer[0 + (vIndex*2)] = texCoord;

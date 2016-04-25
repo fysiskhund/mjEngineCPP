@@ -8,7 +8,7 @@ Baobab::Baobab(Level* levelData, mjResourceManager* resourceManager)
 
 
     model = new mjAssimpModel(resourceManager);
-    model->LoadFromFile("/common/svn/vasilisa/other/modelSources/meshes/cubemovedx.blend");
+    model->LoadFromFile("/common/svn/vasilisa/other/modelSources/meshes/baobab.blend");
 
     ((mjAABB*)boundingStructure)->isImmovable = true;
 
