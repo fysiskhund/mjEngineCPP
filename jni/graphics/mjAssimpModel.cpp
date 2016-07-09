@@ -19,6 +19,7 @@ mjAssimpModel::mjAssimpModel(mjResourceManager* resManager)
 
 void mjAssimpModel::LoadFromFile(const char* fileName)
 {
+    mjMatrixStack* matrixStack = new mjMatrixStack();
     scene = aiImportFile(fileName,aiProcessPreset_TargetRealtime_MaxQuality);
 
     if (scene)
@@ -74,23 +75,40 @@ void mjAssimpModel::LoadFromFile(const char* fileName)
         aiNode* node = scene->mRootNode;
 
 
-        RecursiveBuild(node);
+        RecursiveBuild(node, matrixStack);
     } else
     {
         LOGI("Assimp import error: %s", aiGetErrorString());
     }
+    delete matrixStack;
 }
 
-void mjAssimpModel::RecursiveBuild(aiNode* node)
+void mjAssimpModel::RecursiveBuild(aiNode* node, mjMatrixStack* matrixStack)
 {
+    float tempMatrix[16];
+    float poseMatrix[16];
 
 
+    aiMatrix4x4* baseTrans = &node->mTransformation;
+
+    /*Matrix4::MultiplyMM(poseMatrix, 0,
+                        (float* )baseTrans, 0,
+                        modelMatrix, 0);*/
+
+    matrixStack->Push((float*) baseTrans);
 
     for(unsigned i = 0; i < node->mNumMeshes; i++)
     {
         const aiMesh* assimpMesh = scene->mMeshes[node->mMeshes[i]]; // From the scene, fetch the mesh that is in use by the current node.
         if (meshes[node->mMeshes[i]] == NULL)
         {
+
+
+
+
+
+
+
             mjModelMesh* mjMesh = new mjModelMesh();
 
             meshes[node->mMeshes[i]] = mjMesh;
@@ -120,6 +138,22 @@ void mjAssimpModel::RecursiveBuild(aiNode* node)
                     // Switchy switchy -y <-> z
                     mjMesh->vertexBuffer[1 + (vIndex*3)] = assimpMesh->mVertices[vIndex].z;
                     mjMesh->vertexBuffer[2 + (vIndex*3)] = -assimpMesh->mVertices[vIndex].y;
+
+
+                    // Determine bounds of object
+                    for (unsigned l = 0; l < 3; l++)
+                    {
+
+                        if (vertexBuffer[vIndex + l] < bounds[0 + l])
+                        {
+                            bounds[0 + l] = vertexBuffer[vIndex + l];
+                        }
+
+                        if (vertexBuffer[vIndex + l] > bounds[3 + l])
+                        {
+                            bounds[3 + l] = vertexBuffer[vIndex + l];
+                        }
+                    }
 
 
                     /*mjMesh->vertexBuffer[1 + (vIndex*3)] = assimpMesh->mVertices[vIndex].y;
@@ -171,6 +205,7 @@ void mjAssimpModel::RecursiveBuild(aiNode* node)
                 }
             }
 
+
             LOGI("Mesh %d has %d vertices   ", i, assimpMesh->mNumVertices);
         }
         //glDrawElements(GL_TRIANGLES, mesh->, GL_UNSIGNED_SHORT, mesh->mFaces->mIndices);
@@ -180,8 +215,9 @@ void mjAssimpModel::RecursiveBuild(aiNode* node)
     // honey I unrolled the children
     for (unsigned int n = 0; n < node->mNumChildren; n++)
     {
-        RecursiveBuild(node->mChildren[n]);
+        RecursiveBuild(node->mChildren[n], matrixStack);
     }
+    matrixStack->Pop();
 }
 
 

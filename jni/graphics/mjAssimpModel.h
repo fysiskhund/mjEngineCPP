@@ -33,7 +33,7 @@ public:
               GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose, mjMatrixStack* matrixStack) override;
 
 
-    void RecursiveBuild(aiNode *node);
+    void RecursiveBuild(aiNode *node, mjMatrixStack* matrixStack);
 private:
     mjResourceManager* resManager;
 

@@ -3,7 +3,7 @@
 Baobab::Baobab(Level* levelData, mjResourceManager* resourceManager)
     : KosmoObject(MJ_AABB, resourceManager, levelData)
 {
-    this->canCollide = false;
+    this->canCollide = true;
 
 
 

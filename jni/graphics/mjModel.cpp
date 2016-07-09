@@ -60,6 +60,7 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 		vertexData->QueryFloatAttribute("y", &vertexBuffer[posIn3Array+1]);
 		vertexData->QueryFloatAttribute("z", &vertexBuffer[posIn3Array+2]);
 
+        // Determine bounds of object
 		for (unsigned l = 0; l < 3; l++)
 		{
             if (vertexBuffer[posIn3Array + l] < bounds[0 + l])
