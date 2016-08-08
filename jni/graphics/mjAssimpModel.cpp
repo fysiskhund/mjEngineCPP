@@ -1,5 +1,6 @@
 #include "mjAssimpModel.h"
 
+#ifdef USE_ASSIMP
 
 
 namespace mjEngine{
@@ -406,3 +407,5 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 #endif
 
 }// namespace mj
+
+#endif // USE_ASSIMP

@@ -1,6 +1,7 @@
 #ifndef MJASSIMPMODEL_H
 #define MJASSIMPMODEL_H
 
+#ifdef USE_ASSIMP
 
 #include "mjShader.h"
 #include "../extLibs/math/Matrix.h"
@@ -47,4 +48,5 @@ private:
 
 }
 
+#endif // USE_ASSIMP
 #endif // MJASSIMPMODEL_H

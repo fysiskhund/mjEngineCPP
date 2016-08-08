@@ -88,7 +88,7 @@ class PlatformUniverseScene : public mjScene
         mjMusicPlayer musicPlayer;
         std::string levelFilename;
 
-        mjAssimpModel* assModel;
+        //mjAssimpModel* assimpModel;
 
 
     protected:

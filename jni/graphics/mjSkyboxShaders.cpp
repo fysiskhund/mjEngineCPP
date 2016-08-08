@@ -51,11 +51,13 @@ void mjSkyboxShaders::Run(mjModelMesh* mesh,
 
 }
 
+#ifdef USE_ASSIMP
 void mjSkyboxShaders::RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh,
                                    float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
                                    float* modelMatrix, float* modelViewProjectionMatrix, int glTexture){
 
 }
+#endif // USE_ASSIMP
 
 #ifdef USE_GLES2
 
