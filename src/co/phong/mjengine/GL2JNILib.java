@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Alejandro Valenzuela Roca
+ * Copyright (C) 2014-2016 Alejandro Valenzuela Roca
  * 
  */
 
@@ -10,7 +10,7 @@ package co.phong.mjengine;
 public class GL2JNILib {
 
      static {
-         System.loadLibrary("mjengine");
+         System.loadLibrary("mjGame");
      }
 
     /**

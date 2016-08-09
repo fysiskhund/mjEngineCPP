@@ -24,7 +24,7 @@ void FrogBossAutomatonHuntState::Enter()
 
     if (frogBoss->berserkTimes > 0)
     {
-        LOGI("Frogge: defeated %d times; BERSERK!!!!! [%d]", frogBoss->defeatedTimes, frogBoss->berserkTimes)
+        LOGI("Frogge: defeated %d times; BERSERK!!!!! [%d]", frogBoss->defeatedTimes, frogBoss->berserkTimes);
         maxTime = ((float)rand() / (float) RAND_MAX) + 0.001;
         frogBoss->berserkTimes--;
     } else
