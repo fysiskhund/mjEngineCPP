@@ -1,5 +1,8 @@
-!#/bin/sh
+#!/bin/sh
 cd ../../
+
+mkdir OSXIncludes
+cd OSXIncludes
 
 ln -s /Library/Frameworks/SDL2.framework/Versions/A/Headers SDL2
 
