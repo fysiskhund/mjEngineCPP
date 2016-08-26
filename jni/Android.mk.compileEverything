@@ -57,6 +57,7 @@ LOCAL_SRC_FILES := ai/mjAutomaton.cpp \
     graphics/mjImageLoader.cpp \
     graphics/mjModel.cpp \
     graphics/mjModelMesh.cpp \
+    graphics/mjRenderer.cpp \
     graphics/mjSceneGraph.cpp \
     graphics/mjShader.cpp \
     graphics/mjSkybox.cpp \

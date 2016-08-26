@@ -12,11 +12,12 @@ void mjRenderer::PrepareForModel(mjModel& model)
 {
 
     checkGlError("starting with PrepareForModel");
+#ifndef USE_GLES2
     glGenVertexArrays(1, vertexArrayID);
     checkGlError("creating VAO");
     glBindVertexArray(vertexArrayID[0]);
     checkGlError("binding newly created VAO");
-
+#endif
     shader = new mjDefaultShaders();
 
     checkGlError("defining Shader");
@@ -56,8 +57,9 @@ void mjRenderer::RenderModel(mjModel& model, float* modelMatrix, float* lookAtMa
     float modelViewMatrix[16];
     float modelViewProjectionMatrix[16];
 
-
+#ifndef USE_GLES2
     glBindVertexArray(vertexArrayID[0]);
+#endif
 
     glEnableVertexAttribArray(MJ_VERTEX_COORDINATES_GLVERTEXATTRIB_ID); // Tell OpenGL we will use the slot 0, which we arbitrarily defined as vertex coordinate buffer when the shader source codes were loaded
     glBindBuffer(GL_ARRAY_BUFFER, vertexCoordinatesBufferID);
