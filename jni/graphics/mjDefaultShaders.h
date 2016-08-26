@@ -5,13 +5,13 @@
  #ifndef MJDEFAULTSHADERS_H
 #define MJDEFAULTSHADERS_H
 
-#include "../extLibs/util/mjMultiPlatform.h"
+#include <extLibs/util/mjMultiPlatform.h>
 
-#include "mjShader.h"
-#include "../core/mjVector3.h"
+#include <graphics/mjShader.h>
+#include <core/mjVector3.h>
 #include <string.h>
 
-#include "../extLibs/logger/mjLog.h"
+#include <extLibs/logger/mjLog.h>
 
 namespace mjEngine{
 
@@ -42,16 +42,16 @@ class mjDefaultShaders:  public mjShader
 	float ambientLightColor[4];
 
 	// Handles
-	GLuint maPositionHandle;
-	GLuint maNormalHandle;
-	GLuint maTextureCoordHandle;
-	GLuint maTextureHandle;
-	GLuint maMVPMatrixHandle;
-	GLuint maMMatrixHandle;
-	GLuint uDiffuseLightDirectionHandle;
-	GLuint uDiffuseLightColorHandle;
-	GLuint uAmbientLightColorHandle;
-	//GLuint maMVMatrixHandle;
+    GLint maPositionHandle;
+    GLint maNormalHandle;
+    GLint maTextureCoordHandle;
+    GLint maTextureHandle;
+    GLint maMVPMatrixHandle;
+    GLint maMMatrixHandle;
+    GLint uDiffuseLightDirectionHandle;
+    GLint uDiffuseLightColorHandle;
+    GLint uAmbientLightColorHandle;
+    //GLint maMVMatrixHandle;
 	private:
 		float diffuseLightDirectionArray[3];
 

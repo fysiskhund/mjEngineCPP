@@ -39,6 +39,7 @@ using namespace mjEngine;
 
 
 #include "PlatformUniverseScene.h"
+#include "GraphicsDebugUniverseScene.h"
 
 //static void printGLString(const char *name, GLenum s);
 

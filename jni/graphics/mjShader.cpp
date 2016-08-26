@@ -45,7 +45,10 @@ void mjShader::CreateProgram(const char* vertexShaderCode, const char* fragmentS
 		//checkGlError("glAttachShader");
 		//LOGI("fragmentShader");
 		glAttachShader(glProgramHandle, glFragmentShaderHandle);
-		//checkGlError("glAttachShader");
+
+        BindAttributeLocations();
+
+        //checkGlError("glAttachShader");
 		glLinkProgram(glProgramHandle);
 		GLint linkStatus = GL_FALSE;
 		glGetProgramiv(glProgramHandle, GL_LINK_STATUS, &linkStatus);
@@ -65,6 +68,15 @@ void mjShader::CreateProgram(const char* vertexShaderCode, const char* fragmentS
 			glProgramHandle = 0;
 		}
 	}
+}
+void mjShader::BindAttributeLocations()
+{
+#ifdef USE_GLES2
+    glBindAttribLocation(glProgramHandle, MJ_VERTEX_COORDINATES_GLVERTEXATTRIB_ID, "MJ_VERTEX_COORDINATES");
+    glBindAttribLocation(glProgramHandle, MJ_NORMAL_COORDINATES_GLVERTEXATTRIB_ID, "MJ_NORMAL_COORDINATES");
+    glBindAttribLocation(glProgramHandle, MJ_UV_COMPONENTS_GLVERTEXATTRIB_ID, "MJ_UV_COMPONENTS");
+#endif
+    
 }
 
 }

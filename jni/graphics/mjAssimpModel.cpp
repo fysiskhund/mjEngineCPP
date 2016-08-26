@@ -9,13 +9,6 @@ mjAssimpModel::mjAssimpModel(mjResourceManager* resManager)
 {
     this->resManager = resManager;
 
-#ifdef OSX
-    // Generate the buffers needed for CORE profile compliance
-    glGenVertexArraysAPPLE(1, &vertexArrayObject);
-    glGenBuffers(3, objectBuffers);
-#endif
-
-
 }
 
 void mjAssimpModel::LoadFromFile(const char* fileName)

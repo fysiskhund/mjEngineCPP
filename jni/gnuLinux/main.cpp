@@ -47,16 +47,10 @@ int InitSDL(SDLStruct* sdlData) {
     joystick = SDL_JoystickOpen(0);
 
     #ifdef USE_GL3
-        #ifdef OSX
+
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-        #else
-            SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
-            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-        #endif
-
 
     #elif USE_GLES2
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
@@ -65,6 +59,7 @@ int InitSDL(SDLStruct* sdlData) {
     #else
         #error "Either USE_GL3 or USE_GLES2 need to be specified."
     #endif
+
 
 
     #ifdef USE_SDL_AUDIO
@@ -96,9 +91,25 @@ int InitSDL(SDLStruct* sdlData) {
     	SDL_GetError();
     }
 
+    checkGlError("creating GL context");
+
     #if defined(USE_GL3) && !defined(OSX)
-    glewInit();
+    glewExperimental = GL_TRUE;
+    GLenum glewResult = glewInit();
+    if (glewResult == GLEW_OK)
+    {
+        printf("GLEW initialised correctly\n");
+    } else
+    {
+        printf("GLEW error: %s\n", glewGetErrorString(glewResult));
+    }
+    checkGlError("glew initialisation (this is normal, ignore -_-')");
     #endif
+
+    //glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+    //glDebugMessageCallback(mjGlErrorCallback, NULL);
+
+
 
     const unsigned char* versionStr = glGetString(GL_VERSION);
 

@@ -34,7 +34,7 @@ void Ambient::InitGlowBeings(Level* levelData, mjCamera* camera, mjPhysics* phys
         GlowBeing* glowBeing = new GlowBeing(levelData, camera, &resourceManager);
 
 
-        glowBeing->TieShaders(*shaderList);
+        //glowBeing->TieShaders(*shaderList);
 
         physics->AddObject(glowBeing, 0);
 

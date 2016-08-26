@@ -8,11 +8,16 @@
 #include "gl_code.h"
 
 PlatformUniverseScene* platformUniverse;
+GraphicsDebugUniverseScene* graphicsDebugUniverse;
 mjSceneManager sceneManager;
 
 
 
 bool setupGame(int w, int h, mjResourceManager* resourceManager) {
+    /*graphicsDebugUniverse = new GraphicsDebugUniverseScene(resourceManager);
+    graphicsDebugUniverse->Initialize(w,h);
+    sceneManager.SetFirstScene(graphicsDebugUniverse);*/
+
     platformUniverse = new PlatformUniverseScene(resourceManager);
     platformUniverse->Initialise(w,h);
     sceneManager.SetFirstScene(platformUniverse);

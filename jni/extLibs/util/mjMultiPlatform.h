@@ -3,9 +3,16 @@
 
 // Macros for choosing GL versions
 #ifdef USE_GLES2
+#ifndef IOS
     #include <GLES2/gl2.h>
     #include <GLES2/gl2ext.h>
+#else
+    #include <OpenGLES/ES2/gl.h>
+    #include <OpenGLES/ES2/glext.h>
 
+    #define glGenVertexArrays glGenVertexArraysOES
+    #define glBindVertexArray glBindVertexArrayOES
+#endif
 
 
 #else
@@ -13,9 +20,15 @@
 
 
     #ifdef OSX
-        #include <OpenGL/gl.h>
+
+// I'M DIFFERENT!!!!!!!!!!!
+// DIFFERENT!!!!!!!!!!!!!!1!!!!!!!!!!!!!!!!
+// OMVFG!!!!!!
+
+        #include <OpenGL/gl3.h>
         #include <OpenGL/glu.h>
         #include <OpenGL/glext.h>
+
     #else
 
         #ifdef WIN32
@@ -40,11 +53,16 @@
 
 #ifdef DESKTOP_SDL
     #include <SDL2/SDL.h>
+#endif // DESKTOP_SDL
 
-            void checkGlError(const char* op);
-
-
-#endif // USE_SDL_AUDIO
+void checkGlError(const char* op);
+void mjGlErrorCallback(GLenum source,
+                       GLenum type,
+                       GLuint id,
+                       GLenum severity,
+                       GLsizei length,
+                       const GLchar *message,
+                       const void *userParam);
 
 // Set up joystick
 #ifdef WIN32

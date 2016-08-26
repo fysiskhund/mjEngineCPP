@@ -19,6 +19,7 @@ mjDefaultShaders::mjDefaultShaders()
 	ambientLightColor[0] = ambientLightColor[1] = ambientLightColor[2] = 0.69;
 	ambientLightColor[3] = 1;
 
+    checkGlError("set up lights");
 
 
 	// Set up shader
@@ -26,7 +27,10 @@ mjDefaultShaders::mjDefaultShaders()
 	name = new char[8];
 	strncpy(name, "default", 8);
 
-	LOGI("Programhandle is %d", glProgramHandle);
+    checkGlError("create glProgram");
+
+
+	/*LOGI("Programhandle is %d", glProgramHandle);
 	maPositionHandle = glGetAttribLocation(glProgramHandle, "vPosition");
 
 	maNormalHandle = glGetAttribLocation(glProgramHandle, "aNormal");
@@ -35,10 +39,10 @@ mjDefaultShaders::mjDefaultShaders()
 	//maNormalHandle = glGetAttribLocation(glProgram, "aNormal");
 
 	maTextureCoordHandle = glGetAttribLocation(glProgramHandle, "aTexCoordinates");
-	LOGI("texcoords: %d", maTextureCoordHandle);
+	LOGI("texcoords: %d", maTextureCoordHandle); */
 
 	// Get the texture handle location
-	maTextureHandle = glGetUniformLocation(glProgramHandle, "uTexture");
+    maTextureHandle = glGetUniformLocation(glProgramHandle, "uTexture");
 
 	maMVPMatrixHandle = glGetUniformLocation(glProgramHandle, "maMVPMatrix");
 	maMMatrixHandle = glGetUniformLocation(glProgramHandle, "maMMatrix");
@@ -47,8 +51,9 @@ mjDefaultShaders::mjDefaultShaders()
 	uDiffuseLightColorHandle = glGetUniformLocation(glProgramHandle, "uDiffuseLightColor");
 
 	uAmbientLightColorHandle = glGetUniformLocation(glProgramHandle, "uAmbientLightColor");
+    checkGlError("getting parameters");
 
-	LOGI("textureHAndle %d, mvpMAtrixHAndle %d", maTextureHandle, maMVPMatrixHandle);
+    LOGI("textureHandle %d, mvpMAtrixHandle %d", maTextureHandle, maMVPMatrixHandle);
 }
 
 void mjDefaultShaders::Run(mjModelMesh* mesh,
@@ -56,16 +61,17 @@ void mjDefaultShaders::Run(mjModelMesh* mesh,
         float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)
 {
 	 glUseProgram(glProgramHandle);
-	 glEnableVertexAttribArray(maPositionHandle);
-	 glVertexAttribPointer(maPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, vertexBuffer);
-
-	 glEnableVertexAttribArray(maNormalHandle);
-	 glVertexAttribPointer(maNormalHandle, 3, GL_FLOAT, GL_FALSE, 0, normalComponentBuffer);
-
-	 glEnableVertexAttribArray(maTextureCoordHandle);
-	 glVertexAttribPointer(maTextureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, texCoordBuffer);
 
 
+     // Send the light parameters
+     glUniform3fv(uDiffuseLightDirectionHandle, 1, diffuseLightDirectionArray);
+     glUniform4fv(uDiffuseLightColorHandle, 1, diffuseLightColor);
+     glUniform4fv(uAmbientLightColorHandle, 1, ambientLightColor);
+
+     // Send the modelViewProjection Matrix
+     glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
+     // Send the modelViewProjection Matrix
+     glUniformMatrix4fv(maMMatrixHandle, 1, false, modelMatrix);
 
 	 // Connect the texture
 	 glActiveTexture(GL_TEXTURE0);
@@ -74,15 +80,9 @@ void mjDefaultShaders::Run(mjModelMesh* mesh,
 	 // Set the sampler texture unit to 0
 	 glUniform1i(maTextureHandle, 0);
 
-	 // Send the modelViewProjection Matrix
-	 glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
-	 // Send the modelViewProjection Matrix
-	 glUniformMatrix4fv(maMMatrixHandle, 1, false, modelMatrix);
 
-	 // Send the light parameters
-	 glUniform3fv(uDiffuseLightDirectionHandle, 1, diffuseLightDirectionArray);
-	 glUniform4fv(uDiffuseLightColorHandle, 1, diffuseLightColor);
-	 glUniform4fv(uAmbientLightColorHandle, 1, ambientLightColor);
+
+
 }
 
 #ifdef USE_ASSIMP

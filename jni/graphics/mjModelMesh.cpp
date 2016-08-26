@@ -6,15 +6,12 @@ namespace mjEngine{
 
 mjModelMesh::mjModelMesh()
 {
+    checkGlError("first line of mesh creation");
 	drawOrderCount = -1;
-    
-/*#ifdef OSX
-    // Generate the buffers needed for CORE profile compliance
-    glGenVertexArraysAPPLE(1, &vertexArrayObject);
-    glGenBuffers(3, objectBuffers);
-    
-    
-#endif*/
+    glGenBuffers(1, &elementBufferID);
+
+    checkGlError("mesh creation");
+
 }
     
     

@@ -7,9 +7,6 @@
 #include <vector>
 #include <float.h>
 
-#include "../extLibs/util/mjMultiPlatform.h"
-
-
 
 //#include <android/log.h>
 
@@ -17,10 +14,10 @@
 #include "mjModelMesh.h"
 #include "mjShader.h"
 
-#include "../extLibs/math/Matrix.h"
-#include "../extLibs/math/mjMatrixStack.h"
-#include "../extLibs/tinyxml/tinyxml2.h"
-#include "animation/mjModelStructure.h"
+#include <extLibs/math/Matrix.h>
+#include <extLibs/math/mjMatrixStack.h>
+#include <extLibs/tinyxml/tinyxml2.h>
+#include <graphics/animation/mjModelStructure.h>
 
 
 namespace mjEngine{
@@ -33,9 +30,9 @@ using namespace tinyxml2;
 class mjModel
 {
 public:
-	GLfloat* vertexBuffer;
-	GLfloat* texCoordBuffer;
-	GLfloat* normalComponentBuffer;
+    GLfloat* vertexBufferData;
+    GLfloat* texCoordBufferData;
+    GLfloat* normalComponentBufferData;
 	mjModelStructure* structure = NULL;
 
 
@@ -55,7 +52,7 @@ public:
 
     virtual void TieShaders(std::vector<mjShader*>& shaderList);
 
-    virtual void Draw(std::vector<mjShader*>& shaderList,
+    virtual void DrawDEPRECATED(std::vector<mjShader*>& shaderList,
             GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose, mjMatrixStack* matrixStack);
 
     mjModelPose* CreateSimplePose();
@@ -63,20 +60,16 @@ public:
     void TieStructureToMeshes();
     void TiePoseToStructure();
 
+    int numVertices;
+
+    int rendererIndex = -1;
 private:
-	int numVertices;
+
 	int currentVertex;
 	int currentFace;
 	int faceCount;
 	mjMatrixStack mStack;
 
-
-
-
-#ifdef OSX
-    GLuint vertexArrayObject;
-    GLuint objectBuffers[3];
-#endif
 
 };
 } // nameSpace mj

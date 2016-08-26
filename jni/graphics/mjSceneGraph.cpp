@@ -2,6 +2,9 @@
 
 namespace mjEngine
 {
+
+
+
 void mjSceneGraph::Update(float t_elapsed)
 {
     // This is supposed to optimise drawing by culling objects that are visible. Perhaps also update the
@@ -10,13 +13,38 @@ void mjSceneGraph::Update(float t_elapsed)
 }
 void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
+    float modelMatrix[16];
+
     matrixStack.PopAll();
     Matrix4::SetIdentityM(matrixStack.current, 0);
 
-	unsigned numObjects = drawableObjects.size();
+    unsigned numObjects = drawableObjects.size();
 	for (unsigned i= 0 ; i < numObjects; i++)
 	{
-        drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
+        mjRenderer* renderer = NULL;
+
+        if (drawableObjects[i]->model->rendererIndex == -1)
+        {
+            drawableObjects[i]->model->rendererIndex =  renderers.size();
+
+            // Create a renderer for this model
+            renderer = new mjRenderer();
+
+            renderer->PrepareForModel(* drawableObjects[i]->model);
+
+            renderers.push_back(renderer);
+
+        } else
+        {
+            renderer = renderers[drawableObjects[i]->model->rendererIndex];
+        }
+
+        drawableObjects[i]->CopyModelMatrixTo(modelMatrix);
+
+                                //mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack)
+        renderer->RenderModel(* drawableObjects[i]->model, modelMatrix, lookAtMatrix, projectionMatrix, NULL, &matrixStack);
+
+        //drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
 	}
 
 
@@ -35,8 +63,12 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
 	}
 
 	for (unsigned i= 0 ; i < numObjects; i++)
-        translucentObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
-	}
+    {
+        //FIXME!!
+        //translucentObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
+    }
+
+}
 
 
 bool mjSceneGraph::SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1)

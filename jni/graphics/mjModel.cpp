@@ -10,11 +10,6 @@ mjModel::mjModel()
 	faceCount = -1;
 	status[0] = '\0';
 
-#ifdef OSX
-    // Generate the buffers needed for CORE profile compliance
-    glGenVertexArraysAPPLE(1, &vertexArrayObject);
-    glGenBuffers(3, objectBuffers);
-#endif
 
 
 }
@@ -29,7 +24,7 @@ void mjModel::LoadFromFile(const char* fileName)
 void mjModel::Load(tinyxml2::XMLDocument* doc)
 {
 
-
+   checkGlError("first line of model load");
 	// Doc needs to already have been parsed or loaded by this line
 
 	XMLElement* mesh = doc->FirstChildElement();
@@ -41,9 +36,9 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 
 	int posIn3Array = 0;
 	int posIn2Array = 0;
-	vertexBuffer = new float[3*numVertices];
-	normalComponentBuffer = new float[3*numVertices];
-	texCoordBuffer = new float[2*numVertices];
+    vertexBufferData = new float[3*numVertices];
+    normalComponentBufferData = new float[3*numVertices];
+    texCoordBufferData = new float[2*numVertices];
 
 	XMLElement* vertexbuffer = sharedGeometry->FirstChildElement("vertexbuffer");
 
@@ -56,34 +51,34 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
         // Read the vertices' components
 		XMLElement* vertexData;
 		vertexData = vertex->FirstChildElement("position");
-		vertexData->QueryFloatAttribute("x", &vertexBuffer[posIn3Array]);
-		vertexData->QueryFloatAttribute("y", &vertexBuffer[posIn3Array+1]);
-		vertexData->QueryFloatAttribute("z", &vertexBuffer[posIn3Array+2]);
+        vertexData->QueryFloatAttribute("x", &vertexBufferData[posIn3Array]);
+        vertexData->QueryFloatAttribute("y", &vertexBufferData[posIn3Array+1]);
+        vertexData->QueryFloatAttribute("z", &vertexBufferData[posIn3Array+2]);
 
         // Determine bounds of object
 		for (unsigned l = 0; l < 3; l++)
 		{
-            if (vertexBuffer[posIn3Array + l] < bounds[0 + l])
+            if (vertexBufferData[posIn3Array + l] < bounds[0 + l])
             {
-                bounds[0 + l] = vertexBuffer[posIn3Array + l];
+                bounds[0 + l] = vertexBufferData[posIn3Array + l];
             }
 
-            if (vertexBuffer[posIn3Array + l] > bounds[3 + l])
+            if (vertexBufferData[posIn3Array + l] > bounds[3 + l])
             {
-                bounds[3 + l] = vertexBuffer[posIn3Array + l];
+                bounds[3 + l] = vertexBufferData[posIn3Array + l];
             }
 		}
 
         // Read normal components
 		vertexData = vertex->FirstChildElement("normal");
-		vertexData->QueryFloatAttribute("x", &normalComponentBuffer[posIn3Array]);
-		vertexData->QueryFloatAttribute("y", &normalComponentBuffer[posIn3Array+1]);
-		vertexData->QueryFloatAttribute("z", &normalComponentBuffer[posIn3Array+2]);
+        vertexData->QueryFloatAttribute("x", &normalComponentBufferData[posIn3Array]);
+        vertexData->QueryFloatAttribute("y", &normalComponentBufferData[posIn3Array+1]);
+        vertexData->QueryFloatAttribute("z", &normalComponentBufferData[posIn3Array+2]);
 
         // Read texture coordinates
 		vertexData = vertex->FirstChildElement("texcoord");
-		vertexData->QueryFloatAttribute("u", &texCoordBuffer[posIn2Array]);
-		vertexData->QueryFloatAttribute("v", &texCoordBuffer[posIn2Array+1]);
+        vertexData->QueryFloatAttribute("u", &texCoordBufferData[posIn2Array]);
+        vertexData->QueryFloatAttribute("v", &texCoordBufferData[posIn2Array+1]);
 
 
 		posIn3Array += 3;
@@ -92,18 +87,8 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 	}
 
 
-#ifdef OSX
-    glBindVertexArrayAPPLE(vertexArrayObject);
 
-    glBindBuffer(GL_ARRAY_BUFFER, objectBuffers[0]);
-    glBufferData(GL_ARRAY_BUFFER, numVertices*sizeof(GLfloat)*3, vertexBuffer, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ARRAY_BUFFER, objectBuffers[1]);
-    glBufferData(GL_ARRAY_BUFFER, numVertices*sizeof(GLfloat)*3, normalComponentBuffer, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ARRAY_BUFFER, objectBuffers[2]);
-    glBufferData(GL_ARRAY_BUFFER, numVertices*sizeof(GLfloat)*2, texCoordBuffer, GL_STATIC_DRAW);
-#endif
 
 
     /* debug stuff
@@ -122,6 +107,7 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 	while(submesh)
 	{
 		mjModelMesh* modelMesh = new mjModelMesh();
+
 
 		const char* shader = submesh->Attribute("shader");
 		if (shader != NULL)
@@ -170,6 +156,16 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 			numFacesParsed++;
 			face = face->NextSiblingElement("face");
 		}
+
+        checkGlError("load");
+        // if using core profile
+        checkGlError("load: VAO");
+
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, modelMesh->elementBufferID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, modelMesh->drawOrderCount*sizeof(unsigned short), modelMesh->drawOrderBuffer, GL_STATIC_DRAW);
+
+
 		modelMesh->meshNumber = currentMesh;
 		meshes.push_back(modelMesh);
 		currentMesh++;
@@ -293,7 +289,7 @@ mjModelPose* mjModel::CreateSimplePose()
 #if defined(USE_GLES2) || defined(USE_GL3)
 // Drawing routine for OpenGL ES 2.0 & OpenGL 3
 
-void mjModel::Draw(std::vector<mjShader*>& shaderList,
+void mjModel::DrawDEPRECATED(std::vector<mjShader*>& shaderList,
         float* modelMatrix, float* lookAtMatrix, float* modelViewMatrix, float* projectionMatrix, float* modelViewProjectionMatrix, mjModelPose* pose, mjMatrixStack* stack)
 {
     float poseMatrix[16];
@@ -310,12 +306,15 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
     if (0)//structure)
     {
+
         mStack.PopAll();
         Matrix4::SetIdentityM(mStack.current, 0);
         int debugVar = structure->nodes.size();
         printf("dbvar: %d\n", debugVar);
     	for (unsigned i = 0; i < structure->nodes.size(); i++)
     	{
+
+
 
             std::string debugVar = structure->nodes[i]->meshName;
             printf("dbvar: %s\n", debugVar.c_str());
@@ -338,6 +337,8 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 
     		// Get the particular mesh we're operating on in this node of the structure
             unsigned meshNum = structure->nodes[i]->meshIndex;
+
+
 
 
     		mjVector3 positions;
@@ -365,7 +366,7 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
 					modelViewMatrix, 0);
 
     		shaderList[meshes[i]->mjShaderListIndex]->Run(meshes[i],
-    				vertexBuffer, texCoordBuffer, normalComponentBuffer,
+                    vertexBufferData, texCoordBufferData, normalComponentBufferData,
                     modelMatrix, modelViewProjectionMatrix, meshes[i]->glTexture);
 
     		/*
@@ -429,11 +430,10 @@ void mjModel::Draw(std::vector<mjShader*>& shaderList,
     				projectionMatrix, 0,
 					modelViewMatrix, 0);
 
-    		shaderList[meshes[i]->mjShaderListIndex]->Run(meshes[i],
-    				vertexBuffer, texCoordBuffer, normalComponentBuffer,
-                    modelMatrix, modelViewProjectionMatrix, meshes[i]->glTexture);
 
-    		glDrawElements(GL_TRIANGLES, meshes[i]->drawOrderCount, GL_UNSIGNED_SHORT, meshes[i]->drawOrderBuffer);
+
+
+
     	}
 
     }

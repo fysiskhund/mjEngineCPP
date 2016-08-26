@@ -24,16 +24,28 @@
 
 namespace mjEngine
 {
+    typedef enum {
+        MJ_VERTEX_COORDINATES_GLVERTEXATTRIB_ID = 0,
+        MJ_NORMAL_COORDINATES_GLVERTEXATTRIB_ID,
+        MJ_COLOR_GLVERTEXATTRIB_ID,
+        MJ_UV_COMPONENTS_GLVERTEXATTRIB_ID,
+        MJ_UV_COMPONENTS_SECONDARY_TEXTURE_GLVERTEXATTRIB_ID
+    
+    
+    } MJVERTEX_ATTRIB; // Coincide with iOS GLKVertexAttrib constants
+
 
 class mjShader{
 public:
-	GLuint glProgramHandle;
-	GLuint glVertexShaderHandle;
-	GLuint glFragmentShaderHandle;
-	char* name;
+    GLuint glProgramHandle;
+    GLuint glVertexShaderHandle;
+    GLuint glFragmentShaderHandle;
+    char* name;
 
-	virtual void Run(mjModelMesh* modelMesh,
-			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
+    virtual void BindAttributeLocations();
+
+    virtual void Run(mjModelMesh* modelMesh,
+            float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
             float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)= 0; // Gets called in order to draw something
 
 #ifdef USE_ASSIMP

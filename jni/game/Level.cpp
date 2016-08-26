@@ -14,7 +14,7 @@ Level::Level(mjResourceManager* resourceManager)
 
 void Level::LoadFromFile(const char* fileName)
 {
-
+    checkGlError("LoadFromFile start");
 
 	doc.LoadFile(fileName);
 	Load(&doc);

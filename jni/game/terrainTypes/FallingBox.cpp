@@ -4,6 +4,7 @@ FallingBox::FallingBox(mjResourceManager* resourceManager)
 :Box(resourceManager)
 {
     useModelFromXMLDetails = true;
+    checkGlError("useModelFromXML");
 
     gravity.Set(0, -9.81, 0);
 

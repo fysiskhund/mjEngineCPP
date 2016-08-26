@@ -82,13 +82,15 @@ public:
 	virtual ~mjObject();
     void SetID(const char* id);
     virtual void SetDetailsFromXML(XMLElement* entity);
-    virtual void Draw(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix, mjMatrixStack* matrixStack);
+    virtual void DrawDEPRECATED(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix, mjMatrixStack* matrixStack);
 	virtual void ProcessPhysicsEffects(float t_elapsed);
 	virtual void ProcessCollisionEffects();
 	virtual void Update(float t_elapsed);
 	virtual void UpdatePosition(float t_elapsed);
-	virtual void TieShaders(std::vector<mjShader*>& shaderList);
+    virtual void TieShadersDEPRECATED(std::vector<mjShader*>& shaderList);
 
+
+    void CopyModelMatrixTo(float* modelMatrixOut);
 
     void MatchScaleToAABB();
     void MatchAABBToModel();

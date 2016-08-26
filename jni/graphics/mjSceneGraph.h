@@ -3,11 +3,12 @@
 
 #include <vector>
 #include <algorithm>    // std::sort
-#include "../core/mjObject.h"
-#include "../graphics/mjShader.h"
-#include "../graphics/mjCamera.h"
-#include "../extLibs/math/mjMatrixStack.h"
-#include "../extLibs/math/Matrix.h"
+#include <core/mjObject.h>
+#include <graphics/mjShader.h>
+#include <graphics/mjCamera.h>
+#include <extLibs/math/mjMatrixStack.h>
+#include <extLibs/math/Matrix.h>
+#include <graphics/mjRenderer.h>
 
 namespace mjEngine
 {
@@ -16,7 +17,7 @@ class mjSceneGraph
 {
 public:
     bool sortTranslucentObjects = true;
-	std::vector<mjObject*> drawableObjects;
+    std::vector<mjObject*> drawableObjects;
 	std::vector<mjObject*> translucentObjects;
 	std::vector<mjObject*> shadowCasters;
 
@@ -27,6 +28,8 @@ public:
 private:
     static bool SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1);
 
+
+    std::vector<mjRenderer*> renderers;
 };
 
 }

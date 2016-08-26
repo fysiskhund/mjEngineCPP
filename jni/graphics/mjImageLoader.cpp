@@ -1,6 +1,14 @@
 #include "mjImageLoader.h"
 
 
+#ifdef IOS
+
+#import <Foundation/Foundation.h>
+#import <Foundation/NSString.h>
+#import <UIKit/UIKit.h>
+
+#endif 
+
 namespace mjEngine{
 
 mjImageLoader::mjImageLoader()
@@ -23,10 +31,58 @@ bool mjImageLoader::Load(const char* name)
 
 	hasAlpha = SDL_ISPIXELFORMAT_ALPHA(imageSurface->format->format);
 
+#ifdef OSX
+    //FIXME! Check that in the future SDL is still inverting R and B
+    int stride = 3;
+    if (hasAlpha)
+    {
+        stride = 4;
+    }
+
+    for (uint i = 0; i < (width*height*stride); i += stride)
+    {
+        // Swap R and B channels
+        GLubyte realRColor = imageData[i+2];
+        imageData[i+2] = imageData[i];
+        imageData[i] = realRColor;
+    }
+
+#endif
+
 	return 1;
 }
 
-#else
+#endif
+#ifdef IOS
+    
+    //
+    // Many thanks to Martin Ingvar Kofoed Jensen for his method:
+    // http://stackoverflow.com/questions/3387132/how-to-load-and-display-image-in-opengl-es-for-iphone
+    //
+    //
+    
+    bool mjImageLoader::Load(const char* name)
+    {
+        UIImage* imageX;
+        NSString* iosPath = [NSString stringWithUTF8String:name];
+        
+        imageX = [UIImage imageWithContentsOfFile:iosPath];
+        
+        width = imageX.size.width;
+        height = imageX.size.height;
+        
+        imageData = new GLubyte[4*width*height];
+        
+        CGContextRef imageContext = CGBitmapContextCreate(imageData, imageX.size.width, imageX.size.height, 8, imageX.size.width * 4, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaPremultipliedLast);
+        
+        CGContextDrawImage(imageContext, CGRectMake(0.0, 0.0, imageX.size.width, imageX.size.height), imageX.CGImage);
+        CGContextRelease(imageContext);
+        
+        hasAlpha = true;
+        
+        return true;
+    }
+#elif USE_LIBPNG
 
 bool mjImageLoader::Load(const char* name)
 {
@@ -166,13 +222,17 @@ bool mjImageLoader::Load(const char* name)
 	    return true;
 }
 
-#endif // SDL definition
+#endif // LIBPNG definition
 
 GLuint mjImageLoader::SendToGL(GLfloat textureWrapParam)
 {
 	GLuint textures[1];
+    checkGlError("start of sendToGL");
 	glGenTextures(1, &textures[0]);
-	glBindTexture(GL_TEXTURE_2D, textures[0]);
+    checkGlError("glGenTextures");
+    glBindTexture(GL_TEXTURE_2D, textures[0]);
+
+
 
 	// Set parameters
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -180,7 +240,11 @@ GLuint mjImageLoader::SendToGL(GLfloat textureWrapParam)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, textureWrapParam);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, textureWrapParam);
 	//LOGI("Texture hasAlpha: %d", hasAlpha);
+
 	glTexImage2D(GL_TEXTURE_2D, 0, hasAlpha? GL_RGBA : GL_RGB, width, height, 0, hasAlpha? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, imageData);//testImage.pixel_data);
+
+    checkGlError("glTexImage2D");
+
 	return textures[0];
 }
 GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName, GLfloat textureWrapParam)

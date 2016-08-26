@@ -10,7 +10,7 @@
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 #endif
-#ifdef DESKTOP_SDL
+#if defined(DESKTOP_SDL) || defined(IOS)
 
 #define LOGI(...) printf(__VA_ARGS__); printf("\n");
 

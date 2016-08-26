@@ -19,6 +19,8 @@
 #include <time.h>
 #include <vector>
 
+
+
 #include <core/mjObject.h>
 #include <core/mjScene.h>
 #include <graphics/mjModel.h>
@@ -45,6 +47,7 @@
 #include "EntityCreator.h"
 
 using namespace mjEngine;
+
 
 
 class PlatformUniverseScene : public mjScene
@@ -75,7 +78,7 @@ class PlatformUniverseScene : public mjScene
 
         EntityCreator* entityCreator;
 
-        Ambient ambient;
+        //Ambient ambient;
 
         PlatformUniverseScene(mjResourceManager* resourceManager);
         void Initialise(int width, int height);
@@ -87,6 +90,36 @@ class PlatformUniverseScene : public mjScene
 
         mjMusicPlayer musicPlayer;
         std::string levelFilename;
+
+
+        // From tutorial
+        void DEBUGInit();
+        void DEBUGDraw();
+        GLuint programID;
+        GLuint MatrixID;
+        GLuint ViewMatrixID;
+        GLuint ModelMatrixID;
+        GLuint Texture;
+        GLuint TextureID;
+
+
+        GLuint vertexbuffer;
+    GLuint uvbuffer;
+    GLuint normalbuffer;
+        GLuint elementbuffer;
+
+        GLuint LightID;
+
+
+    GLuint uDiffuseLightDirectionHandle;
+    GLuint uDiffuseLightColorHandle;
+    GLuint uAmbientLightColorHandle;
+
+
+    mjModel* DEBUGvasilisa;
+    mjRenderer* debugRenderer;
+    mjObject* debugVasiObject;
+
 
         //mjAssimpModel* assimpModel;
 

@@ -1,4 +1,13 @@
 #include "mjResourceManager.h"
+
+#ifdef IOS
+
+// Note: in XCode this file is marked as Objective-C++ source to enable [NSStuff functionsAndEtc];
+#import <Foundation/Foundation.h>
+#import <Foundation/NSString.h>
+#endif
+
+
 namespace mjEngine{
 
 mjResourceManager::mjResourceManager(std::string& pathPrefix)
@@ -25,7 +34,8 @@ mjModel* mjResourceManager::FetchModel(const char* path)
 
 mjModel* mjResourceManager::FetchModel(std::string& path)
 {
-    std::string fullPath = pathPrefix + separator + path;
+    std::string fullPath = path;
+    PrependFullFilePath(fullPath);
 
     mjResource* res = SearchByPath(models, fullPath);
     if (res != NULL)
@@ -57,7 +67,8 @@ GLuint mjResourceManager::FetchTexture(const char* path, unsigned glTextureWrapP
 
 GLuint mjResourceManager::FetchTexture(std::string& path, unsigned glTextureWrapParameter)
 {
-    std::string fullPath = pathPrefix + separator + path;
+    std::string fullPath = path;
+    PrependFullFilePath(fullPath);
 
     mjResource* res = SearchByPath(textures, fullPath, glTextureWrapParameter);
     if (res != NULL)
@@ -87,7 +98,8 @@ mjModelStructure* mjResourceManager::FetchModelStructure(const char* path)
 
 mjModelStructure* mjResourceManager::FetchModelStructure(std::string& path)
 {
-    std::string fullPath = pathPrefix + separator + path;
+    std::string fullPath = path;
+    PrependFullFilePath(fullPath);
 
     mjResource* res = SearchByPath(modelStructures, fullPath);
     if (res != NULL)
@@ -114,7 +126,8 @@ mjSoundResource* mjResourceManager::FetchSound(const char* path)
 
 mjSoundResource* mjResourceManager::FetchSound(std::string& path)
 {
-    std::string fullPath = pathPrefix + separator + path;
+    std::string fullPath = path;
+    PrependFullFilePath(fullPath);
 
     mjResource* res = SearchByPath(soundResources, fullPath);
     if (res != NULL)
@@ -153,11 +166,37 @@ mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std:
     return NULL;
 }
 
+#ifndef IOS
 void mjResourceManager::PrependFullFilePath(std::string& filePath)
 {
     filePath = pathPrefix + separator + filePath;
     std::replace(filePath.begin(), filePath.end(), '/', separator);
 }
+#else
+    void mjResourceManager::PrependFullFilePath(std::string& filePath)
+    {
+        filePath = pathPrefix + separator + filePath;
+        
+        std::replace(filePath.begin(), filePath.end(), '/', separator);
+        
+        NSString* resourcePath = [NSString stringWithUTF8String:filePath.c_str()];
+        
+        NSString* found = [[NSBundle mainBundle] pathForResource:resourcePath ofType:nil];
+        
+        if (found == nil)
+        {
+            std::string notFound = "Error: file [" + filePath + "] not found!";
+            LOGI("%s", notFound.c_str());
+            filePath = notFound;
+        } else
+        {
+        
+            filePath = [found UTF8String];
+        }
+        
+    }
+    
+#endif
 
 
 

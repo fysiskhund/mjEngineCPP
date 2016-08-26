@@ -1,12 +1,8 @@
 
 
 const char* mjSkyboxShaders::skyboxVertexShaderCode =
-#ifdef OSX
-// "I'm different!!!!!!!!!!!!!!!!!!!!!111 LOOK AT ME!!! OMG!!" ¬¬
-		"#version 150 \n"
-#else
-		"#version 130 \n"
-#endif
+        "#version 330 core \n"
+
 
 		"in vec4 vPosition;\n"
 		"in vec2 aTexCoordinates;\n"
@@ -19,12 +15,8 @@ const char* mjSkyboxShaders::skyboxVertexShaderCode =
 	    "}\n";
 
 const char* mjSkyboxShaders::skyboxFragmentShaderCode =
-#ifdef OSX
-// "I'm different!!!!!!!!!!!!!!!!!!!!!111 LOOK AT ME!!! OMG!!" ¬¬
-		"#version 150 \n"
-#else
-		"#version 130 \n"
-#endif
+
+        "#version 330 core \n"
 		//"precision mediump float;\n" does this exist in GL3?
 		"in vec2 vTexCoordinates;\n"
 		"uniform sampler2D uTexture;\n"

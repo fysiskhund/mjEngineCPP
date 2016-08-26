@@ -17,10 +17,13 @@ win32: DEFINES += WIN32
 win32: DEFINES -= UNICODE
 unix: DEFINES += GNULINUX
 
+mac: DEFINES += OSX
+mac: INCLUDEPATH += $$PWD/../../OSXIncludes
+mac: QMAKE_LFLAGS += -F/Library/Frameworks
+mac: LIBS += -framework SDL2 -framework SDL2_mixer -framework SDL2_image -framework OpenGL
 # Engine sources
 
 HEADERS += \
-    ../keyboardcontrol.h \
     ai/mjAutomaton.h \
     ai/mjAutomatonState.h \
     audio/mjMusicPlayer.h \
@@ -76,7 +79,9 @@ HEADERS += \
     util/mjResourceManager.h \
     util/mjSoundResource.h \
     util/mjTextureResource.h \
-    graphics/mjAssimpModel.h
+    graphics/mjAssimpModel.h \
+    graphics/mjRenderer.h \
+    game/GraphicsDebugUniverseScene.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -93,8 +98,6 @@ SOURCES += \
     extLibs/util/mjMultiPlatform.cpp \
     extLibs/util/mjXMLHelper.cpp \
     extLibs/math/Matrix.cpp \
-    gnuLinux/keyboardcontrol.cpp \
-    gnuLinux/main.cpp \
     graphics/animation/mjAnimation.cpp \
     graphics/animation/mjAnimationKeyframe.cpp \
     graphics/animation/mjAnimationSegment.cpp \
@@ -128,38 +131,21 @@ SOURCES += \
     util/mjResourceManager.cpp \
     util/mjSoundResource.cpp \
     util/mjTextureResource.cpp \
-    graphics/mjAssimpModel.cpp
+    graphics/mjAssimpModel.cpp \
+    graphics/mjRenderer.cpp \
+    game/GraphicsDebugUniverseScene.cpp
 
 
 # game sources
 
 HEADERS += \
-    ../keyboardcontrol.h \
-    ai/mjAutomaton.h \
-    ai/mjAutomatonState.h \
-    audio/mjMusicPlayer.h \
-    audio/mjSoundSource.h \
-    core/mjInput.h \
-    core/mjObject.h \
-    core/mjScene.h \
-    core/mjSceneManager.h \
-    core/mjVector3.h \
-    extLibs/logger/mjLog.h \
-    extLibs/math/mjMathHelper.h \
-    extLibs/math/mjMatrixStack.h \
-    extLibs/tinyxml/tinyxml2.h \
-    extLibs/util/mjMultiPlatform.h \
-    extLibs/util/mjMultiPlatformAudio.h \
-    extLibs/util/mjXMLHelper.h \
+    gnuLinux/keyboardcontrol.h \
     game/Ambient.h \
     game/EntityCreator.h \
     game/gl_code.h \
     game/Level.h \
     game/PlatformUniverseScene.h \
     game/TerrainCreator.h \
-    etc/testImage.h \
-    extLibs/math/MathConstants.h \
-    extLibs/math/Matrix.h \
     game/ambient/DustDevil.h \
     game/entities/batMatonStates/AttackBatMatonState.h \
     game/entities/batMatonStates/DetectBatMatonState.h \
@@ -179,42 +165,6 @@ HEADERS += \
     game/windStates/DustDevilState.h \
     game/windStates/SteadyDirectionState.h \
     game/windStates/WindState.h \
-    graphics/animation/mjAnimation.h \
-    graphics/animation/mjAnimationKeyframe.h \
-    graphics/animation/mjAnimationSegment.h \
-    graphics/animation/mjAnimator.h \
-    graphics/animation/mjModelAnimation.h \
-    graphics/animation/mjModelPose.h \
-    graphics/animation/mjModelStructure.h \
-    graphics/animation/mjModelStructureNode.h \
-    graphics/gl3/defaultShaderSources-gl3.h \
-    graphics/gl3/skyboxShaderSources-gl3.h \
-    graphics/mj3rdPersonCamera.h \
-    graphics/mjCamera.h \
-    graphics/mjDefaultShaders.h \
-    graphics/mjImageLoader.h \
-    graphics/mjModel.h \
-    graphics/mjModelMesh.h \
-    graphics/mjSceneGraph.h \
-    graphics/mjShader.h \
-    graphics/mjSkybox.h \
-    graphics/mjSkyboxLevelData.h \
-    graphics/mjSkyboxShaders.h \
-    physics/mjAABB.h \
-    physics/mjBoundingStructure.h \
-    physics/mjCollisionResult.h \
-    physics/mjCollisionStructure.h \
-    physics/mjCollisionTests.h \
-    physics/mjPhysics.h \
-    physics/mjPhysicsEffect.h \
-    physics/mjSphere.h \
-    util/mjModelResource.h \
-    util/mjModelStructureResource.h \
-    util/mjRenderedText.h \
-    util/mjResource.h \
-    util/mjResourceManager.h \
-    util/mjSoundResource.h \
-    util/mjTextureResource.h \
     game/entities/KosmoObject.h \
     game/ObjectTags.h \
     game/entities/FrogBoss.h \
@@ -222,8 +172,7 @@ HEADERS += \
     game/entities/frogBossAutomatonStates/FrogBossAutomatonSlamState.h \
     game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.h \
     game/terrainTypes/TriggerBox.h \
-    game/entities/Baobab.h \
-    graphics/mjAssimpModel.h
+    game/entities/Baobab.h
 
 SOURCES += \
     game/Ambient.cpp \
@@ -272,6 +221,6 @@ win32: LIBS += -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image -lglew32s -lop
 #linux: LIBS += -lSDL2 -lGL -lGLEW -lSDL2_image -lSDL2_mixer
 
 
-unix: CONFIG += link_pkgconfig
-unix: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer assimp #for GL3 rendering
+#unix: CONFIG += link_pkgconfig
+#unix: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer assimp #for GL3 rendering
 #unix: PKGCONFIG += sdl2 glesv2 libpng SDL2_image SDL2_mixer #for GLESv2 rendering
