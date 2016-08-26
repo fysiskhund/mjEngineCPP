@@ -221,6 +221,6 @@ win32: LIBS += -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image -lglew32s -lop
 #linux: LIBS += -lSDL2 -lGL -lGLEW -lSDL2_image -lSDL2_mixer
 
 
-#unix: CONFIG += link_pkgconfig
-#unix: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer assimp #for GL3 rendering
+linux: CONFIG += link_pkgconfig
+linux: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer assimp #for GL3 rendering
 #unix: PKGCONFIG += sdl2 glesv2 libpng SDL2_image SDL2_mixer #for GLESv2 rendering
