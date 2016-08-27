@@ -38,6 +38,7 @@ build-*/
 
 # *.user QTCreator file
 *.user
+*.user.*
 
 # *.DS_whatever random debris created by OSX
 *.DS_Store
