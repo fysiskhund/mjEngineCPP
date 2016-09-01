@@ -18,6 +18,7 @@
 #include <extLibs/math/mjMatrixStack.h>
 #include <extLibs/tinyxml/tinyxml2.h>
 #include <graphics/animation/mjModelStructure.h>
+#include <graphics/renderer/mjRendererData.h>
 
 
 namespace mjEngine{
@@ -42,6 +43,11 @@ public:
 	char status[1024];
 
 
+    int numVertices;
+
+    mjRendererData* rendererData = NULL;
+
+
 	std::vector<mjModelMesh*> meshes;
 
 	mjModel();
@@ -60,9 +66,6 @@ public:
     void TieStructureToMeshes();
     void TiePoseToStructure();
 
-    int numVertices;
-
-    int rendererIndex = -1;
 private:
 
 	int currentVertex;

@@ -9,16 +9,22 @@ mjSkyboxShaders::mjSkyboxShaders()
 	name = new char[7];
 	strncpy(name, "skybox", strnlen("skybox", 10)+1);
 
-	maPositionHandle = glGetAttribLocation(glProgramHandle, "vPosition");
+    checkGlError("create glProgram");
+
+    // Get the texture handle location
+    maTextureHandle = glGetUniformLocation(glProgramHandle, "uTexture");
+
+    maMVPMatrixHandle = glGetUniformLocation(glProgramHandle, "maMVPMatrix");
+    maMMatrixHandle = glGetUniformLocation(glProgramHandle, "maMMatrix");
 
 
+    checkGlError("getting parameters");
 
-	maTextureCoordHandle = glGetAttribLocation(glProgramHandle, "aTexCoordinates");
+    LOGI("textureHandle %d, mvpMAtrixHandle %d", maTextureHandle, maMVPMatrixHandle);
 
-	// Get the texture handle location
-	maTextureHandle = glGetUniformLocation(glProgramHandle, "uTexture");
+    enableDepthMask = false;
+    enableDepthTest = false;
 
-	maMVPMatrixHandle = glGetUniformLocation(glProgramHandle, "maMVPMatrix");
 }
 
 
@@ -27,24 +33,20 @@ void mjSkyboxShaders::Run(mjModelMesh* mesh,
             float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)
 {
 
-	glUseProgram(glProgramHandle);
-	glEnableVertexAttribArray(maPositionHandle);
-	glVertexAttribPointer(maPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, vertexBuffer);
-
-	glEnableVertexAttribArray(maTextureCoordHandle);
-	glVertexAttribPointer(maTextureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0, texCoordBuffer);
+    glUseProgram(glProgramHandle);
 
 
+    // Send the modelViewProjection Matrix
+    glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
+    // Send the modelViewProjection Matrix
+    glUniformMatrix4fv(maMMatrixHandle, 1, false, modelMatrix);
 
-	// Connect the texture
-	glActiveTexture(GL_TEXTURE0);
-	// Bind the texture handle
+    // Connect the texture
+    glActiveTexture(GL_TEXTURE0);
+    // Bind the texture handle
     glBindTexture(GL_TEXTURE_2D, glTexture);
-	// Set the sampler texture unit to 0
-	glUniform1i(maTextureHandle, 0);
-
-	// Send the modelViewProjection Matrix
-	glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
+    // Set the sampler texture unit to 0
+    glUniform1i(maTextureHandle, 0);
 
 
 

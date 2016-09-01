@@ -16,7 +16,7 @@ public:
 	char* material = NULL;
 	char* shaderName = NULL;
 	int meshNumber;
-	int mjShaderListIndex;
+    int mjShaderListIndex = -1;
 	unsigned short* drawOrderBuffer;
 	unsigned int drawOrderCount;
 
@@ -24,9 +24,13 @@ public:
     float* normalBuffer =  NULL;
     float* textureCoordsBuffer =  NULL;
 
-	int glTexture;
     
     GLuint elementBufferID;
+    int glTexture = -1;
+
+
+
+
 
 	mjModelMesh();
 

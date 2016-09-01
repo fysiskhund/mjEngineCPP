@@ -14,7 +14,8 @@
 #include <assimp/postprocess.h>
 #endif
 
-#include "mjModelMesh.h"
+#include <graphics/mjModelMesh.h>
+
 #include "../core/mjVector3.h"
 
 #include "../extLibs/util/mjMultiPlatform.h"
@@ -40,7 +41,12 @@ public:
     GLuint glProgramHandle;
     GLuint glVertexShaderHandle;
     GLuint glFragmentShaderHandle;
+
     char* name;
+
+    /* renderer toggles */
+    bool enableDepthTest = true;
+    bool enableDepthMask = true;
 
     virtual void BindAttributeLocations();
 

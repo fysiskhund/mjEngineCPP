@@ -16,6 +16,9 @@ PlatformUniverseScene::PlatformUniverseScene(mjResourceManager* resourceManager)
 
 void PlatformUniverseScene::Initialise(int width, int height)
 {
+
+    sceneGraph.renderer.Initialize(resourceManager);
+
     camera = new mj3rdPersonCamera();
     //InitShaders();
 
@@ -42,6 +45,12 @@ void PlatformUniverseScene::Initialise(int width, int height)
 
 
 
+
+    //FIXME!!
+    //LOGI("setupSkybox");
+    SetUpSkybox();
+    //skybox->TieShaders(shaderList);
+    sceneGraph.drawableObjects.push_back(skybox);
 
 
     level->LoadFromFile(levelFilename.c_str());
@@ -83,10 +92,6 @@ void PlatformUniverseScene::Initialise(int width, int height)
     Matrix4::FrustumM(projectionMatrix, 0,
             				   -ratio, ratio, -closeUpFactor, closeUpFactor, 0.5, 70);
 
-    //FIXME!!
-    //LOGI("setupSkybox");
-    //SetUpSkybox();
-    //skybox->TieShaders(shaderList);
 
 
     LOGI("Adding entities");
@@ -109,8 +114,9 @@ void PlatformUniverseScene::Initialise(int width, int height)
     //DEBUGInit();
 
     DEBUGvasilisa = resourceManager->FetchModel("bird.mesh.xml");
-    debugRenderer = new mjRenderer();
-    debugRenderer->PrepareForModel(*DEBUGvasilisa);
+    debugRenderer = new mjRendererGL();
+    debugRenderer->Initialize(resourceManager);
+    debugRenderer->PrepareModel(*DEBUGvasilisa);
     debugVasiObject = new mjObject();
 
 
@@ -125,12 +131,12 @@ void PlatformUniverseScene::Initialise(int width, int height)
 
 void PlatformUniverseScene::InitShaders()
 {
-	mjDefaultShaders* defaultShaders = new mjDefaultShaders();
+    /*mjDefaultShaders* defaultShaders = new mjDefaultShaders();
 	mjSkyboxShaders* skyboxShaders = new mjSkyboxShaders();
 
     checkGlError("initialising shaders");
 	shaderList.push_back(defaultShaders);
-	shaderList.push_back(skyboxShaders);
+    shaderList.push_back(skyboxShaders);*/
 }
 void PlatformUniverseScene::SetUpSkybox()
 {
@@ -159,7 +165,7 @@ void PlatformUniverseScene::SetUpSkybox()
 
 
 
-    //skybox->SetCameraPos(&camera->pos);
+    skybox->SetCameraPos(&camera->pos);
 
 	LOGI("after SetCamerapos");
 }
@@ -187,7 +193,7 @@ void PlatformUniverseScene::Update(float t_elapsed)
 		camera->Update(t_elapsed);
 
         //FIXME!!
-        //skybox->Update(t_elapsed);
+        skybox->Update(t_elapsed);
 		if (cameraAnglesModifier.GetNorm() > 0.2) {
 			camera->theta += -0.02*cameraAnglesModifier.y;
 			if (camera->theta > 6.283184)

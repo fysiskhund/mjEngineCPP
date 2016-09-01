@@ -3,8 +3,6 @@
 namespace mjEngine
 {
 
-
-
 void mjSceneGraph::Update(float t_elapsed)
 {
     // This is supposed to optimise drawing by culling objects that are visible. Perhaps also update the
@@ -21,28 +19,18 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
     unsigned numObjects = drawableObjects.size();
 	for (unsigned i= 0 ; i < numObjects; i++)
 	{
-        mjRenderer* renderer = NULL;
+        mjObject* drawableObj = drawableObjects[i];
 
-        if (drawableObjects[i]->model->rendererIndex == -1)
+        if (drawableObj->model->rendererData == NULL)
         {
-            drawableObjects[i]->model->rendererIndex =  renderers.size();
-
-            // Create a renderer for this model
-            renderer = new mjRenderer();
-
-            renderer->PrepareForModel(* drawableObjects[i]->model);
-
-            renderers.push_back(renderer);
-
-        } else
-        {
-            renderer = renderers[drawableObjects[i]->model->rendererIndex];
+            renderer.PrepareModel(* drawableObj->model);
         }
 
-        drawableObjects[i]->CopyModelMatrixTo(modelMatrix);
+        drawableObj->CopyModelMatrixTo(modelMatrix);
 
                                 //mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack)
-        renderer->RenderModel(* drawableObjects[i]->model, modelMatrix, lookAtMatrix, projectionMatrix, NULL, &matrixStack);
+        renderer.RenderModel(* drawableObj->model, modelMatrix, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
+                             drawableObj->customShaders, drawableObj->customTextures);
 
         //drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
 	}

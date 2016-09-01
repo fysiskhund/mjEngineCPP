@@ -34,7 +34,7 @@ public:
 	mjSkyboxLevelData backgroundData;
 
 private:
-	mjVector3* cameraPos;
+    mjVector3* cameraPos = NULL;
 	std::vector<mjSkyboxLevelData* > levels;
 	mjResourceManager* resourceManager;
 

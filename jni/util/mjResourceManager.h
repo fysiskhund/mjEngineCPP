@@ -14,6 +14,11 @@
 #include "mjTextureResource.h"
 #include "mjModelStructureResource.h"
 #include "mjSoundResource.h"
+#include "mjShaderResource.h"
+#include <graphics/mjShader.h>
+#include <graphics/mjDefaultShaders.h>
+#include <graphics/mjSkyboxShaders.h>
+
 
 
 
@@ -37,23 +42,33 @@ class mjResourceManager
         mjSoundResource* FetchSound(const char* path);
         mjSoundResource* FetchSound(std::string& path);
 
+        mjShaderResource* FetchShader(const char* name);
+        mjShaderResource* FetchShader(std::string& name);
+        mjShaderResource* PushShader(std::string& name, std::string& vertexShader, std::string& fragmentShader);
+        mjShaderResource* PushShader(std::string& name, mjShader* shader);
+
+
 
         void PrependFullFilePath(std::string& filePath);
 
 
+        std::vector<mjShader*> shaderList;
 
-
-    protected:
+protected:
         std::vector<mjResource*> models;
         std::vector<mjResource*> textures;
         std::vector<mjResource*> modelStructures;
         std::vector<mjResource*> soundResources;
+        std::vector<mjResource*> shaderResources;
+
 
         std::string pathPrefix;
 
         int soundIndexAndroid = 0;
 
         mjResource* SearchByPath(std::vector<mjResource*>& repo, std::string& path, int modifier=0);
+        mjResource* SearchByPathIgnoreExtension(std::vector<mjResource*>& repo, std::string& path, int modifier=0);
+
 
         char separator;
 

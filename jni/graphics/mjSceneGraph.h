@@ -8,7 +8,12 @@
 #include <graphics/mjCamera.h>
 #include <extLibs/math/mjMatrixStack.h>
 #include <extLibs/math/Matrix.h>
-#include <graphics/mjRenderer.h>
+#include <graphics/renderer/mjRenderer.h>
+
+#if defined(USE_GL3) || defined(USE_GLES2)
+#include <graphics/renderer/mjRendererGL.h>
+
+#endif
 
 namespace mjEngine
 {
@@ -16,6 +21,8 @@ namespace mjEngine
 class mjSceneGraph
 {
 public:
+
+
     bool sortTranslucentObjects = true;
     std::vector<mjObject*> drawableObjects;
 	std::vector<mjObject*> translucentObjects;
@@ -25,11 +32,18 @@ public:
 
 	void Update(float t_elapsed);
 	void Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
+
+#if defined(USE_GL3) || defined(USE_GLES2)
+    mjRendererGL renderer;
+#else
+    mjRenderer renderer;
+#endif
+
 private:
     static bool SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1);
 
 
-    std::vector<mjRenderer*> renderers;
+
 };
 
 }

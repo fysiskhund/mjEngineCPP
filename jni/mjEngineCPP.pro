@@ -80,8 +80,12 @@ HEADERS += \
     util/mjSoundResource.h \
     util/mjTextureResource.h \
     graphics/mjAssimpModel.h \
-    graphics/mjRenderer.h \
-    game/GraphicsDebugUniverseScene.h
+    game/GraphicsDebugUniverseScene.h \
+    graphics/renderer/mjRenderer.h \
+    graphics/renderer/mjRendererData.h \
+    graphics/renderer/mjRendererDataGL.h \
+    graphics/renderer/mjRendererGL.h \
+    util/mjShaderResource.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -132,8 +136,12 @@ SOURCES += \
     util/mjSoundResource.cpp \
     util/mjTextureResource.cpp \
     graphics/mjAssimpModel.cpp \
-    graphics/mjRenderer.cpp \
-    game/GraphicsDebugUniverseScene.cpp
+    game/GraphicsDebugUniverseScene.cpp \
+    graphics/renderer/mjRenderer.cpp \
+    graphics/renderer/mjRendererData.cpp \
+    graphics/renderer/mjRendererDataGL.cpp \
+    graphics/renderer/mjRendererGL.cpp \
+    util/mjShaderResource.cpp
 
 
 # game sources

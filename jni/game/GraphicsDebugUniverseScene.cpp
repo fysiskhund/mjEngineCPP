@@ -32,9 +32,9 @@ void GraphicsDebugUniverseScene::Initialize(int width, int height)
 
     DEBUGvasilisa = resourceManager->FetchModel("bird.mesh.xml");
     checkGlError("fetch Model");
-    debugRenderer = new mjRenderer();
+    debugRenderer = new mjRendererGL();
     checkGlError("createRenderer");
-    debugRenderer->PrepareForModel(*DEBUGvasilisa);
+    debugRenderer->PrepareModel(*DEBUGvasilisa);
     debugVasiObject = new mjObject();
 
 
@@ -72,7 +72,8 @@ void GraphicsDebugUniverseScene::Draw()
 
     debugVasiObject->CopyModelMatrixTo(modelMatrix);
 
-    debugRenderer->RenderModel(*DEBUGvasilisa, modelMatrix, lookAtMatrix, projectionMatrix, NULL, NULL);
+    debugRenderer->RenderModel(*DEBUGvasilisa, modelMatrix, lookAtMatrix, projectionMatrix, NULL, NULL,
+                               debugVasiObject->customShaders, debugVasiObject->customTextures);
 
 }
 

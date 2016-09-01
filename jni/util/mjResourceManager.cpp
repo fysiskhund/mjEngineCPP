@@ -20,6 +20,12 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix)
     #endif // WIN32
 
     std::replace(this->pathPrefix.begin(), this->pathPrefix.end(), '/', separator);
+
+    std::string shaderName = "default";
+    PushShader(shaderName, new mjDefaultShaders());
+
+    shaderName = "skybox";
+    PushShader(shaderName, new mjSkyboxShaders());
 }
 
 mjResourceManager::~mjResourceManager()
@@ -148,6 +154,76 @@ mjSoundResource* mjResourceManager::FetchSound(std::string& path)
     return newResource;
 }
 
+mjShaderResource* mjResourceManager::FetchShader(const char* name)
+{
+    std::string pathStr;
+    if (name == NULL)
+    {
+        pathStr = "";
+    } else
+    {
+        pathStr = name;
+    }
+    return FetchShader(pathStr);
+}
+
+mjShaderResource* mjResourceManager::FetchShader(std::string& name)
+{
+    if (name.empty())
+    {
+        name = "default";
+    }
+    std::string fullPath = name;
+    // PrependFullFilePath(fullPath); // For now the shaders need to be loaded already.
+    // At some point there will be the possibility to load them from text files.
+
+    mjResource* res = SearchByPathIgnoreExtension(shaderResources, fullPath);
+    if (res != NULL)
+    {
+        return ((mjShaderResource*) res);
+    }
+
+    // Load the shader sources
+
+    // FIXME!! to be implemented actual file loading. And how this should work with shaders "pushed".
+    // And do it in a way that is not problematic for (im)possible Vulkan/Metal integration in the future
+}
+
+/*mjShaderResource* mjResourceManager::PushShader(std::string& name, std::string& vertexShader, std::string& fragmentShader)
+{
+
+    mjShaderResource* result = (mjShaderResource*) SearchByPathIgnoreExtension(shaderResources, name);
+
+    if (result == NULL)
+    {
+
+        mjShader* shader = new mjShader();
+        shader->CreateProgram(vertexShader.c_str(), fragmentShader.c_str());
+        result = PushShader(name, shader);
+    }
+
+    return result;
+}*/
+
+mjShaderResource* mjResourceManager::PushShader(std::string& name, mjShader* shader)
+{
+    mjShaderResource* result = (mjShaderResource*) SearchByPathIgnoreExtension(shaderResources, name);
+
+    if (result == NULL)
+    {
+        result = new mjShaderResource;
+        result->path = name;
+        result->shader = shader;
+        result->shaderListIndex = shaderList.size();
+
+        shaderList.push_back(shader);
+        shaderResources.push_back(result);
+
+    }
+
+    return result;
+}
+
 
 
 
@@ -166,12 +242,42 @@ mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std:
     return NULL;
 }
 
+mjResource* mjResourceManager::SearchByPathIgnoreExtension(std::vector<mjResource*>& repo, std::string& fullPath, int modifier)
+{
+
+    std::string pathWithoutExtension;
+
+    int lastDotLocation = fullPath.find_last_of('.');
+
+    if (lastDotLocation != std::string::npos)
+    {
+        pathWithoutExtension = fullPath.substr(0, lastDotLocation-1);
+    } else
+    {
+        pathWithoutExtension = fullPath;
+    }
+
+
+    for(unsigned i = 0; i < repo.size(); i++)
+    {
+        mjResource* res = repo[i];
+        if (res->path == pathWithoutExtension && modifier == res->modifier)
+        {
+            return res;
+        }
+    }
+
+    return NULL;
+}
+
 #ifndef IOS
+
 void mjResourceManager::PrependFullFilePath(std::string& filePath)
 {
     filePath = pathPrefix + separator + filePath;
     std::replace(filePath.begin(), filePath.end(), '/', separator);
 }
+
 #else
     void mjResourceManager::PrependFullFilePath(std::string& filePath)
     {

@@ -21,6 +21,7 @@ void mjSkybox::SetModels(mjModel* boxModel, mjModel* planeModel)
 {
 	this->boxModel = boxModel;
 	this->planeModel = planeModel;
+    this->model = boxModel;
 }
 
 void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
@@ -40,6 +41,7 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 		char* name = boxModel->meshes[i]->name;
 
 
+
 		//LOGI("name: %s", name);
 		//Find the last "_", use it as suffix marker.
 		for (unsigned j = 0; j < strnlen(name, 1024)-1; j++)
@@ -56,6 +58,10 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 		snprintf(pathName, 1024, "%s%s%s", prefix, suffix, extension);
 
 		boxModel->meshes[i]->glTexture =  resourceManager->FetchTexture(pathName, GL_CLAMP_TO_EDGE);//imgLoader.LoadToGLAndFreeMemory(pathName, GL_CLAMP_TO_EDGE);
+        char* shaderName = new char[7];
+        snprintf(shaderName, 7, "%s", "skybox");
+        boxModel->meshes[i]->shaderName = shaderName;
+
 		//LOGI("loading %s -> texture%d", pathName, boxModel->meshes[i]->glTexture);
 	}
 

@@ -29,16 +29,14 @@ public:
 	static const char* skyboxFragmentShaderCode;
 
 
-
-	mjVector3 diffuseLightDirection;
-	float diffuseLightColor[4];
-	float ambientLightColor[4];
-
 	// Handles
-	GLuint maPositionHandle;
-	GLuint maTextureCoordHandle;
-	GLuint maTextureHandle;
-	GLuint maMVPMatrixHandle;
+    GLint maPositionHandle;
+    GLint maNormalHandle;
+    GLint maTextureCoordHandle;
+    GLint maTextureHandle;
+    GLint maMVPMatrixHandle;
+    GLint maMMatrixHandle;
+
 	GLuint boxTextures[6];
 	//GLuint maMVMatrixHandle;
 

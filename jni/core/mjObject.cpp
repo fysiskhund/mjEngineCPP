@@ -77,7 +77,10 @@ void mjObject::SetDetailsFromXML(XMLElement* entity)
 
             for (unsigned i = 0; i<model->meshes.size(); i++)
             {
+                mjShaderResource* shaderRes = resourceManager->FetchShader(model->meshes[i]->shaderName);
+                model->meshes[i]->mjShaderListIndex = shaderRes->shaderListIndex;
                 model->meshes[i]->glTexture = glTexture;
+
             }
         }
     }

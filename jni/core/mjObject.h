@@ -18,6 +18,7 @@
 #include "../extLibs/math/mjMatrixStack.h"
 #include "../util/mjResourceManager.h"
 #include "../graphics/mjModel.h"
+#include "../graphics/mjShader.h"
 #include "../graphics/animation/mjModelPose.h"
 #include "../graphics/animation/mjModelAnimation.h"
 #include "../physics/mjBoundingStructure.h"
@@ -58,6 +59,9 @@ public:
 
     char* modelName = NULL;
 	mjModel* model;
+    std::vector<mjShader*>* customShaders = NULL;
+    std::vector<int>* customTextures = NULL;
+
 	int animationState = 0;
 	mjModelAnimation* animation = NULL;
 	mjModelPose* pose = NULL;
