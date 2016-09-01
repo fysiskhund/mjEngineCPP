@@ -29,7 +29,6 @@
 		A9031BBC1D6D106C0056B49C /* mjImageLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BA51D6D106C0056B49C /* mjImageLoader.cpp */; };
 		A9031BBD1D6D106C0056B49C /* mjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BA71D6D106C0056B49C /* mjModel.cpp */; };
 		A9031BBE1D6D106C0056B49C /* mjModelMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BA91D6D106C0056B49C /* mjModelMesh.cpp */; };
-		A9031BBF1D6D106C0056B49C /* mjRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BAB1D6D106C0056B49C /* mjRenderer.cpp */; };
 		A9031BC01D6D106C0056B49C /* mjSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BAD1D6D106C0056B49C /* mjSceneGraph.cpp */; };
 		A9031BC11D6D106C0056B49C /* mjShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BAF1D6D106C0056B49C /* mjShader.cpp */; };
 		A9031BC21D6D106C0056B49C /* mjSkybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BB11D6D106C0056B49C /* mjSkybox.cpp */; };
@@ -55,6 +54,11 @@
 		A9031C011D6D1F950056B49C /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BFF1D6D1F950056B49C /* tinyxml2.cpp */; };
 		A9031C071D6D1FAE0056B49C /* mjMultiPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031C021D6D1FAE0056B49C /* mjMultiPlatform.cpp */; };
 		A9031C081D6D1FAE0056B49C /* mjXMLHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031C051D6D1FAE0056B49C /* mjXMLHelper.cpp */; };
+		A94501B81D782B1000D488E1 /* mjRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94501B01D782B1000D488E1 /* mjRenderer.cpp */; };
+		A94501B91D782B1000D488E1 /* mjRendererData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94501B21D782B1000D488E1 /* mjRendererData.cpp */; };
+		A94501BA1D782B1000D488E1 /* mjRendererDataGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94501B41D782B1000D488E1 /* mjRendererDataGL.cpp */; };
+		A94501BB1D782B1000D488E1 /* mjRendererGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94501B61D782B1000D488E1 /* mjRendererGL.cpp */; };
+		A94501BE1D782C1C00D488E1 /* mjShaderResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94501BC1D782C1C00D488E1 /* mjShaderResource.cpp */; };
 		A9A5204C1D6FBBC500AE64A1 /* mjEngineCPP in Resources */ = {isa = PBXBuildFile; fileRef = A9A5204B1D6FBBC500AE64A1 /* mjEngineCPP */; };
 		A9AB2FD71D6BBC0400547DDA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FD61D6BBC0400547DDA /* main.m */; };
 		A9AB2FE11D6BBC0400547DDA /* GameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FE01D6BBC0400547DDA /* GameViewController.mm */; };
@@ -181,8 +185,6 @@
 		A9031BA81D6D106C0056B49C /* mjModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjModel.h; path = ../graphics/mjModel.h; sourceTree = "<group>"; };
 		A9031BA91D6D106C0056B49C /* mjModelMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjModelMesh.cpp; path = ../graphics/mjModelMesh.cpp; sourceTree = "<group>"; };
 		A9031BAA1D6D106C0056B49C /* mjModelMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjModelMesh.h; path = ../graphics/mjModelMesh.h; sourceTree = "<group>"; };
-		A9031BAB1D6D106C0056B49C /* mjRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjRenderer.cpp; path = ../graphics/mjRenderer.cpp; sourceTree = "<group>"; };
-		A9031BAC1D6D106C0056B49C /* mjRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjRenderer.h; path = ../graphics/mjRenderer.h; sourceTree = "<group>"; };
 		A9031BAD1D6D106C0056B49C /* mjSceneGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjSceneGraph.cpp; path = ../graphics/mjSceneGraph.cpp; sourceTree = "<group>"; };
 		A9031BAE1D6D106C0056B49C /* mjSceneGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjSceneGraph.h; path = ../graphics/mjSceneGraph.h; sourceTree = "<group>"; };
 		A9031BAF1D6D106C0056B49C /* mjShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjShader.cpp; path = ../graphics/mjShader.cpp; sourceTree = "<group>"; };
@@ -237,6 +239,16 @@
 		A9031C041D6D1FAE0056B49C /* mjMultiPlatformAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjMultiPlatformAudio.h; path = ../extLibs/util/mjMultiPlatformAudio.h; sourceTree = "<group>"; };
 		A9031C051D6D1FAE0056B49C /* mjXMLHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjXMLHelper.cpp; path = ../extLibs/util/mjXMLHelper.cpp; sourceTree = "<group>"; };
 		A9031C061D6D1FAE0056B49C /* mjXMLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjXMLHelper.h; path = ../extLibs/util/mjXMLHelper.h; sourceTree = "<group>"; };
+		A94501B01D782B1000D488E1 /* mjRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjRenderer.cpp; sourceTree = "<group>"; };
+		A94501B11D782B1000D488E1 /* mjRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjRenderer.h; sourceTree = "<group>"; };
+		A94501B21D782B1000D488E1 /* mjRendererData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjRendererData.cpp; sourceTree = "<group>"; };
+		A94501B31D782B1000D488E1 /* mjRendererData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjRendererData.h; sourceTree = "<group>"; };
+		A94501B41D782B1000D488E1 /* mjRendererDataGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjRendererDataGL.cpp; sourceTree = "<group>"; };
+		A94501B51D782B1000D488E1 /* mjRendererDataGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjRendererDataGL.h; sourceTree = "<group>"; };
+		A94501B61D782B1000D488E1 /* mjRendererGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjRendererGL.cpp; sourceTree = "<group>"; };
+		A94501B71D782B1000D488E1 /* mjRendererGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjRendererGL.h; sourceTree = "<group>"; };
+		A94501BC1D782C1C00D488E1 /* mjShaderResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjShaderResource.cpp; path = ../util/mjShaderResource.cpp; sourceTree = "<group>"; };
+		A94501BD1D782C1C00D488E1 /* mjShaderResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjShaderResource.h; path = ../util/mjShaderResource.h; sourceTree = "<group>"; };
 		A9A5204B1D6FBBC500AE64A1 /* mjEngineCPP */ = {isa = PBXFileReference; lastKnownFileType = folder; name = mjEngineCPP; path = ../../../../../sdcard/mjEngineCPP; sourceTree = "<group>"; };
 		A9AB2FD21D6BBC0400547DDA /* mjEngine_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mjEngine_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9AB2FD61D6BBC0400547DDA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -415,6 +427,8 @@
 				A9031BE21D6D10950056B49C /* mjResource.h */,
 				A9031BE31D6D10950056B49C /* mjResourceManager.cpp */,
 				A9031BE41D6D10950056B49C /* mjResourceManager.h */,
+				A94501BC1D782C1C00D488E1 /* mjShaderResource.cpp */,
+				A94501BD1D782C1C00D488E1 /* mjShaderResource.h */,
 				A9031BE51D6D10950056B49C /* mjSoundResource.cpp */,
 				A9031BE61D6D10950056B49C /* mjSoundResource.h */,
 				A9031BE71D6D10950056B49C /* mjTextureResource.cpp */,
@@ -450,6 +464,7 @@
 			children = (
 				A9B84B9E1D6D921300239BBA /* animation */,
 				A9B84B9B1D6D91E600239BBA /* gles2 */,
+				A94501AF1D782B1000D488E1 /* renderer */,
 				A9031B9D1D6D106C0056B49C /* mj3rdPersonCamera.cpp */,
 				A9031B9E1D6D106C0056B49C /* mj3rdPersonCamera.h */,
 				A9031B9F1D6D106C0056B49C /* mjAssimpModel.cpp */,
@@ -464,8 +479,6 @@
 				A9031BA81D6D106C0056B49C /* mjModel.h */,
 				A9031BA91D6D106C0056B49C /* mjModelMesh.cpp */,
 				A9031BAA1D6D106C0056B49C /* mjModelMesh.h */,
-				A9031BAB1D6D106C0056B49C /* mjRenderer.cpp */,
-				A9031BAC1D6D106C0056B49C /* mjRenderer.h */,
 				A9031BAD1D6D106C0056B49C /* mjSceneGraph.cpp */,
 				A9031BAE1D6D106C0056B49C /* mjSceneGraph.h */,
 				A9031BAF1D6D106C0056B49C /* mjShader.cpp */,
@@ -575,6 +588,22 @@
 				A9031BFB1D6D1F860056B49C /* mjMatrixStack.h */,
 			);
 			name = math;
+			sourceTree = "<group>";
+		};
+		A94501AF1D782B1000D488E1 /* renderer */ = {
+			isa = PBXGroup;
+			children = (
+				A94501B01D782B1000D488E1 /* mjRenderer.cpp */,
+				A94501B11D782B1000D488E1 /* mjRenderer.h */,
+				A94501B21D782B1000D488E1 /* mjRendererData.cpp */,
+				A94501B31D782B1000D488E1 /* mjRendererData.h */,
+				A94501B41D782B1000D488E1 /* mjRendererDataGL.cpp */,
+				A94501B51D782B1000D488E1 /* mjRendererDataGL.h */,
+				A94501B61D782B1000D488E1 /* mjRendererGL.cpp */,
+				A94501B71D782B1000D488E1 /* mjRendererGL.h */,
+			);
+			name = renderer;
+			path = ../graphics/renderer;
 			sourceTree = "<group>";
 		};
 		A9AB2FC91D6BBC0400547DDA = {
@@ -976,10 +1005,11 @@
 				A9B84B5A1D6D910800239BBA /* FrogJumpAutomatonState.cpp in Sources */,
 				A9B84B991D6D91D500239BBA /* SteadyDirectionState.cpp in Sources */,
 				A9031BBB1D6D106C0056B49C /* mjDefaultShaders.cpp in Sources */,
-				A9031BBF1D6D106C0056B49C /* mjRenderer.cpp in Sources */,
 				A9031B6A1D6D0FCA0056B49C /* mjAutomatonState.cpp in Sources */,
 				A9031BD51D6D10840056B49C /* mjCollisionResult.cpp in Sources */,
+				A94501BB1D782B1000D488E1 /* mjRendererGL.cpp in Sources */,
 				A9B84B981D6D91D500239BBA /* DustDevilState.cpp in Sources */,
+				A94501B91D782B1000D488E1 /* mjRendererData.cpp in Sources */,
 				A9031B691D6D0FCA0056B49C /* mjAutomaton.cpp in Sources */,
 				A9B84B7E1D6D913D00239BBA /* Character.cpp in Sources */,
 				A9B84B801D6D913D00239BBA /* FrogBoss.cpp in Sources */,
@@ -1020,11 +1050,13 @@
 				A9B84B811D6D913D00239BBA /* GlowBeing.cpp in Sources */,
 				A9B84BAF1D6D922400239BBA /* mjAnimation.cpp in Sources */,
 				A9031BEA1D6D10950056B49C /* mjModelStructureResource.cpp in Sources */,
+				A94501BA1D782B1000D488E1 /* mjRendererDataGL.cpp in Sources */,
 				A9031B6F1D6D0FE20056B49C /* mjMusicPlayer.cpp in Sources */,
 				A9031BE91D6D10950056B49C /* mjModelResource.cpp in Sources */,
 				A9B84B9A1D6D91D500239BBA /* WindState.cpp in Sources */,
 				A9031B971D6D101C0056B49C /* Level.cpp in Sources */,
 				A9B84B591D6D910800239BBA /* FrogAutomatonStopState.cpp in Sources */,
+				A94501BE1D782C1C00D488E1 /* mjShaderResource.cpp in Sources */,
 				A9031C071D6D1FAE0056B49C /* mjMultiPlatform.cpp in Sources */,
 				A9031BC31D6D106C0056B49C /* mjSkyboxLevelData.cpp in Sources */,
 				A9B84B7F1D6D913D00239BBA /* Frog.cpp in Sources */,
@@ -1054,6 +1086,7 @@
 				A9B84BD41D6D9B3400239BBA /* Box.cpp in Sources */,
 				A9031BEE1D6D10950056B49C /* mjSoundResource.cpp in Sources */,
 				A9B84B621D6D911E00239BBA /* DetectBatMatonState.cpp in Sources */,
+				A94501B81D782B1000D488E1 /* mjRenderer.cpp in Sources */,
 				A9AB2FD71D6BBC0400547DDA /* main.m in Sources */,
 				A9031B921D6D101C0056B49C /* Ambient.cpp in Sources */,
 				A9031BFC1D6D1F860056B49C /* Matrix.cpp in Sources */,

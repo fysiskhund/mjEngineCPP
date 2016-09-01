@@ -57,7 +57,10 @@ LOCAL_SRC_FILES := ai/mjAutomaton.cpp \
     graphics/mjImageLoader.cpp \
     graphics/mjModel.cpp \
     graphics/mjModelMesh.cpp \
-    graphics/mjRenderer.cpp \
+    graphics/renderer/mjRenderer.cpp \
+    graphics/renderer/mjRendererGL.cpp \
+    graphics/renderer/mjRendererData.cpp \
+    graphics/renderer/mjRendererDataGL.cpp \
     graphics/mjSceneGraph.cpp \
     graphics/mjShader.cpp \
     graphics/mjSkybox.cpp \
@@ -77,6 +80,7 @@ LOCAL_SRC_FILES := ai/mjAutomaton.cpp \
     util/mjResourceManager.cpp \
     util/mjSoundResource.cpp \
     util/mjTextureResource.cpp \
+    util/mjShaderResource.cpp \
     graphics/mjAssimpModel.cpp \
     game/Ambient.cpp \
     game/EntityCreator.cpp \
