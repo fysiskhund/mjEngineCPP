@@ -256,8 +256,8 @@ GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName, GLfloat textur
 		result = SendToGL(textureWrapParam);
 		//LOGI("Loaded %s to texture %d",  fileName, result);
 
-#ifdef DESTKOP_SDL
-		SDL_FreeSurface()
+#ifdef DESKTOP_SDL
+                SDL_FreeSurface(imageSurface);
 #else
 		delete [] imageData;
 #endif

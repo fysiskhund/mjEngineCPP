@@ -92,7 +92,7 @@ void mjObject::SetID(const char* id)
 {
     if (this->id != NULL)
     {
-        delete this->id;
+        delete [] this->id;
     }
     this->id = new char[strnlen(id, 200)+1];
     strncpy(this->id, id, strnlen(id, 200));
