@@ -74,10 +74,10 @@ void PlatformUniverseScene::Initialise(int width, int height)
     cameraOffset.Set(0,0.7,0);
     //LOGI("Here3");
 
-    mjObject* batBot0 = level->GetEntityByID("bat.002");
+    mjObject* frog = level->GetEntityByID("frog.003");
 
     //camera->SetTarget(&batBot0->pos, cameraOffset);
-    camera->SetTarget(&character->pos, cameraOffset);
+    camera->SetTarget(&frog->pos, cameraOffset);
     camera->r = 3;
     camera->SetAsCurrentCamera();
 
@@ -189,7 +189,7 @@ void PlatformUniverseScene::Update(float t_elapsed)
 
 		//LOGI("ambient.wind %p, windEffect %3.3f %3.3f %3.3f\n", &ambient.wind, windEffect->value.x, windEffect->value.y, windEffect->value.z);
         physics.globalEffects.push_back(windEffect);*/
-		physics.Update(t_elapsed);
+        physics.Update(t_elapsed);
 		camera->Update(t_elapsed);
 
         //FIXME!!

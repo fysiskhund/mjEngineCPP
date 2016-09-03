@@ -18,15 +18,14 @@ enum mjcolresult{
 
 class mjCollisionResult{
 public:
-	mjcolresult result;
-	mjPhysicsEffect* relocationEffectObj0;
-	mjPhysicsEffect* changeVelEffectObj0;
-	mjPhysicsEffect* accelObj0;
-	mjPhysicsEffect* relocationEffectObj1;
-	mjPhysicsEffect* changeVelEffectObj1;
-	mjPhysicsEffect* accelObj1;
-
-	mjCollisionResult();
+    mjcolresult result = MJ_NO_COLLISION;
+    mjPhysicsEffect relocationEffectObj0;
+    mjPhysicsEffect changeVelEffectObj0;
+    mjPhysicsEffect accelObj0;
+    mjPhysicsEffect relocationEffectObj1;
+    mjPhysicsEffect changeVelEffectObj1;
+    mjPhysicsEffect accelObj1;
+    void Reset();
 };
 
 }

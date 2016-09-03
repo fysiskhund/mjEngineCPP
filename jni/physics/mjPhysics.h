@@ -38,6 +38,8 @@ public:
 
     void RemoveAllObjects();
 
+    void CleanUpPools();
+
 
 private:
 	std::vector<mjObject*> allObjects;
@@ -45,11 +47,17 @@ private:
 	std::vector<std::vector<mjObject*>* > collisionLayers;
 
 
+    int currentColResultAvailableIndex = 0;
+    int lastColResultPoolSize = 0;
+    std::vector<mjCollisionResult*> colResultPool;
+
+
 	void CollisionDetection();
 
 	void ProcessPhysicsEffectsAndUpdate(float t_elapsed);
 	void ProcessCollisionEffects();
 	void UpdatePositions(float t_elapsed);
+    void RecycleCollisionResults();
 
 };
 

@@ -38,6 +38,8 @@ void mjPhysics::Update(float t_elapsed)
 
 	UpdatePositions(t_elapsed);
 
+    RecycleCollisionResults();
+
 }
 
 
@@ -101,7 +103,20 @@ void mjPhysics::CollisionDetection()
                         object1->DEBUGonCollisionTestStart(object0);
 #endif
 
-						mjCollisionResult* colResult = new mjCollisionResult(); // Prepare the collision result
+                        mjCollisionResult* colResult;
+                        // Need a new colResult. Reuse something from the pool, or get a new one
+                        if (currentColResultAvailableIndex < colResultPool.size())
+                        {
+                            colResult = colResultPool[currentColResultAvailableIndex];
+                            colResult->Reset();
+                        } else
+                        {
+                            colResult = new mjCollisionResult();
+                            colResultPool.push_back(colResult);
+
+                        }
+                        currentColResultAvailableIndex++;
+
 						switch(object0->boundingStructure->type)
 						{
 						case MJ_SPHERE:
@@ -117,11 +132,11 @@ void mjPhysics::CollisionDetection()
 
 
 
-									colResult->relocationEffectObj0->otherObject = object1;
-									object0->collisionStack.push_back(colResult->relocationEffectObj0);
+                                    colResult->relocationEffectObj0.otherObject = object1;
+                                    object0->collisionStack.push_back(&colResult->relocationEffectObj0);
 
-									colResult->relocationEffectObj1->otherObject = object0;
-									object1->collisionStack.push_back(colResult->relocationEffectObj1);
+                                    colResult->relocationEffectObj1.otherObject = object0;
+                                    object1->collisionStack.push_back(&colResult->relocationEffectObj1);
 									//FIXME:!!! Something must be done with colResult in this case
 									// without altering the inner effects, since those will be destroyed in the object after they'be been used.
                                     object0->OnOverlap(object1);
@@ -153,62 +168,62 @@ void mjPhysics::CollisionDetection()
 
 									if (object1->boundingStructure->isImmovable)
 									{
-										if (colResult->changeVelEffectObj0->mask[0])
+                                        if (colResult->changeVelEffectObj0.mask[0])
 										{
-											if (colResult->changeVelEffectObj0->value.x*object0->vel.x < 0)
+                                            if (colResult->changeVelEffectObj0.value.x*object0->vel.x < 0)
 											{
-												colResult->changeVelEffectObj0->value.x = -object0->vel.x;
+                                                colResult->changeVelEffectObj0.value.x = -object0->vel.x;
 											} else{
-												colResult->changeVelEffectObj0->value.x = 0;
+                                                colResult->changeVelEffectObj0.value.x = 0;
 
 											}
 										}
-										if (colResult->changeVelEffectObj0->mask[1])
+                                        if (colResult->changeVelEffectObj0.mask[1])
 										{
-											if (colResult->changeVelEffectObj0->value.y*object0->vel.y < 0)
+                                            if (colResult->changeVelEffectObj0.value.y*object0->vel.y < 0)
 											{
-												colResult->changeVelEffectObj0->value.y = -object0->vel.y;
+                                                colResult->changeVelEffectObj0.value.y = -object0->vel.y;
 											} else{
-												colResult->changeVelEffectObj0->value.y = 0;
+                                                colResult->changeVelEffectObj0.value.y = 0;
 											}
 										}
-										if (colResult->changeVelEffectObj0->mask[2])
+                                        if (colResult->changeVelEffectObj0.mask[2])
 										{
-											if (colResult->changeVelEffectObj0->value.z*object0->vel.z < 0)
+                                            if (colResult->changeVelEffectObj0.value.z*object0->vel.z < 0)
 											{
-												colResult->changeVelEffectObj0->value.z = -object0->vel.z;
+                                                colResult->changeVelEffectObj0.value.z = -object0->vel.z;
 											} else{
-												colResult->changeVelEffectObj0->value.z = 0;
+                                                colResult->changeVelEffectObj0.value.z = 0;
 											}
 										}
 
-									} else if (object0->boundingStructure->isImmovable)
+                                    } else if (object0->boundingStructure->isImmovable)
 									{
-										if (colResult->changeVelEffectObj1->mask[0])
+                                        if (colResult->changeVelEffectObj1.mask[0])
 										{
-											if (colResult->changeVelEffectObj1->value.x*object1->vel.x < 0)
+                                            if (colResult->changeVelEffectObj1.value.x*object1->vel.x < 0)
 											{
-												colResult->changeVelEffectObj1->value.x = -object1->vel.x;
+                                                colResult->changeVelEffectObj1.value.x = -object1->vel.x;
 											} else{
-												colResult->changeVelEffectObj1->value.x = 0;
+                                                colResult->changeVelEffectObj1.value.x = 0;
 											}
 										}
-										if (colResult->changeVelEffectObj1->mask[1])
+                                        if (colResult->changeVelEffectObj1.mask[1])
 										{
-											if (colResult->changeVelEffectObj1->value.y*object1->vel.y < 0)
+                                            if (colResult->changeVelEffectObj1.value.y*object1->vel.y < 0)
 											{
-												colResult->changeVelEffectObj1->value.y = -object1->vel.y;
+                                                colResult->changeVelEffectObj1.value.y = -object1->vel.y;
 											} else{
-												colResult->changeVelEffectObj1->value.y = 0;
+                                                colResult->changeVelEffectObj1.value.y = 0;
 											}
 										}
-										if (colResult->changeVelEffectObj1->mask[2])
+                                        if (colResult->changeVelEffectObj1.mask[2])
 										{
-											if (colResult->changeVelEffectObj1->value.z*object1->vel.z < 0)
+                                            if (colResult->changeVelEffectObj1.value.z*object1->vel.z < 0)
 											{
-												colResult->changeVelEffectObj1->value.z = -object1->vel.z;
+                                                colResult->changeVelEffectObj1.value.z = -object1->vel.z;
 											} else{
-												colResult->changeVelEffectObj1->value.z = 0;
+                                                colResult->changeVelEffectObj1.value.z = 0;
 											}
 										}
 
@@ -230,8 +245,8 @@ void mjPhysics::CollisionDetection()
                                         float v0final = coeff*( (vel0*(object0->mass-object1->mass)*invMasses)+ (vel1*(2.0*object1->mass)*invMasses) );
                                         float v1final = coeff*((vel1*(object1->mass-object0->mass)*invMasses)+ (vel0*(2.0*object0->mass)*invMasses));
 
-                                        colResult->changeVelEffectObj0->value.MulScalar(v0final);
-                                        colResult->changeVelEffectObj1->value.MulScalar(v1final);
+                                        colResult->changeVelEffectObj0.value.MulScalar(v0final);
+                                        colResult->changeVelEffectObj1.value.MulScalar(v1final);
                                         //mjVector3 obj0Obj1(object1.pos);
 
                                         //obj0Obj1.Subtract(object0.pos);
@@ -248,15 +263,15 @@ void mjPhysics::CollisionDetection()
 
 
 
-									colResult->relocationEffectObj0->otherObject = object1;
-									colResult->changeVelEffectObj0->otherObject = object1;
-									object0->collisionStack.push_back(colResult->relocationEffectObj0);
-									object0->collisionStack.push_back(colResult->changeVelEffectObj0);
+                                    colResult->relocationEffectObj0.otherObject = object1;
+                                    colResult->changeVelEffectObj0.otherObject = object1;
+                                    object0->collisionStack.push_back(&colResult->relocationEffectObj0);
+                                    object0->collisionStack.push_back(&colResult->changeVelEffectObj0);
 
-									colResult->relocationEffectObj1->otherObject = object0;
-									colResult->changeVelEffectObj1->otherObject = object0;
-									object1->collisionStack.push_back(colResult->relocationEffectObj1);
-									object1->collisionStack.push_back(colResult->changeVelEffectObj1);
+                                    colResult->relocationEffectObj1.otherObject = object0;
+                                    colResult->changeVelEffectObj1.otherObject = object0;
+                                    object1->collisionStack.push_back(&colResult->relocationEffectObj1);
+                                    object1->collisionStack.push_back(&colResult->changeVelEffectObj1);
 
                                     object0->OnOverlap(object1);
                                     object1->OnOverlap(object0);
@@ -288,8 +303,12 @@ void mjPhysics::CollisionDetection()
 						break;
 						default:
 							break;
-						}
-						delete colResult; // Delete the collision result whether it has been used or not.
+                        }
+                        if (colResult->result == MJ_NO_COLLISION)
+                        {
+                            // wasn't used, therefore it is available
+                            currentColResultAvailableIndex--;
+                        }
 
 					}
 
@@ -331,7 +350,7 @@ void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 
 	for (unsigned j = 0; j < globalEffects.size(); j++)
     {
-		delete globalEffects[j];
+        delete globalEffects[j]; // All global effects are destroyed here.
 
     }
     globalEffects.clear();
@@ -344,11 +363,13 @@ void mjPhysics::ProcessCollisionEffects()
 		if (allObjects[i]->hasKinematics){
 			allObjects[i]->ProcessCollisionEffects();
 		}
-		for (unsigned j = 0; j < allObjects[i]->collisionStack.size(); j++)
-		{
-            delete allObjects[i]->collisionStack[j];
 
-		}
+        //
+        /*for (unsigned j = 0; j < allObjects[i]->collisionStack.size(); j++)
+		{
+            delete allObjects[i]->collisionStack[j]; // all collision results from all objects should be destroyed here
+
+        }*/
 		allObjects[i]->collisionStack.clear();
 	}
 
@@ -362,6 +383,18 @@ void mjPhysics::UpdatePositions(float t_elapsed)
 		}
 	}
 
+}
+
+void mjPhysics::RecycleCollisionResults()
+{
+
+    currentColResultAvailableIndex = 0;
+
+    if (colResultPool.size() != lastColResultPoolSize)
+    {
+        lastColResultPoolSize = colResultPool.size();
+        LOGI("colResultPool size: %d in use\n", lastColResultPoolSize);
+    }
 }
 
 void mjPhysics::RemoveAllObjects()
@@ -378,8 +411,15 @@ void mjPhysics::RemoveAllObjects()
         collisionLayers.pop_back();
     }
 }
+
+void mjPhysics::CleanUpPools()
+{
+
+}
+
 mjPhysics::~mjPhysics()
 {
     RemoveAllObjects();
+    CleanUpPools();
 }
 }

@@ -7,6 +7,7 @@ namespace mjEngine{
 
 #define FUZZ 0.00005
 
+
 mjcolresult mjCollisionTests::SphereVsSphere(mjSphere* s0, mjSphere* s1, mjCollisionResult *out){
 
 
@@ -37,24 +38,24 @@ mjcolresult mjCollisionTests::SphereVsSphere(mjSphere* s0, mjSphere* s1, mjColli
 			float minDistHalf = rSum*0.5;
 
 			//LOGI("minDistHalf = %3.3f", minDistHalf);
-			out->relocationEffectObj0 = new mjPhysicsEffect();
-			out->relocationEffectObj0->type = MJ_COLLISION;
-			out->relocationEffectObj0->action = MJ_CHANGE_POSITION;
+            //out->relocationEffectObj0 = new mjPhysicsEffect();
+            out->relocationEffectObj0.type = MJ_COLLISION;
+            out->relocationEffectObj0.action = MJ_CHANGE_POSITION;
 
 			s0ToS1.MulScalar(-minDistHalf);
 
-			out->relocationEffectObj0->value.CopyFrom(s0ToS1);
+            out->relocationEffectObj0.value.CopyFrom(s0ToS1);
 
 
 
 
-			out->relocationEffectObj1 = new mjPhysicsEffect();
-			out->relocationEffectObj1->type = MJ_COLLISION;
-			out->relocationEffectObj1->action = MJ_CHANGE_POSITION;
+            //out->relocationEffectObj1 = new mjPhysicsEffect();
+            out->relocationEffectObj1.type = MJ_COLLISION;
+            out->relocationEffectObj1.action = MJ_CHANGE_POSITION;
 
 			s0ToS1.MulScalar(-1);
 
-			out->relocationEffectObj1->value.CopyFrom(s0ToS1);
+            out->relocationEffectObj1.value.CopyFrom(s0ToS1);
 			out->result= MJ_OVERLAP;
 
 		}
@@ -123,16 +124,24 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 				overlap.Subtract(minEndp);
 
 
-				out->relocationEffectObj0 = new mjPhysicsEffect(MJ_COLLISION, MJ_CHANGE_POSITION);
-				out->changeVelEffectObj0 = new mjPhysicsEffect(MJ_COLLISION, MJ_ADD_VELOCITY);
+                //out->relocationEffectObj0 = new mjPhysicsEffect(MJ_COLLISION, MJ_CHANGE_POSITION);
+                //out->changeVelEffectObj0 = new mjPhysicsEffect(MJ_COLLISION, MJ_ADD_VELOCITY);
+                out->relocationEffectObj0.type = MJ_COLLISION;
+                out->relocationEffectObj0.action = MJ_CHANGE_POSITION;
+                out->changeVelEffectObj0.type = MJ_COLLISION;
+                out->changeVelEffectObj0.action = MJ_ADD_VELOCITY;
 
-				out->relocationEffectObj1 = new mjPhysicsEffect(MJ_COLLISION, MJ_CHANGE_POSITION);
-				out->changeVelEffectObj1 = new mjPhysicsEffect(MJ_COLLISION, MJ_ADD_VELOCITY);
+                //out->relocationEffectObj1 = new mjPhysicsEffect(MJ_COLLISION, MJ_CHANGE_POSITION);
+                //out->changeVelEffectObj1 = new mjPhysicsEffect(MJ_COLLISION, MJ_ADD_VELOCITY);
+                out->relocationEffectObj1.type = MJ_COLLISION;
+                out->relocationEffectObj1.action = MJ_CHANGE_POSITION;
+                out->changeVelEffectObj1.type = MJ_COLLISION;
+                out->changeVelEffectObj1.action = MJ_ADD_VELOCITY;
 
 
 
-				mjVector3* location0 = &out->relocationEffectObj0->value;
-				mjVector3* location1 = &out->relocationEffectObj1->value;
+                mjVector3* location0 = &out->relocationEffectObj0.value;
+                mjVector3* location1 = &out->relocationEffectObj1.value;
 
 				float displacementFactor = 0.5f;
 
@@ -144,85 +153,85 @@ mjcolresult mjCollisionTests::AABBVsAABB(mjAABB* aabb0, mjAABB* aabb1, mjCollisi
 
 				if ((overlap.x < overlap.y) && (overlap.x < overlap.z))
 				{
-                    out->relocationEffectObj0->mask[0] = mjMathHelper::Sign(directions.x);
+                    out->relocationEffectObj0.mask[0] = mjMathHelper::Sign(directions.x);
 
-                    if (out->relocationEffectObj0->mask[0] == 0) out->relocationEffectObj0->mask[0] = 1;
+                    if (out->relocationEffectObj0.mask[0] == 0) out->relocationEffectObj0.mask[0] = 1;
 
-					out->relocationEffectObj1->mask[0] = -out->relocationEffectObj0->mask[0];
+                    out->relocationEffectObj1.mask[0] = -out->relocationEffectObj0.mask[0];
 
-					float xDisplacement = out->relocationEffectObj0->mask[0]*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor;
+                    float xDisplacement = out->relocationEffectObj0.mask[0]*(aabb0->halfWidths.x + aabb1->halfWidths.x)*displacementFactor;
 					location0->x = aabb1->center->x + xDisplacement;
 					location1->x = aabb0->center->x - xDisplacement;
 
 
 
-					out->changeVelEffectObj0->value.Set(out->relocationEffectObj0->mask[0], 0, 0);
-					out->changeVelEffectObj1->value.Set(out->relocationEffectObj1->mask[0], 0, 0);
+                    out->changeVelEffectObj0.value.Set(out->relocationEffectObj0.mask[0], 0, 0);
+                    out->changeVelEffectObj1.value.Set(out->relocationEffectObj1.mask[0], 0, 0);
 
 
-					out->relocationEffectObj0->mask[1] = false;
-					out->relocationEffectObj0->mask[2] = false;
-					out->changeVelEffectObj0->mask[1] = false;
-					out->changeVelEffectObj0->mask[2] = false;
+                    out->relocationEffectObj0.mask[1] = false;
+                    out->relocationEffectObj0.mask[2] = false;
+                    out->changeVelEffectObj0.mask[1] = false;
+                    out->changeVelEffectObj0.mask[2] = false;
 
-					out->relocationEffectObj1->mask[1] = false;
-					out->relocationEffectObj1->mask[2] = false;
-					out->changeVelEffectObj1->mask[1] = false;
-					out->changeVelEffectObj1->mask[2] = false;
+                    out->relocationEffectObj1.mask[1] = false;
+                    out->relocationEffectObj1.mask[2] = false;
+                    out->changeVelEffectObj1.mask[1] = false;
+                    out->changeVelEffectObj1.mask[2] = false;
 				} else if ((overlap.y < overlap.x ) && (overlap.y < overlap.z))
 				{
-                    out->relocationEffectObj0->mask[1] = mjMathHelper::Sign(directions.y);
+                    out->relocationEffectObj0.mask[1] = mjMathHelper::Sign(directions.y);
 
-                    if (out->relocationEffectObj0->mask[1] == 0) out->relocationEffectObj0->mask[1] = 1;
+                    if (out->relocationEffectObj0.mask[1] == 0) out->relocationEffectObj0.mask[1] = 1;
 
-					float yDisplacement = out->relocationEffectObj0->mask[1]*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor;
+                    float yDisplacement = out->relocationEffectObj0.mask[1]*(aabb0->halfWidths.y + aabb1->halfWidths.y)*displacementFactor;
 					location0->y = aabb1->center->y + yDisplacement;
 					location1->y = aabb0->center->y - yDisplacement;
 
 
 
-					out->relocationEffectObj1->mask[1] = -out->relocationEffectObj0->mask[1];
+                    out->relocationEffectObj1.mask[1] = -out->relocationEffectObj0.mask[1];
 
-					out->changeVelEffectObj0->value.Set(0, out->relocationEffectObj0->mask[1], 0);
-					out->changeVelEffectObj1->value.Set(0, out->relocationEffectObj1->mask[1], 0);
+                    out->changeVelEffectObj0.value.Set(0, out->relocationEffectObj0.mask[1], 0);
+                    out->changeVelEffectObj1.value.Set(0, out->relocationEffectObj1.mask[1], 0);
 
 
-					out->relocationEffectObj0->mask[0] = false;
-					out->relocationEffectObj0->mask[2] = false;
-					out->changeVelEffectObj0->mask[0] = false;
-					out->changeVelEffectObj0->mask[2] = false;
+                    out->relocationEffectObj0.mask[0] = false;
+                    out->relocationEffectObj0.mask[2] = false;
+                    out->changeVelEffectObj0.mask[0] = false;
+                    out->changeVelEffectObj0.mask[2] = false;
 
-					out->relocationEffectObj1->mask[0] = false;
-					out->relocationEffectObj1->mask[2] = false;
-					out->changeVelEffectObj1->mask[0] = false;
-					out->changeVelEffectObj1->mask[2] = false;
+                    out->relocationEffectObj1.mask[0] = false;
+                    out->relocationEffectObj1.mask[2] = false;
+                    out->changeVelEffectObj1.mask[0] = false;
+                    out->changeVelEffectObj1.mask[2] = false;
 				} else
 				{
-                    out->relocationEffectObj0->mask[2] = mjMathHelper::Sign(directions.z);
+                    out->relocationEffectObj0.mask[2] = mjMathHelper::Sign(directions.z);
 
-                    if (out->relocationEffectObj0->mask[2] == 0) out->relocationEffectObj0->mask[2] = 1;
+                    if (out->relocationEffectObj0.mask[2] == 0) out->relocationEffectObj0.mask[2] = 1;
 
-					out->relocationEffectObj1->mask[2] = -out->relocationEffectObj0->mask[2];
+                    out->relocationEffectObj1.mask[2] = -out->relocationEffectObj0.mask[2];
 
-					float zDisplacement = out->relocationEffectObj0->mask[2]*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor;
+                    float zDisplacement = out->relocationEffectObj0.mask[2]*(aabb0->halfWidths.z + aabb1->halfWidths.z)*displacementFactor;
 
 					location0->z = aabb1->center->z + zDisplacement;
 					location1->z = aabb0->center->z - zDisplacement;
 
 
 
-					out->changeVelEffectObj0->value.Set(0, 0, out->relocationEffectObj0->mask[2]);
-					out->changeVelEffectObj1->value.Set(0, 0, out->relocationEffectObj1->mask[2]);
+                    out->changeVelEffectObj0.value.Set(0, 0, out->relocationEffectObj0.mask[2]);
+                    out->changeVelEffectObj1.value.Set(0, 0, out->relocationEffectObj1.mask[2]);
 
-					out->relocationEffectObj0->mask[0] = false;
-					out->relocationEffectObj0->mask[1] = false;
-					out->changeVelEffectObj0->mask[0] = false;
-					out->changeVelEffectObj0->mask[1] = false;
+                    out->relocationEffectObj0.mask[0] = false;
+                    out->relocationEffectObj0.mask[1] = false;
+                    out->changeVelEffectObj0.mask[0] = false;
+                    out->changeVelEffectObj0.mask[1] = false;
 
-					out->relocationEffectObj1->mask[0] = false;
-					out->relocationEffectObj1->mask[1] = false;
-					out->changeVelEffectObj1->mask[0] = false;
-					out->changeVelEffectObj1->mask[1] = false;
+                    out->relocationEffectObj1.mask[0] = false;
+                    out->relocationEffectObj1.mask[1] = false;
+                    out->changeVelEffectObj1.mask[0] = false;
+                    out->changeVelEffectObj1.mask[1] = false;
 				}
 				//out->relocationEffectObj1->value.Check(__FILE__, __LINE__);
 				/*LOGI("displacement obj0: %3.3f, %3.3f, %3.3f",

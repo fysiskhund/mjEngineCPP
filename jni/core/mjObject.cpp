@@ -329,16 +329,10 @@ mjObject::~mjObject()
     delete pose;
     delete boundingStructure;
 
-    for (int i = 0; i < effectStack.size(); i++)
-    {
-        delete effectStack[i];
-    }
-    effectStack.clear();
 
-    for (int i = 0; i < collisionStack.size(); i++)
-    {
-        delete collisionStack[i];
-    }
+    // effects and collision results are the responsibility of mjPhysics, so the stacks are only emptied;
+    // their contents will be administered by mjPhysics
+    effectStack.clear();
     collisionStack.clear();
 
 }

@@ -7,6 +7,7 @@
 #define MJCOLLISIONTESTS_H
 
 #include <math.h>
+#include <vector>
 
 #include "../core/mjVector3.h"
 #include "mjCollisionResult.h"
@@ -25,16 +26,14 @@ namespace mjEngine
 class mjCollisionTests{
 public:
 
-	static mjcolresult SphereVsSphere(mjSphere* s0, mjSphere* s1, mjCollisionResult *out);
+    static mjcolresult SphereVsSphere(mjSphere* s0, mjSphere* s1, mjCollisionResult* out);
 
-	static mjcolresult AABBVsAABB(mjAABB* a, mjAABB* b, mjCollisionResult* out);
+    static mjcolresult AABBVsAABB(mjAABB* a, mjAABB* b, mjCollisionResult* out);
 
-	static mjcolresult SphereVsAABB(mjSphere* s0, mjAABB* aabb0, mjCollisionResult* out);
+    static mjcolresult SphereVsAABB(mjSphere* s0, mjAABB* aabb0, mjCollisionResult* out);
 
 private:
 };
-
-
 }
 
 #endif

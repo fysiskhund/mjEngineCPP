@@ -12,6 +12,7 @@ namespace mjEngine{
 
 
 enum EffectType{
+    MJ_NONE,
 	MJ_ACCELERATION,
 	MJ_GRAVITY,
 	MJ_COLLISION,
@@ -36,7 +37,7 @@ class mjObject;
 class mjPhysicsEffect
 {
 public:
-	EffectType type = MJ_ACCELERATION;
+    EffectType type = MJ_NONE;
 	EffectAction action= MJ_ADD_ACCEL;
 	mjVector3 value;
 	signed char mask[3] = {1, 1, 1};
@@ -46,6 +47,7 @@ public:
 	mjPhysicsEffect();
 	mjPhysicsEffect(EffectType type, EffectAction action);
 
+    void Reset();
 private:
 };
 }
