@@ -9,6 +9,7 @@ GraphicsDebugUniverseScene::GraphicsDebugUniverseScene(mjResourceManager* resour
 void GraphicsDebugUniverseScene::Initialize(int width, int height)
 {
     camera = new mj3rdPersonCamera();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "3rd person camera");
     glEnable(GL_CULL_FACE);
     //glCullFace(GL_BACK); //FIXME: just testing
     glEnable (GL_BLEND);
@@ -33,9 +34,11 @@ void GraphicsDebugUniverseScene::Initialize(int width, int height)
     DEBUGvasilisa = resourceManager->FetchModel("bird.mesh.xml");
     checkGlError("fetch Model");
     debugRenderer = new mjRendererGL();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "renderer");
     checkGlError("createRenderer");
     debugRenderer->PrepareModel(*DEBUGvasilisa);
     debugVasiObject = new mjObject();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "mjObject");
 
 
     GLuint glTexture = resourceManager->FetchTexture("birdtexture.png", GL_CLAMP_TO_EDGE);

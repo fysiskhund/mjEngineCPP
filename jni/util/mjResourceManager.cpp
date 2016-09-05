@@ -23,9 +23,11 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix)
 
     std::string shaderName = "default";
     PushShader(shaderName, new mjDefaultShaders());
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "defaultShader");
 
     shaderName = "skybox";
     PushShader(shaderName, new mjSkyboxShaders());
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "skyboxShader");
 }
 
 mjResourceManager::~mjResourceManager()
@@ -50,10 +52,12 @@ mjModel* mjResourceManager::FetchModel(std::string& path)
     }
 
     mjModelResource* newResource = new mjModelResource();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "modelResource");
 
 
     mjModel* newModel = new mjModel();
     newModel->LoadFromFile(fullPath.c_str());
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "model");
 
     newResource->model = newModel;
     newResource->path = fullPath;
@@ -83,6 +87,7 @@ GLuint mjResourceManager::FetchTexture(std::string& path, unsigned glTextureWrap
     }
 
     mjTextureResource* newResource = new mjTextureResource();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "textureResource");
     newResource->modifier = glTextureWrapParameter;
 
 
@@ -114,6 +119,7 @@ mjModelStructure* mjResourceManager::FetchModelStructure(std::string& path)
     }
 
     mjModelStructureResource* newResource = new mjModelStructureResource();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "modelStructure");
 
     newResource->structure = new mjModelStructure(fullPath.c_str());
 
@@ -142,6 +148,7 @@ mjSoundResource* mjResourceManager::FetchSound(std::string& path)
     }
 
     mjSoundResource* newResource = new mjSoundResource();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "soundResource");
 
 
     newResource->soundIndexAndroid = this->soundIndexAndroid;
@@ -212,6 +219,7 @@ mjShaderResource* mjResourceManager::PushShader(std::string& name, mjShader* sha
     if (result == NULL)
     {
         result = new mjShaderResource;
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "shaderResource");
         result->path = name;
         result->shader = shader;
         result->shaderListIndex = shaderList.size();

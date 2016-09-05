@@ -22,6 +22,7 @@ mjObject::mjObject(structuretype collisionStructureType, mjResourceManager* reso
 		minCorner.Set(-0.5,0,-0.5);
 
 		mjAABB* aabb = new mjAABB(&pos, minCorner, maxCorner, false);
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "aabb");
 		this->boundingStructure = aabb;
         //LOGI("Object initialised as AABB");
 	}
@@ -44,6 +45,7 @@ mjObject::mjObject(mjResourceManager* resourceManager)
 
 
 	boundingStructure = new mjSphere(&pos, 1);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "mjSphere");
 
 	this->resourceManager = resourceManager;
 }
@@ -62,6 +64,7 @@ void mjObject::SetDetailsFromXML(XMLElement* entity)
         const char* stdResModel = entity->FirstChildElement("model")->Attribute("stdres");
         int nameLength = strnlen(stdResModel, 128)+1;
         modelName = new char[nameLength];
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "char (modelname)");
         snprintf(modelName, nameLength, "%s", stdResModel);
         //strncpy(modelName, stdResModel, nameLength);
 
@@ -95,6 +98,7 @@ void mjObject::SetID(const char* id)
         delete [] this->id;
     }
     this->id = new char[strnlen(id, 200)+1];
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "char (ID)");
     strncpy(this->id, id, strnlen(id, 200));
     this->id[strnlen(id, 200)] = '\0';
 }
@@ -102,6 +106,12 @@ void mjObject::SetID(const char* id)
 void mjObject::TieShadersDEPRECATED(std::vector<mjShader*>& shaderList)
 {
     model->TieShaders(shaderList);
+}
+
+void mjObject::FlushPhysicsEffects()
+{
+    effectStack.clear();
+    collisionStack.clear();
 }
 
 void mjObject::CopyModelMatrixTo(float* modelMatrixOut)
@@ -162,7 +172,6 @@ void mjObject::ProcessPhysicsEffects(float t_elapsed)
 
 		//if (effectStack[i]->)
 	}
-	effectStack.clear();
 
 	if (!boundingStructure->isImmovable)
 	{

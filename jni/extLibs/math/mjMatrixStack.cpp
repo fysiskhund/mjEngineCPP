@@ -24,9 +24,11 @@ mjMatrixStack::~mjMatrixStack()
 void mjMatrixStack::CreateStack(unsigned size)
 {
     mStack = new float * [size];
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "float * (createstack)");
     for(unsigned i = 0; i < size; i++)
     {
         mStack[i] = new float[16];
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "float 16 (createStack)");
     }
     current = mStack[0];
     Matrix4::SetIdentityM(mStack[0], 0);

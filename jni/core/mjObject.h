@@ -92,6 +92,7 @@ public:
 	virtual void Update(float t_elapsed);
 	virtual void UpdatePosition(float t_elapsed);
     virtual void TieShadersDEPRECATED(std::vector<mjShader*>& shaderList);
+    virtual void FlushPhysicsEffects();
 
 
     void CopyModelMatrixTo(float* modelMatrixOut);

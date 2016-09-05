@@ -50,7 +50,6 @@ void Character::ProcessPhysicsEffects(float t_elapsed)
 
 		//if (effectStack[i]->)
 	}
-	effectStack.clear();
 
 	if (!boundingStructure->isImmovable)
 	{
@@ -239,16 +238,22 @@ void Character::SetUpSillyAnimation()
 {
 	//Animation test
 	    mjAnimationSegment* segment0 = new mjAnimationSegment();
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "animSegment");
+
 	    segment0->meshNum = 0;
 	    segment0->totalTime = 0.5;
 
 	    mjAnimationKeyframe* keyframe0 = new mjAnimationKeyframe();
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "keyFrame");
+
 
 	    // Keyframe0 and 2 are simply the normal pose
 	    keyframe0->timeStamp = 0;
 	    keyframe0->rotationAnimType = KEYFRAMETYPE_IGNORE;
 
 	    mjAnimationKeyframe* keyframe1 = new mjAnimationKeyframe();
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "keyframe");
+
 
 	    // Keyframe1 is a slight hop
 	    keyframe1->pos.y = 0.05;
@@ -256,6 +261,8 @@ void Character::SetUpSillyAnimation()
 	    keyframe1->rotationAnimType = KEYFRAMETYPE_IGNORE;
 
 	    mjAnimationKeyframe* keyframe2 = new mjAnimationKeyframe();
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "keyframe");
+
 
 
 	    keyframe2->timeStamp = 0.5;
@@ -270,11 +277,20 @@ void Character::SetUpSillyAnimation()
 	    animation.segments.push_back(segment0);
 
 	    pose = new mjModelPose();
-	    pose->angles.push_back(new mjVector3());
-	    pose->positions.push_back(new mjVector3());
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "modelPose");
 
 	    pose->angles.push_back(new mjVector3());
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3");
+
+	    pose->positions.push_back(new mjVector3());
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3");
+
+	    pose->angles.push_back(new mjVector3());
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3");
+
 	    pose->positions.push_back(new mjVector3()); // As many "angles" and "positions" as the number of meshes the model has!
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3");
+
 
 
 	//////////// end of animation test (init)

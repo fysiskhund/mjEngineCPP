@@ -4,6 +4,7 @@ Ambient::Ambient()
 {
 	//LOGI("Wind is at %p\n", &wind);
     windAutomaton.states.push_back(new SteadyDirectionState(&wind));
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "new wind");
     //windAutomaton.states.push_back(new DustDevilState(&wind));
     windAutomaton.SetStartState(windAutomaton.states[0]);
 
@@ -32,6 +33,7 @@ void Ambient::InitGlowBeings(Level* levelData, mjCamera* camera, mjPhysics* phys
     for (unsigned i = 0; i < total; i++)
     {
         GlowBeing* glowBeing = new GlowBeing(levelData, camera, &resourceManager);
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "glowbeing");
 
 
         //glowBeing->TieShaders(*shaderList);
@@ -50,8 +52,11 @@ void Ambient::InitGlowBeings(Level* levelData, mjCamera* camera, mjPhysics* phys
 void Ambient::CreateDustDevil(mjVector3& pos, float r, float h)
 {
     std::vector<GlowBeing*>* inDustDevil = new std::vector<GlowBeing*>();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "vector of glowbeing*");
     std::vector<float>* angles = new std::vector<float>();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "vector of float");
     std::vector<float>* rForParticle = new std::vector<float>();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "vector of float");
 
 
 
@@ -76,6 +81,7 @@ void Ambient::CreateDustDevil(mjVector3& pos, float r, float h)
     if (inDustDevil->size() > 0)
     {
         DustDevil* dustDevil = new DustDevil(r, h, inDustDevil, angles, rForParticle);
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "dustDevil");
 
         dustDevil->rotSpeed = 1.5;
         dustDevil->rotAccel = 0.01;

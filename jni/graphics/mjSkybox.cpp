@@ -27,6 +27,7 @@ void mjSkybox::SetModels(mjModel* boxModel, mjModel* planeModel)
 void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 {
 	char* pathName = new char[1024];
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "char[] for path");
 	const char* extension = ".png"; //FIXME: enable change to jpg when jpg library is added
 	mjImageLoader imgLoader;
 
@@ -59,6 +60,7 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 
 		boxModel->meshes[i]->glTexture =  resourceManager->FetchTexture(pathName, GL_CLAMP_TO_EDGE);//imgLoader.LoadToGLAndFreeMemory(pathName, GL_CLAMP_TO_EDGE);
         char* shaderName = new char[7];
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "char for shaderName");
         snprintf(shaderName, 7, "%s", "skybox");
         boxModel->meshes[i]->shaderName = shaderName;
 

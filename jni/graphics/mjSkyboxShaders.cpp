@@ -8,6 +8,7 @@ mjSkyboxShaders::mjSkyboxShaders()
 	CreateProgram(skyboxVertexShaderCode, skyboxFragmentShaderCode);
 	name = new char[7];
 	strncpy(name, "skybox", strnlen("skybox", 10)+1);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "char[] for skybox shader name");
 
     checkGlError("create glProgram");
 

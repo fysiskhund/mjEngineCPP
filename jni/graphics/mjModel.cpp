@@ -37,8 +37,14 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 	int posIn3Array = 0;
 	int posIn2Array = 0;
     vertexBufferData = new float[3*numVertices];
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "float for vertexData");
+
     normalComponentBufferData = new float[3*numVertices];
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "float for normalData");
+
     texCoordBufferData = new float[2*numVertices];
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "float for texcoords");
+
 
 	XMLElement* vertexbuffer = sharedGeometry->FirstChildElement("vertexbuffer");
 
@@ -107,6 +113,8 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 	while(submesh)
 	{
 		mjModelMesh* modelMesh = new mjModelMesh();
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "modelMesh");
+
 
 
 		const char* shader = submesh->Attribute("shader");
@@ -114,6 +122,8 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 		{
 			int length = strnlen(shader, MJMODEL_MAXATTRSIZE)+1;
 			modelMesh->shaderName = new char[length];
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "char[] for shaderName");
+
 			strncpy(modelMesh->shaderName, shader, length);
 
 		} else
@@ -126,6 +136,8 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 		{
 			int length = strnlen(tempStrAttr, MJMODEL_MAXATTRSIZE)+1;
 			modelMesh->material = new char[length];
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "char[] for material");
+
 			strncpy(modelMesh->material, tempStrAttr, length);
 		}
 
@@ -137,6 +149,8 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 		modelMesh->drawOrderCount = faceCount*3;
 
 		modelMesh->drawOrderBuffer = new unsigned short[faceCount*3];
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "short for drawOrder");
+
 
 		int posInFaceArray = 0;
 		XMLElement* face = faces->FirstChildElement("face");
@@ -190,6 +204,8 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 			const char* tempStrAttr = submesh->Attribute("name");
 			int length = strnlen(tempStrAttr, 96)+1;
 			char* newStr = new char[length];
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "char[] for submesh");
+
 
 			strncpy(newStr, tempStrAttr, length);
 
@@ -278,10 +294,14 @@ void mjModel::TiePoseToStructure()
 mjModelPose* mjModel::CreateSimplePose()
 {
     mjModelPose* pose = new mjModelPose();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "modelPose");
+
     for (unsigned i = 0; i < meshes.size(); i++)
     {
         pose->angles.push_back(new mjVector3());
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3 for angles");
         pose->positions.push_back(new mjVector3());
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3 for positions");
     }
     return pose;
 }
@@ -307,8 +327,8 @@ void mjModel::DrawDEPRECATED(std::vector<mjShader*>& shaderList,
     if (0)//structure)
     {
 
-        mStack.PopAll();
-        Matrix4::SetIdentityM(mStack.current, 0);
+        //mStack.PopAll();
+        Matrix4::SetIdentityM(stack->current, 0);
         int debugVar = structure->nodes.size();
         printf("dbvar: %d\n", debugVar);
     	for (unsigned i = 0; i < structure->nodes.size(); i++)
@@ -325,13 +345,13 @@ void mjModel::DrawDEPRECATED(std::vector<mjShader*>& shaderList,
     			//Nothing.
     			break;
     		case MJ_NODE_PUSH:
-    			mStack.Push(tempMatrix);
+                stack->Push(tempMatrix);
     			break;
     		case MJ_NODE_POP:
-    			mStack.Pop();
+                stack->Pop();
     			break;
     		case MJ_NODE_RESET:
-    			mStack.PopAll();
+                stack->PopAll();
     			break;
     		}
 

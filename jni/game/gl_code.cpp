@@ -19,6 +19,8 @@ bool setupGame(int w, int h, mjResourceManager* resourceManager) {
     sceneManager.SetFirstScene(graphicsDebugUniverse);*/
 
     platformUniverse = new PlatformUniverseScene(resourceManager);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "platformUniverse");
+
     platformUniverse->Initialise(w,h);
     sceneManager.SetFirstScene(platformUniverse);
     return true;

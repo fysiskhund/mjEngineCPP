@@ -70,6 +70,8 @@ void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
         while (controlPointElement)
         {
             mjVector3* cPointVector = new mjVector3();
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "controlPoint");
+
             mjXMLHelper::ReadVector(controlPointElement, cPointVector);
             bool isRelativeToPreviousPosition = false;
             controlPointElement->QueryBoolAttribute("isrelative", &isRelativeToPreviousPosition);

@@ -20,6 +20,8 @@ GlowBeing::GlowBeing(Level* levelData, mjCamera* camera, mjResourceManager* reso
             delete [] model->meshes[i]->shaderName;
 
 		model->meshes[i]->shaderName = new char[7];
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "char [] for shaderName");
+
         strncpy(model->meshes[i]->shaderName, "skybox", strnlen("skybox", 10)+1);
 	}
 
@@ -83,7 +85,6 @@ void GlowBeing::ProcessPhysicsEffects(float t_elapsed)
 
 		//if (effectStack[i]->)
 	}
-	effectStack.clear();
 
 	if (!boundingStructure->isImmovable)
 	{

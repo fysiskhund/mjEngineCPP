@@ -10,6 +10,7 @@ mjSphere::mjSphere()
 	type = MJ_SPHERE;
 	r = 0;
 	c = new mjVector3();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3");
 }
 mjSphere::mjSphere(mjVector3* c, float r)
 {

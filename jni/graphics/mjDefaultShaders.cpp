@@ -25,6 +25,8 @@ mjDefaultShaders::mjDefaultShaders()
 	// Set up shader
 	CreateProgram(vanillaVertexShaderCode, vanillaFragmentShaderCode);//vanillaFragmentShaderCode_GL3_3);//
 	name = new char[8];
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "char[] for shaderName");
+
 	strncpy(name, "default", 8);
 
     checkGlError("create glProgram");

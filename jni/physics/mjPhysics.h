@@ -58,6 +58,7 @@ private:
 	void ProcessCollisionEffects();
 	void UpdatePositions(float t_elapsed);
     void RecycleCollisionResults();
+    void FlushObjectsPhysicsEffects();
 
 };
 

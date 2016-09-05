@@ -21,7 +21,12 @@ Frog::Frog(Level* levelData, mjResourceManager* resourceManager)
 	}
 
     FrogAutomatonState* stopState = new FrogAutomatonStopState(this);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "frogStopState");
+
+
     FrogAutomatonState* jumpState = new FrogAutomatonJumpState(this);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "frogJumpState");
+
 
     states.push_back(stopState);
     states.push_back(jumpState);
@@ -30,6 +35,8 @@ Frog::Frog(Level* levelData, mjResourceManager* resourceManager)
     MatchAABBToModel();
 
     soundSource = new mjSoundSource();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "soundSource");
+
     soundSource->Load(resourceManager->FetchSound("sounds/ribbit.wav"), 0);
 
     mass = 1000; // SO PHAT!

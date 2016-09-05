@@ -229,6 +229,7 @@ GLuint mjImageLoader::SendToGL(GLfloat textureWrapParam)
 	GLuint textures[1];
     checkGlError("start of sendToGL");
 	glGenTextures(1, &textures[0]);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "glGenTextures");
     checkGlError("glGenTextures");
     glBindTexture(GL_TEXTURE_2D, textures[0]);
 

@@ -15,20 +15,28 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
 
     //Animation test
     mjAnimationSegment* segment0 = new mjAnimationSegment();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "animsegment");
+
     segment0->meshNum = 0;
     segment0->totalTime = 0.8;
 
     mjAnimationKeyframe* keyframe0 = new mjAnimationKeyframe();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "animkeyframe");
+
 
     keyframe0->angles.y = M_PI_4;
     keyframe0->timeStamp = 0;
 
     mjAnimationKeyframe* keyframe1 = new mjAnimationKeyframe();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "animkeyframe");
+
 
     keyframe1->angles.y = -M_PI_4;
     keyframe1->timeStamp = 0.4;
 
     mjAnimationKeyframe* keyframe2 = new mjAnimationKeyframe();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "animkeyframe");
+
 
     keyframe2->angles.y = M_PI_4;
     keyframe2->timeStamp = 0.8;
@@ -42,11 +50,21 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
     animation.segments.push_back(segment0);
 
     pose = new mjModelPose();
-    pose->angles.push_back(new mjVector3());
-    pose->positions.push_back(new mjVector3());
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "pose");
 
     pose->angles.push_back(new mjVector3());
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3");
+
+    pose->positions.push_back(new mjVector3());
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3");
+
+
+    pose->angles.push_back(new mjVector3());
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3");
+
     pose->positions.push_back(new mjVector3()); // As many "angles" and "positions" as the number of meshes the model has!
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "vector3");
+
 
 
 //////////// end of animation test (init)
@@ -56,8 +74,14 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
    // anchor.Set(2.34, 7.9, -7.42);
 
     BatAutomatonState* wander = new WanderBatMatonState(this);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "wanderstate");
+
     BatAutomatonState* detect = new DetectBatMatonState(this);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "detectstate");
+
     BatAutomatonState* attack = new AttackBatMatonState(this);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "attack helicopter state");
+
     states.push_back(wander);
     states.push_back(detect);
     states.push_back(attack);
@@ -83,7 +107,11 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
 
 
         model->structure = new mjModelStructure();
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "modelStructure");
+
         mjModelStructureNode* baseNode = new mjModelStructureNode();
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "modelStructureNode");
+
         baseNode->operation = MJ_NODE_NOOP;
         baseNode->meshIndex = 1; // The exporter for whatever reason inverts the order. Later they need to be coupled automatically by name so this won't happen
         baseNode->meshName = "birdBody";
@@ -91,6 +119,8 @@ BatBot::BatBot(Level* levelData, mjResourceManager* resourceManager)
         model->structure->nodes.push_back(baseNode);
 
         mjModelStructureNode* headNode = new mjModelStructureNode();
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "modelStructureNode");
+
         headNode->operation = MJ_NODE_PUSH;
         headNode->meshIndex = 0; // The exporter for whatever reason inverts the order. Later they need to be coupled automatically by name so this won't happen
         headNode->meshName = "birdHead";
@@ -161,7 +191,6 @@ void BatBot::ProcessPhysicsEffects(float t_elapsed)
 
 		//if (effectStack[i]->)
 	}
-	effectStack.clear();
 
 
 	if (!boundingStructure->isImmovable)

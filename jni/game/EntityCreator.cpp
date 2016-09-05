@@ -101,34 +101,42 @@ mjObject* EntityCreator::CreateEntity(const char* entityType, Level* levelData)
     switch (whichEntity) {
         case 0:
             result = new Character(levelData, resourceManager);
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "character");
             result->tag = OT_CHARACTER;
             break;
         case 1:
             result = new Bird(levelData, resourceManager);
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "bird");
             result->tag = OT_BIRD;
             break;
         case 2:
             result = new BatBot(levelData, resourceManager);
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "batbot");
             result->tag = OT_BATBOT;
             break;
         case 3:
             result = new Plant(levelData, resourceManager);
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "plant");
             result->tag = OT_PLANT;
             break;
         case 4:
             result = new Frog(levelData, resourceManager);
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "frog");
             result->tag = OT_FROG;
             break;
         case 5:
             result = new MysticalDoor(levelData, resourceManager);
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "door");
             result->tag = OT_MYSTICALDOOR;
             break;
         case 6:
             result = new FrogBoss(levelData, resourceManager);
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "frogboss");
             result->tag = OT_FROGBOSS;
             break;
         case 7:
             result = new Baobab(levelData, resourceManager);
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "baobab");
             result->tag = OT_BAOBAB;
         break;
         default:

@@ -19,8 +19,14 @@ FrogBoss::FrogBoss(Level* levelData, mjResourceManager* resourceManager)
 	}
 
     FrogBossAutomatonState* waitForLandingState = new FrogBossAutomatonWaitForLandingState(this);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "frogBossLandingState");
+
     FrogBossAutomatonState* huntState = new FrogBossAutomatonHuntState(this);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "frogBossHuntState");
+
     FrogBossAutomatonState* slamState = new FrogBossAutomatonSlamState(this);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "frogBossSlammingState");
+
 
 
     states.push_back(waitForLandingState);
@@ -31,6 +37,8 @@ FrogBoss::FrogBoss(Level* levelData, mjResourceManager* resourceManager)
     MatchAABBToModel();
 
     soundSource = new mjSoundSource();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "soundSource");
+
     soundSource->attenuation = 0.001; // Essentially heard everywhere
     soundSource->Load(resourceManager->FetchSound("sounds/ribbit.wav"), 0);
 

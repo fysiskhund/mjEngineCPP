@@ -38,6 +38,7 @@ void mjScene::SetNextScene(const char* name)
         delete [] nextSceneByName;
     }
     nextSceneByName = new char[strnlen(name, 128)+1];
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "char (scene by name)");
     strncpy(nextSceneByName, name, strnlen(name, 128));
 }
 

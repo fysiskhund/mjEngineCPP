@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <extLibs/util/mjMultiPlatform.h>
+#include <extLibs/logger/mjLog.h>
 
 namespace mjEngine{
 class mjModelMesh

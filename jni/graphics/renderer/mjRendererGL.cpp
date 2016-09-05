@@ -6,6 +6,7 @@ namespace  mjEngine {
 void mjRendererGL::PrepareModel(mjModel &model)
 {
     mjRendererDataGL* dataGL = new mjRendererDataGL();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "dataGL");
 
     model.rendererData = dataGL;
 
@@ -13,6 +14,7 @@ void mjRendererGL::PrepareModel(mjModel &model)
 
 #ifndef USE_GLES2
         glGenVertexArrays(1, &dataGL->vertexArrayID);
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "glGenVertexArrays");
         checkGlError("creating VAO");
         glBindVertexArray(dataGL->vertexArrayID);
         checkGlError("binding newly created VAO");
@@ -22,14 +24,17 @@ void mjRendererGL::PrepareModel(mjModel &model)
 
 
         glGenBuffers(1, &dataGL->vertexCoordinatesBufferID);
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "glGenBuffers (vertex)");
         glBindBuffer(GL_ARRAY_BUFFER, dataGL->vertexCoordinatesBufferID);
         glBufferData(GL_ARRAY_BUFFER, model.numVertices * sizeof(GLfloat)*3, model.vertexBufferData, GL_STATIC_DRAW);
 
         glGenBuffers(1, &dataGL->uvComponentsBufferID);
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "glGenBuffers (uv components)");
         glBindBuffer(GL_ARRAY_BUFFER, dataGL->uvComponentsBufferID);
         glBufferData(GL_ARRAY_BUFFER, model.numVertices * sizeof(GLfloat)*2, model.texCoordBufferData, GL_STATIC_DRAW);
 
         glGenBuffers(1, &dataGL->normalCoordinatesID);
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "glGenBuffers (normal coords)");
         glBindBuffer(GL_ARRAY_BUFFER, dataGL->normalCoordinatesID);
         glBufferData(GL_ARRAY_BUFFER, model.numVertices * sizeof(GLfloat)*3, model.normalComponentBufferData, GL_STATIC_DRAW);
 
@@ -40,7 +45,9 @@ void mjRendererGL::PrepareModel(mjModel &model)
 
         // Generate a buffer for the indices as well
         dataGL->elementBuffersIDs = new GLuint[model.meshes.size()];
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "GLuint[] for meshNums");
         glGenBuffers(model.meshes.size(), dataGL->elementBuffersIDs);
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "glGenBuffers (elements)");
         for (uint16_t i = 0; i < model.meshes.size(); i++)
         {
             mjModelMesh* mesh = model.meshes[i];

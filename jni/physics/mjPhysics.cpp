@@ -22,6 +22,7 @@ void mjPhysics::AddObject(mjObject* object, int collisionLayer)
 		while (collisionLayers.size() <= (collisionLayer + 1))
 		{
 			collisionLayers.push_back(new std::vector<mjObject* >());
+            LOGI("%s %d: new %s", __FILE__, __LINE__, "vector<mjObject*> for collisionLayer");
 		}
 		collisionLayers[collisionLayer]->push_back(object);
 
@@ -30,7 +31,7 @@ void mjPhysics::AddObject(mjObject* object, int collisionLayer)
 
 void mjPhysics::Update(float t_elapsed)
 {
-	ProcessPhysicsEffectsAndUpdate(t_elapsed);
+    ProcessPhysicsEffectsAndUpdate(t_elapsed);
 
 	CollisionDetection();
 
@@ -40,6 +41,7 @@ void mjPhysics::Update(float t_elapsed)
 
     RecycleCollisionResults();
 
+    FlushObjectsPhysicsEffects();
 }
 
 
@@ -112,6 +114,7 @@ void mjPhysics::CollisionDetection()
                         } else
                         {
                             colResult = new mjCollisionResult();
+                            LOGI("%s %d: new %s", __FILE__, __LINE__, "collisionResult for pool");
                             colResultPool.push_back(colResult);
 
                         }
@@ -330,7 +333,7 @@ void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
 
 
 
-			allObjects[i]->effectStack.push_back(&gravityEffect);
+            allObjects[i]->effectStack.push_back(&gravityEffect);
 
 			for (unsigned j = 0; j < globalEffects.size(); j++)
             {
@@ -364,13 +367,6 @@ void mjPhysics::ProcessCollisionEffects()
 			allObjects[i]->ProcessCollisionEffects();
 		}
 
-        //
-        /*for (unsigned j = 0; j < allObjects[i]->collisionStack.size(); j++)
-		{
-            delete allObjects[i]->collisionStack[j]; // all collision results from all objects should be destroyed here
-
-        }*/
-		allObjects[i]->collisionStack.clear();
 	}
 
 }
@@ -394,6 +390,17 @@ void mjPhysics::RecycleCollisionResults()
     {
         lastColResultPoolSize = colResultPool.size();
         LOGI("colResultPool size: %d in use\n", lastColResultPoolSize);
+    }
+}
+
+void mjPhysics::FlushObjectsPhysicsEffects()
+{
+    for(unsigned i = 0; i < allObjects.size(); i++)
+    {
+
+        if (allObjects[i]->hasKinematics){
+            allObjects[i]->FlushPhysicsEffects();
+        }
     }
 }
 

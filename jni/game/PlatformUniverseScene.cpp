@@ -5,6 +5,7 @@ PlatformUniverseScene::PlatformUniverseScene(mjResourceManager* resourceManager)
 {
 
     entityCreator = new EntityCreator(resourceManager);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "entitycreator");
     srand(time(0));
 
     levelFilename  = "levels/testLevel.xml";
@@ -20,9 +21,11 @@ void PlatformUniverseScene::Initialise(int width, int height)
     sceneGraph.renderer.Initialize(resourceManager);
 
     camera = new mj3rdPersonCamera();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "3rd person camera");
     //InitShaders();
 
     level = new Level(resourceManager);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "level");
     //LOGI("Fetching sound %s", "music/fyra.ogg");
     musicPlayer.Load(resourceManager->FetchSound("music/fyra.ogg"), 0);
     //musicPlayer.Play();
@@ -115,9 +118,11 @@ void PlatformUniverseScene::Initialise(int width, int height)
 
     DEBUGvasilisa = resourceManager->FetchModel("bird.mesh.xml");
     debugRenderer = new mjRendererGL();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "renderer");
     debugRenderer->Initialize(resourceManager);
     debugRenderer->PrepareModel(*DEBUGvasilisa);
     debugVasiObject = new mjObject();
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "mjobject");
 
 
     GLuint glTexture = resourceManager->FetchTexture("birdtexture.png", GL_CLAMP_TO_EDGE);
@@ -141,6 +146,8 @@ void PlatformUniverseScene::InitShaders()
 void PlatformUniverseScene::SetUpSkybox()
 {
 	skybox = new mjSkybox(resourceManager);
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "skybox");
+
 
 	mjImageLoader imgLoader;
 	mjModel* skyboxBox;
@@ -190,10 +197,12 @@ void PlatformUniverseScene::Update(float t_elapsed)
 		//LOGI("ambient.wind %p, windEffect %3.3f %3.3f %3.3f\n", &ambient.wind, windEffect->value.x, windEffect->value.y, windEffect->value.z);
         physics.globalEffects.push_back(windEffect);*/
         physics.Update(t_elapsed);
-		camera->Update(t_elapsed);
+
+        camera->Update(t_elapsed);
 
         //FIXME!!
         skybox->Update(t_elapsed);
+
 		if (cameraAnglesModifier.GetNorm() > 0.2) {
 			camera->theta += -0.02*cameraAnglesModifier.y;
 			if (camera->theta > 6.283184)

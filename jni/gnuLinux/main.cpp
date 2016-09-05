@@ -237,6 +237,8 @@ int main(int argc, char* argv[]) {
     #else
         std::string pathPrefix = "C:/mjEngineCPP";
     #endif
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "resourceManager");
+
     setupGame(width, height, new mjResourceManager(pathPrefix));
 
     int beforeFrame;
