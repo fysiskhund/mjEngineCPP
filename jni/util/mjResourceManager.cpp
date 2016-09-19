@@ -194,6 +194,7 @@ mjShaderResource* mjResourceManager::FetchShader(std::string& name)
 
     // FIXME!! to be implemented actual file loading. And how this should work with shaders "pushed".
     // And do it in a way that is not problematic for (im)possible Vulkan/Metal integration in the future
+    return NULL;
 }
 
 /*mjShaderResource* mjResourceManager::PushShader(std::string& name, std::string& vertexShader, std::string& fragmentShader)

@@ -32,7 +32,7 @@ public:
     virtual void CleanForModel(mjModel& model) = 0;
 
 protected:
-    mjResourceManager* resourceManager;
+    mjResourceManager* resourceManager = NULL;
 
 };
 

@@ -3,6 +3,11 @@
 namespace mjEngine
 {
 
+void mjSceneGraph::Initialize(mjResourceManager* resourceManager)
+{
+    renderer.Initialize(resourceManager);
+}
+
 void mjSceneGraph::Update(float t_elapsed)
 {
     // This is supposed to optimise drawing by culling objects that are visible. Perhaps also update the

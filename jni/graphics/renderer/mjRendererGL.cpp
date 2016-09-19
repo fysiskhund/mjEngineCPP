@@ -5,6 +5,11 @@ namespace  mjEngine {
 
 void mjRendererGL::PrepareModel(mjModel &model)
 {
+    if (!resourceManager)
+    {
+        LOGI("Error: Renderer has not been initialized.\n");
+    }
+
     mjRendererDataGL* dataGL = new mjRendererDataGL();
     LOGI("%s %d: new %s", __FILE__, __LINE__, "dataGL");
 

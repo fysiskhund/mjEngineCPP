@@ -42,3 +42,6 @@ build-*/
 
 # *.DS_whatever random debris created by OSX
 *.DS_Store
+
+# takkatakka since it is under a private repo
+takkatakkacpp/

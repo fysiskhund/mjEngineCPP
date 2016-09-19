@@ -9,6 +9,7 @@
 #include <extLibs/math/mjMatrixStack.h>
 #include <extLibs/math/Matrix.h>
 #include <graphics/renderer/mjRenderer.h>
+#include <util/mjResourceManager.h>
 
 #if defined(USE_GL3) || defined(USE_GLES2)
 #include <graphics/renderer/mjRendererGL.h>
@@ -22,6 +23,11 @@ class mjSceneGraph
 {
 public:
 
+#if defined(USE_GL3) || defined(USE_GLES2)
+    mjRendererGL renderer;
+#else
+    mjRenderer renderer;
+#endif
 
     bool sortTranslucentObjects = true;
     std::vector<mjObject*> drawableObjects;
@@ -30,14 +36,9 @@ public:
 
     mjMatrixStack matrixStack;
 
+    void Initialize(mjResourceManager* resourceManager);
 	void Update(float t_elapsed);
 	void Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
-
-#if defined(USE_GL3) || defined(USE_GLES2)
-    mjRendererGL renderer;
-#else
-    mjRenderer renderer;
-#endif
 
 private:
     static bool SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1);

@@ -41,17 +41,17 @@ void Matrix4::FrustumM(GLfloat* m, int ignoredMOffset,
 }
 void Matrix4::OrthoM(GLfloat* m, int ignoredMOffset, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane)
 {
-	GLfloat tx = (right + left)/(right - left);
-	GLfloat ty = (top + bottom)/(top - bottom);
-	GLfloat tz = (farPlane + nearPlane)/(farPlane - nearPlane);
+    GLfloat tx = -(right + left)/(right - left);
+    GLfloat ty = -(top + bottom)/(top - bottom);
+    GLfloat tz = -(farPlane + nearPlane)/(farPlane - nearPlane);
 
-	m[0] = 2/(right - left);
+    m[0] = 2.0/(right - left);
 	m[1] = 0;
 	m[2] = 0;
 	m[3] = 0;
 
 	m[4] = 0;
-	m[5] = 2/(top - bottom);
+    m[5] = 2.0/(top - bottom);
 	m[6] = 0;
 	m[7] = 0;
 

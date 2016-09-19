@@ -19,7 +19,6 @@ win32: DEFINES -= UNICODE
 unix: DEFINES += GNULINUX
 
 HEADERS += \
-    ../keyboardcontrol.h \
     ai/mjAutomaton.h \
     ai/mjAutomatonState.h \
     audio/mjMusicPlayer.h \
@@ -75,7 +74,12 @@ HEADERS += \
     util/mjResourceManager.h \
     util/mjSoundResource.h \
     util/mjTextureResource.h \
-    graphics/mjAssimpModel.h
+    graphics/mjAssimpModel.h \
+    graphics/renderer/mjRenderer.h \
+    graphics/renderer/mjRendererData.h \
+    graphics/renderer/mjRendererDataGL.h \
+    graphics/renderer/mjRendererGL.h \
+    util/mjShaderResource.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -92,8 +96,6 @@ SOURCES += \
     extLibs/util/mjMultiPlatform.cpp \
     extLibs/util/mjXMLHelper.cpp \
     extLibs/math/Matrix.cpp \
-    gnuLinux/keyboardcontrol.cpp \
-    gnuLinux/main.cpp \
     graphics/animation/mjAnimation.cpp \
     graphics/animation/mjAnimationKeyframe.cpp \
     graphics/animation/mjAnimationSegment.cpp \
@@ -127,7 +129,12 @@ SOURCES += \
     util/mjResourceManager.cpp \
     util/mjSoundResource.cpp \
     util/mjTextureResource.cpp \
-    graphics/mjAssimpModel.cpp
+    graphics/mjAssimpModel.cpp \
+    graphics/renderer/mjRenderer.cpp \
+    graphics/renderer/mjRendererData.cpp \
+    graphics/renderer/mjRendererDataGL.cpp \
+    graphics/renderer/mjRendererGL.cpp \
+    util/mjShaderResource.cpp
 
 
 
