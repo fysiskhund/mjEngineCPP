@@ -10,6 +10,7 @@
 #include "../graphics/mjSceneGraph.h"
 #include "../graphics/mjCamera.h"
 #include "../graphics/mjSkybox.h"
+#include "../input/mjInputEvent.h"
 
 namespace mjEngine{
 
@@ -36,6 +37,7 @@ class mjScene
 
         virtual void OnActivate();
         virtual void Update(float t_elapsed);
+        virtual void OnInput(mjInputEvent& event);
         virtual void Draw();
         virtual void OnDeactivate();
 

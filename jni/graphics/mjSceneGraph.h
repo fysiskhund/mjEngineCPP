@@ -39,6 +39,9 @@ public:
     void Initialize(mjResourceManager* resourceManager);
 	void Update(float t_elapsed);
 	void Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
+    void CleanUp();
+    ~mjSceneGraph();
+
 
 private:
     static bool SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1);

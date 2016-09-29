@@ -20,6 +20,11 @@ void mjScene::Update(float t_elapsed)
     sceneGraph.Update(t_elapsed);
 }
 
+void mjScene::OnInput(mjInputEvent& event)
+{
+
+}
+
 void mjScene::Draw()
 {
     glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -31,6 +36,7 @@ void mjScene::OnDeactivate()
 {
 
 }
+
 void mjScene::SetNextScene(const char* name)
 {
     if (nextSceneByName)

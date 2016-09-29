@@ -5,15 +5,17 @@ namespace mjEngine{
 
 class mjInput{
 public:
-int controllerNum;
+    int controllerNum;
 
-mjVector3 mainStick; // left stick
-mjVector3 secStick; // right stick
+    mjVector3 mainStick; // left stick
+    mjVector3 secStick; // right stick
 
-bool button1_pressed;
+    bool button1_pressed;
 
 private:
 
 };
+
+
 }
 #endif

@@ -62,6 +62,18 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
     }
 
 }
+void mjSceneGraph::CleanUp()
+{
+    drawableObjects.clear();
+    translucentObjects.clear();
+    shadowCasters.clear();
+}
+
+mjSceneGraph::~mjSceneGraph()
+{
+
+    CleanUp();
+}
 
 
 bool mjSceneGraph::SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1)
