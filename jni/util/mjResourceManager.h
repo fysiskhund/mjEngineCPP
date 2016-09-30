@@ -33,8 +33,8 @@ class mjResourceManager
         mjModel* FetchModel(const char* path);
         mjModel* FetchModel(std::string& path);
 
-        GLuint FetchTexture(const char* path, unsigned glTextureWrapParameter);
-        GLuint FetchTexture(std::string& path, unsigned glTextureWrapParameter);
+        GLuint FetchTexture(const char* path, unsigned glTextureWrapParameter = GL_CLAMP_TO_EDGE);
+        GLuint FetchTexture(std::string& path, unsigned glTextureWrapParameter = GL_CLAMP_TO_EDGE);
 
         mjModelStructure* FetchModelStructure(const char* path);
         mjModelStructure* FetchModelStructure(std::string& path);

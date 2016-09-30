@@ -7,7 +7,6 @@
 #include "sdl/mjMusicPlayer_SDL.txtcpp"
 
 
-
 #elif USE_ANDROID_AUDIO
 
 #include "android/mjMusicPlayer_android.txtcpp"

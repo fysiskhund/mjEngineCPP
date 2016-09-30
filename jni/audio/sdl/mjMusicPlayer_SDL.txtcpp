@@ -9,13 +9,17 @@ mjMusicPlayer::mjMusicPlayer()
 void mjMusicPlayer::Load(mjSoundResource* soundRes, int sampleNumber)
 {
    currentMusic = Mix_LoadMUS(soundRes->path.c_str());
+   if (currentMusic == NULL)
+   {
+    LOGI("Error while loading music\n");
+   }
 }
 
 void mjMusicPlayer::Play()
 {
     if (currentMusic)
     {
-        channel = Mix_PlayMusic(currentMusic, -1);
+        channel = Mix_PlayMusic(currentMusic, loops);
     }
 }
 void mjMusicPlayer::Play(int sampleIndex)
@@ -24,7 +28,11 @@ void mjMusicPlayer::Play(int sampleIndex)
 }
 void mjMusicPlayer::Pause()
 {
-    Mix_Pause(channel);
+    Mix_PauseMusic();
+}
+void mjMusicPlayer::Resume()
+{
+    Mix_ResumeMusic();
 }
 
 void mjMusicPlayer::Rewind()

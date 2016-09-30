@@ -11,12 +11,16 @@ namespace mjEngine{
 class mjMusicPlayer
 {
     public:
+
+        int loops = 0;
+
         mjMusicPlayer();
 
         void Load(mjSoundResource* soundRes, int sampleNum);
         void Play();
         void Play(int sampleIndex);
         void Pause();
+        void Resume();
         void Rewind();
 
         ~mjMusicPlayer();

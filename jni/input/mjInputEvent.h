@@ -90,6 +90,8 @@ public:
 
     int mouseButtonNumber;
     int mouseButtonState;
+    int keyboardKey;
+    int keyboardKeyState;
 
     mjInputEvent();
 
