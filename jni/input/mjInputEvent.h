@@ -1,13 +1,16 @@
 #ifndef MJINPUTEVENT_H
 #define MJINPUTEVENT_H
 
+#include <stdint.h>
+
+
 namespace mjEngine {
 
 // These numerical values and comments are basically stolen from SDL, for practical reasons.
 //
 enum MJInputTypes
 {
-    MJ_EVENT_NONE,
+    MJ_EVENT_NONE = 0,
 
     /* Application events */
     MJ_QUIT           = 0x100, /**< User-requested quit */
@@ -86,7 +89,9 @@ class mjInputEvent
 {
 public:
     MJInputTypes type = MJ_EVENT_NONE;
-    float time;
+    uint32_t time;
+    int32_t x;
+    int32_t y;
 
     int mouseButtonNumber;
     int mouseButtonState;
