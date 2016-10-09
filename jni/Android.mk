@@ -1,6 +1,6 @@
-# Copyright (C) 2016 Alejandro Valenzuela Roca
+# Copyright (C) 2014-2016 Alejandro Valenzuela Roca
 #
-# Compile only the engine. Note: use ndk-build directly, for some reason calling it from Eclipse generates significantly bigger library files. Probably left some debugging flag active!
+# EVERYTHING will be compiled. This is more of a sanity test for the system since it takes a significant amount of time to be done
 #
 # -------------
 
@@ -11,14 +11,24 @@ LOCAL_PATH:= $(call my-dir)
 
 
 
-# compile the mjEngine, as a library
+# getting libPNG into the project
 include $(CLEAR_VARS)
 
+LOCAL_MODULE    := png
+LOCAL_SRC_FILES := precompiled/png/$(TARGET_ARCH_ABI)/libpng.a
 
-LOCAL_MODULE    := libmjEngine
+include $(PREBUILT_STATIC_LIBRARY)
+# -------------
+
+
+
+# Now, the files from both the engine and the game project are specified:
+
+include $(CLEAR_VARS)
+
 LOCAL_CFLAGS := -I.
 
-# Now, the file from the engine are specified:
+LOCAL_MODULE    := libmjGame
 LOCAL_SRC_FILES := ai/mjAutomaton.cpp \
     ai/mjAutomatonState.cpp \
     audio/mjMusicPlayer.cpp \
@@ -48,14 +58,16 @@ LOCAL_SRC_FILES := ai/mjAutomaton.cpp \
     graphics/mjModel.cpp \
     graphics/mjModelMesh.cpp \
     graphics/renderer/mjRenderer.cpp \
-    graphics/renderer/mjRendererGL.cpp \
     graphics/renderer/mjRendererData.cpp \
+    graphics/renderer/mjRendererGL.cpp \
     graphics/renderer/mjRendererDataGL.cpp \
     graphics/mjSceneGraph.cpp \
     graphics/mjShader.cpp \
     graphics/mjSkybox.cpp \
     graphics/mjSkyboxLevelData.cpp \
     graphics/mjSkyboxShaders.cpp \
+    graphics/mjAssimpModel.cpp \
+    input/mjInputEvent.cpp \
     physics/mjAABB.cpp \
     physics/mjCollisionResult.cpp \
     physics/mjCollisionStructure.cpp \
@@ -68,8 +80,26 @@ LOCAL_SRC_FILES := ai/mjAutomaton.cpp \
     util/mjRenderedText.cpp \
     util/mjResource.cpp \
     util/mjResourceManager.cpp \
+    util/mjShaderResource.cpp \
     util/mjSoundResource.cpp \
-    util/mjTextureResource.cpp
+    util/mjTextureResource.cpp \
+   takkatakkacpp/gameObjects/Bubble.cpp \
+	takkatakkacpp/gameObjects/Track.cpp \
+	takkatakkacpp/gameObjects/Step.cpp \
+	takkatakkacpp/gameObjects/Poke.cpp \
+	takkatakkacpp/gameObjects/TrackLoader.cpp \
+	takkatakkacpp/gameObjects/BubbleScripts/BubbleScript.cpp \
+	takkatakkacpp/gameObjects/BubbleScripts/BubbleScriptSettings.cpp \
+	takkatakkacpp/gameObjects/BubbleScripts/SpiralWalkBubbleScriptSettings.cpp \
+	takkatakkacpp/gameObjects/BubbleScripts/SpiralWalkBubbleScript.cpp \
+	takkatakkacpp/TitleUniverse.cpp \
+	takkatakkacpp/gl_code.cpp \
+	takkatakkacpp/SongUniverse.cpp
+# -------------
 
-# finally we tell ndk-build that the output is a static library. This will be included by Eclipse in the final *.so shared library - see Android.mk.gameOnly
-include $(BUILD_STATIC_LIBRARY)
+# now, the shared and static libs to be used are specified		   
+LOCAL_LDLIBS    := -llog -lGLESv2 -lz
+LOCAL_STATIC_LIBRARIES := png
+
+# finally we tell ndk-build that the output is a shared library (libmjGame.so) . This will be loaded by Java in the android device
+include $(BUILD_SHARED_LIBRARY)

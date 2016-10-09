@@ -29,11 +29,20 @@ void mjMusicPlayer::Pause()
 	mjMultiPlatform::AddCommandForJNI(cmd);
 }
 
+
+
 void mjMusicPlayer::Rewind()
 {
 	std::string cmd = "4:";
 	mjMultiPlatform::AddCommandForJNI(cmd);
 }
+
+void mjMusicPlayer::Resume()
+{
+	std::string cmd = "2:"; // In Android it is the same command
+	mjMultiPlatform::AddCommandForJNI(cmd);
+}
+
 
 mjMusicPlayer::~mjMusicPlayer()
 {

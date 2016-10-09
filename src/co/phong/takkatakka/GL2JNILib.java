@@ -3,7 +3,7 @@
  * 
  */
 
-package co.phong.mjengine;
+package co.phong.takkatakka;
 
 // Wrapper for native library
 
@@ -24,6 +24,7 @@ public class GL2JNILib {
      public static native byte[] HandleEngineQuery();     
      public static native void HandleJoystickInput(int controllerID, int joystickID, float x, float y);
      public static native void HandleButtonInput(int controllerID, int buttonID, boolean pressedDown);
+     public static native void HandleTouchInput(int fingerID, boolean pressedDown, float x, float y);
      public static native void SendEngineQuery(String cmdStr);
      
      public static boolean isReady = false;

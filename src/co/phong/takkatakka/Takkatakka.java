@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package co.phong.mjengine;
+package co.phong.takkatakka;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -25,10 +25,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import android.support.v4.view.MotionEventCompat;
+
+
 import java.io.File;
 
 
-public class GL2JNIActivity extends Activity {
+public class Takkatakka extends Activity {
 
     GL2JNIView mView;
 
@@ -66,19 +69,25 @@ public class GL2JNIActivity extends Activity {
         mjJNICommandInterpreter.musicPlayer.start(); // (this resumes playback)
     }
     @Override
-    public boolean onTouchEvent(MotionEvent e) {
+    public boolean onTouchEvent(MotionEvent motionEvent) {
         // MotionEvent reports input details from the touch screen
         // and other input controls. In this case, you are only
         // interested in events where the touch position changed.
 
-        float x = e.getX();
-        float y = e.getY();
-
-        switch (e.getAction()) {
-            case MotionEvent.ACTION_MOVE:
-
-
-        }
+    	int actionMasked = MotionEventCompat.getActionMasked(motionEvent);
+		
+		//System.out.println(actionToString(actionMasked));
+		if (actionMasked == MotionEvent.ACTION_DOWN || 
+				actionMasked == MotionEvent.ACTION_POINTER_DOWN ||
+				actionMasked == MotionEvent.ACTION_DOWN ||
+				actionMasked == MotionEvent.ACTION_POINTER_UP)
+		{
+			int pointerIndex = MotionEventCompat.getActionIndex(motionEvent);
+			float x = MotionEventCompat.getX(motionEvent, pointerIndex);
+			float y = MotionEventCompat.getY(motionEvent, pointerIndex);
+			GL2JNILib.HandleTouchInput(pointerIndex, (actionMasked == MotionEvent.ACTION_DOWN || actionMasked == MotionEvent.ACTION_POINTER_DOWN), x, y);
+			
+		}
 
         return true;
     }

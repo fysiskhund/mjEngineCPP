@@ -15,6 +15,7 @@ class mjMusicPlayer
         void Play();
         void Play(int sampleIndex);
         void Pause();
+        void Resume();
         void Rewind();
 
         ~mjMusicPlayer();
