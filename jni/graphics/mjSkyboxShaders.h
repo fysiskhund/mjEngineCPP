@@ -17,7 +17,7 @@ public:
 
 	void Run(mjModelMesh* mesh,
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-            float* modelMatrix, float* modelViewProjectionMatrix, int glTexture ) override;
+            float* modelMatrix, float* modelViewProjectionMatrix, int glTexture, float* extraColorForTexture ) override;
 
 #ifdef USE_ASSIMP
     void RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh,

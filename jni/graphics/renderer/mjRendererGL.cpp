@@ -67,7 +67,7 @@ void mjRendererGL::PrepareModel(mjModel &model)
 }
 
 void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAtMatrix, float *projectionMatrix, mjModelPose *pose, mjMatrixStack *stack,
-                               std::vector<mjShader*>* customShaders, std::vector<int>* customTextures)
+                               std::vector<mjShader*>* customShaders, int* customTextures, float* extraColorForTexture)
 {
     mjRendererDataGL* dataGL = (mjRendererDataGL*) model.rendererData;
 
@@ -120,20 +120,14 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
 
 
         glTexture = customTextures?
-                    (customTextures->size() > 1) ? (*customTextures)[i] : (*customTextures)[0] :
+                    customTextures[i] :
                     mesh->glTexture;
 
         //is equivalent to
         /*
         if (customTextures != NULL)
         {
-            if (customTextures->size() > 1)
-            {
-                glTexture = (*customTextures)[i];
-            } else
-            {
-                glTexture = (*customTextures)[0];
-            }
+                glTexture = customTextures[i];
         } else
         {
 
@@ -158,7 +152,7 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
 
 
 
-        shader->Run(mesh, NULL, NULL, NULL, modelMatrix, modelViewProjectionMatrix, glTexture);
+        shader->Run(mesh, NULL, NULL, NULL, modelMatrix, modelViewProjectionMatrix, glTexture, extraColorForTexture);
 
         // Index buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, dataGL->elementBuffersIDs[i]);

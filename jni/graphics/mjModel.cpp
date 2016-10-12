@@ -385,9 +385,9 @@ void mjModel::DrawDEPRECATED(std::vector<mjShader*>& shaderList,
     				projectionMatrix, 0,
 					modelViewMatrix, 0);
 
-    		shaderList[meshes[i]->mjShaderListIndex]->Run(meshes[i],
+            /*shaderList[meshes[i]->mjShaderListIndex]->Run(meshes[i],
                     vertexBufferData, texCoordBufferData, normalComponentBufferData,
-                    modelMatrix, modelViewProjectionMatrix, meshes[i]->glTexture);
+                    modelMatrix, modelViewProjectionMatrix, meshes[i]->glTexture); obsolete code kept for reference*/
 
     		/*
 

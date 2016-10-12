@@ -1,10 +1,10 @@
 
 
-//OpenGL ES 2.0 version of the sources to the default shaders
+// OpenGL ES 2.0 version of the sources to the default shaders
 
 
 const char* mjDefaultShaders::vanillaVertexShaderCode =
-			"attribute vec4 MJ_VERTEX_COORDINATES; \n"
+                "attribute vec4 MJ_VERTEX_COORDINATES; \n"
 	        "attribute vec2 MJ_UV_COMPONENTS;\n"
 	        "attribute vec3 MJ_NORMAL_COORDINATES;\n"
 	        "uniform mat4 maMVPMatrix;\n"
@@ -57,12 +57,13 @@ const char* mjDefaultShaders::vanillaFragmentShaderCode =
 
 		 "varying vec2 textureCoordinatesForFragmentShader;\n"
 		 "uniform sampler2D uTexture;\n"
+                 "uniform vec4 uExtraColorForTexture;\n"
 
 		 "varying vec4 lightParameterForFragmentShader;\n"
 
 		 "void main(){ \n"
 		//"gl_FragColor = vec4(0,1,0,1)*lightParameterForFragmentShader; \n"
-		 " gl_FragColor = texture2D(uTexture, textureCoordinatesForFragmentShader)* lightParameterForFragmentShader;\n"
+                 " gl_FragColor = texture2D(uTexture, textureCoordinatesForFragmentShader) * lightParameterForFragmentShader * extraColorForTexture;\n"
          "  if (gl_FragColor.a < 0.1)\n"
          "  {\n"
          "       discard;\n"

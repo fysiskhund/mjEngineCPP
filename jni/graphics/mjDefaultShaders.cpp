@@ -53,6 +53,7 @@ mjDefaultShaders::mjDefaultShaders()
 	uDiffuseLightColorHandle = glGetUniformLocation(glProgramHandle, "uDiffuseLightColor");
 
 	uAmbientLightColorHandle = glGetUniformLocation(glProgramHandle, "uAmbientLightColor");
+    uExtraColorForTextureHandle = glGetUniformLocation(glProgramHandle, "uExtraColorForTexture");
     checkGlError("getting parameters");
 
     LOGI("textureHandle %d, mvpMAtrixHandle %d", maTextureHandle, maMVPMatrixHandle);
@@ -60,7 +61,7 @@ mjDefaultShaders::mjDefaultShaders()
 
 void mjDefaultShaders::Run(mjModelMesh* mesh,
 		float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-        float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)
+        float* modelMatrix, float* modelViewProjectionMatrix, int glTexture, float* extraColorForTexture)
 {
 	 glUseProgram(glProgramHandle);
 
@@ -69,6 +70,7 @@ void mjDefaultShaders::Run(mjModelMesh* mesh,
      glUniform3fv(uDiffuseLightDirectionHandle, 1, diffuseLightDirectionArray);
      glUniform4fv(uDiffuseLightColorHandle, 1, diffuseLightColor);
      glUniform4fv(uAmbientLightColorHandle, 1, ambientLightColor);
+     glUniform4fv(uExtraColorForTextureHandle, 1, extraColorForTexture);
 
      // Send the modelViewProjection Matrix
      glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
@@ -127,7 +129,7 @@ void mjDefaultShaders::RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMes
 #endif
 
 
-#ifdef USE_GLES2
+#ifdef 1 USE_GLES2
 
 	#include "gles2/defaultShaderSources-gles2.h"
 
@@ -137,23 +139,5 @@ void mjDefaultShaders::RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMes
 
 #endif
 
-const char* mjDefaultShaders::simpleVertexShaderCode =
-		"attribute vec4 vPosition;\n"
-		"attribute vec2 aTexCoordinates;\n"
-		"uniform mat4 maMVPMatrix;\n"
-
-		"varying vec2 vTexCoordinates;\n"
-	    "void main() {\n"
-	    "  gl_Position = maMVPMatrix*vPosition;\n"
-		"  vTexCoordinates = aTexCoordinates;\n"
-	    "}\n";
-
-const char* mjDefaultShaders::simpleFragmentShaderCode =
-		"precision mediump float;\n"
-		"varying vec2 vTexCoordinates;\n"
-		"uniform sampler2D uTexture;\n"
-	    "void main() {\n"
-	    "  gl_FragColor = texture2D(uTexture, vTexCoordinates);\n"
-	    "}\n";
 
 }

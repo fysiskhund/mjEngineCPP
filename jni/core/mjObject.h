@@ -60,7 +60,8 @@ public:
     char* modelName = NULL;
 	mjModel* model;
     std::vector<mjShader*>* customShaders = NULL;
-    std::vector<int>* customTextures = NULL;
+    int* customTextures = NULL;
+    float extraColorForTexture[4] = {1, 1, 1, 1};
 
 	int animationState = 0;
 	mjModelAnimation* animation = NULL;

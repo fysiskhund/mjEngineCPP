@@ -35,7 +35,7 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
 
                                 //mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack)
         renderer.RenderModel(* drawableObj->model, modelMatrix, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
-                             drawableObj->customShaders, drawableObj->customTextures);
+                             drawableObj->customShaders, drawableObj->customTextures, drawableObj->extraColorForTexture);
 
         //drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
 	}

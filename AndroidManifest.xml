@@ -19,14 +19,14 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="co.phong.mjengine">
+    package="co.phong.takkatakka">
     <uses-feature android:glEsVersion="0x00020000"/>
     <uses-sdk android:minSdkVersion="19" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
    
     <application
-            android:label="@string/gl2jni_activity">
-        <activity android:name="GL2JNIActivity"
+            android:label="Takkatakka">
+        <activity android:name="Takkatakka"
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             	android:launchMode="singleTask"
             	android:configChanges="orientation|keyboardHidden">

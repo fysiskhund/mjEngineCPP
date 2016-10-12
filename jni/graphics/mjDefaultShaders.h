@@ -21,7 +21,7 @@ class mjDefaultShaders:  public mjShader
 	mjDefaultShaders();
 	void Run(mjModelMesh* mesh,
 			float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-            float* modelMatrix, float* modelViewProjectionMatrix, int glTexture) override;
+            float* modelMatrix, float* modelViewProjectionMatrix, int glTexture, float* extraColorForTexture) override;
 
 #ifdef USE_ASSIMP
     void RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh,
@@ -29,11 +29,8 @@ class mjDefaultShaders:  public mjShader
                       float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)  override;
 #endif
 
-	static const char* simpleVertexShaderCode; // The simple shaders can be used in the skybox
-	static const char* simpleFragmentShaderCode;
 	static const char* vanillaVertexShaderCode; // Vanilla shaders give a flat shading of surfaces
 	static const char* vanillaFragmentShaderCode;
-	static const char* vanillaFragmentShaderCode_GL3_3;
 
 
 
@@ -51,6 +48,8 @@ class mjDefaultShaders:  public mjShader
     GLint uDiffuseLightDirectionHandle;
     GLint uDiffuseLightColorHandle;
     GLint uAmbientLightColorHandle;
+    GLint uExtraColorForTextureHandle;
+
     //GLint maMVMatrixHandle;
 	private:
 		float diffuseLightDirectionArray[3];

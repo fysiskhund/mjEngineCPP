@@ -12,6 +12,8 @@
 #endif
 #if defined(DESKTOP_SDL) || defined(IOS)
 
+#include <stdio.h>
+
 #define LOGI(...) printf(__VA_ARGS__); printf("\n");
 
 #endif

@@ -17,7 +17,7 @@ const char* mjDefaultShaders::vanillaVertexShaderCode =
 
 	        "uniform vec3 uDiffuseLightDirection;\n"
 
-	        "uniform vec4 uAmbientLightColor;\n"
+            "uniform vec4 uAmbientLightColor;\n"
 
 	        "out vec2 textureCoordinatesForFragmentShader;\n"
 	        "out vec4 lightParameterForFragmentShader;\n"
@@ -61,16 +61,17 @@ const char* mjDefaultShaders::vanillaFragmentShaderCode =
         "#version 330 core \n"
 		 //"precision mediump float;\n"
 
-		 "in vec2 textureCoordinatesForFragmentShader;\n"
+         "uniform vec4 uExtraColorForTexture;\n"
 		 "uniform sampler2D uTexture;\n"
 
 		 "in vec4 lightParameterForFragmentShader;\n"
+         "in vec2 textureCoordinatesForFragmentShader;\n"
 
          "out vec4 fragColorOut;\n"
 
 		 "void main(){ \n"
 		//"gl_FragColor = vec4(0,1,0,1)*lightParameterForFragmentShader; \n"
-         " fragColorOut = texture(uTexture, textureCoordinatesForFragmentShader)* lightParameterForFragmentShader;\n"
+         " fragColorOut = texture(uTexture, textureCoordinatesForFragmentShader) * lightParameterForFragmentShader * uExtraColorForTexture;\n"
          "  if (fragColorOut.a < 0.1)\n"
          "  {\n"
          "       discard;\n"

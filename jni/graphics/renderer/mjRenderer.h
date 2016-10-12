@@ -27,7 +27,7 @@ public:
     virtual void PrepareModel(mjModel& model) = 0;
 
     virtual void RenderModel(mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack,
-                             std::vector<mjShader*>* customShaders, std::vector<int>* customTextures) = 0;
+                             std::vector<mjShader*>* customShaders, int* customTextures, float* extraColorForTexture) = 0;
 
     virtual void CleanForModel(mjModel& model) = 0;
 

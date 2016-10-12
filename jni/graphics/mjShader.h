@@ -52,7 +52,7 @@ public:
 
     virtual void Run(mjModelMesh* modelMesh,
             float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
-            float* modelMatrix, float* modelViewProjectionMatrix, int glTexture)= 0; // Gets called in order to draw something
+            float* modelMatrix, float* modelViewProjectionMatrix, int glTexture, float* extraColorForTexture)= 0; // Gets called in order to draw something
 
 #ifdef USE_ASSIMP
 

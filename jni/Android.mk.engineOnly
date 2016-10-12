@@ -47,12 +47,16 @@ LOCAL_SRC_FILES := ai/mjAutomaton.cpp \
     graphics/mjImageLoader.cpp \
     graphics/mjModel.cpp \
     graphics/mjModelMesh.cpp \
-    graphics/mjRenderer.cpp \
+    graphics/renderer/mjRenderer.cpp \
+    graphics/renderer/mjRendererData.cpp \
+    graphics/renderer/mjRendererGL.cpp \
+    graphics/renderer/mjRendererDataGL.cpp \
     graphics/mjSceneGraph.cpp \
     graphics/mjShader.cpp \
     graphics/mjSkybox.cpp \
     graphics/mjSkyboxLevelData.cpp \
     graphics/mjSkyboxShaders.cpp \
+    input/mjInputEvent.cpp \
     physics/mjAABB.cpp \
     physics/mjCollisionResult.cpp \
     physics/mjCollisionStructure.cpp \

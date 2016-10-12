@@ -16,7 +16,7 @@ public:
     // mjRenderer interface
     void PrepareModel(mjModel &model) override;
     void RenderModel(mjModel &model, float *modelMatrix, float *lookAtMatrix, float *projectionMatrix, mjModelPose *pose, mjMatrixStack *stack,
-                     std::vector<mjShader*>* customShaders, std::vector<int>* customTextures) override;
+                     std::vector<mjShader*>* customShaders, int* customTextures, float* extraColorForTexture) override;
     void CleanForModel(mjModel &model) override;
 
 private:
