@@ -80,7 +80,8 @@ HEADERS += \
     graphics/renderer/mjRendererDataGL.h \
     graphics/renderer/mjRendererGL.h \
     util/mjShaderResource.h \
-    input/mjInputEvent.h
+    input/mjInputEvent.h \
+    text/mjTextShaders.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -136,7 +137,8 @@ SOURCES += \
     graphics/renderer/mjRendererDataGL.cpp \
     graphics/renderer/mjRendererGL.cpp \
     util/mjShaderResource.cpp \
-    input/mjInputEvent.cpp
+    input/mjInputEvent.cpp \
+    text/mjTextShaders.cpp
 
 
 
@@ -150,5 +152,5 @@ win32: LIBS += -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image -lglew32s -lop
 
 
 unix: CONFIG += link_pkgconfig
-unix: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer assimp #for GL3 rendering
+unix: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer assimp freetype2 #for GL3 rendering
 #unix: PKGCONFIG += sdl2 glesv2 libpng SDL2_image SDL2_mixer #for GLESv2 rendering

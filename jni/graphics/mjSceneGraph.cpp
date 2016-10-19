@@ -5,8 +5,25 @@ namespace mjEngine
 
 void mjSceneGraph::Initialize(mjResourceManager* resourceManager)
 {
-    renderer.Initialize(resourceManager);
+    this->resourceManager = resourceManager;
 }
+
+/*void mjSceneGraph::AddToDrawable(mjObject* object, bool isDrawable=true, bool castsShadow, bool isTranslucent)
+{
+    if (isDrawable)
+    {
+        drawableObjects.push_back(object);
+    } else if (isTranslucent)
+    {
+        translucentObjects.push_back(object);
+    }
+    if (castsShadow)
+    {
+        shadowCasters.push_back(object);
+    }
+
+    renderer.PrepareModel(object->model);
+}*/
 
 void mjSceneGraph::Update(float t_elapsed)
 {
@@ -35,7 +52,7 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
 
                                 //mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack)
         renderer.RenderModel(* drawableObj->model, modelMatrix, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
-                             drawableObj->customShaders, drawableObj->customTextures, drawableObj->extraColorForTexture);
+                             drawableObj->customShaders, drawableObj->customTextures, drawableObj->extraColorForTexture, resourceManager->shaderList);
 
         //drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
 	}

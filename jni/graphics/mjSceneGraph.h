@@ -37,6 +37,7 @@ public:
     mjMatrixStack matrixStack;
 
     void Initialize(mjResourceManager* resourceManager);
+    //void AddToDrawable(mjObject* object, bool isDrawable=true, bool castsShadow=false, bool isTranslucent=false);
 	void Update(float t_elapsed);
 	void Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
     void CleanUp();
@@ -44,6 +45,7 @@ public:
 
 
 private:
+    mjResourceManager* resourceManager;
     static bool SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1);
 
 

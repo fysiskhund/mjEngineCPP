@@ -5,6 +5,16 @@
 
 namespace mjEngine{
 
+#ifdef USE_GLES2
+
+    #include "gles2/defaultShaderSources-gles2.h"
+
+#else
+
+    #include "gl3/defaultShaderSources-gl3.h"
+
+#endif
+
 mjDefaultShaders::mjDefaultShaders()
 {
 	//Set up lights
@@ -74,7 +84,7 @@ void mjDefaultShaders::Run(mjModelMesh* mesh,
 
      // Send the modelViewProjection Matrix
      glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
-     // Send the modelViewProjection Matrix
+     // Send the modelView Matrix
      glUniformMatrix4fv(maMMatrixHandle, 1, false, modelMatrix);
 
 	 // Connect the texture
@@ -129,15 +139,7 @@ void mjDefaultShaders::RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMes
 #endif
 
 
-#ifdef 1 USE_GLES2
 
-	#include "gles2/defaultShaderSources-gles2.h"
-
-#else
-
-	#include "gl3/defaultShaderSources-gl3.h"
-
-#endif
 
 
 }

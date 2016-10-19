@@ -5,10 +5,6 @@ namespace  mjEngine {
 
 void mjRendererGL::PrepareModel(mjModel &model)
 {
-    if (!resourceManager)
-    {
-        LOGI("Error: Renderer has not been initialized.\n");
-    }
 
     mjRendererDataGL* dataGL = new mjRendererDataGL();
     LOGI("%s %d: new %s", __FILE__, __LINE__, "dataGL");
@@ -53,13 +49,15 @@ void mjRendererGL::PrepareModel(mjModel &model)
         LOGI("%s %d: new %s", __FILE__, __LINE__, "GLuint[] for meshNums");
         glGenBuffers(model.meshes.size(), dataGL->elementBuffersIDs);
         LOGI("%s %d: new %s", __FILE__, __LINE__, "glGenBuffers (elements)");
+
         for (uint16_t i = 0; i < model.meshes.size(); i++)
         {
             mjModelMesh* mesh = model.meshes[i];
-            if (mesh->mjShaderListIndex == -1)
+            /*if (mesh->mjShaderListIndex == -1)
             {
                 mesh->mjShaderListIndex = resourceManager->FetchShader(mesh->shaderName)->shaderListIndex;
-            }
+            }*/ // This will now be done by the resourceManager after model load
+
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, dataGL->elementBuffersIDs[i]);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh->drawOrderCount * sizeof(unsigned short), mesh->drawOrderBuffer , GL_STATIC_DRAW);
         }
@@ -67,7 +65,7 @@ void mjRendererGL::PrepareModel(mjModel &model)
 }
 
 void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAtMatrix, float *projectionMatrix, mjModelPose *pose, mjMatrixStack *stack,
-                               std::vector<mjShader*>* customShaders, int* customTextures, float* extraColorForTexture)
+                               std::vector<mjShader*>* customShaders, int* customTextures, float* extraColorForTexture, std::vector<mjShader*>& shaderList)
 {
     mjRendererDataGL* dataGL = (mjRendererDataGL*) model.rendererData;
 
@@ -98,7 +96,7 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
 
         shader = customShaders?
                     (customShaders->size() > 1)? (*customShaders)[i] : (*customShaders)[0] :
-                    resourceManager->shaderList[mesh->mjShaderListIndex];
+                    shaderList[mesh->mjShaderListIndex];
 
         // Is equivalent to this:
         /*

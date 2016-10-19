@@ -11,7 +11,6 @@
 
 #include <graphics/renderer/mjRendererData.h>
 
-#include <util/mjResourceManager.h>
 
 
 
@@ -22,17 +21,15 @@ class mjRenderer
 {
 public:
 
-    void Initialize(mjResourceManager* resourceManager);
-
     virtual void PrepareModel(mjModel& model) = 0;
 
     virtual void RenderModel(mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack,
-                             std::vector<mjShader*>* customShaders, int* customTextures, float* extraColorForTexture) = 0;
+                             std::vector<mjShader*>* customShaders, int* customTextures, float* extraColorForTexture, std::vector<mjShader*>& shaderList) = 0;
 
     virtual void CleanForModel(mjModel& model) = 0;
 
 protected:
-    mjResourceManager* resourceManager = NULL;
+
 
 };
 

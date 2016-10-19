@@ -10,8 +10,9 @@
 
 namespace mjEngine{
 
-mjResourceManager::mjResourceManager(std::string& pathPrefix)
+mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* renderer)
 {
+    this->renderer = renderer;
     this->pathPrefix = pathPrefix;
     #ifdef WIN32
         separator = '\\';
@@ -23,11 +24,15 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix)
 
     std::string shaderName = "default";
     PushShader(shaderName, new mjDefaultShaders());
-    LOGI("%s %d: new %s", __FILE__, __LINE__, "defaultShader");
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "defaultShaders");
 
     shaderName = "skybox";
     PushShader(shaderName, new mjSkyboxShaders());
-    LOGI("%s %d: new %s", __FILE__, __LINE__, "skyboxShader");
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "skyboxShaders");
+
+    shaderName = "text";
+    PushShader(shaderName, new mjTextShaders());
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "textShaders");
 }
 
 mjResourceManager::~mjResourceManager()
@@ -63,6 +68,19 @@ mjModel* mjResourceManager::FetchModel(std::string& path)
     newResource->path = fullPath;
     models.push_back(newResource);
 
+
+    // Tie the shaders to the meshes
+    for (uint16_t i = 0; i < newModel->meshes.size(); i++)
+    {
+        mjModelMesh* mesh = newModel->meshes[i];
+        if (mesh->mjShaderListIndex == -1)
+        {
+            mesh->mjShaderListIndex = this->FetchShader(mesh->shaderName)->shaderListIndex;
+        }
+    }
+
+    // And finally, get the renderer to do the model preparations
+    renderer->PrepareModel(*newModel);
 
     return newModel;
 

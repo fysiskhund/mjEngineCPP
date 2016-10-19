@@ -15,9 +15,11 @@
 #include "mjModelStructureResource.h"
 #include "mjSoundResource.h"
 #include "mjShaderResource.h"
-#include <graphics/mjShader.h>
-#include <graphics/mjDefaultShaders.h>
-#include <graphics/mjSkyboxShaders.h>
+#include "graphics/mjShader.h"
+#include "graphics/mjDefaultShaders.h"
+#include "graphics/mjSkyboxShaders.h"
+#include "graphics/renderer/mjRenderer.h"
+#include "../text/mjTextShaders.h"
 
 
 
@@ -27,7 +29,7 @@ namespace mjEngine{
 class mjResourceManager
 {
     public:
-        mjResourceManager(std::string& pathPrefix);
+        mjResourceManager(std::string& pathPrefix, mjRenderer* renderer);
         ~mjResourceManager();
 
         mjModel* FetchModel(const char* path);
@@ -63,6 +65,7 @@ protected:
 
 
         std::string pathPrefix;
+        mjRenderer* renderer = NULL;
 
         int soundIndexAndroid = 0;
 
