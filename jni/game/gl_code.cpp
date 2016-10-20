@@ -7,13 +7,22 @@
 
 #include "gl_code.h"
 
+// For now since the renderer doesn't hold states (or anything), this can be done without problem.
+#if defined(USE_GL3) || defined(USE_GLES2)
+mjRendererGL renderer;
+#else
+mjRenderer renderer;
+#endif
+
 PlatformUniverseScene* platformUniverse;
 GraphicsDebugUniverseScene* graphicsDebugUniverse;
 mjSceneManager sceneManager;
 
+mjResourceManager* resourceManager;
 
+bool setupGame(int w, int h, std::string& pathPrefix) {
 
-bool setupGame(int w, int h, mjResourceManager* resourceManager) {
+    resourceManager = new mjResourceManager(pathPrefix, &renderer);
     /*graphicsDebugUniverse = new GraphicsDebugUniverseScene(resourceManager);
     graphicsDebugUniverse->Initialize(w,h);
     sceneManager.SetFirstScene(graphicsDebugUniverse);*/
@@ -138,7 +147,7 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobje
 
 	std::string pathPrefix = jPathPrefixChars;
 	LOGI("Platform path is %s", pathPrefix.c_str());
-    setupGame(width, height, new mjResourceManager(pathPrefix));
+    setupGame(width, height, pathPrefix);
 }
 
 JNIEXPORT jboolean JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed)

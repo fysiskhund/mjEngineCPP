@@ -4,7 +4,7 @@
 
 
 const char* mjDefaultShaders::vanillaVertexShaderCode =
-                "attribute vec4 MJ_VERTEX_COORDINATES; \n"
+                "attribute vec3 MJ_VERTEX_COORDINATES; \n"
 	        "attribute vec2 MJ_UV_COMPONENTS;\n"
 	        "attribute vec3 MJ_NORMAL_COORDINATES;\n"
 	        "uniform mat4 maMVPMatrix;\n"
@@ -21,7 +21,7 @@ const char* mjDefaultShaders::vanillaVertexShaderCode =
 
 
 	        "void main(){              \n"
-	        " gl_Position = maMVPMatrix * MJ_VERTEX_COORDINATES; \n"
+	        " gl_Position = maMVPMatrix * vec4(MJ_VERTEX_COORDINATES, 1); \n"
 	        " vec3 mcNormal = MJ_NORMAL_COORDINATES;\n"
 
 	        "   textureCoordinatesForFragmentShader = MJ_UV_COMPONENTS;\n"
@@ -63,7 +63,7 @@ const char* mjDefaultShaders::vanillaFragmentShaderCode =
 
 		 "void main(){ \n"
 		//"gl_FragColor = vec4(0,1,0,1)*lightParameterForFragmentShader; \n"
-                 " gl_FragColor = texture2D(uTexture, textureCoordinatesForFragmentShader) * lightParameterForFragmentShader * extraColorForTexture;\n"
+                 " gl_FragColor = texture2D(uTexture, textureCoordinatesForFragmentShader) * lightParameterForFragmentShader * uExtraColorForTexture;\n"
          "  if (gl_FragColor.a < 0.1)\n"
          "  {\n"
          "       discard;\n"

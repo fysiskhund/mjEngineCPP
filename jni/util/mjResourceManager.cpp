@@ -30,9 +30,11 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* render
     PushShader(shaderName, new mjSkyboxShaders());
     LOGI("%s %d: new %s", __FILE__, __LINE__, "skyboxShaders");
 
+
     shaderName = "text";
     PushShader(shaderName, new mjTextShaders());
     LOGI("%s %d: new %s", __FILE__, __LINE__, "textShaders");
+
 }
 
 mjResourceManager::~mjResourceManager()

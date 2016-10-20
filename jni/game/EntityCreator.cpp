@@ -62,7 +62,7 @@ void EntityCreator::PopulateLevel(tinyxml2::XMLDocument* levelDoc, Level* levelD
                     // Door is marked as not active, it is the endpoint of a one-way only pair.
                     door->teleportFunctionActive = false;
 
-                } else if (!door->counterpartName.compare("endlevel") == 0)
+                } else if (!(door->counterpartName.compare("endlevel") == 0))
                 {
                     MysticalDoor* counterPart = (MysticalDoor*) levelData->GetEntityByID(door->counterpartName.c_str());
                     if (counterPart)

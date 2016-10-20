@@ -66,8 +66,6 @@ LOCAL_SRC_FILES := ai/mjAutomaton.cpp \
     graphics/mjSkybox.cpp \
     graphics/mjSkyboxLevelData.cpp \
     graphics/mjSkyboxShaders.cpp \
-    graphics/mjAssimpModel.cpp \
-    input/mjInputEvent.cpp \
     physics/mjAABB.cpp \
     physics/mjCollisionResult.cpp \
     physics/mjCollisionStructure.cpp \
@@ -75,6 +73,7 @@ LOCAL_SRC_FILES := ai/mjAutomaton.cpp \
     physics/mjPhysics.cpp \
     physics/mjPhysicsEffect.cpp \
     physics/mjSphere.cpp \
+    text/mjTextShaders.cpp \
     util/mjModelResource.cpp \
     util/mjModelStructureResource.cpp \
     util/mjRenderedText.cpp \
@@ -83,18 +82,39 @@ LOCAL_SRC_FILES := ai/mjAutomaton.cpp \
     util/mjShaderResource.cpp \
     util/mjSoundResource.cpp \
     util/mjTextureResource.cpp \
-   takkatakkacpp/gameObjects/Bubble.cpp \
-	takkatakkacpp/gameObjects/Track.cpp \
-	takkatakkacpp/gameObjects/Step.cpp \
-	takkatakkacpp/gameObjects/Poke.cpp \
-	takkatakkacpp/gameObjects/TrackLoader.cpp \
-	takkatakkacpp/gameObjects/BubbleScripts/BubbleScript.cpp \
-	takkatakkacpp/gameObjects/BubbleScripts/BubbleScriptSettings.cpp \
-	takkatakkacpp/gameObjects/BubbleScripts/SpiralWalkBubbleScriptSettings.cpp \
-	takkatakkacpp/gameObjects/BubbleScripts/SpiralWalkBubbleScript.cpp \
-	takkatakkacpp/TitleUniverse.cpp \
-	takkatakkacpp/gl_code.cpp \
-	takkatakkacpp/SongUniverse.cpp
+    graphics/mjAssimpModel.cpp \
+    game/Ambient.cpp \
+    game/EntityCreator.cpp \
+    game/gl_code.cpp \
+    game/Level.cpp \
+    game/PlatformUniverseScene.cpp \
+    game/TerrainCreator.cpp \
+    game/ambient/DustDevil.cpp \
+    game/entities/batMatonStates/AttackBatMatonState.cpp \
+    game/entities/batMatonStates/DetectBatMatonState.cpp \
+    game/entities/batMatonStates/WanderBatMatonState.cpp \
+    game/entities/frogAutomatonStates/FrogAutomatonStopState.cpp \
+    game/entities/frogAutomatonStates/FrogJumpAutomatonState.cpp \
+    game/entities/BatBot.cpp \
+    game/entities/BatMaton.cpp \
+    game/entities/Bird.cpp \
+    game/entities/Character.cpp \
+    game/entities/Frog.cpp \
+    game/entities/GlowBeing.cpp \
+    game/entities/MysticalDoor.cpp \
+    game/entities/Plant.cpp \
+    game/terrainTypes/Box.cpp \
+    game/terrainTypes/FallingBox.cpp \
+    game/windStates/DustDevilState.cpp \
+    game/windStates/SteadyDirectionState.cpp \
+    game/windStates/WindState.cpp \
+    game/entities/KosmoObject.cpp \
+    game/entities/FrogBoss.cpp \
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonHuntState.cpp \
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonSlamState.cpp \
+    game/entities/frogBossAutomatonStates/FrogBossAutomatonWaitForLandingState.cpp \
+    game/terrainTypes/TriggerBox.cpp \
+    game/entities/Baobab.cpp
 # -------------
 
 # now, the shared and static libs to be used are specified		   

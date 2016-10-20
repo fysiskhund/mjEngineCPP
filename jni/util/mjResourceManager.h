@@ -19,6 +19,7 @@
 #include "graphics/mjDefaultShaders.h"
 #include "graphics/mjSkyboxShaders.h"
 #include "graphics/renderer/mjRenderer.h"
+
 #include "../text/mjTextShaders.h"
 
 

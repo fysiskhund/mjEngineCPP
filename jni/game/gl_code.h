@@ -46,7 +46,7 @@ using namespace mjEngine;
 //static void checkGlError(const char* op);
 
 
-bool setupGame(int w, int h, mjResourceManager* resourceManager);
+bool setupGame(int w, int h, std::string& pathPrefix);
 
 void renderFrame(float t_elapsed);
 

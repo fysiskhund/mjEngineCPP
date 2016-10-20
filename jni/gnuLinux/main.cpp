@@ -239,7 +239,7 @@ int main(int argc, char* argv[]) {
     #endif
         LOGI("%s %d: new %s", __FILE__, __LINE__, "resourceManager");
 
-    setupGame(width, height, new mjResourceManager(pathPrefix));
+    setupGame(width, height, pathPrefix);
 
     int beforeFrame;
     int exitResult;

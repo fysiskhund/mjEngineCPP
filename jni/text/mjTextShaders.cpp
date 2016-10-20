@@ -4,7 +4,7 @@ namespace mjEngine {
 
 #ifdef USE_GLES2
 
-    #include "gles2/defaultShaderSources-gles2.h"
+    #include "gles2/textShaderSources-gles2.h"
 
 #else
 

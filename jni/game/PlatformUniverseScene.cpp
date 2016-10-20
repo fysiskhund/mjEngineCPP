@@ -17,8 +17,7 @@ PlatformUniverseScene::PlatformUniverseScene(mjResourceManager* resourceManager)
 
 void PlatformUniverseScene::Initialise(int width, int height)
 {
-
-    sceneGraph.renderer.Initialize(resourceManager);
+    sceneGraph.Initialize(resourceManager);
 
     camera = new mj3rdPersonCamera();
     LOGI("%s %d: new %s", __FILE__, __LINE__, "3rd person camera");
@@ -119,7 +118,6 @@ void PlatformUniverseScene::Initialise(int width, int height)
     DEBUGvasilisa = resourceManager->FetchModel("bird.mesh.xml");
     debugRenderer = new mjRendererGL();
     LOGI("%s %d: new %s", __FILE__, __LINE__, "renderer");
-    debugRenderer->Initialize(resourceManager);
     debugRenderer->PrepareModel(*DEBUGvasilisa);
     debugVasiObject = new mjObject();
     LOGI("%s %d: new %s", __FILE__, __LINE__, "mjobject");
