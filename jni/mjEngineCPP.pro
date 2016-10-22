@@ -136,12 +136,12 @@ SOURCES += \
     util/mjSoundResource.cpp \
     util/mjTextureResource.cpp \
     graphics/mjAssimpModel.cpp \
-    game/GraphicsDebugUniverseScene.cpp \
     graphics/renderer/mjRenderer.cpp \
     graphics/renderer/mjRendererData.cpp \
     graphics/renderer/mjRendererDataGL.cpp \
     graphics/renderer/mjRendererGL.cpp \
-    util/mjShaderResource.cpp
+    util/mjShaderResource.cpp \
+    text/mjTextShaders.cpp
 
 
 # game sources
