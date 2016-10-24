@@ -14,8 +14,6 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-#import <util/mjResourceManager.h>
-
 #import "game/gl_code.h"
 
 

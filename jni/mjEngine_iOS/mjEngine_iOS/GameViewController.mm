@@ -24,6 +24,11 @@ using namespace mjEngine;
 - (void)setupGL;
 - (void)tearDownGL;
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
+
 @end
 
 @implementation GameViewController
@@ -86,8 +91,7 @@ using namespace mjEngine;
 
     // Most glEnabling stuff is done by mjEngine.
     std::string pathPrefix = "mjEngineCPP";
-    resourceManager = new mjResourceManager(pathPrefix);
-    setupGame(self.view.bounds.size.width, self.view.bounds.size.height, resourceManager);
+    setupGame(self.view.bounds.size.width, self.view.bounds.size.height, pathPrefix);
 
 }
 
@@ -116,5 +120,43 @@ using namespace mjEngine;
     renderFrame(self.timeSinceLastUpdate);
 
 }
+
+- (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+    UITouch *aTouch = [touches anyObject];
+    
+    CGPoint point = [aTouch locationInView:self.view];
+    
+    printf("Touchy touchy at %f, %f !!\n", point.x, point.y);
+    
+    //FIXME: find out how to get which finger is being tracked. i.e. fingerID
+    // This might help https://github.com/mattgemmell/TouchTest/blob/master/Classes/MGTrackingView.m
+    // Apparently each "touch" event always has the same memory address.
+    // Would be easier with a number, but then it wouldn't be Apple, would it?
+    
+    TouchEvent(0, (int) point.x, (int) point.y, true);
+}
+
+- (void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+}
+
+- (void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *aTouch = [touches anyObject];
+    
+    CGPoint point = [aTouch locationInView:self.view];
+    
+    TouchEvent(0, (int) point.x, (int) point.y, false);
+}
+
+- (void) touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+}
+
+
 
 @end

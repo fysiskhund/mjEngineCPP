@@ -15,7 +15,10 @@
 
 #include "android/mjMusicPlayer_android.txth"
 
-#else
+#elif IOS
+
+
+
 
 
 namespace mjEngine{
@@ -24,7 +27,6 @@ class mjMusicPlayer
 {
     public:
         int loops = 0;
-
         mjMusicPlayer();
 
         void Load(mjSoundResource* soundRes, int sampleNum);
@@ -40,6 +42,31 @@ class mjMusicPlayer
 };
 
 }
+#else
+
+namespace mjEngine{
+    
+    class mjMusicPlayer
+    {
+    public:
+        int loops = 0;
+        
+        mjMusicPlayer();
+        
+        void Load(mjSoundResource* soundRes, int sampleNum);
+        void Play();
+        void Play(int sampleIndex);
+        void Pause();
+        void Resume();
+        void Rewind();
+        
+        virtual ~mjMusicPlayer();
+    protected:
+    private:
+    };
+    
+}
+
 #endif // USE_SDL_AUDIO
 
 #endif // MJMUSICPLAYER_H

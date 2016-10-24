@@ -57,4 +57,6 @@ void JoystickEvent(int controllerID, int joystickID,
 
 void JoystickButtonEvent(int controllerID, int buttonID, bool pressedDown);
 
+void TouchEvent(int fingerID, int x, int y, bool pressedDown);
+
 #endif

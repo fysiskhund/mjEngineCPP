@@ -85,7 +85,8 @@ HEADERS += \
     graphics/renderer/mjRendererData.h \
     graphics/renderer/mjRendererDataGL.h \
     graphics/renderer/mjRendererGL.h \
-    util/mjShaderResource.h
+    util/mjShaderResource.h \
+    input/mjInputEvent.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -141,7 +142,8 @@ SOURCES += \
     graphics/renderer/mjRendererDataGL.cpp \
     graphics/renderer/mjRendererGL.cpp \
     util/mjShaderResource.cpp \
-    text/mjTextShaders.cpp
+    text/mjTextShaders.cpp \
+    input/mjInputEvent.cpp
 
 
 # game sources

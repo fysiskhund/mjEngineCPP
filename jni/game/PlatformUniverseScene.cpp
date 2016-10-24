@@ -26,8 +26,14 @@ void PlatformUniverseScene::Initialise(int width, int height)
     level = new Level(resourceManager);
     LOGI("%s %d: new %s", __FILE__, __LINE__, "level");
     //LOGI("Fetching sound %s", "music/fyra.ogg");
+
+#ifndef IOS
     musicPlayer.Load(resourceManager->FetchSound("music/fyra.ogg"), 0);
-    //musicPlayer.Play();
+#else
+    musicPlayer.Load(resourceManager->FetchSound("music/oskar_schuster_sneeuwland_wunder.mp3"), 0);
+#endif
+    
+    musicPlayer.Play();
     // Some adjustments
     glEnable(GL_CULL_FACE);
     //glCullFace(GL_BACK); //FIXME: just testing

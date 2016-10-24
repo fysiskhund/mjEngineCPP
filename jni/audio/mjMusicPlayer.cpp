@@ -11,6 +11,67 @@
 
 #include "android/mjMusicPlayer_android.txtcpp"
 
+#elif IOS
+
+// Note: in XCode this file is marked as Objective-C++ source to enable [NSStuff functionsAndEtc];
+
+#include <Foundation/Foundation.h>
+#include <Foundation/NSString.h>
+
+#include <AVFoundation/AVFoundation.h>
+#include <AudioToolbox/AudioToolbox.h>
+AVAudioPlayer* player;
+
+
+//@property (nonatomic, retain) AVAudioPlayer *myAudioPlayer;
+
+
+namespace mjEngine{
+    
+    mjMusicPlayer::mjMusicPlayer()
+    {
+        LOGI("iOS mjMusicPlayer in use.");
+        
+        
+    }
+    
+    void mjMusicPlayer::Load(mjSoundResource* soundRes, int sampleNum)
+    {
+        
+        NSString* iosPath = [NSString stringWithUTF8String:soundRes->path.c_str()];
+        
+        NSURL* fileURL = [[NSURL alloc] initFileURLWithPath:iosPath];
+        
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+        [player stop];
+        player.numberOfLoops = -1; // loop-de-loop
+    }
+    
+    void mjMusicPlayer::Play()
+    {
+        [player play];
+    }
+    void mjMusicPlayer::Play(int sampleIndex)
+    {
+        //?
+    }
+    void mjMusicPlayer::Pause()
+    {
+        [player pause];
+    }
+    
+    void mjMusicPlayer::Rewind()
+    {
+        player.currentTime = 0;
+    }
+    
+    mjMusicPlayer::~mjMusicPlayer()
+    {
+        //dtor
+    }
+    
+}
+
 #else
 
 

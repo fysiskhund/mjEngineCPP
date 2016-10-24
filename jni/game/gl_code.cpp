@@ -130,6 +130,21 @@ void JoystickButtonEvent(int controllerID, int buttonID, bool pressedDown)
     }
 }
 
+void TouchEvent(int fingerID, int x, int y, bool pressedDown)
+{
+    mjInputEvent event;
+    
+    event.fingerID = fingerID;
+    event.x = x;
+    event.y = y;
+    
+    event.type = pressedDown? MJ_FINGERDOWN : MJ_FINGERUP;
+    
+    
+    sceneManager.currentScene->OnInput(event);
+
+}
+
 #ifdef ANDROID
 extern "C" {
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height, jstring jPathPrefix);
