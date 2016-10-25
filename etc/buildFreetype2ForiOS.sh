@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Original script from here: http://stackoverflow.com/a/27161949/1527560
+# Many thanks to "Mobile Ben"!
+
+# Modified to build freetype2 by alejandro
+
+# I recommend to build only one platform first, to make sure everything is working fine (disable all the others).
+# Then enable all the others again and let the script work on its own
+
 SDKMINVERSION="8.0"
 
 PLATFORMPATH="/Applications/Xcode.app/Contents/Developer/Platforms"
