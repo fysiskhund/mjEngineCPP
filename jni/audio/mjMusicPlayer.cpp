@@ -69,6 +69,10 @@ namespace mjEngine{
     {
         //dtor
     }
+    void mjMusicPlayer::Resume()
+    {
+        [player play];
+    }
     
 }
 

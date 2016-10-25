@@ -14,7 +14,7 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-#import "game/gl_code.h"
+#import "takkatakkacpp/gl_code.h"
 
 
 

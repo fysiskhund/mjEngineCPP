@@ -21,7 +21,7 @@ mjSceneManager sceneManager;
 mjResourceManager* resourceManager;
 
 bool setupGame(int w, int h, std::string& pathPrefix) {
-
+    LOGI("Screen resolution: %d x %d", w, h);
     resourceManager = new mjResourceManager(pathPrefix, &renderer);
     /*graphicsDebugUniverse = new GraphicsDebugUniverseScene(resourceManager);
     graphicsDebugUniverse->Initialize(w,h);

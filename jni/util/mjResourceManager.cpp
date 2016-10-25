@@ -314,6 +314,13 @@ void mjResourceManager::PrependFullFilePath(std::string& filePath)
         
         std::replace(filePath.begin(), filePath.end(), '/', separator);
         
+        // Auto ogg -> mp3
+        if (filePath.find(".ogg") == filePath.length()-4)
+        {
+            LOGI("iOS note: Searching for .mp3 instead of .ogg");
+            filePath = filePath.substr(0,filePath.length()-4) + ".mp3";
+        }
+        
         NSString* resourcePath = [NSString stringWithUTF8String:filePath.c_str()];
         
         NSString* found = [[NSBundle mainBundle] pathForResource:resourcePath ofType:nil];
