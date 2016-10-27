@@ -35,6 +35,17 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* render
     PushShader(shaderName, new mjTextShaders());
     LOGI("%s %d: new %s", __FILE__, __LINE__, "textShaders");
 
+
+
+    if (FT_Init_FreeType(&ft))
+    {
+        LOGI("Error while initialising FreeType");
+    } else
+    {
+        LOGI("FreeType initialised.");
+    }
+
+
 }
 
 mjResourceManager::~mjResourceManager()
@@ -251,6 +262,39 @@ mjShaderResource* mjResourceManager::PushShader(std::string& name, mjShader* sha
     }
 
     return result;
+}
+
+mjFontResource* mjResourceManager::FetchFont(std::string &path)
+{
+
+    std::string fullPath = path;
+    PrependFullFilePath(fullPath);
+
+    mjResource* res = SearchByPathIgnoreExtension(fontResources, fullPath);
+    if (res != NULL)
+    {
+        return ((mjFontResource*) res);
+    }
+
+    mjFontResource* newResource = new mjFontResource();
+
+    if (FT_New_Face(ft, fullPath.c_str(), 0, &newResource->face))
+    {
+        LOGI("Error while loading font %s.", fullPath.c_str());
+    }
+
+
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "fontResource");
+
+    //FT_Select_Charmap(newResource->face, FT_ENCODING_UNICODE);
+
+    newResource->path = fullPath;
+    fontResources.push_back(newResource);
+
+
+    return newResource;
+
+
 }
 
 

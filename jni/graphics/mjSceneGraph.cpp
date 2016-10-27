@@ -25,11 +25,27 @@ void mjSceneGraph::Initialize(mjResourceManager* resourceManager)
     renderer.PrepareModel(object->model);
 }*/
 
+void mjSceneGraph::RemoveGroup(std::vector<mjObject*>* group)
+{
+    for (int i = 0; i < group->size(); i++)
+    {
+        std::vector<mjObject*>::iterator end = drawableObjects.end();
+        for (std::vector<mjObject*>::iterator j = drawableObjects.begin(); j != end; j++)
+        {
+            if ((*group)[i] == *j)
+            {
+                drawableObjects.erase(j);
+                break;
+            }
+        }
+    }
+}
+
 void mjSceneGraph::Update(float t_elapsed)
 {
     // This is supposed to optimise drawing by culling objects that are visible. Perhaps also update the
     // models' animations.
-
+    // For now it does nothing :P
 }
 void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
@@ -42,11 +58,6 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
 	for (unsigned i= 0 ; i < numObjects; i++)
 	{
         mjObject* drawableObj = drawableObjects[i];
-
-        if (drawableObj->model->rendererData == NULL)
-        {
-            renderer.PrepareModel(* drawableObj->model);
-        }
 
         drawableObj->CopyModelMatrixTo(modelMatrix);
 

@@ -14,7 +14,7 @@ my @excludeList = ('keyboardcontrol', 'main', 'ComputerInput');
 # Is part of the engine
 my $engineFile = 'mj.+\.cpp|extLibs';
 
-my $cppExtension = '.cpp';
+my $cppExtension = '\.cpp|\.c';
 
 # Get the boilerplate out of the way
 
@@ -222,7 +222,7 @@ while (my $row = <$proFILE>)
                
                foreach $component (@rowComponents)
                {
-                    if ($component =~ /\Q$cppExtension\E/)
+                    if ($component =~ /$cppExtension/)
                     {
                          push @engineFiles, $component;
                     }
@@ -234,7 +234,7 @@ while (my $row = <$proFILE>)
                my $component;
                foreach $component (@rowComponents)
                {
-                    if ($component =~ /\Q$cppExtension\E/)
+                    if ($component =~ /$cppExtension/)
                     {
                          push @gameFiles, "${localPrefix}${component}";
                     }

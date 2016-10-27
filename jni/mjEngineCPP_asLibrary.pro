@@ -81,7 +81,10 @@ HEADERS += \
     graphics/renderer/mjRendererGL.h \
     util/mjShaderResource.h \
     input/mjInputEvent.h \
-    text/mjTextShaders.h
+    text/mjTextShaders.h \
+    extLibs/utf8-utils/utf8-utils.h \
+    text/mjGraphicCharObject.h \
+    util/mjFontResource.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -138,7 +141,10 @@ SOURCES += \
     graphics/renderer/mjRendererGL.cpp \
     util/mjShaderResource.cpp \
     input/mjInputEvent.cpp \
-    text/mjTextShaders.cpp
+    text/mjTextShaders.cpp \
+    extLibs/utf8-utils/utf8-utils.c \
+    text/mjGraphicCharObject.cpp \
+    util/mjFontResource.cpp
 
 
 

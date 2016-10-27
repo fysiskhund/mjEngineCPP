@@ -15,10 +15,14 @@
 #include "mjModelStructureResource.h"
 #include "mjSoundResource.h"
 #include "mjShaderResource.h"
+#include "mjFontResource.h"
+
 #include "graphics/mjShader.h"
 #include "graphics/mjDefaultShaders.h"
 #include "graphics/mjSkyboxShaders.h"
 #include "graphics/renderer/mjRenderer.h"
+
+
 
 #include "../text/mjTextShaders.h"
 
@@ -50,7 +54,7 @@ class mjResourceManager
         mjShaderResource* PushShader(std::string& name, std::string& vertexShader, std::string& fragmentShader);
         mjShaderResource* PushShader(std::string& name, mjShader* shader);
 
-
+        mjFontResource* FetchFont(std::string& path);
 
         void PrependFullFilePath(std::string& filePath);
 
@@ -63,6 +67,7 @@ protected:
         std::vector<mjResource*> modelStructures;
         std::vector<mjResource*> soundResources;
         std::vector<mjResource*> shaderResources;
+        std::vector<mjResource*> fontResources;
 
 
         std::string pathPrefix;
@@ -77,6 +82,8 @@ protected:
         char separator;
 
     private:
+        FT_Library ft;
+
 };
 
 }

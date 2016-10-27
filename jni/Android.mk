@@ -21,20 +21,20 @@ LOCAL_SRC_FILES := precompiled/png/$(TARGET_ARCH_ABI)/libpng.a
 include $(PREBUILT_STATIC_LIBRARY)
 # -------------
 
-# getting libmjEngine into the project
-include $(CLEAR_VARS)
-
-LOCAL_MODULE    := libmjEngine
-LOCAL_SRC_FILES := precompiled/mjEngine/$(TARGET_ARCH_ABI)/libmjEngine.a
-
-include $(PREBUILT_STATIC_LIBRARY)
-# -------------
-
 # getting freetype2 into the project
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := freetype2
 LOCAL_SRC_FILES := precompiled/freetype2/$(TARGET_ARCH_ABI)/libfreetype.a
+
+include $(PREBUILT_STATIC_LIBRARY)
+# -------------
+
+# getting libmjEngine into the project
+include $(CLEAR_VARS)
+
+LOCAL_MODULE    := libmjEngine
+LOCAL_SRC_FILES := precompiled/mjEngine/$(TARGET_ARCH_ABI)/libmjEngine.a
 
 include $(PREBUILT_STATIC_LIBRARY)
 # -------------

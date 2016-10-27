@@ -29,6 +29,7 @@ public:
     mjRenderer renderer;
 #endif
 
+
     bool sortTranslucentObjects = true;
     std::vector<mjObject*> drawableObjects;
 	std::vector<mjObject*> translucentObjects;
@@ -39,9 +40,13 @@ public:
     void Initialize(mjResourceManager* resourceManager);
     //void AddToDrawable(mjObject* object, bool isDrawable=true, bool castsShadow=false, bool isTranslucent=false);
 	void Update(float t_elapsed);
+    void RemoveGroup(std::vector<mjObject *>* group);
+
+
 	void Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
     void CleanUp();
     ~mjSceneGraph();
+
 
 
 private:
