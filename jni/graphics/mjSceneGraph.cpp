@@ -25,6 +25,43 @@ void mjSceneGraph::Initialize(mjResourceManager* resourceManager)
     renderer.PrepareModel(object->model);
 }*/
 
+void mjSceneGraph::AddGroup(std::vector<mjObject*>* group, bool toDrawable, bool toShadowCasters, bool toTranslucent)
+{
+    if (toDrawable)
+    {
+        if (drawableObjects.capacity() < drawableObjects.size()+group->size())
+        {
+            drawableObjects.reserve(drawableObjects.size()+group->size());
+        }
+        for (int i = 0; i < group->size(); i++)
+        {
+            drawableObjects.push_back((*group)[i]);
+        }
+    }
+    if (toShadowCasters)
+    {
+        if (shadowCasters.capacity() < shadowCasters.size()+group->size())
+        {
+            shadowCasters.reserve(shadowCasters.size()+group->size());
+        }
+        for (int i = 0; i < group->size(); i++)
+        {
+            shadowCasters.push_back((*group)[i]);
+        }
+    }
+    if (toTranslucent)
+    {
+        if (translucentObjects.capacity() < translucentObjects.size()+group->size())
+        {
+            translucentObjects.reserve(translucentObjects.size()+group->size());
+        }
+        for (int i = 0; i < group->size(); i++)
+        {
+            translucentObjects.push_back((*group)[i]);
+        }
+    }
+}
+
 void mjSceneGraph::RemoveGroup(std::vector<mjObject*>* group)
 {
     for (int i = 0; i < group->size(); i++)

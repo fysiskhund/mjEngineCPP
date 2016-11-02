@@ -40,6 +40,7 @@ public:
     void Initialize(mjResourceManager* resourceManager);
     //void AddToDrawable(mjObject* object, bool isDrawable=true, bool castsShadow=false, bool isTranslucent=false);
 	void Update(float t_elapsed);
+    void AddGroup(std::vector<mjObject*>* group, bool toDrawable=true, bool toShadowCasters=false, bool toTranslucent=false);
     void RemoveGroup(std::vector<mjObject *>* group);
 
 

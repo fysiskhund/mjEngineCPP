@@ -5,16 +5,15 @@ namespace mjEngine {
 
 // FIXME: Cleanup missing.
 
-mjGraphicCharObject::mjGraphicCharObject(mjResourceManager* resourceManager, mjFontResource* fontResource, int fontSize, char* charToRender)
+mjGraphicCharObject::mjGraphicCharObject(mjResourceManager* resourceManager, mjFontResource* fontResource, int fontSize,
+                                         unsigned long charToRenderLong, float renderScale, float positionScale)
     : mjObject(resourceManager)
 {
     this->fontResource = fontResource;
-    this->charToRender = new char[strnlen(charToRender, 8)+1];
     this->fontSize = fontSize;
-    strncpy(this->charToRender, charToRender, strnlen(charToRender, 8)+1);
 
 
-    charToRenderFT = FT_Get_Char_Index(fontResource->face, ftgl::utf8_to_utf32(charToRender));
+    this->charToRenderLong = charToRenderLong;
 
     model = resourceManager->FetchModel("sprite.mesh.xml");
     customShaders = new std::vector<mjShader*>;
@@ -23,19 +22,29 @@ mjGraphicCharObject::mjGraphicCharObject(mjResourceManager* resourceManager, mjF
     customShaders->push_back(textShaderResource->shader);
     customTextures = new int[1];
     GenerateTexture();
+    scale.MulScalar(renderScale);
 
 }
 
 void mjGraphicCharObject::GenerateTexture()
 {
     FT_Set_Pixel_Sizes(fontResource->face, 0, fontSize);
-    if (FT_Load_Glyph(fontResource->face, charToRenderFT, FT_LOAD_RENDER))
+    if (FT_Load_Char(fontResource->face, charToRenderLong, FT_LOAD_RENDER))
     {
         LOGI("Error while rendering glyph");
     }
 
+    charRatio = ((float)fontResource->face->glyph->bitmap.rows) / ((float)fontResource->face->glyph->bitmap.width);
+    charOffsetX = fontResource->face->glyph->bitmap_left;
+    charOffsetY = fontResource->face->glyph->bitmap_top;
+    nextCharOffsetX = (fontResource->face->glyph->advance.x) >> 6; // Bitshift by 6 to get value in pixels (2^6 = 64)
+
+    scale.Set(1, charRatio, 1);
+    //modelOffset.Set(charOffsetX, charOffsetY, 0);
 
 
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glGenTextures(1, (GLuint*) customTextures);
 
     glBindTexture(GL_TEXTURE_2D, customTextures[0]);

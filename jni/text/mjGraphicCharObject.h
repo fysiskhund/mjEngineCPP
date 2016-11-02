@@ -11,10 +11,15 @@ class mjGraphicCharObject : public mjObject
 {
 public:
     mjFontResource* fontResource;
-    char* charToRender;
-    unsigned long charToRenderFT;
+    unsigned long charToRenderLong;
     int fontSize;
-    mjGraphicCharObject(mjResourceManager* resourceManager, mjFontResource* fontResource, int fontSize, char* charToRender);
+    float charRatio;
+    float charOffsetX;
+    float charOffsetY;
+    float nextCharOffsetX;
+
+    mjGraphicCharObject(mjResourceManager* resourceManager, mjFontResource* fontResource,
+                        int fontSize, unsigned long charToRenderLong, float renderScale, float positionScale);
 private:
     void GenerateTexture();
 

@@ -84,7 +84,8 @@ HEADERS += \
     text/mjTextShaders.h \
     extLibs/utf8-utils/utf8-utils.h \
     text/mjGraphicCharObject.h \
-    util/mjFontResource.h
+    util/mjFontResource.h \
+    text/mjGraphicText.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -144,7 +145,8 @@ SOURCES += \
     text/mjTextShaders.cpp \
     extLibs/utf8-utils/utf8-utils.c \
     text/mjGraphicCharObject.cpp \
-    util/mjFontResource.cpp
+    util/mjFontResource.cpp \
+    text/mjGraphicText.cpp
 
 
 

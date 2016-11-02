@@ -270,7 +270,7 @@ mjFontResource* mjResourceManager::FetchFont(std::string &path)
     std::string fullPath = path;
     PrependFullFilePath(fullPath);
 
-    mjResource* res = SearchByPathIgnoreExtension(fontResources, fullPath);
+    mjResource* res = SearchByPath(fontResources, fullPath);
     if (res != NULL)
     {
         return ((mjFontResource*) res);
@@ -283,6 +283,7 @@ mjFontResource* mjResourceManager::FetchFont(std::string &path)
         LOGI("Error while loading font %s.", fullPath.c_str());
     }
 
+    FT_Select_Charmap(newResource->face, FT_ENCODING_UNICODE);
 
     LOGI("%s %d: new %s", __FILE__, __LINE__, "fontResource");
 
@@ -306,7 +307,7 @@ mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std:
     for(unsigned i = 0; i < repo.size(); i++)
     {
         mjResource* res = repo[i];
-        if (res->path == fullPath && modifier == res->modifier)
+        if ((res->path.compare(fullPath) == 0) && modifier == res->modifier)
         {
             return res;
         }
@@ -324,7 +325,7 @@ mjResource* mjResourceManager::SearchByPathIgnoreExtension(std::vector<mjResourc
 
     if (lastDotLocation != std::string::npos)
     {
-        pathWithoutExtension = fullPath.substr(0, lastDotLocation-1);
+        pathWithoutExtension = fullPath.substr(0, lastDotLocation);
     } else
     {
         pathWithoutExtension = fullPath;
@@ -334,7 +335,17 @@ mjResource* mjResourceManager::SearchByPathIgnoreExtension(std::vector<mjResourc
     for(unsigned i = 0; i < repo.size(); i++)
     {
         mjResource* res = repo[i];
-        if (res->path == pathWithoutExtension && modifier == res->modifier)
+        std::string otherPathWithoutExtension = res->path.c_str();
+
+
+        lastDotLocation = otherPathWithoutExtension.find_last_of('.');
+
+        if (lastDotLocation != std::string::npos)
+        {
+            otherPathWithoutExtension = otherPathWithoutExtension.substr(0, lastDotLocation);
+        }
+
+        if ((otherPathWithoutExtension.compare(pathWithoutExtension) == 0) && modifier == res->modifier)
         {
             return res;
         }
