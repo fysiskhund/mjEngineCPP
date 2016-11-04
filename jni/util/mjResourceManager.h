@@ -16,11 +16,13 @@
 #include "mjSoundResource.h"
 #include "mjShaderResource.h"
 #include "mjFontResource.h"
+#include "mjGraphicCharObjectResource.h"
 
 #include "graphics/mjShader.h"
 #include "graphics/mjDefaultShaders.h"
 #include "graphics/mjSkyboxShaders.h"
 #include "graphics/renderer/mjRenderer.h"
+
 
 
 
@@ -54,12 +56,16 @@ class mjResourceManager
         mjShaderResource* PushShader(std::string& name, std::string& vertexShader, std::string& fragmentShader);
         mjShaderResource* PushShader(std::string& name, mjShader* shader);
 
+        mjGraphicCharObjectResource* FetchGraphicChar(mjFontResource* fontResource, int fontSize,
+                                                      unsigned long charToRenderLong);
+
         mjFontResource* FetchFont(std::string& path);
 
         void PrependFullFilePath(std::string& filePath);
 
 
         std::vector<mjShader*> shaderList;
+
 
 protected:
         std::vector<mjResource*> models;
@@ -68,6 +74,8 @@ protected:
         std::vector<mjResource*> soundResources;
         std::vector<mjResource*> shaderResources;
         std::vector<mjResource*> fontResources;
+
+        std::vector<mjResource*> graphicCharObjectResources;
 
 
         std::string pathPrefix;
@@ -78,6 +86,7 @@ protected:
         mjResource* SearchByPath(std::vector<mjResource*>& repo, std::string& path, int modifier=0);
         mjResource* SearchByPathIgnoreExtension(std::vector<mjResource*>& repo, std::string& path, int modifier=0);
 
+        mjResource* SearchByIdentifier(std::vector<mjResource* > &repo, unsigned long identifier, int modifier);
 
         char separator;
 

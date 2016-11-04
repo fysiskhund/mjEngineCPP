@@ -9,6 +9,7 @@ class mjResource
 {
     public:
         std::string path;
+        unsigned long identifier = 0; // For quick lookups, when possible.
         int modifier = 0;
     protected:
     private:

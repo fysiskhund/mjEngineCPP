@@ -14,7 +14,6 @@ mjGraphicText::mjGraphicText(mjResourceManager* resourceManager, const char* tex
     std::string fontPath = font;
 
     mjFontResource* fontResource = resourceManager->FetchFont(fontPath);
-    float displacement = 0;
 
     while (pos < totalLength)
     {
@@ -24,7 +23,7 @@ mjGraphicText::mjGraphicText(mjResourceManager* resourceManager, const char* tex
         {
             LOGI("mjGraphicText: Invalid char in %s [%d]!", text, pos);
             break;
-        }/* else
+        } else
         {
             char charCharCharmander[5];
             for (int j = 0; j < 5; j++)
@@ -38,21 +37,58 @@ mjGraphicText::mjGraphicText(mjResourceManager* resourceManager, const char* tex
                     break;
                 }
             }
+            LOGI(" ****** ");
 
             LOGI("Char: %s", charCharCharmander);
-        }*/
+        }
         unsigned long thisCharLong = ftgl::utf8_to_utf32(&(text[pos]));
-        LOGI("Char: (%lu) %s", thisCharLong, &(text[pos]));
-        mjGraphicCharObject* charObject = new mjGraphicCharObject(resourceManager, fontResource, fontSize, thisCharLong, renderScale, positionScale);
+        //LOGI("Char: (%lu) %s", thisCharLong, &(text[pos]));
 
-        charObject->pos.x += displacement;
 
-        displacement += charObject->nextCharOffsetX*positionScale;
+        mjGraphicCharObject* charObject = new mjGraphicCharObject(resourceManager, fontResource, fontSize, thisCharLong, renderScale);
+        if (charObject->charRatio > 4)
+        {
 
+            charObject->manualRelocation = -charObject->charWidth; //FIXME: Why is this necessary??
+        }
+        LOGI("width: %d, bitmapLeft: %f, advance: %f", charObject->charWidth, charObject->bitmapLeft, (charObject->advanceX/64.0) );
         textVector.push_back(charObject);
         pos += thisCharLength;
     }
+    SetPositionScale(positionScale);
+    SetRenderScale(renderScale);
+
     LOGI("End of creating text.");
 }
+
+void mjGraphicText::SetRenderScale(float renderScale)
+{
+    this->renderScale = renderScale;
+    for (int i = 0; i < textVector.size(); i++)
+    {
+        textVector[i]->scale.Set(textVector[i]->charWidth*renderScale, textVector[i]->charHeight*renderScale, 1);
+    }
+}
+
+void mjGraphicText::SetPositionScale(float positionScale)
+{
+
+    this->positionScale = positionScale;
+    float displacement = 0;
+
+    for (int i = 0; i < textVector.size(); i++)
+    {
+        textVector[i]->pos.y = (textVector[i]->bitmapTop - textVector[i]->charHeight)*0.003; //FIXME: is this value fixed forever?
+        textVector[i]->pos.x = (displacement + textVector[i]->bitmapLeft + textVector[i]->manualRelocation)*positionScale;
+        displacement +=  (textVector[i]->advanceX/64.0);
+    }
+}
+
+void mjGraphicText::Update(const char *text)
+{
+    this->text;
+
+}
+
 
 }

@@ -264,6 +264,8 @@ mjShaderResource* mjResourceManager::PushShader(std::string& name, mjShader* sha
     return result;
 }
 
+
+
 mjFontResource* mjResourceManager::FetchFont(std::string &path)
 {
 
@@ -277,6 +279,7 @@ mjFontResource* mjResourceManager::FetchFont(std::string &path)
     }
 
     mjFontResource* newResource = new mjFontResource();
+    newResource->identifier = fontResources.size();
 
     if (FT_New_Face(ft, fullPath.c_str(), 0, &newResource->face))
     {
@@ -299,7 +302,29 @@ mjFontResource* mjResourceManager::FetchFont(std::string &path)
 }
 
 
+mjGraphicCharObjectResource* mjResourceManager::FetchGraphicChar(mjFontResource *fontResource, int fontSize, unsigned long charToRenderLong)
+{
+    // Max 100 different fonts at the same time due to lookup constraints.
+    mjGraphicCharObjectResource* result = (mjGraphicCharObjectResource*) SearchByIdentifier(graphicCharObjectResources, charToRenderLong, (fontSize*100) + fontResource->identifier);
 
+    if (result != NULL)
+    {
+        //LOGI("Reused 1 char :3 !");
+        return result;
+    }
+
+    result = new mjGraphicCharObjectResource(fontResource, fontSize, charToRenderLong);
+
+    result->identifier = charToRenderLong;
+    result->modifier = (fontSize*100) + fontResource->identifier;
+
+    graphicCharObjectResources.push_back(result);
+
+    return result;
+
+}
+
+// Searches //
 
 mjResource* mjResourceManager::SearchByPath(std::vector<mjResource*>& repo, std::string& fullPath, int modifier)
 {
@@ -353,6 +378,23 @@ mjResource* mjResourceManager::SearchByPathIgnoreExtension(std::vector<mjResourc
 
     return NULL;
 }
+
+mjResource* mjResourceManager::SearchByIdentifier(std::vector<mjResource*>& repo, unsigned long identifier, int modifier)
+{
+
+    for(unsigned i = 0; i < repo.size(); i++)
+    {
+        mjResource* res = repo[i];
+
+        if (identifier == res->identifier && modifier == res->modifier)
+        {
+            return res;
+        }
+    }
+
+    return NULL;
+}
+
 
 #ifndef IOS
 

@@ -23,6 +23,12 @@ public:
     std::string text;
     mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font, int fontSize, float renderScale, float positionScale);
     char* GetNextChar();
+    void SetRenderScale(float scale);
+    void SetPositionScale(float scale);
+    void Update(const char* text);
+private:
+    float positionScale;
+    float renderScale;
 };
 
 }
