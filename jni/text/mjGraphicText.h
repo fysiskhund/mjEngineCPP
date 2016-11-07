@@ -18,17 +18,29 @@ class mjGraphicText
 {
 public:
 
-
+    //bool enableDepthTesting = false; // textShaders will default to NO depth testing, meaning the text is always visible.
     std::vector<mjGraphicCharObject*> textVector;
     std::string text;
-    mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font, int fontSize, float renderScale, float positionScale);
-    char* GetNextChar();
+    int usedLength = 0;
+    mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font,
+                  int fontSize, float renderScale, float positionScale, float* color, mjVector3& position);
+    mjVector3 pos;
+
+    char* GetNextChar();    
     void SetRenderScale(float scale);
     void SetPositionScale(float scale);
+    void SetColor(float* color);
     void Update(const char* text);
+
 private:
+
+
+    float color[4] = {1, 1, 1, 1};
+    int fontSize;
     float positionScale;
     float renderScale;
+    mjFontResource* fontResource;
+    mjResourceManager* resourceManager;
 };
 
 }

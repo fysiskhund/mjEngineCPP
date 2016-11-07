@@ -126,6 +126,22 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
         //translucentObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
     }
 
+    // Finally, render all the text objects
+
+    for (unsigned i = 0; i < graphicTexts.size(); i++)
+    {
+        mjGraphicText* text = graphicTexts[i];
+
+        for (unsigned j = 0; j < text->usedLength; j++)
+        {
+            mjGraphicCharObject* charObj = text->textVector[j];
+            charObj->CopyModelMatrixTo(modelMatrix);
+
+            renderer.RenderModel(* charObj->model, modelMatrix, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
+                                 charObj->customShaders, charObj->customTextures, charObj->extraColorForTexture, resourceManager->shaderList);
+        }
+    }
+
 }
 void mjSceneGraph::CleanUp()
 {

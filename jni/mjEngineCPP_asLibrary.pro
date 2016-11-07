@@ -69,7 +69,6 @@ HEADERS += \
     physics/mjSphere.h \
     util/mjModelResource.h \
     util/mjModelStructureResource.h \
-    util/mjRenderedText.h \
     util/mjResource.h \
     util/mjResourceManager.h \
     util/mjSoundResource.h \
@@ -85,7 +84,8 @@ HEADERS += \
     extLibs/utf8-utils/utf8-utils.h \
     text/mjGraphicCharObject.h \
     util/mjFontResource.h \
-    text/mjGraphicText.h
+    text/mjGraphicText.h \
+    util/mjGraphicCharObjectResource.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -130,7 +130,6 @@ SOURCES += \
     physics/mjSphere.cpp \
     util/mjModelResource.cpp \
     util/mjModelStructureResource.cpp \
-    util/mjRenderedText.cpp \
     util/mjResource.cpp \
     util/mjResourceManager.cpp \
     util/mjSoundResource.cpp \
@@ -146,7 +145,8 @@ SOURCES += \
     extLibs/utf8-utils/utf8-utils.c \
     text/mjGraphicCharObject.cpp \
     util/mjFontResource.cpp \
-    text/mjGraphicText.cpp
+    text/mjGraphicText.cpp \
+    util/mjGraphicCharObjectResource.cpp
 
 
 

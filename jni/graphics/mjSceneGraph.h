@@ -10,6 +10,8 @@
 #include <extLibs/math/Matrix.h>
 #include <graphics/renderer/mjRenderer.h>
 #include <util/mjResourceManager.h>
+#include <text/mjGraphicCharObject.h>
+#include <text/mjGraphicText.h>
 
 #if defined(USE_GL3) || defined(USE_GLES2)
 #include <graphics/renderer/mjRendererGL.h>
@@ -34,6 +36,8 @@ public:
     std::vector<mjObject*> drawableObjects;
 	std::vector<mjObject*> translucentObjects;
 	std::vector<mjObject*> shadowCasters;
+
+    std::vector<mjGraphicText*> graphicTexts;
 
     mjMatrixStack matrixStack;
 
