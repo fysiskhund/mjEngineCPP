@@ -36,7 +36,6 @@
 		A9031BDA1D6D10840056B49C /* mjSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BD21D6D10840056B49C /* mjSphere.cpp */; };
 		A9031BE91D6D10950056B49C /* mjModelResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BDB1D6D10950056B49C /* mjModelResource.cpp */; };
 		A9031BEA1D6D10950056B49C /* mjModelStructureResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BDD1D6D10950056B49C /* mjModelStructureResource.cpp */; };
-		A9031BEB1D6D10950056B49C /* mjRenderedText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BDF1D6D10950056B49C /* mjRenderedText.cpp */; };
 		A9031BEC1D6D10950056B49C /* mjResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BE11D6D10950056B49C /* mjResource.cpp */; };
 		A9031BED1D6D10950056B49C /* mjResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BE31D6D10950056B49C /* mjResourceManager.cpp */; };
 		A9031BEE1D6D10950056B49C /* mjSoundResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BE51D6D10950056B49C /* mjSoundResource.cpp */; };
@@ -78,6 +77,11 @@
 		A94F20961DBE441C00AB5E4C /* TitleUniverse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94F207D1DBE441C00AB5E4C /* TitleUniverse.cpp */; };
 		A9557BC81DBEE5A000F00BDC /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9557BC71DBEE5A000F00BDC /* libfreetype.a */; };
 		A9557BCA1DBEEDC500F00BDC /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A9557BC91DBEEDC500F00BDC /* libbz2.tbd */; };
+		A96266E41DD1FB3B000BB4C4 /* mjGraphicCharObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96266E01DD1FB3B000BB4C4 /* mjGraphicCharObject.cpp */; };
+		A96266E51DD1FB3B000BB4C4 /* mjGraphicText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96266E21DD1FB3B000BB4C4 /* mjGraphicText.cpp */; };
+		A96266EA1DD1FB5B000BB4C4 /* mjFontResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96266E61DD1FB5B000BB4C4 /* mjFontResource.cpp */; };
+		A96266EB1DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96266E81DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.cpp */; };
+		A96266EF1DD1FC10000BB4C4 /* utf8-utils.c in Sources */ = {isa = PBXBuildFile; fileRef = A96266ED1DD1FC10000BB4C4 /* utf8-utils.c */; };
 		A9A5204C1D6FBBC500AE64A1 /* mjEngineCPP in Resources */ = {isa = PBXBuildFile; fileRef = A9A5204B1D6FBBC500AE64A1 /* mjEngineCPP */; };
 		A9AB2FD71D6BBC0400547DDA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FD61D6BBC0400547DDA /* main.m */; };
 		A9AB2FE11D6BBC0400547DDA /* GameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FE01D6BBC0400547DDA /* GameViewController.mm */; };
@@ -178,8 +182,6 @@
 		A9031BDC1D6D10950056B49C /* mjModelResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjModelResource.h; path = ../util/mjModelResource.h; sourceTree = "<group>"; };
 		A9031BDD1D6D10950056B49C /* mjModelStructureResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjModelStructureResource.cpp; path = ../util/mjModelStructureResource.cpp; sourceTree = "<group>"; };
 		A9031BDE1D6D10950056B49C /* mjModelStructureResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjModelStructureResource.h; path = ../util/mjModelStructureResource.h; sourceTree = "<group>"; };
-		A9031BDF1D6D10950056B49C /* mjRenderedText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjRenderedText.cpp; path = ../util/mjRenderedText.cpp; sourceTree = "<group>"; };
-		A9031BE01D6D10950056B49C /* mjRenderedText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjRenderedText.h; path = ../util/mjRenderedText.h; sourceTree = "<group>"; };
 		A9031BE11D6D10950056B49C /* mjResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjResource.cpp; path = ../util/mjResource.cpp; sourceTree = "<group>"; };
 		A9031BE21D6D10950056B49C /* mjResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjResource.h; path = ../util/mjResource.h; sourceTree = "<group>"; };
 		A9031BE31D6D10950056B49C /* mjResourceManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = mjResourceManager.cpp; path = ../util/mjResourceManager.cpp; sourceTree = "<group>"; };
@@ -243,7 +245,6 @@
 		A94F206E1DBE441C00AB5E4C /* TrackLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackLoader.h; sourceTree = "<group>"; };
 		A94F206F1DBE441C00AB5E4C /* gl_code.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gl_code.cpp; sourceTree = "<group>"; };
 		A94F20701DBE441C00AB5E4C /* gl_code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl_code.h; sourceTree = "<group>"; };
-		A94F20721DBE441C00AB5E4C /* mjFreeTypeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjFreeTypeTest.h; sourceTree = "<group>"; };
 		A94F20741DBE441C00AB5E4C /* bubbleSprite.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = bubbleSprite.blend; sourceTree = "<group>"; };
 		A94F20751DBE441C00AB5E4C /* bubbleSprite.blend1 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bubbleSprite.blend1; sourceTree = "<group>"; };
 		A94F20761DBE441C00AB5E4C /* SongUniverse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SongUniverse.cpp; sourceTree = "<group>"; };
@@ -256,6 +257,16 @@
 		A94F207E1DBE441C00AB5E4C /* TitleUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleUniverse.h; sourceTree = "<group>"; };
 		A9557BC71DBEE5A000F00BDC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../precompiled/freetype2/ios/libfreetype.a; sourceTree = "<group>"; };
 		A9557BC91DBEEDC500F00BDC /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		A96266E01DD1FB3B000BB4C4 /* mjGraphicCharObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjGraphicCharObject.cpp; path = ../text/mjGraphicCharObject.cpp; sourceTree = "<group>"; };
+		A96266E11DD1FB3B000BB4C4 /* mjGraphicCharObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjGraphicCharObject.h; path = ../text/mjGraphicCharObject.h; sourceTree = "<group>"; };
+		A96266E21DD1FB3B000BB4C4 /* mjGraphicText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjGraphicText.cpp; path = ../text/mjGraphicText.cpp; sourceTree = "<group>"; };
+		A96266E31DD1FB3B000BB4C4 /* mjGraphicText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjGraphicText.h; path = ../text/mjGraphicText.h; sourceTree = "<group>"; };
+		A96266E61DD1FB5B000BB4C4 /* mjFontResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjFontResource.cpp; path = ../util/mjFontResource.cpp; sourceTree = "<group>"; };
+		A96266E71DD1FB5B000BB4C4 /* mjFontResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjFontResource.h; path = ../util/mjFontResource.h; sourceTree = "<group>"; };
+		A96266E81DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjGraphicCharObjectResource.cpp; path = ../util/mjGraphicCharObjectResource.cpp; sourceTree = "<group>"; };
+		A96266E91DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjGraphicCharObjectResource.h; path = ../util/mjGraphicCharObjectResource.h; sourceTree = "<group>"; };
+		A96266ED1DD1FC10000BB4C4 /* utf8-utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "utf8-utils.c"; sourceTree = "<group>"; };
+		A96266EE1DD1FC10000BB4C4 /* utf8-utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "utf8-utils.h"; sourceTree = "<group>"; };
 		A9A5204B1D6FBBC500AE64A1 /* mjEngineCPP */ = {isa = PBXFileReference; lastKnownFileType = folder; name = mjEngineCPP; path = ../../../../../sdcard/mjEngineCPP; sourceTree = "<group>"; };
 		A9AB2FD21D6BBC0400547DDA /* mjEngine_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mjEngine_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9AB2FD61D6BBC0400547DDA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -352,12 +363,14 @@
 		A9031B5C1D6CFA810056B49C /* util */ = {
 			isa = PBXGroup;
 			children = (
+				A96266E61DD1FB5B000BB4C4 /* mjFontResource.cpp */,
+				A96266E71DD1FB5B000BB4C4 /* mjFontResource.h */,
+				A96266E81DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.cpp */,
+				A96266E91DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.h */,
 				A9031BDB1D6D10950056B49C /* mjModelResource.cpp */,
 				A9031BDC1D6D10950056B49C /* mjModelResource.h */,
 				A9031BDD1D6D10950056B49C /* mjModelStructureResource.cpp */,
 				A9031BDE1D6D10950056B49C /* mjModelStructureResource.h */,
-				A9031BDF1D6D10950056B49C /* mjRenderedText.cpp */,
-				A9031BE01D6D10950056B49C /* mjRenderedText.h */,
 				A9031BE11D6D10950056B49C /* mjResource.cpp */,
 				A9031BE21D6D10950056B49C /* mjResource.h */,
 				A9031BE31D6D10950056B49C /* mjResourceManager.cpp */,
@@ -431,6 +444,7 @@
 		A9031B631D6D06730056B49C /* extLibs */ = {
 			isa = PBXGroup;
 			children = (
+				A96266EC1DD1FC10000BB4C4 /* utf8-utils */,
 				A9031BF01D6D1F000056B49C /* logger */,
 				A9031BF31D6D1F3E0056B49C /* math */,
 				A9031BF21D6D1F330056B49C /* tinyxml */,
@@ -501,6 +515,10 @@
 		A93A308C1DBB9E2A007C9688 /* text */ = {
 			isa = PBXGroup;
 			children = (
+				A96266E01DD1FB3B000BB4C4 /* mjGraphicCharObject.cpp */,
+				A96266E11DD1FB3B000BB4C4 /* mjGraphicCharObject.h */,
+				A96266E21DD1FB3B000BB4C4 /* mjGraphicText.cpp */,
+				A96266E31DD1FB3B000BB4C4 /* mjGraphicText.h */,
 				A93A30891DBB9E22007C9688 /* mjTextShaders.cpp */,
 				A93A308A1DBB9E22007C9688 /* mjTextShaders.h */,
 			);
@@ -542,7 +560,6 @@
 				A94F20581DBE441C00AB5E4C /* gameObjects */,
 				A94F206F1DBE441C00AB5E4C /* gl_code.cpp */,
 				A94F20701DBE441C00AB5E4C /* gl_code.h */,
-				A94F20721DBE441C00AB5E4C /* mjFreeTypeTest.h */,
 				A94F20731DBE441C00AB5E4C /* models */,
 				A94F20761DBE441C00AB5E4C /* SongUniverse.cpp */,
 				A94F20771DBE441C00AB5E4C /* SongUniverse.h */,
@@ -608,6 +625,16 @@
 				A94F207C1DBE441C00AB5E4C /* bubble.xcf */,
 			);
 			path = textures;
+			sourceTree = "<group>";
+		};
+		A96266EC1DD1FC10000BB4C4 /* utf8-utils */ = {
+			isa = PBXGroup;
+			children = (
+				A96266ED1DD1FC10000BB4C4 /* utf8-utils.c */,
+				A96266EE1DD1FC10000BB4C4 /* utf8-utils.h */,
+			);
+			name = "utf8-utils";
+			path = "../extLibs/utf8-utils";
 			sourceTree = "<group>";
 		};
 		A9AB2FC91D6BBC0400547DDA = {
@@ -888,9 +915,11 @@
 			files = (
 				A94F208D1DBE441C00AB5E4C /* gl_code.cpp in Sources */,
 				A9031BEF1D6D10950056B49C /* mjTextureResource.cpp in Sources */,
+				A96266EF1DD1FC10000BB4C4 /* utf8-utils.c in Sources */,
 				A9031BBB1D6D106C0056B49C /* mjDefaultShaders.cpp in Sources */,
 				A9031B6A1D6D0FCA0056B49C /* mjAutomatonState.cpp in Sources */,
 				A9031BD51D6D10840056B49C /* mjCollisionResult.cpp in Sources */,
+				A96266EA1DD1FB5B000BB4C4 /* mjFontResource.cpp in Sources */,
 				A94501BB1D782B1000D488E1 /* mjRendererGL.cpp in Sources */,
 				A94501B91D782B1000D488E1 /* mjRendererData.cpp in Sources */,
 				A94F20861DBE441C00AB5E4C /* SpiralWalkBubbleScript.cpp in Sources */,
@@ -903,7 +932,6 @@
 				A9031BD41D6D10840056B49C /* mjAABB.cpp in Sources */,
 				A9AB2FE11D6BBC0400547DDA /* GameViewController.mm in Sources */,
 				A9031C011D6D1F950056B49C /* tinyxml2.cpp in Sources */,
-				A9031BEB1D6D10950056B49C /* mjRenderedText.cpp in Sources */,
 				A9031BC01D6D106C0056B49C /* mjSceneGraph.cpp in Sources */,
 				A9031BB81D6D106C0056B49C /* mj3rdPersonCamera.cpp in Sources */,
 				A9031BD61D6D10840056B49C /* mjCollisionStructure.cpp in Sources */,
@@ -928,8 +956,11 @@
 				A9031BD81D6D10840056B49C /* mjPhysics.cpp in Sources */,
 				A94F20881DBE441C00AB5E4C /* Player.cpp in Sources */,
 				A9031C081D6D1FAE0056B49C /* mjXMLHelper.cpp in Sources */,
+				A96266E51DD1FB3B000BB4C4 /* mjGraphicText.cpp in Sources */,
 				A9B84BB31D6D922400239BBA /* mjModelAnimation.cpp in Sources */,
+				A96266E41DD1FB3B000BB4C4 /* mjGraphicCharObject.cpp in Sources */,
 				A9B84BB41D6D922400239BBA /* mjModelPose.cpp in Sources */,
+				A96266EB1DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.cpp in Sources */,
 				A9031BC21D6D106C0056B49C /* mjSkybox.cpp in Sources */,
 				A9031B7D1D6D0FF60056B49C /* mjVector3.cpp in Sources */,
 				A9031BD71D6D10840056B49C /* mjCollisionTests.cpp in Sources */,
