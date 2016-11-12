@@ -41,6 +41,9 @@ void mjMatrixStack::Push(float* m)
         Matrix4::MultiplyMM(mStack[currentIndex+1], 0, mStack[currentIndex], 0, m, 0);
         currentIndex++;
         current = mStack[currentIndex];
+    } else
+    {
+        LOGI("Error: maximum size for matrixStack exceeded. Check the balance of Push() and Pop() operations." );
     }
 }
 

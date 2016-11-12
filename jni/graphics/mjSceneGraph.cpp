@@ -132,14 +132,23 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
     {
         mjGraphicText* text = graphicTexts[i];
 
+        matrixStack.Push(text->modelMatrix);
+
+
         for (unsigned j = 0; j < text->usedLength; j++)
         {
             mjGraphicCharObject* charObj = text->textVector[j];
             charObj->CopyModelMatrixTo(modelMatrix);
 
-            renderer.RenderModel(* charObj->model, modelMatrix, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
+            matrixStack.Push(modelMatrix);
+
+            renderer.RenderModel(* charObj->model, matrixStack.current, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
                                  charObj->customShaders, charObj->customTextures, charObj->extraColorForTexture, resourceManager->shaderList);
+
+            matrixStack.Pop();
         }
+
+        matrixStack.Pop();
     }
 
 }

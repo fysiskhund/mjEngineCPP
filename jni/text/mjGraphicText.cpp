@@ -4,13 +4,17 @@ namespace mjEngine {
 
 
 mjGraphicText::mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font, int fontSize,
-                             float renderScale, float positionScale, float* color, mjVector3& position)
+                             float renderScale, float positionScaleHz, float positionScaleVr, float* color, mjVector3& position)
 {
+    dir.Set(0,0,1);
+    scale.Set(1,1,1);
+    up.Set(0,1,0);
     this->text = text;
     this->resourceManager = resourceManager;
     this->fontSize = fontSize;
     this->renderScale = renderScale;
-    this->positionScale = positionScale;
+    this->positionScaleHz = positionScaleHz;
+    this->positionScaleVr = positionScaleVr;
     this->pos.CopyFrom(position);
     // Determine how many chars we're going to render
 
@@ -28,6 +32,7 @@ mjGraphicText::mjGraphicText(mjResourceManager* resourceManager, const char* tex
 
 
     Update(text);
+    UpdateModelMatrix();
 
     LOGI("End of creating text.");
 }
@@ -42,16 +47,16 @@ void mjGraphicText::SetRenderScale(float renderScale)
 }
 
 
-void mjGraphicText::SetPositionScale(float positionScale)
+void mjGraphicText::SetPositionScale(float positionScaleHz)
 {
 
-    this->positionScale = positionScale;
+    this->positionScaleHz = positionScaleHz;
     float displacement = 0;
 
     for (int i = 0; i < usedLength; i++)
     {
-        textVector[i]->pos.y = pos.y + (textVector[i]->bitmapTop - textVector[i]->charHeight)*0.003; //FIXME: is this value fixed forever?
-        textVector[i]->pos.x = pos.x + (displacement + textVector[i]->bitmapLeft + textVector[i]->manualRelocation)*positionScale;
+        textVector[i]->pos.y = (textVector[i]->bitmapTop - textVector[i]->charHeight)*positionScaleVr; //FIXME: is this value fixed forever?
+        textVector[i]->pos.x = (displacement + textVector[i]->bitmapLeft + textVector[i]->manualRelocation)*positionScaleHz;
         displacement +=  (textVector[i]->advanceX/64.0);
     }
 }
@@ -69,6 +74,11 @@ void mjGraphicText::SetColor(float* color)
             textVector[i]->extraColorForTexture[j] = color[j];
         }
     }
+}
+
+void mjGraphicText::UpdateModelMatrix()
+{
+    Matrix4::GetPositionScaleAndRotationMatrix(pos, dir, up, scale, modelMatrix);
 }
 void mjGraphicText::Update(const char *text)
 {
@@ -134,7 +144,7 @@ void mjGraphicText::Update(const char *text)
     }
     usedLength = currentCharPos;
 
-    SetPositionScale(positionScale);
+    SetPositionScale(positionScaleHz);
     SetRenderScale(renderScale);
     SetColor(color);
 
