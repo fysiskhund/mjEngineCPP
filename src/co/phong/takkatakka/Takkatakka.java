@@ -17,6 +17,7 @@
 package co.phong.takkatakka;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.InputDevice;
@@ -37,6 +38,7 @@ public class Takkatakka extends Activity {
 
     @Override protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         /*try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
