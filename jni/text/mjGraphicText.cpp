@@ -5,6 +5,7 @@ namespace mjEngine {
 
 mjGraphicText::mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font, int fontSize,
                              float renderScale, float positionScaleHz, float positionScaleVr, float* color, mjVector3& position)
+    : mjObject(resourceManager)
 {
     dir.Set(0,0,1);
     scale.Set(1,1,1);
@@ -42,7 +43,7 @@ void mjGraphicText::SetRenderScale(float renderScale)
     this->renderScale = renderScale;
     for (int i = 0; i < usedLength; i++)
     {
-        textVector[i]->scale.Set(textVector[i]->charWidth*renderScale, textVector[i]->charHeight*renderScale, 1);
+        ((mjGraphicCharObject*) subObjects[i])->scale.Set(((mjGraphicCharObject*) subObjects[i])->charWidth*renderScale, ((mjGraphicCharObject*) subObjects[i])->charHeight*renderScale, 1);
     }
 }
 
@@ -55,9 +56,9 @@ void mjGraphicText::SetPositionScale(float positionScaleHz)
 
     for (int i = 0; i < usedLength; i++)
     {
-        textVector[i]->pos.y = (textVector[i]->bitmapTop - textVector[i]->charHeight)*positionScaleVr; //FIXME: is this value fixed forever?
-        textVector[i]->pos.x = (displacement + textVector[i]->bitmapLeft + textVector[i]->manualRelocation)*positionScaleHz;
-        displacement +=  (textVector[i]->advanceX/64.0);
+        ((mjGraphicCharObject*) subObjects[i])->pos.y = (((mjGraphicCharObject*) subObjects[i])->bitmapTop - ((mjGraphicCharObject*) subObjects[i])->charHeight)*positionScaleVr; //FIXME: is this value fixed forever?
+        ((mjGraphicCharObject*) subObjects[i])->pos.x = (displacement + ((mjGraphicCharObject*) subObjects[i])->bitmapLeft + ((mjGraphicCharObject*) subObjects[i])->manualRelocation)*positionScaleHz;
+        displacement +=  (((mjGraphicCharObject*) subObjects[i])->advanceX/64.0);
     }
 }
 void mjGraphicText::SetColor(float* color)
@@ -71,7 +72,7 @@ void mjGraphicText::SetColor(float* color)
     {
         for (int j = 0; j < 4; j++)
         {
-            textVector[i]->extraColorForTexture[j] = color[j];
+            ((mjGraphicCharObject*) subObjects[i])->extraColorForTexture[j] = color[j];
         }
     }
 }
@@ -121,15 +122,15 @@ void mjGraphicText::Update(const char *text)
 
         mjGraphicCharObject* charObject;
 
-        if (currentCharPos < textVector.size())
+        if (currentCharPos < subObjects.size())
         {
-            charObject = textVector[currentCharPos];
+            charObject = (mjGraphicCharObject*) subObjects[currentCharPos];
             mjGraphicCharObjectResource* resource = resourceManager->FetchGraphicChar(fontResource, fontSize, thisCharLong);
             charObject->SetGraphicCharResource(resource);
         } else
         {
             charObject = new mjGraphicCharObject(resourceManager, fontResource, fontSize, thisCharLong, renderScale);
-            textVector.push_back(charObject);
+            subObjects.push_back(charObject);
         }
 
         if (charObject->charRatio > 4)

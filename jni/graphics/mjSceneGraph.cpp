@@ -86,7 +86,8 @@ void mjSceneGraph::Update(float t_elapsed)
 }
 void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
-    float modelMatrix[16];
+    this->lookAtMatrix = lookAtMatrix;
+    this->projectionMatrix = projectionMatrix;
 
     matrixStack.PopAll();
     Matrix4::SetIdentityM(matrixStack.current, 0);
@@ -95,12 +96,7 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
 	for (unsigned i= 0 ; i < numObjects; i++)
 	{
         mjObject* drawableObj = drawableObjects[i];
-
-        drawableObj->CopyModelMatrixTo(modelMatrix);
-
-                                //mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack)
-        renderer.RenderModel(* drawableObj->model, modelMatrix, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
-                             drawableObj->customShaders, drawableObj->customTextures, drawableObj->extraColorForTexture, resourceManager->shaderList);
+        DrawObject(drawableObj);
 
         //drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
 	}
@@ -126,32 +122,34 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
         //translucentObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
     }
 
-    // Finally, render all the text objects
-
-    for (unsigned i = 0; i < graphicTexts.size(); i++)
-    {
-        mjGraphicText* text = graphicTexts[i];
-
-        matrixStack.Push(text->modelMatrix);
-
-
-        for (unsigned j = 0; j < text->usedLength; j++)
-        {
-            mjGraphicCharObject* charObj = text->textVector[j];
-            charObj->CopyModelMatrixTo(modelMatrix);
-
-            matrixStack.Push(modelMatrix);
-
-            renderer.RenderModel(* charObj->model, matrixStack.current, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
-                                 charObj->customShaders, charObj->customTextures, charObj->extraColorForTexture, resourceManager->shaderList);
-
-            matrixStack.Pop();
-        }
-
-        matrixStack.Pop();
-    }
 
 }
+void mjSceneGraph::DrawObject(mjObject* objToDraw)
+{
+    float modelMatrix[16];
+    objToDraw->CopyModelMatrixTo(modelMatrix);
+
+    matrixStack.Push(modelMatrix);
+
+
+    if (objToDraw->model)
+    {
+        //                     mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack)
+        renderer.RenderModel(* objToDraw->model, matrixStack.current, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
+                             objToDraw->customShaders, objToDraw->customTextures, objToDraw->extraColorForTexture, resourceManager->shaderList);
+    }
+    if (objToDraw->subObjects.size() > 0)
+    {
+        for (int i = 0; i < objToDraw->subObjects.size(); i++)
+        {
+            DrawObject(objToDraw->subObjects[i]);
+        }
+
+    }
+    matrixStack.Pop();
+
+}
+
 void mjSceneGraph::CleanUp()
 {
     drawableObjects.clear();

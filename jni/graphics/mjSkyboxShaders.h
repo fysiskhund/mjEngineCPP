@@ -31,7 +31,6 @@ public:
 
 	// Handles
     GLint maPositionHandle;
-    GLint maNormalHandle;
     GLint maTextureCoordHandle;
     GLint maTextureHandle;
     GLint maMVPMatrixHandle;

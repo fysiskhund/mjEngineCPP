@@ -4,6 +4,7 @@ namespace mjEngine {
 
 
 mjSkybox::mjSkybox(mjResourceManager* resourceManager)
+    : mjObject(resourceManager)
 {
 	scale.Set(10,10,10);
 	backgroundData.deltaH = 0.005;

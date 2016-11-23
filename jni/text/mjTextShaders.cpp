@@ -14,7 +14,6 @@ namespace mjEngine {
 
 mjTextShaders::mjTextShaders()
 {
-    enableDepthTest = false;
     // Set up shader
     CreateProgram(vertexShaderCode, fragmentShaderCode);
 

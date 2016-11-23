@@ -5,6 +5,7 @@ namespace mjEngine{
 mjCamera* mjCamera::currentCamera = NULL;
 
 mjCamera::mjCamera()
+    :mjObject(NULL)
 {
 	pos.Set(0,0,0);
 	dir.Set(0,0,-1);

@@ -3,10 +3,12 @@
 
 #include <string>
 #include <vector>
+#include "../core/mjObject.h"
 #include "../extLibs/utf8-utils/utf8-utils.h"
 #include "../util/mjResourceManager.h"
 #include "../util/mjFontResource.h"
 #include "mjGraphicCharObject.h"
+
 #include <string.h>
 
 
@@ -14,20 +16,20 @@
 
 namespace mjEngine {
 
-class mjGraphicText
+class mjGraphicText: public mjObject
 {
 public:
 
     //bool enableDepthTesting = false; // textShaders will default to NO depth testing, meaning the text is always visible.
-    std::vector<mjGraphicCharObject*> textVector;
+    //std::vector<mjGraphicCharObject*> textVector;
     std::string text;
     int usedLength = 0;
     mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font,
                   int fontSize, float renderScale, float positionScaleHz, float positionScaleVr, float* color, mjVector3& position);
-    mjVector3 pos;
+    /*mjVector3 pos;
     mjVector3 dir;
     mjVector3 up;
-    mjVector3 scale;
+    mjVector3 scale;*/
 
     float modelMatrix[16];
 

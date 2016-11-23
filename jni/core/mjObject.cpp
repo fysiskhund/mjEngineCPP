@@ -2,7 +2,7 @@
 
 namespace mjEngine{
 
-mjObject::mjObject(structuretype collisionStructureType, mjResourceManager* resourceManager)
+mjObject::mjObject(mjResourceManager* resourceManager, structuretype collisionStructureType)
 {
 
 	// Vectors are initialised with 0, so no need to set them here
@@ -24,9 +24,12 @@ mjObject::mjObject(structuretype collisionStructureType, mjResourceManager* reso
 		mjAABB* aabb = new mjAABB(&pos, minCorner, maxCorner, false);
         LOGI("%s %d: new %s", __FILE__, __LINE__, "aabb");
 		this->boundingStructure = aabb;
-        //LOGI("Object initialised as AABB");
 	}
 		break;
+    case MJ_SPHERE:
+        this->boundingStructure = new mjSphere(&pos, 1);
+        LOGI("%s %d: new %s", __FILE__, __LINE__, "mjSphere");
+        break;
 	default:
 		break;
 	}
@@ -35,7 +38,7 @@ mjObject::mjObject(structuretype collisionStructureType, mjResourceManager* reso
 
 }
 
-mjObject::mjObject(mjResourceManager* resourceManager)
+/*mjObject::mjObject(mjResourceManager* resourceManager)
 {
 	// Vectors are initialised with 0, so no need to set them here
 
@@ -48,7 +51,7 @@ mjObject::mjObject(mjResourceManager* resourceManager)
     LOGI("%s %d: new %s", __FILE__, __LINE__, "mjSphere");
 
 	this->resourceManager = resourceManager;
-}
+}*/
 
 void mjObject::SetDetailsFromXML(XMLElement* entity)
 {

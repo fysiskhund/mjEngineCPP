@@ -41,18 +41,6 @@ mjDefaultShaders::mjDefaultShaders()
 
     checkGlError("create glProgram");
 
-
-	/*LOGI("Programhandle is %d", glProgramHandle);
-	maPositionHandle = glGetAttribLocation(glProgramHandle, "vPosition");
-
-	maNormalHandle = glGetAttribLocation(glProgramHandle, "aNormal");
-
-	LOGI("Position : %d", maPositionHandle);
-	//maNormalHandle = glGetAttribLocation(glProgram, "aNormal");
-
-	maTextureCoordHandle = glGetAttribLocation(glProgramHandle, "aTexCoordinates");
-	LOGI("texcoords: %d", maTextureCoordHandle); */
-
 	// Get the texture handle location
     maTextureHandle = glGetUniformLocation(glProgramHandle, "uTexture");
 

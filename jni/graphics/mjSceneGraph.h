@@ -37,8 +37,6 @@ public:
 	std::vector<mjObject*> translucentObjects;
 	std::vector<mjObject*> shadowCasters;
 
-    std::vector<mjGraphicText*> graphicTexts;
-
     mjMatrixStack matrixStack;
 
     void Initialize(mjResourceManager* resourceManager);
@@ -57,6 +55,10 @@ public:
 private:
     mjResourceManager* resourceManager;
     static bool SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1);
+    void DrawObject(mjObject* drawableObj);
+
+    float* lookAtMatrix;
+    float* projectionMatrix;
 
 
 

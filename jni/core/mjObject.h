@@ -58,7 +58,7 @@ public:
                           // with pos and only if object is semitransparent.
 
     char* modelName = NULL;
-	mjModel* model;
+    mjModel* model = NULL;
     std::vector<mjShader*>* customShaders = NULL;
     int* customTextures = NULL;
     float extraColorForTexture[4] = {1, 1, 1, 1};
@@ -67,7 +67,7 @@ public:
 	mjModelAnimation* animation = NULL;
 	mjModelPose* pose = NULL;
 	mjVector3 modelOffset;
-	mjBoundingStructure* boundingStructure;
+    mjBoundingStructure* boundingStructure = NULL;
 
 	//mjSoundSource* soundSource;
 
@@ -82,8 +82,10 @@ public:
 	bool useModelFromXMLDetails = false;
 	mjResourceManager* resourceManager;
 
-	mjObject(mjResourceManager* resourceManager = NULL);
-	mjObject(structuretype collisionStructureType, mjResourceManager* resourceManager = NULL);
+    std::vector<mjObject*> subObjects;
+
+    //mjObject(mjResourceManager* resourceManager);
+    mjObject(mjResourceManager* resourceManager, structuretype collisionStructureType = MJ_NO_BOUNDING_STRUCT);
 	virtual ~mjObject();
     void SetID(const char* id);
     virtual void SetDetailsFromXML(XMLElement* entity);
