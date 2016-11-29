@@ -54,7 +54,7 @@ class mjResourceManager
         mjShaderResource* FetchShader(const char* name);
         mjShaderResource* FetchShader(std::string& name);
         mjShaderResource* PushShader(std::string& name, std::string& vertexShader, std::string& fragmentShader);
-        mjShaderResource* PushShader(std::string& name, mjShader* shader);
+        mjShaderResource* PushShader(mjShader* shader);
 
         mjGraphicCharObjectResource* FetchGraphicChar(mjFontResource* fontResource, int fontSize,
                                                       unsigned long charToRenderLong);

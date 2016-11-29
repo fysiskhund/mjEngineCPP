@@ -28,10 +28,10 @@ const char* mjTextShaders::fragmentShaderCode =
 
 		 "void main(){ \n"
                  " gl_FragColor = vec4(uExtraColorForTexture.r, uExtraColorForTexture.g, uExtraColorForTexture.b, texture2D(uTexture, textureCoordinatesForFragmentShader).r);\n"
-         "  if (gl_FragColor.a < 0.1)\n"
-         "  {\n"
-         "       discard;\n"
-         "  }\n"
-		 "} \n";
+                 "  if (gl_FragColor.a < 0.1)\n"
+                 "  {\n"
+                 "       discard;\n"
+                 "  }\n"
+                 "} \n";
 
 

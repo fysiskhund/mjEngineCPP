@@ -23,16 +23,16 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* render
     std::replace(this->pathPrefix.begin(), this->pathPrefix.end(), '/', separator);
 
     std::string shaderName = "default";
-    PushShader(shaderName, new mjDefaultShaders());
+    PushShader(new mjDefaultShaders());
     LOGI("%s %d: new %s", __FILE__, __LINE__, "defaultShaders");
 
     shaderName = "skybox";
-    PushShader(shaderName, new mjSkyboxShaders());
+    PushShader(new mjSkyboxShaders());
     LOGI("%s %d: new %s", __FILE__, __LINE__, "skyboxShaders");
 
 
     shaderName = "text";
-    PushShader(shaderName, new mjTextShaders());
+    PushShader(new mjTextShaders());
     LOGI("%s %d: new %s", __FILE__, __LINE__, "textShaders");
 
 
@@ -244,15 +244,17 @@ mjShaderResource* mjResourceManager::FetchShader(std::string& name)
     return result;
 }*/
 
-mjShaderResource* mjResourceManager::PushShader(std::string& name, mjShader* shader)
+mjShaderResource* mjResourceManager::PushShader(mjShader* shader)
 {
-    mjShaderResource* result = (mjShaderResource*) SearchByPathIgnoreExtension(shaderResources, name);
+    std::string shaderName = shader->name;
+
+    mjShaderResource* result = (mjShaderResource*) SearchByPathIgnoreExtension(shaderResources, shaderName);
 
     if (result == NULL)
     {
         result = new mjShaderResource;
         LOGI("%s %d: new %s", __FILE__, __LINE__, "shaderResource");
-        result->path = name;
+        result->path = shaderName;
         result->shader = shader;
         result->shaderListIndex = shaderList.size();
 
@@ -262,7 +264,9 @@ mjShaderResource* mjResourceManager::PushShader(std::string& name, mjShader* sha
     }
 
     return result;
+
 }
+
 
 
 
