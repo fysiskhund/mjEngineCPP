@@ -6,10 +6,11 @@ mjSceneManager::mjSceneManager()
 {
     //ctor
 }
-void mjSceneManager::SetFirstScene(mjScene* firstScene)
+void mjSceneManager::SetFirstScene(mjScene* firstScene, mjGameState* currentGameState)
 {
+    this->currentGameState = currentGameState;
 	currentScene = firstScene;
-	currentScene->OnActivate();
+    currentScene->OnActivate(currentGameState);
 }
 void mjSceneManager::Update(float t_elapsed)
 {
@@ -27,8 +28,10 @@ void mjSceneManager::Update(float t_elapsed)
         // Look up next scene
         for (unsigned i = 0; i < scenes.size(); i++)
         {
-            if (strncmp(currentScene->nextSceneByName, scenes[i]->sceneName, 128))
+            LOGI("Searching for %s =? %s", currentScene->nextSceneByName, scenes[i]->sceneName);
+            if (strncmp(currentScene->nextSceneByName, scenes[i]->sceneName, 128) == 0)
             {
+                LOGI("Switching to %s!", scenes[i]->sceneName);
                 nextScene = scenes[i];
             }
         }
@@ -38,7 +41,7 @@ void mjSceneManager::Update(float t_elapsed)
             currentScene->nextSceneByName = NULL; // Remove the "switch scene" indicator
             currentScene->OnDeactivate();
             currentScene = nextScene;
-            currentScene->OnActivate();
+            currentScene->OnActivate(currentGameState);
         }
 
 	}

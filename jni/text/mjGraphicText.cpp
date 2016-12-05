@@ -4,12 +4,14 @@ namespace mjEngine {
 
 
 mjGraphicText::mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font, int fontSize,
-                             float renderScale, float positionScaleHz, float positionScaleVr, float* color, mjVector3& position)
+                             float renderScale, float positionScaleHz, float positionScaleVr, float* color, mjVector3& position,
+                             TextAlignment alignment)
     : mjObject(resourceManager)
 {
     dir.Set(0,0,1);
     scale.Set(1,1,1);
     up.Set(0,1,0);
+    this->alignment = alignment;
     this->text = text;
     this->resourceManager = resourceManager;
     this->fontSize = fontSize;
@@ -60,6 +62,23 @@ void mjGraphicText::SetPositionScale(float positionScaleHz)
         ((mjGraphicCharObject*) subObjects[i])->pos.x = (displacement + ((mjGraphicCharObject*) subObjects[i])->bitmapLeft + ((mjGraphicCharObject*) subObjects[i])->manualRelocation)*positionScaleHz;
         displacement +=  (((mjGraphicCharObject*) subObjects[i])->advanceX/64.0);
     }
+
+    switch(alignment)
+    {
+    case ALIGNMENT_LEFT:
+        // nothing
+        break;
+    case ALIGNMENT_CENTER:
+        displacement *= 0.5;
+    case ALIGNMENT_RIGHT:
+        //LOGI("posX -= %f ", displacement);
+        for (int i =0; i < usedLength; i++)
+        {
+
+            ((mjGraphicCharObject*) subObjects[i])->pos.x -= displacement*positionScaleHz;
+        }
+        break;
+    }
 }
 void mjGraphicText::SetColor(float* color)
 {
@@ -81,7 +100,7 @@ void mjGraphicText::UpdateModelMatrix()
 {
     Matrix4::GetPositionScaleAndRotationMatrix(pos, dir, up, scale, modelMatrix);
 }
-void mjGraphicText::Update(const char *text)
+void mjGraphicText::Update(const char* text)
 {
     this->text;
 

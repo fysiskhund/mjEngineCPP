@@ -85,7 +85,8 @@ HEADERS += \
     text/mjGraphicCharObject.h \
     util/mjFontResource.h \
     text/mjGraphicText.h \
-    util/mjGraphicCharObjectResource.h
+    util/mjGraphicCharObjectResource.h \
+    core/mjGameState.h
 
 SOURCES += \
     ai/mjAutomaton.cpp \
@@ -146,7 +147,8 @@ SOURCES += \
     text/mjGraphicCharObject.cpp \
     util/mjFontResource.cpp \
     text/mjGraphicText.cpp \
-    util/mjGraphicCharObjectResource.cpp
+    util/mjGraphicCharObjectResource.cpp \
+    core/mjGameState.cpp
 
 
 

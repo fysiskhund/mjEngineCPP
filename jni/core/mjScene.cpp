@@ -8,7 +8,7 @@ mjScene::mjScene(mjResourceManager* resourceManager)
     this->resourceManager = resourceManager;
 }
 
-void mjScene::OnActivate()
+void mjScene::OnActivate(mjGameState* currentGameState)
 {
 
 }
@@ -37,6 +37,13 @@ void mjScene::OnDeactivate()
 
 }
 
+void mjScene::SetName(const char* thisSceneName)
+{
+    sceneName = new char[strnlen(thisSceneName, 128)+1];
+    LOGI("%s %d: new %s", __FILE__, __LINE__, "char (scene's name)");
+    strncpy(sceneName, thisSceneName, strnlen(thisSceneName, 127)+1); // Copy the string terminator too
+}
+
 void mjScene::SetNextScene(const char* name)
 {
     if (nextSceneByName)
@@ -45,7 +52,7 @@ void mjScene::SetNextScene(const char* name)
     }
     nextSceneByName = new char[strnlen(name, 128)+1];
     LOGI("%s %d: new %s", __FILE__, __LINE__, "char (scene by name)");
-    strncpy(nextSceneByName, name, strnlen(name, 128));
+    strncpy(nextSceneByName, name, strnlen(name, 127)+1); // Copy the string terminator too
 }
 
 mjScene::~mjScene()

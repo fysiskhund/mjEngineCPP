@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "../core/mjObject.h"
+#include "../core/mjGameState.h"
 #include "../graphics/mjShader.h"
 #include "../util/mjResourceManager.h"
 
@@ -24,7 +25,7 @@ class mjScene
 
         mjResourceManager* resourceManager;
 
-        const char* sceneName = "";
+        char* sceneName = NULL;
 
         char* nextSceneByName = NULL;
 
@@ -35,16 +36,18 @@ class mjScene
 
         mjScene(mjResourceManager* resourceManager);
 
-        virtual void OnActivate();
+        virtual void OnActivate(mjGameState* currentGameState);
         virtual void Update(float t_elapsed);
         virtual void OnInput(mjInputEvent& event);
         virtual void Draw();
         virtual void OnDeactivate();
 
+        void SetName(const char* thisSceneName);
         void SetNextScene(const char* name);
 
         ~mjScene();
-    protected:
+
+protected:
     private:
 };
 

@@ -16,6 +16,8 @@
 
 namespace mjEngine {
 
+enum TextAlignment {ALIGNMENT_LEFT, ALIGNMENT_CENTER, ALIGNMENT_RIGHT};
+
 class mjGraphicText: public mjObject
 {
 public:
@@ -25,7 +27,7 @@ public:
     std::string text;
     int usedLength = 0;
     mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font,
-                  int fontSize, float renderScale, float positionScaleHz, float positionScaleVr, float* color, mjVector3& position);
+                  int fontSize, float renderScale, float positionScaleHz, float positionScaleVr, float* color, mjVector3& position, TextAlignment alignment = ALIGNMENT_LEFT);
     /*mjVector3 pos;
     mjVector3 dir;
     mjVector3 up;
@@ -33,7 +35,9 @@ public:
 
     float modelMatrix[16];
 
-    char* GetNextChar();    
+
+
+
     void SetRenderScale(float scale);
     void SetPositionScale(float positionScaleHz);
     void SetColor(float* color);
@@ -43,6 +47,7 @@ public:
 private:
 
 
+    TextAlignment alignment = ALIGNMENT_LEFT;
     float color[4] = {1, 1, 1, 1};
     int fontSize;
     float positionScaleHz;
@@ -50,6 +55,7 @@ private:
     float renderScale;
     mjFontResource* fontResource;
     mjResourceManager* resourceManager;
+    char* GetNextChar();
 };
 
 }
