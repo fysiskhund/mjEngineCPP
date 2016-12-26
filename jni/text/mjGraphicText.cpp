@@ -62,6 +62,7 @@ void mjGraphicText::SetPositionScale(float positionScaleHz)
         ((mjGraphicCharObject*) subObjects[i])->pos.x = (displacement + ((mjGraphicCharObject*) subObjects[i])->bitmapLeft + ((mjGraphicCharObject*) subObjects[i])->manualRelocation)*positionScaleHz;
         displacement +=  (((mjGraphicCharObject*) subObjects[i])->advanceX/64.0);
     }
+    totalWidth = displacement;
 
     switch(alignment)
     {
@@ -152,11 +153,11 @@ void mjGraphicText::Update(const char* text)
             subObjects.push_back(charObject);
         }
 
-        if (charObject->charRatio > 4)
+        /*if (charObject->charRatio > 4)
         {
 
             charObject->manualRelocation = -charObject->charWidth; //FIXME: Why is this necessary??
-        }
+        }*/
         //LOGI("width: %d, bitmapLeft: %f, advance: %f", charObject->charWidth, charObject->bitmapLeft, (charObject->advanceX/64.0) );
 
         currentCharPos++;

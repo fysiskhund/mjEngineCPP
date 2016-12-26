@@ -64,7 +64,7 @@ void mjSceneGraph::AddGroup(std::vector<mjObject*>* group, bool toDrawable, bool
 
 void mjSceneGraph::RemoveGroup(std::vector<mjObject*>* group)
 {
-    for (int i = 0; i < group->size(); i++)
+    for (unsigned i = 0; i < group->size(); i++)
     {
         std::vector<mjObject*>::iterator end = drawableObjects.end();
         for (std::vector<mjObject*>::iterator j = drawableObjects.begin(); j != end; j++)
@@ -76,6 +76,26 @@ void mjSceneGraph::RemoveGroup(std::vector<mjObject*>* group)
             }
         }
     }
+}
+
+bool mjSceneGraph::Remove(mjObject* objToRemove, bool inDrawables, bool inShadowCasters, bool inTranslucent)
+{
+
+    bool result = false;
+    if (inDrawables)
+    {
+        result = RemoveFromVector(&drawableObjects, objToRemove);
+    }
+    if (inShadowCasters)
+    {
+        result = result || RemoveFromVector(&shadowCasters, objToRemove);
+    }
+    if (inTranslucent)
+    {
+        result = result || RemoveFromVector(&translucentObjects, objToRemove);
+    }
+
+    return result;
 }
 
 void mjSceneGraph::Update(float t_elapsed)
@@ -148,6 +168,23 @@ void mjSceneGraph::DrawObject(mjObject* objToDraw)
     }
     matrixStack.Pop();
 
+}
+
+bool mjSceneGraph::RemoveFromVector(std::vector<mjObject*>* vectorObj, mjObject* object)
+{
+
+    std::vector<mjObject*>::iterator end = vectorObj->end();
+
+    for (std::vector<mjObject*>::iterator j = vectorObj->begin(); j != end; j++)
+    {
+        if (object == *j)
+        {
+            vectorObj->erase(j);
+            return true;
+            //break; // Not necessary after "return"
+        }
+    }
+    return false;
 }
 
 void mjSceneGraph::CleanUp()

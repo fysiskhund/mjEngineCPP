@@ -10,8 +10,9 @@
 
 namespace mjEngine{
 
-mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* renderer)
+mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, time_t* rngSeed)
 {
+    srand(time(rngSeed)); // Seed the RNG
     this->renderer = renderer;
     this->pathPrefix = pathPrefix;
     #ifdef WIN32

@@ -27,16 +27,14 @@ public:
     std::string text;
     int usedLength = 0;
     mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font,
-                  int fontSize, float renderScale, float positionScaleHz, float positionScaleVr, float* color, mjVector3& position, TextAlignment alignment = ALIGNMENT_LEFT);
-    /*mjVector3 pos;
-    mjVector3 dir;
-    mjVector3 up;
-    mjVector3 scale;*/
+                  int fontSize, float renderScale, float positionScaleHz, float positionScaleVr,
+                  float* color, mjVector3& position, TextAlignment alignment = ALIGNMENT_LEFT);
 
     float modelMatrix[16];
 
 
 
+    float totalWidth = 0;
 
     void SetRenderScale(float scale);
     void SetPositionScale(float positionScaleHz);

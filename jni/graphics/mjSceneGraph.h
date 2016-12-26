@@ -44,6 +44,7 @@ public:
 	void Update(float t_elapsed);
     void AddGroup(std::vector<mjObject*>* group, bool toDrawable=true, bool toShadowCasters=false, bool toTranslucent=false);
     void RemoveGroup(std::vector<mjObject *>* group);
+    bool Remove(mjObject* objToRemove, bool inDrawables=true, bool inShadowCasters=false, bool inTranslucent=false);
 
 
 	void Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
@@ -56,6 +57,7 @@ private:
     mjResourceManager* resourceManager;
     static bool SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1);
     void DrawObject(mjObject* drawableObj);
+    bool RemoveFromVector(std::vector<mjObject*>* vectorObj, mjObject* object);
 
     float* lookAtMatrix;
     float* projectionMatrix;

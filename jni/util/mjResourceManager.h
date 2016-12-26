@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <stdlib.h>
+#include <time.h>
 
 #include "../extLibs/tinyxml/tinyxml2.h"
 
@@ -36,7 +38,7 @@ namespace mjEngine{
 class mjResourceManager
 {
     public:
-        mjResourceManager(std::string& pathPrefix, mjRenderer* renderer);
+        mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, time_t* rngSeed = 0);
         ~mjResourceManager();
 
         mjModel* FetchModel(const char* path);
