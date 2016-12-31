@@ -1,5 +1,8 @@
 TEMPLATE = lib
 CONFIG += console
+
+win32: CONFIG += static
+
 CONFIG -= app_bundle
 CONFIG -= qt
 
@@ -152,11 +155,11 @@ SOURCES += \
 
 
 
-INCLUDEPATH += $$PWD/../../../sdl/i686-w64-mingw32/include $$PWD/../../../glew/include
+INCLUDEPATH += $$PWD/../../../sdl/i686-w64-mingw32/include $$PWD/../../../glew/include $$PWD/extLibs/freetype2/include
 
-win32: LIBS += -L$$PWD/../../../glew/lib/Release/Win32/ -L$$PWD/../../../sdl/i686-w64-mingw32/lib/
+win32: LIBS += -L$$PWD/../../../glew/lib/Release/Win32/ -L$$PWD/../../../sdl/i686-w64-mingw32/lib/ -L$$PWD/precompiled/freetype2/win32
 
-win32: LIBS += -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image -lglew32s -lopengl32 -lSDL2_mixer
+win32: LIBS += -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image -lglew32s -lopengl32 -lSDL2_mixer -lfreetype
 
 #linux: LIBS += -lSDL2 -lGL -lGLEW -lSDL2_image -lSDL2_mixer
 
