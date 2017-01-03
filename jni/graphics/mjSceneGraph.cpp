@@ -158,9 +158,12 @@ void mjSceneGraph::DrawObject(mjObject* objToDraw)
         renderer.RenderModel(* objToDraw->model, matrixStack.current, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
                              objToDraw->customShaders, objToDraw->customTextures, objToDraw->extraColorForTexture, resourceManager->shaderList);
     }
-    if (objToDraw->subObjects.size() > 0)
+
+    unsigned drawToSubObject = objToDraw->drawToSubObject > 0 ? objToDraw->drawToSubObject : objToDraw->subObjects.size();
+
+    if (drawToSubObject > 0)
     {
-        for (int i = 0; i < objToDraw->subObjects.size(); i++)
+        for (int i = 0; i < drawToSubObject; i++)
         {
             DrawObject(objToDraw->subObjects[i]);
         }

@@ -164,6 +164,7 @@ void mjGraphicText::Update(const char* text)
         bytePos += thisCharLength;
     }
     usedLength = currentCharPos;
+    drawToSubObject = currentCharPos;
 
     SetPositionScale(positionScaleHz);
     SetRenderScale(renderScale);

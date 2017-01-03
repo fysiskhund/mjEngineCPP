@@ -83,6 +83,7 @@ public:
 	mjResourceManager* resourceManager;
 
     std::vector<mjObject*> subObjects;
+    int drawToSubObject = -1; // -1: all subObjects, else draw up to subObject N
 
     //mjObject(mjResourceManager* resourceManager);
     mjObject(mjResourceManager* resourceManager, structuretype collisionStructureType = MJ_NO_BOUNDING_STRUCT);
