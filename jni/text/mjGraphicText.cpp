@@ -103,6 +103,7 @@ void mjGraphicText::UpdateModelMatrix()
 }
 void mjGraphicText::Update(const char* text)
 {
+    LOGI("Text updated to %s", text);
     this->text;
 
     int bytePos = 0;
@@ -165,6 +166,7 @@ void mjGraphicText::Update(const char* text)
     }
     usedLength = currentCharPos;
     drawToSubObject = currentCharPos;
+    LOGI("drawToSubObject: %d", drawToSubObject);
 
     SetPositionScale(positionScaleHz);
     SetRenderScale(renderScale);
