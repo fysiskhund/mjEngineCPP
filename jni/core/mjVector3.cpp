@@ -9,8 +9,9 @@ namespace mjEngine{
  *
  */
 
-#define MJ_3_2_PI 4.712388
-#define MJ_1_2_PI 1.570796
+#define MJ_3_2_PI   4.712388
+#define MJ_1_2_PI   1.570796
+#define MJ_TWICE_PI 6.283185
 
  mjVector3::mjVector3()
  {
@@ -60,6 +61,14 @@ namespace mjEngine{
 	y = v.y;
 	z = v.z;
  }
+
+ void mjVector3::ScaleCopyFrom(GLfloat a, mjVector3& v)
+ {
+     x = a*v.x;
+     y = a*v.y;
+     z = a*v.z;
+ }
+
  void mjVector3::CopyFromArray(GLfloat* v)
  {
 	 x = v[0];

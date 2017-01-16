@@ -22,12 +22,12 @@ public:
     float charWidth;
     float charHeight;
 
-    float manualRelocation = 0;
+    //float manualRelocation = 0;
 
     float charRatio;
     float bitmapLeft;
     float bitmapTop;
-    float advanceX;
+    int advanceX;
 
 
 

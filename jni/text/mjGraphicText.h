@@ -40,7 +40,7 @@ public:
     void SetPositionScale(float positionScaleHz);
     void SetColor(float* color);
     void UpdateModelMatrix();
-    void Update(const char* text);
+    void Update(const char* format, ...);
 
 private:
 

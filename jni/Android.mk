@@ -47,8 +47,9 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)//extLibs/freetype2/include
 
 LOCAL_MODULE    := libmjGame
 LOCAL_SRC_FILES := \
-    takkatakkacpp/FreeTypeTest.cpp \
+    takkatakkacpp/ChooserUniverse.cpp \
     takkatakkacpp/SongUniverse.cpp \
+    takkatakkacpp/TakkaTakkaGameState.cpp \
     takkatakkacpp/TitleUniverse.cpp \
     takkatakkacpp/gameObjects/Bubble.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/BubbleScript.cpp \
@@ -60,7 +61,9 @@ LOCAL_SRC_FILES := \
     takkatakkacpp/gameObjects/Step.cpp \
     takkatakkacpp/gameObjects/Track.cpp \
     takkatakkacpp/gameObjects/TrackLoader.cpp \
-    takkatakkacpp/gl_code.cpp
+    takkatakkacpp/gameObjects/TrackPreview.cpp \
+    takkatakkacpp/gl_code.cpp \
+    takkatakkacpp/shaders/BubbleShaders.cpp
 
 # -------------
 

@@ -58,9 +58,11 @@ void mjGraphicText::SetPositionScale(float positionScaleHz)
 
     for (int i = 0; i < usedLength; i++)
     {
-        ((mjGraphicCharObject*) subObjects[i])->pos.y = (((mjGraphicCharObject*) subObjects[i])->bitmapTop - ((mjGraphicCharObject*) subObjects[i])->charHeight)*positionScaleVr; //FIXME: is this value fixed forever?
-        ((mjGraphicCharObject*) subObjects[i])->pos.x = (displacement + ((mjGraphicCharObject*) subObjects[i])->bitmapLeft + ((mjGraphicCharObject*) subObjects[i])->manualRelocation)*positionScaleHz;
-        displacement +=  (((mjGraphicCharObject*) subObjects[i])->advanceX/64.0);
+        mjGraphicCharObject* subCharObj = (mjGraphicCharObject* ) subObjects[i];
+
+        subCharObj->pos.y = (subCharObj->bitmapTop - subCharObj->charHeight)*positionScaleVr; //FIXME: is this value fixed forever?
+        subCharObj->pos.x = (displacement + subCharObj->bitmapLeft)*positionScaleHz;
+        displacement +=  subCharObj->advanceX >> 6;
     }
     totalWidth = displacement;
 
@@ -101,24 +103,32 @@ void mjGraphicText::UpdateModelMatrix()
 {
     Matrix4::GetPositionScaleAndRotationMatrix(pos, dir, up, scale, modelMatrix);
 }
-void mjGraphicText::Update(const char* text)
+
+void mjGraphicText::Update(const char* format, ...)
 {
-    LOGI("Text updated to %s", text);
-    this->text;
+    char buffer[1024];
+
+    va_list argptr;
+    va_start(argptr, format);
+    vsnprintf(buffer, 1024, format, argptr);
+    va_end(argptr);
+
+
+    this->text = buffer;
 
     int bytePos = 0;
 
     int currentCharPos = 0;
 
-    int totalByteLength = strnlen(text, 1024);
+    int totalByteLength = strnlen(buffer, 1024);
 
     while (bytePos < totalByteLength)
     {
-        int thisCharLength = ftgl::utf8_surrogate_len(&text[bytePos]);
+        int thisCharLength = ftgl::utf8_surrogate_len(&buffer[bytePos]);
 
         if (!thisCharLength)
         {
-            LOGI("mjGraphicText: Invalid char in %s [%d]!", text, bytePos);
+            LOGI("mjGraphicText: Invalid char in %s [%d]!", buffer, bytePos);
             break;
         }/* else
         {
@@ -127,7 +137,7 @@ void mjGraphicText::Update(const char* text)
             {
                 if (j < thisCharLength)
                 {
-                    charCharCharmander[j] = text[pos + j];
+                    charCharCharmander[j] = buffer[pos + j];
                 } else
                 {
                     charCharCharmander[j] = 0;
@@ -138,8 +148,8 @@ void mjGraphicText::Update(const char* text)
 
             LOGI("Char: %s", charCharCharmander);
         }*/
-        unsigned long thisCharLong = ftgl::utf8_to_utf32(&(text[bytePos]));
-        //LOGI("Char: (%lu) %s", thisCharLong, &(text[pos]));
+        unsigned long thisCharLong = ftgl::utf8_to_utf32(&(buffer[bytePos]));
+        //LOGI("Char: (%lu) %s", thisCharLong, &(buffer[pos]));
 
         mjGraphicCharObject* charObject;
 
@@ -166,7 +176,7 @@ void mjGraphicText::Update(const char* text)
     }
     usedLength = currentCharPos;
     drawToSubObject = currentCharPos;
-    LOGI("drawToSubObject: %d", drawToSubObject);
+    //LOGI("drawToSubObject: %d", drawToSubObject);
 
     SetPositionScale(positionScaleHz);
     SetRenderScale(renderScale);
