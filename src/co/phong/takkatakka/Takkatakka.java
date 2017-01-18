@@ -70,7 +70,7 @@ public class Takkatakka extends Activity {
 		//System.out.println(actionToString(actionMasked));
 		if (actionMasked == MotionEvent.ACTION_DOWN || 
 				actionMasked == MotionEvent.ACTION_POINTER_DOWN ||
-				actionMasked == MotionEvent.ACTION_DOWN ||
+				actionMasked == MotionEvent.ACTION_UP ||
 				actionMasked == MotionEvent.ACTION_POINTER_UP)
 		{
 			int pointerIndex = MotionEventCompat.getActionIndex(motionEvent);

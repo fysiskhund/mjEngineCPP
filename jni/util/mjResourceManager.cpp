@@ -314,8 +314,11 @@ mjGraphicCharObjectResource* mjResourceManager::FetchGraphicChar(mjFontResource 
 
     if (result != NULL)
     {
-        //LOGI("Reused 1 char :3 !");
+        //LOGI("Reused 1 char [%lu] !", charToRenderLong);
         return result;
+    } else
+    {
+        //LOGI("Rendering char [%lu]", charToRenderLong);
     }
 
     result = new mjGraphicCharObjectResource(fontResource, fontSize, charToRenderLong);

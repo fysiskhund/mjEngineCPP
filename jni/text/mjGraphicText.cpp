@@ -34,7 +34,9 @@ mjGraphicText::mjGraphicText(mjResourceManager* resourceManager, const char* tex
     }
 
 
-    Update(text);
+    // Normally these objects are created while there is a GL context available, so
+    // its text gets updated immediately on creation.
+    UpdateTextStatic(text);
     UpdateModelMatrix();
 
     LOGI("End of creating text.");
@@ -104,7 +106,7 @@ void mjGraphicText::UpdateModelMatrix()
     Matrix4::GetPositionScaleAndRotationMatrix(pos, dir, up, scale, modelMatrix);
 }
 
-void mjGraphicText::Update(const char* format, ...)
+void mjGraphicText::UpdateText(const char* format, ...)
 {
     char buffer[1024];
 
@@ -113,22 +115,36 @@ void mjGraphicText::Update(const char* format, ...)
     vsnprintf(buffer, 1024, format, argptr);
     va_end(argptr);
 
+    this->text =  buffer;
 
-    this->text = buffer;
+    if (immediateUpdate)
+    {
+         UpdateTextStatic(buffer);
+    } else
+    {
+        requiresTextUpdate = true;
+    }
+
+}
+
+void mjGraphicText::UpdateTextStatic(const char* text)
+{
+
+    this->text = text;
 
     int bytePos = 0;
 
     int currentCharPos = 0;
 
-    int totalByteLength = strnlen(buffer, 1024);
+    int totalByteLength = strnlen(text, 1024);
 
     while (bytePos < totalByteLength)
     {
-        int thisCharLength = ftgl::utf8_surrogate_len(&buffer[bytePos]);
+        int thisCharLength = ftgl::utf8_surrogate_len(&text[bytePos]);
 
         if (!thisCharLength)
         {
-            LOGI("mjGraphicText: Invalid char in %s [%d]!", buffer, bytePos);
+            LOGI("mjGraphicText: Invalid char in %s [%d]!", text, bytePos);
             break;
         }/* else
         {
@@ -137,7 +153,7 @@ void mjGraphicText::Update(const char* format, ...)
             {
                 if (j < thisCharLength)
                 {
-                    charCharCharmander[j] = buffer[pos + j];
+                    charCharCharmander[j] = text[bytePos + j];
                 } else
                 {
                     charCharCharmander[j] = 0;
@@ -148,8 +164,8 @@ void mjGraphicText::Update(const char* format, ...)
 
             LOGI("Char: %s", charCharCharmander);
         }*/
-        unsigned long thisCharLong = ftgl::utf8_to_utf32(&(buffer[bytePos]));
-        //LOGI("Char: (%lu) %s", thisCharLong, &(buffer[pos]));
+        unsigned long thisCharLong = ftgl::utf8_to_utf32(&(text[bytePos]));
+        //LOGI("CharLong: (%lu)", thisCharLong);
 
         mjGraphicCharObject* charObject;
 
@@ -181,7 +197,21 @@ void mjGraphicText::Update(const char* format, ...)
     SetPositionScale(positionScaleHz);
     SetRenderScale(renderScale);
     SetColor(color);
+}
 
+void mjGraphicText::Update(float t_elapsed)
+{
+
+    mjObject::Update(t_elapsed);
+
+    /* This is so the GL calls can be made when there is a context present
+     * otherwise funky things happen, at least in Android..
+    */
+    if (requiresTextUpdate)
+    {
+        requiresTextUpdate = false;
+        UpdateTextStatic(this->text.c_str());
+    }
 }
 
 

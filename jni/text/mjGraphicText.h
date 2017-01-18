@@ -36,11 +36,21 @@ public:
 
     float totalWidth = 0;
 
+    /*!
+     * If immediateUpdate is set to true, then it's important to ONLY send updates when
+     * there is a GL context available. In Android, events arrive asynchronously, so there is
+     * NO GL context available until the main thread (e.g. Update(t_elapsed) runs.
+     * When it is set to false, the changes in the text will only be reflected until Update(t_elapsed) runs
+     * but then you must remember to call the Update() method!
+     */
+    bool immediateUpdate = true;
+
     void SetRenderScale(float scale);
     void SetPositionScale(float positionScaleHz);
     void SetColor(float* color);
     void UpdateModelMatrix();
-    void Update(const char* format, ...);
+    void UpdateText(const char* format, ...);
+    void Update(float t_elapsed) override;
 
 private:
 
@@ -53,7 +63,10 @@ private:
     float renderScale;
     mjFontResource* fontResource;
     mjResourceManager* resourceManager;
+    bool requiresTextUpdate;
     char* GetNextChar();
+    void UpdateTextStatic(const char* text);
+
 };
 
 }
