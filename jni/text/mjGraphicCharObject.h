@@ -35,6 +35,7 @@ public:
     mjGraphicCharObject(mjResourceManager* resourceManager, mjFontResource* fontResource,
                         int fontSize, unsigned long charToRenderLong, float renderScale);
     void SetGraphicCharResource(mjGraphicCharObjectResource* resource);
+    virtual ~mjGraphicCharObject();
 private:
 
     mjGraphicCharObjectResource* graphicCharObjectResource;

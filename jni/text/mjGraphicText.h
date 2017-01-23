@@ -52,6 +52,7 @@ public:
     void UpdateText(const char* format, ...);
     void Update(float t_elapsed) override;
 
+    virtual ~mjGraphicText();
 private:
 
 

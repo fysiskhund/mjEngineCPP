@@ -56,11 +56,6 @@ public:
 
     void Load(tinyxml2::XMLDocument* doc);
 
-    virtual void TieShaders(std::vector<mjShader*>& shaderList);
-
-    virtual void DrawDEPRECATED(std::vector<mjShader*>& shaderList,
-            GLfloat* modelMatrix, GLfloat* lookAtMatrix, GLfloat* modelViewMatrix, GLfloat* projectionMatrix, GLfloat* modelViewProjectionMatrix, mjModelPose* pose, mjMatrixStack* matrixStack);
-
     mjModelPose* CreateSimplePose();
 
     void TieStructureToMeshes();

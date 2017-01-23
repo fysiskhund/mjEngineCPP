@@ -106,11 +106,6 @@ void mjObject::SetID(const char* id)
     this->id[strnlen(id, 200)] = '\0';
 }
 
-void mjObject::TieShadersDEPRECATED(std::vector<mjShader*>& shaderList)
-{
-    model->TieShaders(shaderList);
-}
-
 void mjObject::FlushPhysicsEffects()
 {
     effectStack.clear();
@@ -131,27 +126,6 @@ void mjObject::CopyModelMatrixTo(float* modelMatrixOut)
     Matrix4::GetPositionScaleAndRotationMatrix(positionPlusOffset, dir, up, scale, modelMatrixOut);
 }
 
-void mjObject::DrawDEPRECATED(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix, mjMatrixStack* matrixStack)
-{
-	float modelMatrix[16];
-	float modelViewMatrix[16];
-	float modelViewProjectionMatrix[16];
-	mjVector3 positionPlusOffset;
-	positionPlusOffset.CopyFrom(pos);
-	positionPlusOffset.Add(modelOffset);
-
-
-	/*if (pose)
-	{
-		LOGI("id: %s; pAngles: %d", id, pose->angles.size());
-	}*/
-	Matrix4::GetPositionScaleAndRotationMatrix(positionPlusOffset, dir, up, scale, modelMatrix);
-
-	//Matrix4::DebugM("mvpp", modelViewProjectionMatrix);
-
-    // DEPRECATED.
-    //model->Draw(shaderList, modelMatrix, lookAtMatrix, modelViewMatrix, projectionMatrix, modelViewProjectionMatrix, pose, matrixStack);
-}
 
 void mjObject::ProcessPhysicsEffects(float t_elapsed)
 {

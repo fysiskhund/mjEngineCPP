@@ -73,27 +73,7 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 	delete[] pathName;
 }
 
-void mjSkybox::TieShadersDEPRECATED(std::vector<mjShader*>& shaderList)
-{
-	int skyboxShaderIndex = 0;
-	for (unsigned j = 0; j < shaderList.size(); j++)
-	{
-		//LOGI("Considering shader %s", shaderList[j]->name);
-		if (strncmp("skybox", shaderList[j]->name, 96) == 0)
-		{
-			skyboxShaderIndex = j;
-		}
-	}
-	for(unsigned i = 0; i < boxModel->meshes.size(); i++)
-	{
-		boxModel->meshes[i]->mjShaderListIndex = skyboxShaderIndex;
-	}
-	for(unsigned i = 0; i < planeModel->meshes.size(); i++)
-	{
-		//LOGI("Planemodel 0x%x mesh 0x%x -> skybox shader", planeModel, planeModel->meshes[i]);
-		planeModel->meshes[i]->mjShaderListIndex = skyboxShaderIndex;
-	}
-}
+
 
 void mjSkybox::SetCameraPos(mjVector3* cameraPos)
 {
@@ -116,34 +96,5 @@ void mjSkybox::Update(float t_elapsed)
 	}
 	//LOGI("angles: %3.3f, %3.3f -> %3.3f %3.3f %3.3f", level0Data.angleH, level0Data.angleV, dir.x, dir.y, dir.z);
 }
-void mjSkybox::DrawDEPRECATED(std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix, mjMatrixStack* matrixStack)
-{
-	//LOGI("draw skybox");
-	// turn off depth buffer
-	glDepthMask(GL_FALSE);
-	glDisable(GL_DEPTH_TEST);
 
-	model = boxModel;
-
-	dir.SetRotations(backgroundData.angleH, backgroundData.angleV);
-    //FIXME!!
-    //mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix, matrixStack);
-
-	model = planeModel;
-	//LOGI("planeModel 0x%x, mesh 0x%x", model, model->meshes.at(0));
-	for(unsigned i = 0; i < levels.size(); i++)
-	{
-		mjSkyboxLevelData* data = levels.at(i);
-		//LOGI("data: 0x%x, tex: %d", data, data->texture);
-		//LOGI("modelMesh 0x%x", model->meshes.at(0));
-		model->meshes.at(0)->glTexture = data->texture;
-		dir.SetRotations(data->angleH, data->angleV);
-        //FIXME!!
-        //mjObject::Draw(shaderList, lookAtMatrix, projectionMatrix, matrixStack);
-	}
-
-
-	glDepthMask(GL_TRUE);
-	glEnable(GL_DEPTH_TEST);
-}
 }

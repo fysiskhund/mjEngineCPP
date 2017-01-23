@@ -214,5 +214,15 @@ void mjGraphicText::Update(float t_elapsed)
     }
 }
 
+mjGraphicText::~mjGraphicText()
+{
+    for (int i = 0; i < subObjects.size(); i++)
+    {
+
+        delete subObjects[i];
+    }
+    subObjects.clear();
+}
+
 
 }

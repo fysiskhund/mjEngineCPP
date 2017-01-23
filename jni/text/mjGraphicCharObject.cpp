@@ -3,8 +3,6 @@
 namespace mjEngine {
 
 
-// FIXME: Cleanup missing.
-
 mjGraphicCharObject::mjGraphicCharObject(mjResourceManager* resourceManager, mjFontResource* fontResource, int fontSize,
                                          unsigned long charToRenderLong, float renderScale)
     : mjObject(resourceManager)
@@ -46,6 +44,12 @@ void mjGraphicCharObject::SetGraphicCharResource(mjGraphicCharObjectResource* re
 
 
 
+}
+mjGraphicCharObject::~mjGraphicCharObject()
+{
+    //LOGI("deadsies x_X %x", this);
+    delete customShaders;
+    delete [] customTextures;
 }
 
 
