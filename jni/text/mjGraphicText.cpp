@@ -130,13 +130,16 @@ void mjGraphicText::UpdateText(const char* format, ...)
 void mjGraphicText::UpdateTextStatic(const char* text)
 {
 
+    int totalByteLength = strnlen(text, 1024);
+
+
     this->text = text;
 
     int bytePos = 0;
 
     int currentCharPos = 0;
 
-    int totalByteLength = strnlen(text, 1024);
+
 
     while (bytePos < totalByteLength)
     {
@@ -192,11 +195,12 @@ void mjGraphicText::UpdateTextStatic(const char* text)
     }
     usedLength = currentCharPos;
     drawToSubObject = currentCharPos;
-    //LOGI("drawToSubObject: %d", drawToSubObject);
 
     SetPositionScale(positionScaleHz);
     SetRenderScale(renderScale);
     SetColor(color);
+
+    //LOGI("drawToSubObject: %d", drawToSubObject);
 }
 
 void mjGraphicText::Update(float t_elapsed)

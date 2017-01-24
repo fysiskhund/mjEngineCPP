@@ -8,23 +8,34 @@ void mjSceneGraph::Initialize(mjResourceManager* resourceManager)
     this->resourceManager = resourceManager;
 }
 
-/*void mjSceneGraph::AddToDrawable(mjObject* object, bool isDrawable=true, bool castsShadow, bool isTranslucent)
+void mjSceneGraph::Add(mjObject* object, bool isDrawable, bool castsShadow, bool isTranslucent)
 {
     if (isDrawable)
     {
+        object->sceneGraphDrawablesIndex = drawableObjects.size();
         drawableObjects.push_back(object);
+
+        object->sceneGraphTranslucentsIndex = translucentObjects.max_size(); // Mark index as invalid.
     } else if (isTranslucent)
     {
+
+        object->sceneGraphTranslucentsIndex = translucentObjects.size();
         translucentObjects.push_back(object);
+
+        object->sceneGraphDrawablesIndex = drawableObjects.max_size(); // Mark index as invalid.
     }
     if (castsShadow)
     {
+        object->sceneGraphShadowCastersIndex = shadowCasters.size();
         shadowCasters.push_back(object);
+    } else
+    {
+        object->sceneGraphShadowCastersIndex = shadowCasters.max_size(); // Mark index as invalid.
     }
 
-    renderer.PrepareModel(object->model);
-}*/
 
+}
+/*
 void mjSceneGraph::AddGroup(std::vector<mjObject*>* group, bool toDrawable, bool toShadowCasters, bool toTranslucent)
 {
     if (toDrawable)
@@ -76,9 +87,43 @@ void mjSceneGraph::RemoveGroup(std::vector<mjObject*>* group)
             }
         }
     }
+}*/
+
+bool mjSceneGraph::Remove(mjObject* objToRemove, bool fromDrawables, bool fromShadowCasters, bool fromTranslucents)
+{
+    bool actionTaken = false;
+
+    if (fromDrawables)
+    {
+        if (RemoveFromVectorWithIndex(&drawableObjects, objToRemove, objToRemove->sceneGraphDrawablesIndex))
+        {
+            objToRemove->sceneGraphDrawablesIndex = drawableObjects.max_size();
+            actionTaken = true;
+        }
+    }
+    if (fromTranslucents)
+    {
+        if (RemoveFromVectorWithIndex(&translucentObjects, objToRemove, objToRemove->sceneGraphTranslucentsIndex))
+        {
+            objToRemove->sceneGraphTranslucentsIndex = translucentObjects.max_size();
+            actionTaken = true;
+        }
+    }
+    if (fromShadowCasters)
+    {
+        if (RemoveFromVectorWithIndex(&shadowCasters, objToRemove, objToRemove->sceneGraphShadowCastersIndex))
+        {
+            objToRemove->sceneGraphShadowCastersIndex = shadowCasters.max_size();
+            actionTaken = true;
+        }
+    }
+
+    return actionTaken;
+
+
 }
 
-bool mjSceneGraph::Remove(mjObject* objToRemove, bool inDrawables, bool inShadowCasters, bool inTranslucent)
+bool mjSceneGraph::RemoveThorough(mjObject* objToRemove, bool inDrawables, bool inShadowCasters, bool inTranslucent)
 {
 
     bool result = false;
@@ -100,10 +145,13 @@ bool mjSceneGraph::Remove(mjObject* objToRemove, bool inDrawables, bool inShadow
 
 void mjSceneGraph::Update(float t_elapsed)
 {
-    // This is supposed to optimise drawing by culling objects that are visible. Perhaps also update the
+    // This is supposed to optimise drawing by culling objects that are not visible. Perhaps also update the
     // models' animations.
     // For now it does nothing :P
 }
+
+
+
 void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
     this->lookAtMatrix = lookAtMatrix;
@@ -159,7 +207,7 @@ void mjSceneGraph::DrawObject(mjObject* objToDraw)
                              objToDraw->customShaders, objToDraw->customTextures, objToDraw->extraColorForTexture, resourceManager->shaderList);
     }
 
-    unsigned drawToSubObject = objToDraw->drawToSubObject > 0 ? objToDraw->drawToSubObject : objToDraw->subObjects.size();
+    unsigned drawToSubObject = objToDraw->drawToSubObject > -1 ? objToDraw->drawToSubObject : objToDraw->subObjects.size();
 
     if (drawToSubObject > 0)
     {
@@ -186,6 +234,22 @@ bool mjSceneGraph::RemoveFromVector(std::vector<mjObject*>* vectorObj, mjObject*
             return true;
             //break; // Not necessary after "return"
         }
+    }
+    return false;
+}
+
+bool mjSceneGraph::RemoveFromVectorWithIndex(std::vector<mjObject*>* vectorObj, mjObject* object, unsigned index)
+{
+
+    std::vector<mjObject*>::iterator j = vectorObj->begin();
+
+    j += index;
+
+    if (*j == object)
+    {
+        vectorObj->erase(j);
+
+        return true;
     }
     return false;
 }

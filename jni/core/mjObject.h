@@ -40,7 +40,9 @@ public:
     int tag = 0;
 	void* tagObject = NULL;
 
-
+    unsigned sceneGraphDrawablesIndex = 0;
+    unsigned sceneGraphTranslucentsIndex = 0;
+    unsigned sceneGraphShadowCastersIndex = 0;
 
 	mjVector3 pos;
 	mjVector3 dir;

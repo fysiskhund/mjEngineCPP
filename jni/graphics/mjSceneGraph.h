@@ -33,18 +33,21 @@ public:
 
 
     bool sortTranslucentObjects = true;
-    std::vector<mjObject*> drawableObjects;
-	std::vector<mjObject*> translucentObjects;
-	std::vector<mjObject*> shadowCasters;
+
 
     mjMatrixStack matrixStack;
 
     void Initialize(mjResourceManager* resourceManager);
-    //void AddToDrawable(mjObject* object, bool isDrawable=true, bool castsShadow=false, bool isTranslucent=false);
+    void Add(mjObject* object, bool isDrawable=true, bool castsShadow=false, bool isTranslucent=false);
 	void Update(float t_elapsed);
-    void AddGroup(std::vector<mjObject*>* group, bool toDrawable=true, bool toShadowCasters=false, bool toTranslucent=false);
-    void RemoveGroup(std::vector<mjObject *>* group);
-    bool Remove(mjObject* objToRemove, bool inDrawables=true, bool inShadowCasters=false, bool inTranslucent=false);
+    //void AddGroup(std::vector<mjObject*>* group, bool toDrawable=true, bool toShadowCasters=false, bool toTranslucent=false);
+    //void RemoveGroup(std::vector<mjObject *>* group);
+
+    //! Removes an object relying on its sceneGraph-*-indices
+    bool Remove(mjObject* objToRemove, bool fromDrawables=true, bool fromShadowCasters=false, bool fromTranslucents=false);
+
+    //! Finds the object and removes it
+    bool RemoveThorough(mjObject* objToRemove, bool inDrawables=true, bool inShadowCasters=false, bool inTranslucent=false);
 
 
 	void Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix);
@@ -54,13 +57,20 @@ public:
 
 
 private:
+
+    std::vector<mjObject*> drawableObjects;
+    std::vector<mjObject*> translucentObjects;
+    std::vector<mjObject*> shadowCasters;
+
     mjResourceManager* resourceManager;
     static bool SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1);
     void DrawObject(mjObject* drawableObj);
     bool RemoveFromVector(std::vector<mjObject*>* vectorObj, mjObject* object);
+    bool RemoveFromVectorWithIndex(std::vector<mjObject*>* vectorObj, mjObject* object, unsigned index);
 
     float* lookAtMatrix;
     float* projectionMatrix;
+
 
 
 
