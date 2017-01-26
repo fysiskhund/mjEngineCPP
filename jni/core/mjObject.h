@@ -40,9 +40,10 @@ public:
     int tag = 0;
 	void* tagObject = NULL;
 
+    /*  NOTE: doesn't work. Left there in case I can think of something to make it work
     unsigned sceneGraphDrawablesIndex = 0;
     unsigned sceneGraphTranslucentsIndex = 0;
-    unsigned sceneGraphShadowCastersIndex = 0;
+    unsigned sceneGraphShadowCastersIndex = 0;*/
 
 	mjVector3 pos;
 	mjVector3 dir;

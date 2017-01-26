@@ -12,26 +12,27 @@ void mjSceneGraph::Add(mjObject* object, bool isDrawable, bool castsShadow, bool
 {
     if (isDrawable)
     {
-        object->sceneGraphDrawablesIndex = drawableObjects.size();
+        //object->sceneGraphDrawablesIndex = drawableObjects.size();  NOTE: doesn't work. Left there in case I can think of something to make it work
         drawableObjects.push_back(object);
 
-        object->sceneGraphTranslucentsIndex = translucentObjects.max_size(); // Mark index as invalid.
+        //object->sceneGraphTranslucentsIndex = translucentObjects.max_size(); // Mark index as invalid.  NOTE: doesn't work. Left there in case I can think of something to make it work
     } else if (isTranslucent)
     {
 
-        object->sceneGraphTranslucentsIndex = translucentObjects.size();
+        //object->sceneGraphTranslucentsIndex = translucentObjects.size();  NOTE: doesn't work. Left there in case I can think of something to make it work
         translucentObjects.push_back(object);
 
-        object->sceneGraphDrawablesIndex = drawableObjects.max_size(); // Mark index as invalid.
+        //object->sceneGraphDrawablesIndex = drawableObjects.max_size(); // Mark index as invalid.  NOTE: doesn't work. Left there in case I can think of something to make it work
     }
     if (castsShadow)
     {
-        object->sceneGraphShadowCastersIndex = shadowCasters.size();
+        //object->sceneGraphShadowCastersIndex = shadowCasters.size();  NOTE: doesn't work. Left there in case I can think of something to make it work
         shadowCasters.push_back(object);
-    } else
+    }/* else
     {
+     NOTE: doesn't work. Left there in case I can think of something to make it work
         object->sceneGraphShadowCastersIndex = shadowCasters.max_size(); // Mark index as invalid.
-    }
+    }*/
 
 
 }
@@ -89,6 +90,7 @@ void mjSceneGraph::RemoveGroup(std::vector<mjObject*>* group)
     }
 }*/
 
+/*
 bool mjSceneGraph::Remove(mjObject* objToRemove, bool fromDrawables, bool fromShadowCasters, bool fromTranslucents)
 {
     bool actionTaken = false;
@@ -121,27 +123,52 @@ bool mjSceneGraph::Remove(mjObject* objToRemove, bool fromDrawables, bool fromSh
     return actionTaken;
 
 
-}
+}*/
 
-bool mjSceneGraph::RemoveThorough(mjObject* objToRemove, bool inDrawables, bool inShadowCasters, bool inTranslucent)
+bool mjSceneGraph::Remove(mjObject* objToRemove, bool fromDrawables, bool fromShadowCasters, bool fromTranslucents)
 {
 
-    bool result = false;
-    if (inDrawables)
+    bool actionTaken = false;
+    if (fromDrawables)
     {
-        result = RemoveFromVector(&drawableObjects, objToRemove);
+        actionTaken = RemoveFromVector(&drawableObjects, objToRemove);
     }
-    if (inShadowCasters)
+    if (fromShadowCasters)
     {
-        result = result || RemoveFromVector(&shadowCasters, objToRemove);
+        actionTaken = actionTaken || RemoveFromVector(&shadowCasters, objToRemove);
     }
-    if (inTranslucent)
+    if (fromTranslucents)
     {
-        result = result || RemoveFromVector(&translucentObjects, objToRemove);
+        actionTaken = actionTaken || RemoveFromVector(&translucentObjects, objToRemove);
     }
 
-    return result;
+    return actionTaken;
 }
+
+bool mjSceneGraph::RemoveFromBack(mjObject* objToRemove, bool fromDrawables, bool fromShadowCasters, bool fromTranslucents)
+{
+
+    bool actionTaken = false;
+    if (fromDrawables)
+    {
+        actionTaken = RemoveFromVectorFromBack(&drawableObjects, objToRemove);
+    }
+    if (fromShadowCasters)
+    {
+        actionTaken = actionTaken || RemoveFromVectorFromBack(&shadowCasters, objToRemove);
+    }
+    if (fromTranslucents)
+    {
+        actionTaken = actionTaken || RemoveFromVectorFromBack(&translucentObjects, objToRemove);
+    }
+
+    return actionTaken;
+}
+
+/*unsigned mjSceneGraph::GetUnusedIndexValue() NOTE: Doesn't work. kept around to see if I can make it work.
+{
+    return drawableObjects.max_size();
+}*/
 
 void mjSceneGraph::Update(float t_elapsed)
 {
@@ -238,6 +265,25 @@ bool mjSceneGraph::RemoveFromVector(std::vector<mjObject*>* vectorObj, mjObject*
     return false;
 }
 
+bool mjSceneGraph::RemoveFromVectorFromBack(std::vector<mjObject*>* vectorObj, mjObject* object)
+{
+
+    std::vector<mjObject*>::iterator end = vectorObj->end();
+    std::vector<mjObject*>::iterator beginning = vectorObj->begin();
+
+    for (std::vector<mjObject*>::iterator j = end; j != beginning; j--)
+    {
+        if (object == *j)
+        {
+            vectorObj->erase(j);
+            return true;
+            //break; // Not necessary after "return"
+        }
+    }
+    return false;
+}
+
+
 bool mjSceneGraph::RemoveFromVectorWithIndex(std::vector<mjObject*>* vectorObj, mjObject* object, unsigned index)
 {
 
@@ -245,6 +291,7 @@ bool mjSceneGraph::RemoveFromVectorWithIndex(std::vector<mjObject*>* vectorObj, 
 
     j += index;
 
+    LOGI("Removing object with index %d", index);
     if (*j == object)
     {
         vectorObj->erase(j);
