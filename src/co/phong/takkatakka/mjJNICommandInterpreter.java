@@ -35,6 +35,8 @@ public class mjJNICommandInterpreter {
 					
 
 					try {
+						musicPlayer.stop();
+						musicPlayer = new MediaPlayer();
 						musicPlayer.setDataSource(cmdAndArg[1]);
 						musicPlayer.prepare();
 					} catch (IllegalArgumentException e) {
