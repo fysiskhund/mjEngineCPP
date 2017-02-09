@@ -38,7 +38,11 @@ namespace mjEngine{
 class mjResourceManager
 {
     public:
-        mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, time_t* rngSeed = 0);
+
+        std::vector<mjShader*> shaderList;
+        AAssetManager* assMan;
+
+        mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan, time_t* rngSeed = 0);
         ~mjResourceManager();
 
         mjModel* FetchModel(const char* path);
@@ -65,8 +69,8 @@ class mjResourceManager
 
         void PrependFullFilePath(std::string& filePath);
 
+        char* ReadAllFromArchiveToBuffer(const char* filename, int* readSize);
 
-        std::vector<mjShader*> shaderList;
 
 
 protected:
@@ -85,12 +89,14 @@ protected:
 
         int soundIndexAndroid = 0;
 
+        char separator;
+
         mjResource* SearchByPath(std::vector<mjResource*>& repo, std::string& path, int modifier=0);
         mjResource* SearchByPathIgnoreExtension(std::vector<mjResource*>& repo, std::string& path, int modifier=0);
 
         mjResource* SearchByIdentifier(std::vector<mjResource* > &repo, unsigned long identifier, int modifier);
 
-        char separator;
+
 
     private:
         FT_Library ft;

@@ -49,7 +49,12 @@ bool mjImageLoader::Load(const char* name)
 
 #endif
 
-	return 1;
+    return 1;
+}
+
+bool mjImageLoader::LoadFromMemory(char* buffer)
+{
+
 }
 
 #endif

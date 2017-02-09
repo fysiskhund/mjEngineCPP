@@ -18,7 +18,15 @@ void mjModel::LoadFromFile(const char* fileName)
     tinyxml2::XMLDocument doc;
 
 	doc.LoadFile(fileName);
-	Load(&doc);
+    Load(&doc);
+}
+
+void mjModel::LoadFromMemory(char* buffer)
+{
+    LOGI("Loading model from buffer..");
+    tinyxml2::XMLDocument doc;
+    doc.Parse(buffer);
+    Load(&doc);
 }
 
 void mjModel::Load(tinyxml2::XMLDocument* doc)

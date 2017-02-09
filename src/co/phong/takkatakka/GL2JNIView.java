@@ -10,6 +10,7 @@ package co.phong.takkatakka;
 import java.nio.charset.Charset;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.os.Environment;
@@ -40,13 +41,17 @@ import javax.microedition.khronos.opengles.GL10;
  *   bit depths). Failure to do so would result in an EGL_BAD_MATCH error.
  */
 class GL2JNIView extends GLSurfaceView {
+	
     private static String TAG = "GL2JNIView";
     private static final boolean DEBUG = false;
     private static Context androidContext;
 
+    private static AssetManager assetManager;
+    
     public GL2JNIView(Context context) {
         super(context);
         androidContext = context;
+        assetManager = getResources().getAssets();
         init(true, 16, 4);
     }
 
@@ -326,7 +331,8 @@ class GL2JNIView extends GLSurfaceView {
         public void onSurfaceChanged(GL10 gl, int width, int height) {
         	GL2JNILib.isReady = false; // Prevent any events from getting in while the engine is being initialised
         	String pathPrefix = Environment.getExternalStorageDirectory().getAbsolutePath()+"/mjEngineCPP";
-            GL2JNILib.init(width, height, pathPrefix);
+            
+        	GL2JNILib.init(width, height, pathPrefix, assetManager);
             GL2JNILib.isReady = true;
         }
 

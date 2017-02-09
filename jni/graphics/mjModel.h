@@ -53,6 +53,7 @@ public:
 	mjModel();
 
     virtual void LoadFromFile(const char* fileName);
+    virtual void LoadFromMemory(char* buffer);
 
     void Load(tinyxml2::XMLDocument* doc);
 

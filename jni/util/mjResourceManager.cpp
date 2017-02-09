@@ -10,11 +10,14 @@
 
 namespace mjEngine{
 
-mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, time_t* rngSeed)
+mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan, time_t* rngSeed)
 {
     srand(time(rngSeed)); // Seed the RNG
     this->renderer = renderer;
     this->pathPrefix = pathPrefix;
+    this->assMan = assMan;
+
+
     #ifdef WIN32
         separator = '\\';
     #else
@@ -75,7 +78,15 @@ mjModel* mjResourceManager::FetchModel(std::string& path)
 
 
     mjModel* newModel = new mjModel();
+#ifdef ANDROID_ASSMAN
+    int sizeRead;
+    char* modelData = ReadAllFromArchiveToBuffer(fullPath.c_str(), &sizeRead);
+    newModel->LoadFromMemory(modelData);
+    delete [] modelData;
+#else
     newModel->LoadFromFile(fullPath.c_str());
+#endif
+
     LOGI("%s %d: new %s", __FILE__, __LINE__, "model");
 
     newResource->model = newModel;
@@ -400,6 +411,18 @@ mjResource* mjResourceManager::SearchByIdentifier(std::vector<mjResource*>& repo
         }
     }
 
+    return NULL;
+}
+
+char* mjResourceManager::ReadAllFromArchiveToBuffer(const char* filename, int* readSize)
+{
+#ifdef ANDROID
+    AAsset* ass = AAssetManager_open(assMan, filename, AASSET_MODE_BUFFER);
+    char * contents = (char*) AAsset_getBuffer(ass);
+    *readSize = AAsset_getLength(ass);
+    AAsset_close(ass);
+    return contents;
+#endif
     return NULL;
 }
 

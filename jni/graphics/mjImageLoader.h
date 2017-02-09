@@ -70,6 +70,7 @@ private:
 #endif
 
 	bool Load(const char *name);
+    bool LoadFromMemory(char* buffer);
 
 	GLuint SendToGL(GLfloat textureWrapParam);
 
