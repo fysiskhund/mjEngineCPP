@@ -20,7 +20,7 @@ my $cppExtension = '\.cpp|\.c';
 
 my $boilerplateStart = 
 '
-# Copyright (C) 2014-2016 Alejandro Valenzuela Roca
+# Copyright (C) 2014-2017 Alejandro Valenzuela Roca
 #
 ';
 

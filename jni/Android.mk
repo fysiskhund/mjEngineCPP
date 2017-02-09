@@ -1,5 +1,5 @@
 
-# Copyright (C) 2014-2016 Alejandro Valenzuela Roca
+# Copyright (C) 2014-2017 Alejandro Valenzuela Roca
 #
 # Only the game will be compiled. The engine will be loaded as a static library.
 #
@@ -52,6 +52,8 @@ LOCAL_SRC_FILES := \
     takkatakkacpp/TakkaTakkaGameState.cpp \
     takkatakkacpp/TitleUniverse.cpp \
     takkatakkacpp/gameObjects/Bubble.cpp \
+    takkatakkacpp/gameObjects/BubbleScripts/BeatZigZagBubbleScript.cpp \
+    takkatakkacpp/gameObjects/BubbleScripts/BeatZigZagBubbleScriptSettings.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/BubbleScript.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/BubbleScriptSettings.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/SpiralWalkBubbleScript.cpp \
@@ -68,7 +70,7 @@ LOCAL_SRC_FILES := \
 # -------------
 
 # now, the shared and static libs to be used are specified				   
-LOCAL_LDLIBS    := -llog -lGLESv2 -lz
+LOCAL_LDLIBS    := -llog -lGLESv2 -lz -landroid
 LOCAL_STATIC_LIBRARIES := libmjEngine png freetype2
 
 # finally we tell ndk-build that the output is a shared library. This will be loaded by Java in the android device

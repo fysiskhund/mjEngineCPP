@@ -1,7 +1,7 @@
 
 package co.phong.takkatakka;
 /*
- * Copyright (C) 2014-2015 Alejandro Valenzuela Ŕoca
+ * Copyright (C) 2014-2017 Alejandro Valenzuela Ŕoca
  *
  * Licensed under the LGPL License
  */

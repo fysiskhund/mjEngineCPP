@@ -85,7 +85,7 @@ void mjGlErrorCallback(GLenum source,
 #endif // WIN32
 
 
-#ifdef ANDROID
+#ifdef ANDROID_ASSMAN
 #include <android/asset_manager.h>
 #else
 #define AAssetManager int

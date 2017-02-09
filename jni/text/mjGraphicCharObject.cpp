@@ -15,7 +15,7 @@ mjGraphicCharObject::mjGraphicCharObject(mjResourceManager* resourceManager, mjF
     this->charToRenderLong = charToRenderLong;
 
 
-    model = resourceManager->FetchModel("sprite.mesh.xml");
+    model = resourceManager->FetchModel("models/sprite.mesh.xml");
     customShaders = new std::vector<mjShader*>;
     mjShaderResource* textShaderResource = resourceManager->FetchShader("text");
 

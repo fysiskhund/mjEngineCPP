@@ -65,7 +65,12 @@ mjModel* mjResourceManager::FetchModel(const char* path)
 mjModel* mjResourceManager::FetchModel(std::string& path)
 {
     std::string fullPath = path;
+#ifdef ANDROID_ASSMAN
+    fullPath = "mjEngineCPP/";
+    fullPath += path;
+#else
     PrependFullFilePath(fullPath);
+#endif
 
     mjResource* res = SearchByPath(models, fullPath);
     if (res != NULL)
@@ -79,10 +84,10 @@ mjModel* mjResourceManager::FetchModel(std::string& path)
 
     mjModel* newModel = new mjModel();
 #ifdef ANDROID_ASSMAN
-    int sizeRead;
-    char* modelData = ReadAllFromArchiveToBuffer(fullPath.c_str(), &sizeRead);
-    newModel->LoadFromMemory(modelData);
-    delete [] modelData;
+    size_t sizeRead;
+    const unsigned char* modelData = ReadAllFromArchiveToBuffer(fullPath.c_str(), &sizeRead);
+    newModel->LoadFromMemory(modelData, sizeRead);
+    CloseLastOpenedFileFromArchiveAndFreeResources();
 #else
     newModel->LoadFromFile(fullPath.c_str());
 #endif
@@ -297,6 +302,8 @@ mjFontResource* mjResourceManager::FetchFont(std::string &path)
     mjFontResource* newResource = new mjFontResource();
     newResource->identifier = fontResources.size();
 
+    LOGI("fetching font %s", fullPath.c_str());
+
     if (FT_New_Face(ft, fullPath.c_str(), 0, &newResource->face))
     {
         LOGI("Error while loading font %s.", fullPath.c_str());
@@ -414,16 +421,25 @@ mjResource* mjResourceManager::SearchByIdentifier(std::vector<mjResource*>& repo
     return NULL;
 }
 
-char* mjResourceManager::ReadAllFromArchiveToBuffer(const char* filename, int* readSize)
+//! Note: DO ___NOT___ try to free this buffer yourself. The system does it for you
+//! This is because of Android shenanigans.
+const unsigned char* mjResourceManager::ReadAllFromArchiveToBuffer(const char* filename, size_t* readSize)
 {
-#ifdef ANDROID
-    AAsset* ass = AAssetManager_open(assMan, filename, AASSET_MODE_BUFFER);
-    char * contents = (char*) AAsset_getBuffer(ass);
+#ifdef ANDROID_ASSMAN
+    ass = AAssetManager_open(assMan, filename, AASSET_MODE_BUFFER);
+    unsigned char * contents = (unsigned char*) AAsset_getBuffer(ass);
     *readSize = AAsset_getLength(ass);
-    AAsset_close(ass);
+    LOGI("AssMan: %u bytes read from %s", *readSize, (char*) filename);
     return contents;
 #endif
     return NULL;
+}
+void mjResourceManager::CloseLastOpenedFileFromArchiveAndFreeResources()
+{
+#ifdef ANDROID_ASSMAN
+    AAsset_close(ass);
+    ass = nullptr;
+#endif
 }
 
 

@@ -35,6 +35,7 @@ HEADERS += \
     extLibs/math/mjMathHelper.h \
     extLibs/math/mjMatrixStack.h \
     extLibs/tinyxml/tinyxml2.h \
+    extLibs/png/include/png.h \
     extLibs/util/mjMultiPlatform.h \
     extLibs/util/mjMultiPlatformAudio.h \
     extLibs/util/mjXMLHelper.h \
@@ -90,6 +91,7 @@ HEADERS += \
     text/mjGraphicText.h \
     util/mjGraphicCharObjectResource.h \
     core/mjGameState.h
+
 
 SOURCES += \
     ai/mjAutomaton.cpp \

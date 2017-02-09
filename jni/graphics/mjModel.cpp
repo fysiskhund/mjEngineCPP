@@ -15,17 +15,18 @@ mjModel::mjModel()
 }
 void mjModel::LoadFromFile(const char* fileName)
 {
+    LOGI("Loading model from file %s", fileName);
     tinyxml2::XMLDocument doc;
 
 	doc.LoadFile(fileName);
     Load(&doc);
 }
 
-void mjModel::LoadFromMemory(char* buffer)
+void mjModel::LoadFromMemory(const unsigned char* buffer, size_t totalLength)
 {
-    LOGI("Loading model from buffer..");
+    LOGI("Loading model from buffer; %d bytes",totalLength);
     tinyxml2::XMLDocument doc;
-    doc.Parse(buffer);
+    doc.Parse((const char*) buffer, totalLength);
     Load(&doc);
 }
 
@@ -45,13 +46,13 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
 	int posIn3Array = 0;
 	int posIn2Array = 0;
     vertexBufferData = new float[3*numVertices];
-    LOGI("%s %d: new %s", __FILE__, __LINE__, "float for vertexData");
+    LOGI("%s %d: new %s [3*%d]", __FILE__, __LINE__, "float for vertexData", numVertices);
 
     normalComponentBufferData = new float[3*numVertices];
-    LOGI("%s %d: new %s", __FILE__, __LINE__, "float for normalData");
+    LOGI("%s %d: new %s [3*%d]", __FILE__, __LINE__, "float for normalData", numVertices);
 
     texCoordBufferData = new float[2*numVertices];
-    LOGI("%s %d: new %s", __FILE__, __LINE__, "float for texcoords");
+    LOGI("%s %d: new %s [3*%d]", __FILE__, __LINE__, "float for texcoords",  numVertices);
 
 
 	XMLElement* vertexbuffer = sharedGeometry->FirstChildElement("vertexbuffer");
@@ -94,6 +95,9 @@ void mjModel::Load(tinyxml2::XMLDocument* doc)
         vertexData->QueryFloatAttribute("u", &texCoordBufferData[posIn2Array]);
         vertexData->QueryFloatAttribute("v", &texCoordBufferData[posIn2Array+1]);
 
+        LOGI("vertexData: %3.3f, %3.3f, %3.3f,", vertexBufferData[posIn3Array], vertexBufferData[posIn3Array+1], vertexBufferData[posIn3Array+2]);
+        LOGI("normalData: %3.3f, %3.3f, %3.3f,", normalComponentBufferData[posIn3Array], normalComponentBufferData[posIn3Array+1], normalComponentBufferData[posIn3Array+2]);
+        LOGI("texcrdData: %3.3f, %3.3f",         texCoordBufferData[posIn2Array], texCoordBufferData[posIn2Array+1]);
 
 		posIn3Array += 3;
 		posIn2Array += 2;

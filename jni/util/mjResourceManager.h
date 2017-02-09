@@ -69,9 +69,12 @@ class mjResourceManager
 
         void PrependFullFilePath(std::string& filePath);
 
-        char* ReadAllFromArchiveToBuffer(const char* filename, int* readSize);
-
-
+        //! Note: DO ___NOT___ try to free this buffer yourself. The system does it for you
+        //! This is because of Android shenanigans.
+        //! You can only open ONE file at the time. Once you're done with it, close it with the
+        //! provided method, and THEN you can open another.
+        const unsigned char* ReadAllFromArchiveToBuffer(const char* filename, size_t* readSize);
+        void CloseLastOpenedFileFromArchiveAndFreeResources();
 
 protected:
         std::vector<mjResource*> models;
@@ -100,6 +103,10 @@ protected:
 
     private:
         FT_Library ft;
+
+#ifdef ANDROID_ASSMAN
+        AAsset* ass = NULL;
+#endif
 
 };
 
