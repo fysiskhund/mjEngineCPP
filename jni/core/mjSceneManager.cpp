@@ -33,6 +33,7 @@ void mjSceneManager::Update(float t_elapsed)
             {
                 LOGI("Switching to %s!", scenes[i]->sceneName);
                 nextScene = scenes[i];
+                break;
             }
         }
         if (nextScene)

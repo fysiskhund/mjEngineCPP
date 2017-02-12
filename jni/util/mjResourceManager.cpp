@@ -84,12 +84,21 @@ mjModel* mjResourceManager::FetchModel(std::string& path)
 
     mjModel* newModel = new mjModel();
 #ifdef ANDROID_ASSMAN
+
+    mjFileFromArchive* mjFile;
+    const unsigned char* modelData;
     size_t sizeRead;
-    const unsigned char* modelData = ReadAllFromArchiveToBuffer(fullPath.c_str(), &sizeRead);
+
+    mjFile = ReadAllFromArchiveToBuffer(fullPath.c_str(), &modelData, &sizeRead);
     newModel->LoadFromMemory(modelData, sizeRead);
-    CloseLastOpenedFileFromArchiveAndFreeResources();
+    CloseAndFreeResources(&mjFile);
+
 #else
-    newModel->LoadFromFile(fullPath.c_str());
+    const unsigned char* modelContents;
+    size_t readSize;
+    mjFileFromArchive* modelFile = ReadAllFromArchiveToBuffer(fullPath.c_str(), &modelContents, &readSize);
+    newModel->LoadFromMemory(modelContents, readSize);
+    CloseAndFreeResources(&modelFile);
 #endif
 
     LOGI("%s %d: new %s", __FILE__, __LINE__, "model");
@@ -126,7 +135,13 @@ GLuint mjResourceManager::FetchTexture(const char* path, unsigned glTextureWrapP
 GLuint mjResourceManager::FetchTexture(std::string& path, unsigned glTextureWrapParameter)
 {
     std::string fullPath = path;
+
+#ifdef ANDROID_ASSMAN
+    fullPath = "mjEngineCPP/";
+    fullPath += path;
+#else
     PrependFullFilePath(fullPath);
+#endif
 
     mjResource* res = SearchByPath(textures, fullPath, glTextureWrapParameter);
     if (res != NULL)
@@ -138,10 +153,18 @@ GLuint mjResourceManager::FetchTexture(std::string& path, unsigned glTextureWrap
     LOGI("%s %d: new %s", __FILE__, __LINE__, "textureResource");
     newResource->modifier = glTextureWrapParameter;
 
+    mjImageLoader loader(ReadFromArchive);
 
-    mjImageLoader loader;
     //LOGI("Texture's full path: %s", fullPath.c_str());
-    newResource->glResourceID = loader.LoadToGLAndFreeMemory(fullPath.c_str(), glTextureWrapParameter);
+    unsigned const char* tmpBuffer;
+    size_t readSize;
+    newResource->mjFile = ReadAllFromArchiveToBuffer(fullPath.c_str(), &tmpBuffer, &readSize );
+
+
+
+    newResource->glResourceID = loader.LoadToGLAndFreeMemory(newResource, glTextureWrapParameter);
+    CloseAndFreeResources(&newResource->mjFile);
+
     newResource->path = fullPath;
     textures.push_back(newResource);
 
@@ -187,7 +210,12 @@ mjSoundResource* mjResourceManager::FetchSound(const char* path)
 mjSoundResource* mjResourceManager::FetchSound(std::string& path)
 {
     std::string fullPath = path;
+#ifdef ANDROID_ASSMAN
+    fullPath = "mjEngineCPP/";
+    fullPath += path;
+#else
     PrependFullFilePath(fullPath);
+#endif
 
     mjResource* res = SearchByPath(soundResources, fullPath);
     if (res != NULL)
@@ -204,6 +232,15 @@ mjSoundResource* mjResourceManager::FetchSound(std::string& path)
     this->soundIndexAndroid++;
 
     newResource->path = fullPath;
+
+#if !defined(ANDROID_ASSMAN) && !defined(IOS)
+    // Load the buffer in all other platforms
+
+    newResource->fileFromArchive = ReadAllFromArchiveToBuffer(fullPath.c_str(), &newResource->buffer, &newResource->bufferSize);
+    // Leave soundFile open since we need the buffer to remain valid as well
+
+#endif
+
     soundResources.push_back(newResource);
 
     return newResource;
@@ -291,7 +328,13 @@ mjFontResource* mjResourceManager::FetchFont(std::string &path)
 {
 
     std::string fullPath = path;
+
+#ifdef ANDROID_ASSMAN
+    fullPath = "mjEngineCPP/";
+    fullPath += path;
+#else
     PrependFullFilePath(fullPath);
+#endif
 
     mjResource* res = SearchByPath(fontResources, fullPath);
     if (res != NULL)
@@ -304,10 +347,18 @@ mjFontResource* mjResourceManager::FetchFont(std::string &path)
 
     LOGI("fetching font %s", fullPath.c_str());
 
-    if (FT_New_Face(ft, fullPath.c_str(), 0, &newResource->face))
+
+    size_t readSize;
+    const unsigned char* buffer;
+
+    newResource->fontFile = ReadAllFromArchiveToBuffer(fullPath.c_str(), &buffer, &readSize);
+
+    if (FT_New_Memory_Face(ft, buffer, readSize, 0, &newResource->face))
     {
         LOGI("Error while loading font %s.", fullPath.c_str());
     }
+    // The buffer needs to remain valid until the font is no longer needed, hence not closing it now.
+
 
     FT_Select_Charmap(newResource->face, FT_ENCODING_UNICODE);
 
@@ -422,24 +473,70 @@ mjResource* mjResourceManager::SearchByIdentifier(std::vector<mjResource*>& repo
 }
 
 //! Note: DO ___NOT___ try to free this buffer yourself. The system does it for you
-//! This is because of Android shenanigans.
-const unsigned char* mjResourceManager::ReadAllFromArchiveToBuffer(const char* filename, size_t* readSize)
+mjFileFromArchive* mjResourceManager::ReadAllFromArchiveToBuffer(const char* filename, const unsigned char** buffer, size_t* readSize)
 {
+    mjFileFromArchive* mjFile = OpenFromArchive(filename, READ_MODE_READ_ALL);
+    LOGI("ReadAllFromArchiveToBuffer: %s", filename);
 #ifdef ANDROID_ASSMAN
-    ass = AAssetManager_open(assMan, filename, AASSET_MODE_BUFFER);
-    unsigned char * contents = (unsigned char*) AAsset_getBuffer(ass);
-    *readSize = AAsset_getLength(ass);
-    LOGI("AssMan: %u bytes read from %s", *readSize, (char*) filename);
-    return contents;
+
+    *buffer = (const unsigned char*) AAsset_getBuffer(mjFile->ass);
+    *readSize = AAsset_getLength(mjFile->ass);
+    LOGI("Read from archive[%s]: %u", filename, *readSize );
+#else
+
+    struct stat statData;
+    stat(filename, &statData);
+    mjFile->internalUseOnly_wholeFileBuffer = new unsigned char[statData.st_size];
+    fread((void*) mjFile->internalUseOnly_wholeFileBuffer, statData.st_size, 1, mjFile->internalUseOnly_fileDescriptor);
+    mjFile->internalUseOnly_wholeFileBufferSize = statData.st_size;
+
+    *readSize = statData.st_size;
+    *buffer = mjFile->internalUseOnly_wholeFileBuffer;
+
+
 #endif
-    return NULL;
+
+    return mjFile;
 }
-void mjResourceManager::CloseLastOpenedFileFromArchiveAndFreeResources()
+
+mjFileFromArchive* mjResourceManager::OpenFromArchive(const char* path, ArchiveReadMode readMode)
+{
+    mjFileFromArchive* mjFile = new mjFileFromArchive();
+    LOGI("OpenFromArchive: %s", path);
+#ifdef ANDROID_ASSMAN
+
+    mjFile->ass = AAssetManager_open(assMan, path, AASSET_MODE_UNKNOWN);
+
+    return mjFile;
+#else
+    mjFile->internalUseOnly_fileDescriptor = fopen(path, "rb");
+#endif
+
+
+    return mjFile;
+}
+
+size_t mjResourceManager::ReadFromArchive(mjFileFromArchive* mjFile, const unsigned char* buffer, size_t howMany)
+{
+    //LOGI("Attempting to read %u bytes", howMany);
+#ifdef ANDROID_ASSMAN
+    return AAsset_read(mjFile->ass, (void*) buffer, howMany);
+#else
+    return fread((void *)buffer, howMany, 1, mjFile->internalUseOnly_fileDescriptor);
+#endif
+
+}
+
+void mjResourceManager::CloseAndFreeResources(mjFileFromArchive** mjFile)
 {
 #ifdef ANDROID_ASSMAN
-    AAsset_close(ass);
-    ass = nullptr;
+    AAsset_close((*mjFile)->ass);
 #endif
+
+
+    delete *mjFile;
+    *mjFile = NULL; // Mark as no longer usable.
+
 }
 
 
@@ -450,6 +547,7 @@ void mjResourceManager::PrependFullFilePath(std::string& filePath)
     filePath = pathPrefix + separator + filePath;
     std::replace(filePath.begin(), filePath.end(), '/', separator);
 }
+
 
 #else
     void mjResourceManager::PrependFullFilePath(std::string& filePath)

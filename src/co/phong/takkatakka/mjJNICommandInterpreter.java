@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -14,6 +16,8 @@ import android.os.Environment;
 
 public class mjJNICommandInterpreter {
 	
+	private static boolean fromAssets = true;
+	
 	public static MediaPlayer musicPlayer = new MediaPlayer();
 	
 	public static SoundPool soundPool = new SoundPool(16, AudioManager.STREAM_MUSIC, 0);
@@ -21,7 +25,7 @@ public class mjJNICommandInterpreter {
 	public static HashMap<Integer, Integer> soundIDs = new HashMap(); 
 	
 	
-	public static void ParseCommands(String commandsFromJNI, Context androidContext)
+	public static void ParseCommands(String commandsFromJNI, Context androidContext, AssetManager assMan)
 	{
 			String[] lines = commandsFromJNI.split("\n");
 			for(String line:lines)
@@ -37,7 +41,16 @@ public class mjJNICommandInterpreter {
 					try {
 						musicPlayer.stop();
 						musicPlayer = new MediaPlayer();
-						musicPlayer.setDataSource(cmdAndArg[1]);
+						if (fromAssets)
+						{
+							AssetFileDescriptor assFileDescriptor = assMan.openFd(cmdAndArg[1]);
+							
+							musicPlayer.setDataSource(assFileDescriptor.getFileDescriptor(), assFileDescriptor.getStartOffset(), assFileDescriptor.getLength());
+							assFileDescriptor.close();
+						} else {
+							musicPlayer.setDataSource(cmdAndArg[1]);
+						}
+								
 						musicPlayer.prepare();
 					} catch (IllegalArgumentException e) {
 						// TODO Auto-generated catch block

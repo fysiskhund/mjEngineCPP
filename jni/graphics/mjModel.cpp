@@ -13,14 +13,7 @@ mjModel::mjModel()
 
 
 }
-void mjModel::LoadFromFile(const char* fileName)
-{
-    LOGI("Loading model from file %s", fileName);
-    tinyxml2::XMLDocument doc;
 
-	doc.LoadFile(fileName);
-    Load(&doc);
-}
 
 void mjModel::LoadFromMemory(const unsigned char* buffer, size_t totalLength)
 {

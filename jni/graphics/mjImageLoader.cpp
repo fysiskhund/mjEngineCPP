@@ -11,18 +11,25 @@
 
 namespace mjEngine{
 
-mjImageLoader::mjImageLoader()
+
+mjImageLoader::mjImageLoader(size_t (*ReadFromArchiveFunction)(mjFileFromArchive* mjFile, const unsigned char* buffer, size_t howMany))
 {
 
+    this->ReadFromArchiveFunction = ReadFromArchiveFunction;
+    LOGI("Read Fn is at 0x%x", ReadFromArchiveFunction);
 }
+
+size_t (*mjImageLoader::ReadFromArchiveFunction)(mjFileFromArchive* mjFile, const unsigned char* buffer, size_t howMany) = 0;
 
 #ifdef DESKTOP_SDL
 
 
-bool mjImageLoader::Load(const char* name)
+bool mjImageLoader::Load(mjTextureResource* imgRes)
 {
 
-    imageSurface = IMG_Load(name);
+    memRWop = SDL_RWFromConstMem(imgRes->mjFile->internalUseOnly_wholeFileBuffer,
+                                 imgRes->mjFile->internalUseOnly_wholeFileBufferSize);
+    imageSurface = IMG_Load_RW(memRWop, 0); // 0 = don't free the buffer for me!
 
 	width = imageSurface->w;
 	height = imageSurface->h;
@@ -52,12 +59,13 @@ bool mjImageLoader::Load(const char* name)
     return 1;
 }
 
-bool mjImageLoader::LoadFromMemory(char* buffer)
-{
 
-}
 
 #endif
+
+
+
+
 #ifdef IOS
     
     //
@@ -66,8 +74,9 @@ bool mjImageLoader::LoadFromMemory(char* buffer)
     //
     //
     
-    bool mjImageLoader::Load(const char* name)
+    bool mjImageLoader::Load(mjTextureResource* imgRes)
     {
+        const char* name = imgRes->fullPath.c_str();
         UIImage* imageX;
         NSString* iosPath = [NSString stringWithUTF8String:name];
         
@@ -89,8 +98,22 @@ bool mjImageLoader::LoadFromMemory(char* buffer)
     }
 #elif USE_LIBPNG
 
-bool mjImageLoader::Load(const char* name)
+
+
+
+void mjImageLoader::user_read_data(png_structp png_ptr,
+                                        png_bytep data, png_size_t length)
 {
+    //LOGI("in user_read_data");
+    mjFileFromArchive* mjFile = (mjFileFromArchive*) png_get_io_ptr(png_ptr);
+    //LOGI("Invoke read fn 0x%x", ReadFromArchiveFunction);
+    ReadFromArchiveFunction(mjFile, (unsigned const char*) data, length);
+}
+
+
+bool mjImageLoader::Load(mjTextureResource* imgRes)
+{
+
 	// This procedure is based in Morten Nobel's
 	// http://blog.nobel-joergensen.com/2010/11/07/loading-a-png-as-texture-in-opengl-using-libpng/
 	// with many thanks!
@@ -100,13 +123,15 @@ bool mjImageLoader::Load(const char* name)
 	    png_infop info_ptr;
 	    unsigned int sig_read = 0;
 	    int color_type, interlace_type;
-	    FILE *fp;
+        //FILE *fp;
 
-	    if ((fp = fopen(name, "rb")) == NULL)
+        /*if ((fp = fopen(name, "rb")) == NULL)
 	    {
 	    	LOGI("ImageLoader: Error while opening file %s", name);
 	    	return false;
-	    }
+        }*/
+
+
 	    /* Create and initialize the png_struct
 	     * with the desired error handler
 	     * functions.  If you want to use the
@@ -122,7 +147,7 @@ bool mjImageLoader::Load(const char* name)
 	                                     NULL, NULL, NULL);
 	    //LOGI("Name is %s after create_read_Struct", name);
 	    if (png_ptr == NULL) {
-	        fclose(fp);
+            //fclose(fp);
 	        return false;
 	    }
 
@@ -131,7 +156,7 @@ bool mjImageLoader::Load(const char* name)
 	    info_ptr = png_create_info_struct(png_ptr);
 	    //LOGI("Name is %s after png_create_info_truct", name);
 	    if (info_ptr == NULL) {
-	        fclose(fp);
+            //fclose(fp);
 	        png_destroy_read_struct(&png_ptr, NULL, NULL);
 	        return false;
 	    }
@@ -149,7 +174,7 @@ bool mjImageLoader::Load(const char* name)
 	        /* Free all of the memory associated
 	         * with the png_ptr and info_ptr */
 	        png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-	        fclose(fp);
+            //fclose(fp);
 	        /* If we get here, we had a
 	         * problem reading the file */
 	        return false;
@@ -157,7 +182,11 @@ bool mjImageLoader::Load(const char* name)
 
 	    /* Set up the output control if
 	     * you are using standard C streams */
-	    png_init_io(png_ptr, fp);
+        //png_init_io(png_ptr, fp);
+        // However, we are NOT using standard C streams
+        png_set_read_fn(png_ptr,
+                (void*) imgRes->mjFile,
+                        (png_rw_ptr) &mjImageLoader::user_read_data);
 
 	    /* If we have already
 	     * read some of the signature */
@@ -223,11 +252,11 @@ bool mjImageLoader::Load(const char* name)
 	    png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
 	    //LOGI("Name is %s after destroying read structures", name);
 	    /* Close the file */
-	    fclose(fp);
+        //fclose(fp);
 	    return true;
 }
 
-#endif // LIBPNG definition
+#endif // LIBPNG usage. PUT THE ENDIF BACK HERE
 
 GLuint mjImageLoader::SendToGL(GLfloat textureWrapParam)
 {
@@ -253,17 +282,18 @@ GLuint mjImageLoader::SendToGL(GLfloat textureWrapParam)
 
 	return textures[0];
 }
-GLuint mjImageLoader::LoadToGLAndFreeMemory(const char* fileName, GLfloat textureWrapParam)
+GLuint mjImageLoader::LoadToGLAndFreeMemory(mjTextureResource* imgRes, GLfloat textureWrapParam)
 {
 	GLuint result = 0;
 	//LOGI("At load for %s", fileName);
-	if (Load(fileName))
+    if (Load(imgRes))
 	{
 		result = SendToGL(textureWrapParam);
 		//LOGI("Loaded %s to texture %d",  fileName, result);
 
 #ifdef DESKTOP_SDL
                 SDL_FreeSurface(imageSurface);
+                SDL_FreeRW(memRWop);
 #else
 		delete [] imageData;
 #endif

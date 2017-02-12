@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
+#include <sys/stat.h>
 
 #include "../extLibs/tinyxml/tinyxml2.h"
 
@@ -25,6 +27,8 @@
 #include "graphics/mjSkyboxShaders.h"
 #include "graphics/renderer/mjRenderer.h"
 
+#include "mjFileFromArchive.h"
+
 
 
 
@@ -34,6 +38,11 @@
 
 
 namespace mjEngine{
+
+enum ArchiveReadMode{
+    READ_MODE_NO_ASSUMPTIONS,
+    READ_MODE_READ_ALL
+};
 
 class mjResourceManager
 {
@@ -69,12 +78,14 @@ class mjResourceManager
 
         void PrependFullFilePath(std::string& filePath);
 
+
+
         //! Note: DO ___NOT___ try to free this buffer yourself. The system does it for you
-        //! This is because of Android shenanigans.
-        //! You can only open ONE file at the time. Once you're done with it, close it with the
-        //! provided method, and THEN you can open another.
-        const unsigned char* ReadAllFromArchiveToBuffer(const char* filename, size_t* readSize);
-        void CloseLastOpenedFileFromArchiveAndFreeResources();
+        mjFileFromArchive* ReadAllFromArchiveToBuffer(const char* filename, const unsigned char** buffer, size_t* readSize);
+
+        mjFileFromArchive* OpenFromArchive(const char* path, ArchiveReadMode readMode = READ_MODE_NO_ASSUMPTIONS);
+        static size_t ReadFromArchive(mjFileFromArchive* mjFile, const unsigned char* buffer, size_t howMany);
+        void CloseAndFreeResources(mjFileFromArchive** mjFile);
 
 protected:
         std::vector<mjResource*> models;

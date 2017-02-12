@@ -8,7 +8,12 @@ mjSoundSource::mjSoundSource()
 
 int mjSoundSource::Load(mjSoundResource* soundRes, int sampleNumber)
 {
-    samples.push_back(Mix_LoadWAV(soundRes->path.c_str()));
+
+    if (!soundRes->memRWop)
+    {
+        soundRes->memRWop = SDL_RWFromConstMem(soundRes->buffer, soundRes->bufferSize);
+    }
+    samples.push_back(Mix_LoadWAV_RW(soundRes->memRWop, 0)); // 0 = don't free the buffer for me
 
     //samples.push_back(soundRes);
 

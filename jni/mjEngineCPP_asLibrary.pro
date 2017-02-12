@@ -90,7 +90,8 @@ HEADERS += \
     util/mjFontResource.h \
     text/mjGraphicText.h \
     util/mjGraphicCharObjectResource.h \
-    core/mjGameState.h
+    core/mjGameState.h \
+    util/mjFileFromArchive.h
 
 
 SOURCES += \
@@ -153,7 +154,8 @@ SOURCES += \
     util/mjFontResource.cpp \
     text/mjGraphicText.cpp \
     util/mjGraphicCharObjectResource.cpp \
-    core/mjGameState.cpp
+    core/mjGameState.cpp \
+    util/mjFileFromArchive.cpp
 
 
 

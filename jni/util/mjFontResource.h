@@ -7,6 +7,7 @@
 
 
 #include "mjResource.h"
+#include "mjFileFromArchive.h"
 
 
 namespace mjEngine{
@@ -14,9 +15,11 @@ namespace mjEngine{
 class mjFontResource : public mjResource
 {
 public:
+    FT_Face face;
+    mjFileFromArchive* fontFile = NULL;
     mjFontResource();
 
-    FT_Face face;
+
 };
 
 }

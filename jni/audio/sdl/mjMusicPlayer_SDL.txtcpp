@@ -8,18 +8,26 @@ mjMusicPlayer::mjMusicPlayer()
 
 void mjMusicPlayer::Load(mjSoundResource* soundRes, int sampleNumber)
 {
-   currentMusic = Mix_LoadMUS(soundRes->path.c_str());
-   if (currentMusic == NULL)
-   {
-    LOGI("Error while loading music\n");
-   }
+// This is far from ideal because it keeps the whole file in memory
+// but it seems like Mix_LoadMUS_RW does not exist anymore :/
+
+    if (!soundRes->memRWop)
+    {
+        soundRes->memRWop = SDL_RWFromConstMem(soundRes->buffer, soundRes->bufferSize);
+    }
+
+    currentMusic = Mix_LoadWAV_RW(soundRes->memRWop, 0); // 0 = don't free the buffer for me
+    if (currentMusic == NULL)
+    {
+        LOGI("Error while loading music\n");
+    }
 }
 
 void mjMusicPlayer::Play()
 {
     if (currentMusic)
     {
-        channel = Mix_PlayMusic(currentMusic, loops);
+        channel = Mix_PlayChannel(-1, currentMusic, loops);
     }
 }
 void mjMusicPlayer::Play(int sampleIndex)
@@ -28,16 +36,16 @@ void mjMusicPlayer::Play(int sampleIndex)
 }
 void mjMusicPlayer::Pause()
 {
-    Mix_PauseMusic();
+    Mix_Pause(channel);
 }
 void mjMusicPlayer::Resume()
 {
-    Mix_ResumeMusic();
+    Mix_Resume(channel);
 }
 
 void mjMusicPlayer::Rewind()
 {
-    Mix_RewindMusic();
+    Mix_HaltChannel(channel); //FIXME: does this achieve what we need? (stop + go back to start) or should I instead re-load the music..?
 }
 
 mjMusicPlayer::~mjMusicPlayer()

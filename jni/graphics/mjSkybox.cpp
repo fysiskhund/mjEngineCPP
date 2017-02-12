@@ -27,10 +27,9 @@ void mjSkybox::SetModels(mjModel* boxModel, mjModel* planeModel)
 
 void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
 {
-	char* pathName = new char[1024];
+    char* pathName = new char[1024];
     LOGI("%s %d: new %s", __FILE__, __LINE__, "char[] for path");
 	const char* extension = ".png"; //FIXME: enable change to jpg when jpg library is added
-	mjImageLoader imgLoader;
 
 
 	for (int i = 0; i< 6; i++)

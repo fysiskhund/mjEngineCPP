@@ -26,7 +26,7 @@ class mjMusicPlayer
         ~mjMusicPlayer();
     protected:
     private:
-        Mix_Music* currentMusic;
+        Mix_Chunk* currentMusic;
         int channel;
 
 };
