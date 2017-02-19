@@ -246,7 +246,12 @@ void mjObject::ProcessCollisionEffects()
 
 		}
 	}
-	// The stack is cleared and the effect objects deleted automatically by mjPhysics.
+    // The stack is cleared and the effect objects deleted automatically by mjPhysics.
+}
+
+void mjObject::ReceiveInternalMessage(void* contents, unsigned int type, void* sender)
+{
+
 }
 void mjObject::Update(float t_elapsed)
 {

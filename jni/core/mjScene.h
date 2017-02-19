@@ -6,6 +6,7 @@
 #include "../core/mjGameState.h"
 #include "../graphics/mjShader.h"
 #include "../util/mjResourceManager.h"
+#include "../internalMessaging/mjInternalMessenger.h"
 
 #include "../physics/mjPhysics.h"
 #include "../graphics/mjSceneGraph.h"

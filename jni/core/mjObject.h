@@ -25,6 +25,8 @@
 #include "../physics/mjPhysicsEffect.h"
 #include "../physics/mjSphere.h"
 #include "../physics/mjAABB.h"
+
+#include "../internalMessaging/mjInternalMessageReceiver.h"
 //#include "../audio/mjSoundSource.h"
 
 
@@ -32,7 +34,7 @@
 namespace mjEngine{
 
 
-class mjObject // Generic mjObject for games
+class mjObject: public mjInternalMessageReceiver // Generic mjObject for games
 {
 public:
     char* id = NULL;
@@ -95,7 +97,12 @@ public:
     virtual void SetDetailsFromXML(XMLElement* entity);
 	virtual void ProcessPhysicsEffects(float t_elapsed);
 	virtual void ProcessCollisionEffects();
-	virtual void Update(float t_elapsed);
+
+    //! This should be implemented by the mjObject descendants in your game.
+    //! Also remember to "subscribe" this function to a mjInternalMessenger
+    virtual void ReceiveInternalMessage(void* contents, unsigned int type, void* sender) override;
+
+    virtual void Update(float t_elapsed);
 	virtual void UpdatePosition(float t_elapsed);
     virtual void FlushPhysicsEffects();
 

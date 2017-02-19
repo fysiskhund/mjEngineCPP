@@ -91,7 +91,10 @@ HEADERS += \
     text/mjGraphicText.h \
     util/mjGraphicCharObjectResource.h \
     core/mjGameState.h \
-    util/mjFileFromArchive.h
+    util/mjFileFromArchive.h \
+    internalMessaging/mjInternalMessenger.h \
+    internalMessaging/mjInternalMessage.h \
+    internalMessaging/mjInternalMessageReceiver.h
 
 
 SOURCES += \
@@ -155,7 +158,10 @@ SOURCES += \
     text/mjGraphicText.cpp \
     util/mjGraphicCharObjectResource.cpp \
     core/mjGameState.cpp \
-    util/mjFileFromArchive.cpp
+    util/mjFileFromArchive.cpp \
+    internalMessaging/mjInternalMessenger.cpp \
+    internalMessaging/mjInternalMessage.cpp \
+    internalMessaging/mjInternalMessageReceiver.cpp
 
 
 
