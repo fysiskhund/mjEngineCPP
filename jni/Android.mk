@@ -58,10 +58,12 @@ LOCAL_SRC_FILES := \
     takkatakkacpp/gameObjects/BubbleScripts/BubbleScriptSettings.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/SpiralWalkBubbleScript.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/SpiralWalkBubbleScriptSettings.cpp \
+    takkatakkacpp/gameObjects/Choreographer.cpp \
     takkatakkacpp/gameObjects/Player.cpp \
     takkatakkacpp/gameObjects/Poke.cpp \
     takkatakkacpp/gameObjects/Step.cpp \
     takkatakkacpp/gameObjects/Track.cpp \
+    takkatakkacpp/gameObjects/TrackEvent.cpp \
     takkatakkacpp/gameObjects/TrackLoader.cpp \
     takkatakkacpp/gameObjects/TrackPreview.cpp \
     takkatakkacpp/gl_code.cpp \

@@ -241,17 +241,25 @@ int main(int argc, char* argv[]) {
 
     setupGame(width, height, pathPrefix);
 
-    int beforeFrame;
+    int afterFrame = 0;
+    int nowTime;
+    int total;
     int exitResult;
     do{
 
-        beforeFrame = SDL_GetTicks();
+        nowTime = SDL_GetTicks();
+        total = nowTime - afterFrame;
+        //LOGI("totalTime: %d", total);
+        t_elapsed =  ((float)total)/1000.0f;
+
         exitResult = stepFunc(&data);
-        int total = SDL_GetTicks() - beforeFrame;
+
+
         if (total < 16) // lock to 60 fps. In case SDL is not following vertical sync
         {
             SDL_Delay(16-total);
         }
+        afterFrame = nowTime;
 
     } while(!exitResult);
 

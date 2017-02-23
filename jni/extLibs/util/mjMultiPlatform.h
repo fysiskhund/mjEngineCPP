@@ -91,7 +91,6 @@ void mjGlErrorCallback(GLenum source,
 #define AAssetManager int
 #endif
 
-
 #include <string>
 
 class mjMultiPlatform

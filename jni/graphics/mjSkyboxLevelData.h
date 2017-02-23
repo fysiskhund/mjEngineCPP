@@ -2,6 +2,7 @@
 #define MJSKYBOXLEVELDATA_H
 
 #include "../extLibs/util/mjMultiPlatform.h"
+#include "../extLibs/math/MathConstants.h"
 
 #include "../extLibs/logger/mjLog.h"
 
