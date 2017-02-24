@@ -24,6 +24,11 @@ bool mjInternalMessenger::CastMessage(void* sender, void* contents, unsigned int
     return internalCastMessage(sender, contents, type, intendedRecipients);
 }
 
+bool mjInternalMessenger::Unsubscribe(mjInternalMessageReceiver* subscriber)
+{
+    return internalUnsubscribe(subscriber);
+}
+
 
 void mjInternalMessenger::internalSubscribe(mjInternalMessageReceiver* subscriber, unsigned int* recipientCategories)
 {
@@ -68,6 +73,7 @@ bool mjInternalMessenger::internalCastMessage(void* sender, void* contents, unsi
         {
             if ((void*) (*subscribers)[i] != sender)
             {
+                LOGI("Sending message to 0x%x", (*subscribers)[i]);
                 (*subscribers)[i]->ReceiveInternalMessage(contents, type, sender);
             }
         }
@@ -98,6 +104,35 @@ subscriberCategory* mjInternalMessenger::GetCategory(unsigned int categoryID, bo
     {
         return nullptr;
     }
+}
+
+bool mjInternalMessenger::internalUnsubscribe(mjInternalMessageReceiver* subscriber)
+{
+    bool result = false;
+    for (unsigned int i = 0; i < categories.size(); i++)
+    {
+        subscriberCategory* category = categories[i];
+        std::vector<mjInternalMessageReceiver*>::iterator catIt;
+        std::vector<mjInternalMessageReceiver*>::iterator catLast = category->subscribers.end();
+
+        for (catIt = category->subscribers.begin(); catIt != catLast ; catIt++)
+        {
+            if (subscriber == *catIt)
+            {
+                if (i == 0 )
+                {
+                    subscriber->CastMessage = subscriber->NoCrash; // re-link the CastMessage method to its internal
+                                                               // "NoCrash" method to avoid crashes
+                }
+                LOGI("Erasing subscriber 0x%x", subscriber);
+                catIt = category->subscribers.erase(catIt);
+
+                result = true;
+                break;
+            }
+        }
+    }
+    return result;
 }
 
 }
