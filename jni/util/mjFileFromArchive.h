@@ -4,6 +4,10 @@
 #include "../extLibs/util/mjMultiPlatform.h"
 #include "../extLibs/logger/mjLog.h"
 
+#ifdef IOS
+#include <string>
+#endif
+
 namespace mjEngine {
 
 
@@ -19,6 +23,9 @@ public:
     unsigned char* internalUseOnly_wholeFileBuffer = NULL;
     size_t internalUseOnly_wholeFileBufferSize = 0;
     FILE* internalUseOnly_fileDescriptor = 0;
+#endif
+#ifdef IOS
+    std::string iosOnly_fullPath;
 #endif
 
 

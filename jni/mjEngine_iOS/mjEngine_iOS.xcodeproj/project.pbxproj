@@ -55,7 +55,6 @@
 		A94501BE1D782C1C00D488E1 /* mjShaderResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94501BC1D782C1C00D488E1 /* mjShaderResource.cpp */; };
 		A94F207F1DBE441C00AB5E4C /* Android.mk.takkatakka in Resources */ = {isa = PBXBuildFile; fileRef = A94F20531DBE441C00AB5E4C /* Android.mk.takkatakka */; };
 		A94F20811DBE441C00AB5E4C /* deployment.pri in Resources */ = {isa = PBXBuildFile; fileRef = A94F20561DBE441C00AB5E4C /* deployment.pri */; };
-		A94F20821DBE441C00AB5E4C /* FreeTypeTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94F20571DBE441C00AB5E4C /* FreeTypeTest.cpp */; };
 		A94F20831DBE441C00AB5E4C /* Bubble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94F20591DBE441C00AB5E4C /* Bubble.cpp */; };
 		A94F20841DBE441C00AB5E4C /* BubbleScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94F205C1DBE441C00AB5E4C /* BubbleScript.cpp */; };
 		A94F20851DBE441C00AB5E4C /* BubbleScriptSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94F205E1DBE441C00AB5E4C /* BubbleScriptSettings.cpp */; };
@@ -91,6 +90,18 @@
 		A9AB2FF41D6BBC0400547DDA /* mjEngine_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FF31D6BBC0400547DDA /* mjEngine_iOSTests.m */; };
 		A9AB2FFF1D6BBC0400547DDA /* mjEngine_iOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FFE1D6BBC0400547DDA /* mjEngine_iOSUITests.m */; };
 		A9AB30131D6BCB8200547DDA /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9AB30121D6BCB8200547DDA /* GLKit.framework */; };
+		A9B593741E65A981006EA5EB /* Choreographer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B5936E1E65A981006EA5EB /* Choreographer.cpp */; };
+		A9B593751E65A981006EA5EB /* TrackEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B593701E65A981006EA5EB /* TrackEvent.cpp */; };
+		A9B593761E65A981006EA5EB /* TrackPreview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B593721E65A981006EA5EB /* TrackPreview.cpp */; };
+		A9B593791E65A99F006EA5EB /* mjGameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B593771E65A99F006EA5EB /* mjGameState.cpp */; };
+		A9B596151E65AA12006EA5EB /* mjInternalMessageReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B596111E65AA12006EA5EB /* mjInternalMessageReceiver.cpp */; };
+		A9B596161E65AA12006EA5EB /* mjInternalMessenger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B596131E65AA12006EA5EB /* mjInternalMessenger.cpp */; };
+		A9B5961F1E65AA4E006EA5EB /* ChooserUniverse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B596181E65AA4E006EA5EB /* ChooserUniverse.cpp */; };
+		A9B596211E65AA4E006EA5EB /* TakkaTakkaGameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B5961D1E65AA4E006EA5EB /* TakkaTakkaGameState.cpp */; };
+		A9B596241E65AA88006EA5EB /* mjFileFromArchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B596221E65AA88006EA5EB /* mjFileFromArchive.cpp */; };
+		A9B596291E65AE52006EA5EB /* BeatZigZagBubbleScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B596251E65AE52006EA5EB /* BeatZigZagBubbleScript.cpp */; };
+		A9B5962A1E65AE52006EA5EB /* BeatZigZagBubbleScriptSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B596271E65AE52006EA5EB /* BeatZigZagBubbleScriptSettings.cpp */; };
+		A9B5962D1E65AE93006EA5EB /* BubbleShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B5962B1E65AE93006EA5EB /* BubbleShaders.cpp */; };
 		A9B84BAF1D6D922400239BBA /* mjAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B84B9F1D6D922400239BBA /* mjAnimation.cpp */; };
 		A9B84BB01D6D922400239BBA /* mjAnimationKeyframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B84BA11D6D922400239BBA /* mjAnimationKeyframe.cpp */; };
 		A9B84BB11D6D922400239BBA /* mjAnimationSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B84BA31D6D922400239BBA /* mjAnimationSegment.cpp */; };
@@ -221,7 +232,6 @@
 		A94501BD1D782C1C00D488E1 /* mjShaderResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjShaderResource.h; path = ../util/mjShaderResource.h; sourceTree = "<group>"; };
 		A94F20531DBE441C00AB5E4C /* Android.mk.takkatakka */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Android.mk.takkatakka; sourceTree = "<group>"; };
 		A94F20561DBE441C00AB5E4C /* deployment.pri */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = deployment.pri; sourceTree = "<group>"; };
-		A94F20571DBE441C00AB5E4C /* FreeTypeTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FreeTypeTest.cpp; sourceTree = "<group>"; };
 		A94F20591DBE441C00AB5E4C /* Bubble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bubble.cpp; sourceTree = "<group>"; };
 		A94F205A1DBE441C00AB5E4C /* Bubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bubble.h; sourceTree = "<group>"; };
 		A94F205C1DBE441C00AB5E4C /* BubbleScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BubbleScript.cpp; sourceTree = "<group>"; };
@@ -285,6 +295,33 @@
 		A9AB2FFE1D6BBC0400547DDA /* mjEngine_iOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mjEngine_iOSUITests.m; sourceTree = "<group>"; };
 		A9AB30001D6BBC0400547DDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9AB30121D6BCB8200547DDA /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		A9B5936E1E65A981006EA5EB /* Choreographer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Choreographer.cpp; sourceTree = "<group>"; };
+		A9B5936F1E65A981006EA5EB /* Choreographer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Choreographer.h; sourceTree = "<group>"; };
+		A9B593701E65A981006EA5EB /* TrackEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrackEvent.cpp; sourceTree = "<group>"; };
+		A9B593711E65A981006EA5EB /* TrackEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackEvent.h; sourceTree = "<group>"; };
+		A9B593721E65A981006EA5EB /* TrackPreview.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrackPreview.cpp; sourceTree = "<group>"; };
+		A9B593731E65A981006EA5EB /* TrackPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackPreview.h; sourceTree = "<group>"; };
+		A9B593771E65A99F006EA5EB /* mjGameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjGameState.cpp; path = ../core/mjGameState.cpp; sourceTree = "<group>"; };
+		A9B593781E65A99F006EA5EB /* mjGameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjGameState.h; path = ../core/mjGameState.h; sourceTree = "<group>"; };
+		A9B596111E65AA12006EA5EB /* mjInternalMessageReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjInternalMessageReceiver.cpp; sourceTree = "<group>"; };
+		A9B596121E65AA12006EA5EB /* mjInternalMessageReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjInternalMessageReceiver.h; sourceTree = "<group>"; };
+		A9B596131E65AA12006EA5EB /* mjInternalMessenger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjInternalMessenger.cpp; sourceTree = "<group>"; };
+		A9B596141E65AA12006EA5EB /* mjInternalMessenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjInternalMessenger.h; sourceTree = "<group>"; };
+		A9B596171E65AA4E006EA5EB /* autoversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autoversion.h; sourceTree = "<group>"; };
+		A9B596181E65AA4E006EA5EB /* ChooserUniverse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChooserUniverse.cpp; sourceTree = "<group>"; };
+		A9B596191E65AA4E006EA5EB /* ChooserUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooserUniverse.h; sourceTree = "<group>"; };
+		A9B5961A1E65AA4E006EA5EB /* ComputerInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComputerInput.h; sourceTree = "<group>"; };
+		A9B5961B1E65AA4E006EA5EB /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
+		A9B5961D1E65AA4E006EA5EB /* TakkaTakkaGameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TakkaTakkaGameState.cpp; sourceTree = "<group>"; };
+		A9B5961E1E65AA4E006EA5EB /* TakkaTakkaGameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakkaTakkaGameState.h; sourceTree = "<group>"; };
+		A9B596221E65AA88006EA5EB /* mjFileFromArchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjFileFromArchive.cpp; path = ../util/mjFileFromArchive.cpp; sourceTree = "<group>"; };
+		A9B596231E65AA88006EA5EB /* mjFileFromArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjFileFromArchive.h; path = ../util/mjFileFromArchive.h; sourceTree = "<group>"; };
+		A9B596251E65AE52006EA5EB /* BeatZigZagBubbleScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BeatZigZagBubbleScript.cpp; sourceTree = "<group>"; };
+		A9B596261E65AE52006EA5EB /* BeatZigZagBubbleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeatZigZagBubbleScript.h; sourceTree = "<group>"; };
+		A9B596271E65AE52006EA5EB /* BeatZigZagBubbleScriptSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BeatZigZagBubbleScriptSettings.cpp; sourceTree = "<group>"; };
+		A9B596281E65AE52006EA5EB /* BeatZigZagBubbleScriptSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeatZigZagBubbleScriptSettings.h; sourceTree = "<group>"; };
+		A9B5962B1E65AE93006EA5EB /* BubbleShaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BubbleShaders.cpp; path = shaders/BubbleShaders.cpp; sourceTree = "<group>"; };
+		A9B5962C1E65AE93006EA5EB /* BubbleShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BubbleShaders.h; path = shaders/BubbleShaders.h; sourceTree = "<group>"; };
 		A9B84B9C1D6D920C00239BBA /* defaultShaderSources-gles2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "defaultShaderSources-gles2.h"; path = "../graphics/gles2/defaultShaderSources-gles2.h"; sourceTree = "<group>"; };
 		A9B84B9D1D6D920C00239BBA /* skyboxShaderSources-gles2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "skyboxShaderSources-gles2.h"; path = "../graphics/gles2/skyboxShaderSources-gles2.h"; sourceTree = "<group>"; };
 		A9B84B9F1D6D922400239BBA /* mjAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjAnimation.cpp; path = ../graphics/animation/mjAnimation.cpp; sourceTree = "<group>"; };
@@ -456,6 +493,8 @@
 		A9031B641D6D06820056B49C /* core */ = {
 			isa = PBXGroup;
 			children = (
+				A9B593771E65A99F006EA5EB /* mjGameState.cpp */,
+				A9B593781E65A99F006EA5EB /* mjGameState.h */,
 				A9031B711D6D0FF60056B49C /* mjInput.h */,
 				A9031B721D6D0FF60056B49C /* mjObject.cpp */,
 				A9031B731D6D0FF60056B49C /* mjObject.h */,
@@ -480,6 +519,8 @@
 		A9031BF11D6D1F2D0056B49C /* util */ = {
 			isa = PBXGroup;
 			children = (
+				A9B596221E65AA88006EA5EB /* mjFileFromArchive.cpp */,
+				A9B596231E65AA88006EA5EB /* mjFileFromArchive.h */,
 				A9031C021D6D1FAE0056B49C /* mjMultiPlatform.cpp */,
 				A9031C031D6D1FAE0056B49C /* mjMultiPlatform.h */,
 				A9031C041D6D1FAE0056B49C /* mjMultiPlatformAudio.h */,
@@ -554,9 +595,16 @@
 		A94F20521DBE441C00AB5E4C /* takkatakkacpp */ = {
 			isa = PBXGroup;
 			children = (
+				A9B5962E1E65AE96006EA5EB /* shaders */,
+				A9B596171E65AA4E006EA5EB /* autoversion.h */,
+				A9B596181E65AA4E006EA5EB /* ChooserUniverse.cpp */,
+				A9B596191E65AA4E006EA5EB /* ChooserUniverse.h */,
+				A9B5961A1E65AA4E006EA5EB /* ComputerInput.h */,
+				A9B5961B1E65AA4E006EA5EB /* globals.h */,
+				A9B5961D1E65AA4E006EA5EB /* TakkaTakkaGameState.cpp */,
+				A9B5961E1E65AA4E006EA5EB /* TakkaTakkaGameState.h */,
 				A94F20531DBE441C00AB5E4C /* Android.mk.takkatakka */,
 				A94F20561DBE441C00AB5E4C /* deployment.pri */,
-				A94F20571DBE441C00AB5E4C /* FreeTypeTest.cpp */,
 				A94F20581DBE441C00AB5E4C /* gameObjects */,
 				A94F206F1DBE441C00AB5E4C /* gl_code.cpp */,
 				A94F20701DBE441C00AB5E4C /* gl_code.h */,
@@ -576,6 +624,12 @@
 		A94F20581DBE441C00AB5E4C /* gameObjects */ = {
 			isa = PBXGroup;
 			children = (
+				A9B5936E1E65A981006EA5EB /* Choreographer.cpp */,
+				A9B5936F1E65A981006EA5EB /* Choreographer.h */,
+				A9B593701E65A981006EA5EB /* TrackEvent.cpp */,
+				A9B593711E65A981006EA5EB /* TrackEvent.h */,
+				A9B593721E65A981006EA5EB /* TrackPreview.cpp */,
+				A9B593731E65A981006EA5EB /* TrackPreview.h */,
 				A94F20591DBE441C00AB5E4C /* Bubble.cpp */,
 				A94F205A1DBE441C00AB5E4C /* Bubble.h */,
 				A94F205B1DBE441C00AB5E4C /* BubbleScripts */,
@@ -597,6 +651,10 @@
 		A94F205B1DBE441C00AB5E4C /* BubbleScripts */ = {
 			isa = PBXGroup;
 			children = (
+				A9B596251E65AE52006EA5EB /* BeatZigZagBubbleScript.cpp */,
+				A9B596261E65AE52006EA5EB /* BeatZigZagBubbleScript.h */,
+				A9B596271E65AE52006EA5EB /* BeatZigZagBubbleScriptSettings.cpp */,
+				A9B596281E65AE52006EA5EB /* BeatZigZagBubbleScriptSettings.h */,
 				A94F205C1DBE441C00AB5E4C /* BubbleScript.cpp */,
 				A94F205D1DBE441C00AB5E4C /* BubbleScript.h */,
 				A94F205E1DBE441C00AB5E4C /* BubbleScriptSettings.cpp */,
@@ -705,6 +763,27 @@
 			path = mjEngine_iOSUITests;
 			sourceTree = "<group>";
 		};
+		A9B596101E65AA12006EA5EB /* internalMessaging */ = {
+			isa = PBXGroup;
+			children = (
+				A9B596111E65AA12006EA5EB /* mjInternalMessageReceiver.cpp */,
+				A9B596121E65AA12006EA5EB /* mjInternalMessageReceiver.h */,
+				A9B596131E65AA12006EA5EB /* mjInternalMessenger.cpp */,
+				A9B596141E65AA12006EA5EB /* mjInternalMessenger.h */,
+			);
+			name = internalMessaging;
+			path = ../internalMessaging;
+			sourceTree = "<group>";
+		};
+		A9B5962E1E65AE96006EA5EB /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				A9B5962B1E65AE93006EA5EB /* BubbleShaders.cpp */,
+				A9B5962C1E65AE93006EA5EB /* BubbleShaders.h */,
+			);
+			name = shaders;
+			sourceTree = "<group>";
+		};
 		A9B84B9B1D6D91E600239BBA /* gles2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -758,6 +837,7 @@
 		A9D8631B1D6C63E000EC99FD /* motorJ */ = {
 			isa = PBXGroup;
 			children = (
+				A9B596101E65AA12006EA5EB /* internalMessaging */,
 				A9031B5A1D6CFA640056B49C /* ai */,
 				A9031B5B1D6CFA710056B49C /* audio */,
 				A9031B641D6D06820056B49C /* core */,
@@ -916,6 +996,7 @@
 				A94F208D1DBE441C00AB5E4C /* gl_code.cpp in Sources */,
 				A9031BEF1D6D10950056B49C /* mjTextureResource.cpp in Sources */,
 				A96266EF1DD1FC10000BB4C4 /* utf8-utils.c in Sources */,
+				A9B5962D1E65AE93006EA5EB /* BubbleShaders.cpp in Sources */,
 				A9031BBB1D6D106C0056B49C /* mjDefaultShaders.cpp in Sources */,
 				A9031B6A1D6D0FCA0056B49C /* mjAutomatonState.cpp in Sources */,
 				A9031BD51D6D10840056B49C /* mjCollisionResult.cpp in Sources */,
@@ -933,8 +1014,10 @@
 				A9AB2FE11D6BBC0400547DDA /* GameViewController.mm in Sources */,
 				A9031C011D6D1F950056B49C /* tinyxml2.cpp in Sources */,
 				A9031BC01D6D106C0056B49C /* mjSceneGraph.cpp in Sources */,
+				A9B593791E65A99F006EA5EB /* mjGameState.cpp in Sources */,
 				A9031BB81D6D106C0056B49C /* mj3rdPersonCamera.cpp in Sources */,
 				A9031BD61D6D10840056B49C /* mjCollisionStructure.cpp in Sources */,
+				A9B593751E65A981006EA5EB /* TrackEvent.cpp in Sources */,
 				A9031BFD1D6D1F860056B49C /* mjMathHelper.cpp in Sources */,
 				A9031B7B1D6D0FF60056B49C /* mjScene.cpp in Sources */,
 				A9B84C071D6DF2DA00239BBA /* AppDelegate.m in Sources */,
@@ -953,8 +1036,11 @@
 				A9031C071D6D1FAE0056B49C /* mjMultiPlatform.cpp in Sources */,
 				A9031BC31D6D106C0056B49C /* mjSkyboxLevelData.cpp in Sources */,
 				A9B84BB51D6D922400239BBA /* mjModelStructure.cpp in Sources */,
+				A9B596161E65AA12006EA5EB /* mjInternalMessenger.cpp in Sources */,
+				A9B5962A1E65AE52006EA5EB /* BeatZigZagBubbleScriptSettings.cpp in Sources */,
 				A9031BD81D6D10840056B49C /* mjPhysics.cpp in Sources */,
 				A94F20881DBE441C00AB5E4C /* Player.cpp in Sources */,
+				A9B596151E65AA12006EA5EB /* mjInternalMessageReceiver.cpp in Sources */,
 				A9031C081D6D1FAE0056B49C /* mjXMLHelper.cpp in Sources */,
 				A96266E51DD1FB3B000BB4C4 /* mjGraphicText.cpp in Sources */,
 				A9B84BB31D6D922400239BBA /* mjModelAnimation.cpp in Sources */,
@@ -964,7 +1050,9 @@
 				A9031BC21D6D106C0056B49C /* mjSkybox.cpp in Sources */,
 				A9031B7D1D6D0FF60056B49C /* mjVector3.cpp in Sources */,
 				A9031BD71D6D10840056B49C /* mjCollisionTests.cpp in Sources */,
+				A9B596241E65AA88006EA5EB /* mjFileFromArchive.cpp in Sources */,
 				A9031BBD1D6D106C0056B49C /* mjModel.cpp in Sources */,
+				A9B5961F1E65AA4E006EA5EB /* ChooserUniverse.cpp in Sources */,
 				A9031BC11D6D106C0056B49C /* mjShader.cpp in Sources */,
 				A9B84BB11D6D922400239BBA /* mjAnimationSegment.cpp in Sources */,
 				A94F20831DBE441C00AB5E4C /* Bubble.cpp in Sources */,
@@ -976,7 +1064,9 @@
 				A94501B81D782B1000D488E1 /* mjRenderer.cpp in Sources */,
 				A9AB2FD71D6BBC0400547DDA /* main.m in Sources */,
 				A9031BFC1D6D1F860056B49C /* Matrix.cpp in Sources */,
+				A9B593761E65A981006EA5EB /* TrackPreview.cpp in Sources */,
 				A9031BBA1D6D106C0056B49C /* mjCamera.cpp in Sources */,
+				A9B596211E65AA4E006EA5EB /* TakkaTakkaGameState.cpp in Sources */,
 				A9031BBC1D6D106C0056B49C /* mjImageLoader.cpp in Sources */,
 				A93A30901DBBA591007C9688 /* mjInputEvent.cpp in Sources */,
 				A9031BB91D6D106C0056B49C /* mjAssimpModel.cpp in Sources */,
@@ -984,7 +1074,8 @@
 				A94F20841DBE441C00AB5E4C /* BubbleScript.cpp in Sources */,
 				A94F20961DBE441C00AB5E4C /* TitleUniverse.cpp in Sources */,
 				A94F208C1DBE441C00AB5E4C /* TrackLoader.cpp in Sources */,
-				A94F20821DBE441C00AB5E4C /* FreeTypeTest.cpp in Sources */,
+				A9B596291E65AE52006EA5EB /* BeatZigZagBubbleScript.cpp in Sources */,
+				A9B593741E65A981006EA5EB /* Choreographer.cpp in Sources */,
 				A9031B7A1D6D0FF60056B49C /* mjObject.cpp in Sources */,
 				A94F208A1DBE441C00AB5E4C /* Step.cpp in Sources */,
 				A94F20871DBE441C00AB5E4C /* SpiralWalkBubbleScriptSettings.cpp in Sources */,

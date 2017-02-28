@@ -76,11 +76,13 @@ bool mjImageLoader::Load(mjTextureResource* imgRes)
     
     bool mjImageLoader::Load(mjTextureResource* imgRes)
     {
-        const char* name = imgRes->fullPath.c_str();
+        const char* name = imgRes->mjFile->iosOnly_fullPath.c_str();
         UIImage* imageX;
         NSString* iosPath = [NSString stringWithUTF8String:name];
         
         imageX = [UIImage imageWithContentsOfFile:iosPath];
+        
+        //imageX = [UIImage data:imgRes->internal];
         
         width = imageX.size.width;
         height = imageX.size.height;

@@ -511,6 +511,10 @@ mjFileFromArchive* mjResourceManager::OpenFromArchive(const char* path, ArchiveR
 #else
     mjFile->internalUseOnly_fileDescriptor = fopen(path, "rb");
 #endif
+    
+#ifdef IOS
+    mjFile->iosOnly_fullPath = path;
+#endif
 
 
     return mjFile;
