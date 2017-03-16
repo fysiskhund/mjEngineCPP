@@ -46,6 +46,9 @@
 		A9031C011D6D1F950056B49C /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BFF1D6D1F950056B49C /* tinyxml2.cpp */; };
 		A9031C071D6D1FAE0056B49C /* mjMultiPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031C021D6D1FAE0056B49C /* mjMultiPlatform.cpp */; };
 		A9031C081D6D1FAE0056B49C /* mjXMLHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031C051D6D1FAE0056B49C /* mjXMLHelper.cpp */; };
+		A92FB9491E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92FB9471E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp */; };
+		A92FB94E1E799EB50012CF71 /* BaitAndSwitchBubbleScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92FB94A1E799EB50012CF71 /* BaitAndSwitchBubbleScript.cpp */; };
+		A92FB94F1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92FB94C1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.cpp */; };
 		A93A308B1DBB9E22007C9688 /* mjTextShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93A30891DBB9E22007C9688 /* mjTextShaders.cpp */; };
 		A93A30901DBBA591007C9688 /* mjInputEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93A308E1DBBA591007C9688 /* mjInputEvent.cpp */; };
 		A94501B81D782B1000D488E1 /* mjRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94501B01D782B1000D488E1 /* mjRenderer.cpp */; };
@@ -216,6 +219,12 @@
 		A9031C041D6D1FAE0056B49C /* mjMultiPlatformAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjMultiPlatformAudio.h; path = ../extLibs/util/mjMultiPlatformAudio.h; sourceTree = "<group>"; };
 		A9031C051D6D1FAE0056B49C /* mjXMLHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjXMLHelper.cpp; path = ../extLibs/util/mjXMLHelper.cpp; sourceTree = "<group>"; };
 		A9031C061D6D1FAE0056B49C /* mjXMLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjXMLHelper.h; path = ../extLibs/util/mjXMLHelper.h; sourceTree = "<group>"; };
+		A92FB9471E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaitAndSwitchTrackEvent.cpp; sourceTree = "<group>"; };
+		A92FB9481E799EAA0012CF71 /* BaitAndSwitchTrackEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaitAndSwitchTrackEvent.h; sourceTree = "<group>"; };
+		A92FB94A1E799EB50012CF71 /* BaitAndSwitchBubbleScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaitAndSwitchBubbleScript.cpp; sourceTree = "<group>"; };
+		A92FB94B1E799EB50012CF71 /* BaitAndSwitchBubbleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaitAndSwitchBubbleScript.h; sourceTree = "<group>"; };
+		A92FB94C1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaitAndSwitchBubbleScriptSettings.cpp; sourceTree = "<group>"; };
+		A92FB94D1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaitAndSwitchBubbleScriptSettings.h; sourceTree = "<group>"; };
 		A93A30891DBB9E22007C9688 /* mjTextShaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjTextShaders.cpp; path = ../text/mjTextShaders.cpp; sourceTree = "<group>"; };
 		A93A308A1DBB9E22007C9688 /* mjTextShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjTextShaders.h; path = ../text/mjTextShaders.h; sourceTree = "<group>"; };
 		A93A308E1DBBA591007C9688 /* mjInputEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjInputEvent.cpp; sourceTree = "<group>"; };
@@ -624,6 +633,8 @@
 		A94F20581DBE441C00AB5E4C /* gameObjects */ = {
 			isa = PBXGroup;
 			children = (
+				A92FB9471E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp */,
+				A92FB9481E799EAA0012CF71 /* BaitAndSwitchTrackEvent.h */,
 				A9B5936E1E65A981006EA5EB /* Choreographer.cpp */,
 				A9B5936F1E65A981006EA5EB /* Choreographer.h */,
 				A9B593701E65A981006EA5EB /* TrackEvent.cpp */,
@@ -651,6 +662,10 @@
 		A94F205B1DBE441C00AB5E4C /* BubbleScripts */ = {
 			isa = PBXGroup;
 			children = (
+				A92FB94A1E799EB50012CF71 /* BaitAndSwitchBubbleScript.cpp */,
+				A92FB94B1E799EB50012CF71 /* BaitAndSwitchBubbleScript.h */,
+				A92FB94C1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.cpp */,
+				A92FB94D1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.h */,
 				A9B596251E65AE52006EA5EB /* BeatZigZagBubbleScript.cpp */,
 				A9B596261E65AE52006EA5EB /* BeatZigZagBubbleScript.h */,
 				A9B596271E65AE52006EA5EB /* BeatZigZagBubbleScriptSettings.cpp */,
@@ -1006,6 +1021,7 @@
 				A94F20861DBE441C00AB5E4C /* SpiralWalkBubbleScript.cpp in Sources */,
 				A9031B691D6D0FCA0056B49C /* mjAutomaton.cpp in Sources */,
 				A9031BC41D6D106C0056B49C /* mjSkyboxShaders.cpp in Sources */,
+				A92FB94E1E799EB50012CF71 /* BaitAndSwitchBubbleScript.cpp in Sources */,
 				A9031B701D6D0FE20056B49C /* mjSoundSource.cpp in Sources */,
 				A9031BED1D6D10950056B49C /* mjResourceManager.cpp in Sources */,
 				A9031BD91D6D10840056B49C /* mjPhysicsEffect.cpp in Sources */,
@@ -1049,6 +1065,7 @@
 				A96266EB1DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.cpp in Sources */,
 				A9031BC21D6D106C0056B49C /* mjSkybox.cpp in Sources */,
 				A9031B7D1D6D0FF60056B49C /* mjVector3.cpp in Sources */,
+				A92FB9491E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp in Sources */,
 				A9031BD71D6D10840056B49C /* mjCollisionTests.cpp in Sources */,
 				A9B596241E65AA88006EA5EB /* mjFileFromArchive.cpp in Sources */,
 				A9031BBD1D6D106C0056B49C /* mjModel.cpp in Sources */,
@@ -1074,6 +1091,7 @@
 				A94F20841DBE441C00AB5E4C /* BubbleScript.cpp in Sources */,
 				A94F20961DBE441C00AB5E4C /* TitleUniverse.cpp in Sources */,
 				A94F208C1DBE441C00AB5E4C /* TrackLoader.cpp in Sources */,
+				A92FB94F1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.cpp in Sources */,
 				A9B596291E65AE52006EA5EB /* BeatZigZagBubbleScript.cpp in Sources */,
 				A9B593741E65A981006EA5EB /* Choreographer.cpp in Sources */,
 				A9031B7A1D6D0FF60056B49C /* mjObject.cpp in Sources */,

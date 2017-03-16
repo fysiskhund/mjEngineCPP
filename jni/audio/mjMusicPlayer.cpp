@@ -44,7 +44,7 @@ namespace mjEngine{
         
         player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
         [player stop];
-        player.numberOfLoops = -1; // loop-de-loop
+        player.numberOfLoops = loops;
     }
     
     void mjMusicPlayer::Play()
@@ -53,7 +53,12 @@ namespace mjEngine{
     }
     void mjMusicPlayer::Play(int sampleIndex)
     {
-        //?
+        Play(); // FIXME: for now ignore sampleIndex
+    }
+    void mjMusicPlayer::SetLoops(int loops)
+    {
+        this->loops = loops;
+        player.numberOfLoops = loops;
     }
     void mjMusicPlayer::Pause()
     {
@@ -99,6 +104,10 @@ void mjMusicPlayer::Play()
 void mjMusicPlayer::Play(int sampleIndex)
 {
 
+}
+void mjMusicPlayer::SetLoops(int loops)
+{
+    this->loops = loops;
 }
 void mjMusicPlayer::Pause()
 {

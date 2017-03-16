@@ -26,12 +26,13 @@ namespace mjEngine{
 class mjMusicPlayer
 {
     public:
-        int loops = 0;
+    
         mjMusicPlayer();
 
         void Load(mjSoundResource* soundRes, int sampleNum);
         void Play();
         void Play(int sampleIndex);
+        void SetLoops(int loops);
         void Pause();
         void Resume();
         void Rewind();
@@ -39,6 +40,7 @@ class mjMusicPlayer
         virtual ~mjMusicPlayer();
     protected:
     private:
+        int loops = 0;
 };
 
 }
