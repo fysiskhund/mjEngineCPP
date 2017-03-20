@@ -1,32 +1,22 @@
 #ifndef MJMUSICPLAYER_H
 #define MJMUSICPLAYER_H
 
+#ifndef OSX
+#include <SDL2/SDL_mixer.h>
+#else
+#include <SDL2_mixer/SDL_mixer.h>
+#endif
 
 #include "../extLibs/logger/mjLog.h"
 #include "../util/mjSoundResource.h"
 
-#ifdef USE_SDL_AUDIO
+namespace mjEngine {
 
-#include "sdl/mjMusicPlayer_SDL.txth"
-
-
-
-#elif USE_ANDROID_AUDIO
-
-#include "android/mjMusicPlayer_android.txth"
-
-#elif IOS
-
-
-
-
-
-namespace mjEngine{
 
 class mjMusicPlayer
 {
     public:
-    
+
         mjMusicPlayer();
 
         void Load(mjSoundResource* soundRes, int sampleNum);
@@ -41,34 +31,13 @@ class mjMusicPlayer
     protected:
     private:
         int loops = 0;
+
+#ifdef USE_SDL_AUDIO
+        Mix_Chunk* currentMusic;
+        int channel;
+#endif
+
 };
 
 }
-#else
-
-namespace mjEngine{
-    
-    class mjMusicPlayer
-    {
-    public:
-        int loops = 0;
-        
-        mjMusicPlayer();
-        
-        void Load(mjSoundResource* soundRes, int sampleNum);
-        void Play();
-        void Play(int sampleIndex);
-        void Pause();
-        void Resume();
-        void Rewind();
-        
-        virtual ~mjMusicPlayer();
-    protected:
-    private:
-    };
-    
-}
-
-#endif // USE_SDL_AUDIO
-
 #endif // MJMUSICPLAYER_H
