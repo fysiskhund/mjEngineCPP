@@ -64,7 +64,7 @@ private:
     float renderScale;
     mjFontResource* fontResource;
     mjResourceManager* resourceManager;
-    bool requiresTextUpdate;
+    bool requiresTextUpdate = false;
     char* GetNextChar();
     void UpdateTextStatic(const char* text);
 
