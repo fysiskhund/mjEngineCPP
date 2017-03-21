@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "414763CCC8C8A3764D8C412CA9E09DE3709388DF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "f26fed55-4fcf-44db-af71-d2eeef9a96e8++9128" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "414763CCC8C8A3764D8C412CA9E09DE3709388DF" : 9223372036854775807,
+    "f26fed55-4fcf-44db-af71-d2eeef9a96e8++9128" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2F8AA620-5A17-4B5E-927D-DD0F7CE9A615",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "414763CCC8C8A3764D8C412CA9E09DE3709388DF" : "mjEngineCPP\/",
+    "f26fed55-4fcf-44db-af71-d2eeef9a96e8++9128" : "mjEngineCPP\/jni\/takkatakkacpp\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "mjEngine_iOS",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "jni\/mjEngine_iOS\/mjEngine_iOS.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/fysiskhund\/mjEngineCPP.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "414763CCC8C8A3764D8C412CA9E09DE3709388DF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/svn.mexinetica.com\/takataka",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "f26fed55-4fcf-44db-af71-d2eeef9a96e8++9128"
+    }
+  ]
+}

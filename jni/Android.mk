@@ -51,7 +51,10 @@ LOCAL_SRC_FILES := \
     takkatakkacpp/SongUniverse.cpp \
     takkatakkacpp/TakkaTakkaGameState.cpp \
     takkatakkacpp/TitleUniverse.cpp \
+    takkatakkacpp/gameObjects/BaitAndSwitchTrackEvent.cpp \
     takkatakkacpp/gameObjects/Bubble.cpp \
+    takkatakkacpp/gameObjects/BubbleScripts/BaitAndSwitchBubbleScript.cpp \
+    takkatakkacpp/gameObjects/BubbleScripts/BaitAndSwitchBubbleScriptSettings.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/BeatZigZagBubbleScript.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/BeatZigZagBubbleScriptSettings.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/BubbleScript.cpp \

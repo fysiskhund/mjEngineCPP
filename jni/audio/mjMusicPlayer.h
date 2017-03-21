@@ -1,10 +1,12 @@
 #ifndef MJMUSICPLAYER_H
 #define MJMUSICPLAYER_H
 
+#ifdef USE_SDL_AUDIO
 #ifndef OSX
 #include <SDL2/SDL_mixer.h>
 #else
 #include <SDL2_mixer/SDL_mixer.h>
+#endif
 #endif
 
 #include "../extLibs/logger/mjLog.h"

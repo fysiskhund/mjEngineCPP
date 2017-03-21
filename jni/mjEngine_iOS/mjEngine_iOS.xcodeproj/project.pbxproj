@@ -84,7 +84,6 @@
 		A96266EA1DD1FB5B000BB4C4 /* mjFontResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96266E61DD1FB5B000BB4C4 /* mjFontResource.cpp */; };
 		A96266EB1DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96266E81DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.cpp */; };
 		A96266EF1DD1FC10000BB4C4 /* utf8-utils.c in Sources */ = {isa = PBXBuildFile; fileRef = A96266ED1DD1FC10000BB4C4 /* utf8-utils.c */; };
-		A9A5204C1D6FBBC500AE64A1 /* mjEngineCPP in Resources */ = {isa = PBXBuildFile; fileRef = A9A5204B1D6FBBC500AE64A1 /* mjEngineCPP */; };
 		A9AB2FD71D6BBC0400547DDA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FD61D6BBC0400547DDA /* main.m */; };
 		A9AB2FE11D6BBC0400547DDA /* GameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FE01D6BBC0400547DDA /* GameViewController.mm */; };
 		A9AB2FE41D6BBC0400547DDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9AB2FE21D6BBC0400547DDA /* Main.storyboard */; };
@@ -93,6 +92,7 @@
 		A9AB2FF41D6BBC0400547DDA /* mjEngine_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FF31D6BBC0400547DDA /* mjEngine_iOSTests.m */; };
 		A9AB2FFF1D6BBC0400547DDA /* mjEngine_iOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FFE1D6BBC0400547DDA /* mjEngine_iOSUITests.m */; };
 		A9AB30131D6BCB8200547DDA /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9AB30121D6BCB8200547DDA /* GLKit.framework */; };
+		A9B52C191E7BCB71006551D1 /* mjEngineCPP in Resources */ = {isa = PBXBuildFile; fileRef = A9B52C181E7BCB71006551D1 /* mjEngineCPP */; };
 		A9B593741E65A981006EA5EB /* Choreographer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B5936E1E65A981006EA5EB /* Choreographer.cpp */; };
 		A9B593751E65A981006EA5EB /* TrackEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B593701E65A981006EA5EB /* TrackEvent.cpp */; };
 		A9B593761E65A981006EA5EB /* TrackPreview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B593721E65A981006EA5EB /* TrackPreview.cpp */; };
@@ -286,7 +286,6 @@
 		A96266E91DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjGraphicCharObjectResource.h; path = ../util/mjGraphicCharObjectResource.h; sourceTree = "<group>"; };
 		A96266ED1DD1FC10000BB4C4 /* utf8-utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "utf8-utils.c"; sourceTree = "<group>"; };
 		A96266EE1DD1FC10000BB4C4 /* utf8-utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "utf8-utils.h"; sourceTree = "<group>"; };
-		A9A5204B1D6FBBC500AE64A1 /* mjEngineCPP */ = {isa = PBXFileReference; lastKnownFileType = folder; name = mjEngineCPP; path = ../../../../../sdcard/mjEngineCPP; sourceTree = "<group>"; };
 		A9AB2FD21D6BBC0400547DDA /* mjEngine_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mjEngine_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9AB2FD61D6BBC0400547DDA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A9AB2FD81D6BBC0400547DDA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -304,6 +303,7 @@
 		A9AB2FFE1D6BBC0400547DDA /* mjEngine_iOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mjEngine_iOSUITests.m; sourceTree = "<group>"; };
 		A9AB30001D6BBC0400547DDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9AB30121D6BCB8200547DDA /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		A9B52C181E7BCB71006551D1 /* mjEngineCPP */ = {isa = PBXFileReference; lastKnownFileType = folder; name = mjEngineCPP; path = ../../assets/mjEngineCPP; sourceTree = "<group>"; };
 		A9B5936E1E65A981006EA5EB /* Choreographer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Choreographer.cpp; sourceTree = "<group>"; };
 		A9B5936F1E65A981006EA5EB /* Choreographer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Choreographer.h; sourceTree = "<group>"; };
 		A9B593701E65A981006EA5EB /* TrackEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrackEvent.cpp; sourceTree = "<group>"; };
@@ -844,7 +844,7 @@
 		A9D49B1F1D6E890800B105E9 /* embeddedFiles */ = {
 			isa = PBXGroup;
 			children = (
-				A9A5204B1D6FBBC500AE64A1 /* mjEngineCPP */,
+				A9B52C181E7BCB71006551D1 /* mjEngineCPP */,
 			);
 			name = embeddedFiles;
 			sourceTree = "<group>";
@@ -981,9 +981,9 @@
 				A9AB2FE61D6BBC0400547DDA /* Assets.xcassets in Resources */,
 				A9AB2FE91D6BBC0400547DDA /* LaunchScreen.storyboard in Resources */,
 				A94F207F1DBE441C00AB5E4C /* Android.mk.takkatakka in Resources */,
-				A9A5204C1D6FBBC500AE64A1 /* mjEngineCPP in Resources */,
 				A94F20941DBE441C00AB5E4C /* bubble.png in Resources */,
 				A94F20921DBE441C00AB5E4C /* takkatakka.pro in Resources */,
+				A9B52C191E7BCB71006551D1 /* mjEngineCPP in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
