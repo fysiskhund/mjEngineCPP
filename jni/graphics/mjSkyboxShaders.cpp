@@ -54,6 +54,32 @@ void mjSkyboxShaders::Run(mjModelMesh* mesh,
 
 }
 
+void mjEngine::mjSkyboxShaders::BindTexCoordBuffer(float* texCoordBuffer)
+{
+}
+
+void mjEngine::mjSkyboxShaders::BindMatrices(float* modelMatrix, float* modelViewProjectionMatrix)
+{
+    // Send the modelViewProjection Matrix
+    glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
+    // Send the modelView Matrix
+    glUniformMatrix4fv(maMMatrixHandle, 1, false, modelMatrix);
+}
+
+void mjEngine::mjSkyboxShaders::BindTexture(int glTexture)
+{
+    // Bind the texture handle
+    glBindTexture(GL_TEXTURE_2D, glTexture); // So far I haven't used more than one texture so..
+    // Set the sampler texture unit to 0
+    glUniform1i(maTextureHandle, 0);
+}
+
+void mjEngine::mjSkyboxShaders::BindExtraColorForTexture(float* extraColorForTexture)
+{
+    // Not used here.
+}
+
+
 #ifdef USE_ASSIMP
 void mjSkyboxShaders::RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh,
                                    float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
@@ -74,3 +100,5 @@ void mjSkyboxShaders::RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh
 
 
 }
+
+

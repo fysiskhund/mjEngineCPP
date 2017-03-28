@@ -60,3 +60,33 @@ void mjTextShaders::Run(mjModelMesh *modelMesh, float *vertexBuffer, float *texC
 }
 
 }
+
+
+void mjEngine::mjTextShaders::BindTexCoordBuffer(float* texCoordBuffer)
+{
+}
+
+void mjEngine::mjTextShaders::BindMatrices(float* modelMatrix, float* modelViewProjectionMatrix)
+{
+    // Send the modelViewProjection Matrix
+    glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
+
+    // The modelview matrix is not necessary because the normals are not taken into account.
+    // (but maybe this will change to render text that is supposed to be part of the gameworld and not just the UI?)
+}
+
+void mjEngine::mjTextShaders::BindTexture(int glTexture)
+{
+    // Connect the texture
+    //glActiveTexture(GL_TEXTURE0); // So far I haven't used more than one texture so..
+    // Bind the texture handle
+    glBindTexture(GL_TEXTURE_2D, glTexture);
+    // Set the sampler texture unit to 0
+    glUniform1i(maTextureHandle, 0);
+}
+
+void mjEngine::mjTextShaders::BindExtraColorForTexture(float* extraColorForTexture)
+{
+    // Set the extra colour
+    glUniform4fv(uExtraColorForTextureHandle, 1, extraColorForTexture);
+}

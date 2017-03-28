@@ -69,21 +69,27 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
 {
     mjRendererDataGL* dataGL = (mjRendererDataGL*) model.rendererData;
 
+    if (&model != naiveLastModel) // Naïve optimisation attempt
+    {
+        naiveLastModel = &model;
+
+
 #ifndef USE_GLES2
     glBindVertexArray(dataGL->vertexArrayID);
 #endif
 
-    glEnableVertexAttribArray(MJ_VERTEX_COORDINATES_GLVERTEXATTRIB_ID); // Tell OpenGL we will use the slot 0, which we arbitrarily defined as vertex coordinate buffer when the shader source codes were loaded
-    glBindBuffer(GL_ARRAY_BUFFER, dataGL->vertexCoordinatesBufferID);
-    glVertexAttribPointer(MJ_VERTEX_COORDINATES_GLVERTEXATTRIB_ID, 3, GL_FLOAT, GL_FALSE, 0, nullptr); // vertexBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address
+        glEnableVertexAttribArray(MJ_VERTEX_COORDINATES_GLVERTEXATTRIB_ID); // Tell OpenGL we will use the slot 0, which we arbitrarily defined as vertex coordinate buffer when the shader source codes were loaded
+        glBindBuffer(GL_ARRAY_BUFFER, dataGL->vertexCoordinatesBufferID);
+        glVertexAttribPointer(MJ_VERTEX_COORDINATES_GLVERTEXATTRIB_ID, 3, GL_FLOAT, GL_FALSE, 0, nullptr); // vertexBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address
 
-    glEnableVertexAttribArray(MJ_UV_COMPONENTS_GLVERTEXATTRIB_ID); // Tell OpenGL we will use the slot 1, which we arbitrarily defined as UV components when the shader source codes were loaded
-    glBindBuffer(GL_ARRAY_BUFFER, dataGL->uvComponentsBufferID);
-    glVertexAttribPointer(MJ_UV_COMPONENTS_GLVERTEXATTRIB_ID, 2, GL_FLOAT, GL_FALSE, 0, nullptr); // texCoordBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address
+        glEnableVertexAttribArray(MJ_NORMAL_COORDINATES_GLVERTEXATTRIB_ID); // Tell OpenGL we will use the slot 2, which we arbitrarily defined as the coordinates of the normals when the shader source codes were loaded
+        glBindBuffer(GL_ARRAY_BUFFER, dataGL->normalCoordinatesID);
+        glVertexAttribPointer(MJ_NORMAL_COORDINATES_GLVERTEXATTRIB_ID, 3, GL_FLOAT, GL_FALSE, 0, nullptr); // normalComponentBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address
 
-    glEnableVertexAttribArray(MJ_NORMAL_COORDINATES_GLVERTEXATTRIB_ID); // Tell OpenGL we will use the slot 2, which we arbitrarily defined as the coordinates of the normals when the shader source codes were loaded
-    glBindBuffer(GL_ARRAY_BUFFER, dataGL->normalCoordinatesID);
-    glVertexAttribPointer(MJ_NORMAL_COORDINATES_GLVERTEXATTRIB_ID, 3, GL_FLOAT, GL_FALSE, 0, nullptr); // normalComponentBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address
+        glEnableVertexAttribArray(MJ_UV_COMPONENTS_GLVERTEXATTRIB_ID); // Tell OpenGL we will use the slot 1, which we arbitrarily defined as UV components when the shader source codes were loaded
+        glBindBuffer(GL_ARRAY_BUFFER, dataGL->uvComponentsBufferID);
+        glVertexAttribPointer(MJ_UV_COMPONENTS_GLVERTEXATTRIB_ID, 2, GL_FLOAT, GL_FALSE, 0, nullptr); // texCoordBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address
+    }
 
     checkGlError("After binding Vertex Array Pointers");
 
@@ -149,8 +155,20 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
                             modelViewMatrix, 0);
 
 
-
-        shader->Run(mesh, NULL, NULL, NULL, modelMatrix, modelViewProjectionMatrix, glTexture, extraColorForTexture);
+        if (naiveLastShader != shader) // Naïve optimisation attempt
+        {
+            naiveLastShader = shader;
+            shader->Run(mesh, NULL, NULL, NULL, modelMatrix, modelViewProjectionMatrix, glTexture, extraColorForTexture);
+        } else
+        {
+            shader->BindMatrices(modelMatrix, modelViewProjectionMatrix);
+            if (glTexture != naiveLastTexture)
+            {
+                naiveLastTexture = glTexture;
+                shader->BindTexture(glTexture);
+            }
+            shader->BindExtraColorForTexture(extraColorForTexture);
+        }
 
         // Index buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, dataGL->elementBuffersIDs[i]);

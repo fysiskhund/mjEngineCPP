@@ -54,6 +54,11 @@ public:
             float* vertexBuffer, float* texCoordBuffer, float* normalComponentBuffer,
             float* modelMatrix, float* modelViewProjectionMatrix, int glTexture, float* extraColorForTexture)= 0; // Gets called in order to draw something
 
+    virtual void BindTexCoordBuffer(float* texCoordBuffer) = 0;
+    virtual void BindMatrices(float* modelMatrix, float* modelViewProjectionMatrix) = 0;
+    virtual void BindTexture(int glTexture) = 0;
+    virtual void BindExtraColorForTexture( float* extraColorForTexture) = 0;
+
 #ifdef USE_ASSIMP
 
     virtual void RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh,

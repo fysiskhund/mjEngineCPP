@@ -54,6 +54,13 @@ class mjDefaultShaders:  public mjShader
 	private:
 		float diffuseLightDirectionArray[3];
 
+
+        // mjShader interface
+public:
+        void BindTexCoordBuffer(float* texCoordBuffer) override;
+        void BindMatrices(float* modelMatrix, float* modelViewProjectionMatrix) override;
+        void BindTexture(int glTexture) override;
+        void BindExtraColorForTexture(float* extraColorForTexture) override;
 };
 }
 #endif

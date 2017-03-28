@@ -23,6 +23,10 @@ private:
     float modelViewMatrix[16];
     float modelViewProjectionMatrix[16];
 
+    mjModel* naiveLastModel = NULL;
+    int naiveLastTexture = 0;
+    mjShader* naiveLastShader = NULL;
+
 
 };
 

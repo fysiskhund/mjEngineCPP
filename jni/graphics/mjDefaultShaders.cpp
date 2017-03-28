@@ -87,6 +87,36 @@ void mjDefaultShaders::Run(mjModelMesh* mesh,
 
 }
 
+
+
+void mjEngine::mjDefaultShaders::BindTexCoordBuffer(float* texCoordBuffer)
+{
+}
+
+void mjEngine::mjDefaultShaders::BindMatrices(float* modelMatrix, float* modelViewProjectionMatrix)
+{
+    // Send the modelViewProjection Matrix
+    glUniformMatrix4fv(maMVPMatrixHandle, 1, false, modelViewProjectionMatrix);
+    // Send the modelView Matrix
+    glUniformMatrix4fv(maMMatrixHandle, 1, false, modelMatrix);
+}
+
+
+void mjEngine::mjDefaultShaders::BindTexture(int glTexture)
+{
+    // Connect the texture
+    //glActiveTexture(GL_TEXTURE0); // So far I haven't used more than one texture so..
+    // Bind the texture handle
+    glBindTexture(GL_TEXTURE_2D, glTexture);
+    // Set the sampler texture unit to 0
+    glUniform1i(maTextureHandle, 0);
+}
+
+void mjEngine::mjDefaultShaders::BindExtraColorForTexture(float* extraColorForTexture)
+{
+    // Not used here.
+}
+
 #ifdef USE_ASSIMP
 
 void mjDefaultShaders::RunForAssimp(const aiMesh* assimpMesh, mjModelMesh* mjMesh,
