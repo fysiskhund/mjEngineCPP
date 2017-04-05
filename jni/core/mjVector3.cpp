@@ -48,7 +48,12 @@ namespace mjEngine{
  {
 	this->x = 0;
 	this->y = 0;
-	this->z = 0;
+     this->z = 0;
+ }
+
+ void mjVector3::SetAll(GLfloat value)
+ {
+     this->x = this->y = this->z = value;
  }
 
  void mjVector3::CopyFrom(mjVector3& v)

@@ -47,6 +47,23 @@ void mjMatrixStack::Push(float* m)
     }
 }
 
+void mjMatrixStack::Insert(float* m)
+{
+    if (currentIndex < maxSize-1)
+    {
+        currentIndex++;
+        current = mStack[currentIndex];
+
+        for (unsigned int i = 0; i < 16; i++)
+        {
+            current[i] = m[i];
+        }
+    } else
+    {
+        LOGI("Error: maximum size for matrixStack exceeded. Check the balance of Push() and Pop() operations." );
+    }
+}
+
 void mjMatrixStack::Pop()
 {
     if (currentIndex > 0)

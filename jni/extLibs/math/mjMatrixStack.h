@@ -16,6 +16,9 @@ class mjMatrixStack
         mjMatrixStack(unsigned size);
         ~mjMatrixStack();
         void Push(float* m);
+
+        // Add a level to the stack and copy the specified matrix there, without multiplying
+        void Insert(float* m);
         void Pop();
         void Pop(unsigned howMany);
         void PopAll();

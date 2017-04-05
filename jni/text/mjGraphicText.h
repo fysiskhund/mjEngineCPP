@@ -16,7 +16,10 @@
 
 namespace mjEngine {
 
+
 enum TextAlignment {ALIGNMENT_LEFT, ALIGNMENT_CENTER, ALIGNMENT_RIGHT};
+
+
 
 class mjGraphicText: public mjObject
 {
@@ -26,9 +29,7 @@ public:
     //std::vector<mjGraphicCharObject*> textVector;
     std::string text;
     int usedLength = 0;
-    mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font,
-                  int fontSize, float renderScale, float positionScaleHz, float positionScaleVr,
-                  float* color, mjVector3& position, TextAlignment alignment = ALIGNMENT_LEFT);
+
 
     float modelMatrix[16];
 
@@ -44,6 +45,12 @@ public:
      * but then you must remember to call the Update() method!
      */
     bool immediateUpdate = true;
+
+    mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font,
+                  int fontSize, float renderScale, float positionScaleHz, float positionScaleVr,
+                  float* color, mjVector3& position, TextAlignment alignment = ALIGNMENT_LEFT);
+
+
 
     void SetRenderScale(float scale);
     void SetPositionScale(float positionScaleHz);

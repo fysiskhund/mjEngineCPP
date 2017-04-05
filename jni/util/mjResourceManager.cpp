@@ -379,6 +379,7 @@ mjFontResource* mjResourceManager::FetchFont(std::string &path)
 mjGraphicCharObjectResource* mjResourceManager::FetchGraphicChar(mjFontResource *fontResource, int fontSize, unsigned long charToRenderLong)
 {
     // Max 100 different fonts at the same time due to lookup constraints.
+    // But seriously who would use more than 100 fonts at the same time lol
     mjGraphicCharObjectResource* result = (mjGraphicCharObjectResource*) SearchByIdentifier(graphicCharObjectResources, charToRenderLong, (fontSize*100) + fontResource->identifier);
 
     if (result != NULL)

@@ -1,6 +1,10 @@
 #include "mjObject.h"
+#include "../graphics/mjSceneGraph.h"
+#include "../graphics/mjMaterialBucket.h"
 
 namespace mjEngine{
+
+
 
 mjObject::mjObject(mjResourceManager* resourceManager, structuretype collisionStructureType)
 {
@@ -111,6 +115,45 @@ void mjObject::FlushPhysicsEffects()
     effectStack.clear();
     collisionStack.clear();
 }
+
+void mjObject::SetDrawToSubObject(int drawToSubObjectNew)
+{
+    if (sceneGraph)
+    {
+        if (drawToSubObjectNew > drawToSubObject)
+        {
+
+            for (int i = 0; i <= drawToSubObjectNew; i++)
+            {
+                mjObject* subObject = subObjects[i];
+                if (subObject->sceneGraphActionState == 0) // Avoid adding it twice
+                {
+                    sceneGraph->Add(subObject);
+                }
+            }
+        } else if (drawToSubObjectNew < drawToSubObject)
+        {
+            int end = (drawToSubObjectNew > -1) ? drawToSubObjectNew : 0;
+            for (int i = subObjects.size()-1; i > end; i--)
+            {
+                mjObject* subObject = subObjects[i];
+                //if (subObject->sceneGraph != NULL) // Avoid removing it twice
+                {
+                    sceneGraph->Remove(subObject);
+                }
+            }
+        }
+
+    }
+    drawToSubObject = drawToSubObjectNew;
+}
+
+void mjObject::RefreshRendererBucket()
+{
+
+}
+
+
 
 void mjObject::CopyModelMatrixTo(float* modelMatrixOut)
 {

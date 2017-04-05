@@ -93,7 +93,8 @@ HEADERS += \
     core/mjGameState.h \
     util/mjFileFromArchive.h \
     internalMessaging/mjInternalMessenger.h \
-    internalMessaging/mjInternalMessageReceiver.h
+    internalMessaging/mjInternalMessageReceiver.h \
+    graphics/mjMaterialBucket.h
 
 
 SOURCES += \
@@ -159,7 +160,8 @@ SOURCES += \
     core/mjGameState.cpp \
     util/mjFileFromArchive.cpp \
     internalMessaging/mjInternalMessenger.cpp \
-    internalMessaging/mjInternalMessageReceiver.cpp
+    internalMessaging/mjInternalMessageReceiver.cpp \
+    graphics/mjMaterialBucket.cpp
 
 
 

@@ -12,10 +12,43 @@ void mjSceneGraph::Add(mjObject* object, bool isDrawable, bool castsShadow, bool
 {
     if (isDrawable)
     {
-        //object->sceneGraphDrawablesIndex = drawableObjects.size();  NOTE: doesn't work. Left there in case I can think of something to make it work
-        drawableObjects.push_back(object);
 
-        //object->sceneGraphTranslucentsIndex = translucentObjects.max_size(); // Mark index as invalid.  NOTE: doesn't work. Left there in case I can think of something to make it work
+        //LOGI("Adding object 0x%x", object);
+        mjMaterialBucket* bucketFound = nullptr; // Nooo they stole mah bukkit!! I miss mah bukkit!!
+        unsigned int i  = 0;
+
+
+        // Bukkit search party
+        while (!bucketFound && i < byMaterial.size())
+        {
+            bucketFound = byMaterial[i]->AddObjectIfItBelongs(object); // Is this mah bukkit?
+            i++;
+        }
+
+        if (!bucketFound) // I could not find mah bukkit :'{(
+        {
+            bucketFound = new mjMaterialBucket(object, resourceManager); // I haz a new bukkit! :'{D
+
+            byMaterial.push_back(bucketFound);
+
+        }
+
+        object->sceneGraph = this;
+        object->sceneGraphActionState = 1 ; // Added, no further action needed.
+        object->rendererCalculationState = 0;
+        object->rendererBucket = bucketFound;
+
+        int drawToSubObject = object->drawToSubObject;
+
+        if (drawToSubObject >= 0)
+        {
+            for (int i = 0; i <= drawToSubObject; i++)
+            {
+                Add(object->subObjects[i]);
+            }
+        }
+
+
     } else if (isTranslucent)
     {
 
@@ -36,6 +69,17 @@ void mjSceneGraph::Add(mjObject* object, bool isDrawable, bool castsShadow, bool
 
 
 }
+
+void mjSceneGraph::Reclassify(mjObject* object)
+{
+    if (!object->rendererBucket->TestIfObjectBelongs(object))
+    {
+        Remove(object);
+        Add(object);
+
+    }
+}
+
 /*
 void mjSceneGraph::AddGroup(std::vector<mjObject*>* group, bool toDrawable, bool toShadowCasters, bool toTranslucent)
 {
@@ -129,9 +173,30 @@ bool mjSceneGraph::Remove(mjObject* objToRemove, bool fromDrawables, bool fromSh
 {
 
     bool actionTaken = false;
-    if (fromDrawables)
+    if (fromDrawables && objToRemove->sceneGraph == this)
     {
-        actionTaken = RemoveFromVector(&drawableObjects, objToRemove);
+
+
+        unsigned int i  = 0;
+
+        objToRemove->sceneGraphActionState = 0; // Removed
+        objToRemove->sceneGraph = NULL;         // disconnect the SceneGraph
+        objToRemove->rendererCalculationState = 0;
+        //LOGI("Removing object 0x%x", objToRemove);
+
+        actionTaken = objToRemove->rendererBucket->RemoveObject(objToRemove, true);
+        objToRemove->rendererBucket = nullptr;
+
+        if (actionTaken)
+        {
+            for (unsigned int j = 0; j < objToRemove->subObjects.size(); j++)
+            {
+
+                Remove(objToRemove->subObjects[j]); // Remove all the children
+            }
+
+        }
+
     }
     if (fromShadowCasters)
     {
@@ -145,13 +210,13 @@ bool mjSceneGraph::Remove(mjObject* objToRemove, bool fromDrawables, bool fromSh
     return actionTaken;
 }
 
-bool mjSceneGraph::RemoveFromBack(mjObject* objToRemove, bool fromDrawables, bool fromShadowCasters, bool fromTranslucents)
+/*bool mjSceneGraph::RemoveFromBack(mjObject* objToRemove, bool fromDrawables, bool fromShadowCasters, bool fromTranslucents)
 {
 
     bool actionTaken = false;
     if (fromDrawables)
     {
-        actionTaken = RemoveFromVectorFromBack(&drawableObjects, objToRemove);
+        //actionTaken = RemoveFromVectorFromBack(&drawableObjects, objToRemove);
     }
     if (fromShadowCasters)
     {
@@ -163,7 +228,7 @@ bool mjSceneGraph::RemoveFromBack(mjObject* objToRemove, bool fromDrawables, boo
     }
 
     return actionTaken;
-}
+}*/
 
 /*unsigned mjSceneGraph::GetUnusedIndexValue() NOTE: Doesn't work. kept around to see if I can make it work.
 {
@@ -184,17 +249,25 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
     this->lookAtMatrix = lookAtMatrix;
     this->projectionMatrix = projectionMatrix;
 
+    unsigned numObjects;
+
     matrixStack.PopAll();
     Matrix4::SetIdentityM(matrixStack.current, 0);
 
-    unsigned numObjects = drawableObjects.size();
-	for (unsigned i= 0 ; i < numObjects; i++)
-	{
-        mjObject* drawableObj = drawableObjects[i];
-        DrawObject(drawableObj);
+    unsigned numBuckets = byMaterial.size();
+    for (unsigned j = 0; j < numBuckets; j++)
+    {
+        mjMaterialBucket* zeBucket = byMaterial[j];
+        numObjects = zeBucket->objects.size();
+        for (unsigned i= 0 ; i < numObjects; i++)
+        {
+            mjObject* drawableObj = zeBucket->objects[i];
+            CalculateMatrices(drawableObj);
+            DrawObject(drawableObj);
 
-        //drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
-	}
+            //drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
+        }
+    }
 
 
 
@@ -219,22 +292,83 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
 
 
 }
+
+/*void mjSceneGraph::AutoAddRemoveObject(mjObject* object)
+{
+    // Determine visibility according to its sceneGraphActionState variable
+    switch(object->sceneGraphActionState)
+    {
+    case 0:
+        // Add to the buckets etc
+        Add(object);
+        break;
+    case 1:
+        // Nothing
+        break;
+    case 2:
+        // Remove from buckets
+        Remove(object);
+        break;
+    case 3:
+        // Nothing
+        break;
+    }
+}*/
+
+
+
+void mjSceneGraph::CalculateMatrices(mjObject* object, bool isSubObjectPass)
+{
+
+
+    if (object->rendererCalculationState == 0 || isSubObjectPass) // 0: Calculations not yet performed on this object
+    {
+        //LOGI("Calculating matrices for 0x%x", object);
+        object->rendererCalculationState = 1; // Calculations have been performed on this thang
+
+        float modelMatrix[16];
+        object->CopyModelMatrixTo(modelMatrix);
+        Matrix4::MultiplyMM(object->rendererMatrix, 0, matrixStack.current, 0, modelMatrix, 0);
+
+
+
+
+
+        int drawToSubObject = object->drawToSubObject;
+
+        if (drawToSubObject >= 0)
+        {
+            matrixStack.Insert(object->rendererMatrix); // Equivalent of Push, in this context
+            for (int i = 0; i <= drawToSubObject; i++)
+            {
+                CalculateMatrices(object->subObjects[i], true);
+            }
+
+            matrixStack.Pop();
+        }
+    }
+}
+
+
 void mjSceneGraph::DrawObject(mjObject* objToDraw)
 {
-    float modelMatrix[16];
+    /*float modelMatrix[16];
     objToDraw->CopyModelMatrixTo(modelMatrix);
 
-    matrixStack.Push(modelMatrix);
+    matrixStack.Push(modelMatrix);*/
 
 
     if (objToDraw->model)
     {
         //                     mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack)
-        renderer.RenderModel(* objToDraw->model, matrixStack.current, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
+        renderer.RenderModel(* objToDraw->model, objToDraw->rendererMatrix, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
                              objToDraw->customShaders, objToDraw->customTextures, objToDraw->extraColorForTexture, resourceManager->shaderList);
-    }
 
-    unsigned drawToSubObject = objToDraw->drawToSubObject > -1 ? objToDraw->drawToSubObject : objToDraw->subObjects.size();
+
+    }
+    objToDraw->rendererCalculationState = 0;
+
+    /*unsigned drawToSubObject = objToDraw->drawToSubObject > -1 ? objToDraw->drawToSubObject : objToDraw->subObjects.size();
 
     if (drawToSubObject > 0)
     {
@@ -244,7 +378,7 @@ void mjSceneGraph::DrawObject(mjObject* objToDraw)
         }
 
     }
-    matrixStack.Pop();
+    matrixStack.Pop();*/
 
 }
 
@@ -303,7 +437,7 @@ bool mjSceneGraph::RemoveFromVectorWithIndex(std::vector<mjObject*>* vectorObj, 
 
 void mjSceneGraph::CleanUp()
 {
-    drawableObjects.clear();
+    byMaterial.clear();
     translucentObjects.clear();
     shadowCasters.clear();
 }
@@ -319,5 +453,7 @@ bool mjSceneGraph::SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1)
 {
     return (obj0->distSqToCamera > obj1->distSqToCamera);
 }
+
+
 
 }

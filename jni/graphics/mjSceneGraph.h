@@ -12,6 +12,7 @@
 #include <util/mjResourceManager.h>
 #include <text/mjGraphicCharObject.h>
 #include <text/mjGraphicText.h>
+#include "mjMaterialBucket.h"
 
 #if defined(USE_GL3) || defined(USE_GLES2)
 #include <graphics/renderer/mjRendererGL.h>
@@ -39,7 +40,8 @@ public:
 
     void Initialize(mjResourceManager* resourceManager);
     void Add(mjObject* object, bool isDrawable=true, bool castsShadow=false, bool isTranslucent=false);
-	void Update(float t_elapsed);
+    void Reclassify(mjObject* object);
+    void Update(float t_elapsed);
     //void AddGroup(std::vector<mjObject*>* group, bool toDrawable=true, bool toShadowCasters=false, bool toTranslucent=false);
     //void RemoveGroup(std::vector<mjObject *>* group);
 
@@ -50,7 +52,7 @@ public:
     bool Remove(mjObject* objToRemove, bool fromDrawables=true, bool fromShadowCasters=false, bool fromTranslucents=false);
 
     //! Finds the object and removes it, starting from the back
-    bool RemoveFromBack(mjObject* objToRemove, bool fromDrawables=true, bool fromShadowCasters=false, bool fromTranslucents=false);
+    //bool RemoveFromBack(mjObject* objToRemove, bool fromDrawables=true, bool fromShadowCasters=false, bool fromTranslucents=false);
 
     // Get value to detect whether the index is in use by sceneGraph  NOTE: doesn't work. Left there in case I can think of something to make it work
     //unsigned GetUnusedIndexValue();
@@ -62,14 +64,19 @@ public:
 
 
 
+
 private:
 
-    std::vector<mjObject*> drawableObjects;
+    std::vector<mjMaterialBucket*> byMaterial;
+    std::vector<mjObject*> drawableMatrixOrder;
     std::vector<mjObject*> translucentObjects;
     std::vector<mjObject*> shadowCasters;
 
     mjResourceManager* resourceManager;
     static bool SortByInvDistanceToCamera(mjObject* obj0,mjObject* obj1);
+
+    //void AutoAddRemoveObject(mjObject* object);
+    void CalculateMatrices(mjObject* object, bool isSubObjectPass = false);
     void DrawObject(mjObject* drawableObj);
 
     bool RemoveFromVector(std::vector<mjObject*>* vectorObj, mjObject* object);

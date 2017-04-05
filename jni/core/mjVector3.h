@@ -31,6 +31,7 @@ public:
 
 	void Set(GLfloat x, GLfloat y, GLfloat z);
 	void Set0();
+    void SetAll(GLfloat value);
 
     void ScaleCopyFrom(GLfloat a, mjVector3& v);
 	void CopyFrom(mjVector3& v);

@@ -31,21 +31,29 @@
 
 
 
+
+
 namespace mjEngine{
+
+// Forward declaration
+class mjSceneGraph;
+class mjMaterialBucket;
 
 
 class mjObject: public mjInternalMessageReceiver // Generic mjObject for games
 {
 public:
     char* id = NULL;
+    mjSceneGraph* sceneGraph = NULL;
+    mjMaterialBucket* rendererBucket = NULL;
+
 
     int tag = 0;
 	void* tagObject = NULL;
 
-    /*  NOTE: doesn't work. Left there in case I can think of something to make it work
-    unsigned sceneGraphDrawablesIndex = 0;
-    unsigned sceneGraphTranslucentsIndex = 0;
-    unsigned sceneGraphShadowCastersIndex = 0;*/
+    int   rendererCalculationState = 0; // 0: not calculated yet; 1: the matrix for this object has been calculated
+    int   sceneGraphActionState = 0; // 0: Not included, must include. 1: Included, no action needed. 2: Included, must exclude. 3: Excluded, no action
+    float rendererMatrix[16];
 
 	mjVector3 pos;
 	mjVector3 dir;
@@ -66,6 +74,9 @@ public:
     mjModel* model = NULL;
     std::vector<mjShader*>* customShaders = NULL;
     int* customTextures = NULL;
+    std::vector<mjModelMesh*>* customMeshes = NULL;
+
+
     float extraColorForTexture[4] = {1, 1, 1, 1};
 
 	int animationState = 0;
@@ -87,8 +98,9 @@ public:
 	bool useModelFromXMLDetails = false;
 	mjResourceManager* resourceManager;
 
+
     std::vector<mjObject*> subObjects;
-    int drawToSubObject = -1; // -1: all subObjects, else draw up to subObject N
+    int drawToSubObject = -1; // DO NOT MODIFY THIS VARIABLE DIRECTLY. USE SetDrawToSubObject -1: all subObjects, else draw up to subObject with index N.
 
     //mjObject(mjResourceManager* resourceManager);
     mjObject(mjResourceManager* resourceManager, structuretype collisionStructureType = MJ_NO_BOUNDING_STRUCT);
@@ -106,6 +118,9 @@ public:
 	virtual void UpdatePosition(float t_elapsed);
     virtual void FlushPhysicsEffects();
 
+
+    void SetDrawToSubObject(int drawToSubObjectNew);
+    void RefreshRendererBucket();
 
     void CopyModelMatrixTo(float* modelMatrixOut);
 
