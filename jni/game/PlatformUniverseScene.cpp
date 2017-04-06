@@ -4,6 +4,8 @@ PlatformUniverseScene::PlatformUniverseScene(mjResourceManager* resourceManager)
 :mjScene(resourceManager)
 {
 
+    sceneGraph.simpleDrawList = false;
+
     entityCreator = new EntityCreator(resourceManager);
     LOGI("%s %d: new %s", __FILE__, __LINE__, "entitycreator");
     srand(time(0));
@@ -58,7 +60,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
     //LOGI("setupSkybox");
     SetUpSkybox();
     //skybox->TieShaders(shaderList);
-    sceneGraph.drawableObjects.push_back(skybox);
+    sceneGraph.Add(skybox);
 
 
     level->LoadFromFile(levelFilename.c_str());
@@ -85,7 +87,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
     mjObject* frog = level->GetEntityByID("frog.003");
 
     //camera->SetTarget(&batBot0->pos, cameraOffset);
-    camera->SetTarget(&frog->pos, cameraOffset);
+    camera->SetTarget(&character->pos, cameraOffset);
     camera->r = 3;
     camera->SetAsCurrentCamera();
 
@@ -108,7 +110,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
         //level->entities[i]->TieShaders(shaderList);
         //if (strncmp(level->entities[i]->id, "baobab", 10) == 0)
         //{
-            sceneGraph.drawableObjects.push_back(level->entities[i]);
+            sceneGraph.Add(level->entities[i]);
         //}
         physics.AddObject(level->entities[i], 0);
     }
@@ -116,12 +118,12 @@ void PlatformUniverseScene::Initialise(int width, int height)
     for (unsigned i = 0; i < level->terrain.size(); i++)
     {
         //level->terrain[i]->TieShaders(shaderList);
-        sceneGraph.drawableObjects.push_back(level->terrain[i]);
+        sceneGraph.Add(level->terrain[i]);
         physics.AddObject(level->terrain[i], 1);
     }
     //DEBUGInit();
 
-    DEBUGvasilisa = resourceManager->FetchModel("bird.mesh.xml");
+    /*DEBUGvasilisa = resourceManager->FetchModel("bird.mesh.xml");
     debugRenderer = new mjRendererGL();
     LOGI("%s %d: new %s", __FILE__, __LINE__, "renderer");
     debugRenderer->PrepareModel(*DEBUGvasilisa);
@@ -134,7 +136,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
     {
         DEBUGvasilisa->meshes[i]->glTexture = glTexture;
     }
-    LOGI("End of init");
+    LOGI("End of init");*/
     //checkGlError("end of init");
 }
 
@@ -153,7 +155,6 @@ void PlatformUniverseScene::SetUpSkybox()
     LOGI("%s %d: new %s", __FILE__, __LINE__, "skybox");
 
 
-	mjImageLoader imgLoader;
 	mjModel* skyboxBox;
 
 	skyboxBox = resourceManager->FetchModel("skybox.mesh.xml");

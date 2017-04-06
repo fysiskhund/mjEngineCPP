@@ -3,7 +3,7 @@
 
 
 KosmoObject::KosmoObject(structuretype collisionStructureType, mjResourceManager* resourceManager, Level* levelData):
-    mjObject(collisionStructureType, resourceManager)
+    mjObject(resourceManager, collisionStructureType)
 {
  this->levelData = levelData;
 }

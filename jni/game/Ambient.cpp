@@ -40,7 +40,7 @@ void Ambient::InitGlowBeings(Level* levelData, mjCamera* camera, mjPhysics* phys
 
         physics->AddObject(glowBeing, 0);
 
-        sceneGraph->translucentObjects.push_back(glowBeing);
+        //sceneGraph->translucentObjects.push_back(glowBeing);
 
         glowBeing->Reposition();
 

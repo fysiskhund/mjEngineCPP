@@ -1,6 +1,7 @@
 #include "TriggerBox.h"
 
 TriggerBox::TriggerBox(mjResourceManager* resourceManager)
+    : mjObject(resourceManager, MJ_AABB)
 {
 
 }

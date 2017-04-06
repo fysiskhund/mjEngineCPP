@@ -71,6 +71,7 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
 
     if (&model != naiveLastModel) // Naïve optimisation attempt
     {
+        stateSwitchCount++;
         naiveLastModel = &model;
 
 
@@ -157,6 +158,7 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
 
         if (naiveLastShader != shader) // Naïve optimisation attempt
         {
+            stateSwitchCount++;
             naiveLastShader = shader;
             shader->Run(mesh, NULL, NULL, NULL, modelMatrix, modelViewProjectionMatrix, glTexture, extraColorForTexture);
         } else
@@ -164,6 +166,7 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
             shader->BindMatrices(modelMatrix, modelViewProjectionMatrix);
             if (glTexture != naiveLastTexture)
             {
+                stateSwitchCount++;
                 naiveLastTexture = glTexture;
                 shader->BindTexture(glTexture);
             }
@@ -204,3 +207,4 @@ void mjRendererGL::CleanForModel(mjModel &model)
 
 
 }
+

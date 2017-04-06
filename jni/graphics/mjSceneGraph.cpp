@@ -21,7 +21,13 @@ void mjSceneGraph::Add(mjObject* object, bool isDrawable, bool castsShadow, bool
         // Bukkit search party
         while (!bucketFound && i < byMaterial.size())
         {
-            bucketFound = byMaterial[i]->AddObjectIfItBelongs(object); // Is this mah bukkit?
+            if (!simpleDrawList)
+            {
+                bucketFound = byMaterial[i]->AddObjectIfItBelongs(object); // Is this mah bukkit?
+            } else
+            {
+                bucketFound = byMaterial[i]->ForceAddObject(object);
+            }
             i++;
         }
 
@@ -246,6 +252,7 @@ void mjSceneGraph::Update(float t_elapsed)
 
 void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
+    renderer.StartCountingStateSwitches();
     this->lookAtMatrix = lookAtMatrix;
     this->projectionMatrix = projectionMatrix;
 
@@ -290,7 +297,7 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
         //translucentObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
     }
 
-
+    renderer.StopCountingStateSwitches();
 }
 
 /*void mjSceneGraph::AutoAddRemoveObject(mjObject* object)

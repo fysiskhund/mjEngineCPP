@@ -34,6 +34,7 @@ public:
 
 
     bool sortTranslucentObjects = true;
+    bool simpleDrawList = false;
 
 
     mjMatrixStack matrixStack;

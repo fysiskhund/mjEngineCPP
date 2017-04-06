@@ -15,14 +15,15 @@ mjRenderer renderer;
 #endif
 
 PlatformUniverseScene* platformUniverse;
-GraphicsDebugUniverseScene* graphicsDebugUniverse;
 mjSceneManager sceneManager;
 
 mjResourceManager* resourceManager;
 
+AAssetManager* assMan = NULL;
+
 bool setupGame(int w, int h, std::string& pathPrefix) {
     LOGI("Screen resolution: %d x %d", w, h);
-    resourceManager = new mjResourceManager(pathPrefix, &renderer);
+    resourceManager = new mjResourceManager(pathPrefix, &renderer, assMan);
     /*graphicsDebugUniverse = new GraphicsDebugUniverseScene(resourceManager);
     graphicsDebugUniverse->Initialize(w,h);
     sceneManager.SetFirstScene(graphicsDebugUniverse);*/
@@ -31,7 +32,7 @@ bool setupGame(int w, int h, std::string& pathPrefix) {
     LOGI("%s %d: new %s", __FILE__, __LINE__, "platformUniverse");
 
     platformUniverse->Initialise(w,h);
-    sceneManager.SetFirstScene(platformUniverse);
+    sceneManager.SetFirstScene(platformUniverse, NULL);
     return true;
 }
 

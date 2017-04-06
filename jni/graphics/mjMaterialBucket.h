@@ -23,6 +23,7 @@ public:
     mjMaterialBucket(mjObject* exampleObject, mjResourceManager* resourceManager, bool addObject = true);
     ~mjMaterialBucket();
     mjMaterialBucket* AddObjectIfItBelongs(mjObject* object);
+    mjMaterialBucket* ForceAddObject(mjObject* object);
     bool RemoveObject(mjObject* object, bool forceRemove = false);
     bool TestIfObjectBelongs(mjObject* exampleObject);
 };

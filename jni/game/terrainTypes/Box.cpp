@@ -1,7 +1,7 @@
 #include "Box.h"
 
 Box::Box(mjResourceManager* resourceManager)
-: mjObject(MJ_AABB, resourceManager)
+: mjObject( resourceManager, MJ_AABB)
 {
     useModelFromXMLDetails = true;
 

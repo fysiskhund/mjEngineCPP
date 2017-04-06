@@ -57,6 +57,12 @@ mjMaterialBucket* mjMaterialBucket::AddObjectIfItBelongs(mjObject* object)
     return nullptr;
 }
 
+mjMaterialBucket* mjMaterialBucket::ForceAddObject(mjObject* object)
+{
+    objects.push_back(object);
+    return this;
+}
+
 bool mjMaterialBucket::RemoveObject(mjObject* object, bool forceRemove)
 {
     if (forceRemove || TestIfObjectBelongs(object))

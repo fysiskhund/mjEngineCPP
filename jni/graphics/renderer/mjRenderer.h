@@ -21,6 +21,9 @@ class mjRenderer
 {
 public:
 
+    int stateSwitchCount = 0;
+    virtual void StartCountingStateSwitches();
+    virtual void StopCountingStateSwitches();
     virtual void PrepareModel(mjModel& model) = 0;
 
     virtual void RenderModel(mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack,

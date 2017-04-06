@@ -11,6 +11,8 @@ namespace mjEngine{
 class mjRendererGL: public mjRenderer
 {
 public:
+
+
     //mjRendererGL(mjResourceManager* resourceManager);
 
     // mjRenderer interface
@@ -19,6 +21,7 @@ public:
                      std::vector<mjShader*>* customShaders, int* customTextures, float* extraColorForTexture, std::vector<mjShader*>& shaderList) override;
     void CleanForModel(mjModel &model) override;
 
+
 private:
     float modelViewMatrix[16];
     float modelViewProjectionMatrix[16];
@@ -26,6 +29,7 @@ private:
     mjModel* naiveLastModel = NULL;
     int naiveLastTexture = 0;
     mjShader* naiveLastShader = NULL;
+
 
 
 };

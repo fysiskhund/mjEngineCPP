@@ -33,7 +33,10 @@ SDL_Joystick* joystick;
 KeyboardControl keyboardControl;
 
 int InitSDL(SDLStruct* sdlData) {
-   SDL_Init(SDL_INIT_VIDEO|SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK|SDL_INIT_AUDIO);
+   if (0 != SDL_Init(SDL_INIT_VIDEO|SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK|SDL_INIT_AUDIO))
+   {
+       LOGI("Error when initialising SDL.");
+   }
 
 
     if (fullscreen)
@@ -233,14 +236,16 @@ int main(int argc, char* argv[]) {
     InitGL(&data);
 
     #ifndef WIN32
-        std::string pathPrefix = "/sdcard/mjEngineCPP";
+        std::string pathPrefix = "/sdcard/Kosmonavt";
     #else
-        std::string pathPrefix = "C:/mjEngineCPP";
+        std::string pathPrefix = "C:/Kosmonavt";
     #endif
         LOGI("%s %d: new %s", __FILE__, __LINE__, "resourceManager");
 
     setupGame(width, height, pathPrefix);
 
+    // Set up the event watch filter
+   // SDL_AddEventWatch(sdlEventReceived, NULL);
     int afterFrame = 0;
     int nowTime;
     int total;

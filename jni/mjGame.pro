@@ -11,7 +11,7 @@ QMAKE_CXXFLAGS += -std=c++11
 
 DEFINES -= UNICODE
 #DEFINES += DESKTOP_SDL NON_GLES_CONTEXT USE_SDL_AUDIO USE_GL3 #USE_ASSIMP #DEBUGCOLLISIONS
-DEFINES += DESKTOP_SDL USE_GLES2 USE_SDL_AUDIO #DEBUGCOLLISIONS
+DEFINES += DESKTOP_SDL USE_GL3 USE_SDL_AUDIO #DEBUGCOLLISIONS
 
 win32: DEFINES += WIN32
 win32: DEFINES -= UNICODE
@@ -31,38 +31,13 @@ HEADERS += \
     extLibs/logger/mjLog.h \
     extLibs/math/mjMathHelper.h \
     extLibs/math/mjMatrixStack.h \
+    extLibs/png/include/png.h \
     extLibs/tinyxml/tinyxml2.h \
     extLibs/util/mjMultiPlatform.h \
     extLibs/util/mjMultiPlatformAudio.h \
     extLibs/util/mjXMLHelper.h \
-    game/Ambient.h \
-    game/EntityCreator.h \
-    game/gl_code.h \
-    game/Level.h \
-    game/PlatformUniverseScene.h \
-    game/TerrainCreator.h \
-    etc/testImage.h \
     extLibs/math/MathConstants.h \
     extLibs/math/Matrix.h \
-    game/ambient/DustDevil.h \
-    game/entities/batMatonStates/AttackBatMatonState.h \
-    game/entities/batMatonStates/DetectBatMatonState.h \
-    game/entities/batMatonStates/WanderBatMatonState.h \
-    game/entities/frogAutomatonStates/FrogAutomatonStopState.h \
-    game/entities/frogAutomatonStates/FrogJumpAutomatonState.h \
-    game/entities/BatBot.h \
-    game/entities/BatMaton.h \
-    game/entities/Bird.h \
-    game/entities/Character.h \
-    game/entities/Frog.h \
-    game/entities/GlowBeing.h \
-    game/entities/MysticalDoor.h \
-    game/entities/Plant.h \
-    game/terrainTypes/Box.h \
-    game/terrainTypes/FallingBox.h \
-    game/windStates/DustDevilState.h \
-    game/windStates/SteadyDirectionState.h \
-    game/windStates/WindState.h \
     graphics/animation/mjAnimation.h \
     graphics/animation/mjAnimationKeyframe.h \
     graphics/animation/mjAnimationSegment.h \
@@ -99,6 +74,26 @@ HEADERS += \
     util/mjResourceManager.h \
     util/mjSoundResource.h \
     util/mjTextureResource.h \
+    graphics/mjAssimpModel.h \
+    game/ambient/DustDevil.h \
+    game/entities/batMatonStates/AttackBatMatonState.h \
+    game/entities/batMatonStates/DetectBatMatonState.h \
+    game/entities/batMatonStates/WanderBatMatonState.h \
+    game/entities/frogAutomatonStates/FrogAutomatonStopState.h \
+    game/entities/frogAutomatonStates/FrogJumpAutomatonState.h \
+    game/entities/BatBot.h \
+    game/entities/BatMaton.h \
+    game/entities/Bird.h \
+    game/entities/Character.h \
+    game/entities/Frog.h \
+    game/entities/GlowBeing.h \
+    game/entities/MysticalDoor.h \
+    game/entities/Plant.h \
+    game/terrainTypes/Box.h \
+    game/terrainTypes/FallingBox.h \
+    game/windStates/DustDevilState.h \
+    game/windStates/SteadyDirectionState.h \
+    game/windStates/WindState.h \
     game/entities/KosmoObject.h \
     game/ObjectTags.h \
     game/entities/FrogBoss.h \
@@ -146,21 +141,24 @@ SOURCES += \
     game/entities/Baobab.cpp
 
 
+INCLUDEPATH += $$PWD/../
 
-INCLUDEPATH += $$PWD/../../../sdl/i686-w64-mingw32/include $$PWD/../../../glew/include
+win32: LIBS += -L$$PWD/../precompiled/mjEngine/win32 -lmjEngine
 
-win32: LIBS += -L$$PWD/../../../glew/lib/Release/Win32/ -L$$PWD/../../../sdl/i686-w64-mingw32/lib/
+win32: INCLUDEPATH += $$PWD/../../../../sdl/i686-w64-mingw32/include $$PWD/../../../../glew/include $$PWD/../extLibs/freetype2/include
+
+win32: LIBS += -L$$PWD/../../../../glew/lib/Release/Win32/ -L$$PWD/../../../../sdl/i686-w64-mingw32/lib/ -L$$PWD/../precompiled/freetype2/win32/ -lfreetype
+
+
 
 win32: LIBS += -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image -lglew32s -lopengl32 -lSDL2_mixer
 
 #linux: LIBS += -lSDL2 -lGL -lGLEW -lSDL2_image -lSDL2_mixer
 
 
+
 unix: CONFIG += link_pkgconfig
-unix: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer #assimp #for GL3 rendering
+unix: PKGCONFIG += sdl2 glew gl libpng SDL2_image SDL2_mixer freetype2 #assimp #for GL3 rendering
 #unix: PKGCONFIG += sdl2 glesv2 libpng SDL2_image SDL2_mixer #for GLESv2 rendering
 
-unix|win32: LIBS += -L$$PWD/../../build-mjEngineCPP_asLibrary-Desktop-Debug/ -lmjEngine
-
-INCLUDEPATH += $$PWD/../build-mjEngineCPP_asLibrary-Desktop-Debug
-DEPENDPATH += $$PWD/../build-mjEngineCPP_asLibrary-Desktop-Debug
+linux: LIBS += -L$$PWD/precompiled/mjEngine/pc-linux-x86_64/ -lmjEngine
