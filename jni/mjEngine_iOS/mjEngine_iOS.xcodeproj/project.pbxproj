@@ -51,6 +51,9 @@
 		A92FB94F1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92FB94C1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.cpp */; };
 		A93A308B1DBB9E22007C9688 /* mjTextShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93A30891DBB9E22007C9688 /* mjTextShaders.cpp */; };
 		A93A30901DBBA591007C9688 /* mjInputEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93A308E1DBBA591007C9688 /* mjInputEvent.cpp */; };
+		A93A5DC01E9E79D2000F9A1D /* ResponseText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93A5DBC1E9E79D2000F9A1D /* ResponseText.cpp */; };
+		A93A5DC11E9E79D2000F9A1D /* TrackSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93A5DBE1E9E79D2000F9A1D /* TrackSelector.cpp */; };
+		A93A5DC51E9E7A31000F9A1D /* mjMaterialBucket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93A5DC31E9E7A31000F9A1D /* mjMaterialBucket.cpp */; };
 		A94501B81D782B1000D488E1 /* mjRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94501B01D782B1000D488E1 /* mjRenderer.cpp */; };
 		A94501B91D782B1000D488E1 /* mjRendererData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94501B21D782B1000D488E1 /* mjRendererData.cpp */; };
 		A94501BA1D782B1000D488E1 /* mjRendererDataGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94501B41D782B1000D488E1 /* mjRendererDataGL.cpp */; };
@@ -229,6 +232,12 @@
 		A93A308A1DBB9E22007C9688 /* mjTextShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjTextShaders.h; path = ../text/mjTextShaders.h; sourceTree = "<group>"; };
 		A93A308E1DBBA591007C9688 /* mjInputEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjInputEvent.cpp; sourceTree = "<group>"; };
 		A93A308F1DBBA591007C9688 /* mjInputEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjInputEvent.h; sourceTree = "<group>"; };
+		A93A5DBC1E9E79D2000F9A1D /* ResponseText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ResponseText.cpp; path = interfaceObjects/ResponseText.cpp; sourceTree = "<group>"; };
+		A93A5DBD1E9E79D2000F9A1D /* ResponseText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResponseText.h; path = interfaceObjects/ResponseText.h; sourceTree = "<group>"; };
+		A93A5DBE1E9E79D2000F9A1D /* TrackSelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TrackSelector.cpp; path = interfaceObjects/TrackSelector.cpp; sourceTree = "<group>"; };
+		A93A5DBF1E9E79D2000F9A1D /* TrackSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackSelector.h; path = interfaceObjects/TrackSelector.h; sourceTree = "<group>"; };
+		A93A5DC31E9E7A31000F9A1D /* mjMaterialBucket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjMaterialBucket.cpp; path = ../graphics/mjMaterialBucket.cpp; sourceTree = "<group>"; };
+		A93A5DC41E9E7A31000F9A1D /* mjMaterialBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjMaterialBucket.h; path = ../graphics/mjMaterialBucket.h; sourceTree = "<group>"; };
 		A94501B01D782B1000D488E1 /* mjRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjRenderer.cpp; sourceTree = "<group>"; };
 		A94501B11D782B1000D488E1 /* mjRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mjRenderer.h; sourceTree = "<group>"; };
 		A94501B21D782B1000D488E1 /* mjRendererData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mjRendererData.cpp; sourceTree = "<group>"; };
@@ -456,6 +465,8 @@
 		A9031B5E1D6CFA920056B49C /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				A93A5DC31E9E7A31000F9A1D /* mjMaterialBucket.cpp */,
+				A93A5DC41E9E7A31000F9A1D /* mjMaterialBucket.h */,
 				A9B84B9E1D6D921300239BBA /* animation */,
 				A9B84B9B1D6D91E600239BBA /* gles2 */,
 				A94501AF1D782B1000D488E1 /* renderer */,
@@ -585,6 +596,17 @@
 			path = ../input;
 			sourceTree = "<group>";
 		};
+		A93A5DC21E9E79E8000F9A1D /* interfaceObjects */ = {
+			isa = PBXGroup;
+			children = (
+				A93A5DBC1E9E79D2000F9A1D /* ResponseText.cpp */,
+				A93A5DBD1E9E79D2000F9A1D /* ResponseText.h */,
+				A93A5DBE1E9E79D2000F9A1D /* TrackSelector.cpp */,
+				A93A5DBF1E9E79D2000F9A1D /* TrackSelector.h */,
+			);
+			name = interfaceObjects;
+			sourceTree = "<group>";
+		};
 		A94501AF1D782B1000D488E1 /* renderer */ = {
 			isa = PBXGroup;
 			children = (
@@ -604,6 +626,7 @@
 		A94F20521DBE441C00AB5E4C /* takkatakkacpp */ = {
 			isa = PBXGroup;
 			children = (
+				A93A5DC21E9E79E8000F9A1D /* interfaceObjects */,
 				A9B5962E1E65AE96006EA5EB /* shaders */,
 				A9B596171E65AA4E006EA5EB /* autoversion.h */,
 				A9B596181E65AA4E006EA5EB /* ChooserUniverse.cpp */,
@@ -1011,10 +1034,12 @@
 				A94F208D1DBE441C00AB5E4C /* gl_code.cpp in Sources */,
 				A9031BEF1D6D10950056B49C /* mjTextureResource.cpp in Sources */,
 				A96266EF1DD1FC10000BB4C4 /* utf8-utils.c in Sources */,
+				A93A5DC51E9E7A31000F9A1D /* mjMaterialBucket.cpp in Sources */,
 				A9B5962D1E65AE93006EA5EB /* BubbleShaders.cpp in Sources */,
 				A9031BBB1D6D106C0056B49C /* mjDefaultShaders.cpp in Sources */,
 				A9031B6A1D6D0FCA0056B49C /* mjAutomatonState.cpp in Sources */,
 				A9031BD51D6D10840056B49C /* mjCollisionResult.cpp in Sources */,
+				A93A5DC01E9E79D2000F9A1D /* ResponseText.cpp in Sources */,
 				A96266EA1DD1FB5B000BB4C4 /* mjFontResource.cpp in Sources */,
 				A94501BB1D782B1000D488E1 /* mjRendererGL.cpp in Sources */,
 				A94501B91D782B1000D488E1 /* mjRendererData.cpp in Sources */,
@@ -1067,6 +1092,7 @@
 				A9031B7D1D6D0FF60056B49C /* mjVector3.cpp in Sources */,
 				A92FB9491E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp in Sources */,
 				A9031BD71D6D10840056B49C /* mjCollisionTests.cpp in Sources */,
+				A93A5DC11E9E79D2000F9A1D /* TrackSelector.cpp in Sources */,
 				A9B596241E65AA88006EA5EB /* mjFileFromArchive.cpp in Sources */,
 				A9031BBD1D6D106C0056B49C /* mjModel.cpp in Sources */,
 				A9B5961F1E65AA4E006EA5EB /* ChooserUniverse.cpp in Sources */,
