@@ -10,9 +10,10 @@ void mjSceneGraph::Initialize(mjResourceManager* resourceManager)
 
 void mjSceneGraph::Add(mjObject* object, bool isDrawable, bool castsShadow, bool isTranslucent)
 {
-    if (isDrawable)
+    if (isDrawable && object->sceneGraph == nullptr)
     {
 
+        drawableMatrixOrder.push_back(object);
         //LOGI("Adding object 0x%x", object);
         mjMaterialBucket* bucketFound = nullptr; // Nooo they stole mah bukkit!! I miss mah bukkit!!
         unsigned int i  = 0;
@@ -182,8 +183,8 @@ bool mjSceneGraph::Remove(mjObject* objToRemove, bool fromDrawables, bool fromSh
     if (fromDrawables && objToRemove->sceneGraph == this)
     {
 
+        RemoveFromVector(&drawableMatrixOrder, objToRemove);
 
-        unsigned int i  = 0;
 
         objToRemove->sceneGraphActionState = 0; // Removed
         objToRemove->sceneGraph = NULL;         // disconnect the SceneGraph
@@ -252,7 +253,7 @@ void mjSceneGraph::Update(float t_elapsed)
 
 void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, float* lookAtMatrix, float* projectionMatrix)
 {
-    renderer.StartCountingStateSwitches();
+    //renderer.StartCountingStateSwitches();
     this->lookAtMatrix = lookAtMatrix;
     this->projectionMatrix = projectionMatrix;
 
@@ -261,7 +262,14 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
     matrixStack.PopAll();
     Matrix4::SetIdentityM(matrixStack.current, 0);
 
+    unsigned drawableMatrixOrderSize = drawableMatrixOrder.size();
+    for (unsigned j = 0; j < drawableMatrixOrderSize; j++)
+    {
+        CalculateMatrices(drawableMatrixOrder[j]);
+    }
+
     unsigned numBuckets = byMaterial.size();
+
     for (unsigned j = 0; j < numBuckets; j++)
     {
         mjMaterialBucket* zeBucket = byMaterial[j];
@@ -269,7 +277,6 @@ void mjSceneGraph::Draw(mjCamera* camera, std::vector<mjShader*>& shaderList, fl
         for (unsigned i= 0 ; i < numObjects; i++)
         {
             mjObject* drawableObj = zeBucket->objects[i];
-            CalculateMatrices(drawableObj);
             DrawObject(drawableObj);
 
             //drawableObjects[i]->Draw(shaderList, lookAtMatrix, projectionMatrix, &matrixStack);
@@ -359,33 +366,21 @@ void mjSceneGraph::CalculateMatrices(mjObject* object, bool isSubObjectPass)
 
 void mjSceneGraph::DrawObject(mjObject* objToDraw)
 {
-    /*float modelMatrix[16];
-    objToDraw->CopyModelMatrixTo(modelMatrix);
 
-    matrixStack.Push(modelMatrix);*/
-
+#ifdef DEBUGONBEFOREDRAW
+    objToDraw->DEBUGonBeforeDraw();
+#endif
 
     if (objToDraw->model)
     {
         //                     mjModel& model, float* modelMatrix, float* lookAtMatrix, float* projectionMatrix, mjModelPose* pose, mjMatrixStack* stack)
         renderer.RenderModel(* objToDraw->model, objToDraw->rendererMatrix, lookAtMatrix, projectionMatrix, NULL, &matrixStack,
-                             objToDraw->customShaders, objToDraw->customTextures, objToDraw->extraColorForTexture, resourceManager->shaderList);
+                             objToDraw->customShaders, objToDraw->customTextures, objToDraw->customMeshes,
+                             objToDraw->extraColorForTexture, resourceManager->shaderList);
 
 
     }
     objToDraw->rendererCalculationState = 0;
-
-    /*unsigned drawToSubObject = objToDraw->drawToSubObject > -1 ? objToDraw->drawToSubObject : objToDraw->subObjects.size();
-
-    if (drawToSubObject > 0)
-    {
-        for (int i = 0; i < drawToSubObject; i++)
-        {
-            DrawObject(objToDraw->subObjects[i]);
-        }
-
-    }
-    matrixStack.Pop();*/
 
 }
 

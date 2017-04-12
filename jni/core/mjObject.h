@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C) 2014 Alejandro Valenzuela Roca
  */
 
@@ -133,6 +133,9 @@ public:
 
     virtual void DEBUGonCollisionTestStart(mjObject* otherObject){}
     virtual void OnOverlap(mjObject* otherObject){}
+
+    // DEBUGonBeforeDraw is called by the scenegraph only if DEBUGONBEFOREDRAW is defined in build options
+    virtual void DEBUGonBeforeDraw();
 
 
 };

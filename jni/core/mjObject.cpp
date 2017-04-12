@@ -354,6 +354,13 @@ void mjObject::UpdatePosition(float t_elapsed)
         }
     }
 
+    void mjObject::DEBUGonBeforeDraw()
+    {
+        // implement this in your subclass
+        // and define DEBUGONBEFOREDRAW when compiling the mjEngine library for this to be triggered.
+    }
+
+
 mjObject::~mjObject()
 {
     delete [] modelName;

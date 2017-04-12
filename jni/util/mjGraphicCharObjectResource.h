@@ -2,11 +2,13 @@
 #define MJGRAPHICCHAROBJECTRESOURCE_H
 
 
+#include <vector>
 #include "../extLibs/util/mjMultiPlatform.h"
 #include "../extLibs/utf8-utils/utf8-utils.h"
 #include "../extLibs/logger/mjLog.h"
 #include "mjResource.h"
 #include "mjFontResource.h"
+#include "../graphics/mjModelMesh.h"
 
 
 #include <ft2build.h>
@@ -27,6 +29,8 @@ public:
 
 
     GLuint texture;
+
+    std::vector<mjModelMesh*> customMesh;
 
 
     float charWidth;

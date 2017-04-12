@@ -65,7 +65,8 @@ void mjRendererGL::PrepareModel(mjModel &model)
 }
 
 void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAtMatrix, float *projectionMatrix, mjModelPose *pose, mjMatrixStack *stack,
-                               std::vector<mjShader*>* customShaders, int* customTextures, float* extraColorForTexture, std::vector<mjShader*>& shaderList)
+                               std::vector<mjShader*>* customShaders, int* customTextures, std::vector<mjModelMesh*>* customMeshes,
+                               float* extraColorForTexture, std::vector<mjShader*>& shaderList)
 {
     mjRendererDataGL* dataGL = (mjRendererDataGL*) model.rendererData;
 
@@ -94,9 +95,12 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
 
     checkGlError("After binding Vertex Array Pointers");
 
-    for (uint16_t i = 0; i < model.meshes.size(); i++)
+    std::vector<mjModelMesh*>* meshes = customMeshes? customMeshes : &model.meshes;
+
+    uint16_t size = meshes->size();
+    for (uint16_t i = 0; i < size; i++)
     {
-        mjModelMesh* mesh = model.meshes[i];
+        mjModelMesh* mesh = (*meshes)[i];
         mjShader* shader;
         GLuint glTexture;
 

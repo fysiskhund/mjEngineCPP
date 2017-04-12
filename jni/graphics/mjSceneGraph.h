@@ -68,8 +68,8 @@ public:
 
 private:
 
-    std::vector<mjMaterialBucket*> byMaterial;
-    std::vector<mjObject*> drawableMatrixOrder;
+    std::vector<mjMaterialBucket*> byMaterial; // Contains all objects classified by material. Less GL context switching = more efficiency
+    std::vector<mjObject*> drawableMatrixOrder; // CalculateMatrices is called with this order, which is independent of "byMaterial order"
     std::vector<mjObject*> translucentObjects;
     std::vector<mjObject*> shadowCasters;
 

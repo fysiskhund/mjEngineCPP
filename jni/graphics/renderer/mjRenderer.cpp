@@ -10,7 +10,7 @@ void mjRenderer::StartCountingStateSwitches()
 
 void mjRenderer::StopCountingStateSwitches()
 {
-    LOGI("%d state switches counted.", stateSwitchCount);
+   // LOGI("%d state switches counted.", stateSwitchCount);
 }
 
 
