@@ -1,0 +1,10 @@
+###################
+# ANDROID RULZ OK #
+###################
+
+# Place in /etc/udev/rules.d/
+# Then sudo services udev restart
+# Reconnect android devices and maybe restart adb
+
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666", OWNER="root" # Google Nexus devices
+SUBSYSTEM=="usb", ATTR{idVendor}=="0955", MODE="0666", OWNER="root" # NVidia Shield tablet
