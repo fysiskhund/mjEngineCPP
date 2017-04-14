@@ -16,7 +16,7 @@ void mjMusicPlayer::Load(mjSoundResource* soundRes, int sampleNumber)
         soundRes->memRWop = SDL_RWFromConstMem(soundRes->buffer, soundRes->bufferSize);
     }
 
-    currentMusic = Mix_LoadWAV_RW(soundRes->memRWop, 0); // 0 = don't free the buffer for me
+    currentMusic = Mix_LoadMUS_RW(soundRes->memRWop, 0); // 0 = don't free the buffer for me
     if (currentMusic == NULL)
     {
         LOGI("Error while loading music\n");
@@ -27,7 +27,7 @@ void mjMusicPlayer::Play()
 {
     if (currentMusic)
     {
-        channel = Mix_PlayChannel(-1, currentMusic, loops);
+        channel = Mix_PlayMusic(currentMusic, loops);
     }
 }
 void mjMusicPlayer::Play(int sampleIndex)

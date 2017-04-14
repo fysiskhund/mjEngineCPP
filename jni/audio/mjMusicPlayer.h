@@ -35,7 +35,7 @@ class mjMusicPlayer
         int loops = 0;
 
 #ifdef USE_SDL_AUDIO
-        Mix_Chunk* currentMusic;
+        Mix_Music* currentMusic;
         int channel;
 #endif
 
