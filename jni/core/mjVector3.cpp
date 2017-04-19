@@ -156,11 +156,23 @@ namespace mjEngine{
 
  GLfloat mjVector3::DistanceSquaredTo(mjVector3& v1)
  {
-	 mjVector3 v0v1(v1);
+     GLfloat deltaX = this->x-v1.x;
+     GLfloat deltaY = this->y-v1.y;
+     GLfloat deltaZ = this->z-v1.z;
 
-	 v0v1.Subtract(*this);
-	 return v0v1.GetNorm();
+     return (deltaX*deltaX) + (deltaY*deltaY) + (deltaZ*deltaZ);
  }
+
+ GLfloat mjVector3::DistanceSquaredTo(float x, float y, float z)
+ {
+     GLfloat deltaX = this->x-x;
+     GLfloat deltaY = this->y-y;
+     GLfloat deltaZ = this->z-z;
+
+     return (deltaX*deltaX) + (deltaY*deltaY) + (deltaZ*deltaZ);
+ }
+
+
  GLfloat mjVector3::DistanceTo(mjVector3& v1)
  {
 	 GLfloat dist = DistanceSquaredTo(v1);

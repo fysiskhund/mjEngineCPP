@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Alejandro Valenzuela Roca
+ * Copyright (C) 2014-17 Alejandro Valenzuela Roca, under LGPLv3 terms.
  */
 
 #ifndef MJVECTOR3_H
@@ -56,6 +56,7 @@ public:
 	void CopyToArray(GLfloat* array);
 
 	GLfloat DistanceSquaredTo(mjVector3& v1);
+    GLfloat DistanceSquaredTo(float x, float y, float z);
 
 	GLfloat DistanceTo(mjVector3& v1);
 
