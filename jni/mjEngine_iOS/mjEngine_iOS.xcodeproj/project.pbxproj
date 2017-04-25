@@ -119,6 +119,10 @@
 		A9B84C061D6DB45000239BBA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B84C051D6DB45000239BBA /* libz.tbd */; };
 		A9B84C071D6DF2DA00239BBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FD91D6BBC0400547DDA /* AppDelegate.m */; };
 		A9CF13F11DBD7C54002E4DB8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9CF13F01DBD7C54002E4DB8 /* AVFoundation.framework */; };
+		A9D4D2101EAFA8A700891BEF /* ChallengeGameMode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D4D20A1EAFA8A600891BEF /* ChallengeGameMode.cpp */; };
+		A9D4D2111EAFA8A700891BEF /* GameMode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D4D20C1EAFA8A600891BEF /* GameMode.cpp */; };
+		A9D4D2121EAFA8A700891BEF /* PartyGameMode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D4D20E1EAFA8A600891BEF /* PartyGameMode.cpp */; };
+		A9D4D2161EAFA8DF00891BEF /* HealthBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D4D2141EAFA8DF00891BEF /* HealthBar.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -361,6 +365,14 @@
 		A9B84BD91D6DAE9500239BBA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A9B84C051D6DB45000239BBA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		A9CF13F01DBD7C54002E4DB8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A9D4D20A1EAFA8A600891BEF /* ChallengeGameMode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ChallengeGameMode.cpp; path = gameModes/ChallengeGameMode.cpp; sourceTree = "<group>"; };
+		A9D4D20B1EAFA8A600891BEF /* ChallengeGameMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChallengeGameMode.h; path = gameModes/ChallengeGameMode.h; sourceTree = "<group>"; };
+		A9D4D20C1EAFA8A600891BEF /* GameMode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameMode.cpp; path = gameModes/GameMode.cpp; sourceTree = "<group>"; };
+		A9D4D20D1EAFA8A600891BEF /* GameMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameMode.h; path = gameModes/GameMode.h; sourceTree = "<group>"; };
+		A9D4D20E1EAFA8A600891BEF /* PartyGameMode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PartyGameMode.cpp; path = gameModes/PartyGameMode.cpp; sourceTree = "<group>"; };
+		A9D4D20F1EAFA8A700891BEF /* PartyGameMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PartyGameMode.h; path = gameModes/PartyGameMode.h; sourceTree = "<group>"; };
+		A9D4D2141EAFA8DF00891BEF /* HealthBar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HealthBar.cpp; path = interfaceObjects/HealthBar.cpp; sourceTree = "<group>"; };
+		A9D4D2151EAFA8DF00891BEF /* HealthBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HealthBar.h; path = interfaceObjects/HealthBar.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -599,6 +611,8 @@
 		A93A5DC21E9E79E8000F9A1D /* interfaceObjects */ = {
 			isa = PBXGroup;
 			children = (
+				A9D4D2141EAFA8DF00891BEF /* HealthBar.cpp */,
+				A9D4D2151EAFA8DF00891BEF /* HealthBar.h */,
 				A93A5DBC1E9E79D2000F9A1D /* ResponseText.cpp */,
 				A93A5DBD1E9E79D2000F9A1D /* ResponseText.h */,
 				A93A5DBE1E9E79D2000F9A1D /* TrackSelector.cpp */,
@@ -626,6 +640,7 @@
 		A94F20521DBE441C00AB5E4C /* takkatakkacpp */ = {
 			isa = PBXGroup;
 			children = (
+				A9D4D2131EAFA8BF00891BEF /* gameModes */,
 				A93A5DC21E9E79E8000F9A1D /* interfaceObjects */,
 				A9B5962E1E65AE96006EA5EB /* shaders */,
 				A9B596171E65AA4E006EA5EB /* autoversion.h */,
@@ -872,6 +887,19 @@
 			name = embeddedFiles;
 			sourceTree = "<group>";
 		};
+		A9D4D2131EAFA8BF00891BEF /* gameModes */ = {
+			isa = PBXGroup;
+			children = (
+				A9D4D20A1EAFA8A600891BEF /* ChallengeGameMode.cpp */,
+				A9D4D20B1EAFA8A600891BEF /* ChallengeGameMode.h */,
+				A9D4D20C1EAFA8A600891BEF /* GameMode.cpp */,
+				A9D4D20D1EAFA8A600891BEF /* GameMode.h */,
+				A9D4D20E1EAFA8A600891BEF /* PartyGameMode.cpp */,
+				A9D4D20F1EAFA8A700891BEF /* PartyGameMode.h */,
+			);
+			name = gameModes;
+			sourceTree = "<group>";
+		};
 		A9D8631B1D6C63E000EC99FD /* motorJ */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,6 +1124,7 @@
 				A9B596241E65AA88006EA5EB /* mjFileFromArchive.cpp in Sources */,
 				A9031BBD1D6D106C0056B49C /* mjModel.cpp in Sources */,
 				A9B5961F1E65AA4E006EA5EB /* ChooserUniverse.cpp in Sources */,
+				A9D4D2161EAFA8DF00891BEF /* HealthBar.cpp in Sources */,
 				A9031BC11D6D106C0056B49C /* mjShader.cpp in Sources */,
 				A9B84BB11D6D922400239BBA /* mjAnimationSegment.cpp in Sources */,
 				A94F20831DBE441C00AB5E4C /* Bubble.cpp in Sources */,
@@ -1109,8 +1138,10 @@
 				A9031BFC1D6D1F860056B49C /* Matrix.cpp in Sources */,
 				A9B593761E65A981006EA5EB /* TrackPreview.cpp in Sources */,
 				A9031BBA1D6D106C0056B49C /* mjCamera.cpp in Sources */,
+				A9D4D2101EAFA8A700891BEF /* ChallengeGameMode.cpp in Sources */,
 				A9B596211E65AA4E006EA5EB /* TakkaTakkaGameState.cpp in Sources */,
 				A9031BBC1D6D106C0056B49C /* mjImageLoader.cpp in Sources */,
+				A9D4D2121EAFA8A700891BEF /* PartyGameMode.cpp in Sources */,
 				A93A30901DBBA591007C9688 /* mjInputEvent.cpp in Sources */,
 				A9031BB91D6D106C0056B49C /* mjAssimpModel.cpp in Sources */,
 				A9031BEC1D6D10950056B49C /* mjResource.cpp in Sources */,
@@ -1121,6 +1152,7 @@
 				A9B596291E65AE52006EA5EB /* BeatZigZagBubbleScript.cpp in Sources */,
 				A9B593741E65A981006EA5EB /* Choreographer.cpp in Sources */,
 				A9031B7A1D6D0FF60056B49C /* mjObject.cpp in Sources */,
+				A9D4D2111EAFA8A700891BEF /* GameMode.cpp in Sources */,
 				A94F208A1DBE441C00AB5E4C /* Step.cpp in Sources */,
 				A94F20871DBE441C00AB5E4C /* SpiralWalkBubbleScriptSettings.cpp in Sources */,
 				A9031B7C1D6D0FF60056B49C /* mjSceneManager.cpp in Sources */,
