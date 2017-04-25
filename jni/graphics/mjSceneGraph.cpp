@@ -439,6 +439,18 @@ bool mjSceneGraph::RemoveFromVectorWithIndex(std::vector<mjObject*>* vectorObj, 
 
 void mjSceneGraph::CleanUp()
 {
+    // Disconnect all from mjSceneGraph
+    unsigned end = drawableMatrixOrder.size();
+    for (unsigned i = 0; i < end; i++)
+    {
+        mjObject* objToRemove = drawableMatrixOrder[i];
+
+        objToRemove->sceneGraphActionState = 0; // Removed
+        objToRemove->sceneGraph = NULL;         // disconnect the SceneGraph
+        objToRemove->rendererCalculationState = 0;
+    }
+
+    drawableMatrixOrder.clear();
     byMaterial.clear();
     translucentObjects.clear();
     shadowCasters.clear();

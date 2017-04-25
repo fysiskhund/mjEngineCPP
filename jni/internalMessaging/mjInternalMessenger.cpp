@@ -73,7 +73,7 @@ bool mjInternalMessenger::internalCastMessage(void* sender, void* contents, unsi
         {
             if ((void*) (*subscribers)[i] != sender)
             {
-                LOGI("Sending message to 0x%x", (*subscribers)[i]);
+                //LOGI("Sending message to 0x%x", (*subscribers)[i]);
                 (*subscribers)[i]->ReceiveInternalMessage(contents, type, sender);
             }
         }
@@ -124,7 +124,7 @@ bool mjInternalMessenger::internalUnsubscribe(mjInternalMessageReceiver* subscri
                     subscriber->CastMessage = subscriber->NoCrash; // re-link the CastMessage method to its internal
                                                                // "NoCrash" method to avoid crashes
                 }
-                LOGI("Erasing subscriber 0x%x", subscriber);
+                //LOGI("Erasing subscriber 0x%x", subscriber);
                 catIt = category->subscribers.erase(catIt);
 
                 result = true;
