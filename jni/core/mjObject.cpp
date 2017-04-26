@@ -363,6 +363,12 @@ void mjObject::UpdatePosition(float t_elapsed)
 
 mjObject::~mjObject()
 {
+    // If currently connected to a mjSceneGraph, disconnect
+    if (sceneGraph)
+    {
+        sceneGraph->Remove(this); // Hope for the best. FIXME: check for when object is NOT in drawables.
+    }
+
     delete [] modelName;
     // The model itself is not the responsibility of mjObject
     // so it is not deleted here. It is the responsibility of ResourceManager
