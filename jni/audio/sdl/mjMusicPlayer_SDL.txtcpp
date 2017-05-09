@@ -36,16 +36,16 @@ void mjMusicPlayer::Play(int sampleIndex)
 }
 void mjMusicPlayer::Pause()
 {
-    Mix_Pause(channel);
+    Mix_PauseMusic();
 }
 void mjMusicPlayer::Resume()
 {
-    Mix_Resume(channel);
+    Mix_ResumeMusic();
 }
 
 void mjMusicPlayer::Rewind()
 {
-    Mix_HaltChannel(channel); //FIXME: does this achieve what we need? (stop + go back to start) or should I instead re-load the music..?
+    Mix_RewindMusic(); //FIXME: does this achieve what we need? (stop + go back to start) or should I instead re-load the music..?
 }
 
 mjMusicPlayer::~mjMusicPlayer()
