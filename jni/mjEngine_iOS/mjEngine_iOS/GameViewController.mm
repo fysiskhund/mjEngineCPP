@@ -16,6 +16,7 @@ using namespace mjEngine;
 @interface GameViewController () {
 
     mjResourceManager* resourceManager;
+    UITouch* fingerCorrespondence[20];
     
 }
 @property (strong, nonatomic) EAGLContext *context;
@@ -48,6 +49,11 @@ using namespace mjEngine;
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    
+    for (int i = 0; i < 20; i++)
+    {
+        fingerCorrespondence[i] = NULL;
+    }
     
     [self setupGL];
 }
@@ -123,38 +129,94 @@ using namespace mjEngine;
 
 - (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    
-    UITouch *aTouch = [touches anyObject];
-    
-    CGPoint point = [aTouch locationInView:self.view];
-    
-    printf("Touchy touchy at %f, %f !!\n", point.x, point.y);
-    
-    //FIXME: find out how to get which finger is being tracked. i.e. fingerID
-    // This might help https://github.com/mattgemmell/TouchTest/blob/master/Classes/MGTrackingView.m
-    // Apparently each "touch" event always has the same memory address.
-    // Would be easier with a number, but then it wouldn't be Apple, would it?
-    
-    TouchEvent(0, (int) point.x, (int) point.y, true);
+    int fingerID = 0;
+    int firstEmptyCorrespondence = -1;
+    for (UITouch* aTouch in touches) {
+        while ( fingerID < 20 && aTouch != fingerCorrespondence[fingerID])
+        {
+            if (fingerCorrespondence[fingerID] == NULL && firstEmptyCorrespondence == -1)
+            {
+                firstEmptyCorrespondence = fingerID;
+            }
+            fingerID++;
+        }
+        if (fingerID == 20)
+        {
+            fingerCorrespondence[firstEmptyCorrespondence] = aTouch;
+            fingerID = firstEmptyCorrespondence;
+        }
+        
+        CGPoint point = [aTouch locationInView:self.view];
+        
+        printf("FingerDown %d at %f, %f !!\n", fingerID, point.x, point.y);
+        
+        //FIXME: find out how to get which finger is being tracked. i.e. fingerID
+        // This might help https://github.com/mattgemmell/TouchTest/blob/master/Classes/MGTrackingView.m
+        // Apparently each "touch" event always has the same memory address.
+        // Would be easier with a number, but then it wouldn't be Apple, would it?
+        
+        TouchEvent(fingerID, (int) point.x, (int) point.y, MJ_FINGERDOWN);
+        
+    }
 }
 
 - (void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    int fingerID = 0;
     
+    for (UITouch* aTouch in touches) {
+        
+        while ( fingerID < 20 && aTouch != fingerCorrespondence[fingerID])
+        {
+            fingerID++;
+        }
+        
+        CGPoint point = [aTouch locationInView:self.view];
+        
+        //printf("fingerMotion %d at %f, %f !!\n", fingerID, point.x, point.y);
+        TouchEvent(fingerID, (int) point.x, (int) point.y, MJ_FINGERMOTION);
+    }
 }
 
 - (void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    UITouch *aTouch = [touches anyObject];
+    int fingerID = 0;
     
-    CGPoint point = [aTouch locationInView:self.view];
-    
-    TouchEvent(0, (int) point.x, (int) point.y, false);
+    for (UITouch *aTouch in touches) {
+        
+        while ( fingerID < 20 && aTouch != fingerCorrespondence[fingerID])
+        {
+            fingerID++;
+        }
+        
+        CGPoint point = [aTouch locationInView:self.view];
+        
+        printf("FingerUP %d at %f, %f !!\n", fingerID, point.x, point.y);
+        TouchEvent(fingerID, (int) point.x, (int) point.y, MJ_FINGERUP);
+        if (fingerID < 20)
+        {
+            fingerCorrespondence[fingerID] = NULL;
+        }
+    }
 }
 
 - (void) touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    int fingerID = 0;
     
+    for (UITouch *aTouch in touches) {
+        
+        while ( fingerID < 20 && aTouch != fingerCorrespondence[fingerID])
+        {
+            fingerID++;
+        }
+        
+        CGPoint point = [aTouch locationInView:self.view];
+        
+        printf("touchesCancelled %d at %f, %f !!\n", fingerID, point.x, point.y);
+        //TouchEvent(fingerID, (int) point.x, (int) point.y, MJ_FINGERUP);
+        //fingerCorrespondence[fingerID] = NULL;
+    }
 }
 
 
