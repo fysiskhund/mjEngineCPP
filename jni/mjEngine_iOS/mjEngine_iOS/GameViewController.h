@@ -15,6 +15,7 @@
 #import <GLKit/GLKit.h>
 
 #import "takkatakkacpp/gl_code.h"
+#import "input/mjInputEvent.h"
 
 
 
