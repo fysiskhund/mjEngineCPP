@@ -51,6 +51,9 @@ LOCAL_SRC_FILES := \
     takkatakkacpp/SongUniverse.cpp \
     takkatakkacpp/TakkaTakkaGameState.cpp \
     takkatakkacpp/TitleUniverse.cpp \
+    takkatakkacpp/gameModes/ChallengeGameMode.cpp \
+    takkatakkacpp/gameModes/GameMode.cpp \
+    takkatakkacpp/gameModes/PartyGameMode.cpp \
     takkatakkacpp/gameObjects/BaitAndSwitchTrackEvent.cpp \
     takkatakkacpp/gameObjects/Bubble.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/BaitAndSwitchBubbleScript.cpp \
@@ -62,6 +65,7 @@ LOCAL_SRC_FILES := \
     takkatakkacpp/gameObjects/BubbleScripts/SpiralWalkBubbleScript.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/SpiralWalkBubbleScriptSettings.cpp \
     takkatakkacpp/gameObjects/Choreographer.cpp \
+    takkatakkacpp/gameObjects/Draggable.cpp \
     takkatakkacpp/gameObjects/Player.cpp \
     takkatakkacpp/gameObjects/Poke.cpp \
     takkatakkacpp/gameObjects/Step.cpp \
@@ -70,6 +74,10 @@ LOCAL_SRC_FILES := \
     takkatakkacpp/gameObjects/TrackLoader.cpp \
     takkatakkacpp/gameObjects/TrackPreview.cpp \
     takkatakkacpp/gl_code.cpp \
+    takkatakkacpp/interfaceObjects/HealthBar.cpp \
+    takkatakkacpp/interfaceObjects/ResponseText.cpp \
+    takkatakkacpp/interfaceObjects/ToggleButton.cpp \
+    takkatakkacpp/interfaceObjects/TrackSelector.cpp \
     takkatakkacpp/shaders/BubbleShaders.cpp
 
 # -------------

@@ -71,12 +71,28 @@ public class Takkatakka extends Activity {
 		if (actionMasked == MotionEvent.ACTION_DOWN || 
 				actionMasked == MotionEvent.ACTION_POINTER_DOWN ||
 				actionMasked == MotionEvent.ACTION_UP ||
-				actionMasked == MotionEvent.ACTION_POINTER_UP)
+				actionMasked == MotionEvent.ACTION_POINTER_UP ||
+				actionMasked == MotionEvent.ACTION_MOVE)
 		{
 			int pointerIndex = MotionEventCompat.getActionIndex(motionEvent);
+			int touchType = 0;
+			switch(actionMasked)
+			{
+			case MotionEvent.ACTION_POINTER_DOWN:
+			case MotionEvent.ACTION_DOWN:
+				touchType = 0;
+				break;
+			case MotionEvent.ACTION_POINTER_UP:
+			case MotionEvent.ACTION_UP:
+				touchType = 1;
+				break;
+			case MotionEvent.ACTION_MOVE:
+				touchType = 2;
+				break;
+			}
 			float x = MotionEventCompat.getX(motionEvent, pointerIndex);
 			float y = MotionEventCompat.getY(motionEvent, pointerIndex);
-			GL2JNILib.HandleTouchInput(pointerIndex, (actionMasked == MotionEvent.ACTION_DOWN || actionMasked == MotionEvent.ACTION_POINTER_DOWN), x, y);
+			GL2JNILib.HandleTouchInput(pointerIndex, touchType, x, y);
 			
 		}
 
