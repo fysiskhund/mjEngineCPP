@@ -5,8 +5,14 @@
 
 # Modified to build freetype2 by alejandro
 
+# Note: At the time of writing, it is possible to build only on an ElCapitán installation. Otherwise we get "trap 6" errors all over the place and nothing gets built.
+
 # I recommend to build only one platform first, to make sure everything is working fine (disable all the others).
 # Then enable all the others again and let the script work on its own
+
+# Latest compiled version:  freetype-2.8
+# Changed -fembed-bitcode-marker to -fembed-bitcode, otherwise the project cannot be archived and therefore cannot be sent to the AppStore.
+
 
 SDKMINVERSION="8.0"
 
@@ -49,10 +55,10 @@ fi
 
 export CC="$(xcrun -sdk iphoneos -find clang)"
 export CPP="$CC -E"
-export CFLAGS="-arch ${target} -fembed-bitcode-marker -isysroot $PLATFORMPATH/$platform.platform/Developer/SDKs/$platform$SDKVERSION.sdk -miphoneos-version-min=$SDKMINVERSION"
+export CFLAGS="-arch ${target} -fembed-bitcode -isysroot $PLATFORMPATH/$platform.platform/Developer/SDKs/$platform$SDKVERSION.sdk -miphoneos-version-min=$SDKMINVERSION"
 export AR=$(xcrun -sdk iphoneos -find ar)
 export RANLIB=$(xcrun -sdk iphoneos -find ranlib)
-export CPPFLAGS="-arch ${target} -fembed-bitcode-marker -isysroot $PLATFORMPATH/$platform.platform/Developer/SDKs/$platform$SDKVERSION.sdk -miphoneos-version-min=$SDKMINVERSION"
+export CPPFLAGS="-arch ${target} -fembed-bitcode -isysroot $PLATFORMPATH/$platform.platform/Developer/SDKs/$platform$SDKVERSION.sdk -miphoneos-version-min=$SDKMINVERSION"
 export LDFLAGS="-arch ${target} -isysroot $PLATFORMPATH/$platform.platform/Developer/SDKs/$platform$SDKVERSION.sdk"
 
 mkdir -p $pwd/output/$target
