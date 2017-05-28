@@ -97,7 +97,7 @@ public:
     int mouseButtonState;
     int keyboardKey;
     int keyboardKeyState;
-    int fingerID;
+    uintptr_t fingerID;
 
     mjInputEvent();
 
