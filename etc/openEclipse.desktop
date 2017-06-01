@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=Eclipse
+Exec=/common/tools/adt-bundle-linux-x86_64-20140702/eclipse/eclipse
+Icon=/common/tools/adt-bundle-linux-x86_64-20140702/eclipse/icon.xpm
+Type=Application
+Categories=GTK;GNOME;Utility;
