@@ -46,6 +46,7 @@ public:
     char* id = NULL;
     mjSceneGraph* sceneGraph = NULL;
     mjMaterialBucket* rendererBucket = NULL;
+    bool isAvailableFromPool = true; // Used by mjObjectPool
 
 
     int tag = 0;
