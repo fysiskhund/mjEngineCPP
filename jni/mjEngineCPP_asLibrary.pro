@@ -94,7 +94,8 @@ HEADERS += \
     util/mjFileFromArchive.h \
     internalMessaging/mjInternalMessenger.h \
     internalMessaging/mjInternalMessageReceiver.h \
-    graphics/mjMaterialBucket.h
+    graphics/mjMaterialBucket.h \
+    util/mjObjectPool.h
 
 
 SOURCES += \
@@ -161,7 +162,8 @@ SOURCES += \
     util/mjFileFromArchive.cpp \
     internalMessaging/mjInternalMessenger.cpp \
     internalMessaging/mjInternalMessageReceiver.cpp \
-    graphics/mjMaterialBucket.cpp
+    graphics/mjMaterialBucket.cpp \
+    util/mjObjectPool.cpp
 
 
 
