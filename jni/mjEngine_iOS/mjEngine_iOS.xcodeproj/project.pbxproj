@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A902E46C1EE2ACE000FDA51B /* BubbleExplosion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A902E4681EE2ACE000FDA51B /* BubbleExplosion.cpp */; };
+		A902E46D1EE2ACE000FDA51B /* BubbleFragment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A902E46A1EE2ACE000FDA51B /* BubbleFragment.cpp */; };
+		A902E4701EE2AD1700FDA51B /* mjObjectPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A902E46E1EE2AD1700FDA51B /* mjObjectPool.cpp */; };
+		A902E4731EE2AD3A00FDA51B /* BubbleFragmentPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A902E4711EE2AD3A00FDA51B /* BubbleFragmentPool.cpp */; };
 		A9031B691D6D0FCA0056B49C /* mjAutomaton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B651D6D0FCA0056B49C /* mjAutomaton.cpp */; };
 		A9031B6A1D6D0FCA0056B49C /* mjAutomatonState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B671D6D0FCA0056B49C /* mjAutomatonState.cpp */; };
 		A9031B6F1D6D0FE20056B49C /* mjMusicPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B6B1D6D0FE20056B49C /* mjMusicPlayer.cpp */; };
@@ -144,6 +148,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A902E4681EE2ACE000FDA51B /* BubbleExplosion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BubbleExplosion.cpp; sourceTree = "<group>"; };
+		A902E4691EE2ACE000FDA51B /* BubbleExplosion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleExplosion.h; sourceTree = "<group>"; };
+		A902E46A1EE2ACE000FDA51B /* BubbleFragment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BubbleFragment.cpp; sourceTree = "<group>"; };
+		A902E46B1EE2ACE000FDA51B /* BubbleFragment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleFragment.h; sourceTree = "<group>"; };
+		A902E46E1EE2AD1700FDA51B /* mjObjectPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjObjectPool.cpp; path = ../util/mjObjectPool.cpp; sourceTree = "<group>"; };
+		A902E46F1EE2AD1700FDA51B /* mjObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjObjectPool.h; path = ../util/mjObjectPool.h; sourceTree = "<group>"; };
+		A902E4711EE2AD3A00FDA51B /* BubbleFragmentPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BubbleFragmentPool.cpp; path = pools/BubbleFragmentPool.cpp; sourceTree = "<group>"; };
+		A902E4721EE2AD3A00FDA51B /* BubbleFragmentPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BubbleFragmentPool.h; path = pools/BubbleFragmentPool.h; sourceTree = "<group>"; };
 		A9031B651D6D0FCA0056B49C /* mjAutomaton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjAutomaton.cpp; path = ../ai/mjAutomaton.cpp; sourceTree = "<group>"; };
 		A9031B661D6D0FCA0056B49C /* mjAutomaton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjAutomaton.h; path = ../ai/mjAutomaton.h; sourceTree = "<group>"; };
 		A9031B671D6D0FCA0056B49C /* mjAutomatonState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjAutomatonState.cpp; path = ../ai/mjAutomatonState.cpp; sourceTree = "<group>"; };
@@ -408,6 +420,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A902E4741EE2AD3E00FDA51B /* pools */ = {
+			isa = PBXGroup;
+			children = (
+				A902E4711EE2AD3A00FDA51B /* BubbleFragmentPool.cpp */,
+				A902E4721EE2AD3A00FDA51B /* BubbleFragmentPool.h */,
+			);
+			name = pools;
+			sourceTree = "<group>";
+		};
 		A9031B5A1D6CFA640056B49C /* ai */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,6 +454,8 @@
 		A9031B5C1D6CFA810056B49C /* util */ = {
 			isa = PBXGroup;
 			children = (
+				A902E46E1EE2AD1700FDA51B /* mjObjectPool.cpp */,
+				A902E46F1EE2AD1700FDA51B /* mjObjectPool.h */,
 				A96266E61DD1FB5B000BB4C4 /* mjFontResource.cpp */,
 				A96266E71DD1FB5B000BB4C4 /* mjFontResource.h */,
 				A96266E81DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.cpp */,
@@ -647,6 +670,7 @@
 			children = (
 				A9D4D2131EAFA8BF00891BEF /* gameModes */,
 				A93A5DC21E9E79E8000F9A1D /* interfaceObjects */,
+				A902E4741EE2AD3E00FDA51B /* pools */,
 				A9B5962E1E65AE96006EA5EB /* shaders */,
 				A9B596171E65AA4E006EA5EB /* autoversion.h */,
 				A9B596181E65AA4E006EA5EB /* ChooserUniverse.cpp */,
@@ -676,6 +700,10 @@
 		A94F20581DBE441C00AB5E4C /* gameObjects */ = {
 			isa = PBXGroup;
 			children = (
+				A902E4681EE2ACE000FDA51B /* BubbleExplosion.cpp */,
+				A902E4691EE2ACE000FDA51B /* BubbleExplosion.h */,
+				A902E46A1EE2ACE000FDA51B /* BubbleFragment.cpp */,
+				A902E46B1EE2ACE000FDA51B /* BubbleFragment.h */,
 				A92FB9471E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp */,
 				A92FB9481E799EAA0012CF71 /* BaitAndSwitchTrackEvent.h */,
 				A9B5936E1E65A981006EA5EB /* Choreographer.cpp */,
@@ -1100,6 +1128,7 @@
 				A9B84BB01D6D922400239BBA /* mjAnimationKeyframe.cpp in Sources */,
 				A9031BBE1D6D106C0056B49C /* mjModelMesh.cpp in Sources */,
 				A9B84BB21D6D922400239BBA /* mjAnimator.cpp in Sources */,
+				A902E4731EE2AD3A00FDA51B /* BubbleFragmentPool.cpp in Sources */,
 				A93A308B1DBB9E22007C9688 /* mjTextShaders.cpp in Sources */,
 				A9031BFE1D6D1F860056B49C /* mjMatrixStack.cpp in Sources */,
 				A94F20891DBE441C00AB5E4C /* Poke.cpp in Sources */,
@@ -1124,9 +1153,11 @@
 				A9B84BB41D6D922400239BBA /* mjModelPose.cpp in Sources */,
 				A96266EB1DD1FB5B000BB4C4 /* mjGraphicCharObjectResource.cpp in Sources */,
 				A9031BC21D6D106C0056B49C /* mjSkybox.cpp in Sources */,
+				A902E46D1EE2ACE000FDA51B /* BubbleFragment.cpp in Sources */,
 				A9031B7D1D6D0FF60056B49C /* mjVector3.cpp in Sources */,
 				A92FB9491E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp in Sources */,
 				A9031BD71D6D10840056B49C /* mjCollisionTests.cpp in Sources */,
+				A902E4701EE2AD1700FDA51B /* mjObjectPool.cpp in Sources */,
 				A93A5DC11E9E79D2000F9A1D /* TrackSelector.cpp in Sources */,
 				A9B596241E65AA88006EA5EB /* mjFileFromArchive.cpp in Sources */,
 				A9031BBD1D6D106C0056B49C /* mjModel.cpp in Sources */,
@@ -1138,6 +1169,7 @@
 				A9031BDA1D6D10840056B49C /* mjSphere.cpp in Sources */,
 				A94F208B1DBE441C00AB5E4C /* Track.cpp in Sources */,
 				A9031BEE1D6D10950056B49C /* mjSoundResource.cpp in Sources */,
+				A902E46C1EE2ACE000FDA51B /* BubbleExplosion.cpp in Sources */,
 				A94F20851DBE441C00AB5E4C /* BubbleScriptSettings.cpp in Sources */,
 				A94F20911DBE441C00AB5E4C /* SongUniverse.cpp in Sources */,
 				A94501B81D782B1000D488E1 /* mjRenderer.cpp in Sources */,
