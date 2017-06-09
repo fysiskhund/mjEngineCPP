@@ -160,7 +160,7 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
                             modelViewMatrix, 0);
 
 
-        if (naiveLastShader != shader) // Naïve optimisation attempt
+        if (naiveLastShader != shader) // Naïve optimisation attempt // That actually works better than expected!
         {
             stateSwitchCount++;
             naiveLastShader = shader;
