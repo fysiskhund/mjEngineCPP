@@ -28,8 +28,6 @@ HEADERS += \
     audio/mjSoundSource.h \
     core/mjInput.h \
     core/mjObject.h \
-    core/mjScene.h \
-    core/mjSceneManager.h \
     core/mjVector3.h \
     extLibs/logger/mjLog.h \
     extLibs/math/mjMathHelper.h \
@@ -95,7 +93,10 @@ HEADERS += \
     internalMessaging/mjInternalMessenger.h \
     internalMessaging/mjInternalMessageReceiver.h \
     graphics/mjMaterialBucket.h \
-    util/mjObjectPool.h
+    util/mjObjectPool.h \
+    core/mjTransitionUniverse.h \
+    core/mjUniverse.h \
+    core/mjUniverseSwitcher.h
 
 
 SOURCES += \
@@ -104,8 +105,6 @@ SOURCES += \
     audio/mjMusicPlayer.cpp \
     audio/mjSoundSource.cpp \
     core/mjObject.cpp \
-    core/mjScene.cpp \
-    core/mjSceneManager.cpp \
     core/mjVector3.cpp \
     extLibs/math/mjMathHelper.cpp \
     extLibs/math/mjMatrixStack.cpp \
@@ -163,7 +162,10 @@ SOURCES += \
     internalMessaging/mjInternalMessenger.cpp \
     internalMessaging/mjInternalMessageReceiver.cpp \
     graphics/mjMaterialBucket.cpp \
-    util/mjObjectPool.cpp
+    util/mjObjectPool.cpp \
+    core/mjTransitionUniverse.cpp \
+    core/mjUniverse.cpp \
+    core/mjUniverseSwitcher.cpp
 
 
 
