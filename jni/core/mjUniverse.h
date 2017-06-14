@@ -16,7 +16,9 @@
 
 namespace mjEngine{
 
-class mjScene
+enum mjUniverseState { MJ_UNIVERSE_DEACTIVATED, MJ_UNIVERSE_ACTIVATED };
+
+class mjUniverse
 {
     public:
         mjPhysics physics;
@@ -26,27 +28,30 @@ class mjScene
 
         mjResourceManager* resourceManager;
 
-        char* sceneName = NULL;
+        char* universeName = NULL;
 
-        char* nextSceneByName = NULL;
+        char* nextUniverseByName = NULL;
+        char* transitionByName = NULL;
 
         std::vector<mjShader*> shaderList;
         float lookAtMatrix[16];
         float projectionMatrix[16];
 
+        mjUniverseState universeState = MJ_UNIVERSE_DEACTIVATED;
 
-        mjScene(mjResourceManager* resourceManager);
+        mjUniverse(mjResourceManager* resourceManager);
 
         virtual void OnActivate(mjGameState* currentGameState);
-        virtual void Update(float t_elapsed);
+        virtual void Update(double t_elapsed);
         virtual void OnInput(mjInputEvent& event);
-        virtual void Draw();
+        virtual void Draw(bool clearFrameBuffer = true);
         virtual void OnDeactivate();
 
-        void SetName(const char* thisSceneName);
-        void SetNextScene(const char* name);
+        void SetName(const char* thisUniverseName);
+        void SetNextUniverse(const char* name);
+        void SetTransition(const char* name);
 
-        ~mjScene();
+        ~mjUniverse();
 
 protected:
     private:
