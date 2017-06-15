@@ -26,7 +26,71 @@ void mjPhysics::AddObject(mjObject* object, int collisionLayer)
 		}
 		collisionLayers[collisionLayer]->push_back(object);
 
-	}
+        }
+}
+
+bool mjPhysics::RemoveObject(mjObject* object)
+{
+    bool removedFromSomewhere = false;
+    if (object->hasKinematics)
+    {
+        std::vector<mjObject*>::iterator it = objectsWithKinematics.begin();
+
+        while (it != objectsWithKinematics.end())
+        {
+            if (object == *it)
+            {
+                removedFromSomewhere = true;
+                it = objectsWithKinematics.erase(it);
+                break;
+            } else
+            {
+                it++;
+            }
+        }
+    }
+    if (object->canCollide)
+    {
+        bool found = false;
+
+        for (int i = 0; i < collisionLayers.size(); i++)
+        {
+            std::vector<mjObject*>::iterator it = collisionLayers[i]->begin();
+            while (it != collisionLayers[i]->end())
+            {
+                if (object == *it)
+                {
+                    removedFromSomewhere = true;
+                    it = collisionLayers[i]->erase(it);
+                    found = true;
+                    break;
+                } else {
+                    it++;
+                }
+            }
+
+            if (found)
+            {
+                break;
+            }
+        }
+    }
+
+    std::vector<mjObject*>::iterator it = allObjects.begin();
+    while (it != allObjects.end())
+    {
+        if (object == *it)
+        {
+            removedFromSomewhere = true;
+            it = allObjects.erase(it);
+            break;
+        } else
+        {
+            it++;
+        }
+    }
+
+    return removedFromSomewhere;
 }
 
 void mjPhysics::Update(float t_elapsed)

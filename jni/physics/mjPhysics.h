@@ -34,6 +34,8 @@ public:
 
 	void AddObject(mjObject* object, int collisionLayer);
 
+    bool RemoveObject(mjObject* object);
+
 	//void AddPhysicsEffect(mjPhysicsEffect* physicsEffect);
 
     void RemoveAllObjects();
