@@ -30,7 +30,7 @@ public:
     virtual ~mjPhysics();
 
 
-	void Update(float delta_t);
+    void Update(double t_elapsed);
 
 	void AddObject(mjObject* object, int collisionLayer);
 
@@ -56,7 +56,7 @@ private:
 
 	void CollisionDetection();
 
-	void ProcessPhysicsEffectsAndUpdate(float t_elapsed);
+    void ProcessPhysicsEffectsAndUpdate(double t_elapsed);
 	void ProcessCollisionEffects();
 	void UpdatePositions(float t_elapsed);
     void RecycleCollisionResults();

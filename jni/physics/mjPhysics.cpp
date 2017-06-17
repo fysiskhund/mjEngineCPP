@@ -93,7 +93,7 @@ bool mjPhysics::RemoveObject(mjObject* object)
     return removedFromSomewhere;
 }
 
-void mjPhysics::Update(float t_elapsed)
+void mjPhysics::Update(double t_elapsed)
 {
     ProcessPhysicsEffectsAndUpdate(t_elapsed);
 
@@ -385,7 +385,8 @@ void mjPhysics::CollisionDetection()
 		}
 	}
 }
-void mjPhysics::ProcessPhysicsEffectsAndUpdate(float t_elapsed)
+
+void mjPhysics::ProcessPhysicsEffectsAndUpdate(double t_elapsed)
 {
 	mjPhysicsEffect gravityEffect(MJ_GRAVITY, MJ_ADD_ACCEL);
 	gravityEffect.value.CopyFrom(gravity);
