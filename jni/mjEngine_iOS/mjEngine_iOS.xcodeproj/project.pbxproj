@@ -16,8 +16,6 @@
 		A9031B6F1D6D0FE20056B49C /* mjMusicPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B6B1D6D0FE20056B49C /* mjMusicPlayer.cpp */; };
 		A9031B701D6D0FE20056B49C /* mjSoundSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B6D1D6D0FE20056B49C /* mjSoundSource.cpp */; };
 		A9031B7A1D6D0FF60056B49C /* mjObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B721D6D0FF60056B49C /* mjObject.cpp */; };
-		A9031B7B1D6D0FF60056B49C /* mjScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B741D6D0FF60056B49C /* mjScene.cpp */; };
-		A9031B7C1D6D0FF60056B49C /* mjSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B761D6D0FF60056B49C /* mjSceneManager.cpp */; };
 		A9031B7D1D6D0FF60056B49C /* mjVector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B781D6D0FF60056B49C /* mjVector3.cpp */; };
 		A9031BB81D6D106C0056B49C /* mj3rdPersonCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B9D1D6D106C0056B49C /* mj3rdPersonCamera.cpp */; };
 		A9031BB91D6D106C0056B49C /* mjAssimpModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031B9F1D6D106C0056B49C /* mjAssimpModel.cpp */; };
@@ -50,6 +48,10 @@
 		A9031C011D6D1F950056B49C /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031BFF1D6D1F950056B49C /* tinyxml2.cpp */; };
 		A9031C071D6D1FAE0056B49C /* mjMultiPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031C021D6D1FAE0056B49C /* mjMultiPlatform.cpp */; };
 		A9031C081D6D1FAE0056B49C /* mjXMLHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9031C051D6D1FAE0056B49C /* mjXMLHelper.cpp */; };
+		A926A8341EF5452A00A5DF47 /* SlideTransitionUniverse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A926A8321EF5452A00A5DF47 /* SlideTransitionUniverse.cpp */; };
+		A926A83C1EF545B900A5DF47 /* mjTransitionUniverse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A926A8361EF545B900A5DF47 /* mjTransitionUniverse.cpp */; };
+		A926A83D1EF545B900A5DF47 /* mjUniverse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A926A8381EF545B900A5DF47 /* mjUniverse.cpp */; };
+		A926A83E1EF545B900A5DF47 /* mjUniverseSwitcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A926A83A1EF545B900A5DF47 /* mjUniverseSwitcher.cpp */; };
 		A92FB9491E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92FB9471E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp */; };
 		A92FB94E1E799EB50012CF71 /* BaitAndSwitchBubbleScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92FB94A1E799EB50012CF71 /* BaitAndSwitchBubbleScript.cpp */; };
 		A92FB94F1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92FB94C1E799EB50012CF71 /* BaitAndSwitchBubbleScriptSettings.cpp */; };
@@ -167,10 +169,6 @@
 		A9031B711D6D0FF60056B49C /* mjInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjInput.h; path = ../core/mjInput.h; sourceTree = "<group>"; };
 		A9031B721D6D0FF60056B49C /* mjObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjObject.cpp; path = ../core/mjObject.cpp; sourceTree = "<group>"; };
 		A9031B731D6D0FF60056B49C /* mjObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjObject.h; path = ../core/mjObject.h; sourceTree = "<group>"; };
-		A9031B741D6D0FF60056B49C /* mjScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjScene.cpp; path = ../core/mjScene.cpp; sourceTree = "<group>"; };
-		A9031B751D6D0FF60056B49C /* mjScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjScene.h; path = ../core/mjScene.h; sourceTree = "<group>"; };
-		A9031B761D6D0FF60056B49C /* mjSceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjSceneManager.cpp; path = ../core/mjSceneManager.cpp; sourceTree = "<group>"; };
-		A9031B771D6D0FF60056B49C /* mjSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjSceneManager.h; path = ../core/mjSceneManager.h; sourceTree = "<group>"; };
 		A9031B781D6D0FF60056B49C /* mjVector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjVector3.cpp; path = ../core/mjVector3.cpp; sourceTree = "<group>"; };
 		A9031B791D6D0FF60056B49C /* mjVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjVector3.h; path = ../core/mjVector3.h; sourceTree = "<group>"; };
 		A9031B9D1D6D106C0056B49C /* mj3rdPersonCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mj3rdPersonCamera.cpp; path = ../graphics/mj3rdPersonCamera.cpp; sourceTree = "<group>"; };
@@ -239,6 +237,14 @@
 		A9031C041D6D1FAE0056B49C /* mjMultiPlatformAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjMultiPlatformAudio.h; path = ../extLibs/util/mjMultiPlatformAudio.h; sourceTree = "<group>"; };
 		A9031C051D6D1FAE0056B49C /* mjXMLHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjXMLHelper.cpp; path = ../extLibs/util/mjXMLHelper.cpp; sourceTree = "<group>"; };
 		A9031C061D6D1FAE0056B49C /* mjXMLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjXMLHelper.h; path = ../extLibs/util/mjXMLHelper.h; sourceTree = "<group>"; };
+		A926A8321EF5452A00A5DF47 /* SlideTransitionUniverse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SlideTransitionUniverse.cpp; path = universes/SlideTransitionUniverse.cpp; sourceTree = "<group>"; };
+		A926A8331EF5452A00A5DF47 /* SlideTransitionUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlideTransitionUniverse.h; path = universes/SlideTransitionUniverse.h; sourceTree = "<group>"; };
+		A926A8361EF545B900A5DF47 /* mjTransitionUniverse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjTransitionUniverse.cpp; path = ../core/mjTransitionUniverse.cpp; sourceTree = "<group>"; };
+		A926A8371EF545B900A5DF47 /* mjTransitionUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjTransitionUniverse.h; path = ../core/mjTransitionUniverse.h; sourceTree = "<group>"; };
+		A926A8381EF545B900A5DF47 /* mjUniverse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjUniverse.cpp; path = ../core/mjUniverse.cpp; sourceTree = "<group>"; };
+		A926A8391EF545B900A5DF47 /* mjUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjUniverse.h; path = ../core/mjUniverse.h; sourceTree = "<group>"; };
+		A926A83A1EF545B900A5DF47 /* mjUniverseSwitcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjUniverseSwitcher.cpp; path = ../core/mjUniverseSwitcher.cpp; sourceTree = "<group>"; };
+		A926A83B1EF545B900A5DF47 /* mjUniverseSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjUniverseSwitcher.h; path = ../core/mjUniverseSwitcher.h; sourceTree = "<group>"; };
 		A92FB9471E799EAA0012CF71 /* BaitAndSwitchTrackEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaitAndSwitchTrackEvent.cpp; sourceTree = "<group>"; };
 		A92FB9481E799EAA0012CF71 /* BaitAndSwitchTrackEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaitAndSwitchTrackEvent.h; sourceTree = "<group>"; };
 		A92FB94A1E799EB50012CF71 /* BaitAndSwitchBubbleScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaitAndSwitchBubbleScript.cpp; sourceTree = "<group>"; };
@@ -551,15 +557,17 @@
 		A9031B641D6D06820056B49C /* core */ = {
 			isa = PBXGroup;
 			children = (
+				A926A8361EF545B900A5DF47 /* mjTransitionUniverse.cpp */,
+				A926A8371EF545B900A5DF47 /* mjTransitionUniverse.h */,
+				A926A8381EF545B900A5DF47 /* mjUniverse.cpp */,
+				A926A8391EF545B900A5DF47 /* mjUniverse.h */,
+				A926A83A1EF545B900A5DF47 /* mjUniverseSwitcher.cpp */,
+				A926A83B1EF545B900A5DF47 /* mjUniverseSwitcher.h */,
 				A9B593771E65A99F006EA5EB /* mjGameState.cpp */,
 				A9B593781E65A99F006EA5EB /* mjGameState.h */,
 				A9031B711D6D0FF60056B49C /* mjInput.h */,
 				A9031B721D6D0FF60056B49C /* mjObject.cpp */,
 				A9031B731D6D0FF60056B49C /* mjObject.h */,
-				A9031B741D6D0FF60056B49C /* mjScene.cpp */,
-				A9031B751D6D0FF60056B49C /* mjScene.h */,
-				A9031B761D6D0FF60056B49C /* mjSceneManager.cpp */,
-				A9031B771D6D0FF60056B49C /* mjSceneManager.h */,
 				A9031B781D6D0FF60056B49C /* mjVector3.cpp */,
 				A9031B791D6D0FF60056B49C /* mjVector3.h */,
 			);
@@ -609,6 +617,15 @@
 				A9031BFB1D6D1F860056B49C /* mjMatrixStack.h */,
 			);
 			name = math;
+			sourceTree = "<group>";
+		};
+		A926A8351EF5453700A5DF47 /* universes */ = {
+			isa = PBXGroup;
+			children = (
+				A926A8321EF5452A00A5DF47 /* SlideTransitionUniverse.cpp */,
+				A926A8331EF5452A00A5DF47 /* SlideTransitionUniverse.h */,
+			);
+			name = universes;
 			sourceTree = "<group>";
 		};
 		A93A308C1DBB9E2A007C9688 /* text */ = {
@@ -668,6 +685,7 @@
 		A94F20521DBE441C00AB5E4C /* takkatakkacpp */ = {
 			isa = PBXGroup;
 			children = (
+				A926A8351EF5453700A5DF47 /* universes */,
 				A9D4D2131EAFA8BF00891BEF /* gameModes */,
 				A93A5DC21E9E79E8000F9A1D /* interfaceObjects */,
 				A902E4741EE2AD3E00FDA51B /* pools */,
@@ -1123,11 +1141,12 @@
 				A9031BD61D6D10840056B49C /* mjCollisionStructure.cpp in Sources */,
 				A9B593751E65A981006EA5EB /* TrackEvent.cpp in Sources */,
 				A9031BFD1D6D1F860056B49C /* mjMathHelper.cpp in Sources */,
-				A9031B7B1D6D0FF60056B49C /* mjScene.cpp in Sources */,
 				A9B84C071D6DF2DA00239BBA /* AppDelegate.m in Sources */,
 				A9B84BB01D6D922400239BBA /* mjAnimationKeyframe.cpp in Sources */,
+				A926A83C1EF545B900A5DF47 /* mjTransitionUniverse.cpp in Sources */,
 				A9031BBE1D6D106C0056B49C /* mjModelMesh.cpp in Sources */,
 				A9B84BB21D6D922400239BBA /* mjAnimator.cpp in Sources */,
+				A926A8341EF5452A00A5DF47 /* SlideTransitionUniverse.cpp in Sources */,
 				A902E4731EE2AD3A00FDA51B /* BubbleFragmentPool.cpp in Sources */,
 				A93A308B1DBB9E22007C9688 /* mjTextShaders.cpp in Sources */,
 				A9031BFE1D6D1F860056B49C /* mjMatrixStack.cpp in Sources */,
@@ -1140,6 +1159,7 @@
 				A94501BE1D782C1C00D488E1 /* mjShaderResource.cpp in Sources */,
 				A9031C071D6D1FAE0056B49C /* mjMultiPlatform.cpp in Sources */,
 				A9031BC31D6D106C0056B49C /* mjSkyboxLevelData.cpp in Sources */,
+				A926A83D1EF545B900A5DF47 /* mjUniverse.cpp in Sources */,
 				A9B84BB51D6D922400239BBA /* mjModelStructure.cpp in Sources */,
 				A9B596161E65AA12006EA5EB /* mjInternalMessenger.cpp in Sources */,
 				A9B5962A1E65AE52006EA5EB /* BeatZigZagBubbleScriptSettings.cpp in Sources */,
@@ -1147,6 +1167,7 @@
 				A94F20881DBE441C00AB5E4C /* Player.cpp in Sources */,
 				A9B596151E65AA12006EA5EB /* mjInternalMessageReceiver.cpp in Sources */,
 				A9031C081D6D1FAE0056B49C /* mjXMLHelper.cpp in Sources */,
+				A926A83E1EF545B900A5DF47 /* mjUniverseSwitcher.cpp in Sources */,
 				A96266E51DD1FB3B000BB4C4 /* mjGraphicText.cpp in Sources */,
 				A9B84BB31D6D922400239BBA /* mjModelAnimation.cpp in Sources */,
 				A96266E41DD1FB3B000BB4C4 /* mjGraphicCharObject.cpp in Sources */,
@@ -1194,7 +1215,6 @@
 				A9D4D2111EAFA8A700891BEF /* GameMode.cpp in Sources */,
 				A94F208A1DBE441C00AB5E4C /* Step.cpp in Sources */,
 				A94F20871DBE441C00AB5E4C /* SpiralWalkBubbleScriptSettings.cpp in Sources */,
-				A9031B7C1D6D0FF60056B49C /* mjSceneManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
