@@ -8,6 +8,11 @@ mjGraphicText::mjGraphicText(mjResourceManager* resourceManager, const char* tex
                              TextAlignment alignment)
     : mjObject(resourceManager)
 {
+
+#ifndef NODEBUGDELETEMSG
+    LOGI("mjGraphicText() %x", this);
+#endif
+
     dir.Set(0,0,1);
     scale.Set(1,1,1);
     up.Set(0,1,0);
@@ -223,6 +228,9 @@ void mjGraphicText::Update(float t_elapsed)
 
 mjGraphicText::~mjGraphicText()
 {
+#ifndef NODEBUGDELETEMSG
+    LOGI("~mjGraphicText %x", this);
+#endif
     for (int i = 0; i < subObjects.size(); i++)
     {
 

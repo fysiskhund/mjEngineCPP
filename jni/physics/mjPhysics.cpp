@@ -6,6 +6,9 @@ namespace mjEngine
 
 mjPhysics::mjPhysics()
 {
+#ifndef NODEBUGDELETEMSG
+    LOGI("mjPhysics() %x", this);
+#endif
 	gravity.Set(0,-9.81,0);
 }
 
@@ -491,6 +494,9 @@ void mjPhysics::CleanUpPools()
 
 mjPhysics::~mjPhysics()
 {
+#ifndef NODEBUGDELETEMSG
+    LOGI("~mjPhysics() %x", this);
+#endif
     RemoveAllObjects();
     CleanUpPools();
 }

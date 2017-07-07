@@ -9,7 +9,7 @@ class mjTextShaders : public mjShader
 {
 public:
     mjTextShaders();
-
+    virtual ~mjTextShaders();
     // mjShader interface
 public:
 

@@ -14,6 +14,9 @@ namespace mjEngine {
 
 mjTextShaders::mjTextShaders()
 {
+#ifndef NODEBUGDELETEMSG
+    LOGI("mjTextShaders() %x", this);
+#endif
     // Set up shader
     CreateProgram(vertexShaderCode, fragmentShaderCode);
 
@@ -33,6 +36,18 @@ mjTextShaders::mjTextShaders()
     strncpy(name, "text", 5);
 
     checkGlError("getting parameters");
+}
+
+mjTextShaders::~mjTextShaders()
+{
+#ifndef NODEBUGDELETEMSG
+    LOGI("mjTextShaders() %x", this);
+#endif
+
+
+    glDeleteProgram(glProgramHandle);
+
+    delete [] name;
 }
 
 

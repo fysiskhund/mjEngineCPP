@@ -96,7 +96,8 @@ HEADERS += \
     util/mjObjectPool.h \
     core/mjTransitionUniverse.h \
     core/mjUniverse.h \
-    core/mjUniverseSwitcher.h
+    core/mjUniverseSwitcher.h \
+    ui/mjInterfaceBuilder.h
 
 
 SOURCES += \
@@ -165,7 +166,8 @@ SOURCES += \
     util/mjObjectPool.cpp \
     core/mjTransitionUniverse.cpp \
     core/mjUniverse.cpp \
-    core/mjUniverseSwitcher.cpp
+    core/mjUniverseSwitcher.cpp \
+    ui/mjInterfaceBuilder.cpp
 
 
 

@@ -20,6 +20,7 @@ public:
 	mjSphere(mjVector3* c, float r);
 	mjSphere(mjSphere& copy);
 	mjSphere();
+    virtual ~mjSphere();
 };
 
 }

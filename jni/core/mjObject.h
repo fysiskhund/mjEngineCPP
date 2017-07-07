@@ -101,7 +101,7 @@ public:
 
 
     std::vector<mjObject*> subObjects;
-    int drawToSubObject = -1; // DO NOT MODIFY THIS VARIABLE DIRECTLY. USE SetDrawToSubObject -1: all subObjects, else draw up to subObject with index N.
+    int drawToSubObject = -1; // DO NOT MODIFY THIS VARIABLE DIRECTLY. USE SetDrawToSubObject -1: No subObject will be drawn, else draw up to subObject with index N.
 
     //mjObject(mjResourceManager* resourceManager);
     mjObject(mjResourceManager* resourceManager, structuretype collisionStructureType = MJ_NO_BOUNDING_STRUCT);

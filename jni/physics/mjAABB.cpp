@@ -4,6 +4,9 @@ namespace mjEngine{
 
 mjAABB::mjAABB(mjVector3* center, mjVector3& minCorner, mjVector3& maxCorner, bool isImmovable)
 {
+#ifndef NODEBUGDELETEMSG
+    LOGI("mjAABB() %x", this);
+#endif
         this->center = center;
 		this->minCorner.CopyFrom(minCorner);
 		this->maxCorner.CopyFrom(maxCorner);
@@ -17,6 +20,15 @@ mjAABB::mjAABB(mjVector3* center, mjVector3& minCorner, mjVector3& maxCorner, bo
 		this->isImmovable = isImmovable;
 		this->type = MJ_AABB;
 
+}
+
+mjAABB::~mjAABB()
+{
+#ifndef NODEBUGDELETEMSG
+    LOGI("~mjAABB() %x", this);
+#endif
+
+    // No objects created here so all is OK
 }
 
 void mjAABB::UpdateCorners()

@@ -7,6 +7,9 @@ mjGraphicCharObject::mjGraphicCharObject(mjResourceManager* resourceManager, mjF
                                          unsigned long charToRenderLong, float renderScale)
     : mjObject(resourceManager)
 {
+#ifndef NODEBUGDELETEMSG
+    LOGI("mjGraphicChar() %x", this);
+#endif
     this->fontResource = fontResource;
     this->fontSize = fontSize;
     this->renderScale = renderScale;
@@ -47,6 +50,9 @@ void mjGraphicCharObject::SetGraphicCharResource(mjGraphicCharObjectResource* re
 }
 mjGraphicCharObject::~mjGraphicCharObject()
 {
+#ifndef NODEBUGDELETEMSG
+    LOGI("~mjGraphicChar %x", this);
+#endif
     //LOGI("deadsies x_X %x", this);
     delete customShaders;
     delete [] customTextures;
