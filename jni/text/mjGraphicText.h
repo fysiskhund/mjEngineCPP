@@ -28,6 +28,7 @@ public:
     //bool enableDepthTesting = false; // textShaders will default to NO depth testing, meaning the text is always visible.
     //std::vector<mjGraphicCharObject*> textVector;
     std::string text;
+
     int usedLength = 0;
 
 
@@ -75,6 +76,14 @@ private:
     char* GetNextChar();
     void UpdateTextStatic(const char* text);
 
+
+    // mjObject interface
+public:
+    void SetDetailsFromXML(XMLElement* entity) override;
+
+    // mjInternalMessageReceiver interface
+public:
+    void ReceiveInternalMessage(void* contents, unsigned int type, void* sender) override;
 };
 
 }

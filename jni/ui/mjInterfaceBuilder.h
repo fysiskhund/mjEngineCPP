@@ -5,6 +5,7 @@
 #include "../extLibs/logger/mjLog.h"
 #include "../core/mjObject.h"
 #include "../graphics/mjSceneGraph.h"
+#include "../internalMessaging/mjInternalMessenger.h"
 
 
 // UI components
@@ -30,6 +31,8 @@ public:
     float renderScale = 0.002;
     float positionScaleHz = 0.0022;
     float positionScaleVr = 0.0021;
+
+    mjInternalMessenger* internalMessenger;
 
 
 

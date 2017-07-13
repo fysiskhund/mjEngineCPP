@@ -59,8 +59,20 @@ mjObject::mjObject(mjResourceManager* resourceManager, structuretype collisionSt
 
 void mjObject::SetDetailsFromXML(XMLElement* entity)
 {
+    const char* value;
+
     // Read its characteristics
+
+    // Attributes
     SetID(entity->Attribute("id"));
+
+    value = entity->Attribute("variable");
+    if (value)
+    {
+        this->variable = value;
+    }
+
+    // Subfields
     mjXMLHelper::ReadVector(entity->FirstChildElement("pos"), &pos);
     mjXMLHelper::ReadVector(entity->FirstChildElement("dir"), &dir);
     mjXMLHelper::ReadVector(entity->FirstChildElement("up"), &up);
@@ -94,6 +106,17 @@ void mjObject::SetDetailsFromXML(XMLElement* entity)
             }
         }
     }
+    if (entity->FirstChildElement("shader"))
+    {
+        const char* shaderName = entity->FirstChildElement("shader")->Attribute("name");
+        if (!this->customShaders)
+        {
+            this->customShaders = new std::vector<mjShader*>();
+        }
+        this->customShaders->push_back(resourceManager->FetchShader(shaderName)->shader);
+
+    }
+
 
 
 }

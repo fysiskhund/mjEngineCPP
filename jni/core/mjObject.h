@@ -44,6 +44,7 @@ class mjObject: public mjInternalMessageReceiver // Generic mjObject for games
 {
 public:
     char* id = NULL;
+    std::string variable;
     mjSceneGraph* sceneGraph = NULL;
     mjMaterialBucket* rendererBucket = NULL;
     bool isAvailableFromPool = true; // Used by mjObjectPool
@@ -74,7 +75,7 @@ public:
     char* modelName = NULL;
     mjModel* model = NULL;
     std::vector<mjShader*>* customShaders = NULL;
-    int* customTextures = NULL;
+    GLuint* customTextures = NULL;
     std::vector<mjModelMesh*>* customMeshes = NULL;
 
 

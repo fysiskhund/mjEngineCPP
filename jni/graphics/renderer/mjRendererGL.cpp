@@ -65,7 +65,7 @@ void mjRendererGL::PrepareModel(mjModel &model)
 }
 
 void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAtMatrix, float *projectionMatrix, mjModelPose *pose, mjMatrixStack *stack,
-                               std::vector<mjShader*>* customShaders, int* customTextures, std::vector<mjModelMesh*>* customMeshes,
+                               std::vector<mjShader*>* customShaders, GLuint* customTextures, std::vector<mjModelMesh*>* customMeshes,
                                float* extraColorForTexture, std::vector<mjShader*>& shaderList)
 {
     mjRendererDataGL* dataGL = (mjRendererDataGL*) model.rendererData;

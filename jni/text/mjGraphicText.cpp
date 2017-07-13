@@ -211,6 +211,34 @@ void mjGraphicText::UpdateTextStatic(const char* text)
     //LOGI("drawToSubObject: %d", drawToSubObject);
 }
 
+void mjGraphicText::SetDetailsFromXML(XMLElement* entity)
+{
+    mjObject::SetDetailsFromXML(entity);
+
+    const char* variableName = entity->Attribute("variable");
+    if (variableName)
+    {
+        variable = variableName;
+    }
+}
+
+void mjGraphicText::ReceiveInternalMessage(void* contents, unsigned int type, void* sender)
+{
+    if (type == MJ_SET_VARIABLE && !variable.empty())
+    {
+        std::string strContents = (char*) contents;
+        std::string comparison = variable + "=";
+
+        // Compare the "variableName=" part of "variableName=value". If it matches then set the new value.
+        if (strContents.substr(0, comparison.length()).compare(strContents.substr(0,comparison.length())) == 0 )
+        {
+            // This needs to be very strictly NON-immediate
+            UpdateText(strContents.substr(comparison.length()).c_str());
+
+        }
+    }
+}
+
 void mjGraphicText::Update(float t_elapsed)
 {
 
@@ -225,6 +253,8 @@ void mjGraphicText::Update(float t_elapsed)
         UpdateTextStatic(this->text.c_str());
     }
 }
+
+
 
 mjGraphicText::~mjGraphicText()
 {

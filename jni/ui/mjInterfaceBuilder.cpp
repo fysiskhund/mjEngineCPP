@@ -2,17 +2,18 @@
 
 mjInterfaceBuilder::mjInterfaceBuilder()
 {
-
+    internalMessenger = new mjInternalMessenger();
 }
 
 mjInterfaceBuilder::~mjInterfaceBuilder()
 {
     for(unsigned int i = 0; i < uiObjects.size(); i++)
     {
+        internalMessenger->Unsubscribe(uiObjects[i]);
         delete uiObjects[i];
     }
     uiObjects.empty();
-
+    delete internalMessenger;
 }
 
 void mjInterfaceBuilder::LoadFromPath(const char* path, mjResourceManager* resourceManager, mjSceneGraph* sceneGraph)
@@ -86,6 +87,11 @@ void mjInterfaceBuilder::LoadFromMemory(const unsigned char* xmlContents, size_t
         mjObject* newObject = BuildObject(child);
         if (newObject != NULL)
         {
+            if (!newObject->variable.empty())
+            {
+                internalMessenger->Subscribe(newObject);
+            }
+
             uiObjects.push_back(newObject);
         }
         child = child->NextSiblingElement();
@@ -151,6 +157,25 @@ mjObject* mjInterfaceBuilder::BuildObject(XMLElement* entity)
         newObject = new mjGraphicText(resourceManager, text, localFontName.c_str(), localFontSize,
                                       localRenderScale, localPositionScaleHz, localPositionScaleVr,
                                       fontColor, fontPosition, localTextAlignment);
+
+    } else if (strncmp(entity->Name(), "img", strnlen(entity->Name(), 64)) == 0)
+    {
+        const char* source = entity->Attribute("src");
+        const char* model = entity->Attribute("model");
+
+
+        newObject = new mjObject(resourceManager, MJ_NO_BOUNDING_STRUCT);
+        if (model)
+        {
+            newObject->model = resourceManager->FetchModel(model);
+        } else
+        {
+            newObject->model = resourceManager->FetchModel("models/sprite.mesh.xml");
+        }
+        newObject->customTextures = new GLuint[1];
+        GLuint texture = resourceManager->FetchTexture(source);
+        newObject->customTextures[0] = texture;
+
 
     } else if (strncmp(entity->Name(), "button", strnlen(entity->Name(), 64)) == 0)
     {

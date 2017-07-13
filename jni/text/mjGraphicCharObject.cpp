@@ -23,7 +23,7 @@ mjGraphicCharObject::mjGraphicCharObject(mjResourceManager* resourceManager, mjF
     mjShaderResource* textShaderResource = resourceManager->FetchShader("text");
 
     customShaders->push_back(textShaderResource->shader);
-    customTextures = new int[1];
+    customTextures = new GLuint[1];
 
     SetGraphicCharResource(resourceManager->FetchGraphicChar(fontResource, fontSize, charToRenderLong));
 }

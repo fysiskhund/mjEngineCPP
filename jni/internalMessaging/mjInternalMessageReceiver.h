@@ -15,6 +15,11 @@ private:
 
 };
 
+
+enum DefaultMessageTypes{
+    MJ_DEFAULT_MESSAGE=0,
+    MJ_SET_VARIABLE=999
+};
 }
 
 #endif // MJINTERNALMESSAGERECEIVER_H
