@@ -22,7 +22,7 @@ void mjInterfaceBuilder::LoadFromPath(const char* path, mjResourceManager* resou
 
 #ifdef ANDROID_ASSMAN
     fullPath = "mjEngineCPP/";
-    fullPath += stepFilePath;
+    fullPath += path;
 #else
     resourceManager->PrependFullFilePath(fullPath);
 #endif
