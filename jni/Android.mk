@@ -47,15 +47,14 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)//extLibs/freetype2/include
 
 LOCAL_MODULE    := libmjGame
 LOCAL_SRC_FILES := \
-    takkatakkacpp/ChooserUniverse.cpp \
-    takkatakkacpp/SongUniverse.cpp \
     takkatakkacpp/TakkaTakkaGameState.cpp \
-    takkatakkacpp/TitleUniverse.cpp \
     takkatakkacpp/gameModes/ChallengeGameMode.cpp \
     takkatakkacpp/gameModes/GameMode.cpp \
     takkatakkacpp/gameModes/PartyGameMode.cpp \
     takkatakkacpp/gameObjects/BaitAndSwitchTrackEvent.cpp \
     takkatakkacpp/gameObjects/Bubble.cpp \
+    takkatakkacpp/gameObjects/BubbleExplosion.cpp \
+    takkatakkacpp/gameObjects/BubbleFragment.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/BaitAndSwitchBubbleScript.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/BaitAndSwitchBubbleScriptSettings.cpp \
     takkatakkacpp/gameObjects/BubbleScripts/BeatZigZagBubbleScript.cpp \
@@ -75,10 +74,20 @@ LOCAL_SRC_FILES := \
     takkatakkacpp/gameObjects/TrackPreview.cpp \
     takkatakkacpp/gl_code.cpp \
     takkatakkacpp/interfaceObjects/HealthBar.cpp \
+    takkatakkacpp/interfaceObjects/PictureButton.cpp \
     takkatakkacpp/interfaceObjects/ResponseText.cpp \
     takkatakkacpp/interfaceObjects/ToggleButton.cpp \
     takkatakkacpp/interfaceObjects/TrackSelector.cpp \
-    takkatakkacpp/shaders/BubbleShaders.cpp
+    takkatakkacpp/pools/BubbleFragmentPool.cpp \
+    takkatakkacpp/shaders/BubbleShaders.cpp \
+    takkatakkacpp/subsystems/InterfaceBuilder.cpp \
+    takkatakkacpp/subsystems/TokenStore.cpp \
+    takkatakkacpp/subsystems/TrackList.cpp \
+    takkatakkacpp/subsystems/TrackListLoader.cpp \
+    takkatakkacpp/universes/ChooserUniverse.cpp \
+    takkatakkacpp/universes/SlideTransitionUniverse.cpp \
+    takkatakkacpp/universes/SongUniverse.cpp \
+    takkatakkacpp/universes/TitleUniverse.cpp
 
 # -------------
 

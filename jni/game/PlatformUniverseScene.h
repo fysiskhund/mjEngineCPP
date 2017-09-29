@@ -22,7 +22,7 @@
 
 
 #include <core/mjObject.h>
-#include <core/mjScene.h>
+#include <core/mjUniverse.h>
 #include <graphics/mjModel.h>
 
 #include <graphics/mjImageLoader.h>
@@ -50,7 +50,7 @@ using namespace mjEngine;
 
 
 
-class PlatformUniverseScene : public mjScene
+class PlatformUniverseScene : public mjUniverse
 {
     public:
         const char* sceneName = "platformuniverse";
@@ -85,8 +85,8 @@ class PlatformUniverseScene : public mjScene
 
         void InitShaders();
         void SetUpSkybox();
-        void Update(float t_elapsed) override;
-        void Draw() override;
+        void Update(double t_elapsed) override;
+        void Draw(bool clearFrameBuffer = true) override;
 
         mjMusicPlayer musicPlayer;
         std::string levelFilename;

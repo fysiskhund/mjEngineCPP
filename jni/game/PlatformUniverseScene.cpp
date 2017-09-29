@@ -1,7 +1,7 @@
 #include "PlatformUniverseScene.h"
 
 PlatformUniverseScene::PlatformUniverseScene(mjResourceManager* resourceManager)
-:mjScene(resourceManager)
+: mjUniverse(resourceManager)
 {
 
     sceneGraph.simpleDrawList = false;
@@ -181,7 +181,7 @@ void PlatformUniverseScene::SetUpSkybox()
 
 	LOGI("after SetCamerapos");
 }
-void PlatformUniverseScene::Update(float t_elapsed)
+void PlatformUniverseScene::Update(double t_elapsed)
 {
     if (t_elapsed < 0.1)
 	{
@@ -231,7 +231,7 @@ void PlatformUniverseScene::Update(float t_elapsed)
     }
 
 }
-void PlatformUniverseScene::Draw()
+void PlatformUniverseScene::Draw(bool clearFrameBuffer)
 {
     float modelMatrix[16];
 

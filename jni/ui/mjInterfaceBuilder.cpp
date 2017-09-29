@@ -20,12 +20,8 @@ void mjInterfaceBuilder::LoadFromPath(const char* path, mjResourceManager* resou
 {
     std::string fullPath = path;
 
-#ifdef ANDROID_ASSMAN
-    fullPath = "mjEngineCPP/";
-    fullPath += path;
-#else
     resourceManager->PrependFullFilePath(fullPath);
-#endif
+
 
     const unsigned char* buffer;
     size_t readSize;

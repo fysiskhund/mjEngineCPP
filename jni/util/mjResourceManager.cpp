@@ -65,12 +65,8 @@ mjModel* mjResourceManager::FetchModel(const char* path)
 mjModel* mjResourceManager::FetchModel(std::string& path)
 {
     std::string fullPath = path;
-#ifdef ANDROID_ASSMAN
-    fullPath = "mjEngineCPP/";
-    fullPath += path;
-#else
+
     PrependFullFilePath(fullPath);
-#endif
 
     mjResource* res = SearchByPath(models, fullPath);
     if (res != NULL)
@@ -136,12 +132,7 @@ GLuint mjResourceManager::FetchTexture(std::string& path, unsigned glTextureWrap
 {
     std::string fullPath = path;
 
-#ifdef ANDROID_ASSMAN
-    fullPath = "mjEngineCPP/";
-    fullPath += path;
-#else
     PrependFullFilePath(fullPath);
-#endif
 
     mjResource* res = SearchByPath(textures, fullPath, glTextureWrapParameter);
     if (res != NULL)
@@ -210,12 +201,8 @@ mjSoundResource* mjResourceManager::FetchSound(const char* path)
 mjSoundResource* mjResourceManager::FetchSound(std::string& path)
 {
     std::string fullPath = path;
-#ifdef ANDROID_ASSMAN
-    fullPath = "mjEngineCPP/";
-    fullPath += path;
-#else
+
     PrependFullFilePath(fullPath);
-#endif
 
     mjResource* res = SearchByPath(soundResources, fullPath);
     if (res != NULL)
@@ -329,12 +316,7 @@ mjFontResource* mjResourceManager::FetchFont(std::string &path)
 
     std::string fullPath = path;
 
-#ifdef ANDROID_ASSMAN
-    fullPath = "mjEngineCPP/";
-    fullPath += path;
-#else
     PrependFullFilePath(fullPath);
-#endif
 
     mjResource* res = SearchByPath(fontResources, fullPath);
     if (res != NULL)

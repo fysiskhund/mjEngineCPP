@@ -15,7 +15,7 @@ mjRenderer renderer;
 #endif
 
 PlatformUniverseScene* platformUniverse;
-mjSceneManager sceneManager;
+mjUniverseSwitcher sceneManager;
 
 mjResourceManager* resourceManager;
 
@@ -32,7 +32,7 @@ bool setupGame(int w, int h, std::string& pathPrefix) {
     LOGI("%s %d: new %s", __FILE__, __LINE__, "platformUniverse");
 
     platformUniverse->Initialise(w,h);
-    sceneManager.SetFirstScene(platformUniverse, NULL);
+    sceneManager.SetFirstUniverse(platformUniverse, NULL);
     return true;
 }
 
@@ -142,7 +142,7 @@ void TouchEvent(int fingerID, int x, int y, bool pressedDown)
     event.type = pressedDown? MJ_FINGERDOWN : MJ_FINGERUP;
     
     
-    sceneManager.currentScene->OnInput(event);
+    sceneManager.currentUniverse->OnInput(event);
 
 }
 
