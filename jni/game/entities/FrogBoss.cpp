@@ -10,9 +10,9 @@ FrogBoss::FrogBoss(Level* levelData, mjResourceManager* resourceManager)
     srand(time(0));
 
 
-    model = resourceManager->FetchModel("evilfrog.mesh.xml");
+    model = resourceManager->FetchModel("entities/evilFrog/evilfrog.mesh.xml");
 
-    glTexture = resourceManager->FetchTexture("evilfrog.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+    glTexture = resourceManager->FetchTexture("entities/evilFrog/evilfrog.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;

@@ -13,14 +13,14 @@ Bird::Bird(Level* levelData, mjResourceManager* resourceManager)
 
 	GLuint glTexture;
 
-	model = resourceManager->FetchModel("bird.mesh.xml");
+    model = resourceManager->FetchModel("entities/bird/bird.mesh.xml");
 
 
 
 
 	((mjAABB*)boundingStructure)->isImmovable = true;
 
-	glTexture = resourceManager->FetchTexture("birdtexture.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+    glTexture = resourceManager->FetchTexture("entities/bird/birdtexture.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;

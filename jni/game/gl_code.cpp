@@ -162,7 +162,10 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobje
 	const char* jPathPrefixChars = env->GetStringUTFChars(jPathPrefix, 0);
 
 	std::string pathPrefix = jPathPrefixChars;
-	LOGI("Platform path is %s", pathPrefix.c_str());
+    LOGI("Platform path is %s (IGNORED due to ANDROID_ASSMAN)", pathPrefix.c_str());
+    pathPrefix = "Kosmonavt";
+    LOGI("Actual prefix: %s", pathPrefix.c_str());
+
     setupGame(width, height, pathPrefix);
 }
 

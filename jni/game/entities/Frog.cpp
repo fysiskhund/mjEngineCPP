@@ -12,9 +12,9 @@ Frog::Frog(Level* levelData, mjResourceManager* resourceManager)
     //model = resourceManager.FetchModel("frog.mesh.xml");
     //glTexture = resourceManager.FetchTexture("frog.png");
 
-    model = resourceManager->FetchModel("frog.mesh.xml");
+    model = resourceManager->FetchModel("entities/frog/frog.mesh.xml");
 
-    glTexture = resourceManager->FetchTexture("frog.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+    glTexture = resourceManager->FetchTexture("entities/frog/frog.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{
 		model->meshes[i]->glTexture = glTexture;

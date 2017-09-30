@@ -157,14 +157,14 @@ void PlatformUniverseScene::SetUpSkybox()
 
 	mjModel* skyboxBox;
 
-	skyboxBox = resourceManager->FetchModel("skybox.mesh.xml");
+    skyboxBox = resourceManager->FetchModel("skybox/skybox.mesh.xml");
 
 	mjModel* skyboxPlane;
-	skyboxPlane= resourceManager->FetchModel("skybox_plane.mesh.xml");
+    skyboxPlane= resourceManager->FetchModel("skybox/skybox_plane.mesh.xml");
 
 	skybox->SetModels(skyboxBox, skyboxPlane);
 
-	skybox->LoadTexturesFromPrefix("bluesky/skybox");
+    skybox->LoadTexturesFromPrefix("skybox/bluesky/skybox");
 
 	/*char wanderingCloudName[1024];
 	for (unsigned i = 0; i < 3; i++)

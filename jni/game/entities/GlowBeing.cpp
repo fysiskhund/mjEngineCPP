@@ -6,11 +6,11 @@ GlowBeing::GlowBeing(Level* levelData, mjCamera* camera, mjResourceManager* reso
 {
     this->camera = camera;
 
-    model = resourceManager->FetchModel("sprite.mesh.xml");
+    model = resourceManager->FetchModel("entities/sprite.mesh.xml");
 
 
 
-	GLuint glTexture = resourceManager->FetchTexture("glowbeing.png", GL_CLAMP_TO_EDGE);
+    GLuint glTexture = resourceManager->FetchTexture("entities/glowbeing.png", GL_CLAMP_TO_EDGE);
 
 	for (unsigned i = 0; i < model->meshes.size(); i++)
 	{

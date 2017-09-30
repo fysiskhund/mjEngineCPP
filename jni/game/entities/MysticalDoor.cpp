@@ -10,11 +10,11 @@ MysticalDoor::MysticalDoor(Level* levelData, mjResourceManager* resourceManager)
     offsetOnTeleportArrive.y = 0.3;
     offsetRadiusOnTeleportArrive = 0.5;
 
-    model = resourceManager->FetchModel("door.mesh.xml");
+    model = resourceManager->FetchModel("entities/door/door.mesh.xml");
 
     ((mjAABB*)boundingStructure)->isImmovable = true;
 
-    GLuint glTexture = resourceManager->FetchTexture("door.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
+    GLuint glTexture = resourceManager->FetchTexture("entities/door/door.png", GL_REPEAT);//("/sdcard/mjEngineCPP/bluesky/wandering_cloud0.png"); //
     for (unsigned i = 0; i < model->meshes.size(); i++)
     {
         model->meshes[i]->glTexture = glTexture;

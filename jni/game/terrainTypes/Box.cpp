@@ -7,8 +7,8 @@ Box::Box(mjResourceManager* resourceManager)
 
     GLuint glTexture;
 
-    glTexture = resourceManager->FetchTexture("box_grassy.png", GL_CLAMP_TO_EDGE);
-    model = resourceManager->FetchModel("box.mesh.xml");
+    glTexture = resourceManager->FetchTexture("entities/box/box_grassy.png", GL_CLAMP_TO_EDGE);
+    model = resourceManager->FetchModel("entities/box/box.mesh.xml");
 
 
 

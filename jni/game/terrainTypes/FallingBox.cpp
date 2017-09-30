@@ -12,8 +12,8 @@ FallingBox::FallingBox(mjResourceManager* resourceManager)
 
     GLuint glTexture;
 
-    glTexture = resourceManager->FetchTexture("falling_box.png", GL_CLAMP_TO_EDGE);
-    model = resourceManager->FetchModel("fallingbox.mesh.xml");
+    glTexture = resourceManager->FetchTexture("entities/box/falling_box.png", GL_CLAMP_TO_EDGE);
+    model = resourceManager->FetchModel("entities/box/fallingbox.mesh.xml");
 
 
     mjAABB* boundingStruct = ((mjAABB*)boundingStructure);
