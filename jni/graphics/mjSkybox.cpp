@@ -63,6 +63,9 @@ void mjSkybox::LoadTexturesFromPrefix(const char* prefix)
         LOGI("%s %d: new %s", __FILE__, __LINE__, "char for shaderName");
         snprintf(shaderName, 7, "%s", "skybox");
         boxModel->meshes[i]->shaderName = shaderName;
+        this->customShaders = new std::vector<mjShader*>();
+        mjShader* skyboxShader = resourceManager->FetchShader("skybox")->shader;
+        this->customShaders->push_back(skyboxShader);
 
 		//LOGI("loading %s -> texture%d", pathName, boxModel->meshes[i]->glTexture);
 	}

@@ -17,7 +17,12 @@ void mjMultiPlatform::AddCommandForJNI(std::string& command)
 	} else
 	{
 		mjMultiPlatform::commandsForJNI += "\n" + command;
-	}
+    }
+}
+
+void mjMultiPlatform::RequestFullscreenAdvertisement()
+{
+    mjMultiPlatform::AddCommandForJNI("55:fullScreen");
 }
 std::string mjMultiPlatform::commandsForJNI = "";
 bool mjMultiPlatform::commandsForJNIPresent = false;

@@ -82,6 +82,11 @@ enum MJInputTypes
     MJ_FINGERUP,
     MJ_FINGERMOTION,
 
+    /* Other, motorJ-specific events */
+    MJ_ADVERTISING_FULLSCREEN_RESULT_OK = 0x990, /**< Full-screen advertising ended without problems **/
+    MJ_ADVERTISING_FULLSCREEN_RESULT_ERROR,     /**< Full-screen advertising did not succeed but control is given back to the game **/
+
+
 
 };
 
