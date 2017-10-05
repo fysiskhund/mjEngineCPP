@@ -10,14 +10,14 @@ void mjMusicPlayer::Load(mjSoundResource* soundRes, int sampleNum)
 {
 	std::string cmd = "1:" + soundRes->path;
 	//LOGI("loading %s", soundRes->path.c_str());
-	mjMultiPlatform::AddCommandForJNI(cmd);
+	mjMultiPlatform::AddCommandForJava(cmd);
 
 }
 
 void mjMusicPlayer::Play()
 {
 	std::string cmd = "2:";
-	mjMultiPlatform::AddCommandForJNI(cmd);
+	mjMultiPlatform::AddCommandForJava(cmd);
 }
 void mjMusicPlayer::Play(int sampleIndex)
 {
@@ -26,7 +26,7 @@ void mjMusicPlayer::Play(int sampleIndex)
 void mjMusicPlayer::Pause()
 {
 	std::string cmd = "3:";
-	mjMultiPlatform::AddCommandForJNI(cmd);
+	mjMultiPlatform::AddCommandForJava(cmd);
 }
 
 
@@ -34,13 +34,13 @@ void mjMusicPlayer::Pause()
 void mjMusicPlayer::Rewind()
 {
 	std::string cmd = "4:";
-	mjMultiPlatform::AddCommandForJNI(cmd);
+	mjMultiPlatform::AddCommandForJava(cmd);
 }
 
 void mjMusicPlayer::Resume()
 {
 	std::string cmd = "2:"; // In Android it is the same command
-	mjMultiPlatform::AddCommandForJNI(cmd);
+	mjMultiPlatform::AddCommandForJava(cmd);
 }
 
 

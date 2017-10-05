@@ -96,10 +96,11 @@ void mjGlErrorCallback(GLenum source,
 class mjMultiPlatform
 {
 public:
-    static void AddCommandForJNI(std::string& command);
-    static std::string commandsForJNI;
-    static bool commandsForJNIPresent;
+    static void AddCommandForJava(std::string& command);
+    static std::string commandsForJava;
+    static bool commandsForJavaPresent;
     static void RequestFullscreenAdvertisement();
+    static void FlushCommandsForJava();
 };
 
 

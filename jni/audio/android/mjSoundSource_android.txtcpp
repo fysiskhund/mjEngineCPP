@@ -12,7 +12,7 @@ int mjSoundSource::Load(mjSoundResource* soundRes, int sampleNumber)
 	snprintf(cmdCharArray, 256, "51:%s:%d", soundRes->path.c_str(), soundRes->soundIndexAndroid);
 	std::string cmd = cmdCharArray;
 		//LOGI("loading %s", soundRes->path.c_str());
-	mjMultiPlatform::AddCommandForJNI(cmd);
+	mjMultiPlatform::AddCommandForJava(cmd);
 
 	samples.push_back(soundRes);
 
@@ -31,7 +31,7 @@ void mjSoundSource::Play(mjVector3& sourceLocation, mjVector3& listenerLocation,
 		char cmdCharArray[256];
 		snprintf(cmdCharArray, 256, "52:%d:%f:%f:0:0:0:1.0", samples[sampleIndex]->soundIndexAndroid, leftChannel, rightChannel );
 		std::string cmd = cmdCharArray;
-		mjMultiPlatform::AddCommandForJNI(cmd);
+		mjMultiPlatform::AddCommandForJava(cmd);
 	}
 }
 

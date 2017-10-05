@@ -8,24 +8,31 @@ unsigned strnlen(const char* str, unsigned n)
 
 #endif
 
-void mjMultiPlatform::AddCommandForJNI(std::string& command)
+void mjMultiPlatform::AddCommandForJava(std::string& command)
 {
-	if (!mjMultiPlatform::commandsForJNIPresent)
+    if (!mjMultiPlatform::commandsForJavaPresent)
 	{
-		mjMultiPlatform::commandsForJNI = command;
-		mjMultiPlatform::commandsForJNIPresent = true;
+        mjMultiPlatform::commandsForJava = command;
+        mjMultiPlatform::commandsForJavaPresent = true;
 	} else
 	{
-		mjMultiPlatform::commandsForJNI += "\n" + command;
+        mjMultiPlatform::commandsForJava += "\n" + command;
     }
 }
 
 void mjMultiPlatform::RequestFullscreenAdvertisement()
 {
-    mjMultiPlatform::AddCommandForJNI("55:fullScreen");
+    std::string fullScreenAdvScreen = "55:fullscreenRequested";
+    mjMultiPlatform::AddCommandForJava(fullScreenAdvScreen);
 }
-std::string mjMultiPlatform::commandsForJNI = "";
-bool mjMultiPlatform::commandsForJNIPresent = false;
+
+void mjMultiPlatform::FlushCommandsForJava()
+{
+    commandsForJava = "";
+    commandsForJavaPresent = false;
+}
+std::string mjMultiPlatform::commandsForJava = "";
+bool mjMultiPlatform::commandsForJavaPresent = false;
 
 
 void checkGlError(const char *op)
