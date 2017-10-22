@@ -11,10 +11,21 @@ use strict;
 
 my @excludeList = ('keyboardcontrol', 'main', 'ComputerInput');
 
+
+
+# Remove the $${MJENGINE} prefix?
+
+my $removePrefix = '\$\$\{MJENGINE\}\/';
+
+
+
 # Is part of the engine
+
 my $engineFile = 'mj.+\.cpp|extLibs';
 
 my $cppExtension = '\.cpp|\.c';
+
+
 
 # Get the boilerplate out of the way
 
@@ -23,6 +34,8 @@ my $boilerplateStart =
 # Copyright (C) 2014-2017 Alejandro Valenzuela Roca
 #
 ';
+
+
 
 my $boilerplateContinue =
 '
@@ -55,6 +68,8 @@ include $(PREBUILT_STATIC_LIBRARY)
 # -------------
 ';
 
+
+
 my $boilerplateEngineOnly = 
 '
 
@@ -64,11 +79,13 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := libmjEngine
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)//extLibs/freetype2/include
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/extLibs/freetype2/include
 
 # Now, the file from the engine are specified:
 LOCAL_SRC_FILES := \\
 ';
+
+
 
 my $boilerplateGameOnly = 
 '
@@ -91,6 +108,8 @@ LOCAL_MODULE    := libmjGame
 LOCAL_SRC_FILES := \\
 ';
 
+
+
 my $boilerplateMixed =
 '
 # Now, the files from the engine and the game are specified:
@@ -104,14 +123,17 @@ LOCAL_SRC_FILES := \\
 ';
 
 
+
 my $boilerplateEngineOnlyEnd =
 '
 # -------------
 
 
-# finally we tell ndk-build that the output is a static library. This will be included by Eclipse in the final *.so shared library - see Android.mk.gameOnly
+# finally we tell ndk-build that the output is a static library. This will be included by Android Studio in the final *.so shared library - see Android.mk.gameOnly
 include $(BUILD_STATIC_LIBRARY)
 ';
+
+
 
 my $boilerplateGameOnlyEnd =
 '
@@ -125,6 +147,8 @@ LOCAL_STATIC_LIBRARIES := libmjEngine png freetype2
 include $(BUILD_SHARED_LIBRARY)
 ';
 
+
+
 my $boilerplateMixedEnd = 
 '
 # -------------
@@ -137,6 +161,7 @@ LOCAL_STATIC_LIBRARIES := png freetype2
 include $(BUILD_SHARED_LIBRARY)
 
 ';
+
 
 
 # Subroutine for printing the file list into the mk file
@@ -172,7 +197,7 @@ my $mkFilename = "$proFilename.mk";
 
 if (not defined $proFilename)
 {
-	die "*.pro filename necessary ¬¬\n";
+	die "Usage: proToMk.pl projectFile.pro [localPrefix]\n";
 }
 if (defined $localPrefix)
 {
@@ -213,6 +238,11 @@ while (my $row = <$proFILE>)
 	{
 	
 	     my @rowComponents;
+
+             if ($removePrefix)
+             {
+               $row =~ s/$removePrefix//;
+             }
 	
 	     if ($row =~ /$engineFile/ )
 	     {
