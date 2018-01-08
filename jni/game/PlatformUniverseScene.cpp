@@ -66,7 +66,7 @@ void PlatformUniverseScene::Initialise(int width, int height)
     level->LoadFromFile(levelFilename.c_str());
 
     //FIXME!!
-    //ambient.InitGlowBeings(level, camera, &physics, &shaderList, &sceneGraph, *resourceManager);
+    ambient.InitGlowBeings(level, camera, &physics, &shaderList, &sceneGraph, *resourceManager);
     //ambient.CreateDustDevil(o, 12, 10);
     entityCreator->PopulateLevel(&level->doc, level);
 

@@ -120,7 +120,7 @@ public:
 	virtual void UpdatePosition(float t_elapsed);
     virtual void FlushPhysicsEffects();
 
-
+    //! drawToSubObject: Set -1 if no subObjects should be drawn. Otherwise 0 .. numSubObjects-1
     void SetDrawToSubObject(int drawToSubObjectNew);
     void RefreshRendererBucket();
 

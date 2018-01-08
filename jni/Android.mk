@@ -85,6 +85,7 @@ LOCAL_SRC_FILES := \
     takkatakkacpp/subsystems/TrackList.cpp \
     takkatakkacpp/subsystems/TrackListLoader.cpp \
     takkatakkacpp/universes/ChooserUniverse.cpp \
+    takkatakkacpp/universes/CreditsUniverse.cpp \
     takkatakkacpp/universes/SlideTransitionUniverse.cpp \
     takkatakkacpp/universes/SongUniverse.cpp \
     takkatakkacpp/universes/TitleUniverse.cpp

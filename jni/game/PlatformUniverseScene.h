@@ -78,7 +78,7 @@ class PlatformUniverseScene : public mjUniverse
 
         EntityCreator* entityCreator;
 
-        //Ambient ambient;
+        Ambient ambient;
 
         PlatformUniverseScene(mjResourceManager* resourceManager);
         void Initialise(int width, int height);
