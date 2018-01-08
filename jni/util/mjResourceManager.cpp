@@ -526,6 +526,13 @@ void mjResourceManager::CloseAndFreeResources(mjFileFromArchive** mjFile)
 
 }
 
+void mjResourceManager::ReplaceDirectorySeparators(std::string &filePath)
+{
+    if (separator == '\\')
+    {
+        std::replace(filePath.begin(), filePath.end(), '/', separator);
+    }
+}
 
 #ifndef IOS
 
@@ -534,7 +541,6 @@ void mjResourceManager::PrependFullFilePath(std::string& filePath)
     filePath = pathPrefix + separator + filePath;
     std::replace(filePath.begin(), filePath.end(), '/', separator);
 }
-
 
 #else
     void mjResourceManager::PrependFullFilePath(std::string& filePath)

@@ -22,7 +22,7 @@ unix: DEFINES += GNULINUX
 
 # mjEngine path
 unix: MJENGINE=/common/fh/mjEngineCPP/jni
-#win32: MJENGINE=c/common/fh/mjEngineCPP/jni
+win32: MJENGINE=c:/common/fh/mjEngineCPP/jni
 
 HEADERS += \
     $${MJENGINE}/ai/mjAutomaton.h \

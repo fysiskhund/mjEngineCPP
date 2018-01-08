@@ -20,7 +20,7 @@ using namespace mjEngine;
 class mjInterfaceBuilder
 {
 public:
-    XMLDocument doc;
+    tinyxml2::XMLDocument doc; // Sometimes there is an ambiguity in Windows builds caused by Qt - hence why tinyxml needs to be specified
     std::vector<mjObject*> uiObjects;
 
     mjResourceManager* resourceManager;

@@ -78,6 +78,9 @@ class mjResourceManager
 
         void PrependFullFilePath(std::string& filePath);
 
+        //! Always, ALWAYS write directory separators as "/". Then use this function to properly access things in Windows.
+        void ReplaceDirectorySeparators(std::string& filePath);
+
 
 
         //! Note: DO ___NOT___ try to free this buffer yourself. The system does it for you
