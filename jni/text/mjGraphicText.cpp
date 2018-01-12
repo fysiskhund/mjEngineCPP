@@ -227,10 +227,14 @@ void mjGraphicText::ReceiveInternalMessage(void* contents, unsigned int type, vo
     if (type == MJ_SET_VARIABLE && !variable.empty())
     {
         std::string strContents = (char*) contents;
+
         std::string comparison = variable + "=";
+        std::size_t comparisonLength = comparison.length();
+
+        std::string variableToSet = strContents.substr(0, comparisonLength);
 
         // Compare the "variableName=" part of "variableName=value". If it matches then set the new value.
-        if (strContents.substr(0, comparison.length()).compare(strContents.substr(0,comparison.length())) == 0 )
+        if (variableToSet.compare(comparison) == 0 )
         {
             // This needs to be very strictly NON-immediate
             UpdateText(strContents.substr(comparison.length()).c_str());
