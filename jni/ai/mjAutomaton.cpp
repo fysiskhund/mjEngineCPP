@@ -17,7 +17,7 @@ mjAutomaton::~mjAutomaton()
     //dtor..
 }
 
-void mjAutomaton::Update(float t_elapsed)
+void mjAutomaton::Update(double t_elapsed)
 {
     if (currentState)
     {

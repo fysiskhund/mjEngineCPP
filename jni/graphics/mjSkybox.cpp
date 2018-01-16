@@ -82,7 +82,7 @@ void mjSkybox::SetCameraPos(mjVector3* cameraPos)
 	this->cameraPos = cameraPos;
 
 }
-void mjSkybox::Update(float t_elapsed)
+void mjSkybox::Update(double t_elapsed)
 {
 	if (cameraPos)
 	{

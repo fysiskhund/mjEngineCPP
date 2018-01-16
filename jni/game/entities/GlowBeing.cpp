@@ -32,7 +32,7 @@ GlowBeing::GlowBeing(Level* levelData, mjCamera* camera, mjResourceManager* reso
 
 }
 
-void GlowBeing::Update(float t_elapsed)
+void GlowBeing::Update(double t_elapsed)
 {
     mjObject::Update(t_elapsed);
 
@@ -61,7 +61,7 @@ void GlowBeing::Reposition()
     vel.Set0();
 }
 
-void GlowBeing::ProcessPhysicsEffects(float t_elapsed)
+void GlowBeing::ProcessPhysicsEffects(double t_elapsed)
 {
 	accel.Set0();
 

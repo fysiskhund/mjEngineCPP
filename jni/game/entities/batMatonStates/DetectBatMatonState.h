@@ -13,7 +13,7 @@ class DetectBatMatonState: public BatBot::BatAutomatonState
 
         float exciteAngle = 0;
 
-        virtual void Execute(float t_elapsed) override;
+        virtual void Execute(double t_elapsed) override;
         virtual void Reset() override;
         virtual ~DetectBatMatonState();
     protected:

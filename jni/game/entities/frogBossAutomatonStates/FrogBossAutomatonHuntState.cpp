@@ -35,7 +35,7 @@ void FrogBossAutomatonHuntState::Enter()
 }
 
 
-void FrogBossAutomatonHuntState::Execute(float t_elapsed)
+void FrogBossAutomatonHuntState::Execute(double t_elapsed)
 {
     // if frog falls
     if (mjCollisionTests::AABBVsAABB((mjAABB*) frogBoss->boundingStructure, frogBoss->levelData->hardLimits, NULL) != MJ_OVERLAP)

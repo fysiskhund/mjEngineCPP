@@ -109,15 +109,15 @@ public:
 	virtual ~mjObject();
     void SetID(const char* id);
     virtual void SetDetailsFromXML(XMLElement* entity);
-	virtual void ProcessPhysicsEffects(float t_elapsed);
+    virtual void ProcessPhysicsEffects(double t_elapsed);
 	virtual void ProcessCollisionEffects();
 
     //! This should be implemented by the mjObject descendants in your game.
     //! Also remember to "subscribe" this function to a mjInternalMessenger
     virtual void ReceiveInternalMessage(void* contents, unsigned int type, void* sender) override;
 
-    virtual void Update(float t_elapsed);
-	virtual void UpdatePosition(float t_elapsed);
+    virtual void Update(double t_elapsed);
+    virtual void UpdatePosition(double t_elapsed);
     virtual void FlushPhysicsEffects();
 
     //! drawToSubObject: Set -1 if no subObjects should be drawn. Otherwise 0 .. numSubObjects-1

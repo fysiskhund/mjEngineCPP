@@ -30,8 +30,8 @@ class GlowBeing: public KosmoObject
 
         const float MaxCameraDist = 4;
 
-        void Update(float t_elapsed) override;
-        void ProcessPhysicsEffects(float t_elapsed) override;
+        void Update(double t_elapsed) override;
+        void ProcessPhysicsEffects(double t_elapsed) override;
         void Reposition();
 
     protected:

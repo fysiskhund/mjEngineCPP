@@ -30,10 +30,10 @@ public:
 
     bool ignoreInput = false;
 
-	void ProcessPhysicsEffects(float t_elapsed) override;
+	void ProcessPhysicsEffects(double t_elapsed) override;
 	void ProcessCollisionEffects() override;
-	void Update(float t_elapsed) override;
-	void UpdatePosition(float t_elapsed) override;
+	void Update(double t_elapsed) override;
+	void UpdatePosition(double t_elapsed) override;
 	void SetDetailsFromXML(XMLElement* entity) override;
     //void StartTransitionForTravel() override;
     //void EndTransitionForTravel() override;

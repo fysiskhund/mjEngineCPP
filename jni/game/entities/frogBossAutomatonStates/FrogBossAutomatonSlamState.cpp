@@ -36,7 +36,7 @@ void FrogBossAutomatonSlamState::Enter()
 
 }
 
-void FrogBossAutomatonSlamState::Execute(float t_elapsed)
+void FrogBossAutomatonSlamState::Execute(double t_elapsed)
 {
     if (mjCollisionTests::AABBVsAABB((mjAABB*)frogBoss->boundingStructure, frogBoss->levelData->hardLimits, NULL) == MJ_NO_COLLISION)
     {

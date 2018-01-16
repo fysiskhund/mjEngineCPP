@@ -22,7 +22,7 @@ mjSkyboxLevelData::mjSkyboxLevelData(GLuint texture, float angleH, float angleV,
 	//LOGI("skyboxLevelData tex: %d", texture);
 }
 
-void mjSkyboxLevelData::Update(float t_elapsed)
+void mjSkyboxLevelData::Update(double t_elapsed)
 {
 	angleH += deltaH*t_elapsed;
     if (angleH > MJ_TWICE_PI)

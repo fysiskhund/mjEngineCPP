@@ -150,7 +150,7 @@ BatBot::BatAutomatonState::BatAutomatonState(BatBot* bat)
 }
 
 
-void BatBot::Update(float t_elapsed)
+void BatBot::Update(double t_elapsed)
 {
 	tAnimation += t_elapsed;
 
@@ -167,7 +167,7 @@ void BatBot::Update(float t_elapsed)
 }
 
 
-void BatBot::ProcessPhysicsEffects(float t_elapsed)
+void BatBot::ProcessPhysicsEffects(double t_elapsed)
 {
 	accel.Set0();
 

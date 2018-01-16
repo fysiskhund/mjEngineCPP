@@ -41,7 +41,7 @@ class Ambient
 
         Ambient();
 
-        void Update(float t_elapsed);
+        void Update(double t_elapsed);
 
         void InitGlowBeings(Level* levelData, mjCamera* camera, mjPhysics* physics, std::vector<mjShader*>* shaderList, mjSceneGraph* sceneGraph,  mjResourceManager& resourceManager);
 
@@ -51,7 +51,7 @@ class Ambient
 
         mjAutomaton windAutomaton;
     protected:
-        void UpdateDustDevils(float t_elapsed);
+        void UpdateDustDevils(double t_elapsed);
     private:
 
 };

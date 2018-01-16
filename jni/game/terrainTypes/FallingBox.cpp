@@ -92,7 +92,7 @@ void FallingBox::SetDetailsFromXML(XMLElement* fallingBoxElem)
 
 }
 
-void FallingBox::ProcessPhysicsEffects(float t_elapsed)
+void FallingBox::ProcessPhysicsEffects(double t_elapsed)
 {
 	Box::ProcessPhysicsEffects(t_elapsed);
 
@@ -180,7 +180,7 @@ void FallingBox::ProcessCollisionEffects()
     Box::ProcessCollisionEffects();
 }
 
-void FallingBox::Update(float t_elapsed)
+void FallingBox::Update(double t_elapsed)
 {
     if (hasWeight)
     {

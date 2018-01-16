@@ -45,7 +45,7 @@ FrogBoss::FrogBoss(Level* levelData, mjResourceManager* resourceManager)
     gravity.y = -9.81;
 }
 
-void FrogBoss::Update(float t_elapsed)
+void FrogBoss::Update(double t_elapsed)
 {
     if (target == NULL)
     {

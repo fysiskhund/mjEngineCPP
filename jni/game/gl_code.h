@@ -47,7 +47,7 @@ using namespace mjEngine;
 
 bool setupGame(int w, int h, std::string& pathPrefix);
 
-void renderFrame(float t_elapsed);
+void renderFrame(double t_elapsed);
 
 void PrintGLCapabilities();
 

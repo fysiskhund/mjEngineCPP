@@ -438,7 +438,7 @@ void mjPhysics::ProcessCollisionEffects()
 	}
 
 }
-void mjPhysics::UpdatePositions(float t_elapsed)
+void mjPhysics::UpdatePositions(double t_elapsed)
 {
 	for(unsigned i = 0; i < allObjects.size(); i++)
 	{

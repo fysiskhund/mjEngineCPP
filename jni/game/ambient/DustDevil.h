@@ -35,7 +35,7 @@ class DustDevil
         std::vector<float>* angles;
         std::vector<float>* rsForParticle;
         DustDevil(float r, float h, std::vector<GlowBeing*>* beings, std::vector<float>* angles, std::vector<float>* rForParticle);
-        void Update(float t_elapsed);
+        void Update(double t_elapsed);
         ~DustDevil();
 };
 

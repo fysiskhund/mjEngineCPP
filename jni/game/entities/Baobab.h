@@ -17,7 +17,7 @@ class Baobab: public KosmoObject
 {
 public:
     Baobab(Level* levelData, mjResourceManager* resourceManager);
-    void ProcessPhysicsEffects(float t_elapsed);
+    void ProcessPhysicsEffects(double t_elapsed);
 };
 
 #endif // BAOBAB_H

@@ -16,7 +16,7 @@ struct SDLStruct {
     SDL_GLContext context;
 };
 
-float t_elapsed = 0.016f;
+double t_elapsed = 0.016f;
 
 int width = 768;
 int height = 768;

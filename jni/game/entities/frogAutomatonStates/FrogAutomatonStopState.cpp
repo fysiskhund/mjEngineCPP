@@ -17,7 +17,7 @@ void FrogAutomatonStopState::Enter()
 }
 
 
-void FrogAutomatonStopState::Execute(float t_elapsed)
+void FrogAutomatonStopState::Execute(double t_elapsed)
 {
     if (mjCollisionTests::AABBVsAABB((mjAABB*) frog->boundingStructure, frog->levelData->hardLimits, NULL) != MJ_OVERLAP)
     {

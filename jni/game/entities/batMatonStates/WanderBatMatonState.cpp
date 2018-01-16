@@ -14,7 +14,7 @@ void WanderBatMatonState::Enter()
     bat->vel.Set0(); // Stop him if he's moving around
 }
 
-void WanderBatMatonState::Execute(float t_elapsed)
+void WanderBatMatonState::Execute(double t_elapsed)
 {
 
     mjVector3 dirToAnchor;

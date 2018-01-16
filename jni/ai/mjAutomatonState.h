@@ -19,8 +19,8 @@ class mjAutomatonState
 
         virtual void Enter();
 
-        virtual void Execute(float t_elapsed);
-        virtual void Update(float t_elapsed);
+        virtual void Execute(double t_elapsed);
+        virtual void Update(double t_elapsed);
 
         virtual void Reset();
 

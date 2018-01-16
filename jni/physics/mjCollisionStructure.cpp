@@ -17,7 +17,7 @@ void mjCollisionStructure::CreateBoundaries()
 
 }
 
-void mjCollisionStructure::Update(float t_elapsed)
+void mjCollisionStructure::Update(double t_elapsed)
 {
 
 }

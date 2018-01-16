@@ -15,7 +15,7 @@ class FrogAutomatonStopState: public Frog::FrogAutomatonState
     public:
         FrogAutomatonStopState(Frog* frog);
         void Enter() override;
-        void Execute(float t_elapsed) override;
+        void Execute(double t_elapsed) override;
         void Leave() override;
     protected:
     private:

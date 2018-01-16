@@ -24,7 +24,7 @@ public:
 	void SetModels(mjModel* boxModel, mjModel* planeModel);
 	void LoadTexturesFromPrefix(const char* prefix);
 	virtual void PushLevel(mjSkyboxLevelData* data);
-	virtual void Update(float t_elapsed) override;
+	virtual void Update(double t_elapsed) override;
 
 	mjModel* boxModel;
 	mjModel* planeModel;

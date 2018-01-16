@@ -242,7 +242,7 @@ bool mjSceneGraph::Remove(mjObject* objToRemove, bool fromDrawables, bool fromSh
     return drawableObjects.max_size();
 }*/
 
-void mjSceneGraph::Update(float t_elapsed)
+void mjSceneGraph::Update(double t_elapsed)
 {
     // This is supposed to optimise drawing by culling objects that are not visible. Perhaps also update the
     // models' animations.

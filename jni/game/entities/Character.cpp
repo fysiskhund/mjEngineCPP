@@ -25,7 +25,7 @@ Character::Character(Level* levelData, mjResourceManager* resourceManager)
     canGoThroughDoors = true;
 }
 
-void Character::ProcessPhysicsEffects(float t_elapsed)
+void Character::ProcessPhysicsEffects(double t_elapsed)
 {
 	accel.Set0();
 
@@ -119,7 +119,7 @@ void Character::ProcessCollisionEffects()
 
 
 }
-void Character::Update(float t_elapsed)
+void Character::Update(double t_elapsed)
 {
 
 
@@ -188,7 +188,7 @@ void Character::Update(float t_elapsed)
 
 
 }
-void Character::UpdatePosition(float t_elapsed)
+void Character::UpdatePosition(double t_elapsed)
 {
 
     if (intrinsecVel.GetNorm() < 10)

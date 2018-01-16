@@ -9,7 +9,7 @@ class mjModelAnimation
 {
     public:
         mjModelAnimation();
-        void Update(float t_elapsed, mjModelPose* pose, int state);
+        void Update(double t_elapsed, mjModelPose* pose, int state);
         ~mjModelAnimation();
     protected:
     private:

@@ -25,7 +25,7 @@ class KeyboardControl
         bool fullScreen = false;
 
 
-        void Update(float t_elapsed);
+        void Update(double t_elapsed);
         float arrowKeysTimeHeld = 0;
         void HandleSDLKeyboardEvent(SDL_KeyboardEvent& keyEvent);
         void GetJoystickValues(mjVector3* lJoystick, mjVector3* rJoystick);

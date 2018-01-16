@@ -19,7 +19,7 @@ class FrogBoss : public KosmoObject, public mjAutomaton
     public:
         FrogBoss(Level* levelData, mjResourceManager* resourceManager);
         void SetDetailsFromXML(XMLElement* entity) override;
-        void Update(float t_elapsed) override;
+        void Update(double t_elapsed) override;
         void ProcessCollisionEffects() override;
         void ResetByDefeat();
         void Reset();

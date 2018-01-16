@@ -15,7 +15,7 @@ KosmoObject::KosmoObject(mjResourceManager* resourceManager, Level* levelData):
  //mjObject takes care of the construction
 }
 
-void KosmoObject::Update(float t_elapsed)
+void KosmoObject::Update(double t_elapsed)
 {
     if (teleportCooldown > 0 )
     {

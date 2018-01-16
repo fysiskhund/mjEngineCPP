@@ -16,7 +16,7 @@ class mjAutomaton
 
         void SetStartState(mjAutomatonState* initialState);
 
-        virtual void Update(float t_elapsed);
+        virtual void Update(double t_elapsed);
 
 
 

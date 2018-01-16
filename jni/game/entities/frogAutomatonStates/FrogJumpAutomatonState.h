@@ -11,7 +11,7 @@ class FrogAutomatonJumpState: public Frog::FrogAutomatonState
     public:
         FrogAutomatonJumpState(Frog* frog);
         void Enter() override;
-        void Execute(float t_elapsed) override;
+        void Execute(double t_elapsed) override;
     protected:
     private:
 };

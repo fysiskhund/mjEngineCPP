@@ -21,7 +21,7 @@ void DustDevilState::Enter()
     //LOGI("Dust devil intensity %f hdir %d\n", intensity, hDirection);
 }
 
-void DustDevilState::Execute(float t_elapsed)
+void DustDevilState::Execute(double t_elapsed)
 {
     theta += (hDirection*t_elapsed*5.0);
 

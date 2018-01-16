@@ -11,7 +11,7 @@ mjModelAnimation::~mjModelAnimation()
 {
     //dtor
 }
-void mjModelAnimation::Update(float t_elapsed, mjModelPose* pose, int state)
+void mjModelAnimation::Update(double t_elapsed, mjModelPose* pose, int state)
 {
 
 }

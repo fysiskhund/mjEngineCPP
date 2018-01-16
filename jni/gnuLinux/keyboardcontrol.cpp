@@ -83,7 +83,7 @@ void KeyboardControl::HandleSDLKeyboardEvent(SDL_KeyboardEvent& keyEvent)
 
 }
 
-void KeyboardControl::Update(float t_elapsed)
+void KeyboardControl::Update(double t_elapsed)
 {
     if (keysDown[0] || keysDown[1] || keysDown[2] || keysDown[3])
     {

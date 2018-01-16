@@ -18,7 +18,7 @@ Ambient::Ambient()
     std::vector<GlowBeing*> glowBeings;
 }
 
-void Ambient::Update(float t_elapsed)
+void Ambient::Update(double t_elapsed)
 {
     windAutomaton.Update(t_elapsed);
     UpdateDustDevils(t_elapsed);
@@ -97,7 +97,7 @@ void Ambient::CreateDustDevil(mjVector3& pos, float r, float h)
     }
 }
 
-void Ambient::UpdateDustDevils(float t_elapsed)
+void Ambient::UpdateDustDevils(double t_elapsed)
 {
     for (unsigned i = 0; i < dustDevils.size(); i++)
     {

@@ -14,7 +14,7 @@ class DustDevilState : public WindState
 
         DustDevilState(mjVector3* wind);
         void Enter() override;
-        void Execute(float t_elapsed) override;
+        void Execute(double t_elapsed) override;
     protected:
     private:
 };

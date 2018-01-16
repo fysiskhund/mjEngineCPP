@@ -193,7 +193,7 @@ void mjObject::CopyModelMatrixTo(float* modelMatrixOut)
 }
 
 
-void mjObject::ProcessPhysicsEffects(float t_elapsed)
+void mjObject::ProcessPhysicsEffects(double t_elapsed)
 {
 	accel.Set0();
 
@@ -319,7 +319,7 @@ void mjObject::ReceiveInternalMessage(void* contents, unsigned int type, void* s
 {
 
 }
-void mjObject::Update(float t_elapsed)
+void mjObject::Update(double t_elapsed)
 {
     if (animation && pose)
     {
@@ -328,7 +328,7 @@ void mjObject::Update(float t_elapsed)
 
 }
 
-void mjObject::UpdatePosition(float t_elapsed)
+void mjObject::UpdatePosition(double t_elapsed)
 {
 	pos.ScaleAdd(t_elapsed, vel);
 

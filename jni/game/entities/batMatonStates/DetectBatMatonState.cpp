@@ -17,7 +17,7 @@ void DetectBatMatonState::Reset()
 
 }
 
-void DetectBatMatonState::Execute(float t_elapsed)
+void DetectBatMatonState::Execute(double t_elapsed)
 {
     bat->attackVector.CopyFrom(player->pos);
     bat->attackVector.Subtract(bat->pos);

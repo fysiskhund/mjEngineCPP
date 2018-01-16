@@ -16,7 +16,7 @@ Baobab::Baobab(Level* levelData, mjResourceManager* resourceManager)
 }
 
 
-void Baobab::ProcessPhysicsEffects(float t_elapsed)
+void Baobab::ProcessPhysicsEffects(double t_elapsed)
 {
     // Nothing. The Plant does not respond to effects for now.
 }

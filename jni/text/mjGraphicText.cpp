@@ -215,10 +215,20 @@ void mjGraphicText::SetDetailsFromXML(XMLElement* entity)
 {
     mjObject::SetDetailsFromXML(entity);
 
-    const char* variableName = entity->Attribute("variable");
-    if (variableName)
+    const char* value = entity->Attribute("variable");
+    if (value)
     {
-        variable = variableName;
+        variable = value;
+    }
+
+    value = entity->Attribute("content");
+    if (value)
+    {
+        // Forcibly, Update() is needed to properly do this. Unfortunately.
+        // This is the only way we can guarantee there will be no crash as everything needs to be generated
+        // with a thread that has the GL context available. In other words, the thread running Update(t_elapsed);
+        immediateUpdate = false;
+        UpdateText(value);
     }
 }
 
@@ -243,7 +253,7 @@ void mjGraphicText::ReceiveInternalMessage(void* contents, unsigned int type, vo
     }
 }
 
-void mjGraphicText::Update(float t_elapsed)
+void mjGraphicText::Update(double t_elapsed)
 {
 
     mjObject::Update(t_elapsed);

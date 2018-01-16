@@ -7,7 +7,7 @@ class AttackBatMatonState: public BatBot::BatAutomatonState
 {
     public:
         AttackBatMatonState(BatBot* bat);
-        virtual void Execute(float t_elapsed) override;
+        virtual void Execute(double t_elapsed) override;
         //virtual void Reset() override;
         virtual ~AttackBatMatonState();
         mjObject* player = NULL;

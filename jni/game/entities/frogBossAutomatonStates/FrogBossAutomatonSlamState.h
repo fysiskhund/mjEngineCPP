@@ -16,7 +16,7 @@ class FrogBossAutomatonSlamState: public FrogBoss::FrogBossAutomatonState
                           // makes it easier to defeat
         FrogBossAutomatonSlamState(FrogBoss* frogBoss);
         void Enter() override;
-        void Execute(float t_elapsed) override;
+        void Execute(double t_elapsed) override;
     protected:
     private:
 };

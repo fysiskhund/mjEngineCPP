@@ -44,7 +44,7 @@ Frog::Frog(Level* levelData, mjResourceManager* resourceManager)
 
 }
 
-void Frog::Update(float t_elapsed)
+void Frog::Update(double t_elapsed)
 {
 
 	mjAutomaton::Update(t_elapsed);

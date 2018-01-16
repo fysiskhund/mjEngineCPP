@@ -17,7 +17,7 @@ class WanderBatMatonState : public BatBot::BatAutomatonState
         float goingDownTime = -1;
         float twistDirFactor = 1;
         virtual void Enter() override;
-        virtual void Execute(float t_elapsed) override;
+        virtual void Execute(double t_elapsed) override;
         virtual void Reset() override;
         virtual void Leave() override;
     protected:

@@ -36,7 +36,7 @@ bool setupGame(int w, int h, std::string& pathPrefix) {
     return true;
 }
 
-void renderFrame(float t_elapsed) {
+void renderFrame(double t_elapsed) {
 	sceneManager.Update(t_elapsed);
 
 
@@ -149,7 +149,7 @@ void TouchEvent(int fingerID, int x, int y, bool pressedDown)
 #ifdef ANDROID
 extern "C" {
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height, jstring jPathPrefix);
-    JNIEXPORT jboolean JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed);
+    JNIEXPORT jboolean JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jdouble t_elapsed);
 
     JNIEXPORT jbyteArray JNICALL Java_co_phong_mjengine_GL2JNILib_HandleEngineQuery(JNIEnv * env);
     JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_HandleJoystickInput(JNIEnv * env, jobject obj, jint controllerID, jint joystickID, jfloat x, jfloat y);
@@ -169,7 +169,7 @@ JNIEXPORT void JNICALL Java_co_phong_mjengine_GL2JNILib_init(JNIEnv * env, jobje
     setupGame(width, height, pathPrefix);
 }
 
-JNIEXPORT jboolean JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jfloat t_elapsed)
+JNIEXPORT jboolean JNICALL Java_co_phong_mjengine_GL2JNILib_step(JNIEnv * env, jobject obj, jdouble t_elapsed)
 {
     renderFrame(t_elapsed);
     return mjMultiPlatform::commandsForJNIPresent;

@@ -8,7 +8,7 @@ AttackBatMatonState::AttackBatMatonState(BatBot* bat)
     maxTime = 2; //Attack for 2 seconds.
 }
 
-void AttackBatMatonState::Execute(float t_elapsed)
+void AttackBatMatonState::Execute(double t_elapsed)
 {
     bat->vel.ScaleAdd(t_elapsed*2.0, bat->attackVector);
 

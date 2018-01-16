@@ -19,7 +19,7 @@ class Frog : public KosmoObject, public mjAutomaton
     public:
         Frog(Level* levelData, mjResourceManager* resourceManager);
         void SetDetailsFromXML(XMLElement* entity) override;
-        void Update(float t_elapsed) override;
+        void Update(double t_elapsed) override;
         unsigned glTexture;
         mjVector3 jumpDirection;
         mjSoundSource* soundSource;

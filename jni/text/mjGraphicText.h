@@ -58,7 +58,7 @@ public:
     void SetColor(float* color);
     void UpdateModelMatrix();
     void UpdateText(const char* format, ...);
-    void Update(float t_elapsed) override;
+    void Update(double t_elapsed) override;
 
     virtual ~mjGraphicText();
 private:

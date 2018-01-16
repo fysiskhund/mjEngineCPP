@@ -16,7 +16,7 @@ class FrogBossAutomatonWaitForLandingState: public FrogBoss::FrogBossAutomatonSt
         bool maxTimeMustBeReset = false;
         FrogBossAutomatonWaitForLandingState(FrogBoss* frogBoss);
         void Enter() override;
-        void Execute(float t_elapsed) override;
+        void Execute(double t_elapsed) override;
         void Leave() override;
     protected:
     private:

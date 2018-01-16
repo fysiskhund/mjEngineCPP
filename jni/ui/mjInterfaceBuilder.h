@@ -42,6 +42,7 @@ public:
     void LoadFromPath(const char* path, mjResourceManager* resourceManager, mjSceneGraph* sceneGraph);
     void LoadFromMemory(const unsigned char* xmlContents, size_t length, mjResourceManager* resourceManager, mjSceneGraph* sceneGraph);
     virtual mjObject* BuildObject(XMLElement* entity);
+    void Update(double t_elapsed);
 
 };
 

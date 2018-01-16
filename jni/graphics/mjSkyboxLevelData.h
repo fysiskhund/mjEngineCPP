@@ -15,7 +15,7 @@ public:
 	mjSkyboxLevelData();
 	mjSkyboxLevelData(GLuint texture, float angleH, float angleV, float deltaH, float deltaV );
 
-	void Update(float t_elapsed);
+	void Update(double t_elapsed);
 	GLuint texture = 0;
 	float angleH = 0;
 	float angleV = 0;

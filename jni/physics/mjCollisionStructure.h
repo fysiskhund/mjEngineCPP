@@ -19,7 +19,7 @@ class mjCollisionStructure
         mjCollisionStructure();
         virtual void AddObject(mjObject* obj);
         virtual void CreateBoundaries();
-        virtual void Update(float t_elapsed);
+        virtual void Update(double t_elapsed);
 
 
         virtual ~mjCollisionStructure();

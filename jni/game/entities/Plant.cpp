@@ -19,7 +19,7 @@ Plant::Plant(Level* levelData, mjResourceManager* resourceManager)
 
 }
 
-void Plant::ProcessPhysicsEffects(float t_elapsed)
+void Plant::ProcessPhysicsEffects(double t_elapsed)
 {
     // Nothing. The Plant does not respond to effects for now.
 }

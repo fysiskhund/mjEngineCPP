@@ -184,3 +184,11 @@ mjObject* mjInterfaceBuilder::BuildObject(XMLElement* entity)
     }
     return newObject;
 }
+
+void mjInterfaceBuilder::Update(double t_elapsed)
+{
+    for (int i = 0; i < uiObjects.size(); i++)
+    {
+        uiObjects[i]->Update(t_elapsed);
+    }
+}

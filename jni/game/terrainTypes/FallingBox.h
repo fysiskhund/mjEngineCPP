@@ -37,8 +37,8 @@ class FallingBox: public Box
 
         virtual void SetDetailsFromXML(XMLElement* fallingBoxElem) override;
         virtual void ProcessCollisionEffects() override;
-        virtual void ProcessPhysicsEffects(float t_elapsed) override;
-        virtual void Update(float t_elapsed) override;
+        virtual void ProcessPhysicsEffects(double t_elapsed) override;
+        virtual void Update(double t_elapsed) override;
 
         void Reset();
 

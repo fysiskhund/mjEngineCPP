@@ -17,11 +17,11 @@ void mjAutomatonState::Enter()
 
 }
 
-void mjAutomatonState::Execute(float t_elapsed)
+void mjAutomatonState::Execute(double t_elapsed)
 {
 }
 
-void mjAutomatonState::Update(float t_elapsed)
+void mjAutomatonState::Update(double t_elapsed)
 {
     if (maxTime > 0)
     {

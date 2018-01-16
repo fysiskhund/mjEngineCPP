@@ -10,7 +10,7 @@ DustDevil::DustDevil(float r, float h, std::vector<GlowBeing*>* beings, std::vec
     //ctor
 }
 
-void DustDevil::Update(float t_elapsed)
+void DustDevil::Update(double t_elapsed)
 {
 // Take all the particles and start revolving them
         for(unsigned j = 0; j < beings->size(); j++)

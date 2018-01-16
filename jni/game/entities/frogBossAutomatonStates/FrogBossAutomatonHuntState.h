@@ -15,7 +15,7 @@ class FrogBossAutomatonHuntState: public FrogBoss::FrogBossAutomatonState
     public:
         FrogBossAutomatonHuntState(FrogBoss* frogBoss);
         void Enter() override;
-        void Execute(float t_elapsed) override;
+        void Execute(double t_elapsed) override;
         void Leave() override;
     protected:
     private:

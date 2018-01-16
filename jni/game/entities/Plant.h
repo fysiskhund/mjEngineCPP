@@ -18,7 +18,7 @@ class Plant : public KosmoObject, public mjAutomaton
         Plant(Level* levelData, mjResourceManager* resourceManager);
         //BatBot(const BatBot& other);
         ~Plant();
-        virtual void ProcessPhysicsEffects(float t_elapsed) override;
+        virtual void ProcessPhysicsEffects(double t_elapsed) override;
     protected:
     private:
 };

@@ -19,7 +19,7 @@ void FrogAutomatonJumpState::Enter()
     //FIXME: change to detect frog has footing
 }
 
-void FrogAutomatonJumpState::Execute(float t_elapsed)
+void FrogAutomatonJumpState::Execute(double t_elapsed)
 {
     if (mjCollisionTests::AABBVsAABB((mjAABB*)frog->boundingStructure, frog->levelData->hardLimits, NULL) == MJ_NO_COLLISION)
     {
