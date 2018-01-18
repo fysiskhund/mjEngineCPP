@@ -148,7 +148,7 @@ mjObject* mjInterfaceBuilder::BuildObject(XMLElement* entity)
 
 
 
-        const char* text = entity->Attribute("text");
+        const char* text = entity->Attribute("content");
 
         newObject = new mjGraphicText(resourceManager, text, localFontName.c_str(), localFontSize,
                                       localRenderScale, localPositionScaleHz, localPositionScaleVr,
