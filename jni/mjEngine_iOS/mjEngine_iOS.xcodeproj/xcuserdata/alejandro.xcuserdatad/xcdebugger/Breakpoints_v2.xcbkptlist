@@ -42,13 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../extLibs/util/mjMultiPlatform.cpp"
-            timestampString = "493822032.951682"
+            timestampString = "531321203.586912"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
             endingLineNumber = "31"
-            landmarkName = "checkGlError(const char *op)"
-            landmarkType = "9">
+            landmarkName = "mjMultiPlatform::FlushCommandsForJava()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

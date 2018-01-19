@@ -86,6 +86,7 @@
 		A94F20951DBE441C00AB5E4C /* bubble.xcf in Resources */ = {isa = PBXBuildFile; fileRef = A94F207C1DBE441C00AB5E4C /* bubble.xcf */; };
 		A9557BC81DBEE5A000F00BDC /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9557BC71DBEE5A000F00BDC /* libfreetype.a */; };
 		A9557BCA1DBEEDC500F00BDC /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A9557BC91DBEEDC500F00BDC /* libbz2.tbd */; };
+		A95C6772201193CC00328B87 /* SongDetailsUniverse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A95C6770201193CC00328B87 /* SongDetailsUniverse.cpp */; };
 		A96266E41DD1FB3B000BB4C4 /* mjGraphicCharObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96266E01DD1FB3B000BB4C4 /* mjGraphicCharObject.cpp */; };
 		A96266E51DD1FB3B000BB4C4 /* mjGraphicText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96266E21DD1FB3B000BB4C4 /* mjGraphicText.cpp */; };
 		A96266EA1DD1FB5B000BB4C4 /* mjFontResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96266E61DD1FB5B000BB4C4 /* mjFontResource.cpp */; };
@@ -308,6 +309,8 @@
 		A94F207C1DBE441C00AB5E4C /* bubble.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bubble.xcf; sourceTree = "<group>"; };
 		A9557BC71DBEE5A000F00BDC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../precompiled/freetype2/ios/libfreetype.a; sourceTree = "<group>"; };
 		A9557BC91DBEEDC500F00BDC /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		A95C6770201193CC00328B87 /* SongDetailsUniverse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SongDetailsUniverse.cpp; path = universes/SongDetailsUniverse.cpp; sourceTree = "<group>"; };
+		A95C6771201193CC00328B87 /* SongDetailsUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongDetailsUniverse.h; path = universes/SongDetailsUniverse.h; sourceTree = "<group>"; };
 		A96266E01DD1FB3B000BB4C4 /* mjGraphicCharObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjGraphicCharObject.cpp; path = ../text/mjGraphicCharObject.cpp; sourceTree = "<group>"; };
 		A96266E11DD1FB3B000BB4C4 /* mjGraphicCharObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjGraphicCharObject.h; path = ../text/mjGraphicCharObject.h; sourceTree = "<group>"; };
 		A96266E21DD1FB3B000BB4C4 /* mjGraphicText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjGraphicText.cpp; path = ../text/mjGraphicText.cpp; sourceTree = "<group>"; };
@@ -634,6 +637,8 @@
 		A926A8351EF5453700A5DF47 /* universes */ = {
 			isa = PBXGroup;
 			children = (
+				A95C6770201193CC00328B87 /* SongDetailsUniverse.cpp */,
+				A95C6771201193CC00328B87 /* SongDetailsUniverse.h */,
 				A9A9A8DE1F7D37AE001CB313 /* ChooserUniverse.cpp */,
 				A9A9A8DD1F7D37AD001CB313 /* ChooserUniverse.h */,
 				A9A9A8DB1F7D37AD001CB313 /* SongUniverse.cpp */,
@@ -1184,6 +1189,7 @@
 				A9031BBE1D6D106C0056B49C /* mjModelMesh.cpp in Sources */,
 				A9B84BB21D6D922400239BBA /* mjAnimator.cpp in Sources */,
 				A9A9A8F41F7D3A08001CB313 /* InterfaceBuilder.cpp in Sources */,
+				A95C6772201193CC00328B87 /* SongDetailsUniverse.cpp in Sources */,
 				A926A8341EF5452A00A5DF47 /* SlideTransitionUniverse.cpp in Sources */,
 				A902E4731EE2AD3A00FDA51B /* BubbleFragmentPool.cpp in Sources */,
 				A93A308B1DBB9E22007C9688 /* mjTextShaders.cpp in Sources */,
