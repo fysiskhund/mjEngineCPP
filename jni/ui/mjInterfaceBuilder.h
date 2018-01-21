@@ -21,7 +21,7 @@ class mjInterfaceBuilder
 {
 public:
     tinyxml2::XMLDocument doc; // Sometimes there is an ambiguity in Windows builds caused by Qt - hence why tinyxml needs to be specified
-    std::vector<mjObject*> uiObjects;
+    std::vector<mjUIObject*> uiObjects;
 
     mjResourceManager* resourceManager;
     mjSceneGraph* sceneGraph;
@@ -41,7 +41,7 @@ public:
     virtual ~mjInterfaceBuilder();
     void LoadFromPath(const char* path, mjResourceManager* resourceManager, mjSceneGraph* sceneGraph);
     void LoadFromMemory(const unsigned char* xmlContents, size_t length, mjResourceManager* resourceManager, mjSceneGraph* sceneGraph);
-    virtual mjObject* BuildObject(XMLElement* entity);
+    virtual mjUIObject* BuildObject(XMLElement* entity);
     void Update(double t_elapsed);
 
 };

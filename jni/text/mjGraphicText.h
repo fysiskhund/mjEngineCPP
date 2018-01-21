@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "../core/mjObject.h"
+#include "../ui/mjUIObject.h"
 #include "../extLibs/utf8-utils/utf8-utils.h"
 #include "../util/mjResourceManager.h"
 #include "../util/mjFontResource.h"
@@ -21,7 +22,7 @@ enum TextAlignment {ALIGNMENT_LEFT, ALIGNMENT_CENTER, ALIGNMENT_RIGHT};
 
 
 
-class mjGraphicText: public mjObject
+class mjGraphicText: public mjUIObject
 {
 public:
 

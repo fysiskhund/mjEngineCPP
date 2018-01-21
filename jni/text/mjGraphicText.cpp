@@ -6,7 +6,7 @@ namespace mjEngine {
 mjGraphicText::mjGraphicText(mjResourceManager* resourceManager, const char* text, const char* font, int fontSize,
                              float renderScale, float positionScaleHz, float positionScaleVr, float* color, mjVector3& position,
                              TextAlignment alignment)
-    : mjObject(resourceManager)
+    : mjUIObject(resourceManager)
 {
 
 #ifndef NODEBUGDELETEMSG
@@ -213,7 +213,7 @@ void mjGraphicText::UpdateTextStatic(const char* text)
 
 void mjGraphicText::SetDetailsFromXML(XMLElement* entity)
 {
-    mjObject::SetDetailsFromXML(entity);
+    mjUIObject::SetDetailsFromXML(entity);
 
     const char* value = entity->Attribute("variable");
     if (value)

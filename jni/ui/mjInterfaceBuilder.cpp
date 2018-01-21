@@ -80,7 +80,7 @@ void mjInterfaceBuilder::LoadFromMemory(const unsigned char* xmlContents, size_t
 
     while (child != NULL)
     {
-        mjObject* newObject = BuildObject(child);
+        mjUIObject* newObject = BuildObject(child);
         if (newObject != NULL)
         {
             if (!newObject->variable.empty())
@@ -97,10 +97,10 @@ void mjInterfaceBuilder::LoadFromMemory(const unsigned char* xmlContents, size_t
 
 }
 
-mjObject* mjInterfaceBuilder::BuildObject(XMLElement* entity)
+mjUIObject* mjInterfaceBuilder::BuildObject(XMLElement* entity)
 {
 
-    mjObject* newObject = NULL;
+    mjUIObject* newObject = NULL;
 
 
     if (strncmp(entity->Name(), "text", strnlen(entity->Name(), 64)) == 0)
@@ -160,7 +160,7 @@ mjObject* mjInterfaceBuilder::BuildObject(XMLElement* entity)
         const char* model = entity->Attribute("model");
 
 
-        newObject = new mjObject(resourceManager, MJ_NO_BOUNDING_STRUCT);
+        newObject = new mjUIObject(resourceManager, MJ_NO_BOUNDING_STRUCT);
         if (model)
         {
             newObject->model = resourceManager->FetchModel(model);

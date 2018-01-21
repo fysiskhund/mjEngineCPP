@@ -74,6 +74,7 @@ void mjObject::SetDetailsFromXML(XMLElement* entity)
 
     // Subfields
     mjXMLHelper::ReadVector(entity->FirstChildElement("pos"), &pos);
+    mjXMLHelper::ReadVector(entity->FirstChildElement("scale"), &scale);
     mjXMLHelper::ReadVector(entity->FirstChildElement("dir"), &dir);
     mjXMLHelper::ReadVector(entity->FirstChildElement("up"), &up);
     mjXMLHelper::ReadVector(entity->FirstChildElement("vel"), &vel);

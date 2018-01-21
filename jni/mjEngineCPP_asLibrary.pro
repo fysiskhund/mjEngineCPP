@@ -99,7 +99,8 @@ HEADERS += \
     $${MJENGINE}/util/mjResourceManager.h \
     $${MJENGINE}/util/mjShaderResource.h \
     $${MJENGINE}/util/mjSoundResource.h \
-    $${MJENGINE}/util/mjTextureResource.h
+    $${MJENGINE}/util/mjTextureResource.h \
+    $${MJENGINE}/ui/mjUIObject.h
 
 
 SOURCES += \
@@ -169,7 +170,8 @@ SOURCES += \
     $${MJENGINE}/core/mjTransitionUniverse.cpp \
     $${MJENGINE}/core/mjUniverse.cpp \
     $${MJENGINE}/core/mjUniverseSwitcher.cpp \
-    $${MJENGINE}/ui/mjInterfaceBuilder.cpp
+    $${MJENGINE}/ui/mjInterfaceBuilder.cpp \
+    $${MJENGINE}/ui/mjUIObject.cpp
 
 
 
