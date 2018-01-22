@@ -19,7 +19,7 @@ bool mjUIObject::TestPoke(float x, float y)
 
         if ((fabs(x-pos.x) <= 0.5*hitboxSize.x) && (fabs(y-pos.y) < 0.5*hitboxSize.y))
         {
-            CastMessage((void*) this, (void*) message.c_str(), 0, 0);
+            CastMessage((void*) this, (void*) message.c_str(), MJ_UI_MESSAGE, 0);
             return true;
         }
     }

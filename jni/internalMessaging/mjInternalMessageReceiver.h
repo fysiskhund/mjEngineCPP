@@ -18,6 +18,7 @@ private:
 
 enum DefaultMessageTypes{
     MJ_DEFAULT_MESSAGE=0,
+    MJ_UI_MESSAGE=998,
     MJ_SET_VARIABLE=999
 };
 }
