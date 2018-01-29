@@ -66,11 +66,11 @@ void mjRendererGL::PrepareModel(mjModel &model)
 
 void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAtMatrix, float *projectionMatrix, mjModelPose *pose, mjMatrixStack *stack,
                                std::vector<mjShader*>* customShaders, GLuint* customTextures, std::vector<mjModelMesh*>* customMeshes,
-                               float* extraColorForTexture, std::vector<mjShader*>& shaderList)
+                               float extraColorForTexture[4], std::vector<mjShader*>& shaderList)
 {
     mjRendererDataGL* dataGL = (mjRendererDataGL*) model.rendererData;
 
-    if (&model != naiveLastModel) // Naïve optimisation attempt
+    if (&model != naiveLastModel) // Naïve optimisation attempt // that seems to mostly work
     {
         stateSwitchCount++;
         naiveLastModel = &model;

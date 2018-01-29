@@ -19,7 +19,7 @@ public:
     void PrepareModel(mjModel &model) override;
     void RenderModel(mjModel &model, float *modelMatrix, float *lookAtMatrix, float *projectionMatrix, mjModelPose *pose, mjMatrixStack *stack,
                      std::vector<mjShader*>* customShaders, GLuint* customTextures, std::vector<mjModelMesh*>* customMeshes,
-                     float* extraColorForTexture, std::vector<mjShader*>& shaderList) override;
+                     float extraColorForTexture[4], std::vector<mjShader*>& shaderList) override;
     void CleanForModel(mjModel &model) override;
 
 

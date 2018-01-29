@@ -114,7 +114,7 @@ void mjEngine::mjDefaultShaders::BindTexture(int glTexture)
 
 void mjEngine::mjDefaultShaders::BindExtraColorForTexture(float* extraColorForTexture)
 {
-    // Not used here.
+    glUniform4fv(uExtraColorForTextureHandle, 1, extraColorForTexture);
 }
 
 #ifdef USE_ASSIMP
