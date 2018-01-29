@@ -12,6 +12,13 @@ mjCamera::mjCamera()
 	up.Set(0,1,0);
 
 }
+
+void mjCamera::AttachToObject(mjObject* dolly, mjVector3& dollyOffset)
+{
+    this->dolly = dolly;
+    this->dollyOffset.CopyFrom(dollyOffset);
+}
+
 void mjCamera::GetLookAtMatrix(GLfloat* m)
 {
 	Matrix4::SetLookAtM(m, 0, pos, dir, up);
@@ -20,6 +27,16 @@ void mjCamera::GetLookAtMatrix(GLfloat* m)
 void mjCamera::SetAsCurrentCamera()
 {
     mjCamera::currentCamera = this;
+}
+
+void mjCamera::Update(double t_elapsed)
+{
+    if (dolly != nullptr)
+    {
+        // Immediately acquire the dolly's position and offset it as needed.
+        pos.CopyFrom(dolly->pos);
+        pos.Add(dollyOffset);
+    }
 }
 
 }

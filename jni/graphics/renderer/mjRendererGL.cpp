@@ -82,15 +82,15 @@ void mjRendererGL::RenderModel(mjModel &model, float *modelMatrix, float *lookAt
 
         glEnableVertexAttribArray(MJ_VERTEX_COORDINATES_GLVERTEXATTRIB_ID); // Tell OpenGL we will use the slot 0, which we arbitrarily defined as vertex coordinate buffer when the shader source codes were loaded
         glBindBuffer(GL_ARRAY_BUFFER, dataGL->vertexCoordinatesBufferID);
-        glVertexAttribPointer(MJ_VERTEX_COORDINATES_GLVERTEXATTRIB_ID, 3, GL_FLOAT, GL_FALSE, 0, nullptr); // vertexBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address
+        glVertexAttribPointer(MJ_VERTEX_COORDINATES_GLVERTEXATTRIB_ID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0); // vertexBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address // OOps, nullptr can sometimes be defined as 0xbadf00d, do not use!
 
         glEnableVertexAttribArray(MJ_NORMAL_COORDINATES_GLVERTEXATTRIB_ID); // Tell OpenGL we will use the slot 2, which we arbitrarily defined as the coordinates of the normals when the shader source codes were loaded
         glBindBuffer(GL_ARRAY_BUFFER, dataGL->normalCoordinatesID);
-        glVertexAttribPointer(MJ_NORMAL_COORDINATES_GLVERTEXATTRIB_ID, 3, GL_FLOAT, GL_FALSE, 0, nullptr); // normalComponentBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address
+        glVertexAttribPointer(MJ_NORMAL_COORDINATES_GLVERTEXATTRIB_ID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0); // normalComponentBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address // OOps, nullptr can sometimes be defined as 0xbadf00d, do not use!
 
         glEnableVertexAttribArray(MJ_UV_COMPONENTS_GLVERTEXATTRIB_ID); // Tell OpenGL we will use the slot 1, which we arbitrarily defined as UV components when the shader source codes were loaded
         glBindBuffer(GL_ARRAY_BUFFER, dataGL->uvComponentsBufferID);
-        glVertexAttribPointer(MJ_UV_COMPONENTS_GLVERTEXATTRIB_ID, 2, GL_FLOAT, GL_FALSE, 0, nullptr); // texCoordBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address
+        glVertexAttribPointer(MJ_UV_COMPONENTS_GLVERTEXATTRIB_ID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0); // texCoordBuffer); // According to da internetz, when using VAOs, the last parameter becomes an offset and not a memory address // OOps, nullptr can sometimes be defined as 0xbadf00d, do not use!
     }
 
     checkGlError("After binding Vertex Array Pointers");
