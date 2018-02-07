@@ -6,7 +6,7 @@ namespace mjEngine{
 #define MJ_1_2_PI 1.570796
 
 mj3rdPersonCamera::mj3rdPersonCamera()
-    :mjCamera()
+    : mjCamera()
 {
 }
 

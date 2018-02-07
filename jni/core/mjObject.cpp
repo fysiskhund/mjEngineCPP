@@ -8,38 +8,37 @@ namespace mjEngine{
 
 mjObject::mjObject(mjResourceManager* resourceManager, structuretype collisionStructureType)
 {
+    // Vectors are initialised with 0, so no need to set them here
 
-	// Vectors are initialised with 0, so no need to set them here
+    up.Set(0,1,0);
+    dir.Set(0,0,1);
+    scale.Set(1,1,1);
 
-	up.Set(0,1,0);
-	dir.Set(0,0,1);
-	scale.Set(1,1,1);
+    switch(collisionStructureType)
+    {
+    case MJ_AABB:
+    {
+        mjVector3 maxCorner;
+        maxCorner.Set(0.5,1.0,0.5);
 
-	switch(collisionStructureType)
-	{
-	case MJ_AABB:
-	{
-		mjVector3 maxCorner;
-		maxCorner.Set(0.5,1.0,0.5);
+        mjVector3 minCorner;
+        minCorner.Set(-0.5,0,-0.5);
 
-		mjVector3 minCorner;
-		minCorner.Set(-0.5,0,-0.5);
-
-		mjAABB* aabb = new mjAABB(&pos, minCorner, maxCorner, false);
+        mjAABB* aabb = new mjAABB(&pos, minCorner, maxCorner, false);
         LOGI("%s %d: new %s", __FILE__, __LINE__, "aabb");
-		this->boundingStructure = aabb;
-	}
-		break;
+        this->boundingStructure = aabb;
+    }
+        break;
     case MJ_SPHERE:
         this->boundingStructure = new mjSphere(&pos, 1);
         LOGI("%s %d: new %s", __FILE__, __LINE__, "mjSphere");
         break;
-	default:
-		break;
-	}
+    default:
+        break;
+    }
 
-	this->resourceManager = resourceManager;
 
+    this->resourceManager = resourceManager;
 }
 
 /*mjObject::mjObject(mjResourceManager* resourceManager)
@@ -142,7 +141,7 @@ void mjObject::FlushPhysicsEffects()
 
 void mjObject::SetDrawToSubObject(int drawToSubObjectNew)
 {
-    if (sceneGraph)
+    if (sceneGraph != nullptr)
     {
         if (drawToSubObjectNew > drawToSubObject)
         {
@@ -388,7 +387,7 @@ void mjObject::UpdatePosition(double t_elapsed)
 mjObject::~mjObject()
 {
     // If currently connected to a mjSceneGraph, disconnect
-    if (sceneGraph)
+    if (sceneGraph != nullptr)
     {
         sceneGraph->Remove(this); // Hope for the best. FIXME: check for when object is NOT in drawables.
     }

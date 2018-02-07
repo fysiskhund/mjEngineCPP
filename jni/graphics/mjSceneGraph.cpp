@@ -10,69 +10,76 @@ void mjSceneGraph::Initialize(mjResourceManager* resourceManager)
 
 void mjSceneGraph::Add(mjObject* object, bool isDrawable, bool castsShadow, bool isTranslucent)
 {
-    if (isDrawable && object->sceneGraph == nullptr)
+    if (object->sceneGraph == nullptr)
     {
-
-        drawableMatrixOrder.push_back(object);
-        //LOGI("Adding object 0x%x", object);
-        mjMaterialBucket* bucketFound = nullptr; // Nooo they stole mah bukkit!! I miss mah bukkit!!
-        unsigned int i  = 0;
-
-
-        // Bukkit search party
-        while (!bucketFound && i < byMaterial.size())
+        if (isDrawable )
         {
-            if (!simpleDrawList)
+
+            drawableMatrixOrder.push_back(object);
+            //LOGI("Adding object 0x%x", object);
+            mjMaterialBucket* bucketFound = nullptr; // Nooo they stole mah bukkit!! I miss mah bukkit!!
+            unsigned int i  = 0;
+
+
+            // Bukkit search party
+            while (!bucketFound && i < byMaterial.size())
             {
-                bucketFound = byMaterial[i]->AddObjectIfItBelongs(object); // Is this mah bukkit?
-            } else
-            {
-                bucketFound = byMaterial[i]->ForceAddObject(object);
+                if (!simpleDrawList)
+                {
+                    bucketFound = byMaterial[i]->AddObjectIfItBelongs(object); // Is this mah bukkit?
+                } else
+                {
+                    bucketFound = byMaterial[i]->ForceAddObject(object);
+                }
+                i++;
             }
-            i++;
-        }
 
-        if (!bucketFound) // I could not find mah bukkit :'{(
-        {
-            bucketFound = new mjMaterialBucket(object, resourceManager); // I haz a new bukkit! :'{D
-
-            byMaterial.push_back(bucketFound);
-
-        }
-
-        object->sceneGraph = this;
-        object->sceneGraphActionState = 1 ; // Added, no further action needed.
-        object->rendererCalculationState = 0;
-        object->rendererBucket = bucketFound;
-
-        int drawToSubObject = object->drawToSubObject;
-
-        if (drawToSubObject >= 0)
-        {
-            for (int i = 0; i <= drawToSubObject; i++)
+            if (!bucketFound) // I could not find mah bukkit :'{(
             {
-                Add(object->subObjects[i]);
+                bucketFound = new mjMaterialBucket(object, resourceManager); // I haz a new bukkit! :'{D
+
+                byMaterial.push_back(bucketFound);
+
             }
+
+            object->sceneGraph = this;
+            object->sceneGraphActionState = 1 ; // Added, no further action needed.
+            object->rendererCalculationState = 0;
+            object->rendererBucket = bucketFound;
+
+            int drawToSubObject = object->drawToSubObject;
+
+            if (drawToSubObject >= 0)
+            {
+                for (int i = 0; i <= drawToSubObject; i++)
+                {
+                    Add(object->subObjects[i]);
+                }
+            }
+
+
+        } else if (isTranslucent)
+        {
+
+            //object->sceneGraphTranslucentsIndex = translucentObjects.size();  NOTE: doesn't work. Left there in case I can think of something to make it work
+            translucentObjects.push_back(object);
+
+            //object->sceneGraphDrawablesIndex = drawableObjects.max_size(); // Mark index as invalid.  NOTE: doesn't work. Left there in case I can think of something to make it work
         }
-
-
-    } else if (isTranslucent)
-    {
-
-        //object->sceneGraphTranslucentsIndex = translucentObjects.size();  NOTE: doesn't work. Left there in case I can think of something to make it work
-        translucentObjects.push_back(object);
-
-        //object->sceneGraphDrawablesIndex = drawableObjects.max_size(); // Mark index as invalid.  NOTE: doesn't work. Left there in case I can think of something to make it work
-    }
-    if (castsShadow)
-    {
-        //object->sceneGraphShadowCastersIndex = shadowCasters.size();  NOTE: doesn't work. Left there in case I can think of something to make it work
-        shadowCasters.push_back(object);
-    }/* else
+        if (castsShadow)
+        {
+            //object->sceneGraphShadowCastersIndex = shadowCasters.size();  NOTE: doesn't work. Left there in case I can think of something to make it work
+            shadowCasters.push_back(object);
+        }/* else
     {
      NOTE: doesn't work. Left there in case I can think of something to make it work
         object->sceneGraphShadowCastersIndex = shadowCasters.max_size(); // Mark index as invalid.
     }*/
+    } else
+    {
+        LOGI("Warning: Object %s already has a scenegraph. Not added.", object->id);
+    }
+
 
 
 }
