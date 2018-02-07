@@ -119,11 +119,21 @@ void mjMusicPlayer::Rewind()
 
 }
 
+
+void mjMusicPlayer::Free()
+{
+    // Nothing! But in platforms that need it, free the channel!
+
+}
+
 mjMusicPlayer::~mjMusicPlayer()
 {
     //dtor
+    Free();
 }
 
 }
 #endif // not USE_SDL_AUDIO
+
+
 

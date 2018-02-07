@@ -48,9 +48,16 @@ void mjMusicPlayer::Rewind()
     Mix_RewindMusic(); //FIXME: does this achieve what we need? (stop + go back to start) or should I instead re-load the music..?
 }
 
+void mjMusicPlayer::Free()
+{
+    Mix_FreeMusic(currentMusic);
+    currentMusic = NULL;
+}
+
 mjMusicPlayer::~mjMusicPlayer()
 {
     //dtor
+    Free();
 }
 
 }

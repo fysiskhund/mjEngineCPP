@@ -87,6 +87,7 @@ LOCAL_SRC_FILES := \
     takkatakkacpp/universes/ChooserUniverse.cpp \
     takkatakkacpp/universes/CreditsUniverse.cpp \
     takkatakkacpp/universes/SlideTransitionUniverse.cpp \
+    takkatakkacpp/universes/SongDetailsUniverse.cpp \
     takkatakkacpp/universes/SongUniverse.cpp \
     takkatakkacpp/universes/TitleUniverse.cpp
 

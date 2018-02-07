@@ -43,10 +43,17 @@ void mjMusicPlayer::Resume()
 	mjMultiPlatform::AddCommandForJava(cmd);
 }
 
+void mjMusicPlayer::Free()
+{
+        Pause();
+        // Nothing else to do?
+}
+
 
 mjMusicPlayer::~mjMusicPlayer()
 {
     //dtor
+    Free();
 }
 
 }

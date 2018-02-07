@@ -28,6 +28,7 @@ class mjMusicPlayer
         void Pause();
         void Resume();
         void Rewind();
+        void Free();
 
         virtual ~mjMusicPlayer();
     protected:
