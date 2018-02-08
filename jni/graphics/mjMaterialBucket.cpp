@@ -87,7 +87,7 @@ bool mjMaterialBucket::RemoveObject(mjObject* object, bool forceRemove)
 bool mjMaterialBucket::TestIfObjectBelongs(mjObject* exampleObject)
 {
     unsigned int objectTexture;
-    mjShader* objectShader;
+    mjShader* objectShader = nullptr;
 
     if (exampleObject->model != NULL)
     {

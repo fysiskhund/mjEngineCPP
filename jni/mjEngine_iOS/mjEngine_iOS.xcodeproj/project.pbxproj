@@ -130,6 +130,7 @@
 		A9B84C061D6DB45000239BBA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B84C051D6DB45000239BBA /* libz.tbd */; };
 		A9B84C071D6DF2DA00239BBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9AB2FD91D6BBC0400547DDA /* AppDelegate.m */; };
 		A9CF13F11DBD7C54002E4DB8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9CF13F01DBD7C54002E4DB8 /* AVFoundation.framework */; };
+		A9D403F8202CDDCC006EF8FC /* mjUIObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D403F6202CDDCB006EF8FC /* mjUIObject.cpp */; };
 		A9D4D2101EAFA8A700891BEF /* ChallengeGameMode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D4D20A1EAFA8A600891BEF /* ChallengeGameMode.cpp */; };
 		A9D4D2111EAFA8A700891BEF /* GameMode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D4D20C1EAFA8A600891BEF /* GameMode.cpp */; };
 		A9D4D2121EAFA8A700891BEF /* PartyGameMode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D4D20E1EAFA8A600891BEF /* PartyGameMode.cpp */; };
@@ -399,6 +400,8 @@
 		A9B84BD91D6DAE9500239BBA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A9B84C051D6DB45000239BBA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		A9CF13F01DBD7C54002E4DB8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A9D403F6202CDDCB006EF8FC /* mjUIObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjUIObject.cpp; path = ../ui/mjUIObject.cpp; sourceTree = "<group>"; };
+		A9D403F7202CDDCC006EF8FC /* mjUIObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjUIObject.h; path = ../ui/mjUIObject.h; sourceTree = "<group>"; };
 		A9D4D20A1EAFA8A600891BEF /* ChallengeGameMode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ChallengeGameMode.cpp; path = gameModes/ChallengeGameMode.cpp; sourceTree = "<group>"; };
 		A9D4D20B1EAFA8A600891BEF /* ChallengeGameMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChallengeGameMode.h; path = gameModes/ChallengeGameMode.h; sourceTree = "<group>"; };
 		A9D4D20C1EAFA8A600891BEF /* GameMode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameMode.cpp; path = gameModes/GameMode.cpp; sourceTree = "<group>"; };
@@ -833,6 +836,8 @@
 		A9A9A8F51F7D3A70001CB313 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				A9D403F6202CDDCB006EF8FC /* mjUIObject.cpp */,
+				A9D403F7202CDDCC006EF8FC /* mjUIObject.h */,
 				A9A9A8F71F7D3A7D001CB313 /* mjInterfaceBuilder.cpp */,
 				A9A9A8F61F7D3A7D001CB313 /* mjInterfaceBuilder.h */,
 			);
@@ -1251,6 +1256,7 @@
 				A9D4D2121EAFA8A700891BEF /* PartyGameMode.cpp in Sources */,
 				A93A30901DBBA591007C9688 /* mjInputEvent.cpp in Sources */,
 				A9031BB91D6D106C0056B49C /* mjAssimpModel.cpp in Sources */,
+				A9D403F8202CDDCC006EF8FC /* mjUIObject.cpp in Sources */,
 				A9031BEC1D6D10950056B49C /* mjResource.cpp in Sources */,
 				A94F20841DBE441C00AB5E4C /* BubbleScript.cpp in Sources */,
 				A94F208C1DBE441C00AB5E4C /* TrackLoader.cpp in Sources */,

@@ -13,6 +13,8 @@
 
 #elif IOS
 
+// iOS Implementation
+
 // Note: in XCode this file is marked as Objective-C++ source to enable [NSStuff functionsAndEtc];
 
 #include <Foundation/Foundation.h>
@@ -69,18 +71,24 @@ namespace mjEngine{
     {
         player.currentTime = 0;
     }
-    
-    mjMusicPlayer::~mjMusicPlayer()
-    {
-        //dtor
-    }
     void mjMusicPlayer::Resume()
     {
         [player play];
     }
     
+    void mjMusicPlayer::Free()
+    {
+        [player stop];
+    }
+    
+    mjMusicPlayer::~mjMusicPlayer()
+    {
+        Free();
+    }
+    
+    
 }
-
+// end of iOS implementation
 #else
 
 
@@ -123,7 +131,7 @@ void mjMusicPlayer::Rewind()
 void mjMusicPlayer::Free()
 {
     // Nothing! But in platforms that need it, free the channel!
-
+    Stop();
 }
 
 mjMusicPlayer::~mjMusicPlayer()
