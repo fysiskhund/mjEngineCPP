@@ -10,12 +10,32 @@
 
 namespace mjEngine{
 
-mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan, time_t* rngSeed)
+mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan, MJ_PLATFORMTYPE platformType,
+                                     int deviceWidth_px,
+                                     int deviceHeight_px,
+                                     float ppi_x,
+                                     float ppi_y,
+                                     time_t* rngSeed)
 {
     srand(time(rngSeed)); // Seed the RNG
     this->renderer = renderer;
     this->pathPrefix = pathPrefix;
     this->assMan = assMan;
+
+    this->platformInfo.platformType = platformType;
+    this->platformInfo.deviceWidth_px = deviceWidth_px;
+    this->platformInfo.deviceHeight_px = deviceHeight_px;
+
+    // Perform calculations only if ppi_x and ppi_y are valid
+    if ((ppi_x > 0) && (ppi_y > 0))
+    {
+        this->platformInfo.ppi_x = ppi_x;
+        this->platformInfo.ppi_y = ppi_y;
+
+
+        this->platformInfo.deviceWidth_cm  = ((double)deviceWidth_px/(double)ppi_x)*2.54;
+        this->platformInfo.deviceHeight_cm = ((double)deviceHeight_px/(double)ppi_y)*2.54;
+    }
 
 
     #ifdef WIN32

@@ -21,6 +21,7 @@
 #include "mjShaderResource.h"
 #include "mjFontResource.h"
 #include "mjGraphicCharObjectResource.h"
+#include "mjPlatformInfoResource.h"
 
 #include "graphics/mjShader.h"
 #include "graphics/mjDefaultShaders.h"
@@ -51,7 +52,7 @@ class mjResourceManager
         std::vector<mjShader*> shaderList;
         AAssetManager* assMan;
 
-        mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan, time_t* rngSeed = 0);
+        mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan, MJ_PLATFORMTYPE platformType, int deviceWidth_px, int deviceHeight_px, float ppi_x, float ppi_y, time_t* rngSeed = 0);
         ~mjResourceManager();
 
         mjModel* FetchModel(const char* path);
@@ -89,6 +90,8 @@ class mjResourceManager
         mjFileFromArchive* OpenFromArchive(const char* path, ArchiveReadMode readMode = READ_MODE_NO_ASSUMPTIONS);
         static size_t ReadFromArchive(mjFileFromArchive* mjFile, const unsigned char* buffer, size_t howMany);
         void CloseAndFreeResources(mjFileFromArchive** mjFile);
+
+        mjPlatformInfoResource platformInfo;
 
 protected:
         std::vector<mjResource*> models;
