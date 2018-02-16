@@ -25,10 +25,23 @@ enum MJ_PLATFORMTYPE{
     MJ_PTYPE_UNKNOWN
 };
 
+enum MJ_SCREENSIZE{
+    MJ_SCREENSIZE_UNKNOWN,
+    MJ_SCREENSIZE_XXS,
+    MJ_SCREENSIZE_XS,
+    MJ_SCREENSIZE_S,
+    MJ_SCREENSIZE_M,
+    MJ_SCREENSIZE_L,
+    MJ_SCREENSIZE_XL,
+    MJ_SCREENSIZE_XXL
+};
+
 class mjPlatformInfoResource : public mjResource
 {
 public:
     MJ_PLATFORMTYPE platformType = MJ_PTYPE_UNKNOWN;
+
+    MJ_SCREENSIZE screenSize = MJ_SCREENSIZE_UNKNOWN;
 
     float deviceHeight_cm = -1;
     float deviceWidth_cm = -1;

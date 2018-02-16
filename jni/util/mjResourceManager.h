@@ -52,7 +52,10 @@ class mjResourceManager
         std::vector<mjShader*> shaderList;
         AAssetManager* assMan;
 
-        mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan, MJ_PLATFORMTYPE platformType, int deviceWidth_px, int deviceHeight_px, float ppi_x, float ppi_y, time_t* rngSeed = 0);
+        // Device & other info
+        mjPlatformInfoResource platformInfo;
+
+        mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan, MJ_PLATFORMTYPE platformType, int deviceWidth_px, int deviceHeight_px, float ppi_x, float ppi_y, float deviceWidth_cm, float deviceHeight_cm, MJ_SCREENSIZE screenSize, time_t* rngSeed = 0);
         ~mjResourceManager();
 
         mjModel* FetchModel(const char* path);
@@ -91,7 +94,7 @@ class mjResourceManager
         static size_t ReadFromArchive(mjFileFromArchive* mjFile, const unsigned char* buffer, size_t howMany);
         void CloseAndFreeResources(mjFileFromArchive** mjFile);
 
-        mjPlatformInfoResource platformInfo;
+
 
 protected:
         std::vector<mjResource*> models;

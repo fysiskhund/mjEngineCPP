@@ -15,6 +15,9 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* render
                                      int deviceHeight_px,
                                      float ppi_x,
                                      float ppi_y,
+                                     float deviceWidth_cm,
+                                     float deviceHeight_cm,
+                                     MJ_SCREENSIZE screenSize,
                                      time_t* rngSeed)
 {
     srand(time(rngSeed)); // Seed the RNG
@@ -26,8 +29,16 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* render
     this->platformInfo.deviceWidth_px = deviceWidth_px;
     this->platformInfo.deviceHeight_px = deviceHeight_px;
 
-    // Perform calculations only if ppi_x and ppi_y are valid
-    if ((ppi_x > 0) && (ppi_y > 0))
+    // Perform calculations only if measures are valid.
+    // In general, reported measures take precedence over calculations.
+
+    if ((deviceWidth_cm > 0) && (deviceHeight_cm > 0))
+    {
+        this->platformInfo.deviceWidth_cm = deviceWidth_cm;
+        this->platformInfo.deviceHeight_cm = deviceHeight_cm;
+
+
+    } else if ((ppi_x > 0) && (ppi_y > 0))
     {
         this->platformInfo.ppi_x = ppi_x;
         this->platformInfo.ppi_y = ppi_y;
@@ -36,6 +47,40 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* render
         this->platformInfo.deviceWidth_cm  = ((double)deviceWidth_px/(double)ppi_x)*2.54;
         this->platformInfo.deviceHeight_cm = ((double)deviceHeight_px/(double)ppi_y)*2.54;
     }
+
+    float screenArea_cm2 = this->platformInfo.deviceWidth_cm*this->platformInfo.deviceHeight_cm;
+
+    if (screenArea_cm2 > 1 && screenSize == MJ_SCREENSIZE_UNKNOWN)
+    {
+        if (screenArea_cm2 < 40) // 8 * 5
+        {
+            this->platformInfo.screenSize = MJ_SCREENSIZE_XS;
+
+        } else if (screenArea_cm2 < 60) // 10 * 6
+        {
+            this->platformInfo.screenSize = MJ_SCREENSIZE_S;
+
+        } else if (screenArea_cm2 < 104) // 13 * 8
+        {
+            this->platformInfo.screenSize = MJ_SCREENSIZE_M;
+
+        } else if (screenArea_cm2 < 260) // 20 * 13
+        {
+            this->platformInfo.screenSize = MJ_SCREENSIZE_L;
+
+        } else
+        {
+            this->platformInfo.screenSize = MJ_SCREENSIZE_XL;
+
+        }
+    }
+
+    if (screenSize != MJ_SCREENSIZE_UNKNOWN) // Takes precedence over arbitrary calculations
+    {
+        this->platformInfo.screenSize = screenSize;
+    }
+
+
 
 
     #ifdef WIN32
