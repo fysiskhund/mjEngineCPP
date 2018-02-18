@@ -10,7 +10,8 @@
 
 namespace mjEngine{
 
-mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan, MJ_PLATFORMTYPE platformType,
+mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan,
+                                     MJ_PLATFORMTYPE platformType,
                                      int deviceWidth_px,
                                      int deviceHeight_px,
                                      float ppi_x,
@@ -38,6 +39,7 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* render
         this->platformInfo.deviceHeight_cm = deviceHeight_cm;
 
 
+
     } else if ((ppi_x > 0) && (ppi_y > 0))
     {
         this->platformInfo.ppi_x = ppi_x;
@@ -47,6 +49,7 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* render
         this->platformInfo.deviceWidth_cm  = ((double)deviceWidth_px/(double)ppi_x)*2.54;
         this->platformInfo.deviceHeight_cm = ((double)deviceHeight_px/(double)ppi_y)*2.54;
     }
+    LOGI("Device screen size %3.3fx%3x.3fx%", this->platformInfo.deviceHeight_cm, this->platformInfo.deviceHeight_cm);
 
     float screenArea_cm2 = this->platformInfo.deviceWidth_cm*this->platformInfo.deviceHeight_cm;
 
@@ -75,7 +78,7 @@ mjResourceManager::mjResourceManager(std::string& pathPrefix, mjRenderer* render
         }
     }
 
-    if (screenSize != MJ_SCREENSIZE_UNKNOWN) // Takes precedence over arbitrary calculations
+    if (this->platformInfo.screenSize != MJ_SCREENSIZE_UNKNOWN) // Takes precedence over arbitrary calculations
     {
         this->platformInfo.screenSize = screenSize;
     }

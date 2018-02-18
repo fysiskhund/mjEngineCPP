@@ -230,6 +230,24 @@ void mjGraphicText::SetDetailsFromXML(XMLElement* entity)
         immediateUpdate = false;
         UpdateText(value);
     }
+
+    value = entity->Attribute("textAlignment");
+    if (value)
+    {
+        if (strncmp("center", value, 12) == 0)
+        {
+            this->alignment = ALIGNMENT_CENTER;
+        } else if (strncmp("left", value, 12) == 0)
+        {
+            this->alignment = ALIGNMENT_LEFT;
+        } else if (strncmp("right", value, 12) == 0)
+        {
+            this->alignment = ALIGNMENT_RIGHT;
+        } else
+        {
+            LOGI("Invalid text alignment: %s", value);
+        }
+    }
 }
 
 void mjGraphicText::ReceiveInternalMessage(void* contents, unsigned int type, void* sender)
