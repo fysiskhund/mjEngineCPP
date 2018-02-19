@@ -99,7 +99,13 @@ using namespace mjEngine;
 
     // Most glEnabling stuff is done by mjEngine.
     std::string pathPrefix = "mjEngineCPP";
-    setupGame(self.view.bounds.size.width, self.view.bounds.size.height, pathPrefix);
+    setupGame(self.view.bounds.size.width, self.view.bounds.size.height,
+              pathPrefix,
+              -1, -1,
+              -1, -1,
+              MJ_SCREENSIZE_UNKNOWN,
+              MJ_PTYPE_IOS_UNKNOWN
+              );
 
 }
 

@@ -56,9 +56,13 @@ class mjResourceManager
         mjPlatformInfoResource platformInfo;
 
         mjResourceManager(std::string& pathPrefix, mjRenderer* renderer, AAssetManager* assMan,
-                          MJ_PLATFORMTYPE platformType, int deviceWidth_px,
-                          int deviceHeight_px, float ppi_x, float ppi_y, float deviceWidth_cm,
-                          float deviceHeight_cm, MJ_SCREENSIZE screenSize, time_t* rngSeed = 0);
+                          MJ_PLATFORMTYPE platformType,
+                          int screenWidth_px, int screenHeight_px,
+                          float ppi_x, float ppi_y,
+                          float screenWidth_cm, float screenHeight_cm,
+                          MJ_SCREENSIZE screenSize,
+                          time_t* rngSeed = 0);
+    
         ~mjResourceManager();
 
         mjModel* FetchModel(const char* path);

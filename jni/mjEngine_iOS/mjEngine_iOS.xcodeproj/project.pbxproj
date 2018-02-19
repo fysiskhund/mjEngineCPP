@@ -136,6 +136,7 @@
 		A9D4D2121EAFA8A700891BEF /* PartyGameMode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D4D20E1EAFA8A600891BEF /* PartyGameMode.cpp */; };
 		A9D4D2161EAFA8DF00891BEF /* HealthBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D4D2141EAFA8DF00891BEF /* HealthBar.cpp */; };
 		A9D98A331ECB0B5E004C78BB /* ToggleButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D98A311ECB0B5E004C78BB /* ToggleButton.cpp */; };
+		A9FB5C9E20340A4100852B01 /* mjPlatformInfoResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9FB5C9C20340A4100852B01 /* mjPlatformInfoResource.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -412,6 +413,8 @@
 		A9D4D2151EAFA8DF00891BEF /* HealthBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HealthBar.h; path = interfaceObjects/HealthBar.h; sourceTree = "<group>"; };
 		A9D98A311ECB0B5E004C78BB /* ToggleButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ToggleButton.cpp; path = interfaceObjects/ToggleButton.cpp; sourceTree = "<group>"; };
 		A9D98A321ECB0B5E004C78BB /* ToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleButton.h; path = interfaceObjects/ToggleButton.h; sourceTree = "<group>"; };
+		A9FB5C9C20340A4100852B01 /* mjPlatformInfoResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjPlatformInfoResource.cpp; path = ../util/mjPlatformInfoResource.cpp; sourceTree = "<group>"; };
+		A9FB5C9D20340A4100852B01 /* mjPlatformInfoResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mjPlatformInfoResource.h; path = ../util/mjPlatformInfoResource.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +481,8 @@
 		A9031B5C1D6CFA810056B49C /* util */ = {
 			isa = PBXGroup;
 			children = (
+				A9FB5C9C20340A4100852B01 /* mjPlatformInfoResource.cpp */,
+				A9FB5C9D20340A4100852B01 /* mjPlatformInfoResource.h */,
 				A902E46E1EE2AD1700FDA51B /* mjObjectPool.cpp */,
 				A902E46F1EE2AD1700FDA51B /* mjObjectPool.h */,
 				A96266E61DD1FB5B000BB4C4 /* mjFontResource.cpp */,
@@ -1200,6 +1205,7 @@
 				A93A308B1DBB9E22007C9688 /* mjTextShaders.cpp in Sources */,
 				A9031BFE1D6D1F860056B49C /* mjMatrixStack.cpp in Sources */,
 				A94F20891DBE441C00AB5E4C /* Poke.cpp in Sources */,
+				A9FB5C9E20340A4100852B01 /* mjPlatformInfoResource.cpp in Sources */,
 				A9B84BAF1D6D922400239BBA /* mjAnimation.cpp in Sources */,
 				A9031BEA1D6D10950056B49C /* mjModelStructureResource.cpp in Sources */,
 				A94501BA1D782B1000D488E1 /* mjRendererDataGL.cpp in Sources */,
