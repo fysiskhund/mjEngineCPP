@@ -24,8 +24,8 @@ class mjCollisionStructure
 
         virtual ~mjCollisionStructure();
     protected:
-        float bounds[6] = {  OVER_9000,  OVER_9000,  OVER_9000,
-                            -OVER_9000, -OVER_9000, -OVER_9000};
+        float bounds[6] = {  MJ_OVER_9000,  MJ_OVER_9000,  MJ_OVER_9000,
+                            -MJ_OVER_9000, -MJ_OVER_9000, -MJ_OVER_9000};
     private:
 };
 

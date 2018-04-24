@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <vector>
-#include <float.h>
+
 
 
 //#include <android/log.h>
@@ -13,6 +13,7 @@
 #include "animation/mjModelPose.h"
 #include "mjModelMesh.h"
 #include "mjShader.h"
+#include "../core/mjConstants.h"
 
 #include <extLibs/math/Matrix.h>
 #include <extLibs/math/mjMatrixStack.h>
@@ -26,7 +27,7 @@ namespace mjEngine{
 using namespace tinyxml2;
 
 #define MJMODEL_MAXATTRSIZE 96
-#define OVER_9000 FLT_MAX
+
 
 class mjModel
 {
@@ -37,8 +38,8 @@ public:
 	mjModelStructure* structure = NULL;
 
 
-	float bounds[6] = {  OVER_9000,  OVER_9000,  OVER_9000,
-                        -OVER_9000, -OVER_9000, -OVER_9000};
+    float bounds[6] = {  MJ_OVER_9000,  MJ_OVER_9000,  MJ_OVER_9000,
+                        -MJ_OVER_9000, -MJ_OVER_9000, -MJ_OVER_9000};
 
 	char status[1024];
 

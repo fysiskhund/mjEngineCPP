@@ -9,17 +9,9 @@
 #include <stdio.h>
 #include "../extLibs/logger/mjLog.h"
 #include "../extLibs/util/mjMultiPlatform.h"
+#include "../core/mjConstants.h"
 
 namespace mjEngine{
-
-#ifndef MJ_TWICE_PI
-
-// Some useful constants
-#define MJ_3_2_PI   4.712388
-#define MJ_1_2_PI   1.570796
-#define MJ_TWICE_PI 6.283185
-
-#endif
 
 class mjVector3
 {

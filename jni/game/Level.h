@@ -6,6 +6,7 @@
 #include "../core/mjObject.h"
 //#include "EntityCreator.h"
 #include "TerrainCreator.h"
+#include <core/mjConstants.h>
 
 //#include "..Box.h"
 #include "../core/mjVector3.h"

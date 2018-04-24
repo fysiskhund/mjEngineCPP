@@ -4,8 +4,8 @@ Level::Level(mjResourceManager* resourceManager)
 {
     this->resourceManager = resourceManager;
 
-    mjVector3 initialMinCorner(OVER_9000, OVER_9000, OVER_9000);
-    mjVector3 initialMaxCorner(-OVER_9000, -OVER_9000, -OVER_9000);
+    mjVector3 initialMinCorner(MJ_OVER_9000, MJ_OVER_9000, MJ_OVER_9000);
+    mjVector3 initialMaxCorner(-MJ_OVER_9000, -MJ_OVER_9000, -MJ_OVER_9000);
 
     bounds = new mjAABB(&levelCenter, initialMinCorner, initialMaxCorner, true);
     LOGI("%s %d: new %s", __FILE__, __LINE__, "mjAABB");

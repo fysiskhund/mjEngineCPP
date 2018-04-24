@@ -29,6 +29,7 @@ HEADERS += \
     $${MJENGINE}/ai/mjAutomatonState.h \
     $${MJENGINE}/audio/mjMusicPlayer.h \
     $${MJENGINE}/audio/mjSoundSource.h \
+    $${MJENGINE}/core/mjConstants.h \
     $${MJENGINE}/core/mjGameState.h \
     $${MJENGINE}/core/mjInput.h \
     $${MJENGINE}/core/mjObject.h \
@@ -57,6 +58,7 @@ HEADERS += \
     $${MJENGINE}/graphics/animation/mjModelStructureNode.h \
     $${MJENGINE}/graphics/gl3/defaultShaderSources-gl3.h \
     $${MJENGINE}/graphics/gl3/skyboxShaderSources-gl3.h \
+    $${MJENGINE}/graphics/mj1stPersonCamera.h \
     $${MJENGINE}/graphics/mj3rdPersonCamera.h \
     $${MJENGINE}/graphics/mjAssimpModel.h \
     $${MJENGINE}/graphics/mjCamera.h \
@@ -89,20 +91,20 @@ HEADERS += \
     $${MJENGINE}/text/mjGraphicText.h \
     $${MJENGINE}/text/mjTextShaders.h \
     $${MJENGINE}/ui/mjInterfaceBuilder.h \
+    $${MJENGINE}/ui/mjUIObject.h \
     $${MJENGINE}/util/mjFileFromArchive.h \
     $${MJENGINE}/util/mjFontResource.h \
     $${MJENGINE}/util/mjGraphicCharObjectResource.h \
     $${MJENGINE}/util/mjModelResource.h \
     $${MJENGINE}/util/mjModelStructureResource.h \
     $${MJENGINE}/util/mjObjectPool.h \
+    $${MJENGINE}/util/mjPlatformInfoResource.h \
     $${MJENGINE}/util/mjResource.h \
     $${MJENGINE}/util/mjResourceManager.h \
     $${MJENGINE}/util/mjShaderResource.h \
     $${MJENGINE}/util/mjSoundResource.h \
-    $${MJENGINE}/util/mjTextureResource.h \
-    $${MJENGINE}/ui/mjUIObject.h \
-    graphics/mj1stPersonCamera.h \
-    util/mjPlatformInfoResource.h
+    $${MJENGINE}/util/mjTextureResource.h
+
 
 
 SOURCES += \
@@ -110,14 +112,19 @@ SOURCES += \
     $${MJENGINE}/ai/mjAutomatonState.cpp \
     $${MJENGINE}/audio/mjMusicPlayer.cpp \
     $${MJENGINE}/audio/mjSoundSource.cpp \
+    $${MJENGINE}/core/mjGameState.cpp \
     $${MJENGINE}/core/mjObject.cpp \
+    $${MJENGINE}/core/mjTransitionUniverse.cpp \
+    $${MJENGINE}/core/mjUniverse.cpp \
+    $${MJENGINE}/core/mjUniverseSwitcher.cpp \
     $${MJENGINE}/core/mjVector3.cpp \
+    $${MJENGINE}/extLibs/math/Matrix.cpp \
     $${MJENGINE}/extLibs/math/mjMathHelper.cpp \
     $${MJENGINE}/extLibs/math/mjMatrixStack.cpp \
     $${MJENGINE}/extLibs/tinyxml/tinyxml2.cpp \
+    $${MJENGINE}/extLibs/utf8-utils/utf8-utils.c \
     $${MJENGINE}/extLibs/util/mjMultiPlatform.cpp \
     $${MJENGINE}/extLibs/util/mjXMLHelper.cpp \
-    $${MJENGINE}/extLibs/math/Matrix.cpp \
     $${MJENGINE}/graphics/animation/mjAnimation.cpp \
     $${MJENGINE}/graphics/animation/mjAnimationKeyframe.cpp \
     $${MJENGINE}/graphics/animation/mjAnimationSegment.cpp \
@@ -126,10 +133,13 @@ SOURCES += \
     $${MJENGINE}/graphics/animation/mjModelPose.cpp \
     $${MJENGINE}/graphics/animation/mjModelStructure.cpp \
     $${MJENGINE}/graphics/animation/mjModelStructureNode.cpp \
+    $${MJENGINE}/graphics/mj1stPersonCamera.cpp \
     $${MJENGINE}/graphics/mj3rdPersonCamera.cpp \
+    $${MJENGINE}/graphics/mjAssimpModel.cpp \
     $${MJENGINE}/graphics/mjCamera.cpp \
     $${MJENGINE}/graphics/mjDefaultShaders.cpp \
     $${MJENGINE}/graphics/mjImageLoader.cpp \
+    $${MJENGINE}/graphics/mjMaterialBucket.cpp \
     $${MJENGINE}/graphics/mjModel.cpp \
     $${MJENGINE}/graphics/mjModelMesh.cpp \
     $${MJENGINE}/graphics/mjSceneGraph.cpp \
@@ -137,6 +147,13 @@ SOURCES += \
     $${MJENGINE}/graphics/mjSkybox.cpp \
     $${MJENGINE}/graphics/mjSkyboxLevelData.cpp \
     $${MJENGINE}/graphics/mjSkyboxShaders.cpp \
+    $${MJENGINE}/graphics/renderer/mjRenderer.cpp \
+    $${MJENGINE}/graphics/renderer/mjRendererData.cpp \
+    $${MJENGINE}/graphics/renderer/mjRendererDataGL.cpp \
+    $${MJENGINE}/graphics/renderer/mjRendererGL.cpp \
+    $${MJENGINE}/input/mjInputEvent.cpp \
+    $${MJENGINE}/internalMessaging/mjInternalMessageReceiver.cpp \
+    $${MJENGINE}/internalMessaging/mjInternalMessenger.cpp \
     $${MJENGINE}/physics/mjAABB.cpp \
     $${MJENGINE}/physics/mjCollisionResult.cpp \
     $${MJENGINE}/physics/mjCollisionStructure.cpp \
@@ -144,38 +161,23 @@ SOURCES += \
     $${MJENGINE}/physics/mjPhysics.cpp \
     $${MJENGINE}/physics/mjPhysicsEffect.cpp \
     $${MJENGINE}/physics/mjSphere.cpp \
-    $${MJENGINE}/util/mjModelResource.cpp \
-    $${MJENGINE}/util/mjModelStructureResource.cpp \
-    $${MJENGINE}/util/mjResource.cpp \
-    $${MJENGINE}/util/mjResourceManager.cpp \
-    $${MJENGINE}/util/mjSoundResource.cpp \
-    $${MJENGINE}/util/mjTextureResource.cpp \
-    $${MJENGINE}/graphics/mjAssimpModel.cpp \
-    $${MJENGINE}/graphics/renderer/mjRenderer.cpp \
-    $${MJENGINE}/graphics/renderer/mjRendererData.cpp \
-    $${MJENGINE}/graphics/renderer/mjRendererDataGL.cpp \
-    $${MJENGINE}/graphics/renderer/mjRendererGL.cpp \
-    $${MJENGINE}/util/mjShaderResource.cpp \
-    $${MJENGINE}/input/mjInputEvent.cpp \
-    $${MJENGINE}/text/mjTextShaders.cpp \
-    $${MJENGINE}/extLibs/utf8-utils/utf8-utils.c \
     $${MJENGINE}/text/mjGraphicCharObject.cpp \
-    $${MJENGINE}/util/mjFontResource.cpp \
     $${MJENGINE}/text/mjGraphicText.cpp \
-    $${MJENGINE}/util/mjGraphicCharObjectResource.cpp \
-    $${MJENGINE}/core/mjGameState.cpp \
-    $${MJENGINE}/util/mjFileFromArchive.cpp \
-    $${MJENGINE}/internalMessaging/mjInternalMessenger.cpp \
-    $${MJENGINE}/internalMessaging/mjInternalMessageReceiver.cpp \
-    $${MJENGINE}/graphics/mjMaterialBucket.cpp \
-    $${MJENGINE}/util/mjObjectPool.cpp \
-    $${MJENGINE}/core/mjTransitionUniverse.cpp \
-    $${MJENGINE}/core/mjUniverse.cpp \
-    $${MJENGINE}/core/mjUniverseSwitcher.cpp \
+    $${MJENGINE}/text/mjTextShaders.cpp \
     $${MJENGINE}/ui/mjInterfaceBuilder.cpp \
     $${MJENGINE}/ui/mjUIObject.cpp \
-    graphics/mj1stPersonCamera.cpp \
-    util/mjPlatformInfoResource.cpp
+    $${MJENGINE}/util/mjFileFromArchive.cpp \
+    $${MJENGINE}/util/mjFontResource.cpp \
+    $${MJENGINE}/util/mjGraphicCharObjectResource.cpp \
+    $${MJENGINE}/util/mjModelResource.cpp \
+    $${MJENGINE}/util/mjModelStructureResource.cpp \
+    $${MJENGINE}/util/mjObjectPool.cpp \
+    $${MJENGINE}/util/mjPlatformInfoResource.cpp \
+    $${MJENGINE}/util/mjResource.cpp \
+    $${MJENGINE}/util/mjResourceManager.cpp \
+    $${MJENGINE}/util/mjShaderResource.cpp \
+    $${MJENGINE}/util/mjSoundResource.cpp \
+    $${MJENGINE}/util/mjTextureResource.cpp
 
 
 
