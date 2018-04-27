@@ -48,5 +48,9 @@ void mjMathHelper::GetForwardAndLeftDirections(mjVector3& cameraDirection, mjVec
 
 	//LOGI("leftDir: %3.3f, %3.3f, %3.3f", outLeftDirection->x, outLeftDirection->y, outLeftDirection->z);
 }
+float mjMathHelper::Rand01f()
+{
+    return ((float)rand())/((float)RAND_MAX);
+}
 
 }

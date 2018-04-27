@@ -15,6 +15,9 @@ class mjMathHelper{
 public:
 	static float Sign(float x);
 	static void GetForwardAndLeftDirections(mjVector3& cameraDirection, mjVector3& gravity, mjVector3* outForwardDirection, mjVector3* outLeftDirection);
+    //! Pseudorandom value between [0 and 1]. Uses rand()
+    static float Rand01f();
+
 private:
 };
 

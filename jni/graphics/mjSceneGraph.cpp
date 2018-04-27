@@ -22,7 +22,7 @@ void mjSceneGraph::Add(mjObject* object, bool isDrawable, bool castsShadow, bool
 
 
             // Bukkit search party
-            while (!bucketFound && i < byMaterial.size())
+            while ((bucketFound == nullptr) && i < byMaterial.size())
             {
                 if (!simpleDrawList)
                 {
@@ -34,7 +34,7 @@ void mjSceneGraph::Add(mjObject* object, bool isDrawable, bool castsShadow, bool
                 i++;
             }
 
-            if (!bucketFound) // I could not find mah bukkit :'{(
+            if (bucketFound == nullptr) // I could not find mah bukkit :'{(
             {
                 bucketFound = new mjMaterialBucket(object, resourceManager); // I haz a new bukkit! :'{D
 
